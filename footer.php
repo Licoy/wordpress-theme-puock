@@ -47,6 +47,7 @@
         <div class="mt20 text-center t-md">
             <div class="info">
                 <?php echo pk_get_option('footer_info') ?>
+                <p>Theme by <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock">Puock</a></p>
             </div>
         </div>
     </div>
