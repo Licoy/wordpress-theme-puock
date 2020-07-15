@@ -19,8 +19,8 @@
       </a>
 </div>
 
-## 下载
-请到[发行版本](https://github.com/Licoy/wordpress-theme-puock/releases)中进行下载最新版本进行使用。
+## 安装
+请到[发行版本](https://github.com/Licoy/wordpress-theme-puock/releases)中进行下载最新版本，然后到WordPress管理后台中的「外观」-「主题」中点击「添加」，选择Puock的主题包进行上传安装并启用即可，为了防止主题不兼容，请在安装主题前进行数据备份。
 ## 主题特性
 - [x] 支持白天与暗黑模式
 - [x] 全局无刷新加载
