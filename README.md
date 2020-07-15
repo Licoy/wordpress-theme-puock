@@ -19,6 +19,8 @@
       </a>
 </div>
 
+## 下载
+请到[发行版本](https://github.com/Licoy/wordpress-theme-puock/releases)中进行下载最新版本进行使用。
 ## 主题特性
 - [x] 支持白天与暗黑模式
 - [x] 全局无刷新加载
