@@ -41,7 +41,11 @@
 - [x] 支持Dplayer播放器
 - [x] 简约快捷的后台配置
 - [x] 更多功能，等你的[提议](https://github.com/Licoy/wordpress-theme-puock/issues)
-## 食用文档
-[待撰写](.)
+## 文档
+- 主题食用文档：[立即食用](https://www.licoy.cn/puock-doc.html)
+- QQ交流群：30261540 [立即加入](https://shang.qq.com/wpa/qunwpa?idkey=c3541f1d0dbe443456228e3aebf23f6795b614a94d5df6a32f0b2b1c759bb99b)
 ## 开源协议
-[GPL 3.0](./LICENSE)
+- [GPL 3.0](./LICENSE)
+- 请遵守开源协议，保留主题底部的作者署名
+## 推荐
+[![华为云](https://www.licoy.cn/wp-content/uploads/2020/07/hwy-student.jpg)](https://www.licoy.cn/go/ad/?t=huaweiyun__hongkong_and_xueshengji_190801)
