@@ -1,7 +1,9 @@
+.idea
+.DS_store
+**/*.iml
 **/*.log
 **/*.less
 **/puock/**
 **/template-puock.php
-.idea
-.DS_store
-**/*.iml
+cache/*
+!cache/index.html
