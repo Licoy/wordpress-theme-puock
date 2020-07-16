@@ -566,8 +566,8 @@ function get_all_category_id($type=null) {
 //获取菜单数据
 function pk_get_main_menu($mobile=false){
     $menus = get_nav_menu_object('primary');
-    if(count($menus) <= 0){
-        return;
+    if(!$menus || count($menus) <= 0){
+        return "";
     }
     $out = $mobile ? "<ul class='puock-links t-md'>" : "<ul>";
     pk_get_menu_obj_to_html($menus,$out,$mobile);
@@ -589,6 +589,9 @@ function pk_get_main_menu($mobile=false){
 //获取菜单对象数据
 function get_nav_menu_object( $location ) {
     $locations = get_nav_menu_locations();
+    if(!$locations){
+        return null;
+    }
     $menu_id = $locations[$location] ;
     $menu_object = wp_get_nav_menu_object($menu_id);
     $menu_items = wp_get_nav_menu_items($menu_object->term_id);
