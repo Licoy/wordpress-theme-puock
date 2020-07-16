@@ -186,7 +186,7 @@ class Options_Framework_Admin {
 		<div id="optionsframework-wrap" class="wrap">
 
 		<?php $menu = $this->menu_settings(); ?>
-		<h2><?php echo esc_html( $menu['page_title'] ); ?><code>版本：<?php echo sprintf("%.2f",PUOCK_CUR_VER) ?></code></h2>
+		<h2><?php echo esc_html( $menu['page_title'] ); ?><code>版本：<?php echo sprintf("%.1f",PUOCK_CUR_VER) ?></code></h2>
 
 	    <h2 class="nav-tab-wrapper">
 	        <?php echo Options_Framework_Interface::optionsframework_tabs(); ?>

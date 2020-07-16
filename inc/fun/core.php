@@ -1,7 +1,7 @@
 <?php
 
 
-define( 'PUOCK_CUR_VER', 1.10 );
+define( 'PUOCK_CUR_VER', 1.0 );
 
 $puock = 'Puock';
 
