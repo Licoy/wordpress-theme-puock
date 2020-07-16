@@ -65,6 +65,10 @@ foreach (array_merge($shortCodeColors,array('link')) as $sc_btn){
     add_shortcode('btn-'.$sc_btn, 'sc_btn_'.$sc_btn);
 }
 //短代码兼容部分（可对之前使用的主题中的短代码进行转换适配）
+foreach ($shortCodeColors as $scc){
+    add_shortcode('t-'.$scc, 'sc_tips_'.$scc);
+    add_shortcode('btn-'.$scc, 'sc_btn_'.$scc);
+}
 add_shortcode('v_organge', 'sc_tips_warning');
 add_shortcode('v_notice', 'sc_tips_success');
 add_shortcode('v_red', 'sc_tips_danger');
@@ -123,7 +127,7 @@ function pk_download($attr, $content = null){
     $filename = isset($attr['file']) ? $attr['file'] : '';
     $size = isset($attr['size']) ? $attr['size'] : '';
     $down_tips = pk_get_option('down_tips');
-   return "<div class=\"p-block p-down-box\">
+    return "<div class=\"p-block p-down-box\">
         <div class='mb15'><i class='czs-zip-folder-l'></i>&nbsp;<span>文件名称：$filename</span></div>
         <div class='mb15'><i class='czs-download-l'></i>&nbsp;<span>文件大小：$size</span></div>
         <div class='mb15'><i class='czs-about-l'></i>&nbsp;<span>下载声明：$down_tips</span></div>
@@ -168,6 +172,15 @@ function pk_login_read($attr, $content = null) {
 add_shortcode('login', 'pk_login_read');
 //加密内容
 function pk_password_read($attr, $content = null){
+    global $wpdb;
+    $email = null;
+    $user_id = (int)wp_get_current_user()->ID;
+    if($user_id > 0){
+        $email = get_userdata($user_id)->user_email;
+        if($email == get_bloginfo('admin_email')){
+            return $content;
+        }
+    }
     extract(shortcode_atts(array(
         'pass' => null,
     ), $attr));
