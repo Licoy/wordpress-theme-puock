@@ -14,6 +14,23 @@ get_header();
                     <?php if(!empty(get_the_content())): ?>
                         <div class="mt20 p-block puock-text entry-content">
                             <?php the_content() ?>
+                            <?php
+                            $link_pages = wp_link_pages(array(
+                                'before'=> '<li>',
+                                'after'=> '</li>',
+                                'prev_text'=>'&laquo;',
+                                'next_text'=>'&raquo;',
+                                'format'=>'<li>%1</li>',
+                                'echo'=>false
+                            ));
+                            if(!empty($link_pages)):
+                                ?>
+                                <div class="mt20 clearfix text-center">
+                                    <ul class="pagination float-right">
+                                        <?php echo $link_pages ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     <?php endif;comments_template() ?>
                 </div>
