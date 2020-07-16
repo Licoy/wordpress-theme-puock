@@ -10,9 +10,19 @@ get_header();
     <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
         <div id="page-empty">
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
-                <div id="posts" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
-                    <?php if(!empty(get_the_content())): ?>
-                        <div class="mt20 p-block puock-text entry-content">
+                <div id="post-main" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
+                    <div class="p-block">
+                        <div><h2 id="post-title" class="mb-0 puock-text t-xxl"><?php the_title() ?></h2></div>
+                        <div class="options clearfix mt20">
+                            <div class="float-left">
+                                <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views() ?>次阅读</span></div>
+                                <a href="#comments"><div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-comment-l mr-1"></i><?php comments_number() ?></div></a>
+                            </div>
+                            <div class="float-right">
+                                <div class="option puock-bg ta3 t-sm float-left mr-1 d-none d-lg-inline-block post-main-size"><i class="czs-bevel"></i></div>
+                            </div>
+                        </div>
+                        <div class="mt20 puock-text entry-content">
                             <?php the_content() ?>
                             <?php
                             $link_pages = wp_link_pages(array(
@@ -32,7 +42,8 @@ get_header();
                                 </div>
                             <?php endif; ?>
                         </div>
-                    <?php endif;comments_template() ?>
+                    </div>
+                    <?php comments_template() ?>
                 </div>
                 <?php get_sidebar() ?>
             </div>
