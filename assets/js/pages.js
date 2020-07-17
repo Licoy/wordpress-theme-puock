@@ -35,11 +35,13 @@ $(function () {
     }
 
     function pageChangeInit(){
-        $('[data-toggle="tooltip"]').tooltip({placement:'auto',trigger:'hover'});
-        if(global_params.is_single==1){
-            new Viewer(document.getElementById('post-main-content'),{
+        if(document.getElementById("post-main")){
+            new Viewer(document.getElementById("post-main"),{
                 navbar:false,
             });
+        }
+        $('[data-toggle="tooltip"]').tooltip({placement:'auto',trigger:'hover'});
+        if(global_params.is_single==1){
             new ClipboardJS('.copy-post-link', {
                 text: function () {
                     var $copy = $(".copy-post-link");
