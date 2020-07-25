@@ -12,7 +12,7 @@
     <?php wp_head();  ?>
     <?php get_template_part('templates/css','grey') ?>
     <link rel="stylesheet" data-no-instant href="<?php echo get_template_directory_uri(); ?>/assets/css/libs.min.css">
-    <link rel="stylesheet" data-no-instant href="<?php echo get_template_directory_uri(); ?>/assets/css/style.css">
+    <link rel="stylesheet" data-no-instant href="<?php echo get_template_directory_uri(); ?>/assets/css/style.css?v=<?php echo PUOCK_CUR_VER ?>">
     <script data-no-instant type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/jquery.min.js"></script>
     <?php if(is_single() || is_page()):?>
     <?php endif; ?>
