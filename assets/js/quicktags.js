@@ -25,6 +25,7 @@ let shortCodeIds = {
     'music':'音乐播放',
     'reply':'回复可见',
     'login':'登录可见',
+    'login_email':'登录并验证邮箱可见',
 };
 for (let scId in shortCodeIds){
     QTags.addButton( scId, shortCodeIds[scId], "["+scId+"]", "[/"+scId+"]");

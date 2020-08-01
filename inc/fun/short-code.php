@@ -170,6 +170,20 @@ function pk_login_read($attr, $content = null) {
     return is_user_logged_in() ? do_shortcode($content) : $msg;
 }
 add_shortcode('login', 'pk_login_read');
+//登录并验证邮箱可见
+function pk_login_email_read($attr, $content = null) {
+    if(is_user_logged_in()){
+        $user_id = (int)wp_get_current_user()->ID;
+        if($user_id > 0){
+            $email = get_userdata($user_id)->user_email;
+            if(!empty($email) && !pk_check_email_is_sysgen($email)){
+                return do_shortcode($content);
+            }
+        }
+    }
+    return sc_tips_primary(null, "<i class='czs-eye'></i>&nbsp;此处含有隐藏内容，需要登录并验证邮箱后即可查看！");
+}
+add_shortcode('login_email', 'pk_login_email_read');
 //加密内容
 function pk_password_read($attr, $content = null){
     global $wpdb;
