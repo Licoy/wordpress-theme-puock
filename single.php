@@ -82,6 +82,7 @@
                 </div>
             </div>
             <?php endif; ?>
+            <?php get_template_part('ad/global','bottom') ?>
             <?php get_template_part('templates/post','relevant') ?>
             <?php get_template_part('templates/module','andb') ?>
             <?php comments_template() ?>
