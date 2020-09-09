@@ -28,6 +28,8 @@ function pk_comment_callback($comment, $args, $depth) {
                 <div class="puock-text ta3b">
                     <span class="t-md puock-links"><?php pk_comment_author_url() ?></span>
                     <?php if(pk_is_checked('comment_level')){pk_the_author_class();} ?>
+                    <?php CID_print_comment_flag(); ?>
+		    <?php CID_print_comment_browser(); ?>
                 </div>
                 <div class="t-sm c-sub">
                     <?php comment_date('Y-m-d H:i:s') ?>

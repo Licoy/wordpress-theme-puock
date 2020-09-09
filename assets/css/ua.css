@@ -1,0 +1,135 @@
+span.ua, span.os {
+    display: inline-block;
+    margin: 0 3px !important;
+    color: #FFFFFF !important;
+    border-radius: 5px;
+    padding: 1px 5px !important;
+    box-shadow: 0 1px 3px rgba(0, 37, 55, 0.15);
+    font-size: 12px;
+    text-transform: Capitalize !important;
+}
+
+.ua_zhihu {
+    background-color: #12B7F5 !important;
+    border-color: #12B7F5 !important;
+}
+
+.ua_other {
+    background-color: #ACACAC !important;
+    border-color: #ACACAC !important;
+}
+
+.ua_ie {
+    background-color: #1DB6E7 !important;
+    border-color: #1DB6E7 !important;
+}
+
+.ua_edge {
+    background-color: #3275B8 !important;
+    border-color: #3275B8 !important;
+}
+
+.ua_firefox {
+    background-color: #F85318 !important;
+    border-color: #F85318 !important;
+}
+
+.ua_maxthon {
+    background-color: #017BED !important;
+    border-color: #017BED !important;
+}
+
+.ua_ucweb {
+    background-color: #E97F00 !important;
+    border-color: #E97F00 !important;
+}
+
+.ua_sogou {
+    background-color: #3593F7 !important;
+    border-color: #3593F7 !important;
+}
+
+.ua_2345explorer {
+    background-color: #2BA6F1 !important;
+    border-color: #2BA6F1 !important;
+}
+
+.ua_2345chrome {
+    background-color: #2BA6F1 !important;
+    border-color: #2BA6F1 !important;
+}
+
+.ua_chrome {
+    background-color: #EFBD30 !important;
+    border-color: #EFBD30 !important;
+}
+
+.ua_qqbrowser {
+    background-color: #56BDF3 !important;
+    border-color: #56BDF3 !important;
+}
+
+.ua_qq {
+    background-color: #12B7F5 !important;
+    border-color: #12B7F5 !important;
+}
+
+.os_wechat, .ua_wechat {
+    background-color: #22AC38 !important;
+    border-color: #22AC38 !important;
+}
+
+.ua_apple {
+    background-color: #1B89F0 !important;
+    border-color: #1B89F0 !important;
+}
+
+.ua_opera {
+    background-color: #F6172B !important;
+    border-color: #F6172B !important;
+}
+
+.os_other {
+    background-color: #ACACAC !important;
+    border-color: #ACACAC !important;
+}
+
+.os_win {
+    background-color: #00A5F1 !important;
+    border-color: #00A5F1 !important;
+}
+
+.os_android {
+    background-color: #77BC55 !important;
+    border-color: #77BC55 !important;
+}
+
+.os_ubuntu {
+    background-color: #D74613 !important;
+    border-color: #D74613 !important;
+}
+
+.os_redhat {
+    background-color: #E51B23 !important;
+    border-color: #E51B23 !important;
+}
+
+.os_fedora {
+    background-color: #3A6BAF !important;
+    border-color: #3A6BAF !important;
+}
+
+.os_linux {
+    background-color: #D3B17D !important;
+    border-color: #D3B17D !important;
+}
+
+.os_mac {
+    background-color: #666666 !important;
+    border-color: #666666 !important;
+}
+
+.os_unix {
+    background-color: #014485 !important;
+    border-color: #014485 !important;
+}

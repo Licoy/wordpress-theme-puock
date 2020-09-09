@@ -4,14 +4,13 @@
 <div id="post" class="container mt20">
     <?php get_template_part('ad/global','top') ?>
     <?php echo pk_breadcrumbs() ?>
-    <?php get_template_part('ad/page','top') ?>
     <div class="row row-cols-1">
         <div id="post-main" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
             <div class="p-block">
                 <div><h2 id="post-title" class="mb-0 puock-text t-xxl"><?php the_title() ?></h2></div>
                 <div class="options clearfix mt20">
                     <div class="float-left">
-                        <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views() ?>次阅读</span></div>
+                        <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views() ?></span></div>
                         <a href="#comments"><div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-comment-l mr-1"></i><?php comments_number() ?></div></a>
                     </div>
                     <div class="float-right">
@@ -20,7 +19,14 @@
                 </div>
                 <div class="entry-content mt20">
                     <div class="content-main puock-text" id="post-main-content">
+                        <?php get_template_part('ad/page','top') ?>
                         <?php the_content(); ?>
+                        <?php 
+                            if(pk_is_checked('content_bottom_open')){
+                                echo pk_get_option('content_bottom');
+                            }
+                        ?>
+                        <?php get_template_part('ad/page','bottom') ?>
                     </div>
                     <?php
                         $link_pages = wp_link_pages(array(
@@ -82,7 +88,6 @@
                 </div>
             </div>
             <?php endif; ?>
-            <?php get_template_part('ad/page','innerb') ?>
             <?php get_template_part('templates/post','relevant') ?>
             <?php get_template_part('templates/module','andb') ?>
             <?php comments_template() ?>

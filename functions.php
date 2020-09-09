@@ -73,18 +73,23 @@ function pk_get_gravatar($email,$echo=true){
 //获取文章分类链接
 function get_post_category_link($class='',$icon='',$cid=null,$default='无分类',$index=0){
     $cats = get_the_category();
-    $cat = null;
+    $out = '';
     if($cid!=null){
-        $cat = get_category($cid);
-    }else if(count($cats)>0){
-        $cat = $cats[0];
+        $cats = get_category($cid);
     }
-    if($cat){
-        return '<a class="'.$class.'" href="'.get_category_link($cat).'">'.$icon.$cat->name.'</a>';
+    if($cats){
+        if(is_array($cats) && count($cats)>0){
+            foreach ($cats as $cat){
+                $out .= '<span class="mr-2"><a class="'.$class.'" href="'.get_category_link($cat).'">'.$icon.$cat->name.'</a></span>';
+            }
+        }else{
+            $out .= '<span class="mr-2"><a class="'.$class.'" href="'.get_category_link($cats).'">'.$icon.$cats->name.'</a></span>';
+        }
+        
     }else{
-        return '<a class="'.$class.'" href="javascript:void(0)">'.$icon.$default.'</a>';
+        $out .= '<a class="'.$class.'" href="javascript:void(0)">'.$icon.$default.'</a>';
     }
-
+    return $out;
 }
 //获取文章标签
 function get_post_tags($class=''){
@@ -105,19 +110,29 @@ function get_post_tags($class=''){
 }
 
 function pk_get_post_date(){
-    $time = get_post_time();
-    $c_time = time() - $time;
-    $day = 86400;
-    switch ($c_time){
-        case $c_time<$day:$res='近一天内';break;
-        case $c_time<($day * 2):$res='近两天内';break;
-        case $c_time<($day * 3):$res='近三天内';break;
-        case $c_time<($day * 4):$res='四天前';break;
-        case $c_time<($day * 5):$res='五天前';break;
-        case $c_time<($day * 6):$res='六天前';break;
-        default:$res=date('Y-m-d',$time);
+    $time = get_post_time('Y-m-d');
+    $timeC = time() - strtotime($time);
+    $dateC = round((strtotime(date('Y-m-d')) - strtotime(date('Y-m-d', strtotime($time)))) / 60 / 60 / 24);
+    if ($timeC <= 3 * 60) {
+        $dayC = '刚刚';
+    } elseif ($timeC > 3 * 60 && $timeC <= 5 * 60) {
+        $dayC = '3分钟前';
+    } elseif ($timeC > 5 * 60 && $timeC <= 10 * 60) {
+        $dayC = '5分钟前';
+    } elseif ($timeC > 10 * 60 && $timeC <= 30 * 60) {
+        $dayC = '10分钟前';
+    } elseif ($timeC > 30 * 60 && $timeC <= 60 * 60) {
+        $dayC = '30分钟前';
+    } elseif ($timeC > 60 * 60 && $timeC <= 120 * 60) {
+        $dayC = '1小时前';
+    } elseif ($timeC > 120 * 60 && $dateC == 0) {
+        $dayC = '今天';
+    } elseif ($dateC == 1) {
+        $dayC = '昨天';
+    } else {
+        $dayC = date('Y-m-d', strtotime($time));
     }
-    echo $res;
+    echo $dayC;
 }
 
 //获取随机的bootstrap的颜色表示
@@ -203,15 +218,25 @@ function smilies_custom_button($context) {
 
 function get_post_images($post_id=null){
     global $post;
-    if($post_id==null && $post){
-        $content = $post->post_content;
-    }else{
-        $content = get_post($post_id)->post_content;
+    $res = null;
+    // 如果有封面图取封面图
+	if (has_post_thumbnail()) {
+	    $res = get_the_post_thumbnail_url($post, 'large');
     }
-    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
-    if($matches && $matches[1]){
-        $res = $matches[1][0];
-    }else{
+    // 没有封面图,取文章首图
+    if($res == null){
+        $post_id==null && $post){
+            $content = $post->post_content;
+        }else{
+            $content = get_post($post_id)->post_content;
+        }
+        preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
+        if($matches && $matches[1]){
+            $res = $matches[1][0];
+        }
+    }
+    // 文章无图 返回随机图
+    if($res == null){
         $res = get_stylesheet_directory_uri().'/assets/img/random/'.mt_rand(1, 8).'.jpg';
     }
     return $res;

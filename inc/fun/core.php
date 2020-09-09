@@ -32,6 +32,7 @@ require get_template_directory() . '/inc/fun/post-meta.php';
 require get_template_directory() . '/inc/fun/sidebar.php';
 require get_template_directory() . '/inc/fun/post-tags.php';
 require get_template_directory() . '/inc/fun/comment-notify.php';
+require get_template_directory() . 'inc/ua/ua.php';
 if(pk_is_checked('no_category')){
     require get_template_directory() . '/inc/no-category.php';
 }
@@ -159,7 +160,7 @@ function pk_get_wp_links($link_cats=''){
 }
 //获取懒加载图片信息
 function pk_get_lazy_pl_img(){
-    return get_template_directory_uri()."/assets/img/z/load-tip.png";
+    return get_template_directory_uri()."/assets/img/lazy/thumbnail.png";
 }
 function pk_get_lazy_img_info($origin,$class='',$width=null,$height=null,$thumbnail=true){
     if(!pk_is_checked('basic_img_lazy_s')){

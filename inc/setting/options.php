@@ -151,6 +151,58 @@ function optionsframework_options() {
     );
 
     $options[] = array(
+        'name' => '开启文章底部自定义内容',
+        'id' => 'content_bottom_open',
+        'desc' => '允许',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
+        'name' => '文章底部自定义内容',
+        'desc' => '此处为自定义HTML代码',
+        'id' => 'content_bottom',
+        'std' => '',
+        'type' => 'textarea'
+    );
+
+    $options[] = array(
+        'name' => '底部开关',
+        'id' => 'footer_about_open',
+        'std' => 'all_open',
+        'type' => 'radio',
+        'options' => [
+            'all_close'=>'关闭所有',
+            'all_open'=>'开启所有',
+            'about_me_close'=>'仅关闭关于我们',
+            'links_close'=>'仅关闭友情链接',
+        ]
+    );
+    
+    $options[] = array(
+        'name' => '底部布局',
+        'desc' => '仅在底部信息全部开启的情况下有效',
+        'id' => 'footer_layout_mode',
+        'std' => 'double',
+        'type' => 'radio',
+        'options' => [
+            'single'=>'单栏',
+            'double'=>'双栏',
+        ]
+    );
+    
+    $options[] = array(
+        'name' => '底部主题版权开关',
+        'id' => 'footer_theme_copyright_open',
+        'std' => '1',
+        'type' => 'radio',
+        'options' => [
+            '0'=>'关闭',
+            '1'=>'开启',
+        ]
+    );
+
+    $options[] = array(
         'name' => '启用后台登录保护',
         'desc' => '允许（启用后则用"wp-login.php?{后台登录保护参数}={后台登录保护值}"的方式访问）',
         'id' => 'login_protection',
@@ -935,15 +987,13 @@ function optionsframework_options() {
         'type' => 'editor',
         'settings' => $editorSettings
     );
-
     $options[] = array(
         'name' => '底部关于我们说明',
         'id' => 'footer_about_me',
         'settings' => $editorSettings,
         'type' => 'editor',
-        'std' => '底部关于我们说明'
+        'std' => ''
     );
-
     $options[] = array(
         'name' => '下载说明/申明',
         'id' => 'down_tips',

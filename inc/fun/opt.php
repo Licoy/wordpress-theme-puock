@@ -184,5 +184,5 @@ function pk_is_cur_site($url){
 }
 //链接新标签页打开
 function pk_link_blank($content){
-    return str_replace("<a", "<a target=\"_blank\" ",$content);
+    return str_replace("<a href=\"", "<a target=\"_blank\" href=\"".get_template_directory_uri()."/inc/go.php?to=",$content);
 }
