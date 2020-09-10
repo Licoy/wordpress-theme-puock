@@ -2,9 +2,6 @@
 <div align="center">
     <h1>WordPress Theme - Puock</h1>
     <p>一款基于WordPress开发的高颜值的自适应主题，支持白天与黑夜模式。</p>
-      <a href="https://github.com/Licoy/wordpress-theme-puock/releases">
-        <img src="https://img.shields.io/github/downloads/Licoy/wordpress-theme-puock/total.svg?style=flat-square" alt="">
-      </a>
       <a href="https://github.com/Licoy/wordpress-theme-puock/releases/latest">
         <img src="https://img.shields.io/github/release/Licoy/wordpress-theme-puock.svg?style=flat-square" alt="">
       </a>
