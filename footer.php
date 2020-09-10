@@ -61,10 +61,10 @@
     };
 </script>
 <?php if(is_single()): ?>
-<?php if(!empty(pk_get_option('tj_code_footer',''))): ?>
-    <script data-no-instant><?php echo pk_get_option('tj_code_footer',''); ?></script>
-<?php endif; ?>
 <script data-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/qrcode.min.js"></script>
+<?php endif; ?>
+<?php if(!empty(pk_get_option('tj_code_footer',''))): ?>
+<script data-instant><?php echo pk_get_option('tj_code_footer',''); ?></script>
 <?php endif; ?>
 <script data-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/pages.js"></script>
 <script data-no-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/pages-once.js"></script>
