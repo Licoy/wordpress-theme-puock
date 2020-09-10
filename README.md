@@ -49,6 +49,3 @@
 ## 开源协议
 - [GPL 3.0](./LICENSE)
 - 请遵守开源协议，保留主题底部的作者署名
-## 推荐
-[![腾讯云](./dist/qms.jpg)](https://www.licoy.cn/q.php?s=q_ms)
-[![华为云](./dist/hwy-s.jpg)](https://www.licoy.cn/q.php?s=hw_student)
