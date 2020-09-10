@@ -11,6 +11,9 @@
     <a href="https://github.com/Licoy/wordpress-theme-puock/pulls">
         <img src="https://img.shields.io/github/issues-pr/Licoy/wordpress-theme-puock.svg" alt="">
       </a>
+     <a href="https://gitee.com/licoy/wordpress-theme-puock">
+        <img src="https://img.shields.io/badge/Gitee-%E7%A0%81%E4%BA%91-CC3333.svg" alt="">
+      </a>
     <a href="https://github.com/Licoy">
         <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg" alt="">
       </a>
