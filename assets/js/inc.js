@@ -118,6 +118,7 @@ $(()=>{
     //ajax加载评论
     function go_comment_box(){
         $('html,body').animate({scrollTop: $("#comments").offset().top},800);
+        window.puock.lazyLoadInit();
     }
     function comment_ajax_push_State(href){
         var stateObj = { foo: "bar" };

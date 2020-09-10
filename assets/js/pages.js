@@ -1,3 +1,14 @@
+
+window.puock = {
+    lazyLoadInit:function (el='.lazyload') {
+        new LazyLoad(document.querySelectorAll([el,"[data-lazy=true]"]), {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0
+        });
+    }
+}
+
 $(function () {
 
     window.vdCommentOpen = $("meta[name='vd-comment']").attr("content") === 'on';
@@ -55,11 +66,7 @@ $(function () {
                 }
             });
         }
-        new LazyLoad(document.querySelectorAll([".lazyload","[data-lazy=true]"]), {
-            root: null,
-            rootMargin: "0px",
-            threshold: 0
-        });
+        window.puock.lazyLoadInit();
     }
 
     document.querySelectorAll('pre').forEach((block) => {
