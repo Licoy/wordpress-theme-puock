@@ -15,7 +15,7 @@
     <link rel="stylesheet" data-no-instant href="<?php echo get_template_directory_uri(); ?>/assets/css/style.css?v=<?php echo PUOCK_CUR_VER ?>">
     <script data-no-instant type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/jquery.min.js"></script>
     <?php if(!empty(pk_get_option('tj_code_header',''))): ?>
-    <script data-instant><?php echo pk_get_option('tj_code_header',''); ?></script>
+    <?php echo pk_get_option('tj_code_header',''); ?>
     <?php endif; ?>
     <?php if(is_single() || is_page()):?>
     <?php endif; ?>
