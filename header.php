@@ -20,7 +20,7 @@
     <?php if(is_single() || is_page()):?>
     <?php endif; ?>
 </head>
-<body class="puock-<?php echo pk_theme_light() ? 'dark':'light' ?>">
+<body class="puock-<?php echo pk_theme_light() ? 'light':'dark' ?>">
 <div id="page">
     <?php if(is_single()):?>
     <div class="progress" id="page-read-progress">

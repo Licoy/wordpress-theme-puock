@@ -50,24 +50,27 @@ $(()=>{
 
 
 //模式切换
-    function modeChange(isLight=null){
+    function modeChange(isLight=null, isSwitch=false){
         let body = $("body");
         if(typeof(isLight)=="string"){
-            isLight = isLight=='true' ? true : false;
+            isLight = isLight==='true';
         }
         if(isLight==null){
             isLight = body.hasClass(pk+"-light");
         }
+        if(isSwitch){
+            isLight = !isLight;
+        }
         let dn = 'd-none';
-        if(!isLight){
-            $("#logo-dark").addClass(dn);
+        if(isLight){
             $("#logo-light").removeClass(dn);
+            $("#logo-dark").addClass(dn);
         }else{
             $("#logo-dark").removeClass(dn);
             $("#logo-light").addClass(dn);
         }
-        body.removeClass(isLight ? pk+"-light":pk+"-dark");
-        body.addClass(isLight ? pk+"-dark":pk+"-light");
+        body.removeClass(isLight ? pk+"-dark":pk+"-light");
+        body.addClass(isLight ? pk+"-light":pk+"-dark");
         localStorage.setItem('light',isLight);
     }
 //模式初始化
@@ -112,7 +115,7 @@ $(()=>{
     });
 
     $(document).on("click",".colorMode",()=>{
-        modeChange();
+        modeChange(null,true);
     });
 
     //ajax加载评论

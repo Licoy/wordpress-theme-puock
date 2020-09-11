@@ -524,7 +524,7 @@ function pk_get_option($name, $default = false) {
 
 //主题模式
 function pk_theme_light(){
-    return pk_get_option('theme_mode','light')=='light';
+    return pk_get_option('theme_mode','light') == 'light';
 }
 
 //配置是否选择
