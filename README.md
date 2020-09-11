@@ -3,13 +3,13 @@
     <h1>WordPress Theme - Puock</h1>
     <p>一款基于WordPress开发的高颜值的自适应主题，支持白天与黑夜模式。</p>
       <a href="https://github.com/Licoy/wordpress-theme-puock/releases/latest">
-        <img src="https://img.shields.io/github/release/Licoy/wordpress-theme-puock.svg?style=flat-square" alt="">
+        <img src="https://img.shields.io/github/release/Licoy/wordpress-theme-puock.svg" alt="">
       </a>
-    <a href="https://github.com/Licoy/wordpress-theme-puock/issues">
-        <img src="https://img.shields.io/github/issues/Licoy/wordpress-theme-puock.svg" alt="">
+    <a href="https://github.com/Licoy/wordpress-theme-puock">
+        <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress" alt="">
       </a>
-    <a href="https://github.com/Licoy/wordpress-theme-puock/pulls">
-        <img src="https://img.shields.io/github/issues-pr/Licoy/wordpress-theme-puock.svg" alt="">
+    <a href="https://github.com/Licoy/wordpress-theme-puock">
+        <img src="https://img.shields.io/badge/PHP-V7.0+-666699.svg?logo=php" alt="">
       </a>
      <a href="https://gitee.com/licoy/wordpress-theme-puock">
         <img src="https://img.shields.io/badge/Gitee-%E7%A0%81%E4%BA%91-CC3333.svg" alt="">
