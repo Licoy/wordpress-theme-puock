@@ -20,9 +20,9 @@ if(empty($error_info)){
 
         <div class="text-center p-block  puock-text">
             <h3 class="mt20"><?php echo $error_info ?></h3>
-            <h5 class="mt20"><span id="time-count-down">3</span>秒后即将跳转至首页</h5>
+            <h5 class="mt20"><span id="time-count-down">3</span><?php _e('秒后即将跳转至首页', PUOCK) ?></h5>
             <div class="text-center mt20">
-                <a class="a-link" href="<?php echo home_url() ?>"><i class="czs-home-l"></i>&nbsp;返回首页</a>
+                <a class="a-link" href="<?php echo home_url() ?>"><i class="czs-home-l"></i>&nbsp;<?php _e('返回首页', PUOCK) ?></a>
             </div>
         </div>
         <script>

@@ -17,11 +17,11 @@
     <div class="container">
         <div class="row row-cols-md-1">
             <div class="col-md-6">
-                <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i class="czs-about-l"></i> 关于我们</span></div>
+                <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i class="czs-about-l"></i> <?php _e('关于我们', PUOCK) ?></span></div>
                 <p class="mt20 t-md"><?php echo pk_get_option('footer_about_me','') ?></p>
             </div>
             <div class="col-md-6">
-                <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i class="czs-link-l"></i> 友情链接</span></div>
+                <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i class="czs-link-l"></i> <?php _e('友情链接', PUOCK) ?></span></div>
                 <div class="more-link mt20 t-md">
                     <?php
                     $link_cid = pk_get_option('index_link_id','');
@@ -38,7 +38,7 @@
                     }
                     $link_page_id = pk_get_option('link_page','');
                     if(!empty($link_page_id)){
-                        echo '<a target="_blank" href="'.get_page_link($link_page_id).'">更多链接</a>';
+                        echo '<a target="_blank" href="'.get_page_link($link_page_id).'">'.__('更多链接', PUOCK).'</a>';
                     }
                     ?>
                 </div>

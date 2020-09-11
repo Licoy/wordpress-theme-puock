@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Puock\n"
-"POT-Creation-Date: 2020-09-11 11:14+0800\n"
-"PO-Revision-Date: 2020-09-11 11:22+0800\n"
+"POT-Creation-Date: 2020-09-11 14:24+0800\n"
+"PO-Revision-Date: 2020-09-11 15:38+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -19,16 +19,17 @@ msgstr ""
 "_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-1: inc/setting/includes\n"
 
 #: 404.php:12
 msgid "你访问的资源不存在！"
 msgstr "The resource you visited does not exist!"
 
-#: 404.php:13
+#: 404.php:13 error.php:23
 msgid "秒后即将跳转至首页"
 msgstr "Jump to the homepage in seconds"
 
-#: 404.php:15
+#: 404.php:15 error.php:25
 msgid "返回首页"
 msgstr "To homepage"
 
@@ -66,7 +67,7 @@ msgstr "Sign out"
 
 #: comments.php:54
 msgid "取消"
-msgstr "cancel"
+msgstr "Cancel"
 
 #: comments.php:56
 msgid "发布评论"
@@ -74,11 +75,75 @@ msgstr "Publish"
 
 #: comments.php:66
 msgid "载入中..."
-msgstr "loading..."
+msgstr "Loading..."
 
 #: error.php:12
 msgid "无错误信息"
 msgstr "No error message"
+
+#: footer.php:20
+msgid "关于我们"
+msgstr "About us"
+
+#: footer.php:24
+msgid "友情链接"
+msgstr "Links"
+
+#: footer.php:41
+msgid "更多链接"
+msgstr "More links"
+
+#: functions.php:67
+msgid "评论达人"
+msgstr "Commentator"
+
+#: functions.php:77
+msgid "博主"
+msgstr "Blogger"
+
+#: functions.php:104
+msgid "无分类"
+msgstr "No class"
+
+#: functions.php:250 functions.php:251
+msgid "添加表情"
+msgstr "Add emoticons"
+
+#: functions.php:332
+msgid "首页"
+msgstr "Home"
+
+#: functions.php:347
+msgid "正文"
+msgstr "Text"
+
+#: functions.php:349
+msgid "文章列表"
+msgstr "Article list"
+
+#: functions.php:353
+msgid "搜索结果"
+msgstr "Search results"
+
+#: functions.php:355
+msgid "的文章列表"
+msgstr "List of articles"
+
+#: functions.php:361
+msgid "标签"
+msgstr "Tag"
+
+#: functions.php:364
+msgid "你访问的资源不存在"
+msgstr "The resource you are accessing does not exist"
+
+#: header.php:57
+msgid "请输入搜索关键字"
+msgstr "Please enter keyword to search"
+
+#: header.php:60
+msgid "开始搜索"
+msgstr "Search"
 
 #: inc/fun/sidebar.php:5
 msgid "正文内容侧边栏"
@@ -120,134 +185,69 @@ msgstr ""
 msgid "若指定页面未配置任何栏目，则显示此栏目下的数据"
 msgstr ""
 
-#: inc/setting/includes/class-options-framework-admin.php:91
-#: inc/setting/includes/class-options-framework-admin.php:92
-msgid "Puock主题设置"
-msgstr ""
+#: page.php:18 single.php:14
+msgid "次阅读"
+msgstr "Views"
 
-#: inc/setting/includes/class-options-framework-admin.php:203
-msgid "保存配置"
-msgstr ""
+#: single.php:45
+msgid "发表于："
+msgstr "Published on : "
 
-#: inc/setting/includes/class-options-framework-admin.php:204
-msgid "恢复默认"
-msgstr ""
+#: single.php:56
+msgid "复制链接"
+msgstr "Copy link"
 
-#: inc/setting/includes/class-options-framework-admin.php:204
-msgid "是否确认恢复默认配置？"
-msgstr ""
+#: single.php:71 single.php:79
+msgid "版权声明："
+msgstr "Copyright notice: "
 
-#: inc/setting/includes/class-options-framework-admin.php:235
-msgid "已重置为默认配置"
-msgstr ""
+#: single.php:71
+msgid "本站原创文章，由"
+msgstr "Our original article, by "
 
-#: inc/setting/includes/class-options-framework-admin.php:289
-msgid "选项配置已保存"
-msgstr ""
+#: single.php:74
+msgid "发表，"
+msgstr " publish, "
 
-#: inc/setting/includes/class-options-media-uploader.php:62
-msgid "暂无文件选择"
-msgstr ""
+#: single.php:74
+msgid "共计"
+msgstr "total "
 
-#: inc/setting/includes/class-options-media-uploader.php:65
-msgid "上传"
-msgstr ""
+#: single.php:74 single.php:81
+msgid "字。"
+msgstr " words."
 
-#: inc/setting/includes/class-options-media-uploader.php:67
-msgid "移除"
-msgstr ""
+#: single.php:76 single.php:83
+msgid "转载提示："
+msgstr "Reprint tips: "
 
-#: inc/setting/includes/class-options-media-uploader.php:70
-msgid "Upgrade your version of WordPress for full media support."
+#: single.php:76
+msgid "除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。"
 msgstr ""
+"Unless otherwise specified, all articles are published by cc-4.0 protocol. "
+"Please indicate the source of reprint."
 
-#: inc/setting/includes/class-options-media-uploader.php:94
-msgid "View File"
-msgstr ""
+#: single.php:79
+msgid "本文于"
+msgstr "This paper is published in "
 
-#: inc/setting/includes/class-options-media-uploader.php:118
-msgid "Upload"
-msgstr ""
+#: single.php:80
+msgid "转载自"
+msgstr " Reprinted from "
 
-#: inc/setting/includes/class-options-media-uploader.php:119
-msgid "Remove"
-msgstr ""
+#: single.php:81
+msgid "，共计"
+msgstr " , total "
 
-#: inc/setting/includes/class-options-sanitization.php:316
-msgid "No Repeat"
+#: single.php:83
+msgid "此文章非本站原创文章，若需转载请联系原作者获得转载授权。"
 msgstr ""
+"This article is not our original article, if you need to reprint, please "
+"contact the original author to obtain the reprint authorization."
 
-#: inc/setting/includes/class-options-sanitization.php:317
-msgid "Repeat Horizontally"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:318
-msgid "Repeat Vertically"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:319
-msgid "Repeat All"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:331
-msgid "Top Left"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:332
-msgid "Top Center"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:333
-msgid "Top Right"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:334
-msgid "Middle Left"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:335
-msgid "Middle Center"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:336
-msgid "Middle Right"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:337
-msgid "Bottom Left"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:338
-msgid "Bottom Center"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:339
-msgid "Bottom Right"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:351
-msgid "Scroll Normally"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:352
-msgid "Fixed in Place"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:424
-msgid "Normal"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:425
-msgid "Italic"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:426
-msgid "Bold"
-msgstr ""
-
-#: inc/setting/includes/class-options-sanitization.php:427
-msgid "Bold Italic"
-msgstr ""
+#: single.php:106
+msgid "分享至"
+msgstr "Share to"
 
 #. Theme Name of the plugin/theme
 msgid "Puock"

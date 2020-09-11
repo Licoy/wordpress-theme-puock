@@ -15,7 +15,7 @@ get_header();
                         <div><h2 id="post-title" class="mb-0 puock-text t-xxl"><?php the_title() ?></h2></div>
                         <div class="options clearfix mt20">
                             <div class="float-left">
-                                <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views() ?>次阅读</span></div>
+                                <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views(); _e('次阅读', PUOCK) ?></span></div>
                                 <a href="#comments"><div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-comment-l mr-1"></i><?php comments_number() ?></div></a>
                             </div>
                             <div class="float-right">

@@ -64,7 +64,7 @@ function pk_the_author_class_out($count)
         default:
             return '';
     }
-    return '<span class="t-sm c-sub"><i class="czs-diamond-l mr-1"></i>评论达人LV.' . $level . '</span>';
+    return '<span class="t-sm c-sub"><i class="czs-diamond-l mr-1"></i>' . __('评论达人', PUOCK) . ' LV.' . $level . '</span>';
 }
 
 function pk_the_author_class($echo = true, $in_comment = null)
@@ -74,7 +74,7 @@ function pk_the_author_class($echo = true, $in_comment = null)
         $comment = $in_comment;
     }
     if ($comment->user_id == '1') {
-        $res = '<span class="t-sm text-danger"><i class="czs-diamond-l mr-1"></i>博主</span>';
+        $res = '<span class="t-sm text-danger"><i class="czs-diamond-l mr-1"></i>' . __('博主', PUOCK) . '</span>';
     } else {
         $comment_author_email = $comment->comment_author_email;
         $author_count = count($wpdb->get_results(
@@ -98,8 +98,11 @@ function pk_get_gravatar($email, $echo = true)
 }
 
 //获取文章分类链接
-function get_post_category_link($class = '', $icon = '', $cid = null, $default = '无分类', $index = 0)
+function get_post_category_link($class = '', $icon = '', $cid = null, $default = null, $index = 0)
 {
+    if ($default == null) {
+        $default = __('无分类', PUOCK);
+    }
     $cats = get_the_category();
     $cat = null;
     if ($cid != null) {
@@ -140,6 +143,7 @@ function pk_get_post_date()
     $c_time = time() - $time;
     $day = 86400;
     switch ($c_time) {
+        //todo 本地化翻译
         case $c_time < $day:
             $res = '近一天内';
             break;
@@ -179,6 +183,7 @@ function pk_get_color_tag($ex = array())
 
 function get_smiley_codes()
 {
+    //todo 本地化翻译
     return array(":?:" => "疑问", ":razz:" => "调皮", ":sad:" => "难过", ":evil:" => "抠鼻", ":naughty:" => "顽皮",
         ":!:" => "吓", ":smile:" => "微笑", ":oops:" => "憨笑", ":neutral:" => "亲亲", ":cry:" => "大哭", ":mrgreen:" => "呲牙",
         ":grin:" => "坏笑", ":eek:" => "惊讶", ":shock:" => "发呆", ":???:" => "撇嘴", ":cool:" => "酷", ":lol:" => "偷笑",
@@ -242,8 +247,8 @@ function smilies_custom_button($context)
     width: 380px;display:none}.smilies-wrap img{height:24px;width:24px;cursor:pointer;margin-bottom:5px}
      .is-active.smilies-wrap{display:block}</style>
     <a id="insert-media-button" style="position:relative" class="button insert-smilies add_smilies" 
-    title="添加表情" data-editor="content" href="javascript:;">  
-    <span>添加表情</span>  
+    title="'.__('添加表情', PUOCK).'" data-editor="content" href="javascript:;">  
+    <span>'.__('添加表情', PUOCK).'</span>  
     </a><div class="smilies-wrap">' . get_wpsmiliestrans() . '</div>
     <script>jQuery(document).ready(function(){jQuery(document).on("click", ".insert-smilies",function()
      { if(jQuery(".smilies-wrap").hasClass("is-active")){
@@ -324,7 +329,7 @@ function pk_breadcrumbs()
     $out = '<div id="breadcrumb" class="p-block ' . (pk_open_box_animated('animated fadeInUp', false)) . '">';
     $out .= '<nav aria-label="breadcrumb">';
     $out .= '<ol class="breadcrumb">';
-    $out .= '<li class="breadcrumb-item"><a class="a-link" href="' . home_url() . '">首页</a></li>';
+    $out .= '<li class="breadcrumb-item"><a class="a-link" href="' . home_url() . '">'.__('首页', PUOCK).'</a></li>';
     if (is_single() || is_category()) {
         $categorys = get_the_category();
         if (count($categorys) <= 0 && is_single()) {
@@ -339,24 +344,24 @@ function pk_breadcrumbs()
         $cats = str_replace("</a>", '</a></li>', $cats);
         $out .= $cats;
         if (is_single()) {
-            $out .= '<li class="breadcrumb-item active " aria-current="page">正文</li>';
+            $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('正文',PUOCK).'</li>';
         } else if (is_category()) {
-            $out .= '<li class="breadcrumb-item active " aria-current="page">文章列表</li>';
+            $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('文章列表',PUOCK).'</li>';
         }
     } else if (is_search()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($_GET['s']) . '</li>';
-        $out .= '<li class="breadcrumb-item active " aria-current="page">搜索结果</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('搜索结果',PUOCK).'</li>';
     } else if (is_author()) {
-        $out .= '<li class="breadcrumb-item active " aria-current="page">' . get_the_author_meta('nickname') . '的文章列表</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . get_the_author_meta('nickname') . ''.__('的文章列表',PUOCK).'</li>';
     } else if (is_page()) {
         global $post;
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($post->post_title) . '</li>';
     } else if (is_tag()) {
         $tag_name = single_tag_title('', false);
-        $out .= '<li class="breadcrumb-item active " aria-current="page">标签</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('标签',PUOCK).'</li>';
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($tag_name) . '</li>';
     } else if (is_404()) {
-        $out .= '<li class="breadcrumb-item active " aria-current="page">你访问的资源不存在</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('你访问的资源不存在',PUOCK).'</li>';
     } else if (isset($other_page_title)) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . $other_page_title . '</li>';
     }

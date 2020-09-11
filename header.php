@@ -54,10 +54,10 @@
                 <form action="<?php echo home_url() ?>">
                     <div class="row">
                         <div class="col-xl-10 col-lg-9 col-md-8 col-sm-7 col-6">
-                            <input required type="text" name="s" id="s" class="form-control" placeholder="请输入搜索关键字">
+                            <input required type="text" name="s" id="s" class="form-control" placeholder="<?php _e('请输入搜索关键字', PUOCK) ?>">
                         </div>
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-6 pl-0">
-                            <button type="submit" class="btn-dark btn"><i class="czs-search-l mr-1"></i>开始搜索</button>
+                            <button type="submit" class="btn-dark btn"><i class="czs-search-l mr-1"></i><?php _e('开始搜索', PUOCK) ?></button>
                             <button type="button" class="btn-danger btn ml-1 search-modal-btn"><i class="czs-close-l"></i></button>
                         </div>
                     </div>
