@@ -9,7 +9,7 @@ $error_info = $_SESSION['error_info'];
 unset($_SESSION['error_info']);
 
 if(empty($error_info)){
-    $error_info = '无错误信息';
+    $error_info = __('无错误信息', PUOCK);
 }
 
 ?>

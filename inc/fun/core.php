@@ -2,8 +2,14 @@
 
 
 define( 'PUOCK_CUR_VER', 1.3 );
+define( 'PUOCK', 'puock' );
 
 $puock = 'Puock';
+
+add_action('after_setup_theme', 'puock_theme_setup');
+function puock_theme_setup(){
+    load_theme_textdomain(PUOCK, get_template_directory() . '/languages');
+}
 
 if(is_dir(get_template_directory() . '/inc/puock')){
     if(file_exists(get_template_directory() . '/inc/puock/fun.php')){

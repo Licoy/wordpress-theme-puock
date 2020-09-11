@@ -1,0 +1,267 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Puock\n"
+"POT-Creation-Date: 2020-09-11 11:14+0800\n"
+"PO-Revision-Date: 2020-09-11 11:22+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: style.css\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: 404.php:12
+msgid "你访问的资源不存在！"
+msgstr "The resource you visited does not exist!"
+
+#: 404.php:13
+msgid "秒后即将跳转至首页"
+msgstr "Jump to the homepage in seconds"
+
+#: 404.php:15
+msgid "返回首页"
+msgstr "To homepage"
+
+#: comments.php:5
+msgid "评论"
+msgstr "Comment"
+
+#: comments.php:12
+msgid "您必须要登录之后才可以进行评论"
+msgstr "You must be logged in to comment"
+
+#: comments.php:17 comments.php:49
+msgid "QQ登录"
+msgstr "QQ login"
+
+#: comments.php:26
+msgid "世界这么大发表一下你的看法~"
+msgstr "The world is so big and express your opinion~"
+
+#: comments.php:32
+msgid "昵称（必填）"
+msgstr "Nickname (required)"
+
+#: comments.php:33
+msgid "邮箱（必填）"
+msgstr "Email (required)"
+
+#: comments.php:34
+msgid "网站"
+msgstr "Website"
+
+#: comments.php:44
+msgid "登出"
+msgstr "Sign out"
+
+#: comments.php:54
+msgid "取消"
+msgstr "cancel"
+
+#: comments.php:56
+msgid "发布评论"
+msgstr "Publish"
+
+#: comments.php:66
+msgid "载入中..."
+msgstr "loading..."
+
+#: error.php:12
+msgid "无错误信息"
+msgstr "No error message"
+
+#: inc/fun/sidebar.php:5
+msgid "正文内容侧边栏"
+msgstr ""
+
+#: inc/fun/sidebar.php:7
+msgid "文章正文内容侧边栏"
+msgstr ""
+
+#: inc/fun/sidebar.php:15 inc/fun/sidebar.php:17
+msgid "首页侧边栏"
+msgstr ""
+
+#: inc/fun/sidebar.php:25 inc/fun/sidebar.php:27
+msgid "搜索页侧边栏"
+msgstr ""
+
+#: inc/fun/sidebar.php:35 inc/fun/sidebar.php:37
+msgid "分类/标签页侧边栏"
+msgstr ""
+
+#: inc/fun/sidebar.php:45 inc/fun/sidebar.php:47
+msgid "单页面侧边栏"
+msgstr ""
+
+#: inc/fun/sidebar.php:55
+msgid "其他页面侧边栏"
+msgstr ""
+
+#: inc/fun/sidebar.php:57
+msgid "包括作者/404等其他页面"
+msgstr ""
+
+#: inc/fun/sidebar.php:65
+msgid "通用侧边栏"
+msgstr ""
+
+#: inc/fun/sidebar.php:67
+msgid "若指定页面未配置任何栏目，则显示此栏目下的数据"
+msgstr ""
+
+#: inc/setting/includes/class-options-framework-admin.php:91
+#: inc/setting/includes/class-options-framework-admin.php:92
+msgid "Puock主题设置"
+msgstr ""
+
+#: inc/setting/includes/class-options-framework-admin.php:203
+msgid "保存配置"
+msgstr ""
+
+#: inc/setting/includes/class-options-framework-admin.php:204
+msgid "恢复默认"
+msgstr ""
+
+#: inc/setting/includes/class-options-framework-admin.php:204
+msgid "是否确认恢复默认配置？"
+msgstr ""
+
+#: inc/setting/includes/class-options-framework-admin.php:235
+msgid "已重置为默认配置"
+msgstr ""
+
+#: inc/setting/includes/class-options-framework-admin.php:289
+msgid "选项配置已保存"
+msgstr ""
+
+#: inc/setting/includes/class-options-media-uploader.php:62
+msgid "暂无文件选择"
+msgstr ""
+
+#: inc/setting/includes/class-options-media-uploader.php:65
+msgid "上传"
+msgstr ""
+
+#: inc/setting/includes/class-options-media-uploader.php:67
+msgid "移除"
+msgstr ""
+
+#: inc/setting/includes/class-options-media-uploader.php:70
+msgid "Upgrade your version of WordPress for full media support."
+msgstr ""
+
+#: inc/setting/includes/class-options-media-uploader.php:94
+msgid "View File"
+msgstr ""
+
+#: inc/setting/includes/class-options-media-uploader.php:118
+msgid "Upload"
+msgstr ""
+
+#: inc/setting/includes/class-options-media-uploader.php:119
+msgid "Remove"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:316
+msgid "No Repeat"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:317
+msgid "Repeat Horizontally"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:318
+msgid "Repeat Vertically"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:319
+msgid "Repeat All"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:331
+msgid "Top Left"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:332
+msgid "Top Center"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:333
+msgid "Top Right"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:334
+msgid "Middle Left"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:335
+msgid "Middle Center"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:336
+msgid "Middle Right"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:337
+msgid "Bottom Left"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:338
+msgid "Bottom Center"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:339
+msgid "Bottom Right"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:351
+msgid "Scroll Normally"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:352
+msgid "Fixed in Place"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:424
+msgid "Normal"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:425
+msgid "Italic"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:426
+msgid "Bold"
+msgstr ""
+
+#: inc/setting/includes/class-options-sanitization.php:427
+msgid "Bold Italic"
+msgstr ""
+
+#. Theme Name of the plugin/theme
+msgid "Puock"
+msgstr ""
+
+#. Theme URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://www.licoy.cn"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "支持暗黑与白天模式的自适应多风格主题！"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Licoy"
+msgstr ""
