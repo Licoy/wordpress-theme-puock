@@ -113,7 +113,7 @@ function get_post_category_link($class = '', $icon = '', $cid = null, $default =
     if ($cat) {
         return '<a class="' . $class . '" href="' . get_category_link($cat) . '">' . $icon . $cat->name . '</a>';
     } else {
-        return '<a class="' . $class . '" href="javascript:void(0)">' . $icon . $default . '</a>';
+        return '<span class=" c-sub ' . $class . '" href="javascript:void(0)">' . $icon . $default . '</span>';
     }
 
 }
