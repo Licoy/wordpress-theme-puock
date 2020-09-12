@@ -601,8 +601,17 @@ function get_nav_menu_object( $location ) {
     $menu_id = $locations[$location] ;
     $menu_object = wp_get_nav_menu_object($menu_id);
     $menu_items = wp_get_nav_menu_items($menu_object->term_id);
-    _wp_menu_item_classes_by_context($menu_items);
     $menus = array();
+    if($menu_items==null || count($menu_items)==0){
+        return $menus;
+    }else{
+        foreach ($menu_items as &$menu_item){
+            if(!isset($menu_item->classes) || $menu_item->classes==null){
+                $menu_item->classes = array();
+            }
+        }
+    }
+    _wp_menu_item_classes_by_context($menu_items);
     $submenus = array();
     foreach ($menu_items as $m) {
         $m->children = array();
