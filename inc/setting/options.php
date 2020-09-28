@@ -94,7 +94,7 @@ function optionsframework_options() {
     );
 
     $options[] = array(
-        'name' => '网站Favicon',
+        'name' => '网站favicon',
         'desc' => '比例：1:1',
         'id' => 'favicon',
         "std" => "",
@@ -118,7 +118,7 @@ function optionsframework_options() {
     );
 
     $options[] = array(
-        'name' => '全站变灰（可供用于悼念日或其他事件变灰需求）',
+        'name' => '全站变灰（可用于悼念日或其他事件变灰需求）',
         'desc' => '允许',
         'id' => 'grey',
         'std' => '0',
