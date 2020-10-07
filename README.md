@@ -1,5 +1,7 @@
 中文 | [English](./README_EN.md)
 ## 介绍
+![cover](./cover.png)
+
 <div align="center">
     <h1>WordPress Theme - Puock</h1>
     <p>一款基于WordPress开发的高颜值的自适应主题，支持白天与黑夜模式。</p>
