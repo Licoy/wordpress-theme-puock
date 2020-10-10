@@ -50,7 +50,7 @@
                 <?php echo get_post_category_link('badge d-none d-md-inline-block bg-'.pk_get_color_tag(['danger','warning','dark']).' ahfff') ?>
                 <a class="a-link puock-text" title="<?php the_title() ?>" href="<?php the_permalink() ?>"><?php the_title() ?></a>
             </h2>
-            <div class="info-meta d-none d-md-block c-sub">
+            <div class="info-meta d-block c-sub">
                 <p class="text-2line"><?php echo get_the_excerpt() ?></p>
             </div>
             <div class="info-footer w-100 clearfix d-none d-block">
