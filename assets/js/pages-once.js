@@ -20,6 +20,12 @@ $(function () {
         window.open(to,'_blank');
     });
 
+    $(document).on("click","#return-top-bottom>div",function () {
+        const to = $(this).attr("data-to");
+        const scroll_val = to==='top' ? 0 : window.document.body.clientHeight;
+        $('html,body').animate({scrollTop:scroll_val},800)
+    });
+
 });
 
 

@@ -13,6 +13,11 @@
         </div>
     </div>
 </div>
+<!--返回顶部和底部-->
+<div id="return-top-bottom">
+    <div data-to="top" class="p-block primary-hover"><i class="czs-arrow-up-l puock-text"></i></div>
+    <div data-to="bottom" class="p-block primary-hover"><i class="czs-arrow-down-l puock-text"></i></div>
+</div>
 <footer id="footer">
     <div class="container">
         <div class="row row-cols-md-1">
