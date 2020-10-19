@@ -94,6 +94,10 @@ function loli_ssl_avatar($avatar) {
     global $gravatar_urls;
     return str_replace("http://","https://",str_replace( $gravatar_urls, 'gravatar.loli.net', $avatar ));
 }
+function v2ex_ssl_avatar($avatar) {
+    global $gravatar_urls;
+    return str_replace("http://","https://",str_replace( $gravatar_urls, 'cdn.v2ex.com', $avatar ));
+}
 //评论回复邮件通知
 function comment_mail_notify($comment_id) {
     $comment = get_comment($comment_id);

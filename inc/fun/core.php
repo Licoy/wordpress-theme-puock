@@ -395,6 +395,10 @@ if(pk_get_option('gravatar_url','wp')!='wp'){
         add_filter('get_avatar', 'loli_ssl_avatar');
         add_filter('get_avatar_url', 'loli_ssl_avatar');
     }
+    if($type=='v2ex'){
+        add_filter('get_avatar', 'v2ex_ssl_avatar');
+        add_filter('get_avatar_url', 'v2ex_ssl_avatar');
+    }
 }
 //评论者链接
 function pk_comment_author_url($comment_ID = 0) {

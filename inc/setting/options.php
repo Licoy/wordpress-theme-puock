@@ -316,6 +316,7 @@ function optionsframework_options() {
             'cn'=>'官方提供的CN节点',
             'cn_ssl'=>'官方提供SSL的CN节点',
             'loli_ssl'=>'SB.SB提供的SSL节点',
+            'v2ex'=>'v2ex提供的SSL节点',
         ]
     );
 
