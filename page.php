@@ -4,8 +4,6 @@ get_header();
 
 ?>
 
-<meta name="referrer" content="never">
-
 <div id="page" class="container mt20">
     <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
         <div id="page-empty">
