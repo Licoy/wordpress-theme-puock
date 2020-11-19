@@ -433,64 +433,52 @@ function optionsframework_options() {
     );
 
     $options[] = array(
-        'name' => '「关于我们」标题',
-        'id' => 'company_about_t',
-        'std' => '企业介绍',
-        'type' => 'text'
-    );
-
-    $options[] = array(
-        'name' => '「关于我们」内容（支持HTML）',
-        'id' => 'company_about_c',
-        'std' => '<p>关于我们内容</p>',
-        'type' => 'textarea'
-    );
-
-    $options[] = array(
-        'name' => '「关于我们」详情链接',
-        'id' => 'company_about_a',
-        'std' => home_url().'/about.html',
-        'type' => 'text'
-    );
-
-    $options[] = array(
         'name' => '「产品介绍」大标题',
         'id' => 'company_product_title',
         'std' => '产品介绍',
         'type' => 'text'
     );
 
+    $options[] = array(
+        'desc' => '<br>图标字体请到<a href="http://chuangzaoshi.com/icon/" target="_blank">草莓图标库</a>进行选择',
+        'id' => '',
+        'type' => 'info'
+    );
+
     //产品
-    for ($i=1;$i<=4;$i++){
+    for ($i=1;$i<=6;$i++){
 
         $options[] = array(
             'name'=>'',
-            'desc' => '「产品介绍」-第'.$i.'个-启用',
+            'desc' => '「产品介绍」-第'.$i.'个-【是否启用】',
             'id' => 'company_product_open_'.$i,
             'std' => '1',
             'type' => 'checkbox',
         );
 
         $options[] = array(
-            'name' => '「产品介绍」-第'.$i.'个-标题',
+            'name' => '「产品介绍」-第'.$i.'个-【图标】',
+            'id' => 'company_product_i_'.$i,
+            'std' => 'czs-gift-l',
+            'type' => 'text'
+        );
+
+        $options[] = array(
+            'name' => '「产品介绍」-第'.$i.'个-【标题】',
             'id' => 'company_product_t_'.$i,
             'std' => '产品'.$i,
             'type' => 'text'
         );
 
         $options[] = array(
-            'name' => '「产品介绍」-第'.$i.'个-内容（支持HTML）',
+            'name' => '「产品介绍」-第'.$i.'个-【介绍】',
             'id' => 'company_product_c_'.$i,
-            'std' => '<h1 class="card-title pricing-card-title">¥0<small class="text-muted">/月</small></h1>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>40G存储</li>
-                            <li>2GB内存</li>
-                        </ul>',
+            'std' => '介绍内容'.$i,
             'type' => 'textarea'
         );
 
         $options[] = array(
-            'name' => '「产品介绍」-第'.$i.'个-详情指向链接',
+            'name' => '「产品介绍」-第'.$i.'个-【链接】',
             'id' => 'company_product_a_'.$i,
             'std' => home_url(),
             'type' => 'text'
@@ -499,9 +487,9 @@ function optionsframework_options() {
     }
 
     $options[] = array(
-        'name' => '「解决方案」大标题',
-        'id' => 'company_soul_title',
-        'std' => '解决方案',
+        'name' => '「做什么」大标题',
+        'id' => 'company_do_title',
+        'std' => '做什么',
         'type' => 'text'
     );
 
@@ -510,74 +498,41 @@ function optionsframework_options() {
 
         $options[] = array(
             'name'=>'',
-            'desc' => '「解决方案」-第'.$i.'个-启用',
-            'id' => 'company_soul_open_'.$i,
+            'desc' => '「做什么」-第'.$i.'个-【启用】',
+            'id' => 'company_do_open_'.$i,
             'std' => '1',
             'type' => 'checkbox',
         );
 
         $options[] = array(
-            'name' => '「解决方案」-第'.$i.'个-介绍图（1:1比例）',
-            'id' => 'company_soul_i_'.$i,
-            'std' => '',
-            'type' => 'upload'
-        );
-
-        $options[] = array(
-            'name' => '「解决方案」-第'.$i.'个-标题',
-            'id' => 'company_soul_t_'.$i,
-            'std' => '问题'.$i,
+            'name' => '「做什么」-第'.$i.'个-【图标】',
+            'id' => 'company_do_i_'.$i,
+            'std' => 'czs-gift-l',
             'type' => 'text'
         );
 
         $options[] = array(
-            'name' => '「解决方案」-第'.$i.'个-描述（支持HTML）',
-            'id' => 'company_soul_c_'.$i,
-            'std' => '我们将提供问题'.$i.'的最佳解决方案',
-            'type' => 'textarea'
+            'name' => '「做什么」-第'.$i.'个-【标题】',
+            'id' => 'company_do_t_'.$i,
+            'std' => '标题'.$i,
+            'type' => 'text'
         );
 
         $options[] = array(
-            'name' => '「解决方案」-第'.$i.'个-详情指向链接',
-            'id' => 'company_soul_a_'.$i,
-            'std' => home_url(),
+            'name' => '「做什么」-第'.$i.'个-【介绍】',
+            'id' => 'company_do_d_'.$i,
+            'std' => '内容'.$i,
             'type' => 'text'
         );
 
     }
 
-    //产品预览
-    foreach (array('左'=>'l','右'=>'r') as $key=>$val){
-        $options[] = array(
-            'name'=>'',
-            'desc' => '「产品预览」-'.$key.'边显示-启用',
-            'id' => 'company_pr_open_'.$val,
-            'std' => '1',
-            'type' => 'checkbox',
-        );
-
-        $options[] = array(
-            'name' => '「产品预览」-'.$key.'边显示-预览图（400*400）',
-            'id' => 'company_pr_i_'.$val,
-            'std' => '',
-            'type' => 'upload'
-        );
-
-        $options[] = array(
-            'name' => '「产品预览」-'.$key.'边显示-标题',
-            'id' => 'company_pr_t_'.$val,
-            'std' => '产品'.$val,
-            'type' => 'text'
-        );
-
-        $options[] = array(
-            'name' => '「解决方案」-'.$key.'边显示-内容（支持HTML）',
-            'id' => 'company_pr_c_'.$val,
-            'std' => '这里是产品'.$val.'的内容<button class="btn btn-outline-secondary">详情</button>',
-            'type' => 'textarea'
-        );
-
-    }
+    $options[] = array(
+        'name' => '做什么左侧展示图',
+        'id' => 'company_do_img',
+        'std' => '',
+        'type' => 'upload'
+    );
 
     $options[] = array(
         'name'=>'',
