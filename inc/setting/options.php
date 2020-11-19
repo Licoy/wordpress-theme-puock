@@ -457,10 +457,10 @@ function optionsframework_options() {
         );
 
         $options[] = array(
-            'name' => '「产品介绍」-第'.$i.'个-【图标】',
+            'name' => '「产品介绍」-第'.$i.'个-【图片】',
             'id' => 'company_product_i_'.$i,
-            'std' => 'czs-gift-l',
-            'type' => 'text'
+            'std' => '',
+            'type' => 'upload'
         );
 
         $options[] = array(
