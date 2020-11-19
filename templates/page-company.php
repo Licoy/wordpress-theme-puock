@@ -7,7 +7,7 @@
             <div class="row">
                 <?php for ($i=1;$i<=6;$i++): if(pk_is_checked('company_product_open_'.$i)): ?>
                 <div class="col-lg-4 prod-item">
-                    <div class="p-block" style='background-image: url("<?php echo pk_get_option('company_product_i_'.$i) ?>")'>
+                    <div class="p-block bgimg" style='background-image: url("<?php echo pk_get_option('company_product_i_'.$i) ?>")'>
                         <a target="_blank" href="<?php echo pk_get_option('company_product_a_'.$i) ?>">
                             <h3 class="go"><?php echo pk_get_option('company_product_t_'.$i) ?></h3>
                         </a>
