@@ -22,7 +22,7 @@
         </div>
 
         <div class="container mt50" id="do-items">
-            <h3 class="text-center">我们能做什么？</h3>
+            <h3 class="text-center"><?php echo pk_get_option('company_do_title') ?></h3>
             <div class="row mt50">
                 <div class="col-lg-5">
                     <div class="w-100 h-100 bgimg" style='background-image: url("<?php echo pk_get_option('company_do_img') ?>");'></div>
