@@ -578,11 +578,10 @@ function get_all_category_id($type=null) {
 //获取菜单数据
 function pk_get_main_menu($mobile=false){
     $menus = get_nav_menu_object('primary');
-    if(!$menus || count($menus) <= 0){
-        return "";
-    }
     $out = $mobile ? "<ul class='puock-links t-md'>" : "<ul>";
-    pk_get_menu_obj_to_html($menus,$out,$mobile);
+    if($menus && count($menus) > 0){
+        pk_get_menu_obj_to_html($menus,$out,$mobile);
+    }
     if(is_user_logged_in()){
         $user = get_currentuserinfo();
         $avatar = get_avatar_url($user->user_email);
