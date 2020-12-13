@@ -51,7 +51,7 @@
 - [x] 更多功能，等你的[提议](https://github.com/Licoy/wordpress-theme-puock/issues)
 ## 文档
 - 主题食用文档：[立即食用](https://www.licoy.cn/puock-doc.html)
-- QQ交流群：30261540 [立即加入](https://shang.qq.com/wpa/qunwpa?idkey=c3541f1d0dbe443456228e3aebf23f6795b614a94d5df6a32f0b2b1c759bb99b)
+- 对主题有意见或BUG反馈：[点此进入](https://github.com/Licoy/wordpress-theme-puock/issues)
 ## 趋势
 [![Stargazers over time](https://starchart.cc/Licoy/wordpress-theme-puock.svg)](https://starchart.cc/Licoy/wordpress-theme-puock)
 ## 鸣谢
