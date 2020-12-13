@@ -24,9 +24,9 @@
 
 ## 预览
 > 此为安装了此主题的博客，您可以进行在线预览。
-- [憧憬点滴记忆](https://www.licoy.cn/)
+- [憧憬点滴记忆](https://licoy.cn/)
 ## 安装
-请到[发行版本](https://github.com/Licoy/wordpress-theme-puock/releases)中进行下载最新版本，然后到WordPress管理后台中的「外观」-「主题」中点击「添加」，选择Puock的主题包进行上传安装并启用即可，为了防止主题不兼容，请在安装主题前进行数据备份。
+请到 [发行版本](https://github.com/Licoy/wordpress-theme-puock/releases) 中进行下载最新版本，然后到WordPress管理后台中的「外观」-「主题」中点击「添加」，选择Puock的主题包进行上传安装并启用即可，**为了防止主题不兼容，请在安装主题前进行数据备份。**
 ## 主题特性
 - [x] 支持白天与暗黑模式
 - [x] 全局无刷新加载
@@ -50,12 +50,13 @@
 - [x] 简约快捷的后台配置
 - [x] 更多功能，等你的[提议](https://github.com/Licoy/wordpress-theme-puock/issues)
 ## 文档
-- 主题食用文档：[立即食用](https://www.licoy.cn/puock-doc.html)
-- 对主题有意见或BUG反馈：[点此进入](https://github.com/Licoy/wordpress-theme-puock/issues)
+- 食用文档：[立即食用](https://licoy.cn/puock-doc.html)
+- 意见或BUG反馈：[点此进入](https://github.com/Licoy/wordpress-theme-puock/issues)
+- 主题交流群：[347561494](https://qm.qq.com/cgi-bin/qm/qr?k=T5OjCCfKdMRiNyqmqRB_tCfyrBz8R4aS&jump_from=webapi)
 ## 趋势
 [![Stargazers over time](https://starchart.cc/Licoy/wordpress-theme-puock.svg)](https://starchart.cc/Licoy/wordpress-theme-puock)
 ## 鸣谢
 [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
 ## 开源协议
-- [GPL 3.0](./LICENSE)
-- 请遵守开源协议，保留主题底部的作者署名
+- [General Public License 3.0](./LICENSE)
+- 请遵守开源协议，保留主题底部署名
