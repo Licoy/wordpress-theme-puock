@@ -113,7 +113,7 @@ function get_post_category_link($class = '', $icon = '', $cid = null, $default =
     if ($cat) {
         return '<a class="' . $class . '" href="' . get_category_link($cat) . '">' . $icon . $cat->name . '</a>';
     } else {
-        return '<span class=" c-sub ' . $class . '" href="javascript:void(0)">' . $icon . $default . '</span>';
+        return '<a class="' . $class . '" href="javascript:void(0)">' . $icon . $default . '</a>';
     }
 
 }
@@ -326,7 +326,7 @@ if (!function_exists('pk_paging')) {
 function pk_breadcrumbs()
 {
     global $cat, $other_page_title;
-    $out = '<div id="breadcrumb" class="p-block ' . (pk_open_box_animated('animated fadeInUp', false)) . '">';
+    $out = '<div id="breadcrumb" class="' . (pk_open_box_animated('animated fadeInUp', false)) . '">';
     $out .= '<nav aria-label="breadcrumb">';
     $out .= '<ol class="breadcrumb">';
     $out .= '<li class="breadcrumb-item"><a class="a-link" href="' . home_url() . '">'.__('首页', PUOCK).'</a></li>';

@@ -149,7 +149,7 @@ function pk_reply_read($attr, $content = null) {
         }
     }else{
         if (isset($_COOKIE['comment_author_email_' . COOKIEHASH])) {
-            $email = str_replace('%40', '@', $_COOKIE['comment_author_email_' . COOKIEHASH]);
+            $email = $_COOKIE['comment_author_email_' . COOKIEHASH];
         }
     }
     if(empty($email)){

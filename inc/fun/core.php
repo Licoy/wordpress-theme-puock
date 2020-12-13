@@ -585,13 +585,13 @@ function pk_get_main_menu($mobile=false){
     if(is_user_logged_in()){
         $user = get_currentuserinfo();
         $avatar = get_avatar_url($user->user_email);
-        $out .= '<li><a data-no-instant class="p-2" data-toggle="tooltip" title="用户中心" href="'.get_edit_profile_url().'"><img alt="用户中心" src="'.$avatar.'" class="min-avatar"></a></li>';
+        $out .= '<li><a data-no-instant data-toggle="tooltip" title="用户中心" href="'.get_edit_profile_url().'"><img alt="用户中心" src="'.$avatar.'" class="min-avatar"></a></li>';
     }
     if(!$mobile){
         if(pk_is_checked('theme_mode_s')){
-            $out .= '<li><a class="p-2 colorMode" data-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="czs-moon-l"></i></a></li>';
+            $out .= '<li><a class="colorMode" data-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="czs-moon-l"></i></a></li>';
         }
-        $out .= '<li><a class="p-2 search-modal-btn" data-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="czs-search-l"></i></a></li>';
+        $out .= '<li><a class="search-modal-btn" data-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="czs-search-l"></i></a></li>';
     }
     $out .= '</ul>';
     return $out;
@@ -642,7 +642,7 @@ function pk_get_menu_obj_to_html($menus,&$out,$mobile=false,$dpath_cur=1,$max_dp
         $cur = $menu->current ? 'menu-current' : '';
         $out .= "<li id='menu-item-{$menu->ID}' class='menu-item-{$menu->ID} {$classes} {$child_class} {$cur}'>";
         if(!$mobile){
-            $out .= "<a class='p-2' href='{$menu->url}'>{$menu->title}";
+            $out .= "<a href='{$menu->url}'>{$menu->title}";
         }else{
             $link = count($menu->children)>0 ? "#menu-sub-".$menu->ID : $menu->url;
             $out .= '<a href="'.$link.'" data-toggle="collapse">'.$menu->title;

@@ -69,11 +69,26 @@ $(function () {
         window.puock.lazyLoadInit();
     }
 
+    //获取文章的目录结构
+    function getPostMenuStructure(){
+        let res = []
+        for (let item of $("#post-main").find('h1,h2,h3,h4,h5,h6')) {
+            res.push({name: $(item).text().trim(), level: item.tagName.toLowerCase()})
+        }
+        return res
+    }
+
+    function GeneratePostMenuHTML(){
+        const menus = getPostMenuStructure();
+    }
+
     document.querySelectorAll('pre').forEach((block) => {
         hljs.highlightBlock(block);
     });
 
     if(global_params.is_single){
+
+        //生成微信分享二维码
         setTimeout(function () {
             var wx = $("#wx-share");
             QRCode.toDataURL(window.location.href,{ errorCorrectionLevel: 'H'}, function (err, url) {
@@ -82,6 +97,8 @@ $(function () {
                 }
             })
         },1000)
+
+        GeneratePostMenuHTML()
     }
 
     // (function sidebarPosition() {
