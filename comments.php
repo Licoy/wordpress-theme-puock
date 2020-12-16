@@ -1,5 +1,5 @@
-<?php get_template_part('ad/comment','top') ?>
 <?php if(get_comments_number()==0 && !comments_open()):echo '';else: ?>
+    <?php get_template_part('ad/comment','top') ?>
 <div class="p-block" id="comments">
     <div>
         <span class="t-lg border-bottom border-primary puock-text pb-2"><i class="czs-write-l mr-1"></i><?php _e('评论', PUOCK) ?>（<?php comments_number() ?>）</span>
