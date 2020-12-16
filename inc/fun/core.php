@@ -54,6 +54,17 @@ function register_session(){
 }
 add_action('init','register_session');
 
+// 顶部添加自定义菜单
+function pk_toolbar_link($bar)
+{
+    $bar->add_node(array(
+        'id'    => 'theme-setting',
+        'title' => '主题设置',
+        'href'  => admin_url().'themes.php?page=options-framework'
+    ));
+}
+add_action('admin_bar_menu', 'pk_toolbar_link', 999);
+
 //判断阅读数量是否需要增加并进行操作
 function the_views_add($post_ID,$count,$key,$ajax=false){
     if (is_single() || is_page() || $ajax) {

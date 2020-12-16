@@ -385,7 +385,7 @@ function count_words($text = '')
     global $post;
     $text == '' ? $text = $post->post_content : null;
     $text = $post->post_content;
-    return mb_strlen($text, 'UTF-8');
+    return mb_strlen(preg_replace('/\s/','',html_entity_decode(strip_tags($text))),'UTF-8');
 }
 
 //给文章内容添加灯箱
