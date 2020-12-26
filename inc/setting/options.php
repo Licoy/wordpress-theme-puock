@@ -659,7 +659,8 @@ function optionsframework_options() {
         'name' => '全站顶部广告内容',
         'id' => 'ad_g_top',
         'std' => '',
-        'type' => 'textarea'
+        'type' => 'editor',
+        'settings' => $editorSettings
     );
 
     $options[] = array(
@@ -674,7 +675,8 @@ function optionsframework_options() {
         'name' => '全站底部广告内容',
         'id' => 'ad_g_bottom',
         'std' => '',
-        'type' => 'textarea'
+        'type' => 'editor',
+        'settings' => $editorSettings
     );
 
     $options[] = array(
@@ -690,7 +692,8 @@ function optionsframework_options() {
         'desc'=> '显示在面包屑导航下',
         'id' => 'ad_page_t',
         'std' => '',
-        'type' => 'textarea'
+        'type' => 'editor',
+        'settings' => $editorSettings
     );
 
     $options[] = array(
@@ -706,7 +709,8 @@ function optionsframework_options() {
         'desc'=> '会显示在文章结尾处',
         'id' => 'ad_page_c_b',
         'std' => '',
-        'type' => 'textarea'
+        'type' => 'editor',
+        'settings' => $editorSettings
     );
 
     $options[] = array(
@@ -721,7 +725,8 @@ function optionsframework_options() {
         'name' => '评论上方广告内容',
         'id' => 'ad_comment_t',
         'std' => '',
-        'type' => 'textarea'
+        'type' => 'editor',
+        'settings' => $editorSettings
     );
 
     // SEO设置
