@@ -59,7 +59,9 @@
                         <div class="search-start">
                             <button type="submit" class="btn-dark btn"><i class="czs-search-l mr-1"></i><?php _e('搜索', PUOCK) ?></button>
                         </div>
-                        <button type="button" class="btn-danger btn btn-xm ml-1 search-close-btn search-modal-btn"><i class="czs-close-l"></i></button>
+                        <div class="search-close-btn">
+                            <button type="button" class="btn-danger btn ml-1 search-modal-btn"><i class="czs-close-l"></i></button>
+                        </div>
                     </div>
                 </form>
             </div>
