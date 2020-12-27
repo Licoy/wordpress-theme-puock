@@ -388,6 +388,22 @@ function count_words($text = '')
     return mb_strlen(preg_replace('/\s/','',html_entity_decode(strip_tags($text))),'UTF-8');
 }
 
+//给外部链接加上跳转 <https://zhang.ge/4683.html>
+function the_content_nofollow($content)
+{
+    preg_match_all('/<a(.*?)href="(.*?)"(.*?)>/',$content,$matches);
+    if($matches){
+        foreach($matches[2] as $val){
+            if(strpos($val,'://')!==false && strpos($val,home_url())===false && !preg_match('/\.(jpg|jepg|png|ico|bmp|gif|tiff)/i',$val)){
+                $content=str_replace("href=\"$val\"", "href=\"".home_url()."/go/?url=$val\" ",$content);
+            }
+        }
+    }
+    return $content;
+}
+
+add_filter('the_content','the_content_nofollow',999);
+
 //给文章内容添加灯箱
 function light_box_text_replace($content)
 {

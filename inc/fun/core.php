@@ -415,7 +415,11 @@ if(pk_get_option('gravatar_url','wp')!='wp'){
 function pk_comment_author_url($comment_ID = 0) {
     $url = get_comment_author_url($comment_ID);
     $author = get_comment_author($comment_ID);
-    echo empty($url) ? $author : "<a target='_blank' href='".pk_go_link($url)."' rel='external nofollow' class='url'>$author</a>";
+    // echo empty($url) ? $author : "<a target='_blank' href='".pk_go_link($url)."' rel='external nofollow' class='url'>$author</a>";
+    if ( empty( $url ) || 'http://' == $url )
+        echo $author;
+    else
+        echo "<a target='_blank' href='".home_url()."/go/?url=$url' rel='external nofollow' class='url'>$author</a>";
 }
 //评论回复通知
 if(pk_is_checked('comment_mail_notify')){
