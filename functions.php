@@ -100,22 +100,34 @@ function pk_get_gravatar($email, $echo = true)
 //获取文章分类链接
 function get_post_category_link($class = '', $icon = '', $cid = null, $default = null, $index = 0)
 {
+    return get_post_category_link_exec(false, $class, $icon, $cid, $default, $index);
+}
+
+function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid = null, $default = null, $index = 0){
+    global $cat;
     if ($default == null) {
         $default = __('无分类', PUOCK);
     }
     $cats = get_the_category();
-    $cat = null;
-    if ($cid != null) {
-        $cat = get_category($cid);
-    } else if (count($cats) > 0) {
-        $cat = $cats[0];
-    }
-    if ($cat) {
-        return '<a class="' . $class . '" href="' . get_category_link($cat) . '">' . $icon . $cat->name . '</a>';
+    if (count($cats) > 0) {
+        if($all){
+            $out = "";
+            foreach ($cats as $cate) {
+                $out .= '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>、';
+            }
+            $out = mb_substr($out, 0, mb_strlen($out) - 1);
+            return $out;
+        }else{
+            if (!is_category()){
+                $cate = $cats[0];
+            }else{
+                $cate = get_category($cat);
+            }
+            return '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
+        }
     } else {
-        return '<span class=" c-sub ' . $class . '" href="javascript:void(0)">' . $icon . $default . '</span>';
+        return '<a class="' . $class . '" href="javascript:void(0)">' . $icon . $default . '</a>';
     }
-
 }
 
 //获取文章标签
@@ -247,8 +259,8 @@ function smilies_custom_button($context)
     width: 380px;display:none}.smilies-wrap img{height:24px;width:24px;cursor:pointer;margin-bottom:5px}
      .is-active.smilies-wrap{display:block}</style>
     <a id="insert-media-button" style="position:relative" class="button insert-smilies add_smilies" 
-    title="'.__('添加表情', PUOCK).'" data-editor="content" href="javascript:;">  
-    <span>'.__('添加表情', PUOCK).'</span>  
+    title="' . __('添加表情', PUOCK) . '" data-editor="content" href="javascript:;">  
+    <span>' . __('添加表情', PUOCK) . '</span>  
     </a><div class="smilies-wrap">' . get_wpsmiliestrans() . '</div>
     <script>jQuery(document).ready(function(){jQuery(document).on("click", ".insert-smilies",function()
      { if(jQuery(".smilies-wrap").hasClass("is-active")){
@@ -326,10 +338,10 @@ if (!function_exists('pk_paging')) {
 function pk_breadcrumbs()
 {
     global $cat, $other_page_title;
-    $out = '<div id="breadcrumb" class="p-block ' . (pk_open_box_animated('animated fadeInUp', false)) . '">';
+    $out = '<div id="breadcrumb" class="' . (pk_open_box_animated('animated fadeInUp', false)) . '">';
     $out .= '<nav aria-label="breadcrumb">';
     $out .= '<ol class="breadcrumb">';
-    $out .= '<li class="breadcrumb-item"><a class="a-link" href="' . home_url() . '">'.__('首页', PUOCK).'</a></li>';
+    $out .= '<li class="breadcrumb-item"><a class="a-link" href="' . home_url() . '">' . __('首页', PUOCK) . '</a></li>';
     if (is_single() || is_category()) {
         $categorys = get_the_category();
         if (count($categorys) <= 0 && is_single()) {
@@ -344,24 +356,24 @@ function pk_breadcrumbs()
         $cats = str_replace("</a>", '</a></li>', $cats);
         $out .= $cats;
         if (is_single()) {
-            $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('正文',PUOCK).'</li>';
+            $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('正文', PUOCK) . '</li>';
         } else if (is_category()) {
-            $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('文章列表',PUOCK).'</li>';
+            $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('文章列表', PUOCK) . '</li>';
         }
     } else if (is_search()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($_GET['s']) . '</li>';
-        $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('搜索结果',PUOCK).'</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('搜索结果', PUOCK) . '</li>';
     } else if (is_author()) {
-        $out .= '<li class="breadcrumb-item active " aria-current="page">' . get_the_author_meta('nickname') . ''.__('的文章列表',PUOCK).'</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . get_the_author_meta('nickname') . '' . __('的文章列表', PUOCK) . '</li>';
     } else if (is_page()) {
         global $post;
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($post->post_title) . '</li>';
     } else if (is_tag()) {
         $tag_name = single_tag_title('', false);
-        $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('标签',PUOCK).'</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('标签', PUOCK) . '</li>';
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($tag_name) . '</li>';
     } else if (is_404()) {
-        $out .= '<li class="breadcrumb-item active " aria-current="page">'.__('你访问的资源不存在',PUOCK).'</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('你访问的资源不存在', PUOCK) . '</li>';
     } else if (isset($other_page_title)) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . $other_page_title . '</li>';
     }
@@ -385,7 +397,7 @@ function count_words($text = '')
     global $post;
     $text == '' ? $text = $post->post_content : null;
     $text = $post->post_content;
-    return mb_strlen(preg_replace('/\s/','',html_entity_decode(strip_tags($text))),'UTF-8');
+    return mb_strlen(preg_replace('/\s/', '', html_entity_decode(strip_tags($text))), 'UTF-8');
 }
 
 //给文章内容添加灯箱
