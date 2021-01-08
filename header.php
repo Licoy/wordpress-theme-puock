@@ -15,7 +15,7 @@
     <link rel="stylesheet" data-no-instant href="<?php echo get_template_directory_uri(); ?>/assets/css/style.css?v=<?php echo PUOCK_CUR_VER ?>">
     <script data-no-instant type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/jquery.min.js"></script>
     <?php if(!empty(pk_get_option('tj_code_header',''))): ?>
-    <?php echo pk_get_option('tj_code_header',''); ?>
+        <?php echo pk_get_option('tj_code_header',''); ?>
     <?php endif; ?>
     <?php if(is_single() || is_page()):?>
     <?php endif; ?>
@@ -23,9 +23,9 @@
 <body class="puock-<?php echo pk_theme_light() ? 'light':'dark' ?>">
 <div id="page">
     <?php if(is_single()):?>
-    <div class="progress" id="page-read-progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" role="progressbar"></div>
-    </div>
+        <div class="progress" id="page-read-progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" role="progressbar"></div>
+        </div>
     <?php endif; ?>
     <div id="header-box" class="<?php pk_open_box_animated('animated fadeInDown') ?>"></div>
     <header id="header" class="<?php pk_open_box_animated('animated fadeInDown') ?>">
@@ -50,14 +50,16 @@
     </header>
     <div id="search" class="d-none">
         <div class="w-100 d-flex justify-content-center">
-            <div class="container p-block">
+            <div id="search-main" class="container p-block">
                 <form action="<?php echo home_url() ?>">
-                    <div class="row">
-                        <div class="col-xl-10 col-lg-9 col-md-8 col-sm-7 col-6">
+                    <div class="search-layout">
+                        <div class="search-input">
                             <input required type="text" name="s" id="s" class="form-control" placeholder="<?php _e('请输入搜索关键字', PUOCK) ?>">
                         </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-6 pl-0">
-                            <button type="submit" class="btn-dark btn"><i class="czs-search-l mr-1"></i><?php _e('开始搜索', PUOCK) ?></button>
+                        <div class="search-start">
+                            <button type="submit" class="btn-dark btn"><i class="czs-search-l mr-1"></i><?php _e('搜索', PUOCK) ?></button>
+                        </div>
+                        <div class="search-close-btn">
                             <button type="button" class="btn-danger btn ml-1 search-modal-btn"><i class="czs-close-l"></i></button>
                         </div>
                     </div>
