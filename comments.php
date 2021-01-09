@@ -1,5 +1,5 @@
 <?php if(get_comments_number()==0 && !comments_open()):echo '';else: ?>
-    <?php get_template_part('ad/comment','top') ?>
+<?php get_template_part('ad/comment','top') ?>
 <div class="p-block" id="comments">
     <div>
         <span class="t-lg border-bottom border-primary puock-text pb-2"><i class="czs-write-l mr-1"></i><?php _e('评论', PUOCK) ?>（<?php comments_number() ?>）</span>
@@ -20,7 +20,6 @@
     </div>
     <?php else: ?>
     <div class="mt20 clearfix" id="comment-form-box">
-<!--        <form class="mt10" id="comment-form" method="post" action="--><?php //echo get_template_directory_uri().'/inc/fun/comment-ajax.php' ?><!--">-->
         <form class="mt10" id="comment-form" method="post" action="<?php echo admin_url().'admin-ajax.php?action=comment_ajax' ?>">
             <div class="form-group">
                 <textarea placeholder="<?php _e('世界这么大发表一下你的看法~', PUOCK) ?>" id="comment" name="comment" class="form-control form-control-sm t-sm" rows="4"></textarea>
