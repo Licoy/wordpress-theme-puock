@@ -81,7 +81,7 @@ function get_path_query($query)
 }
 
 //GrAvatar头像源
-$gravatar_urls = array('www.gravatar.com','0.gravatar.com','1.gravatar.com','2.gravatar.com');
+$gravatar_urls = array('www.gravatar.com','0.gravatar.com','1.gravatar.com','2.gravatar.com','secure.gravatar.com','cn.gravatar.com');
 function cn_avatar($avatar) {
     global $gravatar_urls;
     return str_replace( $gravatar_urls, 'cn.gravatar.com', $avatar );
@@ -96,7 +96,7 @@ function loli_ssl_avatar($avatar) {
 }
 function v2ex_ssl_avatar($avatar) {
     global $gravatar_urls;
-    return str_replace("http://","https://",str_replace( $gravatar_urls, 'cdn.v2ex.com', $avatar ));
+    return str_replace("http://","https://",str_replace("/avatar", "/gravatar", str_replace( $gravatar_urls, 'cdn.v2ex.com', $avatar )));
 }
 //评论回复邮件通知
 function comment_mail_notify($comment_id) {
@@ -135,7 +135,7 @@ function sc_quicktags() {
 function wp_compress_html(){
 
     //禁止pre标签压缩
-     function pre_no_compress($content) {
+    function pre_no_compress($content) {
         if(preg_match_all('/<\/pre>/i', $content, $matches)) {
             $content = '<!--wp-compress-html--><!--wp-compress-html no compression-->'.$content;
             $content.= '<!--wp-compress-html no compression--><!--wp-compress-html-->';
