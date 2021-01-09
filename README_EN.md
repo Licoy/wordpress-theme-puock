@@ -20,11 +20,10 @@
       </a>
 </div>
 
-## Preview
-> This is the blog with this theme installed. You can preview it online.
-- [Licoy's Blog](https://www.licoy.cn/)
 ## Install
-Please go to the [release version](https://github.com/Licoy/wordpress-theme-puock/releases) to download the latest version, and then click "Add" in "Appearance"-"Themes" in the WordPress management background, select Puock's theme package to upload, install and enable it. To prevent theme incompatibility, please Make a data backup before installing the theme.
+Please go to the [release version](https://github.com/Licoy/wordpress-theme-puock/releases) to download the latest version, and then click "Add" in "Appearance"-"Themes" in the WordPress management background, select Puock's theme package to upload, install and enable it.
+
+**Tip: in order to prevent theme incompatibility, please backup data before installing theme to prevent data loss or other situations.**
 ## Theme characteristics
 - [x] Support day and dark mode
 - [x] Global loading without refresh
@@ -48,7 +47,9 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 - [x] Simple and fast background configuration
 - [x] More features, waiting for your [proposal](https://github.com/Licoy/wordpress-theme-puock/issues)
 ## Documentation
-- Theme edible document: [Eat immediately](https://www.licoy.cn/puock-doc.html)
+- Theme use document: [Use immediately](https://www.licoy.cn/puock-doc.html)
+## Support
+- Reward theme to support：[Click me in](https://licoy.cn/go/zs/)
 ## Thanks
 [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
 ## License
