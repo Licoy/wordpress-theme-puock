@@ -1,5 +1,7 @@
 [中文](./README.md) | English
+
 ## Introduction
+
 <div align="center">
     <h1>WordPress Theme - Puock</h1>
     <p>A high-value adaptive theme based on WordPress, supporting day and night modes.</p>
@@ -21,10 +23,13 @@
 </div>
 
 ## Install
+
 Please go to the [release version](https://github.com/Licoy/wordpress-theme-puock/releases) to download the latest version, and then click "Add" in "Appearance"-"Themes" in the WordPress management background, select Puock's theme package to upload, install and enable it.
 
 **Tip: in order to prevent theme incompatibility, please backup data before installing theme to prevent data loss or other situations.**
+
 ## Theme characteristics
+
 - [x] Support day and dark mode
 - [x] Global loading without refresh
 - [x] Support blog and CMS layout
@@ -46,12 +51,20 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 - [x] Support Dplayer player
 - [x] Simple and fast background configuration
 - [x] More features, waiting for your [proposal](https://github.com/Licoy/wordpress-theme-puock/issues)
+
 ## Documentation
+
 - Theme use document: [Use immediately](https://www.licoy.cn/puock-doc.html)
+
 ## Support
+
 - Reward theme to support：[Click me in](https://licoy.cn/go/zs/)
+
 ## Thanks
+
 [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
+
 ## License
+
 - [GPL 3.0](./LICENSE)
 - Please abide by the open source agreement and keep the author's signature at the bottom of the subject
