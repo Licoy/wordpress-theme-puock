@@ -1,12 +1,12 @@
 <?php
 
 function specs_get_first_char($s0){
-	$char = ord($s0{0});
-	if($char >= ord("A") and $char <= ord("z") )return strtoupper($s0{0});
+	$char = ord($s0[0]);
+	if($char >= ord("A") and $char <= ord("z") )return strtoupper($s0[0]);
 	$s1 = iconv("UTF-8","gb2312", $s0);
 	$s2 = iconv("gb2312","UTF-8", $s1);
 	if($s2 == $s0){$s = $s1;}else{$s = $s0;}
-	$asc = ord($s{0}) * 256 + ord($s{1}) - 65536;
+	$asc = ord($s[0]) * 256 + ord($s[1]) - 65536;
 	if($asc >= -20319 and $asc <= -20284) return "A";
 	if($asc >= -20283 and $asc <= -19776) return "B";
 	if($asc >= -19775 and $asc <= -19219) return "C";
