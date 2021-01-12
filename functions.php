@@ -446,3 +446,35 @@ function pk_bootstrap_table_class($content)
 add_filter('the_content', 'pk_bootstrap_table_class', 99);
 
 require_once dirname(__FILE__) . '/fun-custom.php';
+
+// 使用 Plugin Update Checker 检测主题更新
+require_once dirname(__FILE__) . '/update-checker/plugin-update-checker.php';
+// $theme_update_source = get_option('theme_update_source'); // 主题更新地址 github fastgit jsdelivr zxj(又拍云)
+if ($theme_update_source == 'stop'){
+    // 停止更新
+}
+else if ($theme_update_source == 'github'){
+	$themeThemeUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+		'https://raw.githubusercontent.com/Licoy/wordpress-theme-puock/master/puock.json',
+		dirname(__FILE__) . '/functions.php',
+		'puock'
+	);
+}else if ($theme_update_source == 'jsdelivr'){
+	$themeThemeUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+		'https://api.zxj.pub/puock/puock.json?source=jsdelivr',
+		dirname(__FILE__) . '/functions.php',
+		'puock'
+	);
+}else if ($theme_update_source == 'fastgit'){
+	$themeThemeUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+		'https://api.zxj.pub/puock/puock.json?source=fastgit',
+		dirname(__FILE__) . '/functions.php',
+		'puock'
+	);
+}else{
+	$themeThemeUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+		'https://api.zxj.pub/puock/puock.json?source=zxj',
+		dirname(__FILE__) . '/functions.php',
+		'puock'
+	);
+}
