@@ -1,7 +1,7 @@
 <?php
 
 
-define( 'PUOCK_CUR_VER', 1.4 );
+define( 'PUOCK_CUR_VER', (float)wp_get_theme()->get('Version') );
 define( 'PUOCK', 'puock' );
 
 $puock = 'Puock';
@@ -227,16 +227,16 @@ function extra_user_profile_qq_oauth( $user ) {
     }else{
         $href = $oauth['oauth_url'];
     }
-?>
+    ?>
     <h3>第三方账号绑定</h3>
     <table class="form-table">
         <tr>
             <th><label for="qq_oauth">QQ互联</label></th>
             <td>
                 <?php if(empty($qq_oauth)): ?>
-                <a href="<?php echo $href ?>" target="_blank" id="qq_oauth" <?php echo $is_conn ? '':'disabled' ?>  class="button">立即去绑定</a>
+                    <a href="<?php echo $href ?>" target="_blank" id="qq_oauth" <?php echo $is_conn ? '':'disabled' ?>  class="button">立即去绑定</a>
                 <?php else: ?>
-                <a id="qq_oauth" class="button" disabled>已绑定QQ</a>
+                    <a id="qq_oauth" class="button" disabled>已绑定QQ</a>
                 <?php endif; ?>
             </td>
         </tr>
