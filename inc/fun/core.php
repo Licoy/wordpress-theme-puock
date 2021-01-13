@@ -451,8 +451,10 @@ function pk_check_email_is_sysgen($email){
 }
 //后台登录保护
 function login_protection() {
-    if ($_GET[pk_get_option('lp_user','admin')] != pk_get_option('lp_pass','admin')) {
-        header("Location: ".home_url());
+    if(!is_user_logged_in()){
+        if ($_GET[pk_get_option('lp_user','admin')] != pk_get_option('lp_pass','admin')) {
+            header("Location: ".home_url());
+        }
     }
 }
 if(pk_is_checked('login_protection')){
