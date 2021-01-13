@@ -13,7 +13,7 @@
                         <div class="float-left">
                             <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views();_e('次阅读', PUOCK) ?></span></div>
                             <a href="#comments"><div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-comment-l mr-1"></i><?php comments_number() ?></div></a>
-                            <?php if(is_user_logged_in() && current_user_can('edit_post')): ?>
+                            <?php if(is_user_logged_in() && current_user_can('edit_post', $post->ID)): ?>
                                 <a target="_blank" href="<?php echo get_edit_post_link() ?>"><div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-web-edit-l mr-1"></i><?php _e('编辑', PUOCK) ?></div></a>
                             <?php endif; ?>
                         </div>
