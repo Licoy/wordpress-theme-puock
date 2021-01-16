@@ -151,6 +151,14 @@ function optionsframework_options() {
     );
 
     $options[] = array(
+        'name' => '关闭全局侧边栏显示',
+        'desc' => '允许<code>勾选此项会隐藏掉全局所有页面的侧边栏组件显示</code>',
+        'id' => 'hide_global_sidebar',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
         'name' => '启用后台登录保护',
         'desc' => '允许（启用后则用"wp-login.php?{后台登录保护参数}={后台登录保护值}"的方式访问）',
         'id' => 'login_protection',

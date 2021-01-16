@@ -146,6 +146,9 @@ function get_views_most_post($days, $nums){
 //是否隐藏侧边栏
 function pk_hide_sidebar($post_id=null){
     global $post;
+    if(pk_get_option("hide_global_sidebar") == true){
+        return true;
+    }
     if($post_id==null){
         $post_id = $post->ID;
     }
