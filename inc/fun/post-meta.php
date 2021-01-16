@@ -52,7 +52,7 @@ function post_meta_set($boxes) {
 //保存meta数据
 function save_post_meta_data( $post_id, $boxes ) {
     foreach($boxes as $meta_box) {
-        if ( !wp_verify_nonce( $_POST[$meta_box['name'].'_noncename'], plugin_basename(__FILE__) ))  {
+        if ( !wp_verify_nonce( @$_POST[$meta_box['name'].'_noncename'], plugin_basename(__FILE__) ))  {
             return $post_id;
         }
 
