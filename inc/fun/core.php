@@ -149,10 +149,13 @@ function pk_hide_sidebar($post_id=null){
     if(pk_is_checked("hide_global_sidebar")){
         return true;
     }
-    if($post_id==null){
-        $post_id = $post->ID;
+    if (is_single() || is_page()){
+        if($post_id==null){
+            $post_id = $post->ID;
+        }
+        return get_post_meta($post_id,'hide_side',true)=="true";
     }
-    return get_post_meta($post_id,'hide_side',true)=="true";
+    return false;
 }
 //隐藏/显示侧边栏的输出字符
 function pk_hide_sidebar_out($hide='',$show='',$post_id=null,$echo=true){
