@@ -221,6 +221,14 @@ function optionsframework_options() {
     );
 
     $options[] = array(
+        'name' => '正文内容侧边目录菜单生成',
+        'desc' => '勾选此项会在正文目录显示文章目录',
+        'id' => 'use_post_menu',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
         'name' => '评论Ajax翻页',
         'desc' => '开启',
         'id' => 'comment_ajax',

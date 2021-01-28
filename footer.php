@@ -13,6 +13,7 @@
         </div>
     </div>
 </div>
+<?php if(pk_is_checked('use_post_menu')) get_template_part('templates/module', 'menus') ?>
 <!--返回顶部和底部-->
 <div id="return-top-bottom">
     <div data-to="top" class="p-block"><i class="czs-arrow-up-l puock-text"></i></div>

@@ -6,16 +6,22 @@ window.puock = {
             rootMargin: "0px",
             threshold: 0
         });
+    },
+    loadParams:function (){
+        window.puockParams = eval('('+$("meta[name='puock-params']").attr("content")+')')
+        window.vdCommentOpen = window.puockParams.vd_comment === 'on';
     }
 }
 
+
+
 $(function () {
 
-    window.vdCommentOpen = $("meta[name='vd-comment']").attr("content") === 'on';
+    window.puock.loadParams();
 
     if(window.vdCommentOpen){
         vaptcha({
-            vid: '5e955262370a0ce37126055d', // 验证单元id
+            vid: window.puockParams.vd_vid, // 验证单元id
             type: 'invisible', // 显示类型 隐藏式
             scene: 3, // 场景值 默认0
             offline_server: 'http://ww.ss',
@@ -69,11 +75,48 @@ $(function () {
         window.puock.lazyLoadInit();
     }
 
+    //获取文章的目录结构
+    function getPostMenuStructure(){
+        let res = []
+        for (let item of $(".entry-content").find('h1,h2,h3,h4,h5,h6')) {
+            res.push({name: $(item).text().trim(), level: item.tagName.toLowerCase(), id: $(item).attr("id")})
+        }
+        return res
+    }
+
+    function generatePostMenuHTML(){
+        const menus = getPostMenuStructure();
+        let genHtml = "<ul>";
+        if (menus.length > 0){
+            let heightLevel = 6;
+            for (let i = 0; i < menus.length; i++) {
+                const level = parseInt(menus[i].level[1]);
+                if (level < heightLevel){
+                    heightLevel = level;
+                }
+            }
+            for (let i = 0; i < menus.length; i++) {
+                const m = menus[i];
+                let pl = 0;
+                const level = parseInt(m.level[1]);
+                if (level > heightLevel){
+                    pl = (level - heightLevel) * 10;
+                }
+                genHtml += "<li style='padding-left: "+pl+"px' class='t-line-1'><i class='czs-angle-right-l t-sm c-sub mr-1'></i><a class='pk-menu-to a-link t-w-400 t-md'" +
+                    " href='#"+m.id+"'>"+m.name+"</a></li>";
+            }
+        }
+        genHtml += "</ul>"
+        $("#post-menu-content").html(genHtml)
+    }
+
     document.querySelectorAll('pre').forEach((block) => {
         hljs.highlightBlock(block);
     });
 
     if(global_params.is_single){
+
+        //生成微信分享二维码
         setTimeout(function () {
             var wx = $("#wx-share");
             QRCode.toDataURL(window.location.href,{ errorCorrectionLevel: 'H'}, function (err, url) {
@@ -82,7 +125,28 @@ $(function () {
                 }
             })
         },1000)
+
+        if(window.puockParams.use_post_menu){
+            generatePostMenuHTML()
+        }
     }
+
+    //todo auto change mode
+    // const modeChangeListeners = {
+    //     light : function (){
+    //         console.log("切换到了light")
+    //     },
+    //     dark: function (){
+    //         console.log("切换到了dark")
+    //     }
+    // }
+    // try{
+    //     window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', modeChangeListeners.dark);
+    //     window.matchMedia('(prefers-color-scheme:light)').addEventListener('change', modeChangeListeners.light);
+    // }catch (ex){
+    //     window.matchMedia('(prefers-color-scheme:dark)').addListener(modeChangeListeners.dark);
+    //     window.matchMedia('(prefers-color-scheme:light)').addListener(modeChangeListeners.light);
+    // }
 
     // (function sidebarPosition() {
     //     var sidebar = $("#sidebar");

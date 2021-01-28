@@ -26,6 +26,22 @@ $(function () {
         $('html,body').animate({scrollTop:scroll_val},800)
     });
 
+    $(document).on("click", "#post-menu-state", function (){
+        $("#post-menu-content").toggle();
+    });
+
+    $(document).on("click", ".pk-menu-to", function (){
+        const to = $(this).attr("href");
+        const headerHeight = $("#header").innerHeight();
+        $("html, body").animate({
+            scrollTop: ($(to).offset().top - headerHeight - 10) + "px"
+        }, {
+            duration: 500,
+            easing: "swing"
+        });
+        return false;
+    });
+
 });
 
 
