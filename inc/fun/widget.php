@@ -22,15 +22,15 @@ abstract class puockWidgetBase extends WP_Widget{
         }
         if($type=='input'){
             $out .= "<input class='widefat' id='{$fid}' type='text' name='{$fname}'
-                   value='".($instance[$key])."' />";
+                   value='".(@$instance[$key])."' />";
         }
         if($type=='cats'){
             $out .= wp_dropdown_categories(array('name' => $fname,'echo'=>0,
-                'show_option_all' => '全部分类', 'hide_empty'=>0, 'hierarchical'=>1, 'selected'=>$instance[$key]));
+                'show_option_all' => '全部分类', 'hide_empty'=>0, 'hierarchical'=>1, 'selected'=>@$instance[$key]));
         }
         if($type=='text'){
             $out .= '<textarea class="monospace widefat" rows="10" cols="40" id="'.($fid).'" 
-                name="'.$fname.'">'.$instance[$key].'</textarea>';
+                name="'.$fname.'">'.@$instance[$key].'</textarea>';
         }
         if($type=='checkbox'){
             $use = (isset($instance[$key]) && $instance[$key]=='on') ? 'checked' : '';
@@ -653,3 +653,94 @@ class puockCategory extends puockWidgetBase {
      }
 }
 add_action( 'widgets_init', function (){ register_widget('puockCategory'); });
+
+//标签云
+class puockTagCloud extends puockWidgetBase {
+
+
+    protected $title = "标签云";
+
+    protected $pre_title = "集成博客的标签为";
+
+    function get_fields(){
+        return $this->merge_common_fields(array(
+            array('id'=>'title','strip'=>true, 'val'=>$this->title),
+        ));
+    }
+
+    function form( $instance ) {
+        $instance = $this->default_value($instance);
+        $this->html_gen($instance, '标题', 'title');
+        $this->merge_common_form($instance);
+    }
+
+    function get_class_name()
+    {
+        return __CLASS__;
+    }
+
+    function widget( $args, $instance ){
+        $this->get_common_widget_header($instance);
+        echo '<div class="widget-puock-tag-cloud">';
+        $tags = get_tags();
+        if(count($tags) > 0){
+            foreach ($tags as $tag){
+                $link = get_tag_link($tag);
+                echo "<a href='{$link}' class='badge d-none d-md-inline-block bg-".pk_get_color_tag()." ahfff'>{$tag->name}</a>";
+            }
+        }else{
+            echo sc_tips_primary(null, "暂无标签");
+        }
+        echo '</div>';
+        $this->get_common_widget_footer($instance);
+     }
+}
+add_action( 'widgets_init', function (){ register_widget('puockTagCloud'); });
+
+
+//标签云
+class puockTagHitokoto extends puockWidgetBase {
+
+
+    protected $title = "一言一句话";
+
+    protected $pre_title = "随机展示";
+
+    function get_fields(){
+        return $this->merge_common_fields(array(
+            array('id'=>'title','strip'=>true, 'val'=>$this->title),
+        ));
+    }
+
+    function form( $instance ) {
+        $instance = $this->default_value($instance);
+        $this->html_gen($instance, '标题', 'title');
+        $this->merge_common_form($instance);
+    }
+
+    function get_class_name()
+    {
+        return __CLASS__;
+    }
+
+    function widget( $args, $instance ){
+        $this->get_common_widget_header($instance);
+        $id = "pk-hitokoto-".wp_unique_id();
+        ?>
+        <div class="widget-puock-hitokoto">
+            <div id="<?php echo $id ?>">
+                <div class="t puock-text"></div>
+                <div class="fb">-「<span class="f"></span>」</div>
+            </div>
+            <script type="application/javascript">
+            $.get("https://v1.hitokoto.cn/", function (res){
+                const el = $("#<?php echo $id ?>");
+                el.find(".t").text(res.hitokoto);
+                el.find('.f').text(res.from)
+            },'json');
+            </script>
+        </div>
+       <?php $this->get_common_widget_footer($instance);
+     }
+}
+add_action( 'widgets_init', function (){ register_widget('puockTagHitokoto'); });
