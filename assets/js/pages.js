@@ -131,23 +131,6 @@ $(function () {
         }
     }
 
-    //todo auto change mode
-    // const modeChangeListeners = {
-    //     light : function (){
-    //         console.log("切换到了light")
-    //     },
-    //     dark: function (){
-    //         console.log("切换到了dark")
-    //     }
-    // }
-    // try{
-    //     window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', modeChangeListeners.dark);
-    //     window.matchMedia('(prefers-color-scheme:light)').addEventListener('change', modeChangeListeners.light);
-    // }catch (ex){
-    //     window.matchMedia('(prefers-color-scheme:dark)').addListener(modeChangeListeners.dark);
-    //     window.matchMedia('(prefers-color-scheme:light)').addListener(modeChangeListeners.light);
-    // }
-
     // (function sidebarPosition() {
     //     var sidebar = $("#sidebar");
     //     var main = sidebar.find('.sidebar-main');

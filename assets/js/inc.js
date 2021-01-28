@@ -71,7 +71,7 @@ $(()=>{
         body.addClass(isLight ? pk+"-light":pk+"-dark");
         localStorage.setItem('light',isLight);
     }
-//模式初始化
+    //模式初始化
     function modeInit() {
         let light = lg('light');
         if(light!==undefined){
@@ -79,6 +79,17 @@ $(()=>{
         }
     }
     modeInit();
+
+    //模式自动切换
+    const modeChangeListeners = function (){
+        const isDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+        modeChange(!isDark);
+    }
+    try{
+        window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', modeChangeListeners);
+    }catch (ex){
+        window.matchMedia('(prefers-color-scheme:dark)').addListener(modeChangeListeners);
+    }
 
     //显示infoToast模态框
     function infoToastShow(text,title='提示'){
