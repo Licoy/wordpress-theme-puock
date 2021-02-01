@@ -910,7 +910,7 @@ function optionsframework_options() {
         'name' => '底部页脚信息',
         'desc' => '显示备案信息及其他相关链接（可以为HTML）',
         'id' => 'footer_info',
-        'std' => 'Copyright &copy;&nbsp;&nbsp;Themes Design By Puock&nbsp;&nbsp;',
+        'std' => 'Copyright &copy;&nbsp;&nbsp;',
         'type' => 'editor',
         'settings' => $editorSettings
     );

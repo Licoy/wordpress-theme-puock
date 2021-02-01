@@ -241,3 +241,8 @@ if(pk_is_checked('use_post_menu')){
     }
     add_filter("the_content", "pk_post_menu_id");
 }
+//兼容wp-editor.md
+function pk_wp_editor_md_compatible(){
+    wp_scripts()->remove("Editormd_Front");
+}
+add_action('wp_enqueue_scripts', 'pk_wp_editor_md_compatible', 999);

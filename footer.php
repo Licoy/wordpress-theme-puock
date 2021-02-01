@@ -75,6 +75,7 @@
 <script data-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/pages.js"></script>
 <script data-no-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/pages-once.js"></script>
 <script data-no-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/inc.js"></script>
+<?php wp_footer();  ?>
 <?php get_template_part('templates/async','views') ?>
 </body>
 </html>
