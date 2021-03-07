@@ -103,31 +103,38 @@ function get_post_category_link($class = '', $icon = '', $cid = null, $default =
     return get_post_category_link_exec(false, $class, $icon, $cid, $default, $index);
 }
 
-function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid = null, $default = null, $index = 0){
+function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid = null, $default = null, $index = 0)
+{
     global $cat;
     if ($default == null) {
         $default = __('无分类', PUOCK);
     }
-    $cats = get_the_category();
-    if (count($cats) > 0) {
-        if($all){
-            $out = "";
-            foreach ($cats as $cate) {
-                $out .= '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>、';
-            }
-            $out = mb_substr($out, 0, mb_strlen($out) - 1);
-            return $out;
-        }else{
-            if (!is_category()){
-                $cate = $cats[0];
-            }else{
-                $cate = get_category($cat);
-            }
+    if ($cid != null) {
+        $cate = get_category($cid);
+        if ($cate != null) {
             return '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
         }
-    } else {
-        return '<a class="' . $class . '" href="javascript:void(0)">' . $icon . $default . '</a>';
+    }else{
+        $cats = get_the_category();
+        if (count($cats) > 0) {
+            if ($all) {
+                $out = "";
+                foreach ($cats as $cate) {
+                    $out .= '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>、';
+                }
+                $out = mb_substr($out, 0, mb_strlen($out) - 1);
+                return $out;
+            } else {
+                if (!is_category()) {
+                    $cate = $cats[0];
+                } else {
+                    $cate = get_category($cat);
+                }
+                return '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
+            }
+        }
     }
+    return '<a class="' . $class . '" href="javascript:void(0)">' . $icon . $default . '</a>';
 }
 
 //获取文章标签
