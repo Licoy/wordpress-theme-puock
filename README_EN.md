@@ -24,6 +24,13 @@
 Please go to the [release version](https://github.com/Licoy/wordpress-theme-puock/releases) to download the latest version, and then click "Add" in "Appearance"-"Themes" in the WordPress management background, select Puock's theme package to upload, install and enable it.
 
 **Tip: in order to prevent theme incompatibility, please backup data before installing theme to prevent data loss or other situations.**
+
+##Version iteration
+- Upgrade 1.5 and the following versions to 1.6+ configuration incompatibility handling method:
+```
+Please refer to the introduction of Chinese version
+```
+
 ## Theme characteristics
 - [x] Support day and dark mode
 - [x] Global loading without refresh

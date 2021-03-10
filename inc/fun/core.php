@@ -3,6 +3,7 @@
 
 define( 'PUOCK_CUR_VER', (float)wp_get_theme()->get('Version') );
 define( 'PUOCK', 'puock' );
+define( 'PUOCK_OPT', 'puock_options' );
 
 $puock = 'Puock';
 
@@ -544,7 +545,7 @@ register_nav_menus(array(
 
 //获取主题配置
 function pk_get_option($name, $default = false) {
-    $config = get_option( 'optionsframework' );
+    $config = get_option( PUOCK_OPT );
     if ( $config && isset( $config[$name] ) ) {
         if(!empty($config[$name])){
             return $config[$name];

@@ -26,6 +26,16 @@
 请到 [发行版本](https://github.com/Licoy/wordpress-theme-puock/releases) 中进行下载最新版本，然后到WordPress管理后台中的「外观」-「主题」中点击「添加」，选择Puock的主题包进行上传安装并启用即可。
 
 **提示：为了防止主题不兼容，请在安装主题前进行数据备份，防止数据丢失或其他情况发生。**
+
+## 版本迭代
+- 1.5及以下版本升级至1.6+配置不兼容处理方法：
+
+因为在1.6版本中将配置字段更改为了`puock_options`，所以会导致配置读取不到，用户可以重新进行配置或恢复配置，恢复配置SQL（***执行前请先备份数据库，原配置字段名为`optionsframework`，若其他主题或插件使用了同名字段为配置名则会覆盖***）：
+```sql
+# 执行先请先备份数据库，以防有其他使用同字段名主题或插件的配置覆盖
+UPDATE `wp_options` SET `option_name` = 'puock_options' WHERE `option_name` = 'optionsframework'
+```
+  
 ## 主题特性
 - [x] 支持白天与暗黑模式
 - [x] 全局无刷新加载
