@@ -23,7 +23,7 @@
 ## Install
 Please go to the [release version](https://github.com/Licoy/wordpress-theme-puock/releases) to download the latest version, and then click "Add" in "Appearance"-"Themes" in the WordPress management background, select Puock's theme package to upload, install and enable it.
 
-**Tip: in order to prevent theme incompatibility, please backup data before installing theme to prevent data loss or other situations.**
+**Tip: in order to prevent incompatible themes, please backup data before installing themes to prevent data fields from overlapping.**
 
 ##Version iteration
 - Upgrade 1.5 and the following versions to 1.6+ configuration incompatibility handling method:
