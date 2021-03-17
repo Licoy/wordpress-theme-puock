@@ -46,7 +46,9 @@ if(pk_is_checked('no_category')){
 /*Auth-Domains*/
 
 //钩子添加集合
-add_action('init','html_page_permalink',-1);
+if (pk_is_checked('html_page_permalink')){
+    add_action('init','html_page_permalink',-1);
+}
 add_filter('user_trailingslashit', 'add_init_trailingslashit', 10, 2);
 //添加session支持
 function register_session(){

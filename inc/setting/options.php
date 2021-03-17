@@ -87,6 +87,14 @@ function optionsframework_options() {
     );
 
     $options[] = array(
+        'name' => '页面使用.html后缀',
+        'desc' => '允许（更改后需要重新保存<strong>固定链接</strong>）',
+        'id' => 'html_page_permalink',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
         'name' => '高亮模式下LOGO',
         'desc' => '比例：500*125，请尽量选择png无底色图片',
         'id' => 'light_logo',
