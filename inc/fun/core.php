@@ -670,8 +670,11 @@ function pk_get_menu_obj_to_html($menus,&$out,$mobile=false,$dpath_cur=1,$max_dp
         if(!$mobile){
             $out .= "<a href='{$menu->url}'>{$menu->title}";
         }else{
-            $link = count($menu->children)>0 ? "#menu-sub-".$menu->ID : $menu->url;
-            $out .= '<a href="'.$link.'" data-toggle="collapse">'.$menu->title;
+            if(count($menu->children)>0){
+                $out .= '<a href="#menu-sub-'.$menu->ID.'" data-toggle="collapse">'.$menu->title;
+            }else{
+                $out .= '<a href="'.$menu->url.'">'.$menu->title;
+            }
         }
         if(count($menu->children) > 0){
             $out .= '<i class="czs-angle-down-l t-sm ml-1"></i>';
