@@ -21,8 +21,10 @@
             <div class="info-footer w-100 clearfix d-none d-block">
                 <div class="float-left">
                                         <span class="t-sm c-sub">
+                                                <?php if (!pk_is_checked('hide_post_views')): ?>
                                                 <span class="mr-2"><i class="czs-eye-l mr-1"></i><?php pk_get_post_views() ?><span class="t-sm d-none d-sm-inline-block">次阅读</span></span>
-                                                <a class="c-sub-a" href="<?php the_permalink() ?>#comments">
+                                                <?php endif; ?>
+                                                 <a class="c-sub-a" href="<?php the_permalink() ?>#comments">
                                                     <i class="czs-comment-l mr-1"></i>
                                                     <?php echo get_comments_number() ?><span class="t-sm d-none d-sm-inline-block">个评论</span></a>
                                         </span>

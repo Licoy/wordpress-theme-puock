@@ -127,6 +127,14 @@ function optionsframework_options() {
     );
 
     $options[] = array(
+        'name' => '隐藏文章阅读量',
+        'desc' => '允许',
+        'id' => 'hide_post_views',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
         'name' => '隐藏底部"感谢使用WordPress进行创作"和左上角标识',
         'desc' => '隐藏',
         'id' => 'hide_footer_wp_t',
