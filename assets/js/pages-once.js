@@ -5,11 +5,11 @@ $(function () {
     });
 
     $(document).on("click",".share-to>div",function () {
-        var id = $(this).attr("data-id");
-        var url = window.location.href;
-        var to = null;
-        var title = $("#post-title").text();
-        var wb_key = '';//TODO 填写自己的应用KEY
+        const id = $(this).attr("data-id");
+        const url = window.location.href;
+        let to = null;
+        const title = $("#post-title").text();
+        const wb_key = '';//TODO 填写自己的应用KEY
         if(id==='wx') return;
         switch (id) {
             case 'wb':to='http://service.weibo.com/share/share.php?pic=&title='+title+'&url='+url+'&appkey='+wb_key;break;
@@ -26,9 +26,29 @@ $(function () {
         $('html,body').animate({scrollTop:scroll_val},800)
     });
 
-    $(document).on("click", "#post-menu-state", function (){
-        $("#post-menu-content").toggle();
+    function toggleMenu(vm){
+        const className = "data-open";
+        const open = vm.hasClass(className);
+        const content = $("#post-menu-content");
+        if(open){
+            content.hide();
+            vm.removeClass(className);
+        }else{
+            content.show();
+            vm.addClass(className);
+        }
+    }
+
+    $(document).on("touchend", "#post-menu-state", function (e){
+        e.preventDefault();
+        toggleMenu($(this));
     });
+
+    $(document).on("click", "#post-menu-state", function (){
+        toggleMenu($(this));
+    });
+
+
 
     $(document).on("click", ".pk-menu-to", function (){
         const to = $(this).attr("href");
