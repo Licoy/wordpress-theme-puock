@@ -234,7 +234,7 @@ class puockNewPost extends puockWidgetBase {
         global $wpdb;
         $days = $this->get_num_val($instance, 'days');
         $nums = $this->get_num_val($instance, 'nums');
-        $sql = "SELECT ID , post_title FROM $wpdb->posts WHERE post_type = 'post'
+        $sql = "SELECT * FROM $wpdb->posts WHERE post_type = 'post'
                 AND post_status = 'publish' AND TO_DAYS(now()) - TO_DAYS(post_date) < {$days}
                 ORDER BY ID DESC LIMIT 0 , {$nums} ";
         $posts = $wpdb->get_results($sql);
@@ -286,7 +286,7 @@ class puockHotCommentPost extends puockWidgetBase {
         global $wpdb;
         $days = $this->get_num_val($instance, 'days');
         $nums = $this->get_num_val($instance, 'nums');
-        $sql = "SELECT ID , post_title, comment_count FROM $wpdb->posts WHERE post_type = 'post' 
+        $sql = "SELECT * FROM $wpdb->posts WHERE post_type = 'post' 
                 AND post_status = 'publish' AND TO_DAYS(now()) - TO_DAYS(post_date) < {$days}
                 ORDER BY comment_count DESC LIMIT 0 , {$nums} ";
         $posts = $wpdb->get_results($sql);
@@ -524,7 +524,7 @@ class puockRandomPost extends puockWidgetBase {
         global $wpdb;
         $days = $this->get_num_val($instance, 'days');
         $nums = $this->get_num_val($instance, 'nums');
-        $sql = "SELECT ID , post_title FROM $wpdb->posts WHERE post_type = 'post'
+        $sql = "SELECT * FROM $wpdb->posts WHERE post_type = 'post'
                 AND post_status = 'publish' AND TO_DAYS(now()) - TO_DAYS(post_date) < {$days}
                 ORDER BY rand() DESC LIMIT 0 , {$nums} ";
         $posts = $wpdb->get_results($sql);
