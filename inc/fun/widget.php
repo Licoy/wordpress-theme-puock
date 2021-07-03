@@ -665,12 +665,14 @@ class puockTagCloud extends puockWidgetBase {
     function get_fields(){
         return $this->merge_common_fields(array(
             array('id'=>'title','strip'=>true, 'val'=>$this->title),
+            array('id'=>'max_count','strip'=>true, 'val'=>0),
         ));
     }
 
     function form( $instance ) {
         $instance = $this->default_value($instance);
         $this->html_gen($instance, '标题', 'title');
+        $this->html_gen($instance, '最大显示数量（0为不限制）', 'max_count');
         $this->merge_common_form($instance);
     }
 
@@ -683,10 +685,16 @@ class puockTagCloud extends puockWidgetBase {
         $this->get_common_widget_header($instance);
         echo '<div class="widget-puock-tag-cloud">';
         $tags = get_tags();
+        $max_count = $this->get_num_val($instance, 'max_count');
         if(count($tags) > 0){
+            $count = 0;
             foreach ($tags as $tag){
+                if ($max_count > 0 && $count >= $max_count){
+                    break;
+                }
                 $link = get_tag_link($tag);
                 echo "<a href='{$link}' class='badge d-none d-md-inline-block bg-".pk_get_color_tag()." ahfff'>{$tag->name}</a>";
+                $count++;
             }
         }else{
             echo sc_tips_primary(null, "暂无标签");
@@ -698,7 +706,7 @@ class puockTagCloud extends puockWidgetBase {
 add_action( 'widgets_init', function (){ register_widget('puockTagCloud'); });
 
 
-//标签云
+//一言一句话
 class puockTagHitokoto extends puockWidgetBase {
 
 
