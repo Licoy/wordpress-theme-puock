@@ -559,7 +559,7 @@ class puockAboutAuthor extends puockWidgetBase {
             array('id'=>'name', 'val'=>get_bloginfo('name')),
             array('id'=>'email', 'val'=>get_bloginfo('admin_email')),
             array('id'=>'des', 'val'=>get_bloginfo('description')),
-            array('id'=>'cover', 'val'=>get_template_directory_uri().'/assets/img/show/head-cover.jpg'),
+            array('id'=>'cover', 'val'=>pk_get_static_url().'/assets/img/show/head-cover.jpg'),
         ));
     }
 

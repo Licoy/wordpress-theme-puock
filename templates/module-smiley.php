@@ -16,7 +16,7 @@
                         ?>
                         <div class="smiley-item">
                             <img data-id="<?php echo $key ?>"
-                                <?php echo pk_get_lazy_img_info(get_template_directory_uri().'/assets/img/smiley/'.$imgKey.'.png','smiley-img',null,null,false) ?>
+                                <?php echo pk_get_lazy_img_info(pk_get_static_url().'/assets/img/smiley/'.$imgKey.'.png','smiley-img',null,null,false) ?>
                                  alt="<?php echo $key.'-'.$val ?>" title="<?php echo $val ?>" /></div>
                     <?php endforeach; ?>
                     <div class="mt10">

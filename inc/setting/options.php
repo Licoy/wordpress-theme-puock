@@ -956,5 +956,21 @@ function optionsframework_options() {
         'std' => '本站部分资源来自于网络收集，若侵犯了你的隐私或版权，请及时联系我们删除有关信息。'
     );
 
+    // 资源设置
+    $options[] = array(
+        'name' => '资源设置',
+        'type' => 'heading'
+    );
+    $options[] = array(
+        'name' => '主题静态资源加载源',
+        'id' => 'static_load_origin',
+        'std' => 'self',
+        'type' => 'radio',
+        'options' => [
+            'self'=>'本地',
+            'jsdelivr'=>'JSDelivr',
+        ]
+    );
+
     return $options;
 }

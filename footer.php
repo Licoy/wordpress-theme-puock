@@ -59,7 +59,7 @@
     </div>
 </footer>
 </div>
-<script data-no-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/libs.min.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
+<script data-no-instant src="<?php echo pk_get_static_url(); ?>/assets/js/libs.min.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
 <script>
     var global_params = {
         is_single:<?php echo is_single() ? 1: 0 ?>,
@@ -67,14 +67,14 @@
     };
 </script>
 <?php if(is_single()): ?>
-<script data-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/qrcode.min.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
+<script data-instant src="<?php echo pk_get_static_url(); ?>/assets/js/qrcode.min.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
 <?php endif; ?>
 <?php if(!empty(pk_get_option('tj_code_footer',''))): ?>
 <?php echo pk_get_option('tj_code_footer',''); ?>
 <?php endif; ?>
-<script data-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/pages.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
-<script data-no-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/pages-once.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
-<script data-no-instant src="<?php echo get_template_directory_uri(); ?>/assets/js/inc.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
+<script data-instant src="<?php echo pk_get_static_url(); ?>/assets/js/pages.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
+<script data-no-instant src="<?php echo pk_get_static_url(); ?>/assets/js/pages-once.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
+<script data-no-instant src="<?php echo pk_get_static_url(); ?>/assets/js/inc.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
 <?php wp_footer();  ?>
 <?php get_template_part('templates/async','views') ?>
 </body>

@@ -208,7 +208,7 @@ function pk_get_wp_links($link_cats = '')
 //获取懒加载图片信息
 function pk_get_lazy_pl_img()
 {
-    return get_template_directory_uri() . "/assets/img/z/load-tip.png";
+    return pk_get_static_url() . "/assets/img/z/load-tip.png";
 }
 
 function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = null, $thumbnail = true)
@@ -805,3 +805,15 @@ function pk_chinese_excerpt($text, $len = 100)
 }
 
 add_filter('the_excerpt', 'pk_chinese_excerpt');
+
+//静态资源加载源的链接
+function pk_get_static_url(){
+    $type = pk_get_option('static_load_origin', 'self');
+    switch ($type){
+        case "jsdelivr":
+            $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v".PUOCK_CUR_VER;
+            break;
+        default: $url_pre = get_template_directory_uri();
+    }
+    return $url_pre;
+}
