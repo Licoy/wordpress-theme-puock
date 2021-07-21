@@ -16,6 +16,7 @@ function pk_comment_callback($comment, $args, $depth) {
 
 <div id="comment-<?php comment_ID() ?>" class="post-comment">
     <div class="info clearfix">
+        <?php if(pk_open_show_comment_avatar()):?>
         <div class="float-left">
             <?php if(pk_is_checked('basic_img_lazy_a')): ?>
                 <img src="<?php echo pk_get_lazy_pl_img() ?>" data-src="<?php echo get_avatar_url( $comment->comment_author_email, 64); ?>"
@@ -24,7 +25,8 @@ function pk_comment_callback($comment, $args, $depth) {
                 <?php echo get_avatar( $comment, 64,'','',array('class'=>'md-avatar') ) ?>
             <?php endif; ?>
         </div>
-        <div class="float-left ml-3 two-info">
+        <?php endif; ?>
+        <div class="float-left <?php if(pk_open_show_comment_avatar()){echo 'ml-3';}?> two-info">
             <div class="puock-text ta3b">
                 <span class="t-md puock-links"><?php pk_comment_author_url() ?></span>
                 <?php if(pk_is_checked('comment_level')){pk_the_author_class();} ?>
@@ -41,7 +43,7 @@ function pk_comment_callback($comment, $args, $depth) {
         </div>
     </div>
     <div class="content">
-        <div class="content-text t-sm mt10 puock-text">
+        <div class="content-text t-sm mt10 puock-text" <?php if(!pk_open_show_comment_avatar()){echo 'style="margin-left:0"';} ?>>
             <?php if(!$author_cat_comment || $is_author): comment_text(); ;else:?>
                 <?php echo "<span><i class='czs-lock-l'></i>&nbsp;此评论仅对作者可见</span>";endif; ?>
             <?php if ( $comment->comment_approved == '0' ) : ?>

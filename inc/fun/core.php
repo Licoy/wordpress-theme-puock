@@ -817,3 +817,8 @@ function pk_get_static_url(){
     }
     return $url_pre;
 }
+
+//是否打开讨论-显示头像
+function pk_open_show_comment_avatar(){
+    return get_option('show_avatars') == "1";
+}
