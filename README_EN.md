@@ -25,7 +25,7 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 
 **Tip: in order to prevent incompatible themes, please backup data before installing themes to prevent data fields from overlapping.**
 
-##Version iteration
+## Version iteration
 - Upgrade 1.5 and the following versions to 1.6+ configuration incompatibility handling method:
 ```
 Please refer to the introduction of Chinese version
