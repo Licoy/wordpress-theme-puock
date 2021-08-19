@@ -6,19 +6,29 @@
     <h1>WordPress Theme - Puock</h1>
     <p>一款基于WordPress开发的高颜值的自适应主题，支持白天与黑夜模式。</p>
       <a href="https://github.com/Licoy/wordpress-theme-puock/releases/latest">
-        <img src="https://img.shields.io/github/v/release/Licoy/wordpress-theme-puock.svg?logo=git&style=for-the-badge" alt="Release-Version">
+        <img src="https://img.shields.io/github/v/release/Licoy/wordpress-theme-puock.svg?logo=git" alt="Release-Version">
       </a>
     <a href="https://github.com/Licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress&style=for-the-badge" alt="WordPress-Version">
+        <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress" alt="WordPress-Version">
       </a>
     <a href="https://github.com/Licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/PHP-V7.0+-666699.svg?logo=php&style=for-the-badge" alt="PHP-Version">
+        <img src="https://img.shields.io/badge/PHP-V7.0+-666699.svg?logo=php" alt="PHP-Version">
       </a>
      <a href="https://gitee.com/licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/Gitee-%E7%A0%81%E4%BA%91-CC3333.svg?style=for-the-badge" alt="Gitee">
+        <img src="https://img.shields.io/badge/Gitee-码云-CC3333.svg?logo=gitee" alt="Gitee">
       </a>
     <a href="https://github.com/Licoy">
-        <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg?style=for-the-badge" alt="Author">
+        <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg?logo=github" alt="Author">
+      </a>
+    <br>
+    <a href="https://licoy.cn/go/zs/">
+        <img src="https://img.shields.io/badge/赞赏-开发不易-CC3333.svg?logo=Buy-Me-A-Coffee" alt="赞赏支持">
+      </a>
+    <a href="https://licoy.cn/go/zs/">
+        <img src="https://img.shields.io/badge/捐赠-微信-68b600.svg?logo=WeChat" alt="微信捐赠">
+      </a>
+    <a href="https://licoy.cn/go/zs/">
+        <img src="https://img.shields.io/badge/捐赠-支付宝-00a2ef.svg?logo=AliPay" alt="支付宝捐赠">
       </a>
 </div>
 
