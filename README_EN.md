@@ -4,19 +4,19 @@
     <h1>WordPress Theme - Puock</h1>
     <p>A high-value adaptive theme based on WordPress, supporting day and night modes.</p>
       <a href="https://github.com/Licoy/wordpress-theme-puock/releases/latest">
-        <img src="https://img.shields.io/github/v/release/Licoy/wordpress-theme-puock.svg?logo=git&style=for-the-badge" alt="Release-Version">
+        <img src="https://img.shields.io/github/v/release/Licoy/wordpress-theme-puock.svg?logo=git" alt="Release-Version">
       </a>
     <a href="https://github.com/Licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress&style=for-the-badge" alt="WordPress-Version">
+        <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress" alt="WordPress-Version">
       </a>
     <a href="https://github.com/Licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/PHP-V7.0+-666699.svg?logo=php&style=for-the-badge" alt="PHP-Version">
+        <img src="https://img.shields.io/badge/PHP-V7.0+-666699.svg?logo=php" alt="PHP-Version">
       </a>
      <a href="https://gitee.com/licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/Gitee-%E7%A0%81%E4%BA%91-CC3333.svg?style=for-the-badge" alt="Gitee">
+        <img src="https://img.shields.io/badge/Gitee-%E7%A0%81%E4%BA%91-CC3333.svg?logo=gitee" alt="Gitee">
       </a>
     <a href="https://github.com/Licoy">
-        <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg?style=for-the-badge" alt="Author">
+        <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg?logo=github" alt="Author">
       </a>
 </div>
 
