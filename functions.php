@@ -452,4 +452,10 @@ function pk_bootstrap_table_class($content)
 
 add_filter('the_content', 'pk_bootstrap_table_class', 99);
 
+//初始化wp_style函数，以防止出现Invalid argument supplied for foreach()错误
+function pk_init_wp_empty_style(){
+    wp_enqueue_style('');
+}
+add_action('wp_enqueue_scripts', 'pk_init_wp_empty_style');
+
 require_once dirname(__FILE__) . '/fun-custom.php';
