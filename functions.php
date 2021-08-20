@@ -1,8 +1,8 @@
 <?php
 
-include('inc/fun/core.php');
-
 $puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
+
+include('inc/fun/core.php');
 
 //去除感谢使用wordpress创作
 if (pk_is_checked('hide_footer_wp_t')) {
@@ -114,7 +114,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
         if ($cate != null) {
             return '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
         }
-    }else{
+    } else {
         $cats = get_the_category();
         if (count($cats) > 0) {
             if ($all) {
@@ -453,9 +453,49 @@ function pk_bootstrap_table_class($content)
 add_filter('the_content', 'pk_bootstrap_table_class', 99);
 
 //初始化wp_style函数，以防止出现Invalid argument supplied for foreach()错误
-function pk_init_wp_empty_style(){
+function pk_init_wp_empty_style()
+{
     wp_enqueue_style('');
 }
+
 add_action('wp_enqueue_scripts', 'pk_init_wp_empty_style');
 
 require_once dirname(__FILE__) . '/fun-custom.php';
+
+//更新支持
+function pk_update()
+{
+    $update_server = pk_get_option('update_server');
+    $check_period = pk_get_option('update_server_check_period');
+    if (empty($check_period) || !is_numeric($check_period)) {
+        $check_period = 6;
+    }
+    $current_theme_dir_name = basename(dirname(__FILE__));
+    include('update-checker/update-checker.php');
+    switch ($update_server) {
+        case 'github':
+            {
+                $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                    'https://github.com/Licoy/wordpress-theme-puock',
+                    __FILE__, //Full path to the main plugin file or functions.php.
+                    'unique-plugin-or-theme-slug',
+                    $check_period
+                );
+            }
+            break;
+        default:
+        {
+            $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                'http://localhost/wpc.json',
+                __FILE__, //Full path to the main plugin file or functions.php.
+                $current_theme_dir_name,
+                $check_period
+            );
+        }
+    }
+}
+
+if (is_admin()) {
+    // 在线更新支持
+    pk_update();
+}

@@ -1,23 +1,25 @@
 <?php
-if(isset($_GET['exec'])){
+if (isset($_GET['exec'])) {
 
-    function pk_admin_msg_bar($msg,$type="success"){
-        return '<div id="message" class="notice notice-'.$type.'  is-dismissible">
-				<p><strong>'.$msg.'</strong></p></div>';
+    function pk_admin_msg_bar($msg, $type = "success")
+    {
+        return '<div id="message" class="notice notice-' . $type . '  is-dismissible">
+				<p><strong>' . $msg . '</strong></p></div>';
     }
 
-    function pk_check_github_tag_version(){
+    function pk_check_github_tag_version()
+    {
         $res = wp_remote_request("https://api.github.com/repos/Licoy/wordpress-theme-puock/tags", array(
-            'method'=> "GET",
-            'headers'=> array('Content-Type'=>'application/json;charset=UTF-8'),
-            'timeout'=> 10
+            'method' => "GET",
+            'headers' => array('Content-Type' => 'application/json;charset=UTF-8'),
+            'timeout' => 10
         ));
-        if ( is_array( $res ) && ! is_wp_error( $res ) && $res['response']['code'] == 200) {
+        if (is_array($res) && !is_wp_error($res) && $res['response']['code'] == 200) {
             $tags = json_decode($res['body'], true);
-            if (count($tags) > 0){
+            if (count($tags) > 0) {
                 $latest_version = (float)str_replace('v', '', $tags[0]['name']);
-                if($latest_version > PUOCK_CUR_VER){
-                    return pk_admin_msg_bar("检测到新版本V".$latest_version.
+                if ($latest_version > PUOCK_CUR_VER) {
+                    return pk_admin_msg_bar("检测到新版本V" . $latest_version .
                         "&nbsp;<a target='_blank' 
                         href='https://github.com/Licoy/wordpress-theme-puock/releases/tag/v${latest_version}'>点此进入手动下载更新</a>");
                 }
@@ -26,17 +28,23 @@ if(isset($_GET['exec'])){
         }
         return pk_admin_msg_bar("检测更新失败", "warning");
     }
+
     $get_exec = $_GET['exec'];
-    if ($get_exec == "update_check"){
+    if ($get_exec == "update_check") {
         echo pk_check_github_tag_version();
     }
 }
 
 ?>
 <h2>
-    <?php echo esc_html( $menu['page_title'] ); ?>
-    <code>版本：<?php echo sprintf("%.1f",PUOCK_CUR_VER) ?></code>
-    <code><a href="?page=options-framework&exec=update_check">检查更新<small>(仅检测版本)</small></a></code>
-    <code><a href="https://github.com/Licoy/wordpress-theme-puock#%E6%94%AF%E6%8C%81" target="_blank" rel="nofollow">赞赏支持</a></code>
-    <code><a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="nofollow">开源协议</a></code>
+    <?php echo esc_html($menu['page_title']); ?>
+    <img style="cursor: pointer" onclick="window.open('https://github.com/Licoy/wordpress-theme-puock', 'blank')"
+         src="https://img.shields.io/badge/当前版本-V<?php echo PUOCK_CUR_VER; ?>-CC3333.svg?logo=git" alt="当前版本">
+    <img style="cursor: pointer"
+         onclick="window.open('https://github.com/Licoy/wordpress-theme-puock/blob/master/SUPPORT.md', 'blank')"
+         src="https://img.shields.io/badge/赞赏-开发不易-FFCC33.svg?logo=Buy-Me-A-Coffee" alt="赞赏支持">
+    <img style="cursor: pointer"
+         onclick="window.open('https://github.com/Licoy/wordpress-theme-puock/blob/master/LICENSE', 'blank')"
+         src="https://img.shields.io/badge/开源协议-GPL-ff69b4.svg?logo=github" alt="开源协议">
+    <!--    <code><a href="?page=options-framework&exec=update_check">检查更新<small>(仅检测版本)</small></a></code>-->
 </h2>

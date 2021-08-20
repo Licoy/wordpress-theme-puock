@@ -2,7 +2,8 @@
 /**
  * A unique identifier is defined to store the options in the database and reference them from the theme.
  */
-function optionsframework_option_name() {
+function optionsframework_option_name()
+{
     // Change this to use your theme slug
     return PUOCK_OPT;
 }
@@ -16,24 +17,25 @@ function optionsframework_option_name() {
  * http://codex.wordpress.org/Function_Reference/load_theme_textdomain
  */
 
-function optionsframework_options() {
+function optionsframework_options()
+{
 
     $post_cats = get_all_category_id('category');
 
     $pages = array();
-    $pageObjects = get_pages( 'sort_column=post_parent,menu_order' );
+    $pageObjects = get_pages('sort_column=post_parent,menu_order');
     $pages[''] = '请选择页面';
     foreach ($pageObjects as $page) {
         $pages[$page->ID] = $page->post_title;
     }
 
-    $imgPath =  get_stylesheet_directory_uri() . '/assets/img';
+    $imgPath = get_stylesheet_directory_uri() . '/assets/img';
 
-    $themes = ['light'=>'高亮模式','dark'=>'暗黑模式'];
+    $themes = ['light' => '高亮模式', 'dark' => '暗黑模式'];
 
     $editorSettings = array(
         'textarea_rows' => 3,
-        'tinymce' => array( 'plugins' => 'wordpress' )
+        'tinymce' => array('plugins' => 'wordpress')
     );
 
     // 全局设置
@@ -47,9 +49,9 @@ function optionsframework_options() {
         'std' => 'blog',
         'type' => 'radio',
         'options' => [
-            'blog'=>'博客风格',
-            'cms'=>'CMS风格',
-            'company'=>'企业风格',
+            'blog' => '博客风格',
+            'cms' => 'CMS风格',
+            'company' => '企业风格',
         ]
     );
     $options[] = array(
@@ -58,8 +60,8 @@ function optionsframework_options() {
         'std' => 'list',
         'type' => 'radio',
         'options' => [
-            'list'=>'列表式',
-            'card'=>'卡片式'
+            'list' => '列表式',
+            'card' => '卡片式'
         ]
     );
     $options[] = array(
@@ -342,7 +344,7 @@ function optionsframework_options() {
     );
 
     $options[] = array(
-        'desc' => '<div><small>分类ID对照列表：</small>'.get_all_category_id('link_category').'</div>',
+        'desc' => '<div><small>分类ID对照列表：</small>' . get_all_category_id('link_category') . '</div>',
         'id' => 'catids',
         'type' => 'info'
     );
@@ -353,11 +355,11 @@ function optionsframework_options() {
         'std' => 'wp',
         'type' => 'radio',
         'options' => [
-            'wp'=>'官方默认加载节点',
-            'cn'=>'官方提供的CN节点',
-            'cn_ssl'=>'官方提供SSL的CN节点',
-            'loli_ssl'=>'SB.SB提供的SSL节点',
-            'v2ex'=>'v2ex提供的SSL节点',
+            'wp' => '官方默认加载节点',
+            'cn' => '官方提供的CN节点',
+            'cn_ssl' => '官方提供SSL的CN节点',
+            'loli_ssl' => 'SB.SB提供的SSL节点',
+            'v2ex' => 'v2ex提供的SSL节点',
         ]
     );
 
@@ -447,14 +449,14 @@ function optionsframework_options() {
     $options[] = array(
         'name' => '两栏CMS分类ID列表',
         'id' => 'cms_show_2box_id',
-        'desc'=>'每个ID之间用,进行分隔',
+        'desc' => '每个ID之间用,进行分隔',
         'std' => '',
         'class' => 'mini',
         'type' => 'text'
     );
 
     $options[] = array(
-        'desc' => '<div><small>分类ID对照列表：</small>'.$post_cats.'</div>',
+        'desc' => '<div><small>分类ID对照列表：</small>' . $post_cats . '</div>',
         'id' => 'catids',
         'type' => 'info'
     );
@@ -487,40 +489,40 @@ function optionsframework_options() {
     );
 
     //产品
-    for ($i=1;$i<=6;$i++){
+    for ($i = 1; $i <= 6; $i++) {
 
         $options[] = array(
-            'name'=>'',
-            'desc' => '「产品介绍」-第'.$i.'个-【是否启用】',
-            'id' => 'company_product_open_'.$i,
+            'name' => '',
+            'desc' => '「产品介绍」-第' . $i . '个-【是否启用】',
+            'id' => 'company_product_open_' . $i,
             'std' => '1',
             'type' => 'checkbox',
         );
 
         $options[] = array(
-            'name' => '「产品介绍」-第'.$i.'个-【图片】',
-            'id' => 'company_product_i_'.$i,
+            'name' => '「产品介绍」-第' . $i . '个-【图片】',
+            'id' => 'company_product_i_' . $i,
             'std' => '',
             'type' => 'upload'
         );
 
         $options[] = array(
-            'name' => '「产品介绍」-第'.$i.'个-【标题】',
-            'id' => 'company_product_t_'.$i,
-            'std' => '产品'.$i,
+            'name' => '「产品介绍」-第' . $i . '个-【标题】',
+            'id' => 'company_product_t_' . $i,
+            'std' => '产品' . $i,
             'type' => 'text'
         );
 
         $options[] = array(
-            'name' => '「产品介绍」-第'.$i.'个-【介绍】',
-            'id' => 'company_product_c_'.$i,
-            'std' => '介绍内容'.$i,
+            'name' => '「产品介绍」-第' . $i . '个-【介绍】',
+            'id' => 'company_product_c_' . $i,
+            'std' => '介绍内容' . $i,
             'type' => 'textarea'
         );
 
         $options[] = array(
-            'name' => '「产品介绍」-第'.$i.'个-【链接】',
-            'id' => 'company_product_a_'.$i,
+            'name' => '「产品介绍」-第' . $i . '个-【链接】',
+            'id' => 'company_product_a_' . $i,
             'std' => home_url(),
             'type' => 'text'
         );
@@ -535,34 +537,34 @@ function optionsframework_options() {
     );
 
     //解决方案
-    for ($i=1;$i<=3;$i++){
+    for ($i = 1; $i <= 3; $i++) {
 
         $options[] = array(
-            'name'=>'',
-            'desc' => '「做什么」-第'.$i.'个-【启用】',
-            'id' => 'company_do_open_'.$i,
+            'name' => '',
+            'desc' => '「做什么」-第' . $i . '个-【启用】',
+            'id' => 'company_do_open_' . $i,
             'std' => '1',
             'type' => 'checkbox',
         );
 
         $options[] = array(
-            'name' => '「做什么」-第'.$i.'个-【图标】',
-            'id' => 'company_do_i_'.$i,
+            'name' => '「做什么」-第' . $i . '个-【图标】',
+            'id' => 'company_do_i_' . $i,
             'std' => 'czs-gift-l',
             'type' => 'text'
         );
 
         $options[] = array(
-            'name' => '「做什么」-第'.$i.'个-【标题】',
-            'id' => 'company_do_t_'.$i,
-            'std' => '标题'.$i,
+            'name' => '「做什么」-第' . $i . '个-【标题】',
+            'id' => 'company_do_t_' . $i,
+            'std' => '标题' . $i,
             'type' => 'text'
         );
 
         $options[] = array(
-            'name' => '「做什么」-第'.$i.'个-【介绍】',
-            'id' => 'company_do_d_'.$i,
-            'std' => '内容'.$i,
+            'name' => '「做什么」-第' . $i . '个-【介绍】',
+            'id' => 'company_do_d_' . $i,
+            'std' => '内容' . $i,
             'type' => 'text'
         );
 
@@ -576,7 +578,7 @@ function optionsframework_options() {
     );
 
     $options[] = array(
-        'name'=>'',
+        'name' => '',
         'desc' => '显示新闻',
         'id' => 'company_news_open',
         'std' => '0',
@@ -584,21 +586,21 @@ function optionsframework_options() {
     );
 
     $options[] = array(
-        'name'=>'新闻模块标题',
+        'name' => '新闻模块标题',
         'id' => 'company_news_title',
         'std' => '新闻动态',
         'type' => 'text',
     );
 
     $options[] = array(
-        'name'=>'新闻分类目录（每个分类之间用英文逗号","分隔）',
+        'name' => '新闻分类目录（每个分类之间用英文逗号","分隔）',
         'id' => 'company_news_cid',
         'std' => '',
         'type' => 'text',
     );
 
     $options[] = array(
-        'desc'=>'<div>'.$post_cats.'</div>',
+        'desc' => '<div>' . $post_cats . '</div>',
         'id' => 'company_news_cid_info',
         'type' => 'info',
     );
@@ -622,14 +624,14 @@ function optionsframework_options() {
     $options[] = array(
         'name' => '两栏CMS分类ID列表',
         'id' => 'company_show_2box_id',
-        'desc'=>'每个ID之间用,进行分隔',
+        'desc' => '每个ID之间用,进行分隔',
         'std' => '',
         'class' => 'mini',
         'type' => 'text'
     );
 
     $options[] = array(
-        'desc' => '<div><small>分类ID对照列表：</small>'.$post_cats.'</div>',
+        'desc' => '<div><small>分类ID对照列表：</small>' . $post_cats . '</div>',
         'id' => 'company_catids',
         'type' => 'info'
     );
@@ -681,7 +683,6 @@ function optionsframework_options() {
     );
 
 
-
     // SEO设置
     $options[] = array(
         'name' => '广告',
@@ -730,7 +731,7 @@ function optionsframework_options() {
 
     $options[] = array(
         'name' => '文章内顶部广告内容',
-        'desc'=> '显示在面包屑导航下',
+        'desc' => '显示在面包屑导航下',
         'id' => 'ad_page_t',
         'std' => '',
         'type' => 'editor',
@@ -747,7 +748,7 @@ function optionsframework_options() {
 
     $options[] = array(
         'name' => '文章内容底部广告内容',
-        'desc'=> '会显示在文章结尾处',
+        'desc' => '会显示在文章结尾处',
         'id' => 'ad_page_c_b',
         'std' => '',
         'type' => 'editor',
@@ -956,9 +957,9 @@ function optionsframework_options() {
         'std' => '本站部分资源来自于网络收集，若侵犯了你的隐私或版权，请及时联系我们删除有关信息。'
     );
 
-    // 资源设置
+    // 资源或更新
     $options[] = array(
-        'name' => '资源设置',
+        'name' => "资源或更新",
         'type' => 'heading'
     );
     $options[] = array(
@@ -967,9 +968,27 @@ function optionsframework_options() {
         'std' => 'self',
         'type' => 'radio',
         'options' => [
-            'self'=>'本地',
-            'jsdelivr'=>'JSDelivr',
+            'self' => '本地',
+            'jsdelivr' => 'JSDelivr',
         ]
+    );
+    $options[] = array(
+        'name' => '主题在线更新源',
+        'id' => 'update_server',
+        'std' => 'jsdelivr',
+        'type' => 'radio',
+        'options' => [
+            'jsdelivr' => 'JSDelivr',
+            'github' => 'Github',
+        ]
+    );
+    $options[] = array(
+        'name' => '主题更新检测频率',
+        'id' => 'update_server_check_period',
+        'std' => '6',
+        'desc' => '主题检测更新频率，默认为6小时一次，单位为小时',
+        'class' => 'mini',
+        'type' => 'text'
     );
 
     return $options;
