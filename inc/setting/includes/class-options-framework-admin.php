@@ -7,7 +7,8 @@
  * @copyright 2010-2014 WP Theming
  */
 
-class Options_Framework_Admin {
+class Options_Framework_Admin
+{
 
     /**
      * Page hook for the options screen
@@ -22,26 +23,27 @@ class Options_Framework_Admin {
      *
      * @since 1.7.0
      */
-    public function init() {
+    public function init()
+    {
 
         // Gets options to load
-        $options = & Options_Framework::_optionsframework_options();
+        $options = &Options_Framework::_optionsframework_options();
 
         // Checks if options are available
-        if ( $options ) {
+        if ($options) {
 
             // Add the options page and menu item.
-            add_action( 'admin_menu', array( $this, 'add_custom_options_page' ) );
+            add_action('admin_menu', array($this, 'add_custom_options_page'));
 
             // Add the required scripts and styles
-            add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
-            add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+            add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
+            add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
 
             // Settings need to be registered after admin_init
-            add_action( 'admin_init', array( $this, 'settings_init' ) );
+            add_action('admin_init', array($this, 'settings_init'));
 
             // Adds options menu to the admin bar
-            add_action( 'wp_before_admin_bar_render', array( $this, 'optionsframework_admin_bar' ) );
+            add_action('wp_before_admin_bar_render', array($this, 'optionsframework_admin_bar'));
 
         }
 
@@ -52,17 +54,18 @@ class Options_Framework_Admin {
      *
      * @since 1.7.0
      */
-    function settings_init() {
+    function settings_init()
+    {
 
         // Get the option name
         $options_framework = new Options_Framework;
         $name = $options_framework->get_option_name();
 
         // Registers the settings fields and callback
-        register_setting( 'optionsframework', $name, array ( $this, 'validate_options' ) );
+        register_setting('optionsframework', $name, array($this, 'validate_options'));
 
         // Displays notice after options save
-        add_action( 'optionsframework_after_validate', array( $this, 'save_options_notice' ) );
+        add_action('optionsframework_after_validate', array($this, 'save_options_notice'));
 
     }
 
@@ -80,7 +83,8 @@ class Options_Framework_Admin {
      * @since 1.7.0
      *
      */
-    static function menu_settings() {
+    static function menu_settings()
+    {
 
         $menu = array(
 
@@ -88,8 +92,8 @@ class Options_Framework_Admin {
             'mode' => 'submenu',
 
             // Submenu default settings
-            'page_title' => __( 'Puock主题设置', 'theme-textdomain' ),
-            'menu_title' => __( 'Puock主题设置', 'theme-textdomain' ),
+            'page_title' => __('Puock主题设置', 'theme-textdomain'),
+            'menu_title' => __('Puock主题设置', 'theme-textdomain'),
             'capability' => 'edit_theme_options',
             'menu_slug' => 'options-framework',
             'parent_slug' => 'themes.php',
@@ -100,7 +104,7 @@ class Options_Framework_Admin {
 
         );
 
-        return apply_filters( 'optionsframework_menu', $menu );
+        return apply_filters('optionsframework_menu', $menu);
     }
 
     /**
@@ -108,7 +112,8 @@ class Options_Framework_Admin {
      *
      * @since 1.7.0
      */
-    function add_custom_options_page() {
+    function add_custom_options_page()
+    {
 
         $menu = $this->menu_settings();
 
@@ -122,7 +127,7 @@ class Options_Framework_Admin {
             $menu['menu_title'],
             $menu['capability'],
             $menu['menu_slug'],
-            array( $this, 'options_page' )
+            array($this, 'options_page')
         );
 
     }
@@ -133,13 +138,14 @@ class Options_Framework_Admin {
      * @since 1.7.0
      */
 
-    function enqueue_admin_styles( $hook ) {
+    function enqueue_admin_styles($hook)
+    {
 
-        if ( $this->options_screen != $hook )
+        if ($this->options_screen != $hook)
             return;
 
-        wp_enqueue_style( 'optionsframework', OPTIONS_FRAMEWORK_DIRECTORY . 'css/optionsframework.css', array(),  Options_Framework::VERSION );
-        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_style('optionsframework', OPTIONS_FRAMEWORK_DIRECTORY . 'css/optionsframework.css', array(), Options_Framework::VERSION);
+        wp_enqueue_style('wp-color-picker');
     }
 
     /**
@@ -147,26 +153,35 @@ class Options_Framework_Admin {
      *
      * @since 1.7.0
      */
-    function enqueue_admin_scripts( $hook ) {
+    function enqueue_admin_scripts($hook)
+    {
 
-        if ( $this->options_screen != $hook )
+        if ($this->options_screen != $hook)
             return;
 
         // Enqueue custom option panel JS
         wp_enqueue_script(
             'options-custom',
             OPTIONS_FRAMEWORK_DIRECTORY . 'js/options-custom.js',
-            array( 'jquery','wp-color-picker' ),
+            array('jquery', 'wp-color-picker'),
+            Options_Framework::VERSION
+        );
+
+        wp_enqueue_script(
+            'options-iconfont',
+            OPTIONS_FRAMEWORK_DIRECTORY . 'js/options-iconfont.js',
+            null,
             Options_Framework::VERSION
         );
 
         // Inline scripts from options-interface.php
-        add_action( 'admin_head', array( $this, 'of_admin_head' ) );
+        add_action('admin_head', array($this, 'of_admin_head'));
     }
 
-    function of_admin_head() {
+    function of_admin_head()
+    {
         // Hook to add custom scripts
-        do_action( 'optionsframework_custom_scripts' );
+        do_action('optionsframework_custom_scripts');
     }
 
     /**
@@ -181,32 +196,36 @@ class Options_Framework_Admin {
      *
      * @since 1.7.0
      */
-    function options_page() { ?>
+    function options_page()
+    { ?>
 
         <div id="optionsframework-wrap" class="wrap">
 
             <?php $menu = $this->menu_settings(); ?>
-            <?php require get_template_directory().'/inc/setting/options-inc.php' ?>
+            <?php require get_template_directory() . '/inc/setting/options-inc.php' ?>
             <h2 class="nav-tab-wrapper">
                 <?php echo Options_Framework_Interface::optionsframework_tabs(); ?>
             </h2>
 
-            <?php settings_errors( 'options-framework' ); ?>
+            <?php settings_errors('options-framework'); ?>
 
             <div id="optionsframework-metabox" class="metabox-holder">
                 <div id="optionsframework" class="postbox">
                     <form action="options.php" method="post">
-                        <?php settings_fields( 'optionsframework' ); ?>
+                        <?php settings_fields('optionsframework'); ?>
                         <?php Options_Framework_Interface::optionsframework_fields(); /* Settings */ ?>
                         <div id="optionsframework-submit">
-                            <input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( '保存配置', 'theme-textdomain' ); ?>" />
-                            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( '恢复默认', 'theme-textdomain' ); ?>" onclick="return confirm( '<?php print esc_js( __( '是否确认恢复默认配置？', 'theme-textdomain' ) ); ?>' );" />
+                            <input type="submit" class="button-primary" name="update"
+                                   value="<?php esc_attr_e('保存配置', 'theme-textdomain'); ?>"/>
+                            <input type="submit" class="reset-button button-secondary" name="reset"
+                                   value="<?php esc_attr_e('恢复默认', 'theme-textdomain'); ?>"
+                                   onclick="return confirm( '<?php print esc_js(__('是否确认恢复默认配置？', 'theme-textdomain')); ?>' );"/>
                             <div class="clear"></div>
                         </div>
                     </form>
                 </div> <!-- / #container -->
             </div>
-            <?php do_action( 'optionsframework_after' ); ?>
+            <?php do_action('optionsframework_after'); ?>
         </div> <!-- / .wrap -->
 
         <?php
@@ -220,7 +239,8 @@ class Options_Framework_Admin {
      *
      * @uses $_POST['reset'] to restore default options
      */
-    function validate_options( $input ) {
+    function validate_options($input)
+    {
 
         /*
          * Restore Defaults.
@@ -230,8 +250,8 @@ class Options_Framework_Admin {
          * file will be added to the option for the active theme.
          */
 
-        if ( isset( $_POST['reset'] ) ) {
-            add_settings_error( 'options-framework', 'restore_defaults', __( '已重置为默认配置', 'theme-textdomain' ), 'updated fade' );
+        if (isset($_POST['reset'])) {
+            add_settings_error('options-framework', 'restore_defaults', __('已重置为默认配置', 'theme-textdomain'), 'updated fade');
             return $this->get_default_values();
         }
 
@@ -243,39 +263,39 @@ class Options_Framework_Admin {
          */
 
         $clean = array();
-        $options = & Options_Framework::_optionsframework_options();
-        foreach ( $options as $option ) {
+        $options = &Options_Framework::_optionsframework_options();
+        foreach ($options as $option) {
 
-            if ( ! isset( $option['id'] ) ) {
+            if (!isset($option['id'])) {
                 continue;
             }
 
-            if ( ! isset( $option['type'] ) ) {
+            if (!isset($option['type'])) {
                 continue;
             }
 
-            $id = preg_replace( '/[^a-zA-Z0-9._\-]/', '', strtolower( $option['id'] ) );
+            $id = preg_replace('/[^a-zA-Z0-9._\-]/', '', strtolower($option['id']));
 
             // Set checkbox to false if it wasn't sent in the $_POST
-            if ( 'checkbox' == $option['type'] && ! isset( $input[$id] ) ) {
+            if ('checkbox' == $option['type'] && !isset($input[$id])) {
                 $input[$id] = false;
             }
 
             // Set each item in the multicheck to false if it wasn't sent in the $_POST
-            if ( 'multicheck' == $option['type'] && ! isset( $input[$id] ) ) {
-                foreach ( $option['options'] as $key => $value ) {
+            if ('multicheck' == $option['type'] && !isset($input[$id])) {
+                foreach ($option['options'] as $key => $value) {
                     $input[$id][$key] = false;
                 }
             }
 
             // For a value to be submitted to database it must pass through a sanitization filter
-            if ( has_filter( 'of_sanitize_' . $option['type'] ) ) {
-                $clean[$id] = apply_filters( 'of_sanitize_' . $option['type'], $input[$id], $option );
+            if (has_filter('of_sanitize_' . $option['type'])) {
+                $clean[$id] = apply_filters('of_sanitize_' . $option['type'], $input[$id], $option);
             }
         }
 
         // Hook to run after validation
-        do_action( 'optionsframework_after_validate', $clean );
+        do_action('optionsframework_after_validate', $clean);
 
         return $clean;
     }
@@ -284,8 +304,9 @@ class Options_Framework_Admin {
      * Display message when options have been saved
      */
 
-    function save_options_notice() {
-        add_settings_error( 'options-framework', 'save_options', __( '选项配置已保存', 'theme-textdomain' ), 'updated fade' );
+    function save_options_notice()
+    {
+        add_settings_error('options-framework', 'save_options', __('选项配置已保存', 'theme-textdomain'), 'updated fade');
     }
 
     /**
@@ -300,21 +321,22 @@ class Options_Framework_Admin {
      * @return array Re-keyed options configuration array.
      *
      */
-    function get_default_values() {
+    function get_default_values()
+    {
         $output = array();
-        $config = & Options_Framework::_optionsframework_options();
-        foreach ( (array) $config as $option ) {
-            if ( ! isset( $option['id'] ) ) {
+        $config = &Options_Framework::_optionsframework_options();
+        foreach ((array)$config as $option) {
+            if (!isset($option['id'])) {
                 continue;
             }
-            if ( ! isset( $option['std'] ) ) {
+            if (!isset($option['std'])) {
                 continue;
             }
-            if ( ! isset( $option['type'] ) ) {
+            if (!isset($option['type'])) {
                 continue;
             }
-            if ( has_filter( 'of_sanitize_' . $option['type'] ) ) {
-                $output[$option['id']] = apply_filters( 'of_sanitize_' . $option['type'], $option['std'], $option );
+            if (has_filter('of_sanitize_' . $option['type'])) {
+                $output[$option['id']] = apply_filters('of_sanitize_' . $option['type'], $option['std'], $option);
             }
         }
         return $output;
@@ -324,16 +346,17 @@ class Options_Framework_Admin {
      * Add options menu item to admin bar
      */
 
-    function optionsframework_admin_bar() {
+    function optionsframework_admin_bar()
+    {
 
         $menu = $this->menu_settings();
 
         global $wp_admin_bar;
 
-        if ( 'menu' == $menu['mode'] ) {
-            $href = admin_url( 'admin.php?page=' . $menu['menu_slug'] );
+        if ('menu' == $menu['mode']) {
+            $href = admin_url('admin.php?page=' . $menu['menu_slug']);
         } else {
-            $href = admin_url( 'themes.php?page=' . $menu['menu_slug'] );
+            $href = admin_url('themes.php?page=' . $menu['menu_slug']);
         }
 
         $args = array(
@@ -343,7 +366,7 @@ class Options_Framework_Admin {
             'href' => $href
         );
 
-        $wp_admin_bar->add_menu( apply_filters( 'optionsframework_admin_bar', $args ) );
+        $wp_admin_bar->add_menu(apply_filters('optionsframework_admin_bar', $args));
     }
 
 }
