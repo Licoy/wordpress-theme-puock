@@ -40,7 +40,7 @@ function optionsframework_options()
 
     // 全局设置
     $options[] = array(
-        'name' => optionsframework_icon('set').'全局设置',
+        'name' => optionsframework_icon('set') . '全局设置',
         'type' => 'heading'
     );
     $options[] = array(
@@ -211,7 +211,7 @@ function optionsframework_options()
 
     // 基本设置
     $options[] = array(
-        'name' => optionsframework_icon('shezhi').'基本设置',
+        'name' => optionsframework_icon('shezhi') . '基本设置',
         'type' => 'heading'
     );
 
@@ -389,7 +389,7 @@ function optionsframework_options()
 
     // 第三方登录
     $options[] = array(
-        'name' => optionsframework_icon('QQ').'第三方登录',
+        'name' => optionsframework_icon('QQ') . '第三方登录',
         'type' => 'heading'
     );
 
@@ -417,7 +417,7 @@ function optionsframework_options()
 
     // CMS布局设置
     $options[] = array(
-        'name' => optionsframework_icon('buju').'CMS布局设置',
+        'name' => optionsframework_icon('buju') . 'CMS布局设置',
         'type' => 'heading'
     );
 
@@ -471,7 +471,7 @@ function optionsframework_options()
 
     // 企业布局设置
     $options[] = array(
-        'name' => optionsframework_icon('qiye').'企业布局设置',
+        'name' => optionsframework_icon('qiye') . '企业布局设置',
         'type' => 'heading'
     );
 
@@ -646,7 +646,7 @@ function optionsframework_options()
 
     // 防刷验证
     $options[] = array(
-        'name' => optionsframework_icon('yanzheng').'防刷验证',
+        'name' => optionsframework_icon('yanzheng') . '防刷验证',
         'type' => 'heading'
     );
 
@@ -685,7 +685,7 @@ function optionsframework_options()
 
     // 广告
     $options[] = array(
-        'name' => optionsframework_icon('guanggao').'广告',
+        'name' => optionsframework_icon('guanggao') . '广告',
         'type' => 'heading'
     );
 
@@ -773,7 +773,7 @@ function optionsframework_options()
 
     // 邮件设置
     $options[] = array(
-        'name' => optionsframework_icon('youjian').'SMTP邮件',
+        'name' => optionsframework_icon('youjian') . 'SMTP邮件',
         'type' => 'heading'
     );
 
@@ -837,7 +837,7 @@ function optionsframework_options()
 
     // SEO设置
     $options[] = array(
-        'name' => optionsframework_icon('SEOTAGS').'SEO设置',
+        'name' => optionsframework_icon('SEOTAGS') . 'SEO设置',
         'type' => 'heading'
     );
 
@@ -959,7 +959,7 @@ function optionsframework_options()
 
     // 资源或更新
     $options[] = array(
-        'name' => optionsframework_icon('gengxin').'资源或更新',
+        'name' => optionsframework_icon('gengxin') . '资源或更新',
         'type' => 'heading'
     );
     $options[] = array(
@@ -975,11 +975,13 @@ function optionsframework_options()
     $options[] = array(
         'name' => '主题在线更新源',
         'id' => 'update_server',
-        'std' => 'github',
+        'std' => 'worker',
         'type' => 'radio',
         'options' => [
+            'worker' => '官方代理',
             'github' => 'Github',
             'cnpmjs' => 'cnpmjs',
+            'fastgit' => 'fastgit',
         ]
     );
     $options[] = array(
@@ -994,7 +996,7 @@ function optionsframework_options()
     return $options;
 }
 
-function optionsframework_icon($icon,$nbsp=true)
+function optionsframework_icon($icon, $nbsp = true)
 {
-    return '<svg class="picon" aria-hidden="true"><use xlink:href="#picon-'.$icon.'"></use></svg>'.($nbsp ? '&nbsp;':'');
+    return '<svg class="picon" aria-hidden="true"><use xlink:href="#picon-' . $icon . '"></use></svg>' . ($nbsp ? '&nbsp;' : '');
 }
