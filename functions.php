@@ -477,7 +477,27 @@ function pk_update()
             {
                 $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
                     'https://github.com/Licoy/wordpress-theme-puock',
-                    __FILE__, //Full path to the main plugin file or functions.php.
+                    __FILE__,
+                    'unique-plugin-or-theme-slug',
+                    $check_period
+                );
+            }
+            break;
+        case 'cnpmjs':
+            {
+                $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                    'https://licoy.cn/go/puock-update.php?r=cnpmjs',
+                    __FILE__,
+                    'unique-plugin-or-theme-slug',
+                    $check_period
+                );
+            }
+            break;
+        case 'fastgit':
+            {
+                $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                    'https://licoy.cn/go/puock-update.php?r=fastgit',
+                    __FILE__,
                     'unique-plugin-or-theme-slug',
                     $check_period
                 );
@@ -486,8 +506,8 @@ function pk_update()
         default:
         {
             $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-                'http://localhost/wpc.json',
-                __FILE__, //Full path to the main plugin file or functions.php.
+                'https://licoy.cn/go/puock-update.php?r=worker',
+                __FILE__,
                 $current_theme_dir_name,
                 $check_period
             );
