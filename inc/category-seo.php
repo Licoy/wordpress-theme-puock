@@ -1,7 +1,8 @@
 <?php
 
 // 分类添加字段
-function category_seo_field(){
+function category_seo_field()
+{
     echo '<div class="form-field">  
             <label for="seo-cat-keywords">SEO关键字</label>  
             <input name="seo-cat-keywords" id="seo-cat-keywords" type="text" value="" size="40">  
@@ -14,15 +15,17 @@ function category_seo_field(){
           </div>';
 
 }
-add_action('category_add_form_fields','category_seo_field',10,2);
+
+add_action('category_add_form_fields', 'category_seo_field', 10, 2);
 
 // 分类编辑字段
-function edit_category_seo_field($tag){
+function edit_category_seo_field($tag)
+{
     echo '<tr class="form-field">  
             <th scope="row"><label for="seo-cat-keywords">SEO关键字</label></th>  
             <td>  
                 <input name="seo-cat-keywords" id="seo-cat-keywords" type="text" value="';
-    echo get_option('seo-cat-keywords-'.$tag->term_id).'" size="40"/><br>  
+    echo get_option('seo-cat-keywords-' . $tag->term_id) . '" size="40"/><br>  
                 <span class="seo-cat-keywords">SEO关键字，多个关键字之间使用","分隔，默认显示该分类名称</span>  
             </td>  
         </tr>';
@@ -30,23 +33,25 @@ function edit_category_seo_field($tag){
             <th scope="row"><label for="seo-cat-desc">SEO描述</label></th>  
             <td>  
                 <input name="seo-cat-desc" id="seo-cat-desc" type="text" value="';
-    echo get_option('seo-cat-desc-'.$tag->term_id).'" size="40"/><br>  
+    echo get_option('seo-cat-desc-' . $tag->term_id) . '" size="40"/><br>  
                 <span class="seo-cat-desc">SEO描述，默认显示该分类名称</span>  
             </td>  
         </tr>';
 }
-add_action('category_edit_form_fields','edit_category_seo_field',10,2);
+
+add_action('category_edit_form_fields', 'edit_category_seo_field', 10, 2);
 
 // 保存数据
-function cat_seo_taxonomy_save_data($term_id){
-    if(isset($_POST['seo-cat-keywords']) && isset($_POST['seo-cat-desc'])){
-        if(!current_user_can('manage_categories')){
+function cat_seo_taxonomy_save_data($term_id)
+{
+    if (isset($_POST['seo-cat-keywords']) && isset($_POST['seo-cat-desc'])) {
+        if (!current_user_can('manage_categories')) {
             return $term_id;
         }
-        update_option( 'seo-cat-keywords-'.$term_id, $_POST['seo-cat-keywords'] );
-        update_option( 'seo-cat-desc-'.$term_id, $_POST['seo-cat-desc'] );
+        update_option('seo-cat-keywords-' . $term_id, $_POST['seo-cat-keywords']);
+        update_option('seo-cat-desc-' . $term_id, $_POST['seo-cat-desc']);
     }
 }
 
-add_action('created_category','cat_seo_taxonomy_save_data',10,1);
-add_action('edited_category','cat_seo_taxonomy_save_data',10,1);
+add_action('created_category', 'cat_seo_taxonomy_save_data', 10, 1);
+add_action('edited_category', 'cat_seo_taxonomy_save_data', 10, 1);
