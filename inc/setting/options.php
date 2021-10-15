@@ -129,6 +129,14 @@ function optionsframework_options()
     );
 
     $options[] = array(
+        'name' => '允许上传webp',
+        'desc' => '允许（解决出现<code>web 服务器无法处理该图片，请在上传前将其转换为JPEG或PNG 格式。</code>）',
+        'id' => 'upload_webp',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
         'name' => '隐藏文章阅读量',
         'desc' => '允许',
         'id' => 'hide_post_views',

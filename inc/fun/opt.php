@@ -225,7 +225,8 @@ function pk_link_blank($content)
 {
     return str_replace("<a", "<a target=\"_blank\" ", $content);
 }
-if(pk_is_checked('use_post_menu')){
+
+if (pk_is_checked('use_post_menu')) {
     //生成目录锚点
     function pk_post_menu_id($content)
     {
@@ -239,13 +240,28 @@ if(pk_is_checked('use_post_menu')){
         }
         return $content;
     }
+
     add_filter("the_content", "pk_post_menu_id");
 }
 //兼容处理
-function pk_compatible(){
+function pk_compatible()
+{
     wp_scripts()->remove("Editormd_Front");
-    if(!is_admin()){
+    if (!is_admin()) {
         wp_deregister_script('jquery');
     }
 }
+
 add_action('wp_enqueue_scripts', 'pk_compatible', 999);
+
+if (pk_is_checked("upload_webp")) {
+    add_filter('plupload_default_settings', function ($defaults) {
+        $defaults['webp_upload_error'] = false;
+        return $defaults;
+    }, 10, 1);
+
+    add_filter('plupload_init', function ($plupload_init) {
+        $plupload_init['webp_upload_error'] = false;
+        return $plupload_init;
+    }, 10, 1);
+}
