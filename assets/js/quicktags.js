@@ -32,4 +32,4 @@ for (let scId in shortCodeIds){
 }
 QTags.addButton( 'video', "视频播放", "[video url='' autoplay=false type='auto' pic='' class='']", "[/video]");
 QTags.addButton( 'download', "文件下载", "[download file='' size='']", "[/download]");
-QTags.addButton( 'password', "输入密码可见", "[password pass='']", "[/password]");
+QTags.addButton( 'password', "输入密码可见", "[password pass='' desc='']", "[/password]");
