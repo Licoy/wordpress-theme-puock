@@ -453,6 +453,10 @@ if (pk_is_checked('comment_has_at')) {
 //GrAvatar头像源切换
 if (pk_get_option('gravatar_url', 'wp') != 'wp') {
     $type = pk_get_option('gravatar_url', 'wp');
+    if ($type == 'cravatar') {
+        add_filter('get_avatar', 'cr_avatar');
+        add_filter('get_avatar_url', 'cr_avatar');
+    }
     if ($type == 'cn') {
         add_filter('get_avatar', 'cn_avatar');
         add_filter('get_avatar_url', 'cn_avatar');

@@ -366,6 +366,7 @@ function optionsframework_options()
             'wp' => '官方默认加载节点',
             'cn' => '官方提供的CN节点',
             'cn_ssl' => '官方提供SSL的CN节点',
+            'cravatar' => 'Cravatar公共头像',
             'loli_ssl' => 'SB.SB提供的SSL节点',
             'v2ex' => 'v2ex提供的SSL节点',
         ]

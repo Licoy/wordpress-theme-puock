@@ -94,6 +94,12 @@ function cn_avatar($avatar)
     return str_replace($gravatar_urls, 'cn.gravatar.com', $avatar);
 }
 
+function cr_avatar($avatar)
+{
+    global $gravatar_urls;
+    return str_replace($gravatar_urls, 'cravatar.cn', $avatar);
+}
+
 function cn_ssl_avatar($avatar)
 {
     global $gravatar_urls;
