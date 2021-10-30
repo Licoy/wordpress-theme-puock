@@ -21,10 +21,11 @@ $(function () {
 
     if(window.vdCommentOpen){
         vaptcha({
-            vid: window.puockParams.vd_vid, // 验证单元id
-            type: 'invisible', // 显示类型 隐藏式
+            vid: window.puockParams.vd_vid,
+            type: 'invisible',
             scene: 3, // 场景值 默认0
             offline_server: 'http://ww.ss',
+            area:'cn'
         }).then(function (vaptchaObj) {
             window.vaptchaInstance = vaptchaObj;
             window.vaptchaInstance.listen('pass', function() {

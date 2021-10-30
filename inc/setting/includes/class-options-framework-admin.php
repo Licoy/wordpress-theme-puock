@@ -167,13 +167,6 @@ class Options_Framework_Admin
             Options_Framework::VERSION
         );
 
-        wp_enqueue_script(
-            'options-iconfont',
-            OPTIONS_FRAMEWORK_DIRECTORY . 'js/options-iconfont.js',
-            null,
-            Options_Framework::VERSION
-        );
-
         // Inline scripts from options-interface.php
         add_action('admin_head', array($this, 'of_admin_head'));
     }

@@ -15,7 +15,7 @@ class Options_Framework {
 	 * @since 1.7.0
 	 * @type string
 	 */
-	const VERSION = '1.9.2';
+	const VERSION = '1.9.3';
 
 	/**
 	 * Gets option name
