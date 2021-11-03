@@ -13,7 +13,7 @@
     <?php get_template_part('templates/css','grey') ?>
     <link rel="stylesheet" data-no-instant href="<?php echo pk_get_static_url(); ?>/assets/css/libs.min.css?ver=<?php echo PUOCK_CUR_VER ?>">
     <link rel="stylesheet" data-no-instant href="<?php echo pk_get_static_url(); ?>/assets/css/style.css?ver=<?php echo PUOCK_CUR_VER ?>">
-    <script data-no-instant type="text/javascript" src="<?php echo pk_get_static_url(); ?>/assets/js/jquery.min.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
+    <script data-no-instant type="text/javascript" src="<?php echo pk_get_static_url(); ?>/assets/js/libs/jquery.min.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
     <?php if(!empty(pk_get_option('tj_code_header',''))): ?>
         <?php echo pk_get_option('tj_code_header',''); ?>
     <?php endif; ?>

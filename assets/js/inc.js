@@ -73,6 +73,7 @@ $(() => {
         body.removeClass(isLight ? pk + "-dark" : pk + "-light");
         body.addClass(isLight ? pk + "-light" : pk + "-dark");
         localStorage.setItem('light', isLight);
+        Cookies.set('mode', isLight ? 'light' : 'dark')
     }
 
     //模式初始化
