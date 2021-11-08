@@ -358,7 +358,10 @@ class Puock {
     }
 
     registerMobileMenuEvent() {
-        const fn = (s = 'Out') => {
+        const fn = (s) => {
+            if (typeof (s) !== 'string') {
+                s = 'Out'
+            }
             $("#mobile-menu").attr("class", "animated fade" + s + "Left");
             $("#mobile-menu-backdrop").attr("class", "modal-backdrop animated fade" + s + "Right");
         }
