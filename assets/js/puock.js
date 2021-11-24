@@ -188,6 +188,12 @@ class Puock {
         if (document.getElementById("post-main")) {
             new Viewer(document.getElementById("post-main"), {
                 navbar: false,
+                filter(image) {
+                    if (!$(image).hasClass("dont-view")) {
+                        return image.complete;
+                    }
+                    return false;
+                },
             });
         }
         $('[data-toggle="tooltip"]').tooltip({placement: 'auto', trigger: 'hover'});

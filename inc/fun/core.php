@@ -42,6 +42,7 @@ require get_template_directory() . '/inc/fun/post-meta.php';
 require get_template_directory() . '/inc/fun/sidebar.php';
 require get_template_directory() . '/inc/fun/post-tags.php';
 require get_template_directory() . '/inc/fun/comment-notify.php';
+require get_template_directory() . '/inc/user-agent-parse.php';
 if (pk_is_checked('no_category')) {
     require get_template_directory() . '/inc/no-category.php';
 }

@@ -271,3 +271,12 @@ if (pk_is_checked("upload_webp")) {
         return $plupload_init;
     }, 10, 1);
 }
+
+function pk_get_comment_os_images($name)
+{
+    if (in_array($name, array("Android", "Chrome", "Edge", "Firefox", "Linux",
+        "Macintosh", "Safari", "Windows"))) {
+        return pk_get_static_url() . '/assets/img/os/' . $name . '.svg';
+    }
+    return pk_get_static_url() . '/assets/img/os/Unknown.svg';
+}

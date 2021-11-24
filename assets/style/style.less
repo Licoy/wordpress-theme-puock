@@ -163,7 +163,7 @@ pre {
         display: block;
         text-align: center;
         margin-bottom: 0;
-        @subHeight: @h / 1.2;
+        @subHeight: (@h / 1.2);
         height: @subHeight;
         line-height: @subHeight;
 
@@ -215,7 +215,7 @@ pre {
 }
 
 //文章目录
-#post-menus{
+#post-menus {
   user-select: none;
   position: fixed;
   right: 0;
@@ -225,41 +225,47 @@ pre {
   @h: 400px;
   border-top-left-radius: @border-radius;
   border-bottom-left-radius: @border-radius;
-  #post-menu-state{
+
+  #post-menu-state {
     position: absolute;
     left: -14px;
     background-color: @colorPrimary;
-    width:14px;
+    width: 14px;
     height: 80px;
-    top: @h / 2 - 40;
+    top: (@h / 2 - 40);
     @border-radius: 5px;
     border-top-left-radius: @border-radius;
     border-bottom-left-radius: @border-radius;
     box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
     text-align: center;
     cursor: pointer;
-    i{
+
+    i {
       font-size: 12px;
       line-height: 80px;
       font-weight: bold;
-      color:#fff;
+      color: #fff;
     }
   }
-  #post-menu-content{
+
+  #post-menu-content {
     width: 260px;
     height: @h;
     box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
     display: none;
-    padding:12px;
+    padding: 12px;
     overflow-y: scroll;
-    ul{
+
+    ul {
       list-style: none;
-      padding:0;
-      li{
-        &:not(:last-child){
+      padding: 0;
+
+      li {
+        &:not(:last-child) {
           margin-bottom: 8px;
         }
-        i{
+
+        i {
 
         }
       }
@@ -489,7 +495,7 @@ a:hover {
 .round(@wh) {
   width: @wh;
   height: @wh;
-  border-radius: @wh / 2;
+  border-radius: (@wh / 2);
 }
 
 .min-avatar, .md-avatar {
@@ -1036,6 +1042,23 @@ a:hover {
       display: none;
     }
 
+    .comment-os {
+      margin-top: 10px;
+      font-size: 12px;
+
+      img {
+        width: 14px;
+        position: relative;
+        top: -2px;
+        margin-right: 2px;
+      }
+
+      span {
+        display: inline-block;
+        margin-right: 3px;
+      }
+    }
+
     .content {
       .content-text, .comment-box-reply {
         margin-left: 40px;
@@ -1327,18 +1350,18 @@ a:hover {
 }
 
 //标签云小工具
-.widget-puock-tag-cloud{
-  a{
+.widget-puock-tag-cloud {
+  a {
     margin: 3px 3px;
     padding: .5rem .7rem;
   }
 }
 
 //一言小工具
-.widget-puock-hitokoto{
-  .fb{
+.widget-puock-hitokoto {
+  .fb {
     text-align: right;
-    color:@colorSecondary;
+    color: @colorSecondary;
     .fs14;
     margin-top: 6px;
   }
@@ -1603,12 +1626,12 @@ a:hover {
       .icon {
         width: @wh;
         height: @wh;
-        border-radius: @wh / 2;
+        border-radius: (@wh / 2);
         background-color: @colorPrimary;
         text-align: center;
 
         [class^='czs'] {
-          font-size: @wh / 2;
+          font-size: (@wh / 2);
           color: @colorModeDarkFont;
           line-height: @wh;
         }
@@ -1697,7 +1720,7 @@ a:hover {
   }
 
   #header, .p-block, .sub-menu, #header-box, .widget,
-  #index-company #prod-items .prod-item .icon,#post-menus {
+  #index-company #prod-items .prod-item .icon, #post-menus {
     background-color: @colorModeDarkBoxBg;
     box-shadow: none;
   }
@@ -1763,7 +1786,7 @@ a:hover {
     border-right: 8px solid @inputBg;
   }
 
-  blockquote{
+  blockquote {
     background-color: @colorModeDarkBg !important;
     border-color: #505458 !important;
   }
