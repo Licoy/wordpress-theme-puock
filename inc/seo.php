@@ -52,7 +52,7 @@ if (isset($other_page_title)) { ?>
     if ($single_seo_desc != null && !empty(trim($single_seo_desc))) {
         echo trim($single_seo_desc);
     } else {
-        echo wp_trim_words(do_shortcode(get_the_content($post->ID)), 250, '...');
+        echo wp_trim_words(do_shortcode(get_the_content($post->ID)), 147, '...');
     }
     ?>"/>
 <?php endwhile; endif; ?>
@@ -75,3 +75,11 @@ if (isset($other_page_title)) { ?>
 
     ?>
 <?php endif; ?>
+<?php
+if(is_home()){
+    echo '<link rel="canonical" href="'.home_url().'">';
+}else{
+    echo '<link rel="canonical" href="'.get_permalink().'">';
+}
+?>
+
