@@ -57,7 +57,7 @@ gulp.task('build', gulp.series(
     'lib_script',
 ))
 
-gulp.task('w', function () {
+gulp.task('w', gulp.series('build', function () {
     gulp.watch(_core_style, gulp.series('style'))
     gulp.watch(_core_script, gulp.series('script'))
-})
+}))
