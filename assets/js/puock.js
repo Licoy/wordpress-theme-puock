@@ -66,6 +66,21 @@ class Puock {
         }
     }
 
+    instanceClickLoad() {
+        InstantClick.init('mousedown');
+        InstantClick.on('change', () => {
+            this.loadParams()
+            this.modeInit();
+            this.pageChangeInit()
+            this.loadCommentInfo();
+            this.initCodeHighlight();
+            if (this.data.params.use_post_menu) {
+                this.generatePostMenuHTML()
+            }
+        })
+        this.loadCommentInfo();
+    }
+
     ct(e) {
         return e.currentTarget
     }
@@ -225,27 +240,31 @@ class Puock {
 
     generatePostMenuHTML() {
         const menus = this.getPostMenuStructure();
-        let result = "<ul>";
         if (menus.length > 0) {
-            let heightLevel = 6;
-            for (let i = 0; i < menus.length; i++) {
-                const level = parseInt(menus[i].level[1]);
-                if (level < heightLevel) {
-                    heightLevel = level;
+            let result = "<ul>";
+            if (menus.length > 0) {
+                let heightLevel = 6;
+                for (let i = 0; i < menus.length; i++) {
+                    const level = parseInt(menus[i].level[1]);
+                    if (level < heightLevel) {
+                        heightLevel = level;
+                    }
+                }
+                for (let i = 0; i < menus.length; i++) {
+                    const m = menus[i];
+                    let pl = 0;
+                    const level = parseInt(m.level[1]);
+                    if (level > heightLevel) {
+                        pl = (level - heightLevel) * 10;
+                    }
+                    result += `<li style='padding-left:${pl}px' class='t-line-1'><i class='czs-angle-right-l t-sm c-sub mr-1'></i><a class='pk-menu-to a-link t-w-400 t-md' href='#${m.id}'>${m.name}</a></li>`;
                 }
             }
-            for (let i = 0; i < menus.length; i++) {
-                const m = menus[i];
-                let pl = 0;
-                const level = parseInt(m.level[1]);
-                if (level > heightLevel) {
-                    pl = (level - heightLevel) * 10;
-                }
-                result += `<li style='padding-left:${pl}px' class='t-line-1'><i class='czs-angle-right-l t-sm c-sub mr-1'></i><a class='pk-menu-to a-link t-w-400 t-md' href='#${m.id}'>${m.name}</a></li>`;
-            }
+            result += "</ul>"
+            $("#post-menu-content").html(result)
+        } else {
+            $("#post-menus").remove()
         }
-        result += "</ul>"
-        $("#post-menu-content").html(result)
     }
 
     initCodeHighlight() {
@@ -299,17 +318,6 @@ class Puock {
         }, 'json').error((e) => {
             console.error(e)
         })
-    }
-
-    instanceClickLoad() {
-        InstantClick.init('mousedown');
-        InstantClick.on('change', () => {
-            this.modeInit();
-            this.pageChangeInit()
-            this.loadCommentInfo();
-            this.initCodeHighlight()
-        })
-        this.loadCommentInfo();
     }
 
     modeInit() {
