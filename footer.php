@@ -67,7 +67,7 @@
     <?php echo pk_get_option('tj_code_footer', ''); ?>
 <?php endif; ?>
 <script data-no-instant
-        src="<?php echo pk_get_static_url(); ?>/assets/dist/puock.min.js?ver=<?php echo time() ?>"></script>
+        src="<?php echo pk_get_static_url(); ?>/assets/dist/puock.min.js?ver=<?php echo PUOCK_CUR_VER ?>"></script>
 <?php wp_footer(); ?>
 <?php get_template_part('templates/async', 'views') ?>
 </body>
