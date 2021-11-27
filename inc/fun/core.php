@@ -70,7 +70,7 @@ function pk_toolbar_link($bar)
 {
     $bar->add_node(array(
         'id' => 'theme-setting',
-        'title' => '主题设置',
+        'title' => '✍️主题设置',
         'href' => admin_url() . 'themes.php?page=options-framework'
     ));
 }
