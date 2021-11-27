@@ -70,8 +70,16 @@ function pk_toolbar_link($bar)
 {
     $bar->add_node(array(
         'id' => 'theme-setting',
-        'title' => '✍️主题设置',
+        'title' => '🎨 主题设置',
         'href' => admin_url() . 'themes.php?page=options-framework'
+    ));
+    $bar->add_node(array(
+        'id' => 'theme-qq-qun',
+        'title' => '🐧 主题交流QQ群',
+        'href' => 'https://licoy.cn/go/puock-update.php?r=qq_qun',
+        'meta' => array(
+            'target' => 'blank'
+        )
     ));
 }
 
