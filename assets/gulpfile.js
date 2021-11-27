@@ -26,7 +26,11 @@ gulp.task('style', function () {
 gulp.task('lib_style', function () {
     return gulp.src(_libs_style)
         .pipe(concatCss("libs.min.css"))
-        .pipe(minifyCSS())
+        .pipe(minifyCSS({
+            format : 'keep-breaks',
+            semicolonAfterLastProperty:true,
+            afterComment:true
+        }))
         .pipe(gulp.dest('dist'))
 })
 
