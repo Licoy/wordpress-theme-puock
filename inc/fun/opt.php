@@ -280,3 +280,14 @@ function pk_get_comment_os_images($name)
     }
     return pk_get_static_url() . '/assets/img/os/Unknown.svg';
 }
+
+// 二维码生成
+function pk_post_qrcode($url)
+{
+    $file = '/cache/qr-' . md5($url) . '.png';
+    $filepath = get_template_directory() . $file;
+    if (!file_exists($filepath)) {
+        QRcode::png($url, $filepath, QR_ECLEVEL_L, 7, 1);
+    }
+    return $file;
+}

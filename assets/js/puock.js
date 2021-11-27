@@ -200,6 +200,8 @@ class Puock {
     }
 
     pageChangeInit() {
+        this.generatePostQrcode();
+        $('[data-toggle="tooltip"]').tooltip({placement: 'auto', trigger: 'hover'});
         if (document.getElementById("post-main")) {
             new Viewer(document.getElementById("post-main"), {
                 navbar: false,
@@ -211,7 +213,6 @@ class Puock {
                 },
             });
         }
-        $('[data-toggle="tooltip"]').tooltip({placement: 'auto', trigger: 'hover'});
         if (this.data.params.is_single) {
             new ClipboardJS('.copy-post-link', {
                 text: () => {
@@ -277,13 +278,9 @@ class Puock {
 
     generatePostQrcode() {
         //生成微信分享二维码
-        if (window.QRCode !== undefined) {
-            window.QRCode.toDataURL(window.location.href, {errorCorrectionLevel: 'H'}, (err, url) => {
-                if (!err) {
-                    $("#wx-share").attr("data-original-title", `<p class='text-center t-sm mb-1 mt-1'>使用微信扫一扫</p><img class='mb-1' alt='微信二维码' src='${url}'/>`)
-                }
-            })
-        }
+        const wsEl = $("#wx-share");
+        const qrUrl = wsEl.attr("data-url");
+        wsEl.attr("data-original-title", `<p class='text-center t-sm mb-1 mt-1'>使用微信扫一扫</p><img width="180" class='mb-1' alt='微信二维码' src='${qrUrl}'/>`)
     }
 
 
