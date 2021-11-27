@@ -27,43 +27,18 @@ function pk_comment_ajax()
     //是否需要进行验证
     if (pk_is_checked('vd_comment')) {
 
-        $v_api = pk_get_option('vd_vaptcha_api');
-
-        $v_id = pk_get_option('vd_vaptcha_id');
-
-        $v_key = pk_get_option('vd_vaptcha_key');
-
-        if (empty($v_api) || empty($v_id) || empty($v_key)) {
-            pk_comment_err('未配置验证参数');
-        }
-
         $token = $_REQUEST['comment-vd'];
 
         if (empty($token)) {
-            pk_comment_err('无效的请求');
+            pk_comment_err('无效验证码');
         }
 
-        $req_params = array(
-            'id' => $v_id,
-            'secretkey' => $v_key,
-            'scene' => 3,
-            'token' => $token,
-            'ip' => $_SERVER['REMOTE_ADDR']
-        );
-
-        $v_res = wp_remote_post($v_api, array('body' => $req_params, 'timeout' => 3));
-
-        if (!$res_body = json_decode($v_res['body'], true)) {
-            pk_comment_err('验证用户防刷API解析异常');
+        $session_comment_captcha = $_SESSION['comment_captcha'];
+        if (!$session_comment_captcha || $session_comment_captcha == '' || trim($token) != $session_comment_captcha) {
+            pk_comment_err('无效验证码');
         }
 
-        if (isset($res_body['success']) && $res_body['success'] !== 1) {
-            $sx = "";
-            if (isset($res_body['msg'])) {
-                $sx = ": ${res_body['msg']}";
-            }
-            pk_comment_err("检测到请求异常，请重新验证${sx}");
-        }
+        unset($_SESSION['comment_captcha']);
 
     }
 

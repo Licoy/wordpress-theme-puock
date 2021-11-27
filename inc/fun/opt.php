@@ -291,3 +291,28 @@ function pk_post_qrcode($url)
     }
     return $file;
 }
+
+// 评论验证码
+// request url: {host}/wp-admin/admin-ajax.php?action=puock_comment_captcha
+function pk_comment_captcha()
+{
+    $width = $_GET['w'];
+    $height = $_GET['h'];
+    $captch = new CaptchaBuilder();
+    $captch->initialize([
+        'width' => intval($width),     // 宽度
+        'height' => intval($height),     // 高度
+        'line' => true,     // 直线
+        'curve' => true,   // 曲线
+        'noise' => 1,   // 噪点背景
+        'fonts' => [get_template_directory() . '/assets/fonts/G8321-Bold.ttf']       // 字体
+    ]);
+    $result = $captch->create();
+    $text = $result->getText();
+    $_SESSION['comment_captcha'] = $text;
+    $result->output();
+    die;
+}
+
+add_action('wp_ajax_nopriv_puock_comment_captcha', 'pk_comment_captcha');
+add_action('wp_ajax_puock_comment_captcha', 'pk_comment_captcha');

@@ -44,6 +44,7 @@ require get_template_directory() . '/inc/fun/post-tags.php';
 require get_template_directory() . '/inc/fun/comment-notify.php';
 require get_template_directory() . '/inc/user-agent-parse.php';
 require get_template_directory() . '/inc/phpqrcode.php';
+require get_template_directory() . '/inc/php-captcha.php';
 if (pk_is_checked('no_category')) {
     require get_template_directory() . '/inc/no-category.php';
 }

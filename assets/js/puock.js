@@ -3,13 +3,11 @@ class Puock {
         tag: 'puock',
         params: {
             home: null,
-            vd_comment: false,
-            vd_vid: null,
             use_post_menu: false,
             is_single: false,
             is_pjax: false,
+            vd_comment: false,
         },
-        vdInstance: null,
         comment: {
             loading: false,
             time: 5,
@@ -32,6 +30,9 @@ class Puock {
         $(document).on("click", ".colorMode", () => {
             this.modeChange(null, true);
         });
+        $(document).on("click", ".comment-captcha", (e) => {
+            this.loadCommentCaptchaImage($(this.ct(e)))
+        });
         if (this.data.params.is_pjax) {
             this.instanceClickLoad()
         }
@@ -52,10 +53,8 @@ class Puock {
 
     pageInit() {
         this.loadParams()
-        if (this.data.params.vd_comment) {
-            this.loadVaptcha()
-        }
         this.initReadProgress()
+        this.loadCommentCaptchaImage(null)
         this.pageChangeInit()
         if (this.data.params.is_single) {
             if (this.data.params.use_post_menu) {
@@ -83,6 +82,13 @@ class Puock {
 
     ct(e) {
         return e.currentTarget
+    }
+
+    loadCommentCaptchaImage(el) {
+        if (el == null) {
+            el = $(".comment-captcha");
+        }
+        el.attr("src", el.attr("data-path"));
     }
 
     eventOpenSearchBox() {
@@ -172,25 +178,6 @@ class Puock {
         this.data.commentVd = this.data.params.vd_comment === 'on';
     }
 
-    loadVaptcha() {
-        if (vaptcha !== undefined) {
-            vaptcha({
-                vid: this.data.params.vd_vid,
-                type: 'invisible',
-                scene: 3, // 场景值 默认0
-                offline_server: 'http://ww.ss',
-                area: 'cn'
-            }).then((res) => {
-                this.data.vdInstance = res
-                this.data.vdInstance.listen('pass', () => {
-                    $("#comment-vd").val(this.data.vdInstance.getToken());
-                    this.data.vdInstance.reset();
-                    $.comment_form_submit_exec($("#comment-form"));
-                });
-            })
-        }
-    }
-
     initReadProgress() {
         const readProgress = $("#page-read-progress .progress-bar");
         document.addEventListener('scroll', () => {
@@ -200,6 +187,7 @@ class Puock {
     }
 
     pageChangeInit() {
+        this.loadCommentCaptchaImage(null);
         this.generatePostQrcode();
         $('[data-toggle="tooltip"]').tooltip({placement: 'auto', trigger: 'hover'});
         if (document.getElementById("post-main")) {
@@ -419,15 +407,17 @@ class Puock {
                 this.infoToastShow('评论信息不能为空');
                 return false;
             }
+            if(this.data.params.vd_comment){
+                if ($.trim($("#comment-vd").val()) === '') {
+                    this.infoToastShow('验证码不能为空');
+                    return false;
+                }
+            }
             if ($.trim($("#comment").val()) === '') {
                 this.infoToastShow('评论内容不能为空');
                 return false;
             }
-            if (this.data.params.vd_comment && this.data.vdInstance) {
-                this.data.vdInstance.validate();
-            } else {
-                this.commentSubmit(this.ct(e))
-            }
+            this.commentSubmit(this.ct(e))
             return false;
         })
     }
@@ -441,6 +431,8 @@ class Puock {
             type: $(target).attr('method'),
             success: (data) => {
                 this.infoToastShow('评论已提交成功');
+                this.loadCommentCaptchaImage(null);
+                $("#comment-vd").val("");
                 $("#comment").val("");
                 if (this.data.comment.replyId != null) {
                     let comment = $('#comment-' + this.data.comment.replyId);

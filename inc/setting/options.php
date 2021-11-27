@@ -661,36 +661,11 @@ function optionsframework_options()
 
     $options[] = array(
         'name' => '',
-        'desc' => '启用评论防刷验证',
+        'desc' => '启用评论防刷验证（图形验证码）',
         'id' => 'vd_comment',
         'std' => '0',
         'type' => 'checkbox'
     );
-
-    $options[] = array(
-        'name' => 'Vaptcha-API',
-        'desc' => '查看服务端验证API请到<a target="_blank" href="https://www.vaptcha.com/document/install.html#api请求数据">文档中心</a>获取',
-        'id' => 'vd_vaptcha_api',
-        'std' => 'http://0.vaptcha.com/verify',
-        'type' => 'text'
-    );
-
-    $options[] = array(
-        'name' => 'Vaptcha-VID',
-        'desc' => '获取VID请到<a target="_blank" href="https://user.vaptcha.com/manage">Vaptcha管理系统</a>获取',
-        'id' => 'vd_vaptcha_id',
-        'std' => '',
-        'type' => 'text'
-    );
-
-    $options[] = array(
-        'name' => 'Vaptcha-KEY',
-        'id' => 'vd_vaptcha_key',
-        'desc' => '获取KEY请到<a target="_blank" href="https://user.vaptcha.com/manage">Vaptcha管理系统</a>获取',
-        'std' => '',
-        'type' => 'text'
-    );
-
 
     // 广告
     $options[] = array(
