@@ -9,7 +9,7 @@ abstract class puockWidgetBase extends WP_Widget{
     protected $pre_title = '显示近期的';
 
     function __construct() {
-        $this->WP_Widget($this->get_class_name(), self::$puock." ".$this->title,
+        WP_Widget::__construct($this->get_class_name(), self::$puock." ".$this->title,
             array('description' => $this->pre_title.$this->title));
     }
 
@@ -737,7 +737,7 @@ class puockTagHitokoto extends puockWidgetBase {
         ?>
         <div class="widget-puock-hitokoto">
             <div id="<?php echo $id ?>">
-                <div class="t puock-text"></div>
+                <div class="t puock-text">加载中...</div>
                 <div class="fb">-「<span class="f"></span>」</div>
             </div>
             <script type="application/javascript">

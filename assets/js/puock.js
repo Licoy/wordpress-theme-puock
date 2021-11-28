@@ -88,7 +88,7 @@ class Puock {
         if (el == null) {
             el = $(".comment-captcha");
         }
-        el.attr("src", el.attr("data-path"));
+        el.attr("src", el.attr("data-path") + '&t='+(new Date()).getTime())
     }
 
     eventOpenSearchBox() {

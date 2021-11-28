@@ -30,36 +30,47 @@
                             <textarea placeholder="<?php _e('世界这么大发表一下你的看法~', PUOCK) ?>" id="comment" name="comment"
                                       class="form-control form-control-sm t-sm" rows="4"></textarea>
                         </div>
-                        <?php if (!is_user_logged_in()): ?>
                         <div class="row row-cols-1 comment-info">
+                            <?php $commentInfoCol = pk_is_checked('vd_comment') ? 3 : 4; ?>
+                            <?php if (!is_user_logged_in()): ?>
                                 <input type="text" value="0" hidden name="comment-logged" id="comment-logged">
-                                <div class="col-12 col-sm-4"><input type="text" id="author" name="author"
-                                                                    class="form-control form-control-sm t-sm"
-                                                                    placeholder="<?php _e('昵称（必填）', PUOCK) ?>"></div>
-                                <div class="col-12 col-sm-4"><input type="email" id="email" name="email"
-                                                                    class="form-control form-control-sm t-sm"
-                                                                    placeholder="<?php _e('邮箱（必填）', PUOCK) ?>"></div>
-                                <div class="col-12 col-sm-4"><input type="text" id="url" name="url"
-                                                                    class="form-control form-control-sm t-sm"
-                                                                    placeholder="<?php _e('网站', PUOCK) ?>"></div>
+                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="author"
+                                                                                                 name="author"
+                                                                                                 class="form-control form-control-sm t-sm"
+                                                                                                 placeholder="<?php _e('昵称（必填）', PUOCK) ?>">
+                                </div>
+                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="email" id="email"
+                                                                                                name="email"
+                                                                                                class="form-control form-control-sm t-sm"
+                                                                                                placeholder="<?php _e('邮箱（必填）', PUOCK) ?>">
+                                </div>
+                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="url"
+                                                                                                name="url"
+                                                                                                class="form-control form-control-sm t-sm"
+                                                                                                placeholder="<?php _e('网站', PUOCK) ?>">
+                                </div>
+
+                            <?php endif; ?>
+                            <?php if (pk_is_checked('vd_comment')): ?>
+                                <div class="col-12 col-sm-3">
+                                    <div class="row flex-row justify-content-end">
+                                        <div class="col-8 col-sm-7 text-right pl15">
+                                            <input type="text" value="" placeholder="验证码" maxlength="4"
+                                                   class="form-control form-control-sm t-sm" name="comment-vd"
+                                                   autocomplete="off"
+                                                   id="comment-vd">
+                                        </div>
+                                        <div class="col-4 col-sm-5 pr15">
+                                            <img class="comment-captcha"
+                                                 data-path="<?php echo get_admin_url() . 'admin-ajax.php?action=puock_comment_captcha&w=200&h=70' ?>"
+                                                 src=""
+                                                 alt="验证码">
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                        <?php endif; ?>
-                        <?php if (pk_is_checked('vd_comment')): ?>
-                            <div class="row mt-3">
-                                <div class="col-8 col-sm-9 text-right">
-                                    <input type="text" value="" placeholder="请输入图片内的验证码" maxlength="4"
-                                           class="form-control form-control-sm t-sm" name="comment-vd"
-                                           autocomplete="off"
-                                           id="comment-vd">
-                                </div>
-                                <div class="col-4 col-sm-3">
-                                    <img class="comment-captcha"
-                                         data-path="<?php echo get_admin_url() . 'admin-ajax.php?action=puock_comment_captcha&w=200&h=70' ?>"
-                                         src=""
-                                         alt="验证码">
-                                </div>
-                            </div>
-                        <?php endif; ?>
+
                         <input type="text" hidden name="comment_post_ID" value="<?php echo $post->ID ?>">
                         <input type="text" hidden id="comment_parent" name="comment_parent" value="">
                         <div class="clearfix mt10">

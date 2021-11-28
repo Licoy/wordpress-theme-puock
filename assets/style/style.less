@@ -86,6 +86,16 @@ blockquote {
   top: -1px;
 }
 
+.pr15{
+  padding-left: 0;
+  padding-right: 15px;
+}
+
+.pl15{
+  padding-left: 15px;
+  padding-right: 0;
+}
+
 body, .tooltip {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Emoji Symbols Font', 'Segoe UI Symbol', Arial, sans-serif;;
 }
@@ -1335,7 +1345,7 @@ a:hover {
       @wh: 80px;
       width: @wh;
       height: @wh;
-      border-radius: @wh / 2;
+      border-radius: (@wh / 2);
       position: absolute;
       top: 100px;
       left: 38.333%;

@@ -696,7 +696,7 @@ function pk_get_main_menu($mobile = false)
         pk_get_menu_obj_to_html($menus, $out, $mobile);
     }
     if (is_user_logged_in()) {
-        $user = get_currentuserinfo();
+        $user = wp_get_current_user();
         $avatar = get_avatar_url($user->user_email);
         $out .= '<li><a data-no-instant data-toggle="tooltip" title="用户中心" href="' . get_edit_profile_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
