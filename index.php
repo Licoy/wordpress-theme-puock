@@ -24,6 +24,8 @@
 
         <?php get_template_part('templates/module','cms') ?>
 
+        <?php get_template_part('templates/module','links') ?>
+
         <?php get_template_part('ad/global','bottom') ?>
     </div>
 
