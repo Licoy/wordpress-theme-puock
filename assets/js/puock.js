@@ -201,20 +201,18 @@ class Puock {
                 },
             });
         }
-        if (this.data.params.is_single) {
-            new ClipboardJS('.copy-post-link', {
-                text: () => {
-                    const $copyEl = $(".copy-post-link");
-                    $copyEl.find('span').html("已复制");
-                    $copyEl.attr("disabled", true);
-                    setTimeout(() => {
-                        $copyEl.find('span').html("复制链接");
-                        $copyEl.attr("disabled", false);
-                    }, 3000);
-                    return location.href;
-                }
-            });
-        }
+        new ClipboardJS('.copy-post-link', {
+            text: () => {
+                const $copyEl = $(".copy-post-link");
+                $copyEl.find('span').html("已复制");
+                $copyEl.attr("disabled", true);
+                setTimeout(() => {
+                    $copyEl.find('span').html("复制链接");
+                    $copyEl.attr("disabled", false);
+                }, 3000);
+                return location.href;
+            }
+        });
         this.lazyLoadInit()
     }
 
