@@ -22,42 +22,33 @@
 <footer id="footer">
     <div class="container">
         <div class="row row-cols-md-1">
-            <div class="col-md-6">
-                <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
-                                class="czs-about-l"></i> <?php _e('关于我们', PUOCK) ?></span></div>
-                <p class="mt20 t-md"><?php echo pk_get_option('footer_about_me', '') ?></p>
-            </div>
-            <div class="col-md-6">
-                <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
-                                class="czs-link-l"></i> <?php _e('友情链接', PUOCK) ?></span></div>
-                <div class="more-link mt20 t-md">
-                    <?php
-                    $link_cid = pk_get_option('index_link_id', '');
-                    if (!empty($link_cid)) {
-                        preg_match_all('/<a .*?>.*?<\/a>/', wp_list_bookmarks(array(
-                            'category' => $link_cid,
-                            'category_before' => '',
-                            'title_li' => '',
-                            'echo' => 0
-                        )), $links);
-                        foreach ($links[0] as $link) {
-                            echo $link;
-                        }
-                    }
-                    $link_page_id = pk_get_option('link_page', '');
-                    if (!empty($link_page_id)) {
-                        echo '<a target="_blank" href="' . get_page_link($link_page_id) . '">' . __('更多链接', PUOCK) . '</a>';
-                    }
-                    ?>
+            <?php if (!empty(pk_get_option('footer_about_me_title', ''))): ?>
+                <div class="col-md-6">
+                    <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
+                                    class="czs-about-l"></i> <?php echo pk_get_option('footer_about_me_title', '') ?></span>
+                    </div>
+                    <p class="mt20 t-md"><?php echo pk_get_option('footer_about_me', '') ?></p>
                 </div>
-            </div>
+            <?php endif; ?>
+            <?php if (!empty(pk_get_option('footer_copyright_title', ''))): ?>
+                <div class="col-md-6">
+                    <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
+                                    class="czs-network-l"></i> <?php echo pk_get_option('footer_copyright_title', '') ?></span>
+                    </div>
+                    <p class="mt20 t-md"><?php echo pk_get_option('footer_copyright', '') ?></p>
+                </div>
+            <?php endif; ?>
         </div>
-        <div class="mt20 text-center t-md">
-            <div class="info">
-                <?php echo pk_get_option('footer_info') ?>
-                <p>Theme by <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock">Puock</a></p>
-            </div>
+    </div>
+    <div class="mt20 text-center t-md">
+        <div class="info">
+            <?php echo pk_get_option('footer_info') ?>
+            <?php /* 请遵守开源协议，保留主题底部（此处）的署名，以支持本主题更好的发展，谢谢合作 */ ?>
+            <p class="fs12 mt10"><i class="czs-wordpress"></i>&nbsp;Theme by <a target="_blank" title="Puock"
+                                                                                href="https://github.com/Licoy/wordpress-theme-puock">Puock</a>
+            </p>
         </div>
+    </div>
     </div>
 </footer>
 </div>

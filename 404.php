@@ -4,7 +4,7 @@ get_header();
 
 ?>
 
-    <div id="content" class="mt20 container">
+    <div id="content" class="mt20 container min-height-container">
 
         <?php echo pk_breadcrumbs() ?>
 

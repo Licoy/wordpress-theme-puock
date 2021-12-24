@@ -40,7 +40,7 @@ function optionsframework_options()
 
     // 全局设置
     $options[] = array(
-        'name' => optionsframework_icon($base,'setting') . '全局设置',
+        'name' => optionsframework_icon($base, 'setting') . '全局设置',
         'type' => 'heading'
     );
     $options[] = array(
@@ -219,7 +219,7 @@ function optionsframework_options()
 
     // 基本设置
     $options[] = array(
-        'name' => optionsframework_icon($base,'setting-config') . '基本设置',
+        'name' => optionsframework_icon($base, 'setting-config') . '基本设置',
         'type' => 'heading'
     );
 
@@ -398,7 +398,7 @@ function optionsframework_options()
 
     // 第三方登录
     $options[] = array(
-        'name' => optionsframework_icon($base,'tencent-qq') . '第三方登录',
+        'name' => optionsframework_icon($base, 'tencent-qq') . '第三方登录',
         'type' => 'heading'
     );
 
@@ -426,7 +426,7 @@ function optionsframework_options()
 
     // CMS布局设置
     $options[] = array(
-        'name' => optionsframework_icon($base,'page') . 'CMS布局设置',
+        'name' => optionsframework_icon($base, 'page') . 'CMS布局设置',
         'type' => 'heading'
     );
 
@@ -480,7 +480,7 @@ function optionsframework_options()
 
     // 企业布局设置
     $options[] = array(
-        'name' => optionsframework_icon($base,'city') . '企业布局设置',
+        'name' => optionsframework_icon($base, 'city') . '企业布局设置',
         'type' => 'heading'
     );
 
@@ -655,7 +655,7 @@ function optionsframework_options()
 
     // 防刷验证
     $options[] = array(
-        'name' => optionsframework_icon($base,'protect') . '防刷验证',
+        'name' => optionsframework_icon($base, 'protect') . '防刷验证',
         'type' => 'heading'
     );
 
@@ -669,7 +669,7 @@ function optionsframework_options()
 
     // 广告
     $options[] = array(
-        'name' => optionsframework_icon($base,'ad') . '广告',
+        'name' => optionsframework_icon($base, 'ad') . '广告',
         'type' => 'heading'
     );
 
@@ -757,7 +757,7 @@ function optionsframework_options()
 
     // 邮件设置
     $options[] = array(
-        'name' => optionsframework_icon($base,'mail') . 'SMTP邮件',
+        'name' => optionsframework_icon($base, 'mail') . 'SMTP邮件',
         'type' => 'heading'
     );
 
@@ -821,7 +821,7 @@ function optionsframework_options()
 
     // SEO设置
     $options[] = array(
-        'name' => optionsframework_icon($base,'seo') . 'SEO设置',
+        'name' => optionsframework_icon($base, 'seo') . 'SEO设置',
         'type' => 'heading'
     );
 
@@ -926,11 +926,37 @@ function optionsframework_options()
     );
 
     $options[] = array(
+        'name' => '底部关于我们说明标题',
+        'desc' => '若为空则不显示此栏目',
+        'id' => 'footer_about_me_title',
+        'std' => '关于我们',
+        'class' => 'mini',
+        'type' => 'text'
+    );
+
+    $options[] = array(
         'name' => '底部关于我们说明',
         'id' => 'footer_about_me',
         'settings' => $editorSettings,
         'type' => 'editor',
         'std' => '底部关于我们说明'
+    );
+
+    $options[] = array(
+        'name' => '底部版权说明标题',
+        'desc' => '若为空则不显示此栏目',
+        'id' => 'footer_copyright_title',
+        'std' => '版权说明',
+        'class' => 'mini',
+        'type' => 'text'
+    );
+
+    $options[] = array(
+        'name' => '底部版权说明',
+        'id' => 'footer_copyright',
+        'settings' => $editorSettings,
+        'type' => 'editor',
+        'std' => '底部版权说明'
     );
 
     $options[] = array(
@@ -943,7 +969,7 @@ function optionsframework_options()
 
     // 资源或更新
     $options[] = array(
-        'name' => optionsframework_icon($base,'link-cloud-sucess') . '资源或更新',
+        'name' => optionsframework_icon($base, 'link-cloud-sucess') . '资源或更新',
         'type' => 'heading'
     );
     $options[] = array(
@@ -979,7 +1005,6 @@ function optionsframework_options()
 
     return $options;
 }
-
 
 
 function optionsframework_icon($base, $icon, $nbsp = true)

@@ -1,6 +1,6 @@
 <?php get_header() ?>
 
-    <div id="content" class="container mt15">
+    <div id="content" class="container mt15 ">
         <?php get_template_part('ad/global','top') ?>
         <?php echo pk_breadcrumbs() ?>
 

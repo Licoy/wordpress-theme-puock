@@ -88,7 +88,7 @@ class Puock {
         if (el == null) {
             el = $(".comment-captcha");
         }
-        el.attr("src", el.attr("data-path") + '&t='+(new Date()).getTime())
+        el.attr("src", el.attr("data-path") + '&t=' + (new Date()).getTime())
     }
 
     eventOpenSearchBox() {
@@ -195,6 +195,7 @@ class Puock {
                 navbar: false,
                 filter(image) {
                     if (!$(image).hasClass("dont-view")) {
+                        console.log(image)
                         return image.complete;
                     }
                     return false;
@@ -405,7 +406,7 @@ class Puock {
                 this.infoToastShow('评论信息不能为空');
                 return false;
             }
-            if(this.data.params.vd_comment){
+            if (this.data.params.vd_comment) {
                 if ($.trim($("#comment-vd").val()) === '') {
                     this.infoToastShow('验证码不能为空');
                     return false;

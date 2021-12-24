@@ -114,6 +114,10 @@ pre {
   padding-top: 20px;
 }
 
+.fs12 {
+  font-size: 12px;
+}
+
 .navbar, #header {
   padding: 0;
   position: fixed;
@@ -299,6 +303,10 @@ pre {
   .container, .container-lg, .container-md, .container-sm {
     max-width: 1240px;
   }
+}
+
+.min-height-container{
+  min-height: 70vh;
 }
 
 .modal-content {
@@ -1697,8 +1705,30 @@ a:hover {
 //首页友情链接
 .index-links {
   a {
-    margin: 3px 3px;
+    margin: 3px;
     padding: 0.5rem 0.7rem;
+  }
+
+  .index-links-box {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    &:nth-of-type(2)::after {
+      content: '';
+      flex: auto;
+    }
+  }
+
+  .links-item {
+    background-color: @colorModeLightBg;
+    color: @colorModeLightFont;
+    transition: all .2s;
+    margin-bottom: 8px;
+    &:hover {
+      background-color: @colorPrimary;
+      color: @colorLight;
+    }
   }
 }
 
@@ -1755,6 +1785,13 @@ a:hover {
     }
   }
 
+  .index-links .links-item {
+    &:hover {
+      background-color: @colorPrimary;
+      color: @colorLight
+    }
+  }
+
   .colorMode {
     color: @colorYellow !important;
   }
@@ -1766,7 +1803,11 @@ a:hover {
   }
 
   #post-comments .post-comment .content-text, .entry-content code,
-  #page-read-progress, .timeline-content, .timeline:before, .timeline-location {
+  #page-read-progress,
+  .timeline-content,
+  .timeline:before,
+  .timeline-location,
+  .index-links .links-item {
     background-color: @inputBg;
   }
 
