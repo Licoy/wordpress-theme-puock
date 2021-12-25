@@ -305,7 +305,7 @@ pre {
   }
 }
 
-.min-height-container{
+.min-height-container {
   min-height: 70vh;
 }
 
@@ -798,12 +798,17 @@ a:hover {
   }
 }
 
+// 移动端
 @media (max-width: 576px) {
   #posts {
     .post-item-card {
       padding-left: 0 !important;
       padding-right: 0 !important;
     }
+  }
+
+  .t-line-1 {
+    white-space: normal;
   }
 }
 
@@ -1714,6 +1719,7 @@ a:hover {
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: flex-start;
+
     &:nth-of-type(2)::after {
       content: '';
       flex: auto;
@@ -1725,6 +1731,7 @@ a:hover {
     color: @colorModeLightFont;
     transition: all .2s;
     margin-bottom: 8px;
+
     &:hover {
       background-color: @colorPrimary;
       color: @colorLight;

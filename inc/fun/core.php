@@ -57,14 +57,7 @@ if (pk_is_checked('html_page_permalink')) {
 }
 add_filter('user_trailingslashit', 'add_init_trailingslashit', 10, 2);
 
-//添加session支持
-function register_session()
-{
-    if (!session_id())
-        session_start();
-}
 
-add_action('init', 'register_session');
 
 // 顶部添加自定义菜单
 function pk_toolbar_link($bar)
@@ -395,15 +388,18 @@ function pk_get_oauth_info($type = 'qq', $redirect = '', $gen_state = true)
     $qq_oauth_key = pk_get_option('oauth_qq_key');
     $redirect = urlencode(admin_url() . 'admin-ajax.php?action=oauth_qq_redirect_ajax&redirect=' . $redirect);
     if ($gen_state) {
-        $_SESSION['qq_oauth_state'] = md5(time() . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9));
+        $qq_oauth_state = md5(time() . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9));
+        $_SESSION['qq_oauth_state'] = $qq_oauth_state;
+    } else {
+        $qq_oauth_state = $_SESSION['qq_oauth_state'];
     }
-    $auth_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id={$qq_oauth_id}&redirect_uri={$redirect}&state=" . $_SESSION['qq_oauth_state'];
+    $auth_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id={$qq_oauth_id}&redirect_uri={$redirect}&state=" . $qq_oauth_state;
     return array(
         'qq_open' => $qq_open,
         'qq_oauth_id' => $qq_oauth_id,
         'qq_oauth_key' => $qq_oauth_key,
         'oauth_redirect' => $redirect,
-        'oauth_state' => $_SESSION['qq_oauth_state'],
+        'oauth_state' => $qq_oauth_state,
         'oauth_url' => $auth_url,
     );
 }

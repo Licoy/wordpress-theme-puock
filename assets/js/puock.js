@@ -7,6 +7,7 @@ class Puock {
             is_single: false,
             is_pjax: false,
             vd_comment: false,
+            main_lazy_img: false,
         },
         comment: {
             loading: false,
@@ -190,18 +191,10 @@ class Puock {
         this.loadCommentCaptchaImage(null);
         this.generatePostQrcode();
         $('[data-toggle="tooltip"]').tooltip({placement: 'auto', trigger: 'hover'});
-        if (document.getElementById("post-main")) {
-            new Viewer(document.getElementById("post-main"), {
-                navbar: false,
-                filter(image) {
-                    if (!$(image).hasClass("dont-view")) {
-                        console.log(image)
-                        return image.complete;
-                    }
-                    return false;
-                },
-            });
-        }
+        $("#post-main .entry-content").viewer({
+            navbar: false,
+            url: this.data.params.main_lazy_img ? 'data-src' : 'src'
+        });
         new ClipboardJS('.copy-post-link', {
             text: () => {
                 const $copyEl = $(".copy-post-link");

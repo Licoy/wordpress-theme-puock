@@ -27,9 +27,9 @@ gulp.task('lib_style', function () {
     return gulp.src(_libs_style)
         .pipe(concatCss("libs.min.css"))
         .pipe(minifyCSS({
-            format : 'keep-breaks',
-            semicolonAfterLastProperty:true,
-            afterComment:true
+            format: 'keep-breaks',
+            semicolonAfterLastProperty: true,
+            afterComment: true
         }))
         .pipe(gulp.dest('dist'))
 })
@@ -64,4 +64,6 @@ gulp.task('build', gulp.series(
 gulp.task('w', gulp.series('build', function () {
     gulp.watch(_core_style, gulp.series('style'))
     gulp.watch(_core_script, gulp.series('script'))
+    gulp.watch(_libs_script, gulp.series('lib_script'))
+    gulp.watch(_libs_style, gulp.series('lib_style'))
 }))

@@ -1,5 +1,14 @@
 <?php
 
+//添加session支持
+function register_session()
+{
+    if (!session_id()) {
+        session_start();
+    }
+}
+register_session();
+
 $puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
 include('inc/fun/core.php');

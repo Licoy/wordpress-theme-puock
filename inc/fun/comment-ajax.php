@@ -32,7 +32,6 @@ function pk_comment_ajax()
         if (empty($token)) {
             pk_comment_err('无效验证码');
         }
-
         $session_comment_captcha = $_SESSION['comment_captcha'];
         if (!$session_comment_captcha || $session_comment_captcha == '' || trim($token) != $session_comment_captcha) {
             pk_comment_err('无效验证码');
