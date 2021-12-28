@@ -58,7 +58,6 @@ if (pk_is_checked('html_page_permalink')) {
 add_filter('user_trailingslashit', 'add_init_trailingslashit', 10, 2);
 
 
-
 // 顶部添加自定义菜单
 function pk_toolbar_link($bar)
 {

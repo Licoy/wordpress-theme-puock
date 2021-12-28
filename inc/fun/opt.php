@@ -316,3 +316,8 @@ function pk_comment_captcha()
 
 add_action('wp_ajax_nopriv_puock_comment_captcha', 'pk_comment_captcha');
 add_action('wp_ajax_puock_comment_captcha', 'pk_comment_captcha');
+
+function pk_get_favicon_url($url)
+{
+    return get_template_directory_uri() . '/inc/favicon.php?url=' . $url;
+}
