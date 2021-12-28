@@ -6,7 +6,7 @@ if (pk_is_checked('index_carousel')):
         'ignore_sticky_posts' => true, 'posts_per_page' => pk_get_option('index_carousel_mn', 3)));
     if ($b_posts && count($b_posts) > 0):
         ?>
-        <div id="banners" class="carousel slide" data-ride="carousel">
+        <div id="banners" class="carousel slide mb15" data-ride="carousel">
             <ol class="carousel-indicators">
                 <?php for ($i = 0; $i < count($b_posts); $i++): ?>
                     <li data-target="#banners" data-slide-to="<?php echo $i ?>"

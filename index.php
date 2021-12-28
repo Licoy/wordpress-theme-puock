@@ -9,7 +9,6 @@
                 <?php if(isset($paged) && $paged<=1): ?>
                     <div class="<?php pk_open_box_animated('animated fadeInLeft') ?>">
                         <?php get_template_part('templates/module','banners') ?>
-                        <div class="mb15"></div>
                     </div>
                 <?php endif; ?>
                 <div class="<?php pk_open_box_animated('animated fadeInLeft') ?>
