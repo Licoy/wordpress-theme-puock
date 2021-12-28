@@ -1,7 +1,7 @@
 <?php
 
-
-define('PUOCK_CUR_VER', (float)wp_get_theme()->get('Version'));
+define('PUOCK_CUR_VER_STR', wp_get_theme()->get('Version'));
+define('PUOCK_CUR_VER', (float)PUOCK_CUR_VER_STR);
 define('PUOCK', 'puock');
 define('PUOCK_OPT', 'puock_options');
 
@@ -826,7 +826,7 @@ function pk_get_static_url()
     $type = pk_get_option('static_load_origin', 'self');
     switch ($type) {
         case "jsdelivr":
-            $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER;
+            $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
             break;
         default:
             $url_pre = get_template_directory_uri();
