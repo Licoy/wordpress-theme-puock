@@ -17,10 +17,12 @@
                                             class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views();
                                         _e('次阅读', PUOCK) ?></span></div>
                             <?php endif; ?>
+                            <?php if(!pk_post_comment_is_closed()): ?>
                             <a href="#comments">
                                 <div class="option puock-bg ta3 t-sm float-left mr-1"><i
                                             class="czs-comment-l mr-1"></i><?php comments_number() ?></div>
                             </a>
+                            <?php endif; ?>
                             <?php if (is_user_logged_in() && current_user_can('edit_post', $post->ID)): ?>
                                 <a target="_blank" href="<?php echo get_edit_post_link() ?>">
                                     <div class="option puock-bg ta3 t-sm float-left mr-1"><i

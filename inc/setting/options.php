@@ -144,6 +144,15 @@ function optionsframework_options()
         'type' => 'checkbox'
     );
 
+
+    $options[] = array(
+        'name' => '关闭全站评论功能',
+        'desc' => '开启',
+        'id' => 'close_post_comment',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
     $options[] = array(
         'name' => '隐藏底部"感谢使用WordPress进行创作"和左上角标识',
         'desc' => '隐藏',
@@ -192,6 +201,7 @@ function optionsframework_options()
         'std' => '0',
         'type' => 'checkbox'
     );
+
 
     $options[] = array(
         'name' => '启用后台登录保护',

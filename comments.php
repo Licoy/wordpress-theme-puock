@@ -1,4 +1,4 @@
-<?php if (get_comments_number() == 0 && !comments_open()):echo ''; else: ?>
+<?php if (get_comments_number() == 0 && !comments_open() || pk_post_comment_is_closed()):echo ''; else: ?>
     <?php get_template_part('ad/comment', 'top') ?>
     <div class="p-block" id="comments">
         <div>

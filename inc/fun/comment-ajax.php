@@ -24,6 +24,10 @@ function pk_comment_ajax()
         pk_comment_err('无效的请求方式');
     }
 
+    if (pk_post_comment_is_closed()) {
+        pk_comment_err('评论功能已关闭');
+    }
+
     //是否需要进行验证
     if (pk_is_checked('vd_comment')) {
 
