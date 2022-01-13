@@ -7,6 +7,7 @@ function register_session()
         session_start();
     }
 }
+
 register_session();
 
 $puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
@@ -408,11 +409,12 @@ function pk_get_post_views()
 }
 
 //字数统计
-function count_words($text = '')
+function count_words($text = null)
 {
     global $post;
-    $text == '' ? $text = $post->post_content : null;
-    $text = $post->post_content;
+    if (empty($text)) {
+        $text = $post->post_content;
+    }
     return mb_strlen(preg_replace('/\s/', '', html_entity_decode(strip_tags($text))), 'UTF-8');
 }
 

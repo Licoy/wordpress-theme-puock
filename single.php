@@ -17,11 +17,11 @@
                                             class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views();
                                         _e('次阅读', PUOCK) ?></span></div>
                             <?php endif; ?>
-                            <?php if(!pk_post_comment_is_closed()): ?>
-                            <a href="#comments">
-                                <div class="option puock-bg ta3 t-sm float-left mr-1"><i
-                                            class="czs-comment-l mr-1"></i><?php comments_number() ?></div>
-                            </a>
+                            <?php if (!pk_post_comment_is_closed()): ?>
+                                <a href="#comments">
+                                    <div class="option puock-bg ta3 t-sm float-left mr-1"><i
+                                                class="czs-comment-l mr-1"></i><?php comments_number() ?></div>
+                                </a>
                             <?php endif; ?>
                             <?php if (is_user_logged_in() && current_user_can('edit_post', $post->ID)): ?>
                                 <a target="_blank" href="<?php echo get_edit_post_link() ?>">
@@ -97,11 +97,11 @@
                                            echo get_author_posts_url($authordata->ID,
                                                $authordata->user_nicename);
                                        } ?>"><?php the_author() ?></a><?php the_date('Y-m-d') ?><?php
-                                    _e('发表，', PUOCK) ?><?php _e('共计', PUOCK) ?><?php echo count_words('') ?><?php _e('字。', PUOCK) ?>
+                                    _e('发表，', PUOCK) ?><?php _e('共计', PUOCK) ?><?php echo count_words() ?><?php _e('字。', PUOCK) ?>
                                 </div>
                                 <div class="mt-2">
-                                    <span class="font-weight-bold c-sub"><?php _e('转载提示：', PUOCK) ?></span><span
-                                            class="c-sub"><?php _e('除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。', PUOCK) ?></span>
+                                    <span class="font-weight-bold c-sub"><?php _e('转载说明：', PUOCK) ?></span><span
+                                            class="c-sub"><?php echo pk_get_option('post_reprint_note', pk_get_option('footer_copyright')) ?></span>
                                 </div>
                             <?php else: ?>
                                 <div>

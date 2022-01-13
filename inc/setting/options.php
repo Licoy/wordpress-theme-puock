@@ -406,6 +406,13 @@ function optionsframework_options()
         'type' => 'upload'
     );
 
+    $options[] = array(
+        'name' => '文章转载说明（若为空会自动引用全局底部版权说明内容）',
+        'id' => 'post_reprint_note',
+        'type' => 'text',
+        'std' => '除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。'
+    );
+
     // 第三方登录
     $options[] = array(
         'name' => optionsframework_icon($base, 'tencent-qq') . '第三方登录',
