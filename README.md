@@ -71,7 +71,7 @@ UPDATE `wp_options` SET `option_name` = 'puock_options' WHERE `option_name` = 'o
 ## 文档
 - 主题使用文档：[立即使用](https://www.licoy.cn/puock-doc.html)
 - 建议或BUG反馈：[立即进入](https://github.com/Licoy/wordpress-theme-puock/issues)
-- QQ交流群：[670108361](https://qm.qq.com/cgi-bin/qm/qr?k=Zysuv0HRAYFmSSP_m_-li-Fwn7yMkp1S&jump_from=webapi) （此群皆为大家提供交流使用的地方，有BUG请直接提交ISSUE）
+- QQ交流群：[点我加入](https://licoy.cn/go/puock-update.php?r=qq_qun) （此群皆为大家提供交流使用的地方，有BUG请直接提交ISSUE）
 - **若您有任何建议或BUG发现，并且您也有解决或实现的思路，欢迎直接提交PR！**
 ## 支持
 - 打赏主题以支持：[点我进入](https://licoy.cn/go/zs/)
