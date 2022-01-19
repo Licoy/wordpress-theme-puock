@@ -583,25 +583,26 @@ function pk_tag_pre_encode($content)
     preg_match_all("/<pre.*?>(.+?)<\/pre>/is", $content, $matches);
     if (isset($matches[1])) {
         foreach ($matches[1] as $match) {
-            //兼容WP Editor.md插件（如果pre标签里面含有code标签，则进行去除）
-            $rep_match = preg_replace("/<(\/?code.*?)>/si", "", $match);
-            $content = str_replace($match, pk_htmlspecialchars($rep_match), $content);
+            $m = trim($match);
+            if (!(substr($m, 0, strlen("<code")) === "<code")) {
+                $m = "<code class='language-default'>$m</code>";
+            }
+            if (substr($m, 0, strlen("<code>")) === "<code>") {
+                $m = "<code class='language-default'>" . substr($m, strlen("<code>"));
+            }
+            $content = str_replace($match, $m, $content);
         }
     }
     return $content;
 }
 
 add_filter('the_content', 'pk_tag_pre_encode');
+add_filter('comment_text', 'pk_tag_pre_encode');
 function pk_htmlspecialchars($content)
 {
     $content = str_replace("<", "&lt;", $content);
     $content = str_replace(">", "&gt;", $content);
     return $content;
-}
-
-//新标签页打开
-if (pk_is_checked('link_blank_content')) {
-    add_filter('the_content', 'pk_link_blank');
 }
 
 

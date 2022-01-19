@@ -1,3 +1,7 @@
+const puockGlobalData = {
+    loads: {}
+}
+
 class Puock {
     data = {
         tag: 'puock',
@@ -8,6 +12,7 @@ class Puock {
             is_pjax: false,
             vd_comment: false,
             main_lazy_img: false,
+            link_blank_open: false
         },
         comment: {
             loading: false,
@@ -62,7 +67,6 @@ class Puock {
                 this.generatePostMenuHTML()
             }
             this.generatePostQrcode()
-            this.initCodeHighlight()
         }
     }
 
@@ -70,19 +74,21 @@ class Puock {
         InstantClick.init('mousedown');
         InstantClick.on('change', () => {
             this.loadParams()
-            this.modeInit();
             this.pageChangeInit()
-            this.loadCommentInfo();
-            this.initCodeHighlight();
-            if (this.data.params.use_post_menu) {
-                this.generatePostMenuHTML()
-            }
         })
         this.loadCommentInfo();
     }
 
     ct(e) {
         return e.currentTarget
+    }
+
+    pageLinkBlankOpenInit() {
+        if (this.data.params.link_blank_open) {
+            $("#post-main-content").find("a").each((_, item) => {
+                $(item).attr('target', 'blank')
+            })
+        }
     }
 
     loadCommentCaptchaImage(el) {
@@ -188,8 +194,16 @@ class Puock {
     }
 
     pageChangeInit() {
+        this.modeInit();
+        this.loadCommentInfo();
+        this.katexParse();
+        this.initCodeHighlight();
+        this.pageLinkBlankOpenInit()
         this.loadCommentCaptchaImage(null);
         this.generatePostQrcode();
+        if (this.data.params.use_post_menu) {
+            this.generatePostMenuHTML()
+        }
         $('[data-toggle="tooltip"]').tooltip({placement: 'auto', trigger: 'hover'});
         $("#post-main .entry-content").viewer({
             navbar: false,
@@ -250,8 +264,10 @@ class Puock {
 
     initCodeHighlight() {
         if (window.hljs !== undefined) {
+            window.hljs.configure({ignoreUnescapedHTML:true})
             document.querySelectorAll('pre').forEach((block) => {
                 window.hljs.highlightBlock(block);
+                window.hljs.lineNumbersBlock(block);
             });
         }
     }
@@ -384,6 +400,7 @@ class Puock {
             $.post(href, {}, (data) => {
                 postCommentsEl.html($(data).find("#post-comments"));
                 loadBox.addClass('d-none');
+                this.initCodeHighlight();
                 this.gotoCommentArea()
             }).error(() => {
                 location = href;
@@ -539,10 +556,44 @@ class Puock {
             min ? postSlider.removeClass("d-lg-block") : postSlider.addClass("d-lg-block");
         })
     }
+
+    katexParse() {
+        return;
+        if (typeof katex !== 'undefined') {
+            const ks = $(document).find(".language-katex");
+            const kl = $(document).find(".language-inline");
+            console.log(ks, kl)
+            if (ks.length > 0) {
+                ks.parent("pre").attr("style", "text-align: center; background: none;");
+                ks.addClass("katex-container").removeClass("language-katex");
+                $(".katex-container").each((_, v) => {
+                    this.katexItemParse($(v))
+                });
+            }
+            if (kl.length > 0) {
+                kl.each((_, v) => {
+                    this.katexItemParse($(v))
+                });
+            }
+        }
+    }
+
+    katexItemParse(item) {
+        const katexText = item.text();
+        const el = item.get(0);
+        if (item.parent("code").length === 0) {
+            try {
+                katex.render(katexText, el)
+            } catch (err) {
+                item.html("<span class='err'>" + err)
+            }
+        }
+    }
+
 }
 
 $(() => {
-    window.Pucok = new Puock()
-    window.Pucok.onceInit()
+    window.Puock = new Puock()
+    window.Puock.onceInit()
 })
 

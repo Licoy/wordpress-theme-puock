@@ -51,7 +51,7 @@ function pk_comment_callback($comment, $args, $depth)
         <div class="content-text t-sm mt10 puock-text" <?php if (!pk_open_show_comment_avatar()) {
             echo 'style="margin-left:0"';
         } ?>>
-            <?php if (!$author_cat_comment || $is_author): comment_text();; else: ?>
+            <?php if (!$author_cat_comment || $is_author): comment_text(); else: ?>
                 <?php echo "<span><i class='czs-lock-l'></i>&nbsp;此评论仅对作者可见</span>";endif; ?>
             <?php if ($comment->comment_approved == '0') : ?>
                 <p class="c-sub mt-1"><i class="czs-warning-l mr-1"></i>您的评论正在等待审核！</p>

@@ -236,12 +236,6 @@ function pk_is_cur_site($url)
     return false;
 }
 
-//链接新标签页打开
-function pk_link_blank($content)
-{
-    return str_replace("<a", "<a target=\"_blank\" ", $content);
-}
-
 if (pk_is_checked('use_post_menu')) {
     //生成目录锚点
     function pk_post_menu_id($content)
@@ -335,4 +329,15 @@ function pk_get_favicon_url($url)
 function pk_post_comment_is_closed()
 {
     return pk_is_checked('close_post_comment', false);
+}
+
+//add_filter('clean_url', 'pk_compatible_githuber_md_katex', 10, 3);
+function pk_compatible_githuber_md_katex($good_protocol_url, $original_url, $_context)
+{
+    if (false !== strpos($original_url, '/assets/vendor/katex/katex.min.js')) {
+        remove_filter('clean_url', 'unclean_url');
+        $url_parts = parse_url($good_protocol_url);
+        return $url_parts['scheme'] . '://' . $url_parts['host'] . $url_parts['path'] . "' data-instant nil='";
+    }
+    return $good_protocol_url;
 }
