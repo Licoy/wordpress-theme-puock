@@ -1,4 +1,28 @@
 <?php
+
+function pk_shortcode_register()
+{
+    return array(
+        'music' => array('name' => '音乐播放'),
+        'reply' => array('name' => '回复可见'),
+        'login' => array('name' => '登录可见'),
+        'login_email' => array('name' => '登录并验证邮箱可见'),
+        'video' => array('name' => '视频播放', 'attr' => array(
+            'autoplay' => false, 'type' => 'auto',
+            'pic' => '', 'class' => ''
+        )),
+        'download' => array('name' => '文件下载', 'attr' => array(
+            'file' => '', 'size' => ''
+        )),
+        'password' => array('name' => '输入密码可见', 'attr' => array(
+            'pass' => '', 'desc' => '输入密码可见',
+        )),
+        'collapse' => array('name' => '折叠面板', 'attr' => array(
+            'title' => ''
+        )),
+    );
+}
+
 /*短代码*/
 $shortCodeColors = array('primary', 'danger', 'warning', 'info', 'success', 'dark');
 //提示框部分

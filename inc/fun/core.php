@@ -78,6 +78,25 @@ function pk_toolbar_link($bar)
 
 add_action('admin_bar_menu', 'pk_toolbar_link', 999);
 
+function pk_admin_scripts()
+{
+    wp_enqueue_script('puock-admin', get_stylesheet_directory_uri() . '/assets/dist/admin.min.js',
+        array(), PUOCK_CUR_VER_STR, true);
+}
+
+add_action('admin_enqueue_scripts', 'pk_admin_scripts');
+function pk_admin_print_scripts()
+{
+    $settings = json_encode(array(
+        'compatible' => [
+            'githubermd' => defined('GITHUBER_PLUGIN_NAME')
+        ]
+    ));
+    echo "<script type='text/javascript'>var puock_admin_setting = $settings</script>";
+}
+
+add_action('admin_print_footer_scripts', 'pk_admin_print_scripts', 1);
+
 //判断阅读数量是否需要增加并进行操作
 function the_views_add($post_ID, $count, $key, $ajax = false)
 {

@@ -271,20 +271,10 @@ function get_wpsmiliestrans()
 add_action('media_buttons_context', 'smilies_custom_button');
 function smilies_custom_button($context)
 {
-    $context .= '<style>.smilies-wrap{background:#fff;border: 1px solid #ccc;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.24);padding: 10px;position: absolute;top: 60px;
-    width: 380px;display:none}.smilies-wrap img{height:24px;width:24px;cursor:pointer;margin-bottom:5px}
-     .is-active.smilies-wrap{display:block}</style>
-    <a id="insert-media-button" style="position:relative" class="button insert-smilies add_smilies" 
-    title="' . __('添加表情', PUOCK) . '" data-editor="content" href="javascript:;">  
-    <span>' . __('添加表情', PUOCK) . '</span>  
-    </a><div class="smilies-wrap">' . get_wpsmiliestrans() . '</div>
-    <script>jQuery(document).ready(function(){jQuery(document).on("click", ".insert-smilies",function()
-     { if(jQuery(".smilies-wrap").hasClass("is-active")){
-         jQuery(".smilies-wrap").removeClass("is-active");}else{jQuery(".smilies-wrap").addClass("is-active");}}
-         );jQuery(document).on("click", ".add-smily",function() { send_to_editor(" " 
-         + jQuery(this).data("smilies") + " ");jQuery(".smilies-wrap").removeClass("is-active");return false;})
-         ;});</script>';
+    $context .= '<a id="insert-smiley-button" style="position:relative" class="button" 
+        title="' . __('添加表情', PUOCK) . '" data-editor="content" href="javascript:;">  
+        <span>' . __('添加表情', PUOCK) . '</span> 
+        </a><div id="insert-smiley-wrap" class="pk-media-wrap" style="display: none">' . get_wpsmiliestrans() . '</div>';
     return $context;
 }
 

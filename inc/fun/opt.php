@@ -153,15 +153,25 @@ function pk_comment_add_at($text, $comment = '')
     return $text;
 }
 
-//添加短代码支持
-add_action('admin_print_scripts', 'sc_quicktags');
-function sc_quicktags()
+add_action('media_buttons_context', 'pk_shortcode_box_init', 99);
+function pk_shortcode_box_init($context)
 {
-    wp_enqueue_script('sc_quicktags', get_stylesheet_directory_uri() . '/assets/js/quicktags.js',
-        array('quicktags'));
+    $shortcodes = pk_shortcode_register();
+    $output = "";
+    foreach ($shortcodes as $key => $item) {
+        $attr = '';
+        if (isset($item['attr']) && count($item) > 0) {
+            $attr = 'data-attr=\'' . json_encode($item['attr']) . '\'';
+        }
+        $output .= "<a href='javascript:void(0)' class='add-shortcode button button-small' data-key='{$key}' {$attr}>{$item['name']}</a>";
+    }
+    $context .= '<a id="insert-shortcode-button" style="position:relative" class="button" 
+        title="' . __('添加短代码', PUOCK) . '" data-editor="content" href="javascript:;">  
+        <span>' . __('添加短代码', PUOCK) . '</span>
+        </a><div id="insert-shortcode-wrap" class="pk-media-wrap" style="display: none">' . $output . '</div>';
+    return $context;
 }
 
-;
 //压缩HTML
 function wp_compress_html()
 {
@@ -324,5 +334,5 @@ function pk_get_favicon_url($url)
 
 function pk_post_comment_is_closed()
 {
-    return pk_is_checked('close_post_comment',false);
+    return pk_is_checked('close_post_comment', false);
 }
