@@ -97,6 +97,12 @@ function pk_admin_print_scripts()
 
 add_action('admin_print_footer_scripts', 'pk_admin_print_scripts', 1);
 
+
+function pk_is_pjax()
+{
+    return pk_is_checked('page_ajax_load', false);
+}
+
 //判断阅读数量是否需要增加并进行操作
 function the_views_add($post_ID, $count, $key, $ajax = false)
 {

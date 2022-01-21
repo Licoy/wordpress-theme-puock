@@ -14,8 +14,9 @@
                         <div class="float-left">
                             <?php if (!pk_is_checked('hide_post_views')): ?>
                                 <div class="option puock-bg ta3 t-sm float-left mr-1"><i
-                                            class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views();
-                                        _e('次阅读', PUOCK) ?></span></div>
+                                            class="czs-eye-l mr-1"></i>
+                                    <span id="post-views"><?php pk_get_post_views(); ?></span><span><?php _e('次阅读', PUOCK) ?></span>
+                                </div>
                             <?php endif; ?>
                             <?php if (!pk_post_comment_is_closed()): ?>
                                 <a href="#comments">
