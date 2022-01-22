@@ -30,6 +30,8 @@
     <a href="https://licoy.cn/go/zs/">
         <img src="https://img.shields.io/badge/捐赠-支付宝-00a2ef.svg?logo=AliPay" alt="支付宝捐赠">
       </a>
+    <br><br>
+    <img src='https://repobeats.axiom.co/api/embed/5f966833712409c00d4269bf2800b2d4762e09ea.svg'></img>
 </div>
 
 ## 安装
