@@ -122,10 +122,6 @@ blockquote {
   padding-right: 0;
 }
 
-body, .tooltip {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Emoji Symbols Font', 'Segoe UI Symbol', Arial, sans-serif;;
-}
-
 p, div {
   white-space: normal;
   word-break: break-all;
@@ -692,6 +688,12 @@ a:hover {
 }
 
 #header, #header-box {
+
+  &#header {
+    background-color: rgb(255 255 255 / 15%);
+    backdrop-filter: blur(10px);
+  }
+
   height: 65px;
 
   nav a {
@@ -1852,6 +1854,9 @@ a:hover {
   #index-company #prod-items .prod-item .icon, #post-menus {
     background-color: @colorModeDarkBoxBg;
     box-shadow: none;
+    &#header {
+      background-color: rgb(34 34 34 / 15%);
+    }
   }
 
   .puock-text, .puock-link, .widget h3, .widget.widget_custom_html, #page-links .link-item a,
