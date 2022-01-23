@@ -18,6 +18,10 @@
     <a href="https://github.com/Licoy">
         <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg?logo=github" alt="Author">
       </a>
+    <br><br>
+    <img src='https://repobeats.axiom.co/api/embed/5f966833712409c00d4269bf2800b2d4762e09ea.svg'></img>
+    <br><br>
+    <a href="https://www.producthunt.com/posts/puock-wordpress-theme?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-puock-wordpress-theme" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=327798&theme=light" alt="Puock WordPress Theme - A high-value adaptive theme based on WordPress | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 </div>
 
 ## Install
