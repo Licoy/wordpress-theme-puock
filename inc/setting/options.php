@@ -997,7 +997,15 @@ function optionsframework_options()
         'options' => [
             'self' => '本地',
             'jsdelivr' => 'JSDelivr',
+            'custom' => '自定义（在下方一栏中填入）',
         ]
+    );
+    $options[] = array(
+        'name' => '自定义静态资源加载URI',
+        'id' => 'custom_static_load_origin',
+        'std' => '',
+        'desc' => '需填写完整地址，如https://example.com/puock，路径需要指向到可以访问主题根目录为准。',
+        'type' => 'text'
     );
     $options[] = array(
         'name' => '主题在线更新源',

@@ -854,6 +854,9 @@ function pk_get_static_url()
         case "jsdelivr":
             $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
             break;
+        case 'custom':
+            $url_pre = pk_get_option('custom_static_load_origin','');
+            break;
         default:
             $url_pre = get_template_directory_uri();
     }
