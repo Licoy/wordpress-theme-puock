@@ -407,6 +407,29 @@ function optionsframework_options()
     );
 
     $options[] = array(
+        'name' => '文章正文底部二维码',
+        'desc' => '开启',
+        'id' => 'post_foot_qrcode_open',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
+        'name' => '文章正文底部二维码标题',
+        'id' => 'post_foot_qrcode_title',
+        'std' => '',
+        'type' => 'text'
+    );
+
+    $options[] = array(
+        'name' => '文章正文底部二维码',
+        'desc' => '请选择宽高比例为1:1的图片',
+        'id' => 'post_foot_qrcode_img',
+        'std' => '',
+        'type' => 'upload'
+    );
+
+    $options[] = array(
         'name' => '文章转载说明（若为空会自动引用全局底部版权说明内容）',
         'id' => 'post_reprint_note',
         'type' => 'text',

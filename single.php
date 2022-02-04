@@ -39,6 +39,13 @@
                     <div class="entry-content mt20">
                         <div class="content-main puock-text" id="post-main-content">
                             <?php the_content(); ?>
+                            <?php if (pk_is_checked('post_foot_qrcode_open')): ?>
+                                <div class="post-foot-qrcode">
+                                    <div class="title"><?php echo pk_get_option('post_foot_qrcode_title', '无说明') ?></div>
+                                    <img src="<?php echo pk_get_option('post_foot_qrcode_img', '') ?>"
+                                         alt="post-qrcode">
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <?php
                         $link_pages = wp_link_pages(array(
