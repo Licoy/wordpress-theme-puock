@@ -67,6 +67,14 @@ function pk_toolbar_link($bar)
         'href' => admin_url() . 'themes.php?page=options-framework'
     ));
     $bar->add_node(array(
+        'id' => 'theme-docs',
+        'title' => '📚 主题使用文档',
+        'href' => 'https://licoy.cn/puock.html',
+        'meta' => array(
+            'target' => 'blank'
+        )
+    ));
+    $bar->add_node(array(
         'id' => 'theme-qq-qun',
         'title' => '🐧 主题交流QQ群',
         'href' => 'https://licoy.cn/go/puock-update.php?r=qq_qun',
