@@ -69,7 +69,7 @@ function pk_toolbar_link($bar)
     $bar->add_node(array(
         'id' => 'theme-docs',
         'title' => '📚 主题使用文档',
-        'href' => 'https://licoy.cn/puock.html',
+        'href' => 'https://licoy.cn/puock-doc.html',
         'meta' => array(
             'target' => 'blank'
         )
