@@ -40,7 +40,7 @@ function optionsframework_options()
 
     // 全局设置
     $options[] = array(
-        'name' => optionsframework_icon($base, 'setting') . '全局设置',
+        'name' => optionsframework_icon($base, 'setting') . '全局',
         'type' => 'heading'
     );
     $options[] = array(
@@ -229,7 +229,7 @@ function optionsframework_options()
 
     // 基本设置
     $options[] = array(
-        'name' => optionsframework_icon($base, 'setting-config') . '基本设置',
+        'name' => optionsframework_icon($base, 'setting-config') . '基本',
         'type' => 'heading'
     );
 
@@ -466,7 +466,7 @@ function optionsframework_options()
 
     // CMS布局设置
     $options[] = array(
-        'name' => optionsframework_icon($base, 'page') . 'CMS布局设置',
+        'name' => optionsframework_icon($base, 'page') . 'CMS布局',
         'type' => 'heading'
     );
 
@@ -520,7 +520,7 @@ function optionsframework_options()
 
     // 企业布局设置
     $options[] = array(
-        'name' => optionsframework_icon($base, 'city') . '企业布局设置',
+        'name' => optionsframework_icon($base, 'city') . '企业布局',
         'type' => 'heading'
     );
 
@@ -861,7 +861,7 @@ function optionsframework_options()
 
     // SEO设置
     $options[] = array(
-        'name' => optionsframework_icon($base, 'seo') . 'SEO设置',
+        'name' => optionsframework_icon($base, 'seo') . 'SEO',
         'type' => 'heading'
     );
 
@@ -938,13 +938,27 @@ function optionsframework_options()
         'type' => 'text'
     );
 
+    // 脚本或样式
+    $options[] = array(
+        'name' => optionsframework_icon($base, 'style') . '脚本或样式',
+        'type' => 'heading'
+    );
+
     $options[] = array(
         'name' => '头部流量统计代码',
         'desc' => '用于在页头添加统计代码（PS：若开启无刷新加载，请在标签上加上<code>data-instant</code>属性）',
         'id' => 'tj_code_header',
         'std' => '',
-        'type' => 'editor',
-        'settings' => $editorSettings
+        'type' => 'textarea'
+    );
+
+    $options[] = array(
+        'name' => '头部自定义全局CSS样式',
+        'desc' => '用于在页头添加统自定义CSS样式',
+        'id' => 'css_code_header',
+        'placeholder'=>'例如：#header{background-color:red !important}',
+        'std' => '',
+        'type' => 'textarea'
     );
 
     $options[] = array(
@@ -952,8 +966,7 @@ function optionsframework_options()
         'desc' => '用于在页脚添加统计代码（PS：若开启无刷新加载，请在标签上加上<code>data-instant</code>属性）',
         'id' => 'tj_code_footer',
         'std' => '',
-        'type' => 'editor',
-        'settings' => $editorSettings
+        'type' => 'textarea'
     );
 
     $options[] = array(
@@ -1057,5 +1070,5 @@ function optionsframework_options()
 
 function optionsframework_icon($base, $icon, $nbsp = true)
 {
-    return "<img class='pk-setting-icon' src='${base}/${icon}.svg' alt='${icon}' />";
+    return "<img class='pk-setting-icon' src='${base}/${icon}.svg' alt='${icon}' />&nbsp;";
 }
