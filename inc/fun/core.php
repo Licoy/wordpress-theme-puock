@@ -863,7 +863,7 @@ function pk_get_static_url()
             $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
             break;
         case 'custom':
-            $url_pre = pk_get_option('custom_static_load_origin','');
+            $url_pre = pk_get_option('custom_static_load_origin', '');
             break;
         default:
             $url_pre = get_template_directory_uri();
@@ -875,4 +875,11 @@ function pk_get_static_url()
 function pk_open_show_comment_avatar()
 {
     return get_option('show_avatars') == "1";
+}
+
+//关闭区块小工具
+function pk_off_widgets_block()
+{
+    add_filter('gutenberg_use_widgets_block_editor', '__return_false');
+    add_filter('use_widgets_block_editor', '__return_false');
 }

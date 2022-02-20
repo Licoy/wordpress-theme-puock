@@ -43,6 +43,11 @@ if (pk_is_checked('stop5x_editor')) {
     remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
 }
 
+//区块小工具
+if(!pk_is_checked('use_widgets_block')){
+    pk_off_widgets_block();
+}
+
 //获取评论等级
 function pk_the_author_class_out($count)
 {

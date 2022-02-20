@@ -128,6 +128,15 @@ function optionsframework_options()
         'type' => 'checkbox'
     );
 
+
+    $options[] = array(
+        'name' => '使用区块小工具',
+        'desc' => '使用wordpress 5.8+的区块小工具（不兼容）',
+        'id' => 'use_widgets_block',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
     $options[] = array(
         'name' => '允许上传webp',
         'desc' => '允许（解决出现<code>web 服务器无法处理该图片，请在上传前将其转换为JPEG或PNG 格式。</code>）',
