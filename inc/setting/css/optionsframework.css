@@ -152,6 +152,9 @@
 #optionsframework .mini .explain {
 	max-width:74%;
 }
+#optionsframework .section-textarea .explain{
+	max-width: 90%;
+}
 
 /* Editor */
 
