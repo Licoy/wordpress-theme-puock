@@ -737,14 +737,17 @@ class puockTagHitokoto extends puockWidgetBase {
         ?>
         <div class="widget-puock-hitokoto">
             <div id="<?php echo $id ?>">
-                <div class="t puock-text">加载中...</div>
-                <div class="fb">-「<span class="f"></span>」</div>
+                <div class="t puock-text">
+                    <div class="spinner-grow text-primary" role="status"></div>
+                </div>
+                <div class="fb d-none">-「<span class="f"></span>」</div>
             </div>
             <script type="application/javascript">
             $.get("https://v1.hitokoto.cn/", function (res){
                 const el = $("#<?php echo $id ?>");
                 el.find(".t").text(res.hitokoto);
                 el.find('.f').text(res.from)
+                el.find('.fb').removeClass("d-none")
             },'json');
             </script>
         </div>
