@@ -153,8 +153,8 @@ function pk_comment_add_at($text, $comment = '')
     return $text;
 }
 
-add_action('media_buttons_context', 'pk_shortcode_box_init', 99);
-function pk_shortcode_box_init($context)
+add_action('media_buttons', 'pk_shortcode_box_init', 99);
+function pk_shortcode_box_init()
 {
     $shortcodes = pk_shortcode_register();
     $output = "";
@@ -165,11 +165,10 @@ function pk_shortcode_box_init($context)
         }
         $output .= "<a href='javascript:void(0)' class='add-shortcode button button-small' data-key='{$key}' {$attr}>{$item['name']}</a>";
     }
-    $context .= '<a id="insert-shortcode-button" style="position:relative" class="button" 
+    echo '<a id="insert-shortcode-button" style="position:relative" class="button" 
         title="' . __('添加短代码', PUOCK) . '" data-editor="content" href="javascript:;">  
         <span>' . __('添加短代码', PUOCK) . '</span>
         </a><div id="insert-shortcode-wrap" class="pk-media-wrap" style="display: none">' . $output . '</div>';
-    return $context;
 }
 
 //压缩HTML

@@ -273,14 +273,13 @@ function get_wpsmiliestrans()
     return $output;
 }
 
-add_action('media_buttons_context', 'smilies_custom_button');
+add_action('media_buttons', 'smilies_custom_button');
 function smilies_custom_button($context)
 {
-    $context .= '<a id="insert-smiley-button" style="position:relative" class="button" 
+    echo '<a id="insert-smiley-button" style="position:relative" class="button" 
         title="' . __('添加表情', PUOCK) . '" data-editor="content" href="javascript:;">  
         <span>' . __('添加表情', PUOCK) . '</span> 
         </a><div id="insert-smiley-wrap" class="pk-media-wrap" style="display: none">' . get_wpsmiliestrans() . '</div>';
-    return $context;
 }
 
 function get_post_images($post_id = null)
