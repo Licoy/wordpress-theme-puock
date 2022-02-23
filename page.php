@@ -14,7 +14,7 @@ get_header();
                         <div class="options clearfix mt20">
                             <div class="float-left">
                                 <?php if (!pk_is_checked('hide_post_views')): ?>
-                                <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views(); _e('次阅读', PUOCK) ?></span></div>
+                                <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views();  ?></span><span><?php _e('次阅读', PUOCK) ?></span></div>
                                 <?php endif; ?>
                                 <a href="#comments"><div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-comment-l mr-1"></i><?php comments_number() ?></div></a>
                             </div>
