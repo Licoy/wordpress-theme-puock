@@ -282,7 +282,7 @@ function pk_password_read($attr, $content = null)
             ' . $error . '<form action="' . get_permalink() . '" method="post">
             <div class="row">
             <div class="col-8 col-md-10">
-            <input type="text" placeholder="请输入密码" required class="form-control form-control-sm" name="pass">
+            <input type="password" placeholder="请输入密码" required class="form-control form-control-sm" name="pass">
             </div>
             <div class="col-4 col-md-2 pl-0">
             <button class="btn btn-sm btn-primary w-100">立即查看</button>
