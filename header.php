@@ -35,7 +35,7 @@
         </div>
     <?php endif; ?>
     <div id="header-box" class="<?php pk_open_box_animated('animated fadeInDown') ?>"></div>
-    <header id="header" class="<?php pk_open_box_animated('animated fadeInDown') ?>">
+    <header id="header" class="<?php pk_open_box_animated('animated fadeInDown') ?> <?php if(pk_is_checked('nav_blur')){echo 'blur';} ?>">
         <div class="navbar navbar-dark shadow-sm">
             <div class="container">
                 <a href="<?php echo home_url() ?>" id="logo" class="navbar-brand">

@@ -689,9 +689,10 @@ a:hover {
 
 #header, #header-box {
 
-  &#header {
+  &#header.blur {
     background-color: rgb(255 255 255 / 15%);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   height: 65px;
@@ -1874,7 +1875,7 @@ a:hover {
     background-color: @colorModeDarkBoxBg;
     box-shadow: none;
 
-    &#header {
+    &#header.blur {
       background-color: rgb(34 34 34 / 15%);
     }
   }

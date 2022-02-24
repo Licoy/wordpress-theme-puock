@@ -89,6 +89,14 @@ function optionsframework_options()
     );
 
     $options[] = array(
+        'name' => '导航栏毛玻璃效果',
+        'desc' => '开启',
+        'id' => 'nav_blur',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
         'name' => '页面使用.html后缀',
         'desc' => '允许（更改后需要重新保存<strong>固定链接</strong>）',
         'id' => 'html_page_permalink',
