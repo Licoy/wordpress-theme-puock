@@ -1,8 +1,4 @@
-<?php
-
-get_header();
-
-?>
+<?php get_header(); ?>
 
 <div id="page" class="container mt20">
     <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
