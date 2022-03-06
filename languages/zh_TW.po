@@ -1,0 +1,262 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Puock\n"
+"POT-Creation-Date: 2020-09-11 14:24+0800\n"
+"PO-Revision-Date: 2022-03-05 22:36+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-1: inc/setting/includes\n"
+
+# 您訪問的資源不存在
+#: 404.php:12
+msgid "你访问的资源不存在！"
+msgstr "你訪問的資源不存在！"
+
+#: 404.php:13 error.php:23
+msgid "秒后即将跳转至首页"
+msgstr "秒後即將跳轉至首頁"
+
+#: 404.php:15 error.php:25
+msgid "返回首页"
+msgstr "返回首頁"
+
+#: comments.php:5
+msgid "评论"
+msgstr "評論"
+
+#: comments.php:12
+msgid "您必须要登录之后才可以进行评论"
+msgstr "您必須要登入之後才可以進行評論"
+
+#: comments.php:17 comments.php:49
+msgid "QQ登录"
+msgstr "QQ登入"
+
+#: comments.php:26
+msgid "世界这么大发表一下你的看法~"
+msgstr "是就這麼大發表一下你的看法~"
+
+#: comments.php:32
+msgid "昵称（必填）"
+msgstr "暱稱 (必填)"
+
+#: comments.php:33
+msgid "邮箱（必填）"
+msgstr "電子郵件 (必填)"
+
+#: comments.php:34
+msgid "网站"
+msgstr "網站 (必填)"
+
+#: comments.php:44
+msgid "登出"
+msgstr "登出"
+
+#: comments.php:54
+msgid "取消"
+msgstr "取消"
+
+#: comments.php:56
+msgid "发布评论"
+msgstr "發布評論"
+
+#: comments.php:66
+msgid "载入中..."
+msgstr "載入中..."
+
+#: error.php:12
+msgid "无错误信息"
+msgstr "無錯誤訊息"
+
+#: footer.php:20
+msgid "关于我们"
+msgstr "關於我們"
+
+#: footer.php:24
+msgid "友情链接"
+msgstr "友情連結"
+
+#: footer.php:41
+msgid "更多链接"
+msgstr "更多連結"
+
+#: functions.php:67
+msgid "评论达人"
+msgstr "評論達人"
+
+#: functions.php:77
+msgid "博主"
+msgstr "樓主"
+
+#: functions.php:104
+msgid "无分类"
+msgstr "無分類"
+
+#: functions.php:250 functions.php:251
+msgid "添加表情"
+msgstr "新增表情"
+
+#: functions.php:332
+msgid "首页"
+msgstr "首頁"
+
+#: functions.php:347
+msgid "正文"
+msgstr "正文"
+
+#: functions.php:349
+msgid "文章列表"
+msgstr "文章清單"
+
+#: functions.php:353
+msgid "搜索结果"
+msgstr "搜尋結果"
+
+#: functions.php:355
+msgid "的文章列表"
+msgstr "的文章清單"
+
+#: functions.php:361
+msgid "标签"
+msgstr "標籤"
+
+#: functions.php:364
+msgid "你访问的资源不存在"
+msgstr "你訪問的資源不存在"
+
+#: header.php:57
+msgid "请输入搜索关键字"
+msgstr "請輸入搜尋關鍵字"
+
+#: header.php:60
+msgid "开始搜索"
+msgstr "開始搜尋"
+
+#: inc/fun/sidebar.php:5
+msgid "正文内容侧边栏"
+msgstr "正文內容側邊欄"
+
+#: inc/fun/sidebar.php:7
+msgid "文章正文内容侧边栏"
+msgstr "文章正文內容側邊欄"
+
+#: inc/fun/sidebar.php:15 inc/fun/sidebar.php:17
+msgid "首页侧边栏"
+msgstr "首頁側邊欄"
+
+#: inc/fun/sidebar.php:25 inc/fun/sidebar.php:27
+msgid "搜索页侧边栏"
+msgstr "搜尋頁側邊欄"
+
+#: inc/fun/sidebar.php:35 inc/fun/sidebar.php:37
+msgid "分类/标签页侧边栏"
+msgstr "分類/標籤頁側邊欄"
+
+#: inc/fun/sidebar.php:45 inc/fun/sidebar.php:47
+msgid "单页面侧边栏"
+msgstr "單頁面側邊欄"
+
+#: inc/fun/sidebar.php:55
+msgid "其他页面侧边栏"
+msgstr "其他頁面側邊欄"
+
+#: inc/fun/sidebar.php:57
+msgid "包括作者/404等其他页面"
+msgstr "包括作者/404等其他頁面"
+
+#: inc/fun/sidebar.php:65
+msgid "通用侧边栏"
+msgstr "通用側邊欄"
+
+#: inc/fun/sidebar.php:67
+msgid "若指定页面未配置任何栏目，则显示此栏目下的数据"
+msgstr "若指定頁面未設置任何欄目，則顯示此欄目下的資料"
+
+#: page.php:18 single.php:14
+msgid "次阅读"
+msgstr "次閱讀"
+
+#: single.php:45
+msgid "发表于："
+msgstr "發表於："
+
+#: single.php:56
+msgid "复制链接"
+msgstr "複製連結"
+
+#: single.php:71 single.php:79
+msgid "版权声明："
+msgstr "版權聲明："
+
+#: single.php:71
+msgid "本站原创文章，由"
+msgstr "本站原創文章，由"
+
+#: single.php:74
+msgid "发表，"
+msgstr "發表，"
+
+#: single.php:74
+msgid "共计"
+msgstr "共計"
+
+#: single.php:74 single.php:81
+msgid "字。"
+msgstr "字。"
+
+#: single.php:76 single.php:83
+msgid "转载提示："
+msgstr "轉載提示："
+
+#: single.php:76
+msgid "除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。"
+msgstr "除特殊說明外本站文章皆由CC-4.0協議發布，轉載請註明出處。"
+
+#: single.php:79
+msgid "本文于"
+msgstr "本文於"
+
+#: single.php:80
+msgid "转载自"
+msgstr "轉載自"
+
+#: single.php:81
+msgid "，共计"
+msgstr "，共計"
+
+#: single.php:83
+msgid "此文章非本站原创文章，若需转载请联系原作者获得转载授权。"
+msgstr "此文章非本站原創文章，若需轉載請聯繫原作者獲得轉載授權。"
+
+#: single.php:106
+msgid "分享至"
+msgstr "分享至"
+
+#. Theme Name of the plugin/theme
+msgid "Puock"
+msgstr "Puock"
+
+#. Theme URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://www.licoy.cn"
+msgstr "https://www.licoy.cn"
+
+#. Description of the plugin/theme
+msgid "支持暗黑与白天模式的自适应多风格主题！"
+msgstr "支持暗黑與白天模式的自適應多風格主席！"
+
+#. Author of the plugin/theme
+msgid "Licoy"
+msgstr "Licoy"
