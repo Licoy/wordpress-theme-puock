@@ -2,12 +2,13 @@
 <?php $blogname = pk_get_option('web_title');
 $pkSeoPageInfo = ''; ?>
 <?php global $other_page_title;
+if(get_query_var('paged')){
+    $pkSeoPageInfo = $titleConn . '第' . get_query_var('paged') . '页';
+}
 if (isset($other_page_title)) { ?>
     <title><?php echo $other_page_title . $pkSeoPageInfo . $titleConn . $blogname; ?></title>
 <?php } else if (is_home()) { ?>
     <title><?php echo $blogname . $pkSeoPageInfo . $titleConn . pk_get_option('web_title_2'); ?></title>
-<?php } else if (get_query_var('paged')) {
-    $pkSeoPageInfo = $titleConn . '第' . get_query_var('paged') . '页'; ?>
 <?php } else if (is_search()) { ?><title>搜索"<?php echo $_REQUEST['s'] ?>
     "的结果<?php echo $titleConn . $pkSeoPageInfo . $blogname ?></title>
 <?php } else if (is_single() || is_page()) { ?>
