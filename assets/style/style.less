@@ -291,16 +291,17 @@ body.pre-mac pre {
   z-index: 999;
 
   #post-menu-state {
+    @w:18px;
     position: absolute;
-    left: -14px;
+    left: -@w;
     background-color: @colorPrimary;
-    width: 14px;
+    width: @w;
     height: 80px;
     top: (@h / 2 - 40);
     @border-radius: 5px;
     border-top-left-radius: @border-radius;
     border-bottom-left-radius: @border-radius;
-    box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
+    //box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
     text-align: center;
     cursor: pointer;
 
@@ -315,7 +316,7 @@ body.pre-mac pre {
   #post-menu-content {
     width: 260px;
     height: @h;
-    box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
+    //box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
     display: none;
     padding: 12px;
     overflow-y: scroll;
