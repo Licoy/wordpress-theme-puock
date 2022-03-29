@@ -16,6 +16,25 @@
 @colorModeDarkLink: @colorDark;
 @inputBg: #2f3840;
 @puockBg: #f8f8f9;
+
+// 浏览器样式
+@browserScrollbarWh:8px;
+::-webkit-scrollbar {
+  width: @browserScrollbarWh;
+  height: @browserScrollbarWh;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px @colorSecondary;
+  border-radius: @browserScrollbarWh;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: @browserScrollbarWh;
+  background: #cacaca;
+  -webkit-box-shadow: inset 0 0 6px @colorSecondary;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: @colorPrimary;
+}
 //引用
 blockquote {
   padding: .8em;
@@ -130,6 +149,7 @@ p, div {
 pre {
   padding: 10px;
   border-radius: 5px;
+  font-size: inherit;
 }
 
 body.pre-mac pre {
