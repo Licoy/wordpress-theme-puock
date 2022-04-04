@@ -105,6 +105,14 @@ function optionsframework_options()
     );
 
     $options[] = array(
+        'name' => '开启中文格式化（文案排版）',
+        'desc' => '允许（参考：https://github.com/sparanoid/chinese-copywriting-guidelines）',
+        'id' => 'chinese_format',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
         'name' => '高亮模式下LOGO',
         'desc' => '比例：500*125，请尽量选择png无底色图片',
         'id' => 'light_logo',

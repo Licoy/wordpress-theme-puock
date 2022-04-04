@@ -1,5 +1,7 @@
 <?php
 
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
 define('PUOCK_CUR_VER_STR', wp_get_theme()->get('Version'));
 define('PUOCK_CUR_VER', (float)PUOCK_CUR_VER_STR);
 define('PUOCK', 'puock');
@@ -18,7 +20,6 @@ if (is_dir(get_template_directory() . '/inc/puock')) {
         require get_template_directory() . '/inc/puock/fun.php';
     }
 }
-
 
 function pk_ajax_resp($data = null, $msg = 'success', $code = 0)
 {
@@ -882,4 +883,17 @@ function pk_off_widgets_block()
 {
     add_filter('gutenberg_use_widgets_block_editor', '__return_false');
     add_filter('use_widgets_block_editor', '__return_false');
+}
+
+//获取中文格式化的实例
+function pk_chinese_format($content){
+    $typesetting = new ChineseTypesetting();
+    $content = $typesetting->insertSpace($content);
+    $content = $typesetting->removeSpace($content);
+    $content = $typesetting->full2Half($content);
+    $content = $typesetting->fixPunctuation($content);
+    return $typesetting->properNoun($content);
+}
+if(pk_is_checked('chinese_format')){
+    add_filter('the_content', 'pk_chinese_format', 199);
 }

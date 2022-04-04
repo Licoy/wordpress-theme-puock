@@ -1,6 +1,8 @@
 <?php
 
 //添加session支持
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
 function register_session()
 {
     if (!session_id()) {
@@ -12,6 +14,7 @@ register_session();
 
 $puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
+include('vendor/autoload.php');
 include('inc/fun/core.php');
 
 //去除感谢使用wordpress创作

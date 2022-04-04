@@ -1,0 +1,15 @@
+{
+    "name": "licoy/puock",
+    "description": "A high-value adaptive theme based on WordPress, supports day and night modes, no refresh loading, etc.",
+    "type": "project",
+    "license": "GPL-V3",
+    "authors": [
+        {
+            "name": "Licoy",
+            "email": "licoycn@gmail.com"
+        }
+    ],
+    "require": {
+        "jxlwqq/chinese-typesetting": "^1.2"
+    }
+}

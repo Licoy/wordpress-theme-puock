@@ -1,0 +1,6 @@
+preset: recommended
+risky: true
+finder:
+  exclude:
+  - data
+  name: "*.php"
