@@ -1,7 +1,5 @@
 <?php
 
-use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
-
 define('PUOCK_CUR_VER_STR', wp_get_theme()->get('Version'));
 define('PUOCK_CUR_VER', (float)PUOCK_CUR_VER_STR);
 define('PUOCK', 'puock');
@@ -887,12 +885,12 @@ function pk_off_widgets_block()
 
 //获取中文格式化的实例
 function pk_chinese_format($content){
+    include_once dirname(__FILE__).'/../lib/ChineseTypesetting.php';
     $typesetting = new ChineseTypesetting();
     $content = $typesetting->insertSpace($content);
     $content = $typesetting->removeSpace($content);
     $content = $typesetting->full2Half($content);
-    $content = $typesetting->fixPunctuation($content);
-    return $typesetting->properNoun($content);
+    return $typesetting->fixPunctuation($content);
 }
 if(pk_is_checked('chinese_format')){
     add_filter('the_content', 'pk_chinese_format', 199);

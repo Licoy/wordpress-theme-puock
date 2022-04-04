@@ -1,10 +1,10 @@
 <?php
-
-namespace Jxlwqq\ChineseTypesetting;
-
 /**
- * Class ChineseTypesetting.
+ * @author jxlwqq
+ * @link https://github.com/jxlwqq/chinese-typesetting
+ * @license MIT
  */
+
 class ChineseTypesetting
 {
     /**
@@ -282,34 +282,6 @@ class ChineseTypesetting
 
         foreach ($patterns as $key => $value) {
             $text = preg_replace('/'.$value[0].'/u', $value[1], $text);
-        }
-
-        return $text;
-    }
-
-    /**
-     * 专有名词使用正确的大小写
-     * Correct English proper nouns.
-     *
-     * @param string $text
-     * @param array  $extend
-     * @param array  $ignore
-     *
-     * @return null|string|string[]
-     */
-    public function properNoun($text, array $extend = [], array $ignore = [])
-    {
-        $dict = include __DIR__.'/../data/dict.php';
-        if (!empty($extend)) {
-            $dict = array_merge($dict, $extend);
-        }
-        if (!empty($ignore)) {
-            $dict = array_diff($dict, $ignore);
-        }
-
-        foreach ($dict as $noun) {
-            // Matching proper nouns Outside Of Html Tags
-            $text = preg_replace("/(?<!\.|[a-z]){$noun}(?!\.|[a-z])(?!([^<]+)?>)/i", $noun, $text);
         }
 
         return $text;
