@@ -5,7 +5,9 @@
 function register_session()
 {
     if (!session_id()) {
-        session_start();
+        session_start([
+            'read_and_close' => true,
+        ]);
     }
 }
 
