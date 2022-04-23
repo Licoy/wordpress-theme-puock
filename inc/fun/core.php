@@ -19,7 +19,6 @@ if (is_dir(get_template_directory() . '/inc/puock')) {
     }
 }
 
-
 function pk_ajax_resp($data = null, $msg = 'success', $code = 0)
 {
     return json_encode(array('data' => $data, 'msg' => $msg, 'code' => $code));
@@ -882,4 +881,17 @@ function pk_off_widgets_block()
 {
     add_filter('gutenberg_use_widgets_block_editor', '__return_false');
     add_filter('use_widgets_block_editor', '__return_false');
+}
+
+//获取中文格式化的实例
+function pk_chinese_format($content){
+    include_once dirname(__FILE__).'/../lib/ChineseTypesetting.php';
+    $typesetting = new ChineseTypesetting();
+    $content = $typesetting->insertSpace($content);
+    $content = $typesetting->removeSpace($content);
+    $content = $typesetting->full2Half($content);
+    return $typesetting->fixPunctuation($content);
+}
+if(pk_is_checked('chinese_format')){
+    add_filter('the_content', 'pk_chinese_format', 199);
 }

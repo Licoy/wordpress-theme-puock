@@ -1,6 +1,7 @@
 <?php
 
 //添加session支持
+
 function register_session()
 {
     if (!session_id()) {

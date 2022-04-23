@@ -59,7 +59,6 @@ class Puock {
 
     pageInit() {
         this.loadParams()
-        this.initReadProgress()
         this.loadCommentCaptchaImage(null)
         this.pageChangeInit()
         if (this.data.params.is_single) {
@@ -194,6 +193,7 @@ class Puock {
     }
 
     pageChangeInit() {
+        this.initReadProgress()
         this.modeInit();
         this.loadCommentInfo();
         this.katexParse();
