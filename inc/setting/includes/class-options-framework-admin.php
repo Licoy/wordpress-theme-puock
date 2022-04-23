@@ -194,8 +194,7 @@ class Options_Framework_Admin
 
         <div id="optionsframework-wrap" class="wrap">
 
-            <?php $menu = $this->menu_settings(); ?>
-            <?php require get_template_directory() . '/inc/setting/options-inc.php' ?>
+            <?php require_once dirname(__FILE__).'/../options-inc.php' ?>
             <h2 class="nav-tab-wrapper">
                 <?php echo Options_Framework_Interface::optionsframework_tabs(); ?>
             </h2>

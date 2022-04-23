@@ -37,6 +37,7 @@ if (isset($_GET['exec'])) {
 
 ?>
 <h2>
+    <?php $menu = $this->menu_settings(); ?>
     <?php echo esc_html($menu['page_title']); ?>
     <img style="cursor: pointer" onclick="window.open('https://github.com/Licoy/wordpress-theme-puock', 'blank')"
          src="https://img.shields.io/badge/当前版本-V<?php echo PUOCK_CUR_VER_STR; ?>-CC3333.svg?logo=git" alt="当前版本">
@@ -49,5 +50,4 @@ if (isset($_GET['exec'])) {
     <img style="cursor: pointer"
          onclick="window.open('https://licoy.cn/go/puock-update.php?r=qq_qun', 'blank')"
          src="https://img.shields.io/badge/QQ群-加入讨论-bule.svg?logo=tencent-qq" alt="QQ群">
-    <!--    <code><a href="?page=options-framework&exec=update_check">检查更新<small>(仅检测版本)</small></a></code>-->
 </h2>
