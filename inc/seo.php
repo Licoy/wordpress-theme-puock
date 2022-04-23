@@ -1,5 +1,5 @@
 <?php $titleConn = " " . pk_get_option("title_conn") . " " ?>
-<?php $blogname = pk_get_option('web_title');
+<?php $blogname = pk_get_option('web_title', get_bloginfo('title'));
 $pkSeoPageInfo = ''; ?>
 <?php global $other_page_title;
 if(get_query_var('paged')){

@@ -807,7 +807,7 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
         }
         if (count($menu->children) > 0 && $dpath_cur < $max_dpath) {
             $out .= '<ul ' . ($mobile ? 'id="menu-sub-' . $menu->ID . '"' : '') . ' class="sub-menu ' . ($mobile
-                    ? 'collapse' : 'animated bounceIn') . '">';
+                    ? 'collapse' : '') . '">';
             pk_get_menu_obj_to_html($menu->children, $out, $mobile, $dpath_cur + 1, $max_dpath);
             $out .= '</ul>';
         }

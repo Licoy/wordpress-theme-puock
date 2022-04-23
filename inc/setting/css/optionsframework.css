@@ -27,8 +27,10 @@
 	width: 94%;
 	padding-right:2%;
 }
+#optionsframework-wrap .nav-tab-wrapper [id^=options-group-]{
+	margin-top:10px;
+}
 #optionsframework .section .explain {
-	max-width:38%;
 	float: left;
 	font-size: 12px;
 	line-height:16px;
