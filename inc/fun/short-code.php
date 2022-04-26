@@ -6,6 +6,7 @@ function pk_shortcode_register()
         'music' => array('name' => '音乐播放'),
         'reply' => array('name' => '回复可见'),
         'login' => array('name' => '登录可见'),
+        'github' => array('name' => 'Github'),
         'login_email' => array('name' => '登录并验证邮箱可见'),
         'video' => array('name' => '视频播放', 'attr' => array(
             'autoplay' => false, 'type' => 'auto',
@@ -316,6 +317,16 @@ function pk_sc_collapse($attr, $content = null)
 }
 
 add_shortcode('collapse', 'pk_sc_collapse');
+
+//github项目展示
+function pk_sc_github($attr, $content = null)
+{
+    return '<div class="github-card text-center" data-repo="' . $content . '"><div class="spinner-grow text-primary"></div></div>';
+}
+
+add_shortcode('github', 'pk_sc_github');
+
+
 function p_wpautop($content)
 {
     return wpautop($content, false);

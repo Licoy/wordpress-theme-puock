@@ -201,6 +201,7 @@ class Puock {
         this.pageLinkBlankOpenInit()
         this.loadCommentCaptchaImage(null);
         this.generatePostQrcode();
+        this.initGithubCard();
         if (this.data.params.use_post_menu) {
             this.generatePostMenuHTML()
         }
@@ -264,7 +265,7 @@ class Puock {
 
     initCodeHighlight() {
         if (window.hljs !== undefined) {
-            window.hljs.configure({ignoreUnescapedHTML:true})
+            window.hljs.configure({ignoreUnescapedHTML: true})
             document.querySelectorAll('pre').forEach((block) => {
                 window.hljs.highlightBlock(block);
                 window.hljs.lineNumbersBlock(block);
@@ -588,6 +589,31 @@ class Puock {
                 item.html("<span class='err'>" + err)
             }
         }
+    }
+
+    initGithubCard() {
+        $.each($(".github-card"), (index, _el) => {
+            const el = $(_el);
+            const repo = el.attr("data-repo");
+            if (repo) {
+                $.get(`https://api.github.com/repos/${repo}`, (res) => {
+                    const link_html = `class="hide-hover" href="${res.url}" target="_blank" rel="noreferrer"`;
+                    el.html(`<div class="card-header"><i class="czs-github-logo"></i><a ${link_html}>${res.full_name}</a></div>
+                    <div class="card-body">${res.description}</div>
+                    <div class="card-footer">
+                    <div class="row">
+                    <div class="col-4"><i class="czs-star"></i><a ${link_html}>${res.stargazers_count}</a></div>
+                    <div class="col-4"><i class="czs-code-fork"></i><a ${link_html}>${res.forks}</a></div>
+                    <div class="col-4"><i class="czs-eye"></i><a ${link_html}>${res.subscribers_count}</a></div>
+                    </div>
+                    </div>
+                `);
+                    el.addClass("loaded");
+                }, 'json').error((err) => {
+                    el.html(`<div class="alert alert-danger"><i class="czs-warning"></i>&nbsp;请求Github项目详情异常：${repo}</div>`)
+                });
+            }
+        })
     }
 
 }

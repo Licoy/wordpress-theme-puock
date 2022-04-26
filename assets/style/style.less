@@ -10,6 +10,7 @@
 @colorModeDarkBg: #2d363c;
 @colorModeLightBg: #f3f5f7;
 @colorModeDarkBoxBg: #293238;
+@colorDarkCard: #2f3940;
 @colorModeLightFont: @colorDark;
 @colorModeDarkFont: @colorLight;
 @colorModeLightLink: @bgLight;
@@ -18,23 +19,27 @@
 @puockBg: #f8f8f9;
 
 // 浏览器样式
-@browserScrollbarWh:8px;
+@browserScrollbarWh: 8px;
 ::-webkit-scrollbar {
   width: @browserScrollbarWh;
   height: @browserScrollbarWh;
 }
+
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px @colorSecondary;
   border-radius: @browserScrollbarWh;
 }
+
 ::-webkit-scrollbar-thumb {
   border-radius: @browserScrollbarWh;
   background: #cacaca;
   -webkit-box-shadow: inset 0 0 6px @colorSecondary;
 }
+
 ::-webkit-scrollbar-thumb:window-inactive {
   background: @colorPrimary;
 }
+
 //引用
 blockquote {
   padding: .8em;
@@ -312,7 +317,7 @@ body.pre-mac pre {
   z-index: 999;
 
   #post-menu-state {
-    @w:18px;
+    @w: 18px;
     position: absolute;
     left: -@w;
     background-color: @colorPrimary;
@@ -1068,7 +1073,7 @@ a:hover {
       margin-bottom: 10px;
     }
 
-    a:not(.btn):not(.post-page-numbers) {
+    a:not(.btn,.hide-hover):not(.post-page-numbers) {
       .ta3-fun();
 
       &:hover {
@@ -1853,6 +1858,30 @@ a:hover {
   }
 }
 
+//短代码模块
+//github短代码
+.github-card {
+  margin: 15px 0;
+
+  &.loaded {
+    border: 1px solid rgba(0, 0, 0, .125);
+  }
+
+  .card-header, .card-footer {
+    a {
+      color: @colorModeLightFont;
+      display: inline-block;
+      margin-left: 3px;
+      transition: all .1s;
+      cursor: pointer;
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
 
 //响应式处理
 //最小
@@ -1899,6 +1928,14 @@ a:hover {
 
     &#header.blur {
       background-color: rgb(34 34 34 / 15%);
+    }
+  }
+
+  .github-card.loaded {
+    background-color: @colorDarkCard;
+
+    a {
+      color: @colorModeDarkFont;
     }
   }
 
