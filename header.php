@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv='content-language' content='<?php echo get_locale() ?>'>
     <link rel="shortcut icon" href="<?php echo pk_get_option('favicon') ?>">
     <link rel="apple-touch-icon" href="<?php echo pk_get_option('favicon') ?>"/>
     <?php get_template_part('inc/metas') ?>
@@ -39,9 +40,9 @@
         <div class="navbar navbar-dark shadow-sm">
             <div class="container">
                 <a href="<?php echo home_url() ?>" id="logo" class="navbar-brand">
-                    <img id="logo-light" class="w-100 <?php echo pk_theme_light() ? '' : 'd-none' ?>"
+                    <img id="logo-light" alt="logo" class="w-100 <?php echo pk_theme_light() ? '' : 'd-none' ?>"
                          src="<?php echo pk_get_option('light_logo') ?>">
-                    <img id="logo-dark" class="w-100 <?php echo pk_theme_light() ? 'd-none' : '' ?>"
+                    <img id="logo-dark" alt="logo" class="w-100 <?php echo pk_theme_light() ? 'd-none' : '' ?>"
                          src="<?php echo pk_get_option('dark_logo') ?>">
                 </a>
                 <div class="d-none d-lg-block puock-links">
