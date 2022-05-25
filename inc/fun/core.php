@@ -884,14 +884,32 @@ function pk_off_widgets_block()
 }
 
 //获取中文格式化的实例
-function pk_chinese_format($content){
-    include_once dirname(__FILE__).'/../lib/ChineseTypesetting.php';
+function pk_chinese_format($content)
+{
+    include_once dirname(__FILE__) . '/../lib/ChineseTypesetting.php';
     $typesetting = new ChineseTypesetting();
     $content = $typesetting->insertSpace($content);
     $content = $typesetting->removeSpace($content);
     $content = $typesetting->full2Half($content);
     return $typesetting->fixPunctuation($content);
 }
-if(pk_is_checked('chinese_format')){
+
+if (pk_is_checked('chinese_format')) {
     add_filter('the_content', 'pk_chinese_format', 199);
+}
+
+//获取缩略图的白名单
+function pk_get_thumbnail_allow_sites()
+{
+    $sites = [];
+    $thumbnail_allows = trim(pk_get_option("thumbnail_allows", ''));
+    if (!empty($thumbnail_allows)) {
+        foreach (explode("\n", $thumbnail_allows) as $site) {
+            $site = trim($site);
+            if (!empty($site)) {
+                $sites[] = $site;
+            }
+        }
+    }
+    return $sites;
 }

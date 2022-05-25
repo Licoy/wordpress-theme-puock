@@ -227,7 +227,6 @@ function optionsframework_options()
         'type' => 'checkbox'
     );
 
-
     $options[] = array(
         'name' => '启用后台登录保护',
         'desc' => '允许（启用后则用"wp-login.php?{后台登录保护参数}={后台登录保护值}"的方式访问）',
@@ -250,6 +249,14 @@ function optionsframework_options()
         'id' => 'lp_pass',
         'std' => 'admin',
         'type' => 'text'
+    );
+
+    $options[] = array(
+        'name' => '缩略图白名单（若使用了其他外链图片须在此处添加外链域名以允许）',
+        'desc' => '一行一个，不要带 <code>http://</code> 或 <code>https://</code> 协议头，例如：<code>blog.example.com</code>',
+        'placeholder'=>'一行一个，不要带 http:// 或 https:// 协议头',
+        'id' => 'thumbnail_allows',
+        'type' => 'textarea'
     );
 
     // 基本设置

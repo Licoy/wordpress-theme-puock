@@ -1,5 +1,9 @@
 <?php
 
+require_once dirname(__DIR__).'/../../wp-blog-header.php';
+
+$ALLOWED_SITES = pk_get_thumbnail_allow_sites();
+
 /**
  * TimThumb by Ben Gillbanks and Mark Maunder
  * Based on work done by Tim McDaniels and Darren Hoyt
