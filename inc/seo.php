@@ -1,32 +1,32 @@
 <?php $titleConn = " " . pk_get_option("title_conn") . " " ?>
-<?php $blogname = pk_get_option('web_title', get_bloginfo('title'));
+<?php $blog_name = pk_get_web_title();
 $pkSeoPageInfo = ''; ?>
 <?php global $other_page_title;
 if(get_query_var('paged')){
     $pkSeoPageInfo = $titleConn . '第' . get_query_var('paged') . '页';
 }
 if (isset($other_page_title)) { ?>
-    <title><?php echo $other_page_title . $pkSeoPageInfo . $titleConn . $blogname; ?></title>
+    <title><?php echo $other_page_title . $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
 <?php } else if (is_home()) { ?>
-    <title><?php echo $blogname . $pkSeoPageInfo . $titleConn . pk_get_option('web_title_2'); ?></title>
+    <title><?php echo $blog_name . $pkSeoPageInfo . $titleConn . pk_get_option('web_title_2'); ?></title>
 <?php } else if (is_search()) { ?><title>搜索"<?php echo $_REQUEST['s'] ?>
-    "的结果<?php echo $titleConn . $pkSeoPageInfo . $blogname ?></title>
+    "的结果<?php echo $titleConn . $pkSeoPageInfo . $blog_name ?></title>
 <?php } else if (is_single() || is_page()) { ?>
-    <title><?php echo trim(wp_title('', 0)); ?><?php echo $titleConn . $blogname; ?></title>
+    <title><?php echo trim(wp_title('', 0)); ?><?php echo $titleConn . $blog_name; ?></title>
 <?php } else if (is_year()) { ?><title><?php the_time('Y年'); ?>
-    的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blogname ?></title>
+    的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
 <?php } else if (is_month()) { ?><title><?php the_time('m'); ?>
-    份的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blogname ?></title>
+    份的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
 <?php } else if (is_day()) { ?><title><?php the_time('Y年m月d日'); ?>
-    的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blogname ?></title>
+    的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
 <?php } else if (is_author()) { ?><title><?php the_author(); ?>
-    发表的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blogname ?></title>
+    发表的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
 <?php } else if (is_category()) { ?>
-    <title><?php single_cat_title(); ?><?php echo $pkSeoPageInfo . $titleConn . $blogname ?> </title>
+    <title><?php single_cat_title(); ?><?php echo $pkSeoPageInfo . $titleConn . $blog_name ?> </title>
 <?php } else if (is_tag()) { ?>
-    <title><?php single_tag_title("", true); ?><?php echo $pkSeoPageInfo . $titleConn . $blogname; ?></title>
-<?php } else if (is_404()) { ?> <title>你访问的资源不存在<?php echo $pkSeoPageInfo . $titleConn . $blogname; ?></title>
-<?php } else { ?> <title><?php echo $blogname . $pkSeoPageInfo . $titleConn . $blogname; ?></title><?php } ?>
+    <title><?php single_tag_title("", true); ?><?php echo $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
+<?php } else if (is_404()) { ?> <title>你访问的资源不存在<?php echo $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
+<?php } else { ?> <title><?php echo $blog_name . $pkSeoPageInfo . $titleConn . $blog_name; ?></title><?php } ?>
 <?php if (is_home()) : ?>
     <meta name="keywords" content="<?php echo pk_get_option('keyword') ?>"/>
     <meta name="description" content="<?php echo pk_get_option('description') ?>"/>

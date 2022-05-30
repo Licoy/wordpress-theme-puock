@@ -340,3 +340,8 @@ function pk_compatible_githuber_md_katex($good_protocol_url, $original_url, $_co
     }
     return $good_protocol_url;
 }
+
+//获取网站标题
+function pk_get_web_title(){
+    return pk_get_option('web_title',get_bloginfo('name'));
+}

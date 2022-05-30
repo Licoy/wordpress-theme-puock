@@ -113,7 +113,15 @@ function optionsframework_options()
     );
 
     $options[] = array(
-        'name' => '高亮模式下LOGO',
+        'name' => '使用文字LOGO',
+        'desc' => '勾选此项则会隐藏图片的LOGO',
+        'id' => 'on_txt_logo',
+        'std' => '0',
+        'type' => 'checkbox'
+    );
+
+    $options[] = array(
+        'name' => '高亮模式下LOGO（若不上传则显示文字LOGO）',
         'desc' => '比例：500*125，请尽量选择png无底色图片',
         'id' => 'light_logo',
         "std" => "",
