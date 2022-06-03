@@ -8,10 +8,11 @@ const concat = require('gulp-concat');
 const concatCss = require('gulp-concat-css');
 const minifyCSS = require('gulp-minify-css')
 
-const _core_script = "js/*.js"
-const _libs_script = "libs/**/*.js"
-const _core_style = "style/*.less"
-const _libs_style = "libs/**/*.css"
+const _core_script = "assets/js/*.js"
+const _libs_script = "assets/libs/**/*.js"
+const _core_style = "assets/style/*.less"
+const _libs_style = "assets/libs/**/*.css"
+const _dist = "assets/dist"
 
 gulp.task('style', function () {
     return gulp.src(_core_style)
@@ -20,7 +21,7 @@ gulp.task('style', function () {
             compress: true
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest(_dist))
 })
 
 gulp.task('lib_style', function () {
@@ -31,7 +32,7 @@ gulp.task('lib_style', function () {
             semicolonAfterLastProperty: true,
             afterComment: true
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest(_dist))
 })
 
 gulp.task('lib_script', function () {
@@ -42,7 +43,7 @@ gulp.task('lib_script', function () {
                 comments: true,
             }
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest(_dist))
 })
 
 gulp.task('script', function () {
@@ -51,7 +52,7 @@ gulp.task('script', function () {
         .pipe(rename({suffix: '.min'}))
         .pipe(babel())
         .pipe(uglify())
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest(_dist))
 })
 
 gulp.task('build', gulp.series(
@@ -61,7 +62,7 @@ gulp.task('build', gulp.series(
     'lib_script',
 ))
 
-gulp.task('w', gulp.series('build', function () {
+gulp.task('watch', gulp.series('build', function () {
     gulp.watch(_core_style, gulp.series('style'))
     gulp.watch(_core_script, gulp.series('script'))
     gulp.watch(_libs_script, gulp.series('lib_script'))

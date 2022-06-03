@@ -6,4 +6,4 @@
 **/template-puock.php
 cache/*
 !cache/index.html
-assets/node_modules
+node_modules
