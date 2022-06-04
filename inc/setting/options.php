@@ -410,7 +410,7 @@ function optionsframework_options()
     $options[] = array(
         'name' => 'GrAvatar加载源',
         'id' => 'gravatar_url',
-        'std' => 'wp',
+        'std' => 'cravatar',
         'type' => 'radio',
         'options' => [
             'wp' => '官方默认加载节点',
