@@ -989,7 +989,7 @@ function optionsframework_options()
         'desc' => '用于在页头添加统计代码（PS：若开启无刷新加载，请在标签上加上<code>data-instant</code>属性）',
         'id' => 'tj_code_header',
         'std' => '',
-        'type' => 'editor',
+        'type' => 'textarea',
         'settings' => $editorSettings
     );
 
@@ -1007,7 +1007,7 @@ function optionsframework_options()
         'desc' => '用于在页脚添加统计代码（PS：若开启无刷新加载，请在标签上加上<code>data-instant</code>属性）',
         'id' => 'tj_code_footer',
         'std' => '',
-        'type' => 'editor',
+        'type' => 'textarea',
         'settings' => $editorSettings
     );
 
@@ -1016,7 +1016,7 @@ function optionsframework_options()
         'desc' => '显示备案信息及其他相关链接（可以为HTML）',
         'id' => 'footer_info',
         'std' => 'Copyright &copy;&nbsp;&nbsp;',
-        'type' => 'editor',
+        'type' => 'textarea',
         'settings' => $editorSettings
     );
 
