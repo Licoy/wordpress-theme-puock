@@ -861,6 +861,15 @@ function pk_get_static_url()
         case "jsdelivr":
             $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
             break;
+        case "jsdelivr-fastly":
+            $url_pre = "https://fastly.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            break;
+        case "jsdelivr-testingcf":
+            $url_pre = "https://testingcf.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            break;
+        case "jsdelivr-gcore":
+            $url_pre = "https://gcore.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            break;
         case 'custom':
             $url_pre = pk_get_option('custom_static_load_origin', '');
             break;

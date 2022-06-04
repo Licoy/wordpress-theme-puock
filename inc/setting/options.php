@@ -1074,7 +1074,10 @@ function optionsframework_options()
         'type' => 'radio',
         'options' => [
             'self' => '本地',
-            'jsdelivr' => 'JSDelivr',
+            'jsdelivr' => 'JSDelivrCDN',
+            'jsdelivr-fastly' => 'JSDelivrFastly',
+            'jsdelivr-testingcf' => 'JSDelivrTestingcf',
+            'jsdelivr-gcore' => 'JSDelivrGcore',
             'custom' => '自定义（在下方一栏中填入）',
         ]
     );
