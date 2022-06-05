@@ -1,5 +1,7 @@
 <?php
 
+define('WP_DEBUG', false);
+
 require_once dirname(__DIR__).'/../../wp-blog-header.php';
 
 $ALLOWED_SITES = pk_get_thumbnail_allow_sites();
