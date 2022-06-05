@@ -202,6 +202,7 @@ class Puock {
         this.loadCommentCaptchaImage(null);
         this.generatePostQrcode();
         this.initGithubCard();
+        this.keyUpHandle();
         if (this.data.params.use_post_menu) {
             this.generatePostMenuHTML()
         }
@@ -614,6 +615,28 @@ class Puock {
                 });
             }
         })
+    }
+
+    keyUpHandle() {
+        const prevOrNextEl = $(".single-next-or-pre")
+        if (prevOrNextEl) {
+            window.onkeyup = function (event) {
+                let url = null;
+                switch (event.key) {
+                    case 'ArrowLeft': {
+                        url = prevOrNextEl.find("a[rel='prev']").attr("href");
+                        break
+                    }
+                    case 'ArrowRight': {
+                        url = prevOrNextEl.find("a[rel='next']").attr("href");
+                        break
+                    }
+                }
+                if (url) {
+                    window.location = url
+                }
+            }
+        }
     }
 
 }

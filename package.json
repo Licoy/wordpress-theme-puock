@@ -19,5 +19,6 @@
   "scripts": {
     "build": "gulp build",
     "dev": "gulp watch"
-  }
+  },
+  "dependencies": {}
 }
