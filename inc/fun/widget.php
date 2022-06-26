@@ -746,8 +746,8 @@ class puockTagHitokoto extends puockWidgetBase {
             $.get("https://v1.hitokoto.cn/", function (res){
                 const el = $("#<?php echo $id ?>");
                 el.find(".t").text(res.hitokoto);
-                el.find('.f').text(res.from)
-                el.find('.fb').removeClass("d-none")
+                el.find('.f').text(res.from);
+                el.find('.fb').removeClass("d-none");
             },'json');
             </script>
         </div>
