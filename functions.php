@@ -1,7 +1,13 @@
 <?php
 
-//添加session支持
+define('PUOCK_ABS_DIR', get_template_directory());
+define('PUOCK_ABS_URI', get_template_directory_uri());
+define('PUOCK_CUR_VER_STR', wp_get_theme()->get('Version'));
+const PUOCK = 'puock';
+const PUOCK_OPT = 'puock_options';
+$puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
+//添加session支持
 function register_session()
 {
     if (!session_id()) {
@@ -11,7 +17,6 @@ function register_session()
 
 register_session();
 
-$puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
 include('inc/fun/core.php');
 
@@ -45,7 +50,7 @@ if (pk_is_checked('stop5x_editor')) {
 }
 
 //区块小工具
-if(!pk_is_checked('use_widgets_block')){
+if (!pk_is_checked('use_widgets_block')) {
     pk_off_widgets_block();
 }
 

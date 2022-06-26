@@ -22,7 +22,7 @@
  */
 
 if ( !function_exists( 'optionsframework_init' ) ) {
-    define('OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/setting/');
+    define('OPTIONS_FRAMEWORK_DIRECTORY', PUOCK_ABS_URI . '/inc/setting/');
 }
 
 // If this file is called directly, abort.

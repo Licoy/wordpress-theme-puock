@@ -29,7 +29,7 @@ function optionsframework_options()
         $pages[$page->ID] = $page->post_title;
     }
 
-    $base = get_template_directory_uri() . "/inc/setting/images/icons";
+    $base = PUOCK_ABS_URI . "/inc/setting/images/icons";
 
     $themes = ['light' => '高亮模式', 'dark' => '暗黑模式'];
 
