@@ -1,7 +1,6 @@
 <?php
 
 define('PUOCK_CUR_VER_STR', wp_get_theme()->get('Version'));
-define('PUOCK_CUR_VER', (float)PUOCK_CUR_VER_STR);
 define('PUOCK', 'puock');
 define('PUOCK_OPT', 'puock_options');
 
