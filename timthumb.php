@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__).'/../../wp-blog-header.php';
+require_once dirname(__DIR__) . '/../../wp-load.php';
 
 $ALLOWED_SITES = pk_get_thumbnail_allow_sites();
 
@@ -1089,8 +1089,8 @@ class timthumb
         }
         fseek($fp, strlen($this->filePrependSecurityBlock), SEEK_SET);
         $imgType = fread($fp, 4);
-        $readLen = $imgType==='webp' ? 7 : 6;
-        fseek($fp, $imgType==='webp' ? 3 : 2, SEEK_CUR);
+        $readLen = $imgType === 'webp' ? 7 : 6;
+        fseek($fp, $imgType === 'webp' ? 3 : 2, SEEK_CUR);
         if (ftell($fp) != strlen($this->filePrependSecurityBlock) + $readLen) {
             @unlink($this->cachefile);
             return $this->error("The cached image file seems to be corrupt.");
