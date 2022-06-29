@@ -29,7 +29,7 @@ function optionsframework_options()
         $pages[$page->ID] = $page->post_title;
     }
 
-    $base = get_template_directory_uri() . "/inc/setting/images/icons";
+    $base = PUOCK_ABS_URI . "/inc/setting/images/icons";
 
     $themes = ['light' => '高亮模式', 'dark' => '暗黑模式'];
 
@@ -410,7 +410,7 @@ function optionsframework_options()
     $options[] = array(
         'name' => 'GrAvatar加载源',
         'id' => 'gravatar_url',
-        'std' => 'wp',
+        'std' => 'cravatar',
         'type' => 'radio',
         'options' => [
             'wp' => '官方默认加载节点',
@@ -989,7 +989,7 @@ function optionsframework_options()
         'desc' => '用于在页头添加统计代码（PS：若开启无刷新加载，请在标签上加上<code>data-instant</code>属性）',
         'id' => 'tj_code_header',
         'std' => '',
-        'type' => 'editor',
+        'type' => 'textarea',
         'settings' => $editorSettings
     );
 
@@ -1007,7 +1007,7 @@ function optionsframework_options()
         'desc' => '用于在页脚添加统计代码（PS：若开启无刷新加载，请在标签上加上<code>data-instant</code>属性）',
         'id' => 'tj_code_footer',
         'std' => '',
-        'type' => 'editor',
+        'type' => 'textarea',
         'settings' => $editorSettings
     );
 
@@ -1016,7 +1016,7 @@ function optionsframework_options()
         'desc' => '显示备案信息及其他相关链接（可以为HTML）',
         'id' => 'footer_info',
         'std' => 'Copyright &copy;&nbsp;&nbsp;',
-        'type' => 'editor',
+        'type' => 'textarea',
         'settings' => $editorSettings
     );
 
@@ -1074,7 +1074,10 @@ function optionsframework_options()
         'type' => 'radio',
         'options' => [
             'self' => '本地',
-            'jsdelivr' => 'JSDelivr',
+            'jsdelivr' => 'JSDelivrCDN',
+            'jsdelivr-fastly' => 'JSDelivrFastly',
+            'jsdelivr-testingcf' => 'JSDelivrTestingcf',
+            'jsdelivr-gcore' => 'JSDelivrGcore',
             'custom' => '自定义（在下方一栏中填入）',
         ]
     );

@@ -156,7 +156,7 @@
                         <div data-id="wb" class="circle-button circle-sm circle-hb text-center bg-danger text-light"><i
                                     class="czs-weibo t-md"></i></div>
                         <div data-id="wx" id="wx-share" data-toggle="tooltip" data-html="true"
-                             data-url="<?php echo get_template_directory_uri() . pk_post_qrcode(get_permalink()) ?>"
+                             data-url="<?php echo PUOCK_ABS_URI . pk_post_qrcode(get_permalink()) ?>"
                              class="circle-button circle-sm circle-hb text-center bg-success text-light"><i
                                     class="czs-weixin t-md"></i></div>
                         <div data-id="qzone" class="circle-button circle-sm circle-hb text-center bg-yellow text-light">

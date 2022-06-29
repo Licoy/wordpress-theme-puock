@@ -207,7 +207,7 @@ function pk_reply_read($attr, $content = null)
     if ($user_id > 0) {
         $email = get_userdata($user_id)->user_email;
         if ($email == get_bloginfo('admin_email')) {
-            return $content;
+            return do_shortcode($content);
         }
     } else {
         if (isset($_COOKIE['comment_author_email_' . COOKIEHASH])) {
