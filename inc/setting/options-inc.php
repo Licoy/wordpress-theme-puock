@@ -1,3 +1,8 @@
+<?php
+if (@$_GET['settings-updated'] === 'true') {
+    do_action('options-framework-saved');
+}
+?>
 <h2>
     <?php $menu = $this->menu_settings(); ?>
     <?php echo esc_html($menu['page_title']); ?>

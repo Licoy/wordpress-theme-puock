@@ -1,10 +1,17 @@
 <?php
 
-define('WP_DEBUG', false);
+const WP_DEBUG = false;
 
-require_once dirname(__DIR__) . '/../../wp-load.php';
-
-$ALLOWED_SITES = pk_get_thumbnail_allow_sites();
+$ALLOWED_SITES = [];
+$allow_sites_filename = __DIR__ . '/.tas.php';
+if (!file_exists($allow_sites_filename)) {
+    require_once dirname(__DIR__) . '/../../wp-load.php';
+    if (pk_generate_thumbnail_allow_sites_file()) {
+        require_once $allow_sites_filename;
+    }
+} else {
+    require_once $allow_sites_filename;
+}
 
 /**
  * TimThumb by Ben Gillbanks and Mark Maunder
@@ -1091,8 +1098,8 @@ class timthumb
         }
         fseek($fp, strlen($this->filePrependSecurityBlock), SEEK_SET);
         $imgType = fread($fp, 4);
-        $readLen = $imgType==='webp' ? 7 : 6;
-        fseek($fp, $imgType==='webp' ? 3 : 2, SEEK_CUR);
+        $readLen = $imgType === 'webp' ? 7 : 6;
+        fseek($fp, $imgType === 'webp' ? 3 : 2, SEEK_CUR);
         if (ftell($fp) != strlen($this->filePrependSecurityBlock) + $readLen) {
             @unlink($this->cachefile);
             return $this->error("The cached image file seems to be corrupt.");

@@ -56,7 +56,7 @@ function pk_toolbar_link($bar)
     $bar->add_node(array(
         'id' => 'theme-setting',
         'title' => '🎨 主题设置',
-        'href' => admin_url() . 'themes.php?page=options-framework'
+        'href' => admin_url() . 'themes.php?page=puock-options'
     ));
     $bar->add_node(array(
         'id' => 'theme-docs',
@@ -915,3 +915,25 @@ function pk_get_thumbnail_allow_sites()
     }
     return $sites;
 }
+
+//生成缩略图白名单文件名称
+function pk_get_thumbnail_allow_sites_filepath()
+{
+    return PUOCK_ABS_DIR . '/.tas.php';
+}
+
+//生成缩略图白名单文件
+function pk_generate_thumbnail_allow_sites_file()
+{
+    $sites = pk_get_thumbnail_allow_sites();
+    $template = "<?php \$ALLOWED_SITES = [\n";
+    if (count($sites) > 0) {
+        foreach ($sites as $site) {
+            $template .= "\t\"$site\",\n";
+        }
+    }
+    $template .= "];";
+    return file_put_contents(pk_get_thumbnail_allow_sites_filepath(), $template);
+}
+
+add_action('options-framework-saved', 'pk_generate_thumbnail_allow_sites_file');

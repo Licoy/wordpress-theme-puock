@@ -95,7 +95,7 @@ class Options_Framework_Admin
             'page_title' => __('Puock主题设置', 'theme-textdomain'),
             'menu_title' => __('Puock主题设置', 'theme-textdomain'),
             'capability' => 'edit_theme_options',
-            'menu_slug' => 'options-framework',
+            'menu_slug' => 'puock-options',
             'parent_slug' => 'themes.php',
 
             // Menu default settings
