@@ -49,9 +49,9 @@ add_filter( 'of_sanitize_images', 'of_sanitize_enum', 10, 2 );
  * @return $output sanitized string
  */
 function of_sanitize_textarea( $input ) {
-	global $allowedposttags;
-	$output = wp_kses( $input, $allowedposttags );
-	return $output;
+//	global $allowedposttags;
+//	$output = wp_kses( $input, $allowedposttags );
+	return $input;
 }
 add_filter( 'of_sanitize_textarea', 'of_sanitize_textarea' );
 
