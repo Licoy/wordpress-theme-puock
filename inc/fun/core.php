@@ -777,14 +777,15 @@ function get_nav_menu_object($location)
 function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1, $max_dpath = 2)
 {
     $child_class = $dpath_cur != 1 ? 'menu-item-child' : '';
+    $target = pk_link_target(false);
     foreach ($menus as $menu) {
         $classes = join(" ", $menu->classes);
         $cur = $menu->current ? 'menu-current' : '';
         $out .= "<li id='menu-item-{$menu->ID}' class='menu-item-{$menu->ID} {$classes} {$child_class} {$cur}'>";
         if (!$mobile) {
-            $out .= "<a href='{$menu->url}'>{$menu->title}";
+            $out .= "<a {$target} href='{$menu->url}'>{$menu->title}";
         } else {
-            $out .= '<span><a href="' . $menu->url . '">' . $menu->title . '</a>';
+            $out .= '<span><a '.$target.' href="' . $menu->url . '">' . $menu->title . '</a>';
         }
         if (count($menu->children) > 0) {
             if ($mobile) {
@@ -813,10 +814,10 @@ function get_category_child($parentId)
     $child = get_categories("child_of={$parentId}&hide_empty=0");
     $list = array();
     foreach ($child as $child_item) {
-        array_push($list, array(
+        $list[] = array(
             'url' => get_category_link($child_item),
             'item' => $child_item
-        ));
+        );
     }
     return $list;
 }

@@ -17,7 +17,7 @@ if (pk_is_checked('index_carousel')):
                 <?php $i = 0;
                 foreach ($b_posts as $post): setup_postdata($post);
                     $custom_banner_to_url = get_post_meta(get_the_ID(), 'banner_to', true); ?>
-                    <a href="<?php if (empty($custom_banner_to_url)) {
+                    <a <?php pk_link_target() ?> href="<?php if (empty($custom_banner_to_url)) {
                         the_permalink();
                     } else {
                         echo $custom_banner_to_url;

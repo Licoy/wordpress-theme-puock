@@ -22,7 +22,7 @@ if($relevant_cats && count($relevant_cats)>0){
         <div class="p-block pb-0">
             <div class="row puock-text post-relevant">
                 <?php foreach ($relevants as $post): setup_postdata($post) ?>
-                <a href="<?php the_permalink() ?>" class="col-6 col-md-3 post-relevant-item">
+                <a <?php pk_link_target() ?> href="<?php the_permalink() ?>" class="col-6 col-md-3 post-relevant-item">
 <!--                    --><?php //the_title() ?>
                     <div style="background:url('<?php echo pk_get_img_thumbnail_src(get_post_images(),160,140); ?>')">
                         <div class="title"><?php the_title(); ?></div>

@@ -192,7 +192,7 @@ class puockHotPost extends puockWidgetBase {
             $out .= '<div class="media-link mt20">
                     <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
                         <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'"
+                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
                          href="'.get_permalink($post).'">'.get_the_title($post).'</a>
                     </h2>
                 </div>';
@@ -243,7 +243,7 @@ class puockNewPost extends puockWidgetBase {
             $out .= '<div class="media-link mt20">
                     <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
                         <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'"
+                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
                          href="'.get_permalink($post).'">'.get_the_title($post).'</a>
                     </h2>
                 </div>';
@@ -295,7 +295,7 @@ class puockHotCommentPost extends puockWidgetBase {
             $out .= '<div class="media-link mt20">
                     <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
                         <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'"
+                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
                          href="'.get_permalink($post).'">'.get_the_title($post).'</a>
                     </h2>
                 </div>';
@@ -399,7 +399,7 @@ class puockNewComment extends puockWidgetBase {
             <?php foreach ($comments as $comment): $text=convert_smilies( $comment->text ); ?>
              <div class="comment t-md t-line-1">
                 <img class="min-avatar" src="<?php echo get_avatar_url($comment->mail) ?>" alt="<?php echo $comment->name ?>">
-                <a class="puock-link" href="<?php echo get_permalink($comment->pid).'#comment-'.$comment->id ?>">
+                <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->pid).'#comment-'.$comment->id ?>">
                 <span class="ta3 link-hover"><?php echo $comment->name ?></span></a>
                 <span class="c-sub t-w-400"><?php echo $text ?></span>
             </div>
@@ -533,7 +533,7 @@ class puockRandomPost extends puockWidgetBase {
             $out .= '<div class="media-link mt20">
                     <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
                         <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'"
+                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
                          href="'.get_permalink($post).'">'.get_the_title($post).'</a>
                     </h2>
                 </div>';

@@ -98,13 +98,13 @@
                             <?php $origin_author = get_post_meta(get_the_ID(), 'origin_author', true);
                             if (empty($origin_author)): ?>
                                 <div>
-                                    <span class="font-weight-bold"><?php _e('版权声明：', PUOCK) ?></span><?php _e('本站原创文章，由', PUOCK) ?>
+                                    <span class="font-weight-bold"><?php _e('版权声明：', PUOCK) ?></span><span><?php _e('本站原创文章，由', PUOCK) ?></span>
                                     <a class="a-link"
                                        href="<?php global $authordata;
                                        if ($authordata) {
                                            echo get_author_posts_url($authordata->ID,
                                                $authordata->user_nicename);
-                                       } ?>"><?php the_author() ?></a><?php the_date('Y-m-d') ?><?php
+                                       } ?>"><?php the_author() ?> </a><?php the_date('Y-m-d') ?><?php
                                     _e('发表，', PUOCK) ?><?php _e('共计', PUOCK) ?><?php echo count_words() ?><?php _e('字。', PUOCK) ?>
                                 </div>
                                 <div class="mt-2">

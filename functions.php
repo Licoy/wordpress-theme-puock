@@ -133,7 +133,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
     if ($cid != null) {
         $cate = get_category($cid);
         if ($cate != null) {
-            return '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
+            return '<a '.pk_link_target(false).' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
         }
     } else {
         $cats = get_the_category();
@@ -141,7 +141,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
             if ($all) {
                 $out = "";
                 foreach ($cats as $cate) {
-                    $out .= '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>、';
+                    $out .= '<a '.pk_link_target(false).' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>、';
                 }
                 $out = mb_substr($out, 0, mb_strlen($out) - 1);
                 return $out;
@@ -151,7 +151,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
                 } else {
                     $cate = get_category($cat);
                 }
-                return '<a class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
+                return '<a '.pk_link_target(false).' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
             }
         }
     }
@@ -382,6 +382,8 @@ function pk_breadcrumbs()
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('搜索结果', PUOCK) . '</li>';
     } else if (is_author()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . get_the_author_meta('nickname') . '' . __('的文章列表', PUOCK) . '</li>';
+    } else if (is_date()) {
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . get_the_date() . '</li>';
     } else if (is_page()) {
         global $post;
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($post->post_title) . '</li>';

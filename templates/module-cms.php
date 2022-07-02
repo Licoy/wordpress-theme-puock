@@ -25,13 +25,13 @@
                                     <div class="media row mt10">
                                         <div class="col-4">
                                             <figure class="thumbnail">
-                                                <a href="<?php the_permalink() ?>">
+                                                <a <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                                                     <img title="<?php the_title() ?>" alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(),'w-100',280,180) ?>/>
                                                 </a>
                                             </figure>
                                         </div>
                                         <div class="media-body col-8 pl-0">
-                                            <h2 class="t-lg t-line-1"><a class="a-link" title="<?php the_title() ?>" href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
+                                            <h2 class="t-lg t-line-1"><a class="a-link" title="<?php the_title() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
                                             <div class="t-md c-sub d-none d-md-block"><?php the_excerpt() ?></div>
                                         </div>
                                     </div>
@@ -40,7 +40,7 @@
                                         <div class="t-lg t-line-1 row">
                                             <div class="col-lg-9 col-12 text-nowrap text-truncate">
                                                 <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                                                <a class="a-link t-w-400 t-md" title="<?php the_title() ?>" href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                                <a class="a-link t-w-400 t-md" title="<?php the_title() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                             </div>
                                             <div class="col-lg-3 text-right d-none d-lg-block">
                                                 <span class="c-sub t-sm"><?php pk_get_post_date() ?></span>

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-4 col-lg-3">
                 <figure class="thumbnail">
-                    <a class="t-sm" href="<?php the_permalink() ?>">
+                    <a class="t-sm" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                         <img title="<?php the_title() ?>"
                              alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'tsh', 280, 180) ?> />
                     </a>
@@ -15,7 +15,7 @@
                     <?php if (is_sticky()): ?><span class="badge bg-danger"><i
                                 class="czs-lightning-l"></i>置顶</span><?php endif; ?>
                     <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
-                    <a class="a-link" title="<?php the_title() ?>"
+                    <a class="a-link" title="<?php the_title() ?>" <?php pk_link_target() ?>
                        href="<?php the_permalink() ?>"><?php the_title() ?></a>
                 </h2>
                 <div class="info-meta d-none d-md-block c-sub">
@@ -30,7 +30,7 @@
                                                                 class="t-sm d-none d-sm-inline-block">次阅读</span></span>
                                                 <?php endif; ?>
                                             <?php if (!pk_post_comment_is_closed()): ?>
-                                                <a class="c-sub-a" href="<?php the_permalink() ?>#comments">
+                                                <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
                                                     <i class="czs-comment-l mr-1"></i>
                                                     <?php echo get_comments_number() ?><span
                                                             class="t-sm d-none d-sm-inline-block">个评论</span></a>
@@ -50,7 +50,7 @@
     <article class="block card-plain post-item col-sm-6 col-12 post-item-card">
         <div class="p-block">
             <figure class="thumbnail">
-                <a class="t-sm" href="<?php the_permalink() ?>">
+                <a class="t-sm" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                     <img title="<?php the_title() ?>"
                          alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'tsh', 400, 200) ?> />
                 </a>
@@ -60,7 +60,7 @@
                     <?php if (is_sticky()): ?><span class="badge bg-danger"><i
                                 class="czs-lightning-l"></i>置顶</span><?php endif; ?>
                     <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
-                    <a class="a-link puock-text" title="<?php the_title() ?>"
+                    <a class="a-link puock-text" title="<?php the_title() ?>" <?php pk_link_target() ?>
                        href="<?php the_permalink() ?>"><?php the_title() ?></a>
                 </h2>
                 <div class="info-meta d-block c-sub">
@@ -75,7 +75,7 @@
                                                             class="t-sm d-none d-sm-inline-block">次阅读</span></span>
                                             <?php endif; ?>
                                         <?php if (!pk_post_comment_is_closed()): ?>
-                                            <a class="c-sub-a" href="<?php the_permalink() ?>#comments">
+                                            <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
                                                 <i class="czs-comment-l mr-1"></i>
                                                 <?php echo get_comments_number() ?><span
                                                         class="t-sm d-none d-sm-inline-block">个评论</span></a>

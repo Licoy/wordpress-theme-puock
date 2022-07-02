@@ -342,6 +342,20 @@ function pk_compatible_githuber_md_katex($good_protocol_url, $original_url, $_co
 }
 
 //获取网站标题
-function pk_get_web_title(){
-    return pk_get_option('web_title',get_bloginfo('name'));
+function pk_get_web_title()
+{
+    return pk_get_option('web_title', get_bloginfo('name'));
+}
+
+// 获取链接的target属性
+function pk_link_target($echo = true)
+{
+    $target = "";
+    if (!pk_is_checked('page_ajax_load') && pk_is_checked('link_blank_content')) {
+        $target = "target=\"_blank\"";
+    }
+    if ($echo) {
+        echo $target;
+    }
+    return $target;
 }
