@@ -274,7 +274,7 @@ function get_wpsmiliestrans()
     global $wpsmiliestrans, $output;
     $wpsmilies = array_unique($wpsmiliestrans);
     foreach ($wpsmilies as $alt => $src_path) {
-        $output .= '<a class="add-smily" data-smilies="' . $alt . '"><img class="wp-smiley" src="' . get_bloginfo('template_directory') . '/assets/img/smiley/' . rtrim($src_path, "png") . 'png" /></a>';
+        $output .= '<a class="add-smily" data-smilies="' . $alt . '"><img src="' . get_bloginfo('template_directory') . '/assets/img/smiley/' . rtrim($src_path, "png") . 'png" /></a>';
     }
     return $output;
 }
