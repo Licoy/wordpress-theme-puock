@@ -80,10 +80,12 @@ class CaptchaBuilder
             $this->fonts = $config['fonts'];
         }else {
             $fontDir = __DIR__ . '/fonts/';
-
-            $this->fonts = array_filter(array_slice(scandir($fontDir), 2), function ($file) use ($fontDir) {
-                return is_file($fontDir . $file) && strcasecmp(pathinfo($file, PATHINFO_EXTENSION), 'ttf') === 0;
-            });
+            $scan_dir = scandir($fontDir);
+            if($scan_dir){
+                $this->fonts = array_filter(array_slice(scandir($fontDir), 2), function ($file) use ($fontDir) {
+                    return is_file($fontDir . $file) && strcasecmp(pathinfo($file, PATHINFO_EXTENSION), 'ttf') === 0;
+                });
+            }
             if (empty($this->fonts) === false) {
                 foreach ($this->fonts as &$font) {
                     $font = $fontDir . $font;
