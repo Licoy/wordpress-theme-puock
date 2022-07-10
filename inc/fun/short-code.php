@@ -329,7 +329,7 @@ add_shortcode('github', 'pk_sc_github');
 
 function p_wpautop($content)
 {
-    return wpautop($content, false);
+    return wpautop($content, true);
 }
 
 //TODO 添加到后台配置
