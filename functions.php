@@ -364,11 +364,15 @@ function pk_breadcrumbs()
         if (count($categorys) <= 0 && is_single()) {
             return false;
         }
-        $category = $categorys[0];
-        if ($category == null && is_category()) {
-            $category = get_category($cat);
+        if(is_single()){
+            $category = $categorys[0];
+            if ($category == null && is_category()) {
+                $category = get_category($cat);
+            }
+            $cats = get_category_parents($category->term_id, true, '');
+        }else{
+            $cats = get_category_parents($cat, true, '');
         }
-        $cats = get_category_parents($category->term_id, true, '');
         $cats = str_replace("<a", '<li class="breadcrumb-item"><a class="a-link"', $cats);
         $cats = str_replace("</a>", '</a></li>', $cats);
         $out .= $cats;

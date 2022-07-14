@@ -811,7 +811,7 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
 //获取分类的子集菜单
 function get_category_child($parentId)
 {
-    $child = get_categories("child_of={$parentId}&hide_empty=0");
+    $child = get_categories("parent={$parentId}&hide_empty=0");
     $list = array();
     foreach ($child as $child_item) {
         $list[] = array(
