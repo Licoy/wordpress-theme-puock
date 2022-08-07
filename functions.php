@@ -133,7 +133,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
     if ($cid != null) {
         $cate = get_category($cid);
         if ($cate != null) {
-            return '<a '.pk_link_target(false).' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
+            return '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
         }
     } else {
         $cats = get_the_category();
@@ -141,7 +141,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
             if ($all) {
                 $out = "";
                 foreach ($cats as $cate) {
-                    $out .= '<a '.pk_link_target(false).' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>、';
+                    $out .= '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>、';
                 }
                 $out = mb_substr($out, 0, mb_strlen($out) - 1);
                 return $out;
@@ -151,7 +151,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
                 } else {
                     $cate = get_category($cat);
                 }
-                return '<a '.pk_link_target(false).' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
+                return '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
             }
         }
     }
@@ -364,13 +364,13 @@ function pk_breadcrumbs()
         if (count($categorys) <= 0 && is_single()) {
             return false;
         }
-        if(is_single()){
+        if (is_single()) {
             $category = $categorys[0];
             if ($category == null && is_category()) {
                 $category = get_category($cat);
             }
             $cats = get_category_parents($category->term_id, true, '');
-        }else{
+        } else {
             $cats = get_category_parents($cat, true, '');
         }
         $cats = str_replace("<a", '<li class="breadcrumb-item"><a class="a-link"', $cats);

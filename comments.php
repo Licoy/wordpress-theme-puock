@@ -35,9 +35,9 @@
                             <?php if (!is_user_logged_in()): ?>
                                 <input type="text" value="0" hidden name="comment-logged" id="comment-logged">
                                 <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="author"
-                                                                                                 name="author"
-                                                                                                 class="form-control form-control-sm t-sm"
-                                                                                                 placeholder="<?php _e('昵称（必填）', PUOCK) ?>">
+                                                                                                name="author"
+                                                                                                class="form-control form-control-sm t-sm"
+                                                                                                placeholder="<?php _e('昵称（必填）', PUOCK) ?>">
                                 </div>
                                 <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="email" id="email"
                                                                                                 name="email"
