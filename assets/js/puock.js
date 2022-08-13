@@ -94,7 +94,13 @@ class Puock {
         if (el == null) {
             el = $(".comment-captcha");
         }
-        el.attr("src", el.attr("data-path") + '&t=' + (new Date()).getTime())
+        const url = el.attr("data-path") + '&t=' + (new Date()).getTime()
+        if (el.attr("src") == "") {
+            el.attr("data-src", url)
+        } else {
+            el.attr("src", url)
+        }
+
     }
 
     eventOpenSearchBox() {
@@ -461,8 +467,20 @@ class Puock {
                 this.setCommentInfo()
             },
             error: (res) => {
+                let jsonVal = null;
+                try {
+                    jsonVal = JSON.parse(res.responseText)
+                } catch (e) {
+                }
                 this.commentFormLoadStateChange();
-                this.infoToastShow(res.responseText);
+                if (jsonVal) {
+                    this.infoToastShow(jsonVal.msg);
+                    if (jsonVal.refresh_code) {
+                        this.loadCommentCaptchaImage(null);
+                    }
+                } else {
+                    this.infoToastShow(res.responseText);
+                }
             }
         });
     }

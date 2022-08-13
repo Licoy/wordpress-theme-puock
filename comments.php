@@ -61,9 +61,10 @@
                                                    id="comment-vd">
                                         </div>
                                         <div class="col-4 col-sm-5 pr15">
-                                            <img class="comment-captcha"
+                                            <img class="comment-captcha lazyload"
                                                  data-path="<?php echo get_admin_url() . 'admin-ajax.php?action=puock_comment_captcha&w=200&h=70' ?>"
-                                                 src=""
+                                                 data-src=""
+                                                 src="<?php echo pk_get_lazy_pl_img() ?>"
                                                  alt="验证码">
                                         </div>
                                     </div>

@@ -1,6 +1,6 @@
 <?php
 
-function pk_comment_err($msg)
+function pk_comment_err($msg, $refresh_code = true)
 {
     $protocol = $_SERVER['SERVER_PROTOCOL'];
     if (!in_array($protocol, array('HTTP/1.1', 'HTTP/2', 'HTTP/2.0'))) {
@@ -10,7 +10,10 @@ function pk_comment_err($msg)
     header('Allow: POST');
     header("$protocol 405 Method Not Allowed");
     header('Content-Type: text/plain');
-    echo $msg;
+    echo json_encode([
+        'msg' => $msg,
+        'refresh_code' => $refresh_code,
+    ]);
     exit();
 }
 
@@ -21,11 +24,11 @@ function pk_comment_ajax()
     nocache_headers();
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        pk_comment_err('无效的请求方式');
+        pk_comment_err('无效的请求方式',false);
     }
 
     if (pk_post_comment_is_closed()) {
-        pk_comment_err('评论功能已关闭');
+        pk_comment_err('评论功能已关闭',false);
     }
 
     //是否需要进行验证
@@ -34,11 +37,11 @@ function pk_comment_ajax()
         $token = $_REQUEST['comment-vd'];
 
         if (empty($token)) {
-            pk_comment_err('无效验证码');
+            pk_comment_err('无效验证码，已刷新请重新输入');
         }
         $session_comment_captcha = $_SESSION['comment_captcha'];
         if (!$session_comment_captcha || $session_comment_captcha == '' || trim($token) != $session_comment_captcha) {
-            pk_comment_err('无效验证码');
+            pk_comment_err('验证码不正确',false);
         }
 
         unset($_SESSION['comment_captcha']);
