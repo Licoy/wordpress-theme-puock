@@ -66,7 +66,7 @@ function save_post_meta_data($post_id, $boxes)
                 return $post_id;
         }
 
-        $data = $_POST[$meta_box['name'] . ''];
+        $data = @$_POST[$meta_box['name'] . ''];
 
         if (get_post_meta($post_id, $meta_box['name'] . '') == "")
             add_post_meta($post_id, $meta_box['name'] . '', $data, true);

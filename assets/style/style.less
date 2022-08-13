@@ -19,6 +19,7 @@
 @puockBg: #f8f8f9;
 
 // 浏览器样式
+
 @browserScrollbarWh: 8px;
 ::-webkit-scrollbar {
   width: @browserScrollbarWh;
@@ -26,14 +27,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px @colorSecondary;
+  -webkit-box-shadow: inset 0 0 6px rgba(70, 71, 72, 0.2);
   border-radius: @browserScrollbarWh;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: @browserScrollbarWh;
   background: #cacaca;
-  -webkit-box-shadow: inset 0 0 6px @colorSecondary;
+  -webkit-box-shadow: inset 0 0 6px rgba(127, 128, 130, 0.2);
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
@@ -1005,13 +1006,22 @@ a:hover {
     }
 
     p {
-      margin-bottom: 10px !important;
-      line-height: 1.7rem;
+      margin: 10px 0 !important;
+      line-height: 1.8;
     }
 
-    h1, h2, h3, h4, h5 {
+    blockquote{
+      p:not(:last-child){
+        margin: 0 0 10px 0 !important;
+      }
+      p:last-child{
+        margin: 0 !important;
+      }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
       position: relative;
-      margin-bottom: 10px;
+      margin: 16px 0;
     }
 
     .entry-h-border(@color) {
@@ -1019,22 +1029,10 @@ a:hover {
       border-left: 2px solid @color;
     }
 
-    h1, h2, h3 {
-      border-radius: 4px;
-      padding: 5px 10px;
-      background-color: #fdfcfc;
-    }
-
-    h1 {
-      .entry-h-border(@colorDanger);
-    }
-
-    h2 {
-      .entry-h-border(@colorPrimary);
-    }
-
-    h3 {
-      border-left: 2px solid @colorPrimary;
+    br:before{
+      display: block;
+      content: ' ';
+      margin: 10px 0;
     }
 
     .h-config(@size) {
@@ -1042,23 +1040,27 @@ a:hover {
     }
 
     h1 {
-      .h-config(22px)
+      .h-config(26px)
     }
 
     h2 {
-      .h-config(20px);
+      .h-config(24px);
     }
 
     h3 {
-      .h-config(16px);
+      .h-config(22px);
     }
 
     h4 {
-      .h-config(15px)
+      .h-config(20px)
     }
 
     h5 {
-      .h-config(13px)
+      .h-config(18px)
+    }
+
+    h6 {
+      .h-config(16px)
     }
 
     code:not([class]) {
@@ -1909,6 +1911,7 @@ a:hover {
 
 //颜色处理
 .puock-dark {
+
   .ta3-fun();
   background-color: @colorModeDarkBg;
 
@@ -1990,12 +1993,6 @@ a:hover {
 
     &.cat-top-info {
       box-shadow: 2px 2px 22px -7px rgba(78, 76, 74, 0.44);
-    }
-  }
-
-  .entry-content {
-    h1, h2, h3 {
-      background-color: @colorModeDarkBg !important;
     }
   }
 
