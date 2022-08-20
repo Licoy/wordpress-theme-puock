@@ -9,7 +9,7 @@
             <div id="post-main"
                  class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
                 <div class="p-block">
-                    <div><h2 id="post-title" class="mb-0 puock-text t-xxl"><?php the_title() ?></h2></div>
+                    <div><h1 id="post-title" class="mb-0 puock-text t-xxl"><?php the_title() ?></h1></div>
                     <div class="options clearfix mt20">
                         <div class="float-left">
                             <?php if (!pk_is_checked('hide_post_views')): ?>
