@@ -19,6 +19,7 @@ register_session();
 
 
 include('inc/fun/core.php');
+include('gutenberg/index.php');
 
 //去除感谢使用wordpress创作
 if (pk_is_checked('hide_footer_wp_t')) {

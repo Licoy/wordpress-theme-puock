@@ -1,0 +1,24 @@
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/alert/style.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.wp-block-puock-alert {
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+.wp-block-puock-alert .p--text {
+  padding: 10px;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #767676;
+  border-color: #f0f0f0;
+}
+.wp-block-puock-alert .p--center {
+  text-align: center;
+}
+.wp-block-puock-alert .danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

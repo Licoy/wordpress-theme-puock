@@ -8,3 +8,4 @@ cache/*
 !cache/index.html
 node_modules
 .tas.php
+gutenberg/source
