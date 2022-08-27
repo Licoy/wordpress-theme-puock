@@ -2,13 +2,13 @@
 <?php $blog_name = pk_get_web_title();
 $pkSeoPageInfo = ''; ?>
 <?php global $other_page_title;
-if(get_query_var('paged')){
+if (get_query_var('paged')) {
     $pkSeoPageInfo = $titleConn . '第' . get_query_var('paged') . '页';
 }
 if (isset($other_page_title)) { ?>
     <title><?php echo $other_page_title . $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
 <?php } else if (is_home()) { ?>
-    <title><?php echo $blog_name . $pkSeoPageInfo . $titleConn . pk_get_option('web_title_2'); ?></title>
+    <title><?php echo $blog_name . $pkSeoPageInfo . (pk_get_option('web_title_2') ? $titleConn . pk_get_option('web_title_2') : ''); ?></title>
 <?php } else if (is_search()) { ?><title>搜索"<?php echo $_REQUEST['s'] ?>
     "的结果<?php echo $titleConn . $pkSeoPageInfo . $blog_name ?></title>
 <?php } else if (is_single() || is_page()) { ?>
@@ -77,10 +77,10 @@ if (isset($other_page_title)) { ?>
     ?>
 <?php endif; ?>
 <?php
-if(is_home()){
-    echo '<link rel="canonical" href="'.home_url().'">';
-}else{
-    echo '<link rel="canonical" href="'.get_permalink().'">';
+if (is_home()) {
+    echo '<link rel="canonical" href="' . home_url() . '">';
+} else {
+    echo '<link rel="canonical" href="' . get_permalink() . '">';
 }
 ?>
 
