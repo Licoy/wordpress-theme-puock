@@ -3,9 +3,11 @@
 include '../../../wp-blog-header.php';
 
 get_header();
-
-$error_info = $_SESSION['error_info'];
-unset($_SESSION['error_info']);
+$error_info = "";
+pk_session_call(function () use (&$error_info) {
+    $error_info = $_SESSION['error_info'];
+    unset($_SESSION['error_info']);
+});
 
 if (empty($error_info)) {
     $error_info = __('无错误信息', PUOCK);

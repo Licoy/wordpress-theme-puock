@@ -24,11 +24,11 @@ function pk_comment_ajax()
     nocache_headers();
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        pk_comment_err('无效的请求方式',false);
+        pk_comment_err('无效的请求方式', false);
     }
 
     if (pk_post_comment_is_closed()) {
-        pk_comment_err('评论功能已关闭',false);
+        pk_comment_err('评论功能已关闭', false);
     }
 
     //是否需要进行验证
@@ -39,13 +39,17 @@ function pk_comment_ajax()
         if (empty($token)) {
             pk_comment_err('无效验证码，已刷新请重新输入');
         }
-        $session_comment_captcha = $_SESSION['comment_captcha'];
-        if (!$session_comment_captcha || $session_comment_captcha == '' || trim($token) != $session_comment_captcha) {
-            pk_comment_err('验证码不正确',false);
+        $validate_pass = true;
+        pk_session_call(function () use ($token, &$validate_pass) {
+            $session_comment_captcha = $_SESSION['comment_captcha'];
+            if (!$session_comment_captcha || $session_comment_captcha == '' || trim($token) != $session_comment_captcha) {
+                $validate_pass = false;
+            }
+            unset($_SESSION['comment_captcha']);
+        });
+        if (!$validate_pass) {
+            pk_comment_err('验证码不正确', false);
         }
-
-        unset($_SESSION['comment_captcha']);
-
     }
 
     $comment_post_ID = isset($_POST['comment_post_ID']) ? (int)$_POST['comment_post_ID'] : 0;

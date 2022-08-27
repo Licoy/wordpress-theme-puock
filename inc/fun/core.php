@@ -50,6 +50,29 @@ if (pk_is_checked('html_page_permalink')) {
 add_filter('user_trailingslashit', 'add_init_trailingslashit', 10, 2);
 
 
+function pk_open_session()
+{
+    if (!session_id()) {
+        session_start();
+    }
+}
+
+function pk_wclose_session()
+{
+    session_write_close();
+}
+
+function pk_session_call($function)
+{
+    pk_open_session();
+    try {
+        $function();
+    } finally {
+        session_write_close();
+    }
+}
+
+
 // 顶部添加自定义菜单
 function pk_toolbar_link($bar)
 {
@@ -328,7 +351,10 @@ function oauth_qq_redirect_ajax()
     }
     $state = $_GET['state'];
     $from_redirect = $_GET['redirect'];
-    $state_session = $_SESSION['qq_oauth_state'];
+    $state_session = "";
+    pk_session_call(function () use (&$state_session){
+        $state_session = $_SESSION['qq_oauth_state'];
+    });
     $code = $_GET['code'];
     if ($state !== $state_session || empty($code)) {
         oauth_qq_redirect_page(false, '非法State - 授权请求');
@@ -400,13 +426,16 @@ function oauth_qq_redirect_page($success = true, $info = '', $from_redirect = ''
             echo "<html><script>window.location=\"" . $from_redirect . "\"</script></html>";
         }
     } else {
-        $_SESSION['error_info'] = $info;
+        pk_session_call(function () use ($info) {
+            $_SESSION['error_info'] = $info;
+        });
         echo "<html><script>window.location=\"" . PUOCK_ABS_URI . "/error.php\"</script></html>";
     }
 }
 
 function pk_get_oauth_info($type = 'qq', $redirect = '', $gen_state = true)
 {
+    pk_open_session();
     $qq_open = pk_is_checked('oauth_qq');
     $qq_oauth_id = pk_get_option('oauth_qq_id');
     $qq_oauth_key = pk_get_option('oauth_qq_key');
@@ -417,6 +446,7 @@ function pk_get_oauth_info($type = 'qq', $redirect = '', $gen_state = true)
     } else {
         $qq_oauth_state = $_SESSION['qq_oauth_state'];
     }
+    pk_wclose_session();
     $auth_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id={$qq_oauth_id}&redirect_uri={$redirect}&state=" . $qq_oauth_state;
     return array(
         'qq_open' => $qq_open,
@@ -785,7 +815,7 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
         if (!$mobile) {
             $out .= "<a {$target} href='{$menu->url}'>{$menu->title}";
         } else {
-            $out .= '<span><a '.$target.' href="' . $menu->url . '">' . $menu->title . '</a>';
+            $out .= '<span><a ' . $target . ' href="' . $menu->url . '">' . $menu->title . '</a>';
         }
         if (count($menu->children) > 0) {
             if ($mobile) {

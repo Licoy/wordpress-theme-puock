@@ -312,7 +312,9 @@ function pk_comment_captcha()
     ]);
     $result = $captch->create();
     $text = $result->getText();
-    $_SESSION['comment_captcha'] = $text;
+    pk_session_call(function () use ($text) {
+        $_SESSION['comment_captcha'] = $text;
+    });
     $result->output();
     die;
 }

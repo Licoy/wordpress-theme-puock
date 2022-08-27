@@ -7,17 +7,6 @@ const PUOCK = 'puock';
 const PUOCK_OPT = 'puock_options';
 $puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
-//添加session支持
-function register_session()
-{
-    if (!session_id()) {
-        session_start();
-    }
-}
-
-register_session();
-
-
 include('inc/fun/core.php');
 include('gutenberg/index.php');
 
