@@ -68,10 +68,10 @@
     <div id="search" class="d-none">
         <div class="w-100 d-flex justify-content-center">
             <div id="search-main" class="container p-block">
-                <form action="<?php echo home_url() ?>">
+                <form class="global-search-form" action="<?php echo home_url() ?>">
                     <div class="search-layout">
                         <div class="search-input">
-                            <input required type="text" name="s" id="s" class="form-control"
+                            <input required type="text" name="s" class="form-control"
                                    placeholder="<?php _e('请输入搜索关键字', PUOCK) ?>">
                         </div>
                         <div class="search-start">

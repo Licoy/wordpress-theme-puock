@@ -480,7 +480,7 @@ class puockSearch extends puockWidgetBase {
             </div>
             <?php endif; ?>
             <div class="<?php if(!$this->is_checked($instance['hide_title'])): ?>mt20<?php endif; ?>">
-                <form action="<?php echo home_url() ?>" method="get">
+                <form class="global-search-form" action="<?php echo home_url() ?>" method="get">
                     <div class="input-group">
                         <input type="text" name="s" class="form-control t-md" placeholder="<?php echo $instance['pl'] ?>">
                     </div>

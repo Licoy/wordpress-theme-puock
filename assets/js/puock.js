@@ -43,7 +43,7 @@ class Puock {
             this.instanceClickLoad()
         }
         this.sidebarMenuEventInit()
-        this.eventOpenSearchBox()
+        this.searchInit()
         this.eventShareStart()
         this.modeInit();
         this.registerMobileMenuEvent()
@@ -71,6 +71,12 @@ class Puock {
 
     instanceClickLoad() {
         InstantClick.init('mousedown');
+        InstantClick.go = (url) => {
+            const link = document.createElement('a');
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+        }
         InstantClick.on('change', () => {
             this.loadParams()
             this.pageChangeInit()
@@ -103,15 +109,29 @@ class Puock {
 
     }
 
-    eventOpenSearchBox() {
-        $(document).on("click", ".search-modal-btn", () => {
+    searchInit() {
+        const toggle = () => {
             const search = $("#search");
             const open = search.attr("data-open") === "true";
             let tag = open ? 'Out' : 'In';
             search.attr("class", "animated fade" + tag + "Left");
             $("#search-backdrop").attr("class", "modal-backdrop animated fade" + tag + "Right");
             search.attr("data-open", !open);
+        }
+        $(document).on("click", ".search-modal-btn", () => {
+            toggle();
         });
+        $(document).on("click", "#search-backdrop", () => {
+            toggle();
+        })
+        $(document).on("submit", ".global-search-form", (e) => {
+            if (this.data.params.is_pjax) {
+                const el = $(e.currentTarget)
+                InstantClick.go(el.attr("action") + "/?" + el.serialize())
+                return false;
+            }
+            return true;
+        })
     }
 
     eventShareStart() {
