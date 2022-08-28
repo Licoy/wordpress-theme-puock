@@ -293,10 +293,22 @@ class Puock {
     initCodeHighlight() {
         if (window.hljs !== undefined) {
             window.hljs.configure({ignoreUnescapedHTML: true})
-            document.querySelectorAll('pre').forEach((block) => {
+            document.querySelectorAll('pre').forEach((block, index) => {
+                const el = $(block);
+                el.attr("id", "hljs-item-" + index)
+                el.before("<div class='pk-code-tools' data-pre-id='hljs-item-" + index + "'><div class='dot'>" +
+                    "<i></i><i></i><i></i></div><div class='actions'><div><i class='i czs-list-clipboard-l cp-code' data-clipboard-target='#hljs-item-" + index + "'></i></div></div></div>")
                 window.hljs.highlightBlock(block);
                 window.hljs.lineNumbersBlock(block);
             });
+            const cp = new ClipboardJS('.cp-code');
+            cp.on("success",(e)=>{
+                const el = $(e.trigger);
+                el.removeClass("czs-list-clipboard-l").addClass("czs-right-clipboard-l")
+                setTimeout(() => {
+                    el.removeClass("czs-right-clipboard-l").addClass("czs-list-clipboard-l")
+                }, 1500)
+            })
         }
     }
 

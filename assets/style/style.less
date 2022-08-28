@@ -17,6 +17,7 @@
 @colorModeDarkLink: @colorDark;
 @inputBg: #2f3840;
 @puockBg: #f8f8f9;
+@preRadius: 5px;
 
 // 浏览器样式
 
@@ -65,13 +66,12 @@ blockquote {
   user-select: none;
   text-align: center;
   color: #8e8d8d;
-  border-right: 1px solid #3f3f3f;
   vertical-align: top;
   display: inline-block;
   margin-right: 10px;
 
   .hljs-ln-n {
-    margin-right: 5px;
+    margin-right: 3px;
     min-width: 20px;
   }
 
@@ -154,9 +154,11 @@ p, div {
 
 pre {
   padding: 10px;
-  border-radius: 5px;
+  border-bottom-left-radius: @preRadius;
+  border-bottom-right-radius: @preRadius;
   font-size: inherit;
 }
+
 
 body.pre-mac pre {
   font-size: 100%;
@@ -368,11 +370,13 @@ body.pre-mac pre {
 #logo {
   padding: 10px;
   max-width: 200px;
-  @height:45px;
-  img{
+  @height: 45px;
+
+  img {
     height: @height;
   }
-  .txt-logo{
+
+  .txt-logo {
     line-height: @height;
   }
 }
@@ -1010,11 +1014,12 @@ a:hover {
       line-height: 1.8;
     }
 
-    blockquote{
-      p:not(:last-child){
+    blockquote {
+      p:not(:last-child) {
         margin: 0 0 10px 0 !important;
       }
-      p:last-child{
+
+      p:last-child {
         margin: 0 !important;
       }
     }
@@ -1029,7 +1034,7 @@ a:hover {
       border-left: 2px solid @color;
     }
 
-    br:before{
+    br:before {
       display: block;
       content: ' ';
       margin: 10px 0;
@@ -2087,4 +2092,51 @@ a:hover {
   cursor: pointer;
   height: 28px;
   width: 100px;
+}
+
+.pk-code-tools {
+  background-color: #282c34;
+  border-top-left-radius: @preRadius;
+  border-top-right-radius: @preRadius;
+  padding: 5px 10px 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+
+  .dot {
+    i {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 6px;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+
+      &:nth-child(1) {
+        background-color: #FF5F56;
+      }
+
+      &:nth-child(2) {
+        background-color: #FFBD2E;
+      }
+
+      &:nth-child(3) {
+        background-color: #27C93F;
+      }
+    }
+  }
+
+  .actions {
+    .i {
+      color: @colorModeDarkFont - 50;
+      cursor: pointer;
+      transition: all .3s;
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+  }
 }
