@@ -732,24 +732,12 @@ class puockTagHitokoto extends puockWidgetBase {
     }
 
     function widget( $args, $instance ){
-        $this->get_common_widget_header($instance);
-        $id = "pk-hitokoto-".wp_unique_id();
-        ?>
+        $this->get_common_widget_header($instance); ?>
         <div class="widget-puock-hitokoto">
-            <div id="<?php echo $id ?>">
-                <div class="t puock-text">
-                    <div class="spinner-grow text-primary" role="status"></div>
-                </div>
-                <div class="fb d-none">-「<span class="f"></span>」</div>
+            <div class="t puock-text">
+                <div class="spinner-grow text-primary" role="status"></div>
             </div>
-            <script type="application/javascript">
-            $.get("https://v1.hitokoto.cn/", function (res){
-                const el = $("#<?php echo $id ?>");
-                el.find(".t").text(res.hitokoto);
-                el.find('.f').text(res.from);
-                el.find('.fb').removeClass("d-none");
-            },'json');
-            </script>
+            <div class="fb d-none">-「<span class="f"></span>」</div>
         </div>
        <?php $this->get_common_widget_footer($instance);
      }

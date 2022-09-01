@@ -12,7 +12,8 @@ class Puock {
             is_pjax: false,
             vd_comment: false,
             main_lazy_img: false,
-            link_blank_open: false
+            link_blank_open: false,
+            async_view_id: null,
         },
         comment: {
             loading: false,
@@ -78,9 +79,13 @@ class Puock {
             link.click();
         }
         InstantClick.on('change', () => {
-            this.loadParams()
+            this.loadParams();
             this.pageChangeInit()
         })
+        // InstantClick.on('receive',(url, body, title)=>{
+        //     console.log(body)
+        //     this.loadParams($(body))
+        // })
         this.loadCommentInfo();
     }
 
@@ -206,7 +211,7 @@ class Puock {
     }
 
     loadParams() {
-        this.data.params = JSON.parse($("meta[name='puock-params']").attr("content"))
+        this.data.params = puock_metas;
         this.data.commentVd = this.data.params.vd_comment === 'on';
     }
 
@@ -229,6 +234,8 @@ class Puock {
         this.generatePostQrcode();
         this.initGithubCard();
         this.keyUpHandle();
+        this.loadHitokoto();
+        this.asyncCacheViews();
         if (this.data.params.use_post_menu) {
             this.generatePostMenuHTML()
         }
@@ -290,25 +297,29 @@ class Puock {
         }
     }
 
-    initCodeHighlight() {
+    initCodeHighlight(fullChange = true) {
         if (window.hljs !== undefined) {
             window.hljs.configure({ignoreUnescapedHTML: true})
             document.querySelectorAll('pre').forEach((block, index) => {
                 const el = $(block);
-                el.attr("id", "hljs-item-" + index)
-                el.before("<div class='pk-code-tools' data-pre-id='hljs-item-" + index + "'><div class='dot'>" +
-                    "<i></i><i></i><i></i></div><div class='actions'><div><i class='i czs-list-clipboard-l cp-code' data-clipboard-target='#hljs-item-" + index + "'></i></div></div></div>")
-                window.hljs.highlightBlock(block);
-                window.hljs.lineNumbersBlock(block);
+                if (!el.attr("id")) {
+                    el.attr("id", "hljs-item-" + index)
+                    el.before("<div class='pk-code-tools' data-pre-id='hljs-item-" + index + "'><div class='dot'>" +
+                        "<i></i><i></i><i></i></div><div class='actions'><div><i class='i czs-list-clipboard-l cp-code' data-clipboard-target='#hljs-item-" + index + "'></i></div></div></div>")
+                    window.hljs.highlightBlock(block);
+                    window.hljs.lineNumbersBlock(block);
+                }
             });
-            const cp = new ClipboardJS('.cp-code');
-            cp.on("success",(e)=>{
-                const el = $(e.trigger);
-                el.removeClass("czs-list-clipboard-l").addClass("czs-right-clipboard-l")
-                setTimeout(() => {
-                    el.removeClass("czs-right-clipboard-l").addClass("czs-list-clipboard-l")
-                }, 1500)
-            })
+            if (fullChange) {
+                const cp = new ClipboardJS('.cp-code');
+                cp.on("success", (e) => {
+                    const el = $(e.trigger);
+                    el.removeClass("czs-list-clipboard-l").addClass("czs-right-clipboard-l")
+                    setTimeout(() => {
+                        el.removeClass("czs-right-clipboard-l").addClass("czs-list-clipboard-l")
+                    }, 1500)
+                })
+            }
         }
     }
 
@@ -341,16 +352,19 @@ class Puock {
         this.localstorageToggle("comment_url", $("#url").val());
     }
 
-    asyncCacheViews(postId) {
-        $.post(this.data.params.home + "/wp-admin/admin-ajax.php?action=async_pk_views", {id: postId}, (res) => {
-            if (res.code !== 0) {
-                console.error(res.msg)
-            } else {
-                $("#post-views").text(res.data)
-            }
-        }, 'json').error((e) => {
-            console.error(e)
-        })
+    asyncCacheViews() {
+        if (this.data.params.async_view_id) {
+            $.post(this.data.params.home + "/wp-admin/admin-ajax.php?action=async_pk_views",
+                {id: this.data.params.async_view_id}, (res) => {
+                    if (res.code !== 0) {
+                        console.error(res.msg)
+                    } else {
+                        $("#post-views").text(res.data)
+                    }
+                }, 'json').error((e) => {
+                console.error(e)
+            })
+        }
     }
 
     modeInit() {
@@ -419,8 +433,9 @@ class Puock {
         });
     }
 
-    gotoCommentArea() {
-        $('html,body').animate({scrollTop: $("#comments").offset().top}, 800);
+    gotoCommentArea(speed = 800) {
+        const top = $("#comments").offset().top - $("#header").height() - 10;
+        $('html,body').animate({scrollTop: top}, speed);
         this.lazyLoadInit()
     }
 
@@ -436,11 +451,12 @@ class Puock {
             let href = $(this.ct(e)).attr("href");
             this.pushAjaxCommentHistoryState(href);
             postCommentsEl.html(" ");
+            this.gotoCommentArea(200);
             loadBox.removeClass('d-none');
             $.post(href, {}, (data) => {
                 postCommentsEl.html($(data).find("#post-comments"));
                 loadBox.addClass('d-none');
-                this.initCodeHighlight();
+                this.initCodeHighlight(false);
                 this.gotoCommentArea()
             }).error(() => {
                 location = href;
@@ -687,6 +703,17 @@ class Puock {
                 }
             }
         }
+    }
+
+    loadHitokoto() {
+        $(".widget-puock-hitokoto").each((_, v) => {
+            const el = $(v);
+            $.get("https://v1.hitokoto.cn/", (res) => {
+                el.find(".t").text(res.hitokoto);
+                el.find('.f').text(res.from);
+                el.find('.fb').removeClass("d-none");
+            }, 'json')
+        })
     }
 
 }

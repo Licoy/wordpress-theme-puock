@@ -33,10 +33,15 @@ if (pk_is_checked('hide_footer_wp_t')) {
     add_filter('update_footer', 'my_update_footer', 50);
 }
 
-//禁用5.0编辑器
+//禁用5.0古登堡编辑器
 if (pk_is_checked('stop5x_editor')) {
     add_filter('use_block_editor_for_post', '__return_false');
     remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
+    function remove_global_styles_and_svg_filters() {
+        remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
+        remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
+    }
+    add_action('init', 'remove_global_styles_and_svg_filters');
 }
 
 //区块小工具
