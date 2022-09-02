@@ -210,6 +210,7 @@ class puockHotPost extends puockWidgetBase {
                     )
                 ),
         ));
+        wp_reset_query();
         $out = "";
         foreach ($posts as $post){
             $out .= '<div class="media-link mt20">
@@ -271,6 +272,7 @@ class puockNewPost extends puockWidgetBase {
                     )
                 ),
         ));
+        wp_reset_query();
         $out = "";
         foreach ($posts as $post){
             $out .= '<div class="media-link mt20">
@@ -335,6 +337,7 @@ class puockHotCommentPost extends puockWidgetBase {
                     )
                 ),
         ));
+        wp_reset_query();
         $out = "";
         foreach ($posts as $post){
             $out .= '<div class="media-link mt20">
