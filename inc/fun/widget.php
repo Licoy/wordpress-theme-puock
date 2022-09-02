@@ -167,6 +167,7 @@ class puockHotPost extends puockWidgetBase {
             array('id'=>'title','strip'=>true, 'val'=>$this->title),
             array('id'=>'nums', 'val'=>5),
             array('id'=>'days', 'val'=>31),
+            array('id'=>'categories','strip'=>true, 'val'=>''),
         ));
     }
 
@@ -175,6 +176,7 @@ class puockHotPost extends puockWidgetBase {
         $this->html_gen($instance, '标题', 'title');
         $this->html_gen($instance, '显示篇数', 'nums');
         $this->html_gen($instance, '最近N天内', 'days');
+        $this->html_gen($instance, '指定分类ID（多个ID之间使用,进行分隔）', 'categories');
         $this->merge_common_form($instance);
     }
 
@@ -186,7 +188,28 @@ class puockHotPost extends puockWidgetBase {
     function widget( $args, $instance ){
         $days = $this->get_num_val($instance, 'days');
         $nums = $this->get_num_val($instance, 'nums');
-        $posts = get_views_most_post($days, $nums);
+        $posts = query_posts(array(
+                'post_type'=>'post',
+                'post_status'=>'publish',
+                'showposts'=>$nums,
+                'cat'=>$instance['categories'],
+                'ignore_sticky_posts'=>1,
+                'orderby' => 'meta_value_num',
+                'meta_type' => 'NUMERIC',
+                'meta_query'=> array(
+                        'relation' => 'OR',
+                        array(
+                                'key'=>'views',
+                                'compare' => 'EXISTS',
+                        ),
+                ),
+                'date_query'=>array(
+                    array(
+                        'after'=>date('Y-m-d', strtotime("-{$days} days")),
+                        'inclusive'=>true
+                    )
+                ),
+        ));
         $out = "";
         foreach ($posts as $post){
             $out .= '<div class="media-link mt20">
@@ -219,6 +242,7 @@ class puockNewPost extends puockWidgetBase {
             array('id'=>'title','strip'=>true, 'val'=>$this->title),
             array('id'=>'days', 'val'=>31),
             array('id'=>'nums', 'val'=>5),
+            array('id'=>'categories','strip'=>true, 'val'=>''),
         ));
     }
 
@@ -227,17 +251,26 @@ class puockNewPost extends puockWidgetBase {
         $this->html_gen($instance, '标题', 'title');
         $this->html_gen($instance, '最近N天内', 'days');
         $this->html_gen($instance, '显示篇数', 'nums');
+        $this->html_gen($instance, '指定分类ID（多个ID之间使用,进行分隔）', 'categories');
         $this->merge_common_form($instance);
     }
 
     function widget( $args, $instance ){
-        global $wpdb;
         $days = $this->get_num_val($instance, 'days');
         $nums = $this->get_num_val($instance, 'nums');
-        $sql = "SELECT * FROM $wpdb->posts WHERE post_type = 'post'
-                AND post_status = 'publish' AND TO_DAYS(now()) - TO_DAYS(post_date) < {$days}
-                ORDER BY ID DESC LIMIT 0 , {$nums} ";
-        $posts = $wpdb->get_results($sql);
+        $posts = query_posts(array(
+                'post_type'=>'post',
+                'post_status'=>'publish',
+                'showposts'=>$nums,
+                'cat'=>$instance['categories'],
+                'ignore_sticky_posts'=>1,
+                'date_query'=>array(
+                    array(
+                        'after'=>date('Y-m-d', strtotime("-{$days} days")),
+                        'inclusive'=>true
+                    )
+                ),
+        ));
         $out = "";
         foreach ($posts as $post){
             $out .= '<div class="media-link mt20">
@@ -271,6 +304,7 @@ class puockHotCommentPost extends puockWidgetBase {
             array('id'=>'title','strip'=>true, 'val'=>$this->title),
             array('id'=>'days', 'val'=>31),
             array('id'=>'nums', 'val'=>5),
+            array('id'=>'categories','strip'=>true, 'val'=>''),
         ));
     }
 
@@ -279,17 +313,28 @@ class puockHotCommentPost extends puockWidgetBase {
         $this->html_gen($instance, '标题', 'title');
         $this->html_gen($instance, '最近N天内', 'days');
         $this->html_gen($instance, '显示篇数', 'nums');
+        $this->html_gen($instance, '指定分类ID（多个ID之间使用,进行分隔）', 'categories');
         $this->merge_common_form($instance);
     }
 
     function widget( $args, $instance ){
-        global $wpdb;
         $days = $this->get_num_val($instance, 'days');
         $nums = $this->get_num_val($instance, 'nums');
-        $sql = "SELECT * FROM $wpdb->posts WHERE post_type = 'post' 
-                AND post_status = 'publish' AND TO_DAYS(now()) - TO_DAYS(post_date) < {$days}
-                ORDER BY comment_count DESC LIMIT 0 , {$nums} ";
-        $posts = $wpdb->get_results($sql);
+        $posts = query_posts(array(
+                'post_type'=>'post',
+                'post_status'=>'publish',
+                'showposts'=>$nums,
+                'cat'=>$instance['categories'],
+                'ignore_sticky_posts'=>1,
+                'orderby'=>'comment_count',
+                'order' => 'DESC',
+                'date_query'=>array(
+                    array(
+                        'after'=>date('Y-m-d', strtotime("-{$days} days")),
+                        'inclusive'=>true
+                    )
+                ),
+        ));
         $out = "";
         foreach ($posts as $post){
             $out .= '<div class="media-link mt20">
@@ -494,7 +539,6 @@ add_action( 'widgets_init', function (){ register_widget('puockSearch'); });
 //随机文章
 class puockRandomPost extends puockWidgetBase {
 
-
     protected $title = "随机文章";
 
     protected $pre_title = "显示指定范围内的";
@@ -624,12 +668,14 @@ class puockCategory extends puockWidgetBase {
     function get_fields(){
         return $this->merge_common_fields(array(
             array('id'=>'title','strip'=>true, 'val'=>$this->title),
+            array('id'=>'categories','strip'=>true, 'val'=>''),
         ));
     }
 
     function form( $instance ) {
         $instance = $this->default_value($instance);
         $this->html_gen($instance, '标题', 'title');
+        $this->html_gen($instance, '指定分类ID（多个ID之间使用,进行分隔）', 'categories');
         $this->merge_common_form($instance);
     }
 
@@ -639,7 +685,10 @@ class puockCategory extends puockWidgetBase {
     }
 
     function widget( $args, $instance ){
-        $cats = get_categories();
+        $cat_ids= $instance['categories'];
+        $cats = get_categories(array(
+                'include'=>$cat_ids
+        ));
         $this->get_common_widget_header($instance);
         echo '<div class="row t-md">';
         foreach ($cats as $cat){ ?>
