@@ -51,3 +51,14 @@ jQuery(function () {
         $('#insert-shortcode-wrap').removeClass('cur')
     });
 })
+
+window.puockSelectMedia = (params = {}, callback = null) => {
+    const wpMedia = wp.media(params)
+    wpMedia.on('select', function () {
+        const media = wpMedia.state().get('selection').first()
+        if (callback) {
+            callback(media)
+        }
+    })
+    wpMedia.open()
+}
