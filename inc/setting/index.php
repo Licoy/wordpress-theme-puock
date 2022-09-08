@@ -2,11 +2,12 @@
 
 function pk_register_options_setting_menu() {
     add_menu_page(
-        "Puock配置",
-        "Puock配置",
+        "Puock主题配置",
+        "Puock主题配置",
         "manage_options",
         "puock-options",
-        'pk_options_page'
+        'pk_options_page',
+        'dashicons-art',
     );
 }
 

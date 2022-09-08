@@ -1,48 +1,20 @@
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/assets/dist/setting/index.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
-<style>
-    #wpcontent {
-        margin-left: 140px
-    }
-
-    @media screen and (max-width: 782px) {
-        #wpcontent {
-            padding-left: 0 !important;
-        }
-    }
-
-    @media screen and (max-width: 960px) {
-        #wpcontent {
-            margin-left: 0 !important;
-        }
-    }
-
-    .n-message-wrapper, .n-message-container, .n-modal-container {
-        z-index: 999999 !important;
-    }
-
-    .n-input input:focus, .n-input textarea:focus {
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    .n-code {
-        padding: 0;
-        background: none !important;
-    }
-</style>
-<div id="app"></div>
+<style id="pk-options-style"></style>
+<div id="app">
+    <div style="padding: 40px;font-size: 30px">loading...</div>
+</div>
 <script>
     jQuery(function () {
-        var wpBodyContentEl = jQuery("#wpbody-content")
         var wpAdminBarEl = jQuery("#wpadminbar")
         var wpFooterEl = jQuery("#wpfooter")
+        var pkOptionsStyleEl = jQuery("#pk-options-style")
 
         function loadWpContentHeight() {
             var h = window.innerHeight - wpAdminBarEl.height() - wpFooterEl.height() - 50
-            wpBodyContentEl.attr("style", "height:" + h + "px")
+            pkOptionsStyleEl.html("#wpbody-content{height:" + h + "px}#pk-options-box{height:" + (window.innerHeight - wpAdminBarEl.height()) + "px}")
         }
 
-        window.onresize = loadWpContentHeight
+        window.addEventListener("resize", loadWpContentHeight)
 
         loadWpContentHeight()
     })

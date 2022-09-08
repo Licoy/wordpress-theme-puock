@@ -28,6 +28,8 @@ function pk_ajax_get_theme_options()
                 'pages' => $pages,
                 'categories' => get_all_category_id_row('category'),
                 'link_categories' => get_all_category_id_row('link_category'),
+                'home_url'=>home_url(),
+                'admin_url'=>admin_url(),
             ]
         ]);
     } else {
