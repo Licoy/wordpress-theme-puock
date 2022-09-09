@@ -127,30 +127,6 @@ $basic_metas = array(
         "title" => "评论仅对作者可见",
         "type" => "checkbox"
     ),
-    "banner" => array(
-        "name" => "banner",
-        "std" => "",
-        "title" => "添加到首页幻灯",
-        "type" => "checkbox"
-    ),
-    "banner_company" => array(
-        "name" => "banner_company",
-        "std" => "",
-        "title" => "添加到企业首页幻灯（请尽量使用16:4(5)的通栏图片）",
-        "type" => "checkbox"
-    ),
-    "banner_url" => array(
-        "name" => "banner_url",
-        "std" => "",
-        "title" => "首页幻灯片展示图URL（图片尺寸请尽量>=800px，并所有幻灯片展示的图宽高均为一致）",
-        "type" => "text"
-    ),
-    "banner_to" => array(
-        "name" => "banner_to",
-        "std" => "",
-        "title" => "（选填）幻灯指向的链接，默认为本篇文章的地址",
-        "type" => "text"
-    ),
     "origin_author" => array(
         "name" => "origin_author",
         "std" => "",
