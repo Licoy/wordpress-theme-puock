@@ -192,7 +192,7 @@ class puockHotPost extends puockWidgetBase {
                 'post_type'=>'post',
                 'post_status'=>'publish',
                 'showposts'=>$nums,
-                'cat'=>$instance['categories'],
+                'cat'=>@$instance['categories'],
                 'ignore_sticky_posts'=>1,
                 'orderby' => 'meta_value_num',
                 'meta_type' => 'NUMERIC',
@@ -263,7 +263,7 @@ class puockNewPost extends puockWidgetBase {
                 'post_type'=>'post',
                 'post_status'=>'publish',
                 'showposts'=>$nums,
-                'cat'=>$instance['categories'],
+                'cat'=>@$instance['categories'],
                 'ignore_sticky_posts'=>1,
                 'date_query'=>array(
                     array(
@@ -326,7 +326,7 @@ class puockHotCommentPost extends puockWidgetBase {
                 'post_type'=>'post',
                 'post_status'=>'publish',
                 'showposts'=>$nums,
-                'cat'=>$instance['categories'],
+                'cat'=>@$instance['categories'],
                 'ignore_sticky_posts'=>1,
                 'orderby'=>'comment_count',
                 'order' => 'DESC',
@@ -688,7 +688,7 @@ class puockCategory extends puockWidgetBase {
     }
 
     function widget( $args, $instance ){
-        $cat_ids= $instance['categories'];
+        $cat_ids= @$instance['categories'];
         $cats = get_categories(array(
                 'include'=>$cat_ids
         ));
