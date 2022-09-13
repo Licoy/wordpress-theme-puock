@@ -166,12 +166,40 @@ class Puock {
     }
 
     sidebarMenuEventInit() {
+        let currentOpenSubMenu = null;
         $(document).on("touchend", "#post-menu-state", (e) => {
             e.preventDefault();
             this.toggleMenu();
         });
         $(document).on("click", "#post-menu-state", () => {
             this.toggleMenu();
+        });
+        $(document).on("click", ".post-menu-item", (e) => {
+            const el = $(this.ct(e))
+            const id = el.attr("data-id")
+            if (currentOpenSubMenu) {
+                const parentUl = el.parents("ul")
+                let curClass = "post-menu-sub-" + currentOpenSubMenu
+                while (true) {
+                    if (typeof (curClass) === "undefined") {
+                        break
+                    }
+                    const currentMenu = $("." + curClass)
+                    const classStr = currentMenu.attr("class")
+                    const und = typeof (classStr) == "undefined"
+                    if (und || parentUl.attr("class") === currentMenu.attr("class")) {
+                        break;
+                    } else {
+                        currentMenu.hide();
+                        curClass = currentMenu.parents("ul").attr("class");
+                    }
+                }
+            }
+            const subMenu = $(".post-menu-sub-" + id)
+            if (subMenu.length > 0) {
+                subMenu.show()
+                currentOpenSubMenu = id
+            }
         });
         $(document).on("click", ".pk-menu-to", (e) => {
             const to = $(this.ct(e)).attr("href");
@@ -273,25 +301,92 @@ class Puock {
         if (menus.length > 0) {
             let result = "<ul>";
             if (menus.length > 0) {
-                let heightLevel = 6;
-                for (let i = 0; i < menus.length; i++) {
-                    const level = parseInt(menus[i].level[1]);
-                    if (level < heightLevel) {
-                        heightLevel = level;
-                    }
+                const finalMenus = []
+                let maxLevel = 6;
+                const initChildren = (item) => {
+                    item.children = []
+                    return item
                 }
-                for (let i = 0; i < menus.length; i++) {
-                    const m = menus[i];
-                    let pl = 0;
-                    const level = parseInt(m.level[1]);
-                    if (level > heightLevel) {
-                        pl = (level - heightLevel) * 10;
+                const getLevel = (item) => {
+                    item.levelInt = parseInt(item.level.replace("h", ""))
+                    if (item.levelInt < maxLevel) {
+                        maxLevel = item.levelInt
                     }
-                    result += `<li style='padding-left:${pl}px' class='t-line-1'><i class='czs-angle-right-l t-sm c-sub mr-1'></i><a class='pk-menu-to a-link t-w-400 t-md' href='#${m.id}'>${m.name}</a></li>`;
+                    return item.levelInt
                 }
+                const firstMenu = initChildren(menus[0])
+                const firstLevel = getLevel(firstMenu)
+                let loadIndex = 0;
+                const eqLevelFn = (unMenu, parentMen) => {
+                    const nextUnMenu = loadMenu(unMenu, parentMen)
+                    if (nextUnMenu != null) {
+                        if(getLevel(nextUnMenu) === getLevel(unMenu)){
+                            return eqLevelFn(nextUnMenu, parentMen)
+                        }
+                    }
+                    return nextUnMenu;
+                }
+                const loadMenu = (menu, parentMenu) => {
+                    if (loadIndex >= menus.length - 1) {
+                        return null;
+                    }
+                    const nextIndex = ++loadIndex;
+                    const nextMenu = initChildren(menus[nextIndex])
+                    const nowLevel = getLevel(menu)
+                    const nextLevel = getLevel(nextMenu)
+                    let unknownMenu = null;
+                    if (nextLevel === firstLevel) {
+                        finalMenus.push(nextMenu)
+                        unknownMenu = loadMenu(nextMenu, null)
+                    } else if (nextLevel > nowLevel) {
+                        menu.children.push(nextMenu)
+                        unknownMenu = loadMenu(nextMenu, menu)
+                    } else if (nextLevel === nowLevel && parentMenu != null) {
+                        parentMenu.children.push(nextMenu)
+                        unknownMenu = loadMenu(nextMenu, parentMenu)
+                    } else {
+                        return nextMenu
+                    }
+                    if (unknownMenu != null) {
+                        const unknownLevel = getLevel(unknownMenu)
+                        if (unknownLevel === nowLevel) {
+                            parentMenu.children.push(unknownMenu)
+                            unknownMenu = eqLevelFn(unknownMenu, parentMenu)
+                        }
+                    }
+                    return unknownMenu
+                }
+                finalMenus.push(firstMenu)
+                while (true) {
+                    const unknownMenu = loadMenu(firstMenu, null)
+                    if (unknownMenu == null) {
+                        break
+                    }
+                    loadMenu(unknownMenu, null)
+                }
+                let menuIndex = 0;
+                const outHtml = (item, parent) => {
+                    ++menuIndex;
+                    const id = menuIndex;
+                    const pl = (item.levelInt - maxLevel) * 10
+                    let out = `<li data-level="${item.levelInt}" style='padding-left:${pl}px'>`
+                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='czs-angle-right-l t-sm c-sub mr-1'></i> ${item.name}</a>`
+                    if (item.children.length > 0) {
+                        out += `<ul class="post-menu-sub-${id}" data-parent="${parent + 1}">`
+                        for (let child of item.children) {
+                            out += outHtml(child, id)
+                        }
+                        out += `</ul>`
+                    }
+                    out += "</li>"
+                    return out;
+                }
+                finalMenus.forEach(item => {
+                    result += outHtml(item, menuIndex)
+                })
             }
             result += "</ul>"
-            $("#post-menu-content").html(result)
+            $("#post-menu-content-items").html(result)
         } else {
             $("#post-menus").remove()
         }
