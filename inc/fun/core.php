@@ -354,7 +354,7 @@ function oauth_qq_redirect_ajax()
     $state = $_GET['state'];
     $from_redirect = $_GET['redirect'];
     $state_session = "";
-    pk_session_call(function () use (&$state_session){
+    pk_session_call(function () use (&$state_session) {
         $state_session = $_SESSION['qq_oauth_state'];
     });
     $code = $_GET['code'];
@@ -707,6 +707,14 @@ function pk_is_checked($name, $default = 0)
     return pk_get_option($name, $default) == 1;
 }
 
+//配置选择输出
+function pk_checked_out($name, $out = '', $default = 0)
+{
+    if (pk_is_checked($name, $default)) {
+        echo $out;
+    }
+}
+
 //动画载入
 function pk_open_box_animated($class, $echo = true)
 {
@@ -751,7 +759,7 @@ function get_all_category_id_row($type = null)
     $cats = $wpdb->get_results($sql);
     $result = [];
     foreach ($cats as $cat) {
-        $result[] = ['label'=>$cat->name,'value'=>$cat->term_id];
+        $result[] = ['label' => $cat->name, 'value' => $cat->term_id];
     }
     return $result;
 }

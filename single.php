@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="entry-content mt20">
-                        <div class="content-main puock-text" id="post-main-content">
+                        <div class="content-main puock-text <?php pk_checked_out('post_content_indent', 'p-indent') ?>" id="post-main-content">
                             <?php the_content(); ?>
                             <?php if (pk_is_checked('post_foot_qrcode_open')): ?>
                                 <div class="post-foot-qrcode">
