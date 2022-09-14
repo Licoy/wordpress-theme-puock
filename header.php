@@ -26,6 +26,21 @@
     <?php endif; ?>
     <?php if (is_single() || is_page()): ?>
     <?php endif; ?>
+<!--   mathjax3   -->
+    <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+    <!--   mathjax3   -->
 </head>
 <body class="puock-<?php echo pk_theme_light() ? 'light' : 'dark'; echo current_theme_supports('custom-background') ? ' custom-background':''; ?>">
 <div id="page">
