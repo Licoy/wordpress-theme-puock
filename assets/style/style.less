@@ -159,7 +159,6 @@ pre {
   font-size: inherit;
 }
 
-
 body.pre-mac pre {
   font-size: 100%;
   border-radius: 4px;
@@ -323,7 +322,7 @@ body.pre-mac pre {
     @w: 18px;
     position: absolute;
     left: -@w;
-    background-color: @colorPrimary;
+    background-color: .pk-rgba(@colorPrimary)[@c];
     width: @w;
     height: 80px;
     top: (@h / 2 - 40);
@@ -434,6 +433,10 @@ body.pre-mac pre {
 .ta3-fun() {
   transition: all .3s;
   //-webkit-transform: translateY(0px);
+}
+
+.pk-rgba(@color){
+  @c: rgba(red(@color), green(@color), blue(@color), var(--puock-block-not-tran));
 }
 
 .ta3, .ta3b a {
@@ -1306,7 +1309,7 @@ a:hover {
 #footer {
   color: @colorLight;
   padding: 30px 0;
-  background-color: @colorModeDarkBoxBg;
+  background-color: .pk-rgba(@colorModeDarkBoxBg)[@c];
 
   .info {
     color: #b9bcbf;
@@ -1928,6 +1931,7 @@ a:hover {
 .puock-dark {
 
   .ta3-fun();
+  //background-color: fead(@colorModeDarkBg);
   background-color: @colorModeDarkBg;
 
   .katex-container {
@@ -1948,7 +1952,7 @@ a:hover {
 
   #header, .p-block, .sub-menu, #header-box, .widget,
   #index-company #prod-items .prod-item .icon, #post-menus {
-    background-color: @colorModeDarkBoxBg;
+    background-color: .pk-rgba(@colorModeDarkBoxBg)[@c];
     box-shadow: none;
 
     &#header.blur {
@@ -1987,8 +1991,8 @@ a:hover {
   }
 
   .form-control {
-    background-color: @inputBg;
-    border: @inputBg;
+    background-color: .pk-rgba(@inputBg)[@c];
+    border: .pk-rgba(@inputBg)[@c];
     color: @colorModeDarkFont;
   }
 
@@ -1998,13 +2002,13 @@ a:hover {
   .timeline:before,
   .timeline-location,
   .index-links .links-item {
-    background-color: @inputBg;
+    background-color: .pk-rgba(@inputBg)[@c];
   }
 
 
   .puock-bg, #mobile-menu, .modal-content, .pagination a, #page-links .link-item a, #tags-main-index li.a a,
   #tags-main-index li.t, #tags-main-box a, .cat-top-info {
-    background-color: @colorModeDarkBg;
+    background-color: .pk-rgba(@colorModeDarkBg)[@c];
 
     &.cat-top-info {
       box-shadow: 2px 2px 22px -7px rgba(78, 76, 74, 0.44);
@@ -2040,14 +2044,14 @@ a:hover {
 //白天模式
 .puock-light {
   .ta3-fun();
-  background-color: @colorModeLightBg;
+  background-color: .pk-rgba(@colorModeLightBg)[@c];
 
   .puock-links a, .puock-link {
     color: @colorDark;
   }
 
   .modal-content, .entry-content code:not([class]), .pagination a {
-    background-color: @colorModeLightBg;
+    background-color: .pk-rgba(@colorModeLightBg)[@c];
   }
 
   .puock-link, .puock-links a:not(.btn) {
@@ -2058,11 +2062,11 @@ a:hover {
 
   .puock-bg, #mobile-menu, #tags-main-index li.a a, #tags-main-index li.t, #tags-main-box a,
   .timeline-content, .timeline:before, .timeline-location {
-    background-color: @puockBg;
+    background-color: .pk-rgba(@puockBg)[@c];
   }
 
   #header, .p-block, .sub-menu, #header-box, .widget {
-    background-color: #fff;
+    background-color: .pk-rgba(#fff)[@c];
   }
 
   .puock-text {

@@ -127,3 +127,6 @@ function disable_emojis_tinymce($plugins)
         return array();
     }
 }
+
+//开启支持
+add_theme_support('custom-background');

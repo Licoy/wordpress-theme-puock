@@ -11,9 +11,13 @@
     <?php get_template_part('inc/seo') ?>
     <?php wp_head(); ?>
     <?php get_template_part('templates/css', 'grey') ?>
-    <link rel="stylesheet" data-no-instant href="<?php echo pk_get_static_url(); ?>/assets/dist/libs.min.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
-    <link rel="stylesheet" data-no-instant href="<?php echo pk_get_static_url(); ?>/assets/dist/style.min.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
-    <script data-no-instant src="<?php echo pk_get_static_url(); ?>/assets/dist/jquery.min.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
+    <link rel="stylesheet" data-no-instant
+          href="<?php echo pk_get_static_url(); ?>/assets/dist/libs.min.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
+    <link rel="stylesheet" data-no-instant
+          href="<?php echo pk_get_static_url(); ?>/assets/dist/style.min.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
+    <script data-no-instant
+            src="<?php echo pk_get_static_url(); ?>/assets/dist/jquery.min.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
+    <?php echo pk_head_style_var() ?>
     <?php if (!empty(pk_get_option('tj_code_header', ''))): ?>
         <?php echo pk_get_option('tj_code_header', ''); ?>
     <?php endif; ?>
@@ -23,7 +27,7 @@
     <?php if (is_single() || is_page()): ?>
     <?php endif; ?>
 </head>
-<body class="puock-<?php echo pk_theme_light() ? 'light' : 'dark' ?>">
+<body class="puock-<?php echo pk_theme_light() ? 'light' : 'dark'; echo current_theme_supports('custom-background') ? ' custom-background':''; ?>">
 <div id="page">
     <?php if (is_single()): ?>
         <div class="progress" id="page-read-progress">
