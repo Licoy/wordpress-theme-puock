@@ -362,6 +362,7 @@ function pk_link_target($echo = true)
     return $target;
 }
 
+// 头部样式定义
 function pk_head_style_var()
 {
     $vars = [
@@ -369,3 +370,9 @@ function pk_head_style_var()
     ];
     return "<style>:root{" . join(";", $vars) . "}</style>";
 }
+
+// 加载文件媒体文件
+function pk_load_media_files() {
+    wp_enqueue_media();
+}
+add_action( 'admin_enqueue_scripts', 'pk_load_media_files' );

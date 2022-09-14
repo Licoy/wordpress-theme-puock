@@ -285,6 +285,9 @@ class Puock {
             }
         });
         this.lazyLoadInit()
+        $('#post-main, #sidebar').theiaStickySidebar({
+            additionalMarginTop: 20
+        });
     }
 
 

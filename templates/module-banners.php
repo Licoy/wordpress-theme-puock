@@ -2,7 +2,7 @@
 <?php
 if (pk_is_checked('index_carousel')):
     $index_carousel_list = pk_get_option('index_carousel_list', []);
-    if (is_array($index_carousel_list) || count($index_carousel_list) > 0):
+    if (is_array($index_carousel_list) && count($index_carousel_list) > 0):
         ?>
         <div id="banners" class="carousel slide mb15" data-ride="carousel">
             <ol class="carousel-indicators">
