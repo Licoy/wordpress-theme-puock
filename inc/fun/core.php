@@ -25,6 +25,7 @@ function pk_ajax_resp_error($msg = 'fail', $data = null)
 
 require_once PUOCK_ABS_DIR . '/inc/setting/index.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/ajax.php';
+require_once PUOCK_ABS_DIR . '/inc/fun/oauth.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/comment-ajax.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/widget.php';
 require_once PUOCK_ABS_DIR . '/inc/init.php';
@@ -54,9 +55,7 @@ add_filter('user_trailingslashit', 'add_init_trailingslashit', 10, 2);
 
 function pk_open_session()
 {
-    if (!session_id()) {
-        session_start();
-    }
+    session_start();
 }
 
 function pk_wclose_session()
@@ -101,7 +100,9 @@ function pk_toolbar_link($bar)
     ));
 }
 
-add_action('admin_bar_menu', 'pk_toolbar_link', 999);
+if(is_user_logged_in() && current_user_can('manage_options')){
+    add_action('admin_bar_menu', 'pk_toolbar_link', 999);
+}
 
 function pk_admin_scripts()
 {
@@ -312,204 +313,7 @@ function pk_post_style_list()
     return pk_get_option('post_style', 'list') == 'list';
 }
 
-function extra_user_profile_qq_oauth($user)
-{
-    $qq_oauth = get_the_author_meta('qq_oauth', $user->ID);
-    $oauth = pk_get_oauth_info();
-    $is_conn = true;
-    $href = null;
-    if (empty($oauth['qq_oauth_id']) || empty($oauth['qq_oauth_key'])) {
-        $is_conn = false;
-    } else {
-        $href = $oauth['oauth_url'];
-    }
-    ?>
-    <h3>第三方账号绑定</h3>
-    <table class="form-table">
-        <tr>
-            <th><label for="qq_oauth">QQ互联</label></th>
-            <td>
-                <?php if (empty($qq_oauth)): ?>
-                    <a href="<?php echo $href ?>" target="_blank" id="qq_oauth" <?php echo $is_conn ? '' : 'disabled' ?>
-                       class="button">立即去绑定</a>
-                <?php else: ?>
-                    <a id="qq_oauth" class="button" disabled>已绑定QQ</a>
-                <?php endif; ?>
-            </td>
-        </tr>
-    </table>
-<?php }
-
-//添加qq授权之后的回调请求
-function oauth_qq_redirect_ajax()
-{
-    $oauth = pk_get_oauth_info('qq', '', false);
-    $qq_oauth_id = $oauth['qq_oauth_id'];
-    $qq_oauth_key = $oauth['qq_oauth_key'];
-    $redirect = $oauth['oauth_redirect'];
-    if (empty($qq_oauth_id) || empty($qq_oauth_key)) {
-        oauth_qq_redirect_page(false, '站点未填写QQ互联授权信息');
-        return;
-    }
-    $state = $_GET['state'];
-    $from_redirect = $_GET['redirect'];
-    $state_session = "";
-    pk_session_call(function () use (&$state_session) {
-        $state_session = $_SESSION['qq_oauth_state'];
-    });
-    $code = $_GET['code'];
-    if ($state !== $state_session || empty($code)) {
-        oauth_qq_redirect_page(false, '非法State - 授权请求');
-        return;
-    }
-    $access_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id={$qq_oauth_id}&client_secret={$qq_oauth_key}&code={$code}&redirect_uri={$redirect}";
-    $access_token_res = wp_remote_get($access_url);
-    $body = $access_token_res['body'];
-    $querys = get_path_query($body);
-    if (!isset($querys['access_token'])) {
-        oauth_qq_redirect_page(false, '获取access_token失败');
-        return;
-    }
-    $info_url = "https://graph.qq.com/oauth2.0/me?access_token=" . $querys['access_token'];
-    $info_res = wp_remote_get($info_url);
-    $info_body = str_replace('callback( ', '', $info_res['body']);
-    $info_body = str_replace(' );', '', $info_body);
-    if ($info = json_decode($info_body, true)) {
-        $openid = $info['openid'];
-        $user_info_url = "https://graph.qq.com/user/get_user_info?access_token={$querys['access_token']}&openid={$openid}&oauth_consumer_key={$qq_oauth_id}&format=json";
-        $user_info_res = wp_remote_get($user_info_url);
-        if ($user_info = json_decode($user_info_res['body'], true)) {
-            if (is_user_logged_in()) {
-                $user = wp_get_current_user();
-                update_user_meta($user->ID, "qq_oauth", $openid);
-                oauth_qq_redirect_page(true, '', $from_redirect);
-            } else {
-                $users = get_users(array('meta_key' => 'qq_oauth', 'meta_value' => $openid));
-                if (!$users || count($users) <= 0) {
-                    //不存在用户，先自动注册再登录
-                    $wp_create_nonce = wp_create_nonce($openid);
-                    $username = 'qq' . $wp_create_nonce;
-                    $password = wp_generate_password($length = 10);
-                    $user_data = array(
-                        'user_login' => 'qq' . wp_create_nonce($openid),
-                        'display_name' => $user_info['nickname'],
-                        'user_pass' => $password,
-                        'nickname' => $user_info['nickname'],
-                        'user_email' => '_p_' . $username . '@null.null'
-                    );
-                    $user_id = wp_insert_user($user_data);
-                    wp_signon(array("user_login" => $username, "user_password" => $password), true);
-                    update_user_meta($user_id, "qq_oauth", $openid);
-                    oauth_qq_redirect_page(true, '', $from_redirect);
-                } else {
-                    //存在，直接登录
-                    wp_set_auth_cookie($users[0]->ID);
-                    oauth_qq_redirect_page(true, '', $from_redirect);
-                }
-            }
-        } else {
-            oauth_qq_redirect_page(false, '获取用户信息失败');
-            return;
-        }
-    } else {
-        oauth_qq_redirect_page(false, '获取OPENID失败');
-        return;
-    }
-
-}
-
-//授权返回页面回调
-function oauth_qq_redirect_page($success = true, $info = '', $from_redirect = '')
-{
-    if ($success) {
-        if (empty($from_redirect)) {
-            echo "<html><script>window.location=\"" . get_admin_url() . "\"</script></html>";
-        } else {
-            echo "<html><script>window.location=\"" . $from_redirect . "\"</script></html>";
-        }
-    } else {
-        pk_session_call(function () use ($info) {
-            $_SESSION['error_info'] = $info;
-        });
-        echo "<html><script>window.location=\"" . PUOCK_ABS_URI . "/error.php\"</script></html>";
-    }
-}
-
-function pk_get_oauth_info($type = 'qq', $redirect = '', $gen_state = true)
-{
-    pk_open_session();
-    $qq_open = pk_is_checked('oauth_qq');
-    $qq_oauth_id = pk_get_option('oauth_qq_id');
-    $qq_oauth_key = pk_get_option('oauth_qq_key');
-    $redirect = urlencode(admin_url() . 'admin-ajax.php?action=oauth_qq_redirect_ajax&redirect=' . $redirect);
-    if ($gen_state) {
-        $qq_oauth_state = md5(time() . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9));
-        $_SESSION['qq_oauth_state'] = $qq_oauth_state;
-    } else {
-        $qq_oauth_state = $_SESSION['qq_oauth_state'];
-    }
-    pk_wclose_session();
-    $auth_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id={$qq_oauth_id}&redirect_uri={$redirect}&state=" . $qq_oauth_state;
-    return array(
-        'qq_open' => $qq_open,
-        'qq_oauth_id' => $qq_oauth_id,
-        'qq_oauth_key' => $qq_oauth_key,
-        'oauth_redirect' => $redirect,
-        'oauth_state' => $qq_oauth_state,
-        'oauth_url' => $auth_url,
-    );
-}
-
-function pk_oauth_url($type = 'qq', $redirect = '')
-{
-    if ($type == 'qq') {
-        $oauth = pk_get_oauth_info('qq', $redirect);
-        if (!$oauth['qq_open'] || empty($oauth['qq_oauth_id']) || empty($oauth['qq_oauth_key'])) {
-            return '#';
-        }
-        return $oauth['oauth_url'];
-    }
-}
-
-function pk_oauth_url_page_ajax($type = 'qq', $redirect = '')
-{
-    return admin_url() . "admin-ajax.php?action=pk_oauth_url_page_ajax_exec&type={$type}&redirect={$redirect}";
-}
-
-//执行第三方登录页面跳转
-function pk_oauth_url_page_ajax_exec()
-{
-    $type = $_GET['type'];
-    $redirect = $_GET['redirect'];
-    if ($type == 'qq') {
-        echo "<html><script>window.location=\"" . pk_oauth_url($type, $redirect) . "\"</script></html>";
-        wp_die();
-    }
-    oauth_qq_redirect_page(false, '无效授权请求', $redirect);
-}
-
-//登录页快捷按钮
-function pk_oauth_form()
-{
-    $out = "<div style='margin-bottom:10px'>";
-    if (pk_is_checked('oauth_qq')) {
-        $out .= '<a href="' . pk_oauth_url_page_ajax('qq', admin_url()) . '" class="button button-large">QQ登录</a>';
-    }
-    $out .= "</div>";
-    echo $out;
-}
-
-add_action('wp_ajax_nopriv_pk_oauth_url_page_ajax_exec', 'pk_oauth_url_page_ajax_exec');
-add_action('wp_ajax_pk_oauth_url_page_ajax_exec', 'pk_oauth_url_page_ajax_exec');
-if (pk_is_checked('oauth_qq')) {
-    add_action('wp_ajax_nopriv_oauth_qq_redirect_ajax', 'oauth_qq_redirect_ajax');
-    add_action('wp_ajax_oauth_qq_redirect_ajax', 'oauth_qq_redirect_ajax');
-    //添加用户QQ——OPENID字段
-    add_action('show_user_profile', 'extra_user_profile_qq_oauth');
-    add_action('edit_user_profile', 'extra_user_profile_qq_oauth');
-    add_action('login_form', 'pk_oauth_form');
-    add_action('register_form', 'pk_oauth_form');
-}
+//评论添加@功能
 if (pk_is_checked('comment_has_at')) {
     add_filter('comment_text', 'pk_comment_add_at', 20, 2);
 }

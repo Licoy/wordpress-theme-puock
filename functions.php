@@ -7,8 +7,9 @@ const PUOCK = 'puock';
 const PUOCK_OPT = 'puock_options';
 $puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
-include('inc/fun/core.php');
-include('gutenberg/index.php');
+include_once('vendor/autoload.php');
+include_once('inc/fun/core.php');
+include_once('gutenberg/index.php');
 
 //去除感谢使用wordpress创作
 if (pk_is_checked('hide_footer_wp_t')) {

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>百度登录</title>
+    </head>
+
+    <body>
+        <script>
+            var GWC = {
+                version: '1.0.0',
+                urlParams: {},
+                appendParams: function(url, params) {
+                    if (params) {
+                        var baseWithSearch = url.split('#')[0];
+                        var hash = url.split('#')[1];
+                        for (var key in params) {
+                            var attrValue = params[key];
+                            if (attrValue !== undefined) {
+                                var newParam = key + "=" + attrValue;
+                                if (baseWithSearch.indexOf('?') > 0) {
+                                    var oldParamReg = new RegExp('^' + key + '=[-%.!~*\'\(\)\\w]*', 'g');
+                                    if (oldParamReg.test(baseWithSearch)) {
+                                        baseWithSearch = baseWithSearch.replace(oldParamReg, newParam);
+                                    } else {
+                                        baseWithSearch += "&" + newParam;
+                                    }
+                                } else {
+                                    baseWithSearch += "?" + newParam;
+                                }
+                            }
+                        }
+
+                        if (hash) {
+                            url = baseWithSearch + '#' + hash;
+                        } else {
+                            url = baseWithSearch;
+                        }
+                    }
+                    return url;
+                },
+                getUrlParams: function() {
+                    var pairs = location.search.substring(1).split('&');
+                    for (var i = 0; i < pairs.length; i++) {
+                        var pos = pairs[i].indexOf('=');
+                        if (pos === -1) {
+                            continue;
+                        }
+                        GWC.urlParams[pairs[i].substring(0, pos)] = decodeURIComponent(pairs[i].substring(pos + 1));
+                    }
+                },
+                doRedirect: function() {
+					var code = GWC.urlParams['code'];
+                    var appId = GWC.urlParams['client_id'];
+                    var response_type = GWC.urlParams['response_type'];
+                    var redirectUri;
+                    var scope = GWC.urlParams['scope'];
+                    var state = GWC.urlParams['state'];
+                    var display = GWC.urlParams['display'];
+                    var force_login = GWC.urlParams['force_login'];
+                    var confirm_login = GWC.urlParams['confirm_login'];
+                    var login_type = GWC.urlParams['login_type'];
+                    if (!code) {
+                        //第一步，没有拿到code，跳转至授权页面获取code
+                        redirectUri = GWC.appendParams('https://openapi.baidu.com/oauth/2.0/authorize', {
+                            client_id: appId,
+                            response_type: response_type,
+                            redirect_uri: encodeURIComponent(GWC.appendParams(location.href.split('?')[0], {
+                                'redirect_uri': encodeURIComponent(GWC.urlParams['redirect_uri']),
+                            })),
+                            scope: scope,
+                            state: state,
+                            display: display,
+                            force_login: force_login,
+                            confirm_login: confirm_login,
+                            login_type: login_type
+                        });
+                    } else {
+                        //第二步，从授权页面跳转回来，已经获取到了code，再次跳转到实际所需页面
+                        redirectUri = GWC.appendParams(GWC.urlParams['redirect_uri'], {
+                            code: code,
+                            state: state,
+                        });
+                    }
+
+                    location.href = redirectUri;
+                }
+            };
+
+            GWC.getUrlParams();
+            GWC.doRedirect();
+        </script>
+    </body>
+
+</html>
