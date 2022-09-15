@@ -111,16 +111,17 @@ abstract class puockWidgetBase extends WP_Widget{
      * @param $instance
      */
     public function get_common_widget_header($instance){
+        $show_title = !array_key_exists('hide_title',$instance) || !$this->is_checked($instance['hide_title'])
         ?>
 
         <div class="p-block <?php echo $instance['classes'] ?>">
-            <?php if(!$this->is_checked($instance['hide_title'])): ?>
+            <?php if($show_title): ?>
                 <div>
                 <span class="t-lg border-bottom border-primary
                 puock-text pb-2"><i class="<?php echo $this->get_icon($instance['icon']) ?> mr-1"></i><?php echo $instance['title'] ?></span>
                 </div>
             <?php endif; ?>
-            <div class="<?php if(!$this->is_checked($instance['hide_title'])): ?>mt20<?php endif; ?>">
+            <div class="<?php if($show_title): ?>mt20<?php endif; ?>">
 
         <?php
     }
@@ -150,6 +151,29 @@ abstract class puockWidgetBase extends WP_Widget{
             }
         }
         return $default;
+    }
+
+
+    /**
+    * 通用文章输出
+    * @param $instance
+    * @param $posts
+    * @return void
+     */
+    public function comment_post_output($instance, $posts){
+        $out = "";
+        foreach ($posts as $post){
+            $out .= '<div class="media-link mt20">
+                    <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
+                        <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
+                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
+                         href="'.get_permalink($post).'">'.get_the_title($post).'</a>
+                    </h2>
+                </div>';
+        }
+        $this->get_common_widget_header($instance);
+        echo $out;
+        $this->get_common_widget_footer($instance);
     }
 
 }
@@ -185,10 +209,17 @@ class puockHotPost extends puockWidgetBase {
         return __CLASS__;
     }
 
+    public function update($cur,$old){
+        pk_cache_delete(PKC_WIDGET_HOT_POSTS);
+        return $cur;
+    }
+
     function widget( $args, $instance ){
-        $days = $this->get_num_val($instance, 'days');
-        $nums = $this->get_num_val($instance, 'nums');
-        $posts = query_posts(array(
+        $posts = pk_cache_get(PKC_WIDGET_HOT_POSTS);
+        if(!$posts){
+            $days = $this->get_num_val($instance, 'days');
+            $nums = $this->get_num_val($instance, 'nums');
+            $posts = query_posts(array(
                 'post_type'=>'post',
                 'post_status'=>'publish',
                 'showposts'=>$nums,
@@ -209,21 +240,11 @@ class puockHotPost extends puockWidgetBase {
                         'inclusive'=>true
                     )
                 ),
-        ));
-        wp_reset_query();
-        $out = "";
-        foreach ($posts as $post){
-            $out .= '<div class="media-link mt20">
-                    <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
-                        <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
-                         href="'.get_permalink($post).'">'.get_the_title($post).'</a>
-                    </h2>
-                </div>';
+            ));
+            wp_reset_query();
+            pk_cache_set(PKC_WIDGET_HOT_POSTS, $posts);
         }
-        $this->get_common_widget_header($instance);
-        echo $out;
-        $this->get_common_widget_footer($instance);
+        $this->comment_post_output($instance, $posts);
      }
 }
 add_action( 'widgets_init', function (){ register_widget('puockHotPost'); });
@@ -256,10 +277,17 @@ class puockNewPost extends puockWidgetBase {
         $this->merge_common_form($instance);
     }
 
+    public function update($cur,$old){
+        pk_cache_delete(PKC_WIDGET_NEW_POSTS);
+        return $cur;
+    }
+
     function widget( $args, $instance ){
-        $days = $this->get_num_val($instance, 'days');
-        $nums = $this->get_num_val($instance, 'nums');
-        $posts = query_posts(array(
+        $posts = pk_cache_get(PKC_WIDGET_NEW_POSTS);
+        if(!$posts){
+            $days = $this->get_num_val($instance, 'days');
+            $nums = $this->get_num_val($instance, 'nums');
+            $posts = query_posts(array(
                 'post_type'=>'post',
                 'post_status'=>'publish',
                 'showposts'=>$nums,
@@ -271,21 +299,11 @@ class puockNewPost extends puockWidgetBase {
                         'inclusive'=>true
                     )
                 ),
-        ));
-        wp_reset_query();
-        $out = "";
-        foreach ($posts as $post){
-            $out .= '<div class="media-link mt20">
-                    <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
-                        <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
-                         href="'.get_permalink($post).'">'.get_the_title($post).'</a>
-                    </h2>
-                </div>';
+            ));
+            wp_reset_query();
+            pk_cache_set(PKC_WIDGET_NEW_POSTS, $posts);
         }
-        $this->get_common_widget_header($instance);
-        echo $out;
-        $this->get_common_widget_footer($instance);
+        $this->comment_post_output($instance, $posts);
      }
 
 }
@@ -319,10 +337,17 @@ class puockHotCommentPost extends puockWidgetBase {
         $this->merge_common_form($instance);
     }
 
+    public function update($cur,$old){
+        pk_cache_delete(PKC_WIDGET_HOT_COMMENTS);
+        return $cur;
+    }
+
     function widget( $args, $instance ){
-        $days = $this->get_num_val($instance, 'days');
-        $nums = $this->get_num_val($instance, 'nums');
-        $posts = query_posts(array(
+        $posts = pk_cache_get(PKC_WIDGET_HOT_COMMENTS);
+        if(!$posts){
+            $days = $this->get_num_val($instance, 'days');
+            $nums = $this->get_num_val($instance, 'nums');
+            $posts = query_posts(array(
                 'post_type'=>'post',
                 'post_status'=>'publish',
                 'showposts'=>$nums,
@@ -336,21 +361,11 @@ class puockHotCommentPost extends puockWidgetBase {
                         'inclusive'=>true
                     )
                 ),
-        ));
-        wp_reset_query();
-        $out = "";
-        foreach ($posts as $post){
-            $out .= '<div class="media-link mt20">
-                    <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
-                        <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
-                         href="'.get_permalink($post).'">'.get_the_title($post).'</a>
-                    </h2>
-                </div>';
+            ));
+            wp_reset_query();
+            pk_cache_set(PKC_WIDGET_HOT_COMMENTS, $posts);
         }
-        $this->get_common_widget_header($instance);
-        echo $out;
-        $this->get_common_widget_footer($instance);
+        $this->comment_post_output($instance, $posts);
     }
 }
 add_action( 'widgets_init', function (){ register_widget('puockHotCommentPost'); });
@@ -383,14 +398,23 @@ class puockReadPerson extends puockWidgetBase {
         $this->merge_common_form($instance);
     }
 
+    public function update($cur,$old){
+        pk_cache_delete(PKC_WIDGET_READ_PERSONS);
+        return $cur;
+    }
+
     function widget( $args, $instance ){
         global $wpdb;
-        $days = $this->get_num_val($instance, 'days',31);
-        $nums = $this->get_num_val($instance, 'nums');
-        $sql = "SELECT count(comment_ID) as num, comment_author_email as mail,comment_author as `name`,comment_author_url as url
-                FROM $wpdb->comments WHERE user_id !=1 AND TO_DAYS(now()) - TO_DAYS(comment_date) < {$days}
-                 group by comment_author_email order by num desc limit 0,{$nums}";
-        $authors = $wpdb->get_results($sql);
+        $authors = pk_cache_get(PKC_WIDGET_READ_PERSONS);
+        if(!$authors){
+            $days = $this->get_num_val($instance, 'days',31);
+            $nums = $this->get_num_val($instance, 'nums');
+            $sql = "SELECT count(comment_ID) as num, comment_author_email as mail,comment_author as `name`,comment_author_url as url
+                    FROM $wpdb->comments WHERE user_id !=1 AND TO_DAYS(now()) - TO_DAYS(comment_date) < {$days}
+                     group by comment_author_email order by num desc limit 0,{$nums}";
+            $authors = $wpdb->get_results($sql);
+            pk_cache_set(PKC_WIDGET_READ_PERSONS, $authors);
+        }
         $this->get_common_widget_header($instance); ?>
         <div class="row puock-text">
             <?php foreach ($authors as $author): ?>
@@ -436,12 +460,21 @@ class puockNewComment extends puockWidgetBase {
         $this->merge_common_form($instance);
     }
 
+    public function update($cur,$old){
+        pk_cache_delete(PKC_WIDGET_NEW_COMMENTS);
+        return $cur;
+    }
+
     function widget( $args, $instance ){
         global $wpdb;
-        $nums = $this->get_num_val($instance, 'nums');
-        $sql = "SELECT comment_ID as id,comment_post_ID as pid,comment_author_email as mail,comment_author as `name`,comment_author_url as url,comment_content as text
-                FROM $wpdb->comments WHERE user_id !=1 and comment_approved=1 order by comment_date desc limit 0,{$nums}";
-        $comments = $wpdb->get_results($sql);
+        $comments = pk_cache_get(PKC_WIDGET_NEW_COMMENTS);
+        if(!$comments){
+            $nums = $this->get_num_val($instance, 'nums');
+            $sql = "SELECT comment_ID as id,comment_post_ID as pid,comment_author_email as mail,comment_author as `name`,comment_author_url as url,comment_content as text
+                    FROM $wpdb->comments WHERE user_id !=1 and comment_approved=1 order by comment_date desc limit 0,{$nums}";
+            $comments = $wpdb->get_results($sql);
+            pk_cache_set(PKC_WIDGET_NEW_COMMENTS, $comments);
+        }
         $this->get_common_widget_header($instance); ?>
         <div class="min-comments t-md">
             <?php foreach ($comments as $comment): $text=convert_smilies( $comment->text ); ?>
@@ -575,19 +608,7 @@ class puockRandomPost extends puockWidgetBase {
                 AND post_status = 'publish' AND TO_DAYS(now()) - TO_DAYS(post_date) < {$days}
                 ORDER BY rand() DESC LIMIT 0 , {$nums} ";
         $posts = $wpdb->get_results($sql);
-        $out = "";
-        foreach ($posts as $post){
-            $out .= '<div class="media-link mt20">
-                    <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
-                        <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
-                         href="'.get_permalink($post).'">'.get_the_title($post).'</a>
-                    </h2>
-                </div>';
-        }
-        $this->get_common_widget_header($instance);
-        echo $out;
-        $this->get_common_widget_footer($instance);
+        $this->comment_post_output($instance, $posts);
      }
 }
 add_action( 'widgets_init', function (){ register_widget('puockRandomPost'); });
@@ -687,11 +708,20 @@ class puockCategory extends puockWidgetBase {
         return __CLASS__;
     }
 
+    public function update($cur,$old){
+        pk_cache_delete(PKC_WIDGET_CATEGORIES);
+        return $cur;
+    }
+
     function widget( $args, $instance ){
         $cat_ids= @$instance['categories'];
-        $cats = get_categories(array(
+        $cats = pk_cache_get(PKC_WIDGET_CATEGORIES);
+        if(!$cats){
+            $cats = get_categories(array(
                 'include'=>$cat_ids
-        ));
+            ));
+            pk_cache_set(PKC_WIDGET_CATEGORIES, $cats);
+        }
         $this->get_common_widget_header($instance);
         echo '<div class="row t-md">';
         foreach ($cats as $cat){ ?>
@@ -733,10 +763,19 @@ class puockTagCloud extends puockWidgetBase {
         return __CLASS__;
     }
 
+    public function update($cur,$old){
+        pk_cache_delete(PKC_WIDGET_TAGS);
+        return $cur;
+    }
+
     function widget( $args, $instance ){
         $this->get_common_widget_header($instance);
         echo '<div class="widget-puock-tag-cloud">';
-        $tags = get_tags();
+        $tags = pk_cache_get(PKC_WIDGET_TAGS);
+        if(!$tags){
+            $tags = get_tags();
+            pk_cache_set(PKC_WIDGET_TAGS,$tags);
+        }
         $max_count = $this->get_num_val($instance, 'max_count');
         if(count($tags) > 0){
             $count = 0;

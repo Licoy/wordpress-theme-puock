@@ -9,20 +9,25 @@
             if (count($cms_cats) > 0) {
                 $cms_cats_num = pk_get_option($cms_mode . '_show_2box_num', '6');
                 foreach ($cms_cats as $catId):
-                    query_posts(array(
-                        'cat' => $catId,
-                        'posts_per_page' => $cms_cats_num,
-                        'orderby' => 'DESC'
-                    ));
+                    $posts = pk_cache_get(PKC_CMS_2BOX_POSTS . '_' . $catId);
+                    if (!$posts) {
+                        $posts = query_posts(array(
+                            'cat' => $catId,
+                            'posts_per_page' => $cms_cats_num,
+                            'orderby' => 'DESC'
+                        ));
+                        wp_reset_query();
+                        pk_cache_set(PKC_CMS_2BOX_POSTS . '_' . $catId, $posts);
+                    }
                     $post_index = 0;
                     ?>
-                    <?php if (have_posts()) : ?>
+                    <?php if ($posts && count($posts) > 0) : ?>
                     <div class="col-md-6 pr-0 magazine">
                         <div class="p-block">
                             <div>
                                 <span class="t-lg puock-text pb-2 d-inline-block border-bottom border-primary"><?php echo get_post_category_link('ta3 a-link', '<i class="czs-layers"></i>&nbsp;', $catId) ?></span>
                             </div>
-                            <?php while (have_posts()) : the_post(); ?>
+                            <?php foreach ($posts as $post) : setup_postdata($post); ?>
                                 <?php if ($post_index == 0): ?>
                                     <div class="media row mt10">
                                         <div class="col-4">
@@ -57,11 +62,11 @@
                                     </div>
                                 <?php endif;
                                 $post_index++; ?>
-                            <?php endwhile; ?>
+                            <?php endforeach;
+                            unset($posts); ?>
                         </div>
                     </div>
-                <?php endif;
-                    wp_reset_query();endforeach;
+                <?php endif; endforeach;
             }
         } ?>
     </div>

@@ -23,6 +23,7 @@ function pk_ajax_resp_error($msg = 'fail', $data = null)
     return pk_ajax_resp($data, $msg, -1);
 }
 
+require_once PUOCK_ABS_DIR . '/inc/fun/cache.php';
 require_once PUOCK_ABS_DIR . '/inc/setting/index.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/ajax.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/oauth.php';
@@ -572,7 +573,11 @@ function get_all_category_id_row($type = null)
 //获取菜单数据
 function pk_get_main_menu($mobile = false)
 {
-    $menus = get_nav_menu_object('primary');
+    $menus = pk_cache_get(PKC_MENU_PRIMARY);
+    if(!$menus){
+        $menus = get_nav_menu_object('primary');
+        pk_cache_set(PKC_MENU_PRIMARY, $menus);
+    }
     $out = $mobile ? "<ul class='puock-links t-md'>" : "<ul>";
     if ($menus && count($menus) > 0) {
         pk_get_menu_obj_to_html($menus, $out, $mobile);

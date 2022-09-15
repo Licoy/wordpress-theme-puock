@@ -10,13 +10,17 @@ if (!empty($link_cid)):
         </div>
         <div class="mt20 t-md index-links-box">
             <?php
-            $links = get_bookmarks(array(
-                'category' => $link_cid,
-                'category_before' => '',
-                'title_li' => '',
-                'echo' => 0,
-                'class' => ''
-            ));
+            $links = pk_cache_get(PKC_FOOTER_LINKS);
+            if(!$links){
+                $links = get_bookmarks(array(
+                    'category' => $link_cid,
+                    'category_before' => '',
+                    'title_li' => '',
+                    'echo' => 0,
+                    'class' => ''
+                ));
+                pk_cache_set(PKC_FOOTER_LINKS, $links);
+            }
             foreach ($links as $link) {
                 if ($link->link_visible != 'Y') {
                     continue;
