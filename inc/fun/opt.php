@@ -376,3 +376,18 @@ function pk_load_media_files() {
     wp_enqueue_media();
 }
 add_action( 'admin_enqueue_scripts', 'pk_load_media_files' );
+
+// debug sql
+function pk_debug_print_sql_list(){
+    global $wpdb;
+    $show_sql_count = pk_get_option('debug_sql_count');
+    $show_sql_detail = pk_get_option('debug_sql_detail');
+    $out = "<script>";
+    if($show_sql_count){
+        $out .= "console.log('共计查询SQL：".get_num_queries()."次，耗时：".timer_stop(3)."秒');";
+    }
+    if($show_sql_detail){
+        $out .= "console.log(".json_encode($wpdb->queries).");";
+    }
+    echo $out."</script>";
+}

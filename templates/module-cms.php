@@ -9,7 +9,8 @@
             if (count($cms_cats) > 0) {
                 $cms_cats_num = pk_get_option($cms_mode . '_show_2box_num', '6');
                 foreach ($cms_cats as $catId):
-                    $posts = pk_cache_get(PKC_CMS_2BOX_POSTS . '_' . $catId);
+                    $cache_key = sprintf(PKC_CMS_2BOX_POSTS,$catId);
+                    $posts = pk_cache_get($cache_key);
                     if (!$posts) {
                         $posts = query_posts(array(
                             'cat' => $catId,
@@ -17,7 +18,7 @@
                             'orderby' => 'DESC'
                         ));
                         wp_reset_query();
-                        pk_cache_set(PKC_CMS_2BOX_POSTS . '_' . $catId, $posts);
+                        pk_cache_set($cache_key, $posts);
                     }
                     $post_index = 0;
                     ?>

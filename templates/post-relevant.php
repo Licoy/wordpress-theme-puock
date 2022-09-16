@@ -14,7 +14,7 @@ if (is_single()):
 
         $relevant_cat_ids = substr($relevant_cat_ids, 0, strlen($relevant_cat_ids) - 1);
 
-        $_cache_key = PKC_CAT_RELEVANT_POSTS . '_' . $relevant_cat_ids;
+        $_cache_key = sprintf(PKC_CAT_RELEVANT_POSTS, $relevant_cat_ids);
         $relevants = pk_cache_get($_cache_key);
         if (!$relevants) {
             $relevants = query_posts(array('cat' => $relevant_cat_ids, 'ignore_sticky_posts' => true,

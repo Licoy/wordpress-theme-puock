@@ -59,5 +59,6 @@
 <?php endif; ?>
 <script data-no-instant defer src="<?php echo pk_get_static_url(); ?>/assets/dist/puock.min.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
 <?php wp_footer(); ?>
+<?php pk_debug_print_sql_list(); ?>
 </body>
 </html>

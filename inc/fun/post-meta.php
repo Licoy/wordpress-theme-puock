@@ -163,51 +163,52 @@ function puock_basic_post_meta_box()
 add_action('admin_menu', 'puock_basic_post_meta_box');
 add_action('save_post', 'puock_basic_post_metas_save');
 
-$link_cats = get_all_category_id('link_category');
+function pk_post_meta_basic(){
+    $link_cats = get_all_category_id('link_category');
+    return array(
+        "hide_side" => array(
+            "name" => "hide_side",
+            "std" => "",
+            "title" => "隐藏侧边栏",
+            "type" => "checkbox"
+        ),
+        "author_cat_comment" => array(
+            "name" => "author_cat_comment",
+            "std" => "",
+            "title" => "评论仅对作者可见",
+            "type" => "checkbox"
+        ),
+        "page_links_cids" => array(
+            "name" => 'page_links_cids',
+            "std" => '<b>链接分类ID对照列表：</b>' . $link_cats,
+            "title" => "",
+            "type" => "des"
+        ),
+        "page_links_id" => array(
+            "name" => "page_links_id",
+            "std" => "",
+            "title" => "链接显示分类目录ID列表（仅为\"友情链接\"及\"网址导航\"模板时有效，每个ID之前用\",\"进行分隔，为空则不显示）",
+            "type" => "text"
+        ),
+        "page_books_id" => array(
+            "name" => "page_books_id",
+            "std" => "",
+            "title" => "书籍显示分类目录ID列表（仅为\"书籍推荐\"模板时有效，每个ID之前用\",\"进行分隔，为空则不显示）",
+            "type" => "text"
+        )
+    );
+}
 
-$basic_page = array(
-    "hide_side" => array(
-        "name" => "hide_side",
-        "std" => "",
-        "title" => "隐藏侧边栏",
-        "type" => "checkbox"
-    ),
-    "author_cat_comment" => array(
-        "name" => "author_cat_comment",
-        "std" => "",
-        "title" => "评论仅对作者可见",
-        "type" => "checkbox"
-    ),
-    "page_links_cids" => array(
-        "name" => 'page_links_cids',
-        "std" => '<b>链接分类ID对照列表：</b>' . $link_cats,
-        "title" => "",
-        "type" => "des"
-    ),
-    "page_links_id" => array(
-        "name" => "page_links_id",
-        "std" => "",
-        "title" => "链接显示分类目录ID列表（仅为\"友情链接\"及\"网址导航\"模板时有效，每个ID之前用\",\"进行分隔，为空则不显示）",
-        "type" => "text"
-    ),
-    "page_books_id" => array(
-        "name" => "page_books_id",
-        "std" => "",
-        "title" => "书籍显示分类目录ID列表（仅为\"书籍推荐\"模板时有效，每个ID之前用\",\"进行分隔，为空则不显示）",
-        "type" => "text"
-    )
-);
+
 
 function puock_basic_page_metas()
 {
-    global $basic_page;
-    post_meta_set($basic_page);
+    post_meta_set(pk_post_meta_basic());
 }
 
 function puock_basic_page_metas_save($post_id)
 {
-    global $basic_page;
-    save_post_meta_data($post_id, $basic_page);
+    save_post_meta_data($post_id, pk_post_meta_basic());
 }
 
 function puock_basic_page_meta_box()

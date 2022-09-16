@@ -28,8 +28,8 @@ function pk_ajax_get_theme_options()
                 'pages' => $pages,
                 'categories' => get_all_category_id_row('category'),
                 'link_categories' => get_all_category_id_row('link_category'),
-                'home_url'=>home_url(),
-                'admin_url'=>admin_url(),
+                'home_url' => home_url(),
+                'admin_url' => admin_url(),
             ]
         ]);
     } else {
@@ -44,6 +44,7 @@ function pk_ajax_update_theme_options()
     if (current_user_can('edit_theme_options')) {
         $body = pk_ajax_get_req_body();
         update_option(PUOCK_OPT, $body);
+        do_action('pk_option_updated', $body);
         wp_send_json_success();
     } else {
         wp_send_json_error('权限不足');

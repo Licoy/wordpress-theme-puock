@@ -38,10 +38,12 @@ if (pk_is_checked('hide_footer_wp_t')) {
 if (pk_is_checked('stop5x_editor')) {
     add_filter('use_block_editor_for_post', '__return_false');
     remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
-    function remove_global_styles_and_svg_filters() {
-        remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
-        remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
+    function remove_global_styles_and_svg_filters()
+    {
+        remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+        remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
     }
+
     add_action('init', 'remove_global_styles_and_svg_filters');
 }
 
@@ -84,8 +86,7 @@ function pk_the_author_class_out($count)
     return '<span class="t-sm c-sub"><i class="czs-diamond-l mr-1"></i>' . __('评论达人', PUOCK) . ' LV.' . $level . '</span>';
 }
 
-function pk_the_author_class($echo = true, $in_comment = null)
-{
+function pk_the_author_class($echo = true, $in_comment = null){
     global $wpdb, $comment;
     if (!$comment) {
         $comment = $in_comment;
@@ -94,8 +95,13 @@ function pk_the_author_class($echo = true, $in_comment = null)
         $res = '<span class="t-sm text-danger"><i class="czs-diamond-l mr-1"></i>' . __('博主', PUOCK) . '</span>';
     } else {
         $comment_author_email = $comment->comment_author_email;
-        $author_count = count($wpdb->get_results(
-            "SELECT comment_ID as author_count FROM $wpdb->comments WHERE comment_author_email = '$comment_author_email' "));
+        $cache_key = sprintf(PKC_AUTHOR_COMMENTS, md5($comment_author_email));
+        $author_count = pk_cache_get($cache_key);
+        if (!$author_count) {
+            $query = $wpdb->prepare("SELECT count(1) as c FROM $wpdb->comments WHERE comment_author_email = %s", $comment_author_email);
+            $author_count = $wpdb->get_results($query)[0]->c;
+            pk_cache_set($cache_key, $author_count);
+        }
         $res = pk_the_author_class_out($author_count);
     }
     if (!$echo) {

@@ -101,7 +101,7 @@ function pk_toolbar_link($bar)
     ));
 }
 
-if(is_user_logged_in() && current_user_can('manage_options')){
+if (is_user_logged_in() && current_user_can('manage_options')) {
     add_action('admin_bar_menu', 'pk_toolbar_link', 999);
 }
 
@@ -153,12 +153,18 @@ if (!function_exists('the_views')) {
             $post_id = $post->ID;
         }
         $key = 'views';
-        $count = get_post_meta($post_id, $key, true);
-        if ($count == '') {
-            $count = 0;
+        $cache_key = sprintf(PKC_POST_VIEWS, $post_id);
+        $count = pk_cache_get($cache_key);
+        if (!$count) {
+            $count = get_post_meta($post_id, $key, true);
+            if ($count == '') {
+                $count = 0;
+            }
         }
         $count = the_views_add($post_id, $count, $key, $ajax);
         $count = number_format_i18n($count);
+        pk_cache_set($cache_key, $count);
+        pk_cache_delete(PKC_TOTAL_VIEWS);
         if (!$echo) {
             return $count;
         }
@@ -195,7 +201,12 @@ add_action('publish_post', 'set_views');
 function get_total_views()
 {
     global $wpdb;
-    return $wpdb->get_var("SELECT SUM(meta_value) FROM $wpdb->postmeta where meta_key='views'");
+    $views = pk_cache_get(PKC_TOTAL_VIEWS);
+    if (!$views) {
+        $views = $wpdb->get_var("SELECT SUM(meta_value) FROM $wpdb->postmeta where meta_key='views'");
+        pk_cache_set(PKC_TOTAL_VIEWS, $views);
+    }
+    return $views;
 }
 
 
@@ -574,7 +585,7 @@ function get_all_category_id_row($type = null)
 function pk_get_main_menu($mobile = false)
 {
     $menus = pk_cache_get(PKC_MENU_PRIMARY);
-    if(!$menus){
+    if (!$menus) {
         $menus = get_nav_menu_object('primary');
         pk_cache_set(PKC_MENU_PRIMARY, $menus);
     }
