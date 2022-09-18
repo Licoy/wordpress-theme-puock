@@ -11,7 +11,6 @@ const PKC_TOTAL_VIEWS = 'total_views';
 const PKC_TOTAL_COMMENTS = 'total_comments';
 const PKC_CMS_2BOX_POSTS = 'cms_2box_posts_%d';
 const PKC_FOOTER_LINKS = 'footer_links';
-const PKC_MENU_PRIMARY = 'menu_primary';
 const PKC_CAT_RELEVANT_POSTS = 'cat_relevant_posts_%d';
 const PKC_POST_VIEWS = 'post_views_%d';
 const PKC_AUTHOR_COMMENTS = 'author_comments_%s';

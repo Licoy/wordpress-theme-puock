@@ -584,11 +584,7 @@ function get_all_category_id_row($type = null)
 //获取菜单数据
 function pk_get_main_menu($mobile = false)
 {
-    $menus = pk_cache_get(PKC_MENU_PRIMARY);
-    if (!$menus) {
-        $menus = get_nav_menu_object('primary');
-        pk_cache_set(PKC_MENU_PRIMARY, $menus);
-    }
+    $menus = get_nav_menu_object('primary');
     $out = $mobile ? "<ul class='puock-links t-md'>" : "<ul>";
     if ($menus && count($menus) > 0) {
         pk_get_menu_obj_to_html($menus, $out, $mobile);
