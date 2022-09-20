@@ -7,15 +7,21 @@
                 <div id="post-main" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
                     <div class="p-block">
                         <div><h1 id="post-title" class="mb-0 puock-text t-xxl"><?php the_title() ?></h1></div>
-                        <div class="options clearfix mt20">
-                            <div class="float-left">
+                        <div class="options p-flex-sbc mt20">
+                            <div>
                                 <?php if (!pk_is_checked('hide_post_views')): ?>
-                                <div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views();  ?></span><span><?php _e('次阅读', PUOCK) ?></span></div>
+                                <div class="option puock-bg ta3 t-sm mr-1"><i class="czs-eye-l mr-1"></i><span id="post-views"><?php pk_get_post_views();  ?></span><span><?php _e('次阅读', PUOCK) ?></span></div>
                                 <?php endif; ?>
-                                <a href="#comments"><div class="option puock-bg ta3 t-sm float-left mr-1"><i class="czs-comment-l mr-1"></i><?php comments_number() ?></div></a>
+                                <a href="#comments"><div class="option puock-bg ta3 t-sm mr-1"><i class="czs-comment-l mr-1"></i><?php comments_number() ?></div></a>
+                                <?php if (is_user_logged_in() && current_user_can('edit_post', $post->ID)): ?>
+                                    <a target="_blank" href="<?php echo get_edit_post_link() ?>">
+                                        <div class="option puock-bg ta3 t-sm mr-1"><i
+                                                    class="czs-web-edit-l mr-1"></i><?php _e('编辑', PUOCK) ?></div>
+                                    </a>
+                                <?php endif; ?>
                             </div>
-                            <div class="float-right">
-                                <div class="option puock-bg ta3 t-sm float-left mr-1 d-none d-lg-inline-block post-main-size"><i class="czs-bevel"></i></div>
+                            <div>
+                                <div class="option puock-bg ta3 t-sm mr-1 d-none d-lg-inline-block post-main-size"><i class="czs-bevel"></i></div>
                             </div>
                         </div>
                         <div class="mt20 puock-text entry-content">

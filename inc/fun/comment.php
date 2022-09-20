@@ -15,9 +15,9 @@ function pk_comment_callback($comment, $args, $depth)
     }
     ?>
 <div id="comment-<?php comment_ID() ?>" class="post-comment">
-    <div class="info clearfix">
+    <div class="info">
         <?php if (pk_open_show_comment_avatar()): ?>
-            <div class="float-left">
+            <div>
                 <?php if (pk_is_checked('basic_img_lazy_a')): ?>
                     <img src="<?php echo pk_get_lazy_pl_img() ?>"
                          data-src="<?php echo get_avatar_url($comment->comment_author_email, 64); ?>"
@@ -27,7 +27,7 @@ function pk_comment_callback($comment, $args, $depth)
                 <?php endif; ?>
             </div>
         <?php endif; ?>
-        <div class="float-left <?php if (pk_open_show_comment_avatar()) {
+        <div class="<?php if (pk_open_show_comment_avatar()) {
             echo 'ml-3';
         } ?> two-info">
             <div class="puock-text ta3b">

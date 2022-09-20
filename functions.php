@@ -316,7 +316,7 @@ function get_post_images($post_id = null)
 
 //分页功能
 if (!function_exists('pk_paging')) {
-    function pk_paging($pnum = 2, $position = 'right')
+    function pk_paging($pnum = 2)
     {
         if (is_singular()) {
             return;
@@ -324,7 +324,7 @@ if (!function_exists('pk_paging')) {
         global $wp_query, $paged;
         $max_page = $wp_query->max_num_pages;
         if ($max_page == 1) return;
-        echo '<div class="mt20 clearfix"><ul class="pagination float-' . $position . '">';
+        echo '<div class="mt20 p-flex-s-right"><ul class="pagination">';
         if (empty($paged)) $paged = 1;
         echo '<li class="prev-page puock-bg">';
         previous_posts_link('&laquo;');

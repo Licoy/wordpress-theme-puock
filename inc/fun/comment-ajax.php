@@ -161,9 +161,9 @@ function pk_comment_ajax()
     wp_set_comment_cookies($comment, $user);
 
     echo '<div id="comment-' . get_comment_ID() . '" class="post-comment">
-            <div class="info clearfix">
-                <div class="float-left">' . get_avatar($comment, 64, '', '', array('class' => 'md-avatar')) . '</div>
-                <div class="float-left ml-3 two-info">
+            <div class="info">
+                <div>' . get_avatar($comment, 64, '', '', array('class' => 'md-avatar')) . '</div>
+                <div class="ml-3 two-info">
                     <div class="puock-text ta3b">
                         <span class="t-md puock-links">' . get_comment_author_link($comment_id) . '</span>
                         ' . pk_the_author_class(false, $comment) . '

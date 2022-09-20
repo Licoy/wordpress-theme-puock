@@ -10,29 +10,29 @@
                  class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
                 <div class="p-block">
                     <div><h1 id="post-title" class="mb-0 puock-text t-xxl"><?php the_title() ?></h1></div>
-                    <div class="options clearfix mt20">
-                        <div class="float-left">
+                    <div class="options p-flex-sbc mt20">
+                        <div>
                             <?php if (!pk_is_checked('hide_post_views')): ?>
-                                <div class="option puock-bg ta3 t-sm float-left mr-1"><i
+                                <div class="option puock-bg ta3 t-sm mr-1"><i
                                             class="czs-eye-l mr-1"></i>
                                     <span id="post-views"><?php pk_get_post_views(); ?></span><span><?php _e('次阅读', PUOCK) ?></span>
                                 </div>
                             <?php endif; ?>
                             <?php if (!pk_post_comment_is_closed()): ?>
                                 <a href="#comments">
-                                    <div class="option puock-bg ta3 t-sm float-left mr-1"><i
+                                    <div class="option puock-bg ta3 t-sm mr-1"><i
                                                 class="czs-comment-l mr-1"></i><?php comments_number() ?></div>
                                 </a>
                             <?php endif; ?>
                             <?php if (is_user_logged_in() && current_user_can('edit_post', $post->ID)): ?>
                                 <a target="_blank" href="<?php echo get_edit_post_link() ?>">
-                                    <div class="option puock-bg ta3 t-sm float-left mr-1"><i
+                                    <div class="option puock-bg ta3 t-sm mr-1"><i
                                                 class="czs-web-edit-l mr-1"></i><?php _e('编辑', PUOCK) ?></div>
                                 </a>
                             <?php endif; ?>
                         </div>
-                        <div class="float-right">
-                            <div class="option puock-bg ta3 t-sm float-left mr-1 d-none d-lg-inline-block post-main-size">
+                        <div>
+                            <div class="option puock-bg ta3 t-sm mr-1 d-none d-lg-inline-block post-main-size">
                                 <i class="czs-bevel"></i></div>
                         </div>
                     </div>
@@ -59,25 +59,25 @@
                         if (!empty($link_pages)):
                             ?>
                             <div class="mt20 clearfix text-center">
-                                <ul class="pagination float-right">
+                                <ul class="pagination">
                                     <?php echo $link_pages ?>
                                 </ul>
                             </div>
                         <?php endif; ?>
                         <div class="footer-info puock-text mt20">
-                            <div class="clearfix mt20 t-sm">
-                                <div class="float-left">
-                                    <span><?php _e('发表于：', PUOCK) ?></span><?php echo get_post_category_link_exec(true) ?>
+                            <div class="p-flex-sbc mt20 t-sm">
+                                <div>
+                                    <span><?php _e('发表至：', PUOCK) ?></span><?php echo get_post_category_link_exec(true) ?>
                                 </div>
-                                <div class="float-right">
+                                <div>
                                     <span class="c-sub"><?php pk_get_post_date() ?></span>
                                 </div>
                             </div>
-                            <div class="clearfix">
-                                <div class="float-left">
+                            <div class="p-flex-sbc mt20">
+                                <div>
                                     <?php echo get_post_tags('mt20 tags') ?>
                                 </div>
-                                <div class="float-right mt20">
+                                <div>
                                     <span class="badge badge-secondary copy-post-link curp"><i
                                                 class="czs-list-clipboard-l"></i><span><?php _e('复制链接', PUOCK) ?></span></span>
                                 </div>
@@ -87,14 +87,14 @@
                     <?php get_template_part('templates/post', 'options') ?>
                 </div>
                 <?php if (pk_is_checked('page_copy_right')): ?>
-                    <div class="p-block clearfix">
-                        <div class="float-left mr-3 d-none d-md-block">
+                    <div class="p-block p-flex-sc">
+                        <div class="mr-3 d-none d-md-block">
                             <img class="md-avatar mt-1"
                                  src="<?php echo pk_get_gravatar(get_the_author_meta('email')) ?>"
                                  alt="<?php the_author_meta('display_name') ?>"
                                  title="<?php the_author_meta('display_name') ?>">
                         </div>
-                        <div class="float-left puock-text t-md">
+                        <div class="puock-text t-md">
                             <?php $origin_author = get_post_meta(get_the_ID(), 'origin_author', true);
                             if (empty($origin_author)): ?>
                                 <div>

@@ -74,8 +74,8 @@
 
                         <input type="text" hidden name="comment_post_ID" value="<?php echo $post->ID ?>">
                         <input type="text" hidden id="comment_parent" name="comment_parent" value="">
-                        <div class="clearfix mt10">
-                            <div class="float-left">
+                        <div class="p-flex-sbc mt10">
+                            <div>
                                 <?php if (is_user_logged_in()): $user = wp_get_current_user(); ?>
                                     <div class="puock-text t-sm">
                                         <input type="text" value="1" hidden name="comment-logged" id="comment-logged">
@@ -93,7 +93,7 @@
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <div class="float-right">
+                            <div>
                                 <button id="comment-cancel" type="button"
                                         class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUOCK) ?></button>
                                 <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm" type="button"><i
@@ -124,8 +124,8 @@
             endif;
             ?>
 
-            <div class="mt20 clearfix" <?php echo pk_is_checked('comment_ajax') ? 'data-no-instant' : '' ?>>
-                <ul class="pagination float-right comment-ajax-load">
+            <div class="mt20 p-flex-s-right" <?php echo pk_is_checked('comment_ajax') ? 'data-no-instant' : '' ?>>
+                <ul class="pagination comment-ajax-load">
                     <?php
                     paginate_comments_links(array(
                         'prev_text' => '&laquo;',

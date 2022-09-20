@@ -665,6 +665,24 @@ a:hover {
   }
 }
 
+.p-flex-sbc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p-flex-sc {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.p-flex-s-right{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .text-line() {
   text-decoration: underline;
 }
@@ -1235,6 +1253,11 @@ a:hover {
   .post-comment {
     margin-top: 20px;
 
+    .info{
+      display: flex;
+      align-items: center;
+    }
+
     .hide-info {
       display: none;
     }
@@ -1258,7 +1281,7 @@ a:hover {
 
     .content {
       .content-text, .comment-box-reply {
-        margin-left: 40px;
+        margin-left: 42px;
         border-radius: 3px;
       }
 
