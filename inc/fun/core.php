@@ -657,9 +657,9 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
         }
         if (count($menu->children) > 0) {
             if ($mobile) {
-                $out .= '<a href="#menu-sub-' . $menu->ID . '" data-toggle="collapse"><i class="czs-angle-down-l t-sm ml-1"></i></a>';
+                $out .= '<a href="#menu-sub-' . $menu->ID . '" data-toggle="collapse"><i class="czs-angle-down-l t-sm ml-1 menu-sub-icon"></i></a>';
             } else {
-                $out .= '<i class="czs-angle-down-l t-sm ml-1"></i>';
+                $out .= '<i class="czs-angle-down-l t-sm ml-1 menu-sub-icon"></i>';
             }
         }
         if ($mobile) {

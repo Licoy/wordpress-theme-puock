@@ -180,19 +180,50 @@ body.pre-mac pre {
   @h: 65px;
   height: @h;
 
+  & > ul > li {
+    &:after{
+      .ta3-fun();
+      @_h: 3px;
+      content: " ";
+      position: absolute;
+      width: 100%;
+      top: @h - @_h;
+      left: 0;
+      background: @colorPrimary;
+      height: @_h;
+      border-radius: 2px;
+      opacity: 0;
+    }
+
+    &:hover, &.menu-current {
+      &:after{
+        opacity: 1;
+      }
+    }
+
+    .menu-sub-icon {
+      .ta3-fun();
+      display: inline-block;
+    }
+
+    &.menu-current, &:hover {
+      .menu-sub-icon {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
   ul {
+    position: relative;
     list-style: none;
     padding: 0;
     margin: 0;
-    //li:not(:last-child){
-    //  margin-bottom: 15px;
-    //}
+
     & > li > a {
       display: inline-block;
     }
 
     li {
-      transition: all .1s;
       position: relative;
       display: inline-block;
       height: @h;
@@ -203,10 +234,6 @@ body.pre-mac pre {
         padding: 0 .5rem;
       }
 
-      &.menu-current, &:hover {
-        border-bottom: 2px solid @colorPrimary;
-      }
-
       &:hover .sub-menu {
         display: block;
       }
@@ -214,14 +241,14 @@ body.pre-mac pre {
 
     .sub-menu {
       display: none;
-      box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
       min-width: 160px;
       position: absolute;
       z-index: 999;
-      top: 55px;
+      top: 60px;
       left: -40px;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+      .ta3-fun();
 
       li {
         display: block;
@@ -230,6 +257,25 @@ body.pre-mac pre {
         @subHeight: (@h / 1.2);
         height: @subHeight;
         line-height: @subHeight;
+
+        &.menu-current, &:hover {
+          background-color: @colorPrimary;
+          border: none;
+
+          &:first-child {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+          }
+
+          &:last-child {
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+          }
+
+          a {
+            color: @colorLight !important;
+          }
+        }
 
         a {
           transition: all .3s;
@@ -956,7 +1002,7 @@ a:hover {
   }
 
   .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto,
-  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl{
+  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
     padding-right: 6px;
     padding-left: 6px;
   }
