@@ -28,11 +28,11 @@ blockquote {
   border-radius: 4px;
 }
 
-figure{
+figure {
   margin: 0;
 }
 
-  //覆盖样式
+//覆盖样式
 .hljs-ln-numbers {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -324,13 +324,13 @@ body.pre-mac pre {
     padding: 12px;
     overflow-y: scroll;
 
-    #post-menu-content-items{
+    #post-menu-content-items {
       overflow-y: scroll;
     }
 
-    [class^=post-menu-sub]{
+    [class^=post-menu-sub] {
       display: none;
-      margin-top:4px;
+      margin-top: 4px;
     }
 
     ul {
@@ -409,7 +409,7 @@ body.pre-mac pre {
   //-webkit-transform: translateY(0px);
 }
 
-.pk-rgba(@color){
+.pk-rgba(@color) {
   @c: rgba(red(@color), green(@color), blue(@color), var(--puock-block-not-tran));
 }
 
@@ -496,6 +496,14 @@ a:hover {
 
 .mb5 {
   margin-bottom: 5px;
+}
+
+.mr5 {
+  margin-right: 5px;
+}
+
+.mr10 {
+  margin-right: 10px;
 }
 
 .fs14() {
@@ -677,10 +685,10 @@ a:hover {
   align-items: center;
 }
 
-.p-flex-s-right{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.p-flex-s-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .text-line() {
@@ -830,6 +838,7 @@ a:hover {
       transition-duration: .5s;
       margin: 0 10px 0 0;
       flex-shrink: 0;
+
       img {
         width: 100%;
         height: auto;
@@ -837,14 +846,14 @@ a:hover {
       }
     }
 
-    &.post-item-card{
-      .thumbnail{
+    &.post-item-card {
+      .thumbnail {
         width: 100%;
       }
     }
 
-    &:hover{
-      .thumbnail{
+    &:hover {
+      .thumbnail {
         .ts-fun();
       }
     }
@@ -879,7 +888,7 @@ a:hover {
 
   .post-item-card {
 
-    .post-item-card-box{
+    .post-item-card-box {
       //display: flex;
     }
 
@@ -908,8 +917,8 @@ a:hover {
       }
     }
 
-    .info-meta{
-      .text-2line{
+    .info-meta {
+      .text-2line {
         height: 42px;
       }
     }
@@ -938,24 +947,23 @@ a:hover {
     white-space: normal;
   }
 
-  #posts{
-    .post-item{
-      .thumbnail{
+  #posts {
+    .post-item {
+      .thumbnail {
         width: 120px;
       }
     }
   }
 
-  #post,#content,#page{
-    box-sizing: border-box;
+  .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto,
+  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl{
     padding-right: 6px;
     padding-left: 6px;
-    .post-row{
-      margin: 0 !important;
-      #post-main{
-        padding:0;
-      }
-    }
+  }
+
+  .row {
+    margin-right: -6px;
+    margin-left: -6px;
   }
 }
 
@@ -1055,8 +1063,8 @@ a:hover {
   .entry-content {
     .fs14();
 
-    #post-main-content{
-      &.p-indent>p{
+    #post-main-content {
+      &.p-indent > p {
         text-indent: 2rem;
       }
     }
@@ -1139,6 +1147,12 @@ a:hover {
       margin: 10px auto;
       display: block;
       border-radius: 2px;
+      cursor: pointer;
+      transition: all .3s;
+
+      &:hover {
+        opacity: .8;
+      }
     }
 
     .alert {
@@ -1253,7 +1267,7 @@ a:hover {
   .post-comment {
     margin-top: 20px;
 
-    .info{
+    .info {
       display: flex;
       align-items: center;
     }
@@ -2152,7 +2166,7 @@ a:hover {
   padding-left: 0;
 }
 
-#post-main,#sidebar{
+#post-main, #sidebar {
   animation-fill-mode: none !important;
 }
 
@@ -2208,8 +2222,9 @@ a:hover {
     }
   }
 }
-.post-comment{
-  .pk-code-tools{
+
+.post-comment {
+  .pk-code-tools {
     margin-top: 10px;
   }
 }

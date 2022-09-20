@@ -268,7 +268,7 @@ class Puock {
             this.generatePostMenuHTML()
         }
         $('[data-toggle="tooltip"]').tooltip({placement: 'auto', trigger: 'hover'});
-        $("#post-main .entry-content").viewer({
+        $(".entry-content").viewer({
             navbar: false,
             url: this.data.params.main_lazy_img ? 'data-src' : 'src'
         });

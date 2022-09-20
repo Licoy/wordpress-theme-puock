@@ -25,6 +25,7 @@ function pk_ajax_resp_error($msg = 'fail', $data = null)
 
 require_once PUOCK_ABS_DIR . '/inc/fun/cache.php';
 require_once PUOCK_ABS_DIR . '/inc/setting/index.php';
+require_once PUOCK_ABS_DIR . '/inc/ext/init.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/ajax.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/oauth.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/comment-ajax.php';
