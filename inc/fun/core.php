@@ -154,22 +154,16 @@ if (!function_exists('the_views')) {
             $post_id = $post->ID;
         }
         $key = 'views';
-        $cache_key = sprintf(PKC_POST_VIEWS, $post_id);
-        $count = pk_cache_get($cache_key);
-        if (!$count) {
-            $count = get_post_meta($post_id, $key, true);
-            if ($count == '') {
-                $count = 0;
-            }
+        $count = get_post_meta($post_id, $key, true);
+        if ($count == '') {
+            $count = 0;
         }
         $count = the_views_add($post_id, $count, $key, $ajax);
-        $count = number_format_i18n($count);
-        pk_cache_set($cache_key, $count);
-        pk_cache_delete(PKC_TOTAL_VIEWS);
+        $count_view = number_format_i18n($count);
         if (!$echo) {
-            return $count;
+            return $count_view;
         }
-        echo $count;
+        echo $count_view;
     }
 }
 //异步请求浏览量
