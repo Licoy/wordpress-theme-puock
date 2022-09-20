@@ -28,7 +28,7 @@
     <?php endif; ?>
 </head>
 <body class="puock-<?php echo pk_theme_light() ? 'light' : 'dark'; echo current_theme_supports('custom-background') ? ' custom-background':''; ?>">
-<div id="page">
+<div>
     <?php if (is_single()): ?>
         <div class="progress" id="page-read-progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="0" aria-valuemin="0"

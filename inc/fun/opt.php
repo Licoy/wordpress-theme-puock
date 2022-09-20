@@ -384,7 +384,7 @@ function pk_debug_print_sql_list(){
     $show_sql_detail = pk_get_option('debug_sql_detail');
     $out = "<script>";
     if($show_sql_count){
-        $out .= "console.log('共计查询SQL：".get_num_queries()."次，耗时：".timer_stop(3)."秒');";
+        $out .= "console.log('共计查询SQL：".get_num_queries()."次，耗时：".timer_stop()."秒');";
     }
     if($show_sql_detail){
         $out .= "console.log(".json_encode($wpdb->queries).");";

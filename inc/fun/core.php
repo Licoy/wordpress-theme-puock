@@ -706,19 +706,6 @@ function pk_pre_post_set($query)
 }
 
 add_action('pre_get_posts', 'pk_pre_post_set');
-//摘要长度控制
-function pk_chinese_excerpt($text, $len = 100)
-{
-    $end_str = '';
-    if (strlen($text) > $len) {
-        $len -= 3;
-        $end_str = '...';
-    }
-    $text = mb_substr($text, 0, $len);
-    return $text . $end_str;
-}
-
-add_filter('the_excerpt', 'pk_chinese_excerpt');
 
 //静态资源加载源的链接
 function pk_get_static_url()

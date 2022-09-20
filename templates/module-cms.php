@@ -35,7 +35,7 @@
                                             <figure class="thumbnail">
                                                 <a <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                                                     <img title="<?php the_title() ?>"
-                                                         alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'w-100', 280, 180) ?>/>
+                                                         alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'tsh w-100', 280, 180) ?>/>
                                                 </a>
                                             </figure>
                                         </div>

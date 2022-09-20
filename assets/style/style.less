@@ -19,29 +19,6 @@
 @puockBg: #f8f8f9;
 @preRadius: 5px;
 
-// 浏览器样式
-
-@browserScrollbarWh: 8px;
-::-webkit-scrollbar {
-  width: @browserScrollbarWh;
-  height: @browserScrollbarWh;
-}
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(70, 71, 72, 0.2);
-  border-radius: @browserScrollbarWh;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: @browserScrollbarWh;
-  background: #cacaca;
-  -webkit-box-shadow: inset 0 0 6px rgba(127, 128, 130, 0.2);
-}
-
-::-webkit-scrollbar-thumb:window-inactive {
-  background: @colorPrimary;
-}
-
 //引用
 blockquote {
   padding: .8em;
@@ -51,13 +28,11 @@ blockquote {
   border-radius: 4px;
 }
 
-//覆盖样式
-.abc-checkbox input[type=checkbox]:checked + label::after, .abc-checkbox input[type=radio]:checked + label::after {
-  font-family: 'StrawberryIcon-Free' !important;
-  content: "\e915";
-  top: 1px;
+figure{
+  margin: 0;
 }
 
+  //覆盖样式
 .hljs-ln-numbers {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -76,10 +51,8 @@ blockquote {
     word-break: normal;
   }
 
-  /* your custom style here */
 }
 
-/* for block of code */
 .hljs-ln-code {
   padding-left: 10px;
 }
@@ -445,7 +418,7 @@ body.pre-mac pre {
 }
 
 .ts-fun() {
-  transform: scale(1.2);
+  transform: scale(1.03);
 }
 
 .tsh {
@@ -795,7 +768,7 @@ a:hover {
 .p-block, .widget {
   position: relative;
   margin: 0 0 15px 0;
-  padding: 20px;
+  padding: 15px;
   border-radius: 4px;
   box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
   box-sizing: border-box;
@@ -826,36 +799,51 @@ a:hover {
 
 #posts {
   .post-item {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+
     .ta3-fun();
 
     .thumbnail {
-      margin: 0;
       position: relative;
-      clear: both;
-      overflow: hidden;
       height: auto;
-      max-width: 200px;
+      width: 200px;
       transition-duration: .5s;
-
-      a img {
-        width: auto;
+      margin: 0 10px 0 0;
+      flex-shrink: 0;
+      img {
+        width: 100%;
         height: auto;
-        max-width: 100%;
         border-radius: 2px;
       }
     }
 
-    &:hover .post-info .info-title .a-link {
-      margin-left: 5px;
+    &.post-item-card{
+      .thumbnail{
+        width: 100%;
+      }
+    }
+
+    &:hover{
+      .thumbnail{
+        .ts-fun();
+      }
     }
 
     .post-info {
+      display: flex;
+      flex: auto;
+      overflow: hidden;
+      flex-direction: column;
+      justify-content: space-between;
+      //min-width:0;
       padding-left: 0;
       position: relative;
 
       .info-title {
         .fs16;
-
+        .t-line-1;
       }
 
       .info-meta {
@@ -864,14 +852,19 @@ a:hover {
       }
 
       .info-footer {
-        padding-right: 15px;
-        position: absolute;
-        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
     }
   }
 
   .post-item-card {
+
+    .post-item-card-box{
+      //display: flex;
+    }
+
     &:nth-child(even) {
       padding-right: 0;
       padding-left: 7px;
@@ -884,6 +877,7 @@ a:hover {
 
     .p-block {
       padding: 0;
+      width: 100%;
     }
 
     .thumbnail {
@@ -893,6 +887,12 @@ a:hover {
         width: 100% !important;
         padding: 10px;
         border-radius: 13px !important;
+      }
+    }
+
+    .info-meta{
+      .text-2line{
+        height: 42px;
       }
     }
 
@@ -918,6 +918,26 @@ a:hover {
 
   .post-item-card .t-line-1 {
     white-space: normal;
+  }
+
+  #posts{
+    .post-item{
+      .thumbnail{
+        width: 120px;
+      }
+    }
+  }
+
+  #post,#content,#page{
+    box-sizing: border-box;
+    padding-right: 6px;
+    padding-left: 6px;
+    .post-row{
+      margin: 0 !important;
+      #post-main{
+        padding:0;
+      }
+    }
   }
 }
 

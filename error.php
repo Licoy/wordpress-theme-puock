@@ -5,7 +5,7 @@ include '../../../wp-blog-header.php';
 $error_info = "";
 
 pk_session_call(function () use (&$error_info) {
-    $error_info = $_SESSION['error_info'];
+    $error_info = @$_SESSION['error_info'];
     unset($_SESSION['error_info']);
 });
 
