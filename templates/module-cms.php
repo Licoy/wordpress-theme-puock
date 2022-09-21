@@ -30,7 +30,7 @@
                             </div>
                             <?php foreach ($posts as $post) : setup_postdata($post); ?>
                                 <?php if ($post_index == 0): ?>
-                                    <div class="media row mt10">
+                                    <div class="media row mtb10">
                                         <div class="col-4">
                                             <figure class="thumbnail">
                                                 <a <?php pk_link_target() ?> href="<?php the_permalink() ?>">
@@ -44,7 +44,7 @@
                                                                          title="<?php the_title() ?>" <?php pk_link_target() ?>
                                                                          href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                             </h2>
-                                            <div class="t-md c-sub d-none d-md-block"><?php the_excerpt() ?></div>
+                                            <div class="t-md c-sub"><?php the_excerpt() ?></div>
                                         </div>
                                     </div>
                                 <?php else: ?>

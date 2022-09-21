@@ -181,7 +181,7 @@ body.pre-mac pre {
   height: @h;
 
   & > ul > li {
-    &:after{
+    &:after {
       .ta3-fun();
       @_h: 3px;
       content: " ";
@@ -196,7 +196,7 @@ body.pre-mac pre {
     }
 
     &:hover, &.menu-current {
-      &:after{
+      &:after {
         opacity: 1;
       }
     }
@@ -536,8 +536,17 @@ a:hover {
   margin-top: 50px;
 }
 
+.mb10 {
+  margin-bottom: 10px;
+}
+
 .mb15 {
   margin-bottom: 15px;
+}
+
+.mtb10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .mb5 {
@@ -1017,6 +1026,13 @@ a:hover {
   margin-right: 0;
 
   .magazine {
+    display: flex;
+    align-items: stretch;
+
+    & > div {
+      width: 100%;
+    }
+
     &:nth-child(even) {
       margin-right: 0;
     }
