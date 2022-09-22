@@ -2,6 +2,12 @@ const puockGlobalData = {
     loads: {}
 }
 
+const TYPE_PRIMARY = "primary"
+const TYPE_WARNING = "warning"
+const TYPE_DANGER = "danger"
+const TYPE_SUCCESS = "success"
+const TYPE_INFO = "info"
+
 class Puock {
     data = {
         tag: 'puock',
@@ -161,17 +167,17 @@ class Puock {
                     to = 'https://www.facebook.com/sharer.php?u' + url;
                     break;
             }
-            window.open(to, '_blank');
+            if (to) window.open(to, '_blank');
         });
     }
 
     sidebarMenuEventInit() {
         let currentOpenSubMenu = null;
-        $(document).on("touchend", "#post-menu-state", (e) => {
+        $(document).on("touchend", ".post-menu-toggle", (e) => {
             e.preventDefault();
             this.toggleMenu();
         });
-        $(document).on("click", "#post-menu-state", () => {
+        $(document).on("click", ".post-menu-toggle", () => {
             this.toggleMenu();
         });
         $(document).on("click", ".post-menu-item", (e) => {
@@ -272,18 +278,33 @@ class Puock {
             navbar: false,
             url: this.data.params.main_lazy_img ? 'data-src' : 'src'
         });
-        new ClipboardJS('.copy-post-link', {
-            text: () => {
-                const $copyEl = $(".copy-post-link");
-                $copyEl.find('span').html("已复制");
-                $copyEl.attr("disabled", true);
-                setTimeout(() => {
-                    $copyEl.find('span').html("复制链接");
-                    $copyEl.attr("disabled", false);
-                }, 3000);
-                return location.href;
-            }
+        const cp = new ClipboardJS('.copy-opt', {
+            text: (trigger) => {
+                const t = $(trigger)
+                let input = t.attr("data-cp-input")
+                let el = t.attr("data-cp-el")
+                let val = t.attr("data-cp-val")
+                let text;
+                if (typeof val !== "undefined") {
+                    text = val
+                } else if (typeof input !== "undefined") {
+                    text = $(input).val()
+                } else if (typeof el !== "undefined") {
+                    text = $(el).text()
+                } else {
+                    text = t.text()
+                }
+                return text;
+            },
         });
+        cp.on("success", (e) => {
+            let name = $(e.trigger).attr('data-cp-title') || "";
+            this.toast(`复制${name}成功`)
+        })
+        cp.on("error", (e) => {
+            let name = $(e.trigger).attr('data-cp-title') || "";
+            this.toast(`复制${name}失败`, TYPE_DANGER)
+        })
         this.lazyLoadInit()
         $('#post-main, #sidebar').theiaStickySidebar({
             additionalMarginTop: 20
@@ -323,7 +344,7 @@ class Puock {
                 const eqLevelFn = (unMenu, parentMen) => {
                     const nextUnMenu = loadMenu(unMenu, parentMen)
                     if (nextUnMenu != null) {
-                        if(getLevel(nextUnMenu) === getLevel(unMenu)){
+                        if (getLevel(nextUnMenu) === getLevel(unMenu)) {
                             return eqLevelFn(nextUnMenu, parentMen)
                         }
                     }
@@ -373,7 +394,7 @@ class Puock {
                     const id = menuIndex;
                     const pl = (item.levelInt - maxLevel) * 10
                     let out = `<li data-level="${item.levelInt}" style='padding-left:${pl}px'>`
-                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='czs-angle-right-l t-sm c-sub mr-1'></i> ${item.name}</a>`
+                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='${item.children.length > 0 ? 'czs-angle-right-l':'czs-doc-file-l'} t-sm c-sub mr-1'></i> ${item.name}</a>`
                     if (item.children.length > 0) {
                         out += `<ul class="post-menu-sub-${id}" data-parent="${parent + 1}">`
                         for (let child of item.children) {
@@ -389,9 +410,8 @@ class Puock {
                 })
             }
             result += "</ul>"
-            $("#post-menu-content-items").html(result)
-        } else {
-            $("#post-menus").remove()
+            $("#post-menu-content-items").html(result);
+            $(".post-menus-box").show();
         }
     }
 
@@ -411,6 +431,8 @@ class Puock {
             if (fullChange) {
                 const cp = new ClipboardJS('.cp-code');
                 cp.on("success", (e) => {
+                    e.clearSelection();
+                    this.toast('已复制到剪切板')
                     const el = $(e.trigger);
                     el.removeClass("czs-list-clipboard-l").addClass("czs-right-clipboard-l")
                     setTimeout(() => {
@@ -566,22 +588,22 @@ class Puock {
 
     eventCommentPreSubmit() {
         $(document).on('submit', '#comment-form', (e) => {
+            e.preventDefault();
             if ($("#comment-logged").val() === '0' && ($.trim($("#author").val()) === '' || $.trim($("#email").val()) === '')) {
-                this.infoToastShow('评论信息不能为空');
-                return false;
+                this.toast('评论信息不能为空', TYPE_WARNING);
+                return;
             }
             if (this.data.params.vd_comment) {
                 if ($.trim($("#comment-vd").val()) === '') {
-                    this.infoToastShow('验证码不能为空');
-                    return false;
+                    this.toast('验证码不能为空', TYPE_WARNING);
+                    return;
                 }
             }
             if ($.trim($("#comment").val()) === '') {
-                this.infoToastShow('评论内容不能为空');
-                return false;
+                this.toast('评论内容不能为空', TYPE_WARNING);
+                return;
             }
             this.commentSubmit(this.ct(e))
-            return false;
         })
     }
 
@@ -593,7 +615,7 @@ class Puock {
             data: $(target).serialize(),
             type: $(target).attr('method'),
             success: (data) => {
-                this.infoToastShow('评论已提交成功');
+                this.toast('评论已提交成功', TYPE_SUCCESS);
                 this.loadCommentCaptchaImage(null);
                 $("#comment-vd").val("");
                 $("#comment").val("");
@@ -620,12 +642,12 @@ class Puock {
                 }
                 this.commentFormLoadStateChange();
                 if (jsonVal) {
-                    this.infoToastShow(jsonVal.msg);
+                    this.toast(jsonVal.msg, TYPE_DANGER);
                     if (jsonVal.refresh_code) {
                         this.loadCommentCaptchaImage(null);
                     }
                 } else {
-                    this.infoToastShow(res.responseText);
+                    this.toast(res.responseText, TYPE_DANGER);
                 }
             }
         });
@@ -657,7 +679,7 @@ class Puock {
         $(document).on("click", "[id^=comment-reply-]", (e) => {
             this.data.comment.replyId = $(this.ct(e)).attr("data-id");
             if ($.trim(this.data.comment.replyId) === '') {
-                this.infoToastShow('结构有误');
+                this.toast('结构有误', TYPE_DANGER);
                 return;
             }
             const cf = $("#comment-form"),
@@ -692,10 +714,10 @@ class Puock {
                     vm.find("span").html(res.d);
                     vm.addClass("bg-primary text-light");
                 } else {
-                    this.infoToastShow(res.t);
+                    this.toast(res.t);
                 }
             }, 'json').error(() => {
-                this.infoToastShow('点赞异常');
+                this.toast('点赞异常', TYPE_DANGER);
             })
         })
     }
@@ -812,6 +834,25 @@ class Puock {
                 el.find('.fb').removeClass("d-none");
             }, 'json')
         })
+    }
+
+
+    toast(msg, type = TYPE_PRIMARY, options = {}) {
+        options = Object.assign({
+            duration: 2600,
+            close: false,
+            position: 'right',
+            gravity: 'bottom',
+            offset: {},
+            className: 't-' + type,
+        }, options)
+        console.log(options)
+        const t = Toastify({
+            text: msg,
+            ...options
+        });
+        t.showToast();
+        return t;
     }
 
 }

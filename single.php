@@ -73,18 +73,14 @@
                                     <span class="c-sub"><?php pk_get_post_date() ?></span>
                                 </div>
                             </div>
-                            <div class="p-flex-sbc mt20">
+                            <div class="mt20">
                                 <div>
                                     <?php echo get_post_tags('mt20 tags') ?>
-                                </div>
-                                <div>
-                                    <span class="badge badge-secondary copy-post-link curp"><i
-                                                class="czs-list-clipboard-l"></i><span><?php _e('复制链接', PUOCK) ?></span></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php get_template_part('templates/post', 'options') ?>
+                    <?php get_template_part('templates/post', 'actions') ?>
                 </div>
                 <?php if (pk_is_checked('page_copy_right')): ?>
                     <div class="p-block p-flex-sc">
@@ -141,35 +137,7 @@
 
     <?php get_template_part('templates/module', 'smiley') ?>
     <?php get_template_part('templates/module', 'reward') ?>
-    <!-- 分享至第三方 -->
-    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title puock-text"><?php _e('分享至', PUOCK) ?></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="czs-close-l t-md"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="d-flex justify-content-center w-100 share-to">
-                        <div data-id="wb" class="circle-button circle-sm circle-hb text-center bg-danger text-light"><i
-                                    class="czs-weibo t-md"></i></div>
-                        <div data-id="wx" id="wx-share" data-toggle="tooltip" data-html="true"
-                             data-url="<?php echo PUOCK_ABS_URI . pk_post_qrcode(get_permalink()) ?>"
-                             class="circle-button circle-sm circle-hb text-center bg-success text-light"><i
-                                    class="czs-weixin t-md"></i></div>
-                        <div data-id="qzone" class="circle-button circle-sm circle-hb text-center bg-yellow text-light">
-                            <i class="czs-qzone t-md"></i></div>
-                        <div data-id="tw" class="circle-button circle-sm circle-hb text-center bg-info text-light"><i
-                                    class="czs-twitter t-md"></i></div>
-                        <div data-id="fb" class="circle-button circle-sm circle-hb text-center bg-primary text-light"><i
-                                    class="czs-facebook t-md"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php get_template_part('templates/post', 'share') ?>
 
 <?php endwhile; ?>
 

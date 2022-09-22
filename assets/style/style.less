@@ -1,7 +1,8 @@
 @colorPrimary: #007bff;
 @colorDanger: #dc3545;
 @colorInfo: #17a2b8;
-@colorYellow: #FFCC33;
+@colorSuccess: #00b74a;
+@colorWarning: #fc651f;
 @bgLight: #fefcfc;
 @bgHui: #f8f8f9;
 @colorSecondary: #6c757d;
@@ -32,6 +33,28 @@ figure {
   margin: 0;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(75, 75, 75, 0.5)
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(106, 106, 106, 0.5)
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(120, 120, 120, 0.2)
+}
+
 //覆盖样式
 .hljs-ln-numbers {
   -webkit-touch-callout: none;
@@ -55,6 +78,37 @@ figure {
 
 .hljs-ln-code {
   padding-left: 10px;
+}
+
+.toastify {
+  font-size: 14px;
+  background-color: @colorDark;
+  color: #fff;
+
+  &.t-primary {
+    background: @colorPrimary;
+  }
+
+  &.t-info {
+    background: @colorInfo;
+  }
+
+  &.t-warning {
+    background: @colorWarning;
+  }
+
+  &.t-danger {
+    background: @colorDanger;
+  }
+
+  &.t-success {
+    background: @colorSuccess;
+  }
+
+  .toast-close {
+    font-size: 12px;
+    opacity: .2;
+  }
 }
 
 //覆盖样式结束
@@ -368,11 +422,7 @@ body.pre-mac pre {
     //box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
     display: none;
     padding: 12px;
-    overflow-y: scroll;
-
-    #post-menu-content-items {
-      overflow-y: scroll;
-    }
+    overflow-y: auto;
 
     [class^=post-menu-sub] {
       display: none;
@@ -395,6 +445,10 @@ body.pre-mac pre {
     }
   }
 }
+.post-menus-box{
+  .ta3-fun();
+  display: none;
+}
 
 #logo {
   padding: 10px;
@@ -416,6 +470,39 @@ body.pre-mac pre {
   }
 }
 
+//最大区域元素不会变动
+@media (min-width: 1420px) {
+  .post-action-panel {
+    .post-action-content {
+      position: fixed;
+      margin-left: -6rem;
+      top: 40%;
+      z-index: 9;
+
+      .ls{
+        display: block !important;
+      }
+
+      & > div {
+        flex-direction: column;
+      }
+
+      .circle-button {
+        background-color: @colorModeDarkBoxBg;
+
+        &:first-child {
+          position: relative;
+          left: 6px;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: 1360px) {
   .container, .container-lg, .container-md, .container-sm {
     max-width: 1240px;
@@ -429,6 +516,19 @@ body.pre-mac pre {
 .modal-content {
   border: none;
   border-radius: 5px;
+
+  .modal-header {
+    .close {
+      i {
+        display: inline-block;
+        .ta3-fun();
+
+        &:hover {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
 }
 
 .modal-body {
@@ -480,7 +580,7 @@ body.pre-mac pre {
 }
 
 .bg-yellow {
-  background-color: @colorYellow !important;
+  background-color: @colorWarning !important;
 }
 
 a:hover {
@@ -670,6 +770,34 @@ a:hover {
 .xs-avatar {
   .round(120px)
 }
+
+//.mini-scroll,body,pre{
+//  &::-webkit-scrollbar {
+//    width: 5px;
+//    height: 5px;
+//  }
+//
+//  &::-webkit-scrollbar-track {
+//    border-radius: 10px;
+//  }
+//
+//  &::-webkit-scrollbar-thumb {
+//    border-radius: 10px;
+//    background: rgba(0,0,0,0);
+//  }
+//
+//  &:hover::-webkit-scrollbar-thumb {
+//    background: rgba(125, 125, 125, 0.4)
+//  }
+//
+//  &::-webkit-scrollbar-thumb:hover {
+//    background: rgba(47, 47, 47, 0.6)
+//  }
+//
+//  &::-webkit-scrollbar-thumb:window-inactive {
+//    background: rgba(120, 120, 120, 0.2)
+//  }
+//}
 
 .line-h(@h) {
   line-height: @h;
@@ -1098,6 +1226,14 @@ a:hover {
   }
 }
 
+.post-action-panel{
+  .post-action-content{
+    .ls{
+      display: none;
+    }
+  }
+}
+
 #post, #page {
   .options {
     .option {
@@ -1336,6 +1472,10 @@ a:hover {
 
     .hide-info {
       display: none;
+    }
+
+    pre{
+      font-size: 14px;
     }
 
     .comment-os {
@@ -1647,7 +1787,12 @@ a:hover {
 
 //标签云小工具
 .widget-puock-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
   a {
+    flex: 1;
     margin: 3px 3px;
     padding: .5rem .7rem;
   }
@@ -2113,7 +2258,8 @@ a:hover {
   }
 
   .colorMode {
-    color: @colorYellow !important;
+    color: #f7e201 !important;
+    font-weight: bold;
   }
 
   .form-control {
