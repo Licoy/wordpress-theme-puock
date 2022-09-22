@@ -5,7 +5,7 @@ function pk_get_website_favicon_ico($url, $cache_time, $default_ico, $basename =
     $cache_file = dirname(__FILE__) . '/../cache/' . md5($url) . '.ico';
     if (is_file($cache_file)) {
         if (time() - filemtime($cache_file) <= $cache_time) {
-            pk_favicon_output(file_get_contents($cache_file));
+            pk_favicon_get_ico_contents($cache_file, $default_ico);
             return;
         }
     }
@@ -33,7 +33,22 @@ function pk_get_website_favicon_ico($url, $cache_time, $default_ico, $basename =
         pk_favicon_put_default_and_output($cache_file, $default_ico);
         return;
     }
-    pk_favicon_output(file_get_contents($cache_file));
+    var_dump(11);
+    pk_favicon_get_ico_contents($cache_file, $default_ico);
+}
+
+function pk_favicon_get_ico_contents($cache_file, $default_ico)
+{
+    if (pk_favicon_validate($cache_file)) {
+        pk_favicon_output(file_get_contents($cache_file));
+        return;
+    }
+    pk_favicon_output(file_get_contents($default_ico));
+}
+
+function pk_favicon_validate($cache_file)
+{
+    return @exif_imagetype($cache_file);
 }
 
 function pk_favicon_put_default_and_output($cache_file, $default_ico)
