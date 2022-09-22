@@ -33,7 +33,6 @@ function pk_get_website_favicon_ico($url, $cache_time, $default_ico, $basename =
         pk_favicon_put_default_and_output($cache_file, $default_ico);
         return;
     }
-    var_dump(11);
     pk_favicon_get_ico_contents($cache_file, $default_ico);
 }
 
