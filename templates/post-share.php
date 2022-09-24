@@ -16,7 +16,7 @@
                          data-url="<?php echo PUOCK_ABS_URI . pk_post_qrcode(get_permalink()) ?>"
                          class="circle-button circle-sm circle-hb text-center bg-success text-light"><i
                             class="czs-weixin t-md"></i></div>
-                    <div data-id="qzone" class="circle-button circle-sm circle-hb text-center bg-yellow text-light">
+                    <div data-id="qzone" class="circle-button circle-sm circle-hb text-center bg-warning text-light">
                         <i class="czs-qzone t-md"></i></div>
                     <div data-id="tw" class="circle-button circle-sm circle-hb text-center bg-info text-light"><i
                             class="czs-twitter t-md"></i></div>

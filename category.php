@@ -2,7 +2,7 @@
 
     <div id="content">
 
-        <div class="cat-top-info box-sw">
+        <div class="cat-top-info">
             <div class="container">
                 <?php echo pk_breadcrumbs() ?>
                 <?php $cats = get_category_child($cat);if($cats && count($cats)>0): ?>
