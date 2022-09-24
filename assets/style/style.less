@@ -85,6 +85,10 @@ blockquote {
   background-color: var(--pk-c-primary);
 }
 
+.modal-content{
+  background-color: var(--pk-bg-box);
+}
+
 //覆盖样式结束
 #page-read-progress {
   z-index: 1000;
@@ -296,7 +300,7 @@ body.pre-mac pre {
   position: fixed;
   right: 0;
   top: ~"calc(100% - 75%)";
-  background-color: #fff;
+  background-color: var(--pk-bg-box);
   @border-radius: 10px;
   @h: 400px;
   border-top-left-radius: @border-radius;
@@ -314,7 +318,6 @@ body.pre-mac pre {
     @border-radius: 5px;
     border-top-left-radius: @border-radius;
     border-bottom-left-radius: @border-radius;
-    //box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
     text-align: center;
     cursor: pointer;
     color: #fff;
@@ -1107,7 +1110,7 @@ a:hover {
   @wh: 50px;
   .round(@wh);
   line-height: @wh;
-  background-color: var(--pk-bg-grey);
+  background-color: var(--pk-bg-box-content);
   .ta3-fun();
 
   &:not(:first-child) {
@@ -1391,11 +1394,6 @@ a:hover {
   .fs12();
 }
 
-//授权追踪码
-.as {
-  color: #fff;
-}
-
 //书籍推荐
 #page-books {
   #books-main {
@@ -1519,6 +1517,7 @@ a:hover {
   &:before {
     content: '';
     position: absolute;
+    background-color: var(--pk-bg-box-content);
     top: 0;
     left: 25px;
     height: 100%;
@@ -1546,6 +1545,7 @@ a:hover {
 
   .timeline-content {
     .ta3-fun();
+    background-color: var(--pk-bg-box-content);
     padding: 20px 10px 10px 10px;
     position: relative;
     margin-left: 60px;
@@ -1574,11 +1574,11 @@ a:hover {
     }
 
     &:before {
-      content: '';
+      content: ' ';
       position: absolute;
       top: 9px;
       right: 100%;
-      border: 8px solid transparent;
+      border-right: 8px solid var(--pk-bg-box-content);
     }
 
     &:hover {
@@ -1594,6 +1594,7 @@ a:hover {
     width: @wh;
     height: @wh;
     border-radius: 50%;
+    background-color: var(--pk-bg-box-content);
   }
 }
 
@@ -1708,6 +1709,7 @@ a:hover {
     color: var(--pk-c-font);
     transition: all .2s;
     margin-bottom: 8px;
+    flex: 1;
 
     &:hover {
       background-color: var(--pk-c-primary);

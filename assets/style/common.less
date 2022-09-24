@@ -136,6 +136,15 @@ a{
 .--each-arr-color(@colors, c, color);
 [class^=alert]{
   color:var(--pk-c-light) !important;
+  a{
+    color: var(--pk-c-light) !important;
+    text-decoration: underline;
+  }
+}
+
+.mtb10{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .plr10() {
