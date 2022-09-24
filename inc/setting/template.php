@@ -30,8 +30,8 @@
     }
 </script>
 <?php
-if (file_exists(dirname(__FILE__) . './template-script-dev.php')) {
-    include_once dirname(__FILE__) . './template-script-dev.php';
+if (file_exists(dirname(__FILE__) . '/template-script-dev.php')) {
+    include_once dirname(__FILE__) . '/template-script-dev.php';
 } else { ?>
 
     <script type="module" crossorigin

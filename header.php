@@ -17,6 +17,7 @@
           href="<?php echo pk_get_static_url(); ?>/assets/dist/style.min.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
     <script data-no-instant
             src="<?php echo pk_get_static_url(); ?>/assets/dist/jquery.min.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
+    <?php get_template_part('templates/css', 'custom') ?>
     <?php echo pk_head_style_var() ?>
     <?php if (!empty(pk_get_option('tj_code_header', ''))): ?>
         <?php echo pk_get_option('tj_code_header', ''); ?>
