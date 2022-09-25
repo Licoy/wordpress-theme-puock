@@ -779,7 +779,7 @@ function pk_get_thumbnail_allow_sites_filepath()
 }
 
 //生成缩略图白名单文件
-function pk_generate_thumbnail_allow_sites_file()
+function pk_generate_thumbnail_allow_sites_file($options)
 {
     $sites = pk_get_thumbnail_allow_sites();
     $template = "<?php \$ALLOWED_SITES = [\n";
@@ -792,4 +792,4 @@ function pk_generate_thumbnail_allow_sites_file()
     return file_put_contents(pk_get_thumbnail_allow_sites_filepath(), $template);
 }
 
-add_action('options-framework-saved', 'pk_generate_thumbnail_allow_sites_file');
+add_action('pk_option_updated', 'pk_generate_thumbnail_allow_sites_file');

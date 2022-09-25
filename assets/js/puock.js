@@ -128,6 +128,9 @@ class Puock {
             search.attr("class", "animated fade" + tag + "Left");
             $("#search-backdrop").attr("class", "modal-backdrop animated fade" + tag + "Right");
             search.attr("data-open", !open);
+            if(!open){
+                search.find("input").focus();
+            }
         }
         $(document).on("click", ".search-modal-btn", () => {
             toggle();
