@@ -20,9 +20,11 @@
                                     </a>
                                 <?php endif; ?>
                             </div>
+                            <?php if(!pk_is_checked("hide_global_sidebar")): ?>
                             <div>
                                 <div class="option puock-bg ta3 t-sm mr-1 d-none d-lg-inline-block post-main-size"><i class="czs-bevel"></i></div>
                             </div>
+                            <?php endif; ?>
                         </div>
                         <div class="mt20 puock-text entry-content">
                             <?php the_content() ?>
