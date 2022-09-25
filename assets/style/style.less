@@ -4,7 +4,7 @@
 
 body {
   background-color: var(--pk-bg-body);
-  color:var(--pk-c-font);
+  color: var(--pk-c-font);
 }
 
 #header, .p-block, .sub-menu, #header-box, .widget,
@@ -77,7 +77,7 @@ blockquote {
   }
 }
 
-.progress{
+.progress {
   background-color: var(--pk-bg-body);
 }
 
@@ -85,7 +85,7 @@ blockquote {
   background-color: var(--pk-c-primary);
 }
 
-.modal-content{
+.modal-content {
   background-color: var(--pk-bg-box);
 }
 
@@ -375,6 +375,7 @@ body.pre-mac pre {
   }
 
   .txt-logo {
+    color: var(--pk-c-font);
     line-height: @height;
   }
 }
@@ -512,6 +513,12 @@ a:hover {
     &:hover {
       text-decoration: none;
       .c-primary;
+    }
+  }
+
+  .colorMode {
+    &.czs-moon-l, .czs-moon-l {
+      color: var(--pk-c-yellow);
     }
   }
 }
@@ -1726,6 +1733,7 @@ a:hover {
   &.loaded {
     border: 1px solid rgba(0, 0, 0, .125);
     background-color: var(--pk-bg-card);
+
     a {
       color: var(--pk-c-font);
     }

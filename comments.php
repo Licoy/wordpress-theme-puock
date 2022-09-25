@@ -11,7 +11,7 @@
                     <form class="mt10" id="comment-form" method="post">
                         <div class="form-group">
                             <textarea placeholder="<?php _e('您必须要登录之后才可以进行评论', PUOCK) ?>" disabled id="comment"
-                                      name="comment" class="form-control form-control-sm t-sm" rows="1"></textarea>
+                                      name="comment" class="form-control form-control-sm t-sm" rows="4"></textarea>
                         </div>
                     </form>
                     <?php if (pk_is_checked('oauth_qq')): ?>
