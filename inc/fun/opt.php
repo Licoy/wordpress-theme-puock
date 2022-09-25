@@ -160,10 +160,11 @@ function pk_shortcode_box_init()
     $output = "";
     foreach ($shortcodes as $key => $item) {
         $attr = '';
+        $content = $item['content'] ?? '';
         if (isset($item['attr']) && count($item) > 0) {
             $attr = 'data-attr=\'' . json_encode($item['attr']) . '\'';
         }
-        $output .= "<a href='javascript:void(0)' class='add-shortcode button button-small' data-key='{$key}' {$attr}>{$item['name']}</a>";
+        $output .= "<a href='javascript:void(0)' class='add-shortcode button button-small' data-key='{$key}' {$attr} data-content='{$content}'>{$item['name']}</a>";
     }
     echo '<a id="insert-shortcode-button" style="position:relative" class="button" 
         title="' . __('添加短代码', PUOCK) . '" data-editor="content" href="javascript:;">  

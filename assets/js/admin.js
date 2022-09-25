@@ -39,6 +39,7 @@ jQuery(function () {
         const _this = $(this)
         const key = _this.attr("data-key")
         const attrStr = _this.attr("data-attr")
+        const content = _this.attr("data-content")
         let out = `[${key}`
         if (attrStr) {
             const attr = JSON.parse(attrStr)
@@ -46,7 +47,7 @@ jQuery(function () {
                 out += ` ${attrKey}='${attr[attrKey]}'`
             }
         }
-        out += `][/${key}]`
+        out += `]${content}[/${key}]`
         putTextToEditor(out)
         $('#insert-shortcode-wrap').removeClass('cur')
     });

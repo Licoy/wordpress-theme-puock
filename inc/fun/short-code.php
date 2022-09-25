@@ -1,36 +1,53 @@
 <?php
+/*短代码*/
+$shortCodeColors = array('primary', 'danger', 'warning', 'info', 'success', 'dark');
 
 function pk_shortcode_register()
 {
-    return array(
-        'music' => array('name' => '音乐播放'),
-        'reply' => array('name' => '回复可见'),
-        'login' => array('name' => '登录可见'),
-        'github' => array('name' => 'Github'),
-        'login_email' => array('name' => '登录并验证邮箱可见'),
-        'video' => array('name' => '视频播放', 'attr' => array(
+    global $shortCodeColors;
+    $list = array(
+        'music' => array('name' => '音乐播放', 'content' => '输入链接地址'),
+        'reply' => array('name' => '回复可见', 'content' => '输入内容'),
+        'login' => array('name' => '登录可见', 'content' => '输入内容'),
+        'github' => array('name' => 'Github仓库卡片', 'content' => 'Licoy/wordpress-theme-puock'),
+        'login_email' => array('name' => '登录并验证邮箱可见', 'content' => '输入内容'),
+        'video' => array('name' => '视频播放', 'content' => '视频地址', 'attr' => array(
             'autoplay' => false, 'type' => 'auto',
-            'pic' => '', 'class' => ''
+            'pic' => 'https://xxx.com/cover.jpg', 'class' => ''
         )),
-        'download' => array('name' => '文件下载', 'attr' => array(
-            'file' => '', 'size' => ''
+        'download' => array('name' => '文件下载', 'content' => '文件地址', 'attr' => array(
+            'file' => 'xxx.zip', 'size' => '12MB'
         )),
-        'password' => array('name' => '输入密码可见', 'attr' => array(
-            'pass' => '', 'desc' => '输入密码可见',
+        'password' => array('name' => '输入密码可见', 'content' => '输入内容', 'attr' => array(
+            'pass' => '123456', 'desc' => '输入密码可见',
         )),
-        'collapse' => array('name' => '折叠面板', 'attr' => array(
-            'title' => ''
+        'collapse' => array('name' => '折叠面板', 'content' => '输入内容', 'attr' => array(
+            'title' => 'title'
         )),
     );
+    foreach ($shortCodeColors as $sc_tips) {
+        $list['t-' . $sc_tips] = array(
+            'name' => '提示框' . $sc_tips,
+            'attr' => array(
+                'icon' => ''
+            ),
+            'content' => '输入内容'
+        );
+    }
+    return $list;
 }
 
-/*短代码*/
-$shortCodeColors = array('primary', 'danger', 'warning', 'info', 'success', 'dark');
 //提示框部分
 function sc_tips_common($type, $attr, $content)
 {
-    return '<div class="alert alert-' . $type . '">' . $content . '</div>';
+    $icon = $attr['icon'] ?? '';
+    if(!empty($icon)){
+        $content = "<i class=\"{$icon} mr-1\"></i>".$content;
+    }
+    return "<div class=\"alert alert-{$type}\">{$content}</div>";
 }
+
+
 
 function sc_tips_primary($attr, $content = null)
 {
@@ -119,24 +136,6 @@ function sc_btn_link($attr, $content = null)
 foreach (array_merge($shortCodeColors, array('link')) as $sc_btn) {
     add_shortcode('btn-' . $sc_btn, 'sc_btn_' . $sc_btn);
 }
-//短代码兼容部分（可对之前使用的主题中的短代码进行转换适配）
-foreach ($shortCodeColors as $scc) {
-    add_shortcode('t-' . $scc, 'sc_tips_' . $scc);
-    add_shortcode('btn-' . $scc, 'sc_btn_' . $scc);
-}
-add_shortcode('v_organge', 'sc_tips_warning');
-add_shortcode('v_notice', 'sc_tips_success');
-add_shortcode('v_red', 'sc_tips_danger');
-add_shortcode('v_lvse', 'sc_tips_success');
-add_shortcode('v_error', 'sc_tips_danger');
-add_shortcode('v_blue', 'sc_tips_primary');
-add_shortcode('v_warn', 'sc_tips_warning');
-add_shortcode('v_act', 'sc_tips_primary');
-add_shortcode('bb', 'sc_btn_primary');
-add_shortcode('sgbtn_orange', 'sc_btn_warning');
-add_shortcode('sgbtn_blue', 'sc_btn_primary');
-add_shortcode('sgbtn_red', 'sc_btn_danger');
-add_shortcode('sgbtn_lv', 'sc_btn_success');
 
 //集成dplayer播放器
 function pk_dplayer_videos($attr, $content = null)
