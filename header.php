@@ -60,7 +60,9 @@
                 </div>
                 <div class="mobile-menus d-block d-lg-none p-1 puock-text">
                     <i class="czs-menu-l t-xl mr-2 mobile-menu-s"></i>
+                    <?php if(pk_is_checked('theme_mode_s')): ?>
                     <i class="colorMode czs-moon-l t-xl mr-2"></i>
+                    <?php endif; ?>
                     <i class="search-modal-btn czs-search-l t-md"></i>
                 </div>
             </div>
