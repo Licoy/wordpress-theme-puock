@@ -397,10 +397,10 @@ function pk_breadcrumbs()
         $tag_name = single_tag_title('', false);
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('标签', PUOCK) . '</li>';
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($tag_name) . '</li>';
+    }  else if (isset($other_page_title)) {
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . $other_page_title . '</li>';
     } else if (is_404()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('你访问的资源不存在', PUOCK) . '</li>';
-    } else if (isset($other_page_title)) {
-        $out .= '<li class="breadcrumb-item active " aria-current="page">' . $other_page_title . '</li>';
     }
     $out .= '</div></nav></ol>';
     return $out;

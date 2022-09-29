@@ -163,7 +163,7 @@ function puock_basic_post_meta_box()
 add_action('admin_menu', 'puock_basic_post_meta_box');
 add_action('save_post', 'puock_basic_post_metas_save');
 
-function pk_post_meta_basic(){
+function pk_page_meta_basic(){
     $link_cats = get_all_category_id('link_category');
     return array(
         "hide_side" => array(
@@ -176,6 +176,12 @@ function pk_post_meta_basic(){
             "name" => "author_cat_comment",
             "std" => "",
             "title" => "评论仅对作者可见",
+            "type" => "checkbox"
+        ),
+        "use_theme_link_forward" => array(
+            "name" => "use_theme_link_forward",
+            "std" => "0",
+            "title" => "使用主题链接跳转页",
             "type" => "checkbox"
         ),
         "page_links_cids" => array(
@@ -203,12 +209,12 @@ function pk_post_meta_basic(){
 
 function puock_basic_page_metas()
 {
-    post_meta_set(pk_post_meta_basic());
+    post_meta_set(pk_page_meta_basic());
 }
 
 function puock_basic_page_metas_save($post_id)
 {
-    save_post_meta_data($post_id, pk_post_meta_basic());
+    save_post_meta_data($post_id, pk_page_meta_basic());
 }
 
 function puock_basic_page_meta_box()
