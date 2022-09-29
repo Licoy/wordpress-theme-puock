@@ -5,11 +5,15 @@ $other_page_title = "链接跳转";
 include '../../../../wp-blog-header.php';
 
 $url = @$_GET['to'];
+$name = @$_GET['name'];
+if (!empty($name)) {
+    $name = base64_decode(str_replace(' ','+',$name));
+}
 $error = null;
 if (empty($url)) {
     $error = "目标网址为空，无法进行跳转";
 } else {
-    $url = htmlentities($url);
+    $url = htmlentities(base64_decode($url));
     if (strpos($url, "https://") !== 0 && strpos($url, "http://") !== 0) {
         $error = "跳转链接协议有误";
     } else {
@@ -36,8 +40,8 @@ get_header();
         <?php else: ?>
             <p class="mt20">
                 <span>您即将离开<?php echo get_bloginfo('name') ?>跳转至</span>
-                <a class="a-link" rel="nofollow" href="<?php echo $url ?>"><?php echo $url; ?></a>
-                <span>，确定进入吗？</span>
+                <a class="a-link text-line" rel="nofollow"
+                   href="<?php echo $url ?>"><?php echo empty($name) ? $url : $name; ?></a><span> ，确定进入吗？</span>
             </p>
         <?php endif; ?>
         <div class="text-center mt20">

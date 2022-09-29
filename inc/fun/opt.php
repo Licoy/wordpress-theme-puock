@@ -219,12 +219,16 @@ function wp_compress_html()
 }
 
 //跳转链接
-function pk_go_link($url)
+function pk_go_link($url, $name = '')
 {
     if (pk_is_cur_site($url)) {
         return $url;
     }
-    return PUOCK_ABS_URI . '/inc/go.php?to=' . $url;
+    $url = PUOCK_ABS_URI . '/inc/go.php?to=' . base64_encode($url);
+    if (!empty($name)) {
+        $url .= '&name=' . base64_encode($name);
+    }
+    return $url;
 }
 
 //检测链接是否属于本站
@@ -373,22 +377,25 @@ function pk_head_style_var()
 }
 
 // 加载文件媒体文件
-function pk_load_media_files() {
+function pk_load_media_files()
+{
     wp_enqueue_media();
 }
-add_action( 'admin_enqueue_scripts', 'pk_load_media_files' );
+
+add_action('admin_enqueue_scripts', 'pk_load_media_files');
 
 // debug sql
-function pk_debug_print_sql_list(){
+function pk_debug_print_sql_list()
+{
     global $wpdb;
     $show_sql_count = pk_get_option('debug_sql_count');
     $show_sql_detail = pk_get_option('debug_sql_detail');
     $out = "<script>";
-    if($show_sql_count){
-        $out .= "console.log('共计查询SQL：".get_num_queries()."次，耗时：".timer_stop()."秒');";
+    if ($show_sql_count) {
+        $out .= "console.log('共计查询SQL：" . get_num_queries() . "次，耗时：" . timer_stop() . "秒');";
     }
-    if($show_sql_detail){
-        $out .= "console.log(".json_encode($wpdb->queries).");";
+    if ($show_sql_detail) {
+        $out .= "console.log(" . json_encode($wpdb->queries) . ");";
     }
-    echo $out."</script>";
+    echo $out . "</script>";
 }
