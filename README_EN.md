@@ -24,6 +24,9 @@
     <a href="https://www.producthunt.com/posts/puock-wordpress-theme?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-puock-wordpress-theme" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=327798&theme=light" alt="Puock WordPress Theme - A high-value adaptive theme based on WordPress | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 </div>
 
+## Theme options screenshot
+![theme-options.png](./.screenshot/options.png)
+
 ## Install
 Please go to the [release version](https://github.com/Licoy/wordpress-theme-puock/releases) to download the latest version, and then click "Add" in "Appearance"-"Themes" in the WordPress management background, select Puock's theme package to upload, install and enable it.
 
@@ -55,7 +58,14 @@ Please refer to the introduction of Chinese version
 - [x] Support comments are visible
 - [x] Support password is visible
 - [x] Support Dplayer player
-- [x] Simple and fast background configuration
+- [x] Code style and copy code imitating MacOS `v2.5.6`
+- [x] Vue3+NaiveUI integrated high beauty background configuration `v2.6.0`
+- [x] Article multi-level directory generation `v2.6.2`
+- [x] Sidebar Sticky Scroll `v2.6.2`
+- [x] Support Github/Getee/Weibo login `v2.6.2`
+- [x] WP cache support `v2.6.2`
+- [x] Customize the main color `v2.6.3`
+- [x] Please refer to the release notes for more feature updates：[releases](https://github.com/Licoy/wordpress-theme-puock/releases)
 - [x] More features, waiting for your [proposal](https://github.com/Licoy/wordpress-theme-puock/issues)
 ## Documentation
 - Theme use document: [Use immediately](https://www.licoy.cn/puock-doc.html)

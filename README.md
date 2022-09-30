@@ -37,6 +37,9 @@
     
 </div>
 
+## 配置截图
+![theme-options.png](./.screenshot/options.png)
+
 ## 安装
 请到 [发行版本](https://github.com/Licoy/wordpress-theme-puock/releases) 中进行下载最新版本，然后到WordPress管理后台中的「外观」-「主题」中点击「添加」，选择Puock的主题包进行上传安装并启用即可。
 
@@ -74,8 +77,15 @@ UPDATE `wp_options` SET `option_name` = 'puock_options' WHERE `option_name` = 'o
 - [x] 支持评论可见
 - [x] 支持密码可见
 - [x] 支持Dplayer播放器
-- [x] 简约快捷的后台配置
-- [x] 更多功能，等你的[提议](https://github.com/Licoy/wordpress-theme-puock/issues)
+- [x] 仿MacOS的代码风格及拷贝代码 `v2.5.6`
+- [x] Vue3+NaiveUI集成的高颜值后台配置 `v2.6.0`
+- [x] 文章多级目录生成 `v2.6.2`
+- [x] 侧边栏粘性滚动 `v2.6.2`
+- [x] 支持Github/Gitee/微博登录 `v2.6.2`
+- [x] WP缓存支持 `v2.6.2`
+- [x] 自定义主色调 `v2.6.3`
+- [x] 更多特性更新请查阅版本发布说明：[releases](https://github.com/Licoy/wordpress-theme-puock/releases)
+- [x] 更多功能等你的[提议](https://github.com/Licoy/wordpress-theme-puock/issues)
 ## 文档
 - 主题使用文档：[立即使用](https://www.licoy.cn/puock-doc.html)
 - 建议或BUG反馈：[立即进入](https://github.com/Licoy/wordpress-theme-puock/issues)
