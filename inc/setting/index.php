@@ -7,7 +7,7 @@ function pk_register_options_setting_menu() {
         "manage_options",
         "puock-options",
         'pk_options_page',
-        'dashicons-art',
+        'dashicons-art'
     );
 }
 
