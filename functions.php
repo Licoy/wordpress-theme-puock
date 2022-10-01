@@ -537,33 +537,6 @@ function pk_update()
     }
 }
 
-//webp格式文件上传和显示支持
-// Add support for WebP image format
-function webp_upload_mimes( $current_mimes ) {
-    $current_mimes['webp'] = 'image/webp';
-    return $current_mimes;
-}
-add_filter( 'mime_types', 'webp_upload_mimes' );
- 
-// Display WebP images in Media Library
-function display_WebP($result, $path) {
-    if ($result === false) {
-        $displayable_image_types = array( IMAGETYPE_WEBP );
-        $info = @getimagesize( $path );
-
-        if (empty($info)) {
-            $result = false;
-        } elseif (!in_array($info[2], $displayable_image_types)) {
-            $result = false;
-        } else {
-            $result = true;
-        }
-    }
-
-    return $result;
-}
-add_filter('file_is_displayable_image', 'display_WebP', 10, 2);
-
 if (is_admin()) {
     // 在线更新支持
     pk_update();
