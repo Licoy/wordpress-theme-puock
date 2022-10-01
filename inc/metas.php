@@ -17,6 +17,7 @@ $headMetas = [
     'main_lazy_img' => pk_is_checked('basic_img_lazy_z', false),
     'link_blank_open' => pk_is_checked('link_blank_content'),
     'async_view_id' => pk_metas_get_async_view_id(),
+    'mode_switch'=>pk_is_checked('theme_mode_s')
 ];
 ?>
 <script data-instant>var puock_metas=<?php echo json_encode($headMetas) ?>;</script>

@@ -20,6 +20,7 @@ class Puock {
             main_lazy_img: false,
             link_blank_open: false,
             async_view_id: null,
+            mode_switch:false,
         },
         comment: {
             loading: false,
@@ -546,10 +547,16 @@ class Puock {
     }
 
     registerModeChangeEvent() {
-        try {
-            window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', this.modeChangeListener);
-        } catch (ex) {
-            window.matchMedia('(prefers-color-scheme:dark)').addListener(this.modeChangeListener);
+        if(this.data.params.mode_switch){
+            try {
+                window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', ()=>{
+                    this.modeChangeListener()
+                });
+            } catch (ex) {
+                window.matchMedia('(prefers-color-scheme:dark)').addListener(()=>{
+                    this.modeChangeListener()
+                });
+            }
         }
     }
 
