@@ -423,6 +423,13 @@ class Puock {
             window.hljs.configure({ignoreUnescapedHTML: true})
             document.querySelectorAll('pre').forEach((block, index) => {
                 const el = $(block);
+                const codeChildClass = el.children("code") ? el.children("code").attr("class") : undefined;
+                if(codeChildClass){
+                    if(codeChildClass.indexOf("katex")!==-1 || codeChildClass.indexOf("latex")!==-1 || codeChildClass.indexOf("flowchart")!==-1
+                        || codeChildClass.indexOf("flow")!==-1 || codeChildClass.indexOf("seq")!==-1  || codeChildClass.indexOf("math")!==-1){
+                        return;
+                    }
+                }
                 if (!el.attr("id")) {
                     el.attr("id", "hljs-item-" + index)
                     el.before("<div class='pk-code-tools' data-pre-id='hljs-item-" + index + "'><div class='dot'>" +
