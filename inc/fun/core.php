@@ -595,7 +595,7 @@ function pk_get_main_menu($mobile = false)
     }
     if (!$mobile) {
         if (pk_is_checked('theme_mode_s')) {
-            $out .= '<li><a class="colorMode" data-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="czs-'.(pk_theme_light() ? 'sun':'moon').'-l"></i></a></li>';
+            $out .= '<li><a class="colorMode" data-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="czs-' . (pk_theme_light() ? 'sun' : 'moon') . '-l"></i></a></li>';
         }
         $out .= '<li><a class="search-modal-btn" data-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="czs-search-l"></i></a></li>';
     }
@@ -779,7 +779,7 @@ function pk_get_thumbnail_allow_sites_filepath()
 }
 
 //生成缩略图白名单文件
-function pk_generate_thumbnail_allow_sites_file($options)
+function pk_generate_thumbnail_allow_sites_file()
 {
     $sites = pk_get_thumbnail_allow_sites();
     $template = "<?php \$ALLOWED_SITES = [\n";
@@ -792,4 +792,4 @@ function pk_generate_thumbnail_allow_sites_file($options)
     return file_put_contents(pk_get_thumbnail_allow_sites_filepath(), $template);
 }
 
-add_action('pk_option_updated', 'pk_generate_thumbnail_allow_sites_file');
+add_action('pk_option_updated', 'pk_generate_thumbnail_allow_sites_file', 10, 0);
