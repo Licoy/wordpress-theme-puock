@@ -340,7 +340,10 @@ if (!function_exists('pk_paging')) {
                 }
             }
         }
-        if ($paged < $max_page - $pnum - 1) echo "<li><a href='javascript:void(0)'>...</a></li>";
+        if ($paged < $max_page - $pnum - 1) {
+            echo "<li><a href='javascript:void(0)'>...</a></li>";
+            page_link($max_page);
+        }
         echo '<li class="next-page">';
         next_posts_link('&raquo;');
         echo '</li>';
