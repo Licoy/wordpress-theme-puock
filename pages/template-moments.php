@@ -48,11 +48,11 @@ get_header();
                             <span class="t-sm c-sub">
                             <?php if (!pk_is_checked('hide_post_views')): ?>
                                 <span class="mr-2"><i
-                                            class="czs-eye-l mr-1"></i><?php pk_get_post_views() ?></span>
+                                            class="fa-regular fa-eye mr-1"></i><?php pk_get_post_views() ?></span>
                             <?php endif; ?>
                                 <?php if (!pk_post_comment_is_closed()): ?>
                                     <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
-                                <i class="czs-comment-l mr-1"></i>
+                                <i class="fa-regular fa-comment mr-1"></i>
                                 <?php echo get_comments_number() ?></a>
                                 <?php endif; ?>
                     </span>

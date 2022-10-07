@@ -64,7 +64,7 @@ abstract class puockWidgetBase extends WP_Widget{
     public function merge_common_fields($array){
         return array_merge($array,array(
             array('id'=>'hide_title', 'val'=>0),
-            array('id'=>'icon', 'val'=>'czs-plugin'),
+            array('id'=>'icon', 'val'=>'fa fa-chart-simple'),
             array('id'=>'classes', 'val'=>''),
         ));
     }
@@ -99,7 +99,7 @@ abstract class puockWidgetBase extends WP_Widget{
     }
 
     //获取icon
-    public function get_icon($val,$default='czs-plugin'){
+    public function get_icon($val,$default='fa fa-chart-simple'){
         if(!empty($val)){
             return $val;
         }
@@ -165,7 +165,7 @@ abstract class puockWidgetBase extends WP_Widget{
         foreach ($posts as $post){
             $out .= '<div class="media-link mt20">
                     <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
-                        <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
+                        <i class="fa fa-angle-right t-sm c-sub mr-1"></i>
                         <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
                          href="'.get_permalink($post).'">'.get_the_title($post).'</a>
                     </h2>
@@ -557,7 +557,7 @@ class puockSearch extends puockWidgetBase {
             <?php if(!$this->is_checked($instance['hide_title'])): ?>
             <div>
                 <span class="t-lg border-bottom border-primary
-                puock-text pb-2"><i class="czs-search-l mr-1"></i><?php echo $instance['title'] ?></span>
+                puock-text pb-2"><i class="fa fa-search mr-1"></i><?php echo $instance['title'] ?></span>
             </div>
             <?php endif; ?>
             <div class="<?php if(!$this->is_checked($instance['hide_title'])): ?>mt20<?php endif; ?>">

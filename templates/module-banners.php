@@ -29,10 +29,10 @@ if (pk_is_checked('index_carousel')):
                 unset($i); ?>
             </div>
             <a class="carousel-control-prev" href="#banners" role="button" data-slide="prev">
-                <i class="czs-angle-left-l"></i>
+                <i class="fa fa-angle-left"></i>
             </a>
             <a class="carousel-control-next" href="#banners" role="button" data-slide="next">
-                <i class="czs-angle-right-l"></i>
+                <i class="fa fa-angle-right"></i>
             </a>
         </div>
     <?php endif;endif; ?>

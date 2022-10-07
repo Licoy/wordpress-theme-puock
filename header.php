@@ -28,7 +28,8 @@
     <?php if (is_single() || is_page()): ?>
     <?php endif; ?>
 </head>
-<body class="puock-<?php echo pk_theme_light() ? 'light' : 'dark'; echo current_theme_supports('custom-background') ? ' custom-background':''; ?>">
+<body class="puock-<?php echo pk_theme_light() ? 'light' : 'dark';
+echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>">
 <div>
     <?php if (is_single()): ?>
         <div class="progress" id="page-read-progress">
@@ -57,13 +58,12 @@
                     <div id="menus" class="t-md ">
                         <?php echo pk_get_main_menu() ?>
                     </div>
-                </div>
                 <div class="mobile-menus d-block d-lg-none p-1 puock-text">
-                    <i class="czs-menu-l t-xl mr-2 mobile-menu-s"></i>
-                    <?php if(pk_is_checked('theme_mode_s')): ?>
-                    <i class="colorMode czs-<?php echo (pk_theme_light() ? 'sun':'moon'); ?>-l t-xl mr-2"></i>
+                    <i class="fa fa-bars t-xl mr-2 mobile-menu-s"></i>
+                    <?php if (pk_is_checked('theme_mode_s')): ?>
+                        <i class="fa-regular fa-<?php echo(pk_theme_light() ? 'sun' : 'moon'); ?> colorMode t-xl mr-2"></i>
                     <?php endif; ?>
-                    <i class="search-modal-btn czs-search-l t-md"></i>
+                    <i class="search-modal-btn fa fa-search t-md"></i>
                 </div>
             </div>
         </div>
@@ -79,11 +79,10 @@
                         </div>
                         <div class="search-start">
                             <button type="submit" class="btn-dark btn"><i
-                                        class="czs-search-l mr-1"></i><?php _e('搜索', PUOCK) ?></button>
+                                        class="fa fa-search mr-1"></i><?php _e('搜索', PUOCK) ?></button>
                         </div>
                         <div class="search-close-btn">
-                            <button type="button" class="btn-danger btn ml-1 search-modal-btn"><i
-                                        class="czs-close-l"></i></button>
+                            <button type="button" class="btn-danger btn ml-1 search-modal-btn"><i class="fa fa-close"></i></button>
                         </div>
                     </div>
                 </form>
@@ -93,7 +92,7 @@
     <div id="mobile-menu" class="d-none">
         <div class="menus">
             <div class="p-block">
-                <div class="text-right"><i class="czs-close-l t-xl puock-link mobile-menu-close ta3"></i></div>
+                <div class="text-right"><i class="fa fa-close t-xl puock-link mobile-menu-close ta3"></i></div>
                 <nav>
                     <?php echo pk_get_main_menu(true) ?>
                 </nav>

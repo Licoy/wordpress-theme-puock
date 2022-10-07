@@ -187,10 +187,10 @@ function pk_download($attr, $content = null)
     $size = isset($attr['size']) ? $attr['size'] : '';
     $down_tips = pk_get_option('down_tips');
     return "<div class=\"p-block p-down-box\">
-        <div class='mb15'><i class='czs-zip-folder-l'></i>&nbsp;<span>文件名称：$filename</span></div>
-        <div class='mb15'><i class='czs-download-l'></i>&nbsp;<span>文件大小：$size</span></div>
-        <div class='mb15'><i class='czs-about-l'></i>&nbsp;<span>下载声明：$down_tips</span></div>
-        <div><i class='czs-paper-plane-l'></i>&nbsp;<span>下载地址：$content</span></div>
+        <div class='mb15'><i class='fa fa-file-zipper'></i>&nbsp;<span>文件名称：$filename</span></div>
+        <div class='mb15'><i class='fa fa-download'></i>&nbsp;<span>文件大小：$size</span></div>
+        <div class='mb15'><i class='fa-regular fa-bell'></i>&nbsp;<span>下载声明：$down_tips</span></div>
+        <div><i class='fa fa-link'></i><span>下载地址：$content</span></div>
     </div>";
 }
 
@@ -202,7 +202,7 @@ function pk_reply_read($attr, $content = null)
     global $wpdb;
     $email = null;
     $user_id = (int)wp_get_current_user()->ID;
-    $msg = sc_tips_primary(null, "<i class='czs-eye'></i>&nbsp;此处含有隐藏内容，请提交评论并审核通过刷新后即可查看！");
+    $msg = sc_tips_primary(null, "<i class='fa-regular fa-eye'></i>&nbsp;此处含有隐藏内容，请提交评论并审核通过刷新后即可查看！");
     if ($user_id > 0) {
         $email = get_userdata($user_id)->user_email;
         if ($email == get_bloginfo('admin_email')) {
@@ -229,7 +229,7 @@ add_shortcode('reply', 'pk_reply_read');
 //登录可见
 function pk_login_read($attr, $content = null)
 {
-    $msg = sc_tips_primary(null, "<i class='czs-eye'></i>&nbsp;此处含有隐藏内容，登录后即可查看！");
+    $msg = sc_tips_primary(null, "<i class='fa-regular fa-eye'></i>&nbsp;此处含有隐藏内容，登录后即可查看！");
     return is_user_logged_in() ? do_shortcode($content) : $msg;
 }
 
@@ -246,7 +246,7 @@ function pk_login_email_read($attr, $content = null)
             }
         }
     }
-    return sc_tips_primary(null, "<i class='czs-eye'></i>&nbsp;此处含有隐藏内容，需要登录并验证邮箱后即可查看！");
+    return sc_tips_primary(null, "<i class='fa-regular fa-eye'></i>&nbsp;此处含有隐藏内容，需要登录并验证邮箱后即可查看！");
 }
 
 add_shortcode('login_email', 'pk_login_email_read');
@@ -272,13 +272,13 @@ function pk_password_read($attr, $content = null)
         if ($_REQUEST['pass'] == $pass) {
             return do_shortcode($content);
         } else {
-            $error = sc_tips_danger(null, "<i class='czs-eye'></i>&nbsp;密码输入错误，请重新输入！");
+            $error = sc_tips_danger(null, "<i class='fa-regular fa-eye'></i>&nbsp;密码输入错误，请重新输入！");
         }
     }
     if (trim($desc) == "") {
         $desc = "此处含有隐藏内容，需要正确输入密码后可见！";
     }
-    $out .= '<div class="p-block">' . sc_tips_primary(null, "<i class='czs-eye'></i>&nbsp;{$desc}") . '
+    $out .= '<div class="p-block">' . sc_tips_primary(null, "<i class='fa-regular fa-eye'></i>&nbsp;{$desc}") . '
             ' . $error . '<form action="' . get_permalink() . '" method="post">
             <div class="row">
             <div class="col-8 col-md-10">
@@ -310,7 +310,7 @@ function pk_sc_collapse($attr, $content = null)
         'title' => null,
     ), $attr));
     $out = '<div><a class="btn btn-primary btn-sm" data-toggle="collapse" href="#' . $scId . '" role="button"
-        aria-expanded="false" aria-controls="' . $scId . '"><i class="czs-angle-up-l"></i>&nbsp;' . $title . '</a></div>';
+        aria-expanded="false" aria-controls="' . $scId . '"><i class="fa fa-angle-up"></i>&nbsp;' . $title . '</a></div>';
     $out .= '<div class="collapse" id="' . $scId . '">' . $content . '</div>';
     return $out;
 }

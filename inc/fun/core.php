@@ -595,9 +595,9 @@ function pk_get_main_menu($mobile = false)
     }
     if (!$mobile) {
         if (pk_is_checked('theme_mode_s')) {
-            $out .= '<li><a class="colorMode" data-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="czs-' . (pk_theme_light() ? 'sun' : 'moon') . '-l"></i></a></li>';
+            $out .= '<li><a class="colorMode" data-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="fa-regular fa-' . (pk_theme_light() ? 'sun' : 'moon') . '"></i></a></li>';
         }
-        $out .= '<li><a class="search-modal-btn" data-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="czs-search-l"></i></a></li>';
+        $out .= '<li><a class="search-modal-btn" data-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>';
     }
     $out .= '</ul>';
     return $out;
@@ -657,9 +657,9 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
         }
         if (count($menu->children) > 0) {
             if ($mobile) {
-                $out .= '<a href="#menu-sub-' . $menu->ID . '" data-toggle="collapse"><i class="czs-angle-down-l t-sm ml-1 menu-sub-icon"></i></a>';
+                $out .= '<a href="#menu-sub-' . $menu->ID . '" data-toggle="collapse"><i class="fa fa-chevron-down t-sm ml-1 menu-sub-icon"></i></a>';
             } else {
-                $out .= '<i class="czs-angle-down-l t-sm ml-1 menu-sub-icon"></i>';
+                $out .= '<i class="fa fa-chevron-down t-sm ml-1 menu-sub-icon"></i>';
             }
         }
         if ($mobile) {

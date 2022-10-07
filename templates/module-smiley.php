@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h5 class="modal-title puock-text">选择表情</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="czs-close-l t-md"></i></span>
+                    <span aria-hidden="true"><i class="fa fa-close t-md"></i></span>
                 </button>
             </div>
             <div class="modal-body puock-text t-md">

@@ -6,7 +6,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title puock-text">打赏</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="czs-close-l t-md"></i></span>
+                        <span aria-hidden="true"><i class="fa fa-close t-md"></i></span>
                     </button>
                 </div>
                 <div class="modal-body puock-text t-md">
@@ -23,7 +23,7 @@
                                     <img <?php echo pk_get_lazy_img_info($reward_alipay, 'w-100', null, null, false) ?>
                                          alt="支付宝赞赏"
                                          title="支付宝赞赏" data-toggle="tooltip"/>
-                                    <p class="mt10 text-center fs12"><i class="czs-alipay"></i>&nbsp;请使用支付宝扫一扫</p>
+                                    <p class="mt10 text-center fs12"><i class="fa-brands fa-alipay"></i>&nbsp;请使用支付宝扫一扫</p>
                                 </div>
                             <?php endif; ?>
                             <?php if (!empty($reward_wx)): ?>
@@ -31,7 +31,7 @@
                                     <img <?php echo pk_get_lazy_img_info($reward_wx, 'w-100', null, null, false) ?>
                                          alt="微信赞赏"
                                          title="微信赞赏" data-toggle="tooltip"/>
-                                    <p class="mt10 text-center fs12"><i class="czs-weixinzhifu"></i>&nbsp;请使用微信扫一扫</p>
+                                    <p class="mt10 text-center fs12"><i class="fa-brands fa-weixin"></i>&nbsp;请使用微信扫一扫</p>
                                 </div>
                             <?php endif; ?>
                         </div>

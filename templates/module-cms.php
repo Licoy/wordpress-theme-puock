@@ -26,7 +26,7 @@
                     <div class="col-md-6 pr-0 magazine">
                         <div class="p-block">
                             <div>
-                                <span class="t-lg puock-text pb-2 d-inline-block border-bottom border-primary"><?php echo get_post_category_link('ta3 a-link', '<i class="czs-layers"></i>&nbsp;', $catId) ?></span>
+                                <span class="t-lg puock-text pb-2 d-inline-block border-bottom border-primary"><?php echo get_post_category_link('ta3 a-link', '<i class="fa fa-layer-group"></i>&nbsp;', $catId) ?></span>
                             </div>
                             <?php foreach ($posts as $post) : setup_postdata($post); ?>
                                 <?php if ($post_index == 0): ?>
@@ -51,7 +51,7 @@
                                     <div class="media-link media-row-2">
                                         <div class="t-lg t-line-1 row">
                                             <div class="col-lg-9 col-12 text-nowrap text-truncate">
-                                                <i class="czs-angle-right-l t-sm c-sub mr-1"></i>
+                                                <i class="fa fa-angle-right t-sm c-sub mr-1"></i>
                                                 <a class="a-link t-w-400 t-md"
                                                    title="<?php the_title() ?>" <?php pk_link_target() ?>
                                                    href="<?php the_permalink() ?>"><?php the_title() ?></a>

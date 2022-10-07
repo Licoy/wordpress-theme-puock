@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h5 class="modal-title puock-text" id="infoToastTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="czs-close-l t-md"></i></span>
+                    <span aria-hidden="true"><i class="fa fa-close t-md"></i></span>
                 </button>
             </div>
             <div class="modal-body puock-text t-md" id="infoToastText">
@@ -16,8 +16,8 @@
 <?php if (pk_is_checked('use_post_menu')) get_template_part('templates/module', 'menus') ?>
 <!--返回顶部和底部-->
 <div id="return-top-bottom">
-    <div data-to="top" class="p-block"><i class="czs-arrow-up-l puock-text"></i></div>
-    <div data-to="bottom" class="p-block"><i class="czs-arrow-down-l puock-text"></i></div>
+    <div data-to="top" class="p-block"><i class="fa fa-arrow-up puock-text"></i></div>
+    <div data-to="bottom" class="p-block"><i class="fa fa-arrow-down puock-text"></i></div>
 </div>
 <footer id="footer">
     <div class="container">
@@ -25,7 +25,7 @@
             <?php if (!empty(pk_get_option('footer_about_me_title', ''))): ?>
                 <div class="col-md-6">
                     <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
-                                    class="czs-about-l"></i> <?php echo pk_get_option('footer_about_me_title', '') ?></span>
+                                    class="fa-regular fa-bell"></i> <?php echo pk_get_option('footer_about_me_title', '') ?></span>
                     </div>
                     <p class="mt20 t-md"><?php echo pk_get_option('footer_about_me', '') ?></p>
                 </div>
@@ -33,7 +33,7 @@
             <?php if (!empty(pk_get_option('footer_copyright_title', ''))): ?>
                 <div class="col-md-6">
                     <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
-                                    class="czs-network-l"></i> <?php echo pk_get_option('footer_copyright_title', '') ?></span>
+                                    class="fa-regular fa-copyright"></i> <?php echo pk_get_option('footer_copyright_title', '') ?></span>
                     </div>
                     <p class="mt20 t-md"><?php echo pk_get_option('footer_copyright', '') ?></p>
                 </div>
@@ -44,7 +44,7 @@
         <div class="info">
             <?php echo pk_get_option('footer_info') ?>
             <?php /* 请遵守开源协议，保留主题底部（此处）的署名，以支持本主题更好的发展，谢谢合作 */ ?>
-            <p class="fs12 mt10"><i class="czs-wordpress"></i>&nbsp;Theme by <a target="_blank" title="Puock"
+            <p class="fs12 mt10"><i class="fa-brands fa-wordpress"></i>&nbsp;Theme by <a target="_blank" title="Puock v<?php echo PUOCK_CUR_VER_STR; ?>"
                                                                                 href="https://github.com/Licoy/wordpress-theme-puock">Puock</a>
             </p>
         </div>

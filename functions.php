@@ -83,7 +83,7 @@ function pk_the_author_class_out($count)
         default:
             return '';
     }
-    return '<span class="t-sm c-sub"><i class="czs-diamond-l mr-1"></i>' . __('评论达人', PUOCK) . ' LV.' . $level . '</span>';
+    return '<span class="t-sm c-sub"><i class="fa-regular fa-gem mr-1"></i>' . __('评论达人', PUOCK) . ' LV.' . $level . '</span>';
 }
 
 function pk_the_author_class($echo = true, $in_comment = null){
@@ -92,7 +92,7 @@ function pk_the_author_class($echo = true, $in_comment = null){
         $comment = $in_comment;
     }
     if ($comment->user_id == '1') {
-        $res = '<span class="t-sm text-danger"><i class="czs-diamond-l mr-1"></i>' . __('博主', PUOCK) . '</span>';
+        $res = '<span class="t-sm text-danger"><i class="fa-regular fa-gem mr-1"></i>' . __('博主', PUOCK) . '</span>';
     } else {
         $comment_author_email = $comment->comment_author_email;
         $cache_key = sprintf(PKC_AUTHOR_COMMENTS, md5($comment_author_email));

@@ -398,7 +398,7 @@ class Puock {
                     const id = menuIndex;
                     const pl = (item.levelInt - maxLevel) * 10
                     let out = `<li data-level="${item.levelInt}" style='padding-left:${pl}px'>`
-                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='${item.children.length > 0 ? 'czs-angle-right-l':'czs-doc-file-l'} t-sm c-sub mr-1'></i> ${item.name}</a>`
+                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='fa ${item.children.length > 0 ? 'fa-angle-right':'fa-file-invoice'} t-sm c-sub mr-1'></i> ${item.name}</a>`
                     if (item.children.length > 0) {
                         out += `<ul class="post-menu-sub-${id}" data-parent="${parent + 1}">`
                         for (let child of item.children) {
@@ -434,7 +434,7 @@ class Puock {
                 if (!el.attr("id")) {
                     el.attr("id", "hljs-item-" + index)
                     el.before("<div class='pk-code-tools' data-pre-id='hljs-item-" + index + "'><div class='dot'>" +
-                        "<i></i><i></i><i></i></div><div class='actions'><div><i class='i czs-list-clipboard-l cp-code' data-clipboard-target='#hljs-item-" + index + "'></i></div></div></div>")
+                        "<i></i><i></i><i></i></div><div class='actions'><div><i class='i fa fa-copy cp-code' data-clipboard-target='#hljs-item-" + index + "'></i></div></div></div>")
                     window.hljs.highlightBlock(block);
                     window.hljs.lineNumbersBlock(block);
                 }
@@ -444,11 +444,6 @@ class Puock {
                 cp.on("success", (e) => {
                     e.clearSelection();
                     this.toast('已复制到剪切板')
-                    const el = $(e.trigger);
-                    el.removeClass("czs-list-clipboard-l").addClass("czs-right-clipboard-l")
-                    setTimeout(() => {
-                        el.removeClass("czs-right-clipboard-l").addClass("czs-list-clipboard-l")
-                    }, 1500)
                 })
             }
         }
@@ -533,7 +528,7 @@ class Puock {
                 target = $(el).find("i");
             }
             if(target){
-                target.removeClass("czs-sun-l").removeClass("czs-moon-l").addClass(isLight ? "czs-sun-l" : "czs-moon-l");
+                target.removeClass("fa-sun").removeClass("fa-moon").addClass(isLight ? "fa-sun" : "fa-moon");
             }
         })
         body.removeClass(isLight ? this.data.tag + "-dark" : this.data.tag + "-light");
@@ -814,19 +809,19 @@ class Puock {
             if (repo) {
                 $.get(`https://api.github.com/repos/${repo}`, (res) => {
                     const link_html = `class="hide-hover" href="${res.url}" target="_blank" rel="noreferrer"`;
-                    el.html(`<div class="card-header"><i class="czs-github-logo"></i><a ${link_html}>${res.full_name}</a></div>
+                    el.html(`<div class="card-header"><i class="fa-brands fa-github"></i><a ${link_html}>${res.full_name}</a></div>
                     <div class="card-body">${res.description}</div>
                     <div class="card-footer">
                     <div class="row">
-                    <div class="col-4"><i class="czs-star"></i><a ${link_html}>${res.stargazers_count}</a></div>
-                    <div class="col-4"><i class="czs-code-fork"></i><a ${link_html}>${res.forks}</a></div>
-                    <div class="col-4"><i class="czs-eye"></i><a ${link_html}>${res.subscribers_count}</a></div>
+                    <div class="col-4"><i class="fa-regular fa-star"></i><a ${link_html}>${res.stargazers_count}</a></div>
+                    <div class="col-4"><i class="fa-solid fa-code-fork"></i><a ${link_html}>${res.forks}</a></div>
+                    <div class="col-4"><i class="fa-regular fa-eye"></i><a ${link_html}>${res.subscribers_count}</a></div>
                     </div>
                     </div>
                 `);
                     el.addClass("loaded");
                 }, 'json').error((err) => {
-                    el.html(`<div class="alert alert-danger"><i class="czs-warning"></i>&nbsp;请求Github项目详情异常：${repo}</div>`)
+                    el.html(`<div class="alert alert-danger"><i class="fa fa-warning"></i>&nbsp;请求Github项目详情异常：${repo}</div>`)
                 });
             }
         })

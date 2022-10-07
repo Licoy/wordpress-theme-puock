@@ -3,7 +3,7 @@
     <div class="p-block" id="comments">
         <div>
             <span class="t-lg border-bottom border-primary puock-text pb-2"><i
-                        class="czs-write-l mr-1"></i><?php _e('评论', PUOCK) ?>（<?php comments_number() ?>）</span>
+                        class="fa-regular fa-comments mr-1"></i><?php _e('评论', PUOCK) ?>（<?php comments_number() ?>）</span>
         </div>
         <?php if (comments_open()): ?>
             <?php if (get_option('comment_registration', '0') == '1' && !is_user_logged_in()): //登录后才可以评论 ?>
@@ -18,7 +18,7 @@
                         <div>
                             <a data-no-instant href="<?php echo pk_oauth_url_page_ajax('qq', get_the_permalink()) ?>"
                                class="btn btn-danger btn-ssm ahfff"><i
-                                        class="czs-qq"></i>&nbsp;<?php _e('QQ登录', PUOCK) ?></a>
+                                        class="fa-brands fa-qq"></i>&nbsp;<?php _e('QQ登录', PUOCK) ?></a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -89,7 +89,7 @@
                                         <a data-no-instant
                                            href="<?php echo pk_oauth_url_page_ajax('qq', get_the_permalink()) ?>"
                                            class="btn btn-danger btn-ssm ahfff"><i
-                                                    class="czs-qq"></i>&nbsp;<?php _e('QQ登录', PUOCK) ?></a>
+                                                    class="fa-brands fa-qq"></i>&nbsp;<?php _e('QQ登录', PUOCK) ?></a>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -97,9 +97,9 @@
                                 <button id="comment-cancel" type="button"
                                         class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUOCK) ?></button>
                                 <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm" type="button"><i
-                                            class="czs-face-l t-md"></i></button>
+                                            class="fa-regular fa-face-grin-tongue t-md"></i></button>
                                 <button id="comment-submit" type="submit" class="btn btn-primary btn-ssm"><i
-                                            class="czs-paper-plane-l"></i>&nbsp;<?php _e('发布评论', PUOCK) ?></button>
+                                            class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('发布评论', PUOCK) ?></button>
                             </div>
                         </div>
                     </form>

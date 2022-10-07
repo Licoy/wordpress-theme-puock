@@ -155,7 +155,7 @@ function pk_comment_ajax()
     $comment_approved_str = '';
 
     if ($comment->comment_approved == '0') {
-        $comment_approved_str = '<p class="c-sub mt-1"><i class="czs-warning-l mr-1"></i>您的评论正在等待审核！</p>';
+        $comment_approved_str = '<p class="c-sub mt-1"><i class="fa fa-warning mr-1"></i>您的评论正在等待审核！</p>';
     }
 
     wp_set_comment_cookies($comment, $user);
