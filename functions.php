@@ -340,7 +340,10 @@ if (!function_exists('pk_paging')) {
                 }
             }
         }
-        if ($paged < $max_page - $pnum - 1) echo "<li><a href='javascript:void(0)'>...</a></li>";
+        if ($paged < $max_page - $pnum - 1) {
+            echo "<li><a href='javascript:void(0)'>...</a></li>";
+            page_link($max_page);
+        }
         echo '<li class="next-page">';
         next_posts_link('&raquo;');
         echo '</li>';
@@ -445,8 +448,8 @@ function content_img_add_alt_title($content)
     preg_match_all('/<img (.*?)\/>/', $content, $images);
     if (!is_null($images)) {
         foreach ($images[1] as $index => $value) {
-            $new_img = str_replace('<img', '<img title=' . $post->post_title . '
-             alt=' . $post->post_title, $images[0][$index]);
+            $new_img = str_replace('<img', '<img title="'. $post->post_title . '"
+             alt="' . $post->post_title .'"', $images[0][$index]);
             $content = str_replace($images[0][$index], $new_img, $content);
         }
     }
