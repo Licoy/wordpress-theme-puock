@@ -23,8 +23,8 @@ function deel_setup()
     remove_filter('pre_oembed_result', 'wp_filter_pre_oembed_result', 10);
 
 // 屏蔽 REST API
-    add_filter('rest_enabled', '__return_false');
-    add_filter('rest_jsonp_enabled', '__return_false');
+//    add_filter('rest_enabled', '__return_false');
+//    add_filter('rest_jsonp_enabled', '__return_false');
 
 // 移除头部 wp-json 标签和 HTTP header 中的 link
     remove_action('wp_head', 'rest_output_link_wp_head', 10);

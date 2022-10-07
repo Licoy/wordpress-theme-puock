@@ -75,6 +75,10 @@ function pk_session_call($function)
     }
 }
 
+function pk_get_theme_option_url($to=''){
+    return admin_url() . 'admin.php?page=puock-options&to=' . $to;
+}
+
 
 // 顶部添加自定义菜单
 function pk_toolbar_link($bar)
@@ -82,7 +86,7 @@ function pk_toolbar_link($bar)
     $bar->add_node(array(
         'id' => 'theme-setting',
         'title' => '🎨 主题设置',
-        'href' => admin_url() . 'admin.php?page=puock-options'
+        'href' => pk_get_theme_option_url()
     ));
     $bar->add_node(array(
         'id' => 'theme-docs',
