@@ -27,6 +27,7 @@
         donate: "https://licoy.cn/go/zs",
         get_url: '<?php echo admin_url('admin-ajax.php') ?>?action=get_theme_options',
         update_url: '<?php echo admin_url('admin-ajax.php') ?>?action=update_theme_options',
+        fields_url: '<?php echo admin_url('admin-ajax.php') ?>?action=get_theme_option_fields',
     }
 </script>
 <?php

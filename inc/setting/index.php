@@ -17,3 +17,5 @@ function pk_options_page(){
     require_once dirname(__FILE__).'/template.php';
 }
 
+require_once dirname(__FILE__) . '/options.php';
+
