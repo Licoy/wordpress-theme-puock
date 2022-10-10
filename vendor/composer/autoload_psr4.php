@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Yurun\\Util\\' => array($vendorDir . '/yurunsoft/yurun-http/src'),
     'Yurun\\OAuthLogin\\' => array($vendorDir . '/yurunsoft/yurun-oauth-login/src'),
+    'Puock\\Theme\\' => array($baseDir . '/inc'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
 );

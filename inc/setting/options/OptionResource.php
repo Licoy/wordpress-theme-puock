@@ -1,5 +1,7 @@
 <?php
 
+namespace Puock\Theme\setting\options;
+
 class OptionResource extends BaseOptionItem{
 
     function get_fields(): array

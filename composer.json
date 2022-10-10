@@ -4,6 +4,9 @@
     "type": "project",
     "license": "GPL V3",
     "autoload": {
+        "psr-4": {
+            "Puock\\Theme\\": "inc/"
+        }
     },
     "authors": [
         {

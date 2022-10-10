@@ -14,6 +14,7 @@ class ComposerStaticInit4f6b69ae626959092fc09391096ba5a1
         ),
         'P' => 
         array (
+            'Puock\\Theme\\' => 12,
             'Psr\\Http\\Message\\' => 17,
         ),
     );
@@ -26,6 +27,10 @@ class ComposerStaticInit4f6b69ae626959092fc09391096ba5a1
         'Yurun\\OAuthLogin\\' => 
         array (
             0 => __DIR__ . '/..' . '/yurunsoft/yurun-oauth-login/src',
+        ),
+        'Puock\\Theme\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/inc',
         ),
         'Psr\\Http\\Message\\' => 
         array (
