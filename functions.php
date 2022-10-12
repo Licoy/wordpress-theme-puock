@@ -447,9 +447,10 @@ function content_img_add_alt_title($content)
     global $post;
     preg_match_all('/<img (.*?)\/>/', $content, $images);
     if (!is_null($images)) {
+        $title = @$post->post_title;
         foreach ($images[1] as $index => $value) {
-            $new_img = str_replace('<img', '<img title="'. $post->post_title . '"
-             alt="' . $post->post_title .'"', $images[0][$index]);
+            $new_img = str_replace('<img', '<img title="'. $title . '"
+             alt="' . $title .'"', $images[0][$index]);
             $content = str_replace($images[0][$index], $new_img, $content);
         }
     }
