@@ -278,11 +278,11 @@ function pk_password_read($attr, $content = null)
     if (trim($desc) == "") {
         $desc = "此处含有隐藏内容，需要正确输入密码后可见！";
     }
-    $out .= '<div class="p-block">' . sc_tips_primary(null, "<i class='fa-regular fa-eye'></i>&nbsp;{$desc}") . '
+    $out .= '<div class="p-block pk-sc-password-red">' . sc_tips_primary(null, "<i class='fa-regular fa-eye'></i>&nbsp;{$desc}") . '
             ' . $error . '<form action="' . get_permalink() . '" method="post">
             <div class="row">
             <div class="col-8 col-md-10">
-            <input type="password" placeholder="请输入密码" required class="form-control form-control-sm" name="pass">
+            <input type="password" placeholder="请输入密码" required class="form-control form-control-sm" name="pass"/>
             </div>
             <div class="col-4 col-md-2 pl-0">
             <button class="btn btn-sm btn-primary w-100">立即查看</button>
@@ -309,7 +309,7 @@ function pk_sc_collapse($attr, $content = null)
     extract(shortcode_atts(array(
         'title' => null,
     ), $attr));
-    $out = '<div><a class="btn btn-primary btn-sm" data-toggle="collapse" href="#' . $scId . '" role="button"
+    $out = '<div class="pk-sc-collapse"><a class="btn btn-primary btn-sm" data-toggle="collapse" href="#' . $scId . '" role="button"
         aria-expanded="false" aria-controls="' . $scId . '"><i class="fa fa-angle-up"></i>&nbsp;' . $title . '</a></div>';
     $out .= '<div class="collapse" id="' . $scId . '">' . $content . '</div>';
     return $out;

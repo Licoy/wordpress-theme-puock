@@ -86,7 +86,8 @@ function pk_the_author_class_out($count)
     return '<span class="t-sm c-sub"><i class="fa-regular fa-gem mr-1"></i>' . __('评论达人', PUOCK) . ' LV.' . $level . '</span>';
 }
 
-function pk_the_author_class($echo = true, $in_comment = null){
+function pk_the_author_class($echo = true, $in_comment = null)
+{
     global $wpdb, $comment;
     if (!$comment) {
         $comment = $in_comment;
@@ -290,9 +291,13 @@ function smilies_custom_button($context)
         </a><div id="insert-smiley-wrap" class="pk-media-wrap" style="display: none">' . get_wpsmiliestrans() . '</div>';
 }
 
-function get_post_images($post_id = null)
+function get_post_images($_post = null)
 {
     global $post;
+    if($_post != null){
+        $post = $_post;
+    }
+    $post_id = $post->ID;
     // 如果有封面图取封面图
     if (has_post_thumbnail()) {
         $res = get_the_post_thumbnail_url($post, 'large');
@@ -400,7 +405,7 @@ function pk_breadcrumbs()
         $tag_name = single_tag_title('', false);
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('标签', PUOCK) . '</li>';
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($tag_name) . '</li>';
-    }  else if (isset($other_page_title)) {
+    } else if (isset($other_page_title)) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . $other_page_title . '</li>';
     } else if (is_404()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('你访问的资源不存在', PUOCK) . '</li>';
@@ -449,8 +454,8 @@ function content_img_add_alt_title($content)
     if (!is_null($images)) {
         $title = @$post->post_title;
         foreach ($images[1] as $index => $value) {
-            $new_img = str_replace('<img', '<img title="'. $title . '"
-             alt="' . $title .'"', $images[0][$index]);
+            $new_img = str_replace('<img', '<img title="' . $title . '"
+             alt="' . $title . '"', $images[0][$index]);
             $content = str_replace($images[0][$index], $new_img, $content);
         }
     }
