@@ -752,8 +752,7 @@ function pk_chinese_format($content)
     $typesetting = new ChineseTypesetting();
     $content = $typesetting->insertSpace($content);
     $content = $typesetting->removeSpace($content);
-    $content = $typesetting->full2Half($content);
-    return $typesetting->fixPunctuation($content);
+    return $typesetting->full2Half($content);
 }
 
 if (pk_is_checked('chinese_format')) {
