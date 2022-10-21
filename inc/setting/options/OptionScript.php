@@ -2,15 +2,22 @@
 
 namespace Puock\Theme\setting\options;
 
-class OptionScript extends BaseOptionItem{
+class OptionScript extends BaseOptionItem
+{
 
     function get_fields(): array
     {
         return [
             'key' => 'script',
             'label' => '脚本及样式',
-            'icon'=>'dashicons-shortcode',
+            'icon' => 'dashicons-shortcode',
             'fields' => [
+                [
+                    'id' => 'style_color_primary',
+                    'label' => '站点主色调',
+                    'type' => 'color',
+                    'sdt' => '#1c60f3',
+                ],
                 [
                     'id' => 'block_not_tran',
                     'label' => '全站区块不透明度',
@@ -19,7 +26,7 @@ class OptionScript extends BaseOptionItem{
                     'step' => 1,
                     'max' => 100,
 //                    'tips'=>"小于100则会进行透明显示，部分浏览器可能不兼容",
-                    'tips'=>"func:(function(args){
+                    'tips' => "func:(function(args){
                         return args.h('div',[
                             args.h('span',null,'小于100则会进行透明显示，部分浏览器可能不兼容 '),
                             args.h(args.el.nTag,{type:'primary',size:'small',round:true},'当前不透明度为：'+args.data.block_not_tran+'%')
@@ -31,7 +38,7 @@ class OptionScript extends BaseOptionItem{
                     'label' => '头部流量统计代码',
                     'type' => 'textarea',
                     'sdt' => '',
-                    'tips'=>"用于在页头添加统计代码（PS：若开启无刷新加载，请在标签上加上<code>data-instant</code>属性）"
+                    'tips' => "用于在页头添加统计代码（PS：若开启无刷新加载，请在标签上加上<code>data-instant</code>属性）"
                 ],
                 [
                     'id' => 'css_code_header',
@@ -39,7 +46,7 @@ class OptionScript extends BaseOptionItem{
                     'type' => 'textarea',
                     'placeholder' => '例如：#header{background-color:red !important}',
                     'sdt' => '',
-                    'tips'=>"用于在页头添加统自定义CSS样式"
+                    'tips' => "用于在页头添加统自定义CSS样式"
                 ],
                 [
                     'id' => 'tj_code_footer',
@@ -57,7 +64,7 @@ class OptionScript extends BaseOptionItem{
                     'id' => 'footer_about_me_title',
                     'label' => '底部关于我们说明标题',
                     'sdt' => '关于我们',
-                    'tips'=>"若为空则不显示此栏目"
+                    'tips' => "若为空则不显示此栏目"
                 ],
                 [
                     'id' => 'footer_about_me',
@@ -69,7 +76,7 @@ class OptionScript extends BaseOptionItem{
                     'id' => 'footer_copyright_title',
                     'label' => '底部版权说明标题',
                     'sdt' => '版权说明',
-                    'tips'=>"若为空则不显示此栏目"
+                    'tips' => "若为空则不显示此栏目"
                 ],
                 [
                     'id' => 'footer_copyright',
