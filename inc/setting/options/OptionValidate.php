@@ -18,7 +18,7 @@ class OptionValidate extends BaseOptionItem
                     'type' => 'switch',
                     'sdt' => 'false',
                     'tips' => '图形验证码'
-                ],
+                ]
             ],
         ];
     }
