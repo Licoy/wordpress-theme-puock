@@ -14,9 +14,9 @@ if (pk_is_checked('index_carousel')):
             <div class="carousel-inner">
                 <?php $i = 0;
                 foreach ($index_carousel_list as $index_carousel_item): ?>
-                    <a <?php if ($index_carousel_item['blank']) {
+                    <a <?php if ($index_carousel_item['blank'] ?? false) {
                         echo "target=\"_blank\"";
-                    } ?> href="<?php echo $index_carousel_item['link'] ?>"
+                    } ?> href="<?php echo $index_carousel_item['link'] ?? '/' ?>"
                          class="carousel-item <?php echo $i == 0 ? 'active' : '' ?>">
                         <img class="w-100" src="<?php echo $index_carousel_item['img'] ?>"
                              title="<?php echo $index_carousel_item['title'] ?>"
