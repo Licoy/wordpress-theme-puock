@@ -131,7 +131,7 @@ function pk_oauth_url_page_ajax($type, $redirect = '')
     return admin_url() . "admin-ajax.php?action=pk_oauth_start_redirect&type={$type}&redirect={$redirect}";
 }
 
-function pk_oauth_get_base($type, $redirect = ''): ?PkOAuthBase
+function pk_oauth_get_base($type, $redirect = '')
 {
     if (!pk_is_checked('oauth_' . $type)) {
         return null;
@@ -223,7 +223,7 @@ function pk_oauth_callback()
                 'display_name' => $nickname,
                 'user_pass' => $password,
                 'nickname' => $nickname,
-                'user_email' => null
+                'user_email' => 'null@null.null'
             );
             $user_id = wp_insert_user($user_data);
             update_user_meta($user_id, $type . "_oauth", $oauthBase->openid);
