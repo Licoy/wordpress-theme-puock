@@ -2,14 +2,15 @@
 
 namespace Puock\Theme\setting\options;
 
-class OptionGlobal extends BaseOptionItem{
+class OptionGlobal extends BaseOptionItem
+{
 
     function get_fields(): array
     {
         return [
             'key' => 'global',
             'label' => '全局设置',
-            'icon'=>'dashicons-admin-site',
+            'icon' => 'dashicons-admin-site',
             'fields' => [
                 [
                     'id' => 'index_mode',
@@ -89,14 +90,14 @@ class OptionGlobal extends BaseOptionItem{
                     'label' => '页面使用.html后缀',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>'更改后需要重新保存<strong>固定链接</strong>'
+                    'tips' => '更改后需要重新保存<strong>固定链接</strong>'
                 ],
                 [
                     'id' => 'chinese_format',
                     'label' => '开启中文格式化（文案排版）',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>"参考：<a href='https://github.com/sparanoid/chinese-copywriting-guidelines' target='_blank'>https://github.com/sparanoid/chinese-copywriting-guidelines</a>"
+                    'tips' => "参考：<a href='https://github.com/sparanoid/chinese-copywriting-guidelines' target='_blank'>https://github.com/sparanoid/chinese-copywriting-guidelines</a>"
                 ],
                 [
                     'id' => 'on_txt_logo',
@@ -109,21 +110,21 @@ class OptionGlobal extends BaseOptionItem{
                     'label' => '高亮模式下LOGO',
                     'type' => 'img',
                     'sdt' => '',
-                    'tips'=>'若不上传则显示文字LOGO，比例：500*125，请尽量选择png无底色图片'
+                    'tips' => '若不上传则显示文字LOGO，比例：500*125，请尽量选择png无底色图片'
                 ],
                 [
                     'id' => 'dark_logo',
                     'label' => '暗黑模式下LOGO',
                     'type' => 'img',
                     'sdt' => '',
-                    'tips'=>"比例：500*125，请尽量选择png无底色图片",
+                    'tips' => "比例：500*125，请尽量选择png无底色图片",
                 ],
                 [
                     'id' => 'favicon',
                     'label' => '网站favicon',
                     'type' => 'img',
                     'sdt' => '',
-                    'tips'=>"比例：1:1"
+                    'tips' => "比例：1:1"
                 ],
                 [
                     'id' => 'stop5x_editor',
@@ -180,12 +181,20 @@ class OptionGlobal extends BaseOptionItem{
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'close_rest_api',
+                    'label' => '禁止使用REST API',
+                    'tips' => '开启后将不能使用相关功能，如果使用了<b>小程序</b>等功能此选项应不要开启，
+                                另外开启后可能导致古腾堡编辑器出现通信异常问题，建议非必要不开启此选项',
+                    'type' => 'switch',
+                    'sdt' => 'false',
+                ],
+                [
                     'id' => 'login_protection',
                     'label' => '启用后台登录保护',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>'func:(function(args){
-                            const link = `'.home_url().'/wp-login.php?${args.data.lp_user}=${args.data.lp_pass}`
+                    'tips' => 'func:(function(args){
+                            const link = `' . home_url() . '/wp-login.php?${args.data.lp_user}=${args.data.lp_pass}`
                             return `<div>启用后则用 <a href="${link}" target="_blank">${link}</a> 的方式访问后台入口</div>`
                         })(args)'
                 ],
@@ -206,7 +215,7 @@ class OptionGlobal extends BaseOptionItem{
                     'label' => '缩略图白名单',
                     'type' => 'textarea',
                     'sdt' => '',
-                    'tips'=>"<strong>若使用了其他外链图片须在此处添加外链域名以允许</strong>：一行一个，不要带 <code>http://</code> 或 <code>https://</code> 协议头，例如：<code>blog.example.com</code>"
+                    'tips' => "<strong>若使用了其他外链图片须在此处添加外链域名以允许</strong>：一行一个，不要带 <code>http://</code> 或 <code>https://</code> 协议头，例如：<code>blog.example.com</code>"
                 ],
             ],
         ];

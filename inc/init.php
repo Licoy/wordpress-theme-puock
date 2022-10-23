@@ -23,8 +23,13 @@ function deel_setup()
     remove_filter('pre_oembed_result', 'wp_filter_pre_oembed_result', 10);
 
 // 屏蔽 REST API
-//    add_filter('rest_enabled', '__return_false');
-//    add_filter('rest_jsonp_enabled', '__return_false');
+if(pk_is_checked('close_rest_api')){
+    add_filter('rest_enabled', '__return_false');
+    add_filter('rest_jsonp_enabled', '__return_false');
+    add_filter( 'rest_authentication_errors', function( $access ) {
+        return new WP_Error( 'rest_cannot_access', 'REST API已经被关闭，请打开后再进行尝试', array( 'status' => 403 ) );
+    });
+}
 
 // 移除头部 wp-json 标签和 HTTP header 中的 link
     remove_action('wp_head', 'rest_output_link_wp_head', 10);
