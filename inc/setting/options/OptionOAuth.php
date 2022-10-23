@@ -20,6 +20,13 @@ class OptionOAuth extends BaseOptionItem
                     'tips' => '通用回调地址（callback url）为: <code>' . home_url() . '/wp-admin/admin-ajax.php</code>'
                 ],
                 [
+                    'id' => 'oauth_close_register',
+                    'label' => '关闭第三方登录直接注册',
+                    'type' => 'switch',
+                    'tips' => '开启后，若用户未绑定过账户进行第三方登录时则不会自动创建新的账户',
+                    'std' => false
+                ],
+                [
                     'id' => '-',
                     'label' => 'QQ登录配置',
                     'type' => 'panel',

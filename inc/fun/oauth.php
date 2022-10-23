@@ -214,6 +214,10 @@ function pk_oauth_callback()
         $users = get_users(array('meta_key' => $type . '_oauth', 'meta_value' => $oauthBase->openid));
         if (!$users || count($users) <= 0) {
             //不存在用户，先自动注册再登录
+            if(pk_is_checked('oauth_close_register')){
+                oauth_redirect_page(false, '您的' . $oauth->oauth['label'] . '账号未绑定本站账户，当前已关闭自动注册，请手动注册后再进入个人资料中进行绑定', $redirect);
+                wp_die();
+            }
             $wp_create_nonce = wp_create_nonce($oauthBase->openid);
             $username = $type . '_' . $wp_create_nonce;
             $password = wp_generate_password(10);
