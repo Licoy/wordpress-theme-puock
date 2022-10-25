@@ -1,5 +1,6 @@
 <?php if (in_array(pk_get_option('index_mode', ''), array('cms', 'company'))
     && (pk_is_checked('cms_show_2box') || pk_is_checked('company_show_2box'))): ?>
+    <?php dynamic_sidebar('index_cms_layout_top') ?>
     <div class="row row-cols-1 <?php pk_open_box_animated('animated fadeInUp') ?> " id="magazines">
         <?php
         $cms_mode = pk_get_option('index_mode', '') == 'cms' ? 'cms' : 'company';
@@ -9,7 +10,7 @@
             if (count($cms_cats) > 0) {
                 $cms_cats_num = pk_get_option($cms_mode . '_show_2box_num', '6');
                 foreach ($cms_cats as $catId):
-                    $cache_key = sprintf(PKC_CMS_2BOX_POSTS,$catId);
+                    $cache_key = sprintf(PKC_CMS_2BOX_POSTS, $catId);
                     $posts = pk_cache_get($cache_key);
                     if (!$posts) {
                         $posts = query_posts(array(
@@ -71,4 +72,5 @@
             }
         } ?>
     </div>
+    <?php dynamic_sidebar('index_cms_layout_bottom') ?>
 <?php endif; ?>

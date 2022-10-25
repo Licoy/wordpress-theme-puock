@@ -47,7 +47,9 @@
                             <?php endif; ?>
                         </div>
                     </div>
+                    <?php dynamic_sidebar('page_content_comment_top'); ?>
                     <?php comments_template() ?>
+                    <?php dynamic_sidebar('page_content_comment_bottom'); ?>
                 </div>
                 <?php get_sidebar() ?>
             </div>

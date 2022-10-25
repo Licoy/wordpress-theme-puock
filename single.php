@@ -84,6 +84,7 @@
                     </div>
                     <?php get_template_part('templates/post', 'actions') ?>
                 </div>
+                <?php dynamic_sidebar('post_content_author_top'); ?>
                 <?php if (pk_is_checked('page_copy_right')): ?>
                     <div class="p-block p-flex-sc">
                         <div class="mr-3 d-none d-md-block">
@@ -125,12 +126,15 @@
                         </div>
                     </div>
                 <?php endif; ?>
+                <?php dynamic_sidebar('post_content_author_bottom'); ?>
                 <?php get_template_part('ad/page', 'innerb') ?>
                 <?php if (pk_is_checked('page_b_recommend')): ?>
                     <?php get_template_part('templates/post', 'relevant') ?>
                 <?php endif; ?>
                 <?php get_template_part('templates/module', 'andb') ?>
+                <?php dynamic_sidebar('post_content_comment_top'); ?>
                 <?php comments_template() ?>
+                <?php dynamic_sidebar('post_content_comment_bottom'); ?>
             </div>
             <?php get_sidebar() ?>
         </div>

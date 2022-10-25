@@ -257,6 +257,13 @@ function pk_hide_sidebar_out($hide = '', $show = '', $post_id = null, $echo = tr
     echo $out;
 }
 
+//侧边栏检测数据
+function pk_sidebar_check_has($name){
+    if(!dynamic_sidebar($name)){
+        dynamic_sidebar('sidebar_not');
+    }
+}
+
 //获取链接对象，用于书籍推荐及其他页面使用
 function pk_get_wp_links($link_cats = '')
 {

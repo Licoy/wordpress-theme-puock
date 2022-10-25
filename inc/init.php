@@ -22,20 +22,20 @@ function deel_setup()
     remove_action('wp_head', 'wp_oembed_add_host_js');
     remove_filter('pre_oembed_result', 'wp_filter_pre_oembed_result', 10);
 
-// 屏蔽 REST API
-if(pk_is_checked('close_rest_api')){
-    add_filter('rest_enabled', '__return_false');
-    add_filter('rest_jsonp_enabled', '__return_false');
-    add_filter( 'rest_authentication_errors', function( $access ) {
-        return new WP_Error( 'rest_cannot_access', 'REST API已经被关闭，请打开后再进行尝试', array( 'status' => 403 ) );
-    });
-}
+    // 屏蔽 REST API
+    if (pk_is_checked('close_rest_api')) {
+        add_filter('rest_enabled', '__return_false');
+        add_filter('rest_jsonp_enabled', '__return_false');
+        add_filter('rest_authentication_errors', function ($access) {
+            return new WP_Error('rest_cannot_access', 'REST API已经被关闭，请打开后再进行尝试', array('status' => 403));
+        });
+    }
 
-// 移除头部 wp-json 标签和 HTTP header 中的 link
+    // 移除头部 wp-json 标签和 HTTP header 中的 link
     remove_action('wp_head', 'rest_output_link_wp_head', 10);
     remove_action('template_redirect', 'rest_output_link_header', 11);
 
-//清除wp_footer带入的embed.min.js
+    //清除wp_footer带入的embed.min.js
     function git_deregister_embed_script()
     {
         wp_deregister_script('wp-embed');
@@ -43,7 +43,7 @@ if(pk_is_checked('close_rest_api')){
 
     add_action('wp_footer', 'git_deregister_embed_script');
 
-//禁止 s.w.org
+    //禁止 s.w.org
     function git_remove_dns_prefetch($hints, $relation_type)
     {
         if ('dns-prefetch' === $relation_type) {

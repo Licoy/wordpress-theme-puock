@@ -114,7 +114,7 @@ abstract class puockWidgetBase extends WP_Widget{
         $show_title = !array_key_exists('hide_title',$instance) || !$this->is_checked($instance['hide_title'])
         ?>
 
-        <div class="p-block <?php echo $instance['classes'] ?>">
+        <div class="pk-widget p-block <?php echo $instance['classes'] ?>">
             <?php if($show_title): ?>
                 <div>
                 <span class="t-lg border-bottom border-primary

@@ -261,9 +261,6 @@ if (pk_is_checked('use_post_menu')) {
 function pk_compatible()
 {
     wp_scripts()->remove("Editormd_Front");
-    if (!is_admin()) {
-        wp_deregister_script('jquery');
-    }
 }
 
 add_action('wp_enqueue_scripts', 'pk_compatible', 999);
