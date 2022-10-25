@@ -102,6 +102,60 @@ blockquote {
   color: var(--pk-c-light) !important;
 }
 
+.swiper {
+  height: 100%;
+  --swiper-theme-color: var(--pk-c-primary);
+
+  .swiper-button-next, .swiper-button-prev {
+    transform: scale(.5);
+    &.swiper-button-next{
+        right: 5px;
+    }
+    &.swiper-button-prev{
+        left: 5px;
+    }
+  }
+
+  .swiper-wrapper {
+
+    img {
+      height: 100%;
+    }
+
+    .swiper-title {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 0 20px;
+
+      & > .swiper-title-text {
+        display: inline-block;
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 3px 16px;
+        border-radius: 3px;
+        transition: all .3s;
+        cursor: pointer;
+        color: var(--pk-c-light);
+        .t-line-1;
+
+        &:hover {
+          opacity: .6;
+        }
+      }
+    }
+  }
+
+  &:has(.swiper-pagination) {
+    .swiper-wrapper {
+      .swiper-title {
+        bottom: 40px;
+      }
+    }
+  }
+}
+
 
 pre {
   padding: 10px;
@@ -266,7 +320,7 @@ body.pre-mac pre {
   height: 100vh;
   background-color: var(--pk-bg-box);
 
-  .p-block{
+  .p-block {
     box-shadow: none !important;
   }
 
@@ -1308,11 +1362,13 @@ a:hover {
   max-height: 18px !important;
 }
 
-.table{
+.table {
   color: var(--pk-c-font);
-  &.table-bordered{
+
+  &.table-bordered {
     border: 1px solid var(--pk-c-border);
-    td,th{
+
+    td, th {
       border: 1px solid var(--pk-c-border);
     }
   }
@@ -1734,7 +1790,7 @@ a:hover {
     }
   }
 
-  .badge{
+  .badge {
     font-size: 85%;
   }
 }

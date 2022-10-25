@@ -4,35 +4,35 @@ if (pk_is_checked('index_carousel')):
     $index_carousel_list = pk_get_option('index_carousel_list', []);
     if (is_array($index_carousel_list) && count($index_carousel_list) > 0):
         ?>
-        <div id="banners" class="carousel slide mb15" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <?php for ($i = 0; $i < count($index_carousel_list); $i++): ?>
-                    <li data-target="#banners" data-slide-to="<?php echo $i ?>"
-                        class="<?php echo $i == 0 ? 'active' : '' ?>"></li>
-                <?php endfor; ?>
-            </ol>
-            <div class="carousel-inner">
-                <?php $i = 0;
-                foreach ($index_carousel_list as $index_carousel_item): ?>
-                    <a <?php if ($index_carousel_item['blank'] ?? false) {
-                        echo "target=\"_blank\"";
-                    } ?> href="<?php echo $index_carousel_item['link'] ?? '/' ?>"
-                         class="carousel-item <?php echo $i == 0 ? 'active' : '' ?>">
-                        <img class="w-100" src="<?php echo $index_carousel_item['img'] ?>"
-                             title="<?php echo $index_carousel_item['title'] ?>"
-                             alt="<?php echo $index_carousel_item['title'] ?>">
-                        <div class="carousel-caption d-none d-md-block">
-                            <p class="mb-0"><?php echo $index_carousel_item['title'] ?></p>
+        <div id="index-banners" data-swiper="init" data-swiper-class="index-banner-swiper"
+             data-swiper-args='{"autoplay":{"delay":3000}}' class="mb15">
+            <div class="swiper index-banner-swiper">
+                <div class="swiper-wrapper">
+                    <?php
+                    foreach ($index_carousel_list as $item):
+                        ?>
+                        <div class="swiper-slide swiper-lazy">
+                            <a data-no-instant href="<?php echo $item['link'] ?? 'javascript:void(0);' ?>"
+                                <?php if (isset($item['blank']) && $item['blank']) {
+                                    echo ' target="_blank"';
+                                } ?>>
+                                <img class="w-100" src="<?php echo $item['img']; ?>"
+                                     alt="<?php echo $item['title'] ?? ''; ?>">
+
+                                <?php if (isset($item['title']) && !empty($item['title'])): ?>
+                                    <div class="swiper-title">
+                                        <div class="swiper-title-text"><?php echo $item['title'] ?></div>
+                                    </div>
+                                <?php endif; ?>
+                            </a>
                         </div>
-                    </a>
-                    <?php $i++;endforeach;
-                unset($i); ?>
+                    <?php
+                    endforeach;
+                    ?>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
-            <a class="carousel-control-prev" href="#banners" role="button" data-slide="prev">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            <a class="carousel-control-next" href="#banners" role="button" data-slide="next">
-                <i class="fa fa-angle-right"></i>
-            </a>
         </div>
     <?php endif;endif; ?>

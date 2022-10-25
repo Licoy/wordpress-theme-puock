@@ -20,7 +20,7 @@ class Puock {
             main_lazy_img: false,
             link_blank_open: false,
             async_view_id: null,
-            mode_switch:false,
+            mode_switch: false,
         },
         comment: {
             loading: false,
@@ -63,6 +63,7 @@ class Puock {
         this.eventCloseCommentBox()
         this.eventSendPostLike()
         this.eventPostMainBoxResize()
+        this.swiperOnceEvent()
     }
 
     pageInit() {
@@ -85,7 +86,7 @@ class Puock {
             document.body.appendChild(link);
             link.click();
         }
-        InstantClick.on('change', () => {
+        InstantClick.on('change', (e) => {
             this.loadParams();
             this.pageChangeInit()
         })
@@ -129,7 +130,7 @@ class Puock {
             search.attr("class", "animated fade" + tag + "Left");
             $("#search-backdrop").attr("class", "modal-backdrop animated fade" + tag + "Right");
             search.attr("data-open", !open);
-            if(!open){
+            if (!open) {
                 search.find("input").focus();
             }
         }
@@ -274,6 +275,7 @@ class Puock {
         this.keyUpHandle();
         this.loadHitokoto();
         this.asyncCacheViews();
+        this.swiperInit()
         if (this.data.params.use_post_menu) {
             this.generatePostMenuHTML()
         }
@@ -398,7 +400,7 @@ class Puock {
                     const id = menuIndex;
                     const pl = (item.levelInt - maxLevel) * 10
                     let out = `<li data-level="${item.levelInt}" style='padding-left:${pl}px'>`
-                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='fa ${item.children.length > 0 ? 'fa-angle-right':'fa-file-invoice'} t-sm c-sub mr-1'></i> ${item.name}</a>`
+                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='fa ${item.children.length > 0 ? 'fa-angle-right' : 'fa-file-invoice'} t-sm c-sub mr-1'></i> ${item.name}</a>`
                     if (item.children.length > 0) {
                         out += `<ul class="post-menu-sub-${id}" data-parent="${parent + 1}">`
                         for (let child of item.children) {
@@ -425,9 +427,9 @@ class Puock {
             document.querySelectorAll('pre').forEach((block, index) => {
                 const el = $(block);
                 const codeChildClass = el.children("code") ? el.children("code").attr("class") : undefined;
-                if(codeChildClass){
-                    if(codeChildClass.indexOf("katex")!==-1 || codeChildClass.indexOf("latex")!==-1 || codeChildClass.indexOf("flowchart")!==-1
-                        || codeChildClass.indexOf("flow")!==-1 || codeChildClass.indexOf("seq")!==-1  || codeChildClass.indexOf("math")!==-1){
+                if (codeChildClass) {
+                    if (codeChildClass.indexOf("katex") !== -1 || codeChildClass.indexOf("latex") !== -1 || codeChildClass.indexOf("flowchart") !== -1
+                        || codeChildClass.indexOf("flow") !== -1 || codeChildClass.indexOf("seq") !== -1 || codeChildClass.indexOf("math") !== -1) {
                         return;
                     }
                 }
@@ -519,15 +521,15 @@ class Puock {
             $("#logo-dark").removeClass(dn);
             $("#logo-light").addClass(dn);
         }
-        $(".colorMode").each((_,e)=>{
+        $(".colorMode").each((_, e) => {
             const el = $(e);
             let target;
-            if(el.prop("localName")==='i'){
+            if (el.prop("localName") === 'i') {
                 target = el;
-            }else{
+            } else {
                 target = $(el).find("i");
             }
-            if(target){
+            if (target) {
                 target.removeClass("fa-sun").removeClass("fa-moon").addClass(isLight ? "fa-sun" : "fa-moon");
             }
         })
@@ -542,13 +544,13 @@ class Puock {
     }
 
     registerModeChangeEvent() {
-        if(this.data.params.mode_switch){
+        if (this.data.params.mode_switch) {
             try {
-                window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', ()=>{
+                window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', () => {
                     this.modeChangeListener()
                 });
             } catch (ex) {
-                window.matchMedia('(prefers-color-scheme:dark)').addListener(()=>{
+                window.matchMedia('(prefers-color-scheme:dark)').addListener(() => {
                     this.modeChangeListener()
                 });
             }
@@ -847,6 +849,40 @@ class Puock {
                 }
             }
         }
+    }
+
+    swiperInit() {
+        $("[data-swiper='init']").each((_, _el) => {
+            const el = $(_el);
+            const swiperClass = el.attr("data-swiper-class");
+            const elArgs = el.attr("data-swiper-args");
+            let args = {}
+            if (elArgs) {
+                args = JSON.parse(elArgs)
+            }
+            new Swiper('.' + swiperClass, {
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                ...args
+            });
+        });
+    }
+
+    swiperOnceEvent() {
+        $(document).on("click", ".swiper-slide a", (e) => {
+            if(this.data.params.is_pjax){
+                e.preventDefault();
+                console.log(e.currentTarget.href)
+                InstantClick.go(e.currentTarget.href)
+            }
+        });
     }
 
     loadHitokoto() {
