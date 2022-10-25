@@ -108,11 +108,13 @@ blockquote {
 
   .swiper-button-next, .swiper-button-prev {
     transform: scale(.5);
-    &.swiper-button-next{
-        right: 5px;
+
+    &.swiper-button-next {
+      right: 5px;
     }
-    &.swiper-button-prev{
-        left: 5px;
+
+    &.swiper-button-prev {
+      left: 5px;
     }
   }
 
@@ -150,7 +152,7 @@ blockquote {
   &:has(.swiper-pagination) {
     .swiper-wrapper {
       .swiper-title {
-        bottom: 40px;
+        bottom: 25px;
       }
     }
   }
@@ -664,7 +666,6 @@ a:hover {
       overflow: hidden;
       flex-direction: column;
       justify-content: space-between;
-      //min-width:0;
       padding-left: 0;
       position: relative;
 
@@ -773,6 +774,21 @@ a:hover {
   .magazine {
     display: flex;
     align-items: stretch;
+    .img{
+      transition: all .3s;
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+
+    .magazine-media-item{
+      display: flex;
+      align-items: stretch;
+      &:hover{
+        .img{
+          transform: scale(.95);
+        }
+      }
+    }
 
     & > div {
       width: 100%;
@@ -1444,6 +1460,35 @@ a:hover {
   }
 }
 
+.pk-widget {
+  .widget-common-media-post {
+    display: flex;
+    overflow: hidden;
+
+    &:hover .img img {
+      transform: scale(.95);
+
+    }
+
+    .img {
+      flex-shrink: 0;
+      margin-right: 10px;
+
+      img {
+        border-radius: 3px;
+        transition: all .3s;
+      }
+    }
+
+    .info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      .t-line-1;
+    }
+  }
+}
+
 .no-style ul {
   list-style: none;
 }
@@ -1767,9 +1812,8 @@ a:hover {
 
   .index-links-box {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: center;
 
     &:nth-of-type(2)::after {
       content: '';
@@ -1782,7 +1826,6 @@ a:hover {
     color: var(--pk-c-font);
     transition: all .2s;
     margin-bottom: 8px;
-    flex: 1;
 
     &:hover {
       background-color: var(--pk-c-primary);

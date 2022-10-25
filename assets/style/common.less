@@ -4,12 +4,26 @@ a{
   color: var(--pk-c-primary);
 }
 
+.wh100{
+    width: 100%;
+    height: 100%;
+}
+
 .text-2line {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   line-clamp: 2;
   -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.text-3line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -32,7 +46,7 @@ a{
 }
 
 .ts-fun() {
-  transform: scale(1.03);
+  transform: scale(.95);
 }
 
 .tsh {
@@ -273,6 +287,10 @@ a{
   }
 }
 
+.p-flex-sk-0{
+    flex-shrink: 0;
+}
+
 .p-flex-sbc {
   display: flex;
   justify-content: space-between;
@@ -316,6 +334,10 @@ a{
 
 .p-border-r-1{
   border-color: var(--pk-c-border);
+}
+
+.round-3{
+    border-radius: 3px;
 }
 
 .curp {

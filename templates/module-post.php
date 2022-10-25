@@ -1,24 +1,22 @@
 <!--文章ID：<?php the_ID() ?> -->
 <?php if (pk_post_style_list()): ?>
     <article class="block card-plain post-item p-block post-item-list">
-        <div class="thumbnail">
-            <figure>
-                <a class="t-sm" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-                    <img title="<?php the_title() ?>"
-                         alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 280, 180) ?> />
-                </a>
-            </figure>
-        </div>
+        <a class="t-sm thumbnail" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
+            <img title="<?php the_title() ?>"
+                 alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 280, 212) ?> />
+        </a>
         <div class="post-info">
-            <h2 class="info-title">
-                <?php if (is_sticky()): ?><span class="badge bg-danger"><i
-                            class="fa fa-bolt-lightning"></i>置顶</span><?php endif; ?>
-                <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
-                <a class="a-link" title="<?php the_title() ?>" <?php pk_link_target() ?>
-                   href="<?php the_permalink() ?>"><?php the_title() ?></a>
-            </h2>
-            <div class="info-meta d-none d-md-block c-sub">
-                <?php the_excerpt() ?>
+            <div class="info-top">
+                <h2 class="info-title">
+                    <?php if (is_sticky()): ?><span class="badge bg-danger"><i
+                                class="fa fa-bolt-lightning"></i>置顶</span><?php endif; ?>
+                    <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
+                    <a class="a-link" title="<?php the_title() ?>" <?php pk_link_target() ?>
+                       href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                </h2>
+                <div class="info-meta c-sub text-2line">
+                    <?php the_excerpt() ?>
+                </div>
             </div>
             <div class="info-footer w-100">
                 <div>

@@ -31,21 +31,17 @@
                             </div>
                             <?php foreach ($posts as $post) : setup_postdata($post); ?>
                                 <?php if ($post_index == 0): ?>
-                                    <div class="media row mtb10">
-                                        <div class="col-4">
-                                            <figure class="thumbnail">
-                                                <a <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-                                                    <img title="<?php the_title() ?>"
-                                                         alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'tsh w-100', 280, 180) ?>/>
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="media-body col-8 pl-0">
+                                    <div class="mtb10 magazine-media-item">
+                                        <a class="img" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
+                                            <img title="<?php the_title() ?>"
+                                                 alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'w-100 round-3', 120, 80) ?>/>
+                                        </a>
+                                        <div class="t-line-1">
                                             <h2 class="t-lg t-line-1"><a class="a-link"
                                                                          title="<?php the_title() ?>" <?php pk_link_target() ?>
                                                                          href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                             </h2>
-                                            <div class="t-md c-sub"><?php the_excerpt() ?></div>
+                                            <div class="t-md c-sub text-2line"><?php the_excerpt() ?></div>
                                         </div>
                                     </div>
                                 <?php else: ?>

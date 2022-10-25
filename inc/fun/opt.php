@@ -396,3 +396,8 @@ function pk_debug_print_sql_list()
     }
     echo $out . "</script>";
 }
+
+function pk_get_excerpt_more_filter(){
+    return '...';
+}
+add_filter('excerpt_more', 'pk_get_excerpt_more_filter');

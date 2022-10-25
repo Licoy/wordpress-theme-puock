@@ -159,22 +159,72 @@ abstract class puockWidgetBase extends WP_Widget{
     * @param $instance
     * @param $posts
     * @return void
-     */
+    */
     public function comment_post_output($instance, $posts){
         $out = "";
+        $is_simple_style = isset($instance['simple']) && $instance['simple'];
+        $target = pk_link_target(false);
         foreach ($posts as $post){
-            $out .= '<div class="media-link mt20">
-                    <h2 class="t-lg t-line-1" title="'.get_the_title($post).'">
+            $title = get_the_title($post);
+            $link = get_permalink($post);
+            if($is_simple_style){
+                $out .= '<div class="media-link mt20">
+                    <h2 class="t-lg t-line-1" title="'.$title.'">
                         <i class="fa fa-angle-right t-sm c-sub mr-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.get_the_title($post).'" '.pk_link_target(false).'
-                         href="'.get_permalink($post).'">'.get_the_title($post).'</a>
+                        <a class="a-link t-w-400 t-md" title="'.$title.'" '.$target.'
+                         href="'.$link.'">'.$title.'</a>
                     </h2>
                 </div>';
+            }else{
+                $img = pk_get_lazy_img_info(get_post_images($post), '', 120,80);
+                $out .= '<div class="mt10">
+                    <div class="widget-common-media-post">
+                        <a class="img" title="'.$title.'" '.$target.' href="'.$link.'"><img '.$img.' alt="'.$title.'"/></a>
+                        <div class="info">
+                        <h2 class="t-lg t-line-1"><a class="a-link t-w-400 t-md" title="'.$title.'" '.$target.'
+                         href="'.$link.'">'.$title.'</a></h2>
+                         <div class="description t-sm c-sub text-3line">'.get_the_excerpt($post).'</div>
+                        </div>
+                    </div>
+                </div>';
+            }
         }
         $this->get_common_widget_header($instance);
         echo $out;
         $this->get_common_widget_footer($instance);
     }
+
+    /**
+    * 公共文章列表类型字段
+    * @return array
+    */
+    public function common_post_list_fields($args=array()){
+        return $this->merge_common_fields(array_merge(array(
+            array('id'=>'title','strip'=>true, 'val'=>$this->title),
+            array('id'=>'nums', 'val'=>5),
+            array('id'=>'days', 'val'=>31),
+            array('id'=>'simple', 'val'=>false),
+            array('id'=>'categories','strip'=>true, 'val'=>''),
+        ), $args));
+    }
+
+    /**
+    * 公共文章列表类型表单
+    * @return void
+    */
+    public function common_post_list_form($instance,$callback=null){
+        $instance = $this->default_value($instance);
+        $this->html_gen($instance, '标题', 'title');
+        $this->html_gen($instance, '显示篇数', 'nums');
+        $this->html_gen($instance, '最近N天内', 'days');
+        $this->html_gen($instance, '指定分类ID（多个ID之间使用,进行分隔）', 'categories');
+        $this->html_gen($instance, '简洁风格', 'simple','checkbox',false);
+        if($callback){
+            $callback();
+        }
+        $this->merge_common_form($instance);
+    }
+
 
 }
 
@@ -187,21 +237,11 @@ class puockHotPost extends puockWidgetBase {
     protected $pre_title = "根据阅读量显示最近的";
 
     function get_fields(){
-        return $this->merge_common_fields(array(
-            array('id'=>'title','strip'=>true, 'val'=>$this->title),
-            array('id'=>'nums', 'val'=>5),
-            array('id'=>'days', 'val'=>31),
-            array('id'=>'categories','strip'=>true, 'val'=>''),
-        ));
+        return $this->common_post_list_fields();
     }
 
     function form( $instance ) {
-        $instance = $this->default_value($instance);
-        $this->html_gen($instance, '标题', 'title');
-        $this->html_gen($instance, '显示篇数', 'nums');
-        $this->html_gen($instance, '最近N天内', 'days');
-        $this->html_gen($instance, '指定分类ID（多个ID之间使用,进行分隔）', 'categories');
-        $this->merge_common_form($instance);
+        $this->common_post_list_form($instance);
     }
 
     function get_class_name()
@@ -260,21 +300,11 @@ class puockNewPost extends puockWidgetBase {
     }
 
     function get_fields(){
-        return $this->merge_common_fields(array(
-            array('id'=>'title','strip'=>true, 'val'=>$this->title),
-            array('id'=>'days', 'val'=>31),
-            array('id'=>'nums', 'val'=>5),
-            array('id'=>'categories','strip'=>true, 'val'=>''),
-        ));
+        return $this->common_post_list_fields();
     }
 
     function form( $instance ) {
-        $instance = $this->default_value($instance);
-        $this->html_gen($instance, '标题', 'title');
-        $this->html_gen($instance, '最近N天内', 'days');
-        $this->html_gen($instance, '显示篇数', 'nums');
-        $this->html_gen($instance, '指定分类ID（多个ID之间使用,进行分隔）', 'categories');
-        $this->merge_common_form($instance);
+        $this->common_post_list_form($instance);
     }
 
     public function update($cur,$old){
@@ -320,21 +350,11 @@ class puockHotCommentPost extends puockWidgetBase {
     }
 
     function get_fields(){
-        return $this->merge_common_fields(array(
-            array('id'=>'title','strip'=>true, 'val'=>$this->title),
-            array('id'=>'days', 'val'=>31),
-            array('id'=>'nums', 'val'=>5),
-            array('id'=>'categories','strip'=>true, 'val'=>''),
-        ));
+        return $this->common_post_list_fields();
     }
 
     function form( $instance ) {
-        $instance = $this->default_value($instance);
-        $this->html_gen($instance, '标题', 'title');
-        $this->html_gen($instance, '最近N天内', 'days');
-        $this->html_gen($instance, '显示篇数', 'nums');
-        $this->html_gen($instance, '指定分类ID（多个ID之间使用,进行分隔）', 'categories');
-        $this->merge_common_form($instance);
+        $this->common_post_list_form($instance);
     }
 
     public function update($cur,$old){
@@ -580,19 +600,11 @@ class puockRandomPost extends puockWidgetBase {
     protected $pre_title = "显示指定范围内的";
 
     function get_fields(){
-        return $this->merge_common_fields(array(
-            array('id'=>'title','strip'=>true, 'val'=>$this->title),
-            array('id'=>'nums', 'val'=>5),
-            array('id'=>'days', 'val'=>31),
-        ));
+        return $this->common_post_list_fields();
     }
 
     function form( $instance ) {
-        $instance = $this->default_value($instance);
-        $this->html_gen($instance, '标题', 'title');
-        $this->html_gen($instance, '显示篇数', 'nums');
-        $this->html_gen($instance, '最近N天内', 'days');
-        $this->merge_common_form($instance);
+        $this->common_post_list_form($instance);
     }
 
     function get_class_name()

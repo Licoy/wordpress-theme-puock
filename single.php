@@ -87,7 +87,7 @@
                 <?php dynamic_sidebar('post_content_author_top'); ?>
                 <?php if (pk_is_checked('page_copy_right')): ?>
                     <div class="p-block p-flex-sc">
-                        <div class="mr-3 d-none d-md-block">
+                        <div class="mr-3 p-flex-sk-0">
                             <img class="md-avatar mt-1"
                                  src="<?php echo pk_get_gravatar(get_the_author_meta('email')) ?>"
                                  alt="<?php the_author_meta('display_name') ?>"
