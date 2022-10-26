@@ -27,7 +27,7 @@ abstract class BaseOptionItem
     protected static function get_link_category()
     {
         if(!self::$_link_category){
-            self::$_link_category = get_all_category_id_row('link_categories');
+            self::$_link_category = get_all_category_id_row('link_category');
         }
         return self::$_link_category;
     }
