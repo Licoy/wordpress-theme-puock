@@ -21,6 +21,8 @@
 
     window.puockSettingMetaInfo = {
         version: "V<?php echo PUOCK_CUR_VER_STR ?>",
+        description:'简单/方便/高颜值',
+        tag: {text: '主题', color: 'rgb(134,12,220)'},
         github: "https://github.com/Licoy/wordpress-theme-puock",
         qq: "https://licoy.cn/go/puock-update.php?r=qq_qun",
         license: "GPL V3",
