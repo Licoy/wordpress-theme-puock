@@ -32,6 +32,15 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 
 **Tip: in order to prevent incompatible themes, please backup data before installing themes to prevent data fields from overlapping.**
 
+### Environmental requirements
+
+- WordPress `5.0+`
+- PHP `7.4+`
+    - extension must be enabled
+        - `fileinfo`: the MIME type used to get the file
+        - `exif`: used to get the EXIF information of the image
+- MySQL `5.6+`
+
 ## Version iteration
 - Upgrade 1.5 and the following versions to 1.6+ configuration incompatibility handling method:
 ```
