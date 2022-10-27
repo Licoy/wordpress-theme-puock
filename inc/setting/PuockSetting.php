@@ -60,7 +60,7 @@ class PuockSetting
             "manage_options",
             "puock-options",
             array($this, 'setting_page'),
-            'dashicons-art'
+            PUOCK_ABS_URI.'/assets/img/icon/theme.png',
         );
     }
 

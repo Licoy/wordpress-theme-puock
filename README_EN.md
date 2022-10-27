@@ -81,7 +81,10 @@ Please refer to the introduction of Chinese version
 ## Support
 - Reward theme to support：[Click me in](https://licoy.cn/go/zs/)
 ## Thanks
-[Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
+- [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock): IDE Support
+- [Icons8](https://icons8.com/): Icon Support
+- [Font Awesome](https://fontawesome.com/): Icon Support
+- [Twemoji](https://twemoji.twitter.com/): Emoji Support
 ## License
 - [GPL 3.0](./LICENSE)
 - Please abide by the open source agreement and keep the author's signature at the bottom of the subject

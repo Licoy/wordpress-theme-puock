@@ -122,7 +122,10 @@ WHERE `option_name` = 'optionsframework'
 
 ## 鸣谢
 
-[Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
+- [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock): IDE Support
+- [Icons8](https://icons8.com/): Icon Support
+- [Font Awesome](https://fontawesome.com/): Icon Support
+- [Twemoji](https://twemoji.twitter.com/): Emoji Support
 
 ## 开源协议
 

@@ -280,10 +280,10 @@ if (pk_is_checked("upload_webp")) {
 function pk_get_comment_os_images($name)
 {
     if (in_array($name, array("Android", "Chrome", "Edge", "Firefox", "Linux",
-        "Macintosh", "Safari", "Windows"))) {
-        return pk_get_static_url() . '/assets/img/os/' . $name . '.svg';
+        "Macintosh", "Safari", "Windows","iPhone","iPad","Weixin"))) {
+        return pk_get_static_url() . '/assets/img/os/' . $name . '.png';
     }
-    return pk_get_static_url() . '/assets/img/os/Unknown.svg';
+    return pk_get_static_url() . '/assets/img/os/Unknown.png';
 }
 
 // 二维码生成

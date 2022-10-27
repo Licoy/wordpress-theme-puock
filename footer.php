@@ -44,9 +44,18 @@
         <div class="info">
             <?php echo pk_get_option('footer_info') ?>
             <?php /* 请遵守开源协议，保留主题底部（此处）的署名，以支持本主题更好的发展，谢谢合作 */ ?>
-            <p class="fs12 mt10"><i class="fa-brands fa-wordpress"></i>&nbsp;Theme by <a target="_blank" title="Puock v<?php echo PUOCK_CUR_VER_STR; ?>"
-                                                                                href="https://github.com/Licoy/wordpress-theme-puock">Puock</a>
-            </p>
+            <div class="fs12 mt10 c-sub">
+                <span>
+                    <i class="fa-brands fa-wordpress"></i>&nbsp;Theme by <a target="_blank" class="c-sub" title="Puock v<?php echo PUOCK_CUR_VER_STR; ?>"
+                                                                            href="https://github.com/Licoy/wordpress-theme-puock">Puock</a>
+                </span>
+            </div>
+            <div class="fs12 mt5 c-sub">
+                <span>Assets by</span>
+                <span><a target="_blank" rel="nofollow" href="https://icons8.com" class="c-sub">Icons8</a></span>
+                <span>|</span>
+                <span><a target="_blank" rel="nofollow" href="https://twemoji.twitter.com/" class="c-sub">Twemoji</a></span>
+            </div>
         </div>
     </div>
     </div>
