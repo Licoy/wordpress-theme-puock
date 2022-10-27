@@ -19,6 +19,7 @@
         loadWpContentHeight()
     })
 
+    window.puockSettingId = "puock-theme-options-global";
     window.puockSettingMetaInfo = {
         version: "V<?php echo PUOCK_CUR_VER_STR ?>",
         description:'简单/方便/高颜值',

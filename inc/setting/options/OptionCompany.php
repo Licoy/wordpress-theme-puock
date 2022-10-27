@@ -21,6 +21,7 @@ class OptionCompany extends BaseOptionItem{
                     'label' => '产品列表',
                     'type' => 'dynamic-list',
                     'sdt' => [],
+                    'draggable' => true,
                     'dynamicModel'=>[
                         ['id' => 'title', 'label' => '标题', 'std' => ''],
                         ['id' => 'img', 'label' => '图片', 'std' => '', 'type' => 'img'],
@@ -38,6 +39,7 @@ class OptionCompany extends BaseOptionItem{
                     'label' => '做什么-列表',
                     'type' => 'dynamic-list',
                     'sdt' => [],
+                    'draggable' => true,
                     'dynamicModel'=>[
                         ['id' => 'title', 'label' => '标题', 'std' => ''],
                         ['id' => 'icon', 'label' => '图标', 'std' => ''],

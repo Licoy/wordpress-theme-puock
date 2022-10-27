@@ -136,17 +136,19 @@ function pk_is_pjax()
 }
 
 //判断阅读数量是否需要增加并进行操作
-function the_views_add($post_ID, $count, $key, $ajax = false)
-{
-    if (is_single() || is_page() || $ajax) {
-        if ($count == '') {
-            add_post_meta($post_ID, $key, '0');
-        } else {
-            update_post_meta($post_ID, $key, $count + 1);
-            $count++;
+if(!function_exists('the_views_add')){
+    function the_views_add($post_ID, $count, $key, $ajax = false)
+    {
+        if (is_single() || is_page() || $ajax) {
+            if ($count == '') {
+                add_post_meta($post_ID, $key, '0');
+            } else {
+                update_post_meta($post_ID, $key, $count + 1);
+                $count++;
+            }
         }
+        return $count;
     }
-    return $count;
 }
 
 //获取当前的阅读数量与自增
