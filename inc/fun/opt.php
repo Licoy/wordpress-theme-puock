@@ -277,13 +277,43 @@ if (pk_is_checked("upload_webp")) {
     }, 10, 1);
 }
 
-function pk_get_comment_os_images($name)
+function pk_get_comment_ua_os_icon($name)
 {
-    if (in_array($name, array("Android", "Chrome", "Edge", "Firefox", "Linux",
-        "Macintosh", "Safari", "Windows","iPhone","iPad","Weixin"))) {
-        return pk_get_static_url() . '/assets/img/os/' . $name . '.png';
+    switch ($name){
+        case "Android":
+            $res_class = "fa-android";
+            break;
+        case "Chrome":
+            $res_class = "fa-chrome";
+            break;
+        case "Edge":
+            $res_class = "fa-edge";
+            break;
+        case "Firefox":
+            $res_class = "fa-firefox";
+            break;
+        case "Linux":
+            $res_class = "fa-linux";
+            break;
+        case "iPad":
+        case "iPhone":
+        case "Macintosh":
+            $res_class = "fa-apple";
+            break;
+        case "Safari":
+            $res_class = "fa-safari";
+            break;
+        case "Windows":
+            $res_class = "fa-windows";
+            break;
+        case "Weixin":
+            $res_class = "fa-weixin";
+            break;
+        default:
+            $res_class = "fa-tablet";
+            break;
     }
-    return pk_get_static_url() . '/assets/img/os/Unknown.png';
+    return 'fa-brands '.$res_class;
 }
 
 // 二维码生成

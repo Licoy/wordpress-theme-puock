@@ -60,11 +60,10 @@ function pk_comment_callback($comment, $args, $depth)
             <div class="comment-os c-sub">
                 <?php
                 $commentUserAgent = parse_user_agent($comment->comment_agent);
-                $commentOsLink = pk_get_comment_os_images($commentUserAgent['platform']);
-                $commentBrowserLink = pk_get_comment_os_images($commentUserAgent['browser']);
-                echo "<img class='dont-view' alt='${commentUserAgent['platform']}' title='${commentUserAgent['platform']}' src='$commentOsLink'/><span>${commentUserAgent['platform']}</span>";
-                echo "<img class='dont-view' alt='${commentUserAgent['browser']}' title='${commentUserAgent['browser']}' src='$commentBrowserLink'/><span>${commentUserAgent['browser']}</span>";
-                echo "<span>${commentUserAgent['version']}</span>"
+                $commentOsIcon = pk_get_comment_ua_os_icon($commentUserAgent['platform']);
+                $commentBrowserIcon = pk_get_comment_ua_os_icon($commentUserAgent['browser']);
+                echo "<span title='${commentUserAgent['platform']}'><i class='$commentOsIcon'></i>&nbsp;<span>${commentUserAgent['platform']}&nbsp;</span></span>";
+                echo "<span title='${commentUserAgent['browser']} ${commentUserAgent['version']}'><i class='$commentBrowserIcon'></i>&nbsp;<span>${commentUserAgent['browser']}</span></span>";
                 ?>
             </div>
         </div>

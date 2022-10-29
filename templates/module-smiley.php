@@ -19,6 +19,9 @@
                                 <?php echo pk_get_lazy_img_info(pk_get_static_url().'/assets/img/smiley/'.$imgKey.'.png','smiley-img',null,null,false) ?>
                                  alt="<?php echo $key.'-'.$val ?>" title="<?php echo $val ?>" /></div>
                     <?php endforeach; ?>
+                    <div class="mt10">
+                        <small class="c-sub">此表情来源于: <a href="https://twemoji.twitter.com" target="_blank" rel="nofollow">twemoji</a></small>
+                    </div>
                 </div>
             </div>
         </div>

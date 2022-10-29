@@ -50,12 +50,6 @@
                                                                             href="https://github.com/Licoy/wordpress-theme-puock">Puock</a>
                 </span>
             </div>
-            <div class="fs12 mt5 c-sub">
-                <span>Assets by</span>
-                <span><a target="_blank" rel="nofollow" href="https://icons8.com" class="c-sub">Icons8</a></span>
-                <span>|</span>
-                <span><a target="_blank" rel="nofollow" href="https://twemoji.twitter.com/" class="c-sub">Twemoji</a></span>
-            </div>
         </div>
     </div>
     </div>
