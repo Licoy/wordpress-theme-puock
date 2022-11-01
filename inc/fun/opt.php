@@ -279,7 +279,8 @@ if (pk_is_checked("upload_webp")) {
 
 function pk_get_comment_ua_os_icon($name)
 {
-    switch ($name){
+    $prefix = "fa-brands ";
+    switch ($name) {
         case "Android":
             $res_class = "fa-android";
             break;
@@ -310,10 +311,11 @@ function pk_get_comment_ua_os_icon($name)
             $res_class = "fa-weixin";
             break;
         default:
+            $prefix = "fa ";
             $res_class = "fa-tablet";
             break;
     }
-    return 'fa-brands '.$res_class;
+    return $prefix . $res_class;
 }
 
 // 二维码生成
@@ -427,7 +429,9 @@ function pk_debug_print_sql_list()
     echo $out . "</script>";
 }
 
-function pk_get_excerpt_more_filter(){
+function pk_get_excerpt_more_filter()
+{
     return '...';
 }
+
 add_filter('excerpt_more', 'pk_get_excerpt_more_filter');
