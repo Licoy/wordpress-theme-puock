@@ -137,3 +137,28 @@ function pk_disable_emojis_tinymce($plugins)
 add_theme_support('custom-background');
 
 add_action('init', array(\Puock\Theme\classes\meta\PuockAbsMeta::class, 'load'));
+
+function pk_env_check()
+{
+    $php_version = phpversion();
+    $last_version = '7.4';
+    $content = [];
+    if (version_compare($php_version, $last_version, '<')) {
+        $content[] = '<p>您正在使用过时的PHP版本<code>' . $php_version . '</code>，Puock主题需要PHP版本大于<code>' . $last_version . '</code>才能完整使用全部功能，请升级PHP版本。</p>';
+    }
+    $need_ext = ['fileinfo', 'exif', 'gd'];
+    $not_ext = [];
+    foreach ($need_ext as $ext) {
+        if (!extension_loaded($ext)) {
+            $not_ext[] = '<code>' . $ext . '</code>';
+        }
+    }
+    if (count($not_ext) > 0) {
+        $content[] = '<p>您的PHP缺少扩展' . implode(', ', $not_ext) . '，缺少这些扩展可能导致部分功能无法使用，请及时安装这些扩展。</p>';
+    }
+    if (!empty($content)) {
+        echo '<div class="error">' . (join('', $content)) . '</div>';
+    }
+}
+
+add_action('admin_notices', 'pk_env_check');
