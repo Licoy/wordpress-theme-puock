@@ -273,6 +273,9 @@ function pk_get_wp_links($link_cats = '')
     if (empty($link_cats)) {
         return null;
     }
+    if(is_array($link_cats)){
+        $link_cats = implode(',', $link_cats);
+    }
     $sql = "select links.*,terms.term_id,terms.name  from {$wpdb->links} as links
             LEFT JOIN (select * from {$wpdb->term_relationships} where term_taxonomy_id in ({$link_cats})) as relat on links.link_id = relat.object_id
             LEFT JOIN (selecT * from {$wpdb->terms} where term_id in ({$link_cats})) as terms on terms.term_id = relat.term_taxonomy_id

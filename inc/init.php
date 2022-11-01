@@ -135,3 +135,5 @@ function pk_disable_emojis_tinymce($plugins)
 
 //开启支持
 add_theme_support('custom-background');
+
+add_action('init', array(\Puock\Theme\classes\meta\PuockAbsMeta::class, 'load'));
