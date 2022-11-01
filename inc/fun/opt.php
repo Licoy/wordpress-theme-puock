@@ -100,6 +100,12 @@ function cr_avatar($avatar)
     return str_replace($gravatar_urls, 'cravatar.cn', $avatar);
 }
 
+function loli_avatar($avatar)
+{
+    global $gravatar_urls;
+    return str_replace($gravatar_urls, 'gravatar.loli.net', $avatar);
+}
+
 function cn_ssl_avatar($avatar)
 {
     global $gravatar_urls;

@@ -143,6 +143,10 @@ class OptionBasic extends BaseOptionItem{
                             'value' => 'v2ex',
                             'label' => 'v2ex提供的SSL节点',
                         ],
+                        [
+                            'value'=>'loli',
+                            'label'=>'loli.net节点'
+                        ]
                     ],
                 ],
                 [

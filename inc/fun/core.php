@@ -343,20 +343,19 @@ if (pk_get_option('gravatar_url', 'wp') != 'wp') {
     if ($type == 'cravatar') {
         add_filter('get_avatar', 'cr_avatar');
         add_filter('get_avatar_url', 'cr_avatar');
-    }
-    if ($type == 'cn') {
+    }else if ($type == 'loli') {
+        add_filter('get_avatar', 'loli_avatar');
+        add_filter('get_avatar_url', 'loli_avatar');
+    }else if ($type == 'cn') {
         add_filter('get_avatar', 'cn_avatar');
         add_filter('get_avatar_url', 'cn_avatar');
-    }
-    if ($type == 'cn_ssl') {
+    }else if ($type == 'cn_ssl') {
         add_filter('get_avatar', 'cn_ssl_avatar');
         add_filter('get_avatar_url', 'cn_ssl_avatar');
-    }
-    if ($type == 'loli_ssl') {
+    }else if ($type == 'loli_ssl') {
         add_filter('get_avatar', 'loli_ssl_avatar');
         add_filter('get_avatar_url', 'loli_ssl_avatar');
-    }
-    if ($type == 'v2ex') {
+    }else if ($type == 'v2ex') {
         add_filter('get_avatar', 'v2ex_ssl_avatar');
         add_filter('get_avatar_url', 'v2ex_ssl_avatar');
     }
