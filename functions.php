@@ -418,7 +418,7 @@ function pk_breadcrumbs()
 function pk_get_post_views()
 {
     if (function_exists('the_views')) {
-        echo the_views();
+        echo the_views(null, false);
     } else {
         echo 0;
     }
