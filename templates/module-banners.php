@@ -1,11 +1,15 @@
 <!--轮播图-->
 <?php
+
+use Puock\Theme\setting\options\OptionCarousel;
+
 if (pk_is_checked('index_carousel')):
     $index_carousel_list = pk_get_option('index_carousel_list', []);
     if (is_array($index_carousel_list) && count($index_carousel_list) > 0):
         ?>
         <div id="index-banners" data-swiper="init" data-swiper-class="index-banner-swiper"
-             data-swiper-args='{"autoplay":{"delay":3000}}' class="mb15">
+             data-swiper-args='<?php echo OptionCarousel::getCarouselIndexArgs() ?>'
+             class="mb15">
             <div class="swiper index-banner-swiper">
                 <div class="swiper-wrapper">
                     <?php

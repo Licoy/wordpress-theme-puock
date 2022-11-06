@@ -105,16 +105,39 @@ blockquote {
 .swiper {
   height: 100%;
   --swiper-theme-color: var(--pk-c-primary);
+  --swiper-navigation-size: 30px;
+
+  &:hover {
+    .swiper-button-next, .swiper-button-prev {
+      opacity: 1;
+    }
+  }
 
   .swiper-button-next, .swiper-button-prev {
-    transform: scale(.5);
+    opacity:0;
+    padding: 15px;
+    width: auto;
+    height: auto;
+    color: var(--pk-c-light);
+    transition: all .2s;
+    &.swiper-button-disabled{
+      opacity:0;
+    }
+
+    &:after {
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.09);
+    }
 
     &.swiper-button-next {
-      right: 5px;
+      right: 0;
     }
 
     &.swiper-button-prev {
-      left: 5px;
+      left: 0;
     }
   }
 
@@ -775,17 +798,19 @@ a:hover {
   .magazine {
     display: flex;
     align-items: stretch;
-    .img{
+
+    .img {
       transition: all .3s;
       flex-shrink: 0;
       margin-right: 10px;
     }
 
-    .magazine-media-item{
+    .magazine-media-item {
       display: flex;
       align-items: stretch;
-      &:hover{
-        .img{
+
+      &:hover {
+        .img {
           transform: scale(.95);
         }
       }
@@ -1220,9 +1245,11 @@ a:hover {
 
   .info {
     color: var(--pk-c-font);
-    a{
+
+    a {
       transition: all .3s !important;
-      &:hover{
+
+      &:hover {
         color: var(--pk-c-primary) !important;
       }
     }

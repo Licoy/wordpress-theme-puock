@@ -5,6 +5,22 @@ namespace Puock\Theme\setting\options;
 class OptionCarousel extends BaseOptionItem
 {
 
+    public static function getCarouselIndexArgs($encode = true)
+    {
+        $args = [];
+        if (pk_is_checked('index_carousel_mousewheel')) {
+            $args['mousewheel'] = ['invert' => true];
+        }
+        $speed = pk_get_option('index_carousel_autoplay_speed');
+        if ($speed && $speed > 0) {
+            $args['autoplay'] = ['delay' => $speed];
+        }
+        if (pk_is_checked('index_carousel_loop')) {
+            $args['loop'] = true;
+        }
+        return $encode ? json_encode($args) : $args;
+    }
+
     function get_fields(): array
     {
         return [
@@ -22,6 +38,26 @@ class OptionCarousel extends BaseOptionItem
                     'label' => '首页幻灯片',
                     'type' => 'switch',
                     'sdt' => true,
+                ],
+                [
+                    'id' => 'index_carousel_mousewheel',
+                    'label' => '首页幻灯片鼠标左右滚动',
+                    'type' => 'switch',
+                    'sdt' => true,
+                ],
+                [
+                    'id' => 'index_carousel_loop',
+                    'label' => '首页幻灯片循环播放',
+                    'type' => 'switch',
+                    'sdt' => true,
+                ],
+                [
+                    'id' => 'index_carousel_autoplay_speed',
+                    'label' => '首页幻灯片自动播放速度（毫秒）',
+                    'tips' => '填写0则不自动播放',
+                    'type' => 'number',
+                    'sdt' => 3000,
+                    'showRefId' => 'index_carousel',
                 ],
                 [
                     'id' => 'index_carousel_list',
