@@ -75,7 +75,8 @@ function pk_session_call($function)
     }
 }
 
-function pk_get_theme_option_url($to=''){
+function pk_get_theme_option_url($to = '')
+{
     return admin_url() . 'admin.php?page=puock-options&to=' . $to;
 }
 
@@ -136,7 +137,7 @@ function pk_is_pjax()
 }
 
 //判断阅读数量是否需要增加并进行操作
-if(!function_exists('the_views_add')){
+if (!function_exists('the_views_add')) {
     function the_views_add($post_ID, $count, $key, $ajax = false)
     {
         if (is_single() || is_page() || $ajax) {
@@ -260,8 +261,9 @@ function pk_hide_sidebar_out($hide = '', $show = '', $post_id = null, $echo = tr
 }
 
 //侧边栏检测数据
-function pk_sidebar_check_has($name){
-    if(!dynamic_sidebar($name)){
+function pk_sidebar_check_has($name)
+{
+    if (!dynamic_sidebar($name)) {
         dynamic_sidebar('sidebar_not');
     }
 }
@@ -273,7 +275,7 @@ function pk_get_wp_links($link_cats = '')
     if (empty($link_cats)) {
         return null;
     }
-    if(is_array($link_cats)){
+    if (is_array($link_cats)) {
         $link_cats = implode(',', $link_cats);
     }
     $sql = "select links.*,terms.term_id,terms.name  from {$wpdb->links} as links
@@ -346,19 +348,19 @@ if (pk_get_option('gravatar_url', 'wp') != 'wp') {
     if ($type == 'cravatar') {
         add_filter('get_avatar', 'cr_avatar');
         add_filter('get_avatar_url', 'cr_avatar');
-    }else if ($type == 'loli') {
+    } else if ($type == 'loli') {
         add_filter('get_avatar', 'loli_avatar');
         add_filter('get_avatar_url', 'loli_avatar');
-    }else if ($type == 'cn') {
+    } else if ($type == 'cn') {
         add_filter('get_avatar', 'cn_avatar');
         add_filter('get_avatar_url', 'cn_avatar');
-    }else if ($type == 'cn_ssl') {
+    } else if ($type == 'cn_ssl') {
         add_filter('get_avatar', 'cn_ssl_avatar');
         add_filter('get_avatar_url', 'cn_ssl_avatar');
-    }else if ($type == 'loli_ssl') {
+    } else if ($type == 'loli_ssl') {
         add_filter('get_avatar', 'loli_ssl_avatar');
         add_filter('get_avatar_url', 'loli_ssl_avatar');
-    }else if ($type == 'v2ex') {
+    } else if ($type == 'v2ex') {
         add_filter('get_avatar', 'v2ex_ssl_avatar');
         add_filter('get_avatar_url', 'v2ex_ssl_avatar');
     }
@@ -528,9 +530,13 @@ function pk_theme_light()
 }
 
 //配置是否选择
-function pk_is_checked($name, $default = 0)
+function pk_is_checked($name, $default = false)
 {
-    return pk_get_option($name, $default) == 1;
+    $val = pk_get_option($name);
+    if ($val === true || $val === 'true' || $val === 1 || $val === '1') {
+        return true;
+    }
+    return $default;
 }
 
 //配置选择输出

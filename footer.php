@@ -22,7 +22,7 @@
 <footer id="footer">
     <div class="container">
         <div class="row row-cols-md-1">
-            <?php if (!empty(pk_get_option('footer_about_me_title', ''))): ?>
+            <?php if (pk_is_checked('footer_about_me_open')): ?>
                 <div class="col-md-6">
                     <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
                                     class="fa-regular fa-bell"></i> <?php echo pk_get_option('footer_about_me_title', '') ?></span>
@@ -30,7 +30,7 @@
                     <p class="mt20 t-md"><?php echo pk_get_option('footer_about_me', '') ?></p>
                 </div>
             <?php endif; ?>
-            <?php if (!empty(pk_get_option('footer_copyright_title', ''))): ?>
+            <?php if (pk_is_checked('footer_copyright_open')): ?>
                 <div class="col-md-6">
                     <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
                                     class="fa-regular fa-copyright"></i> <?php echo pk_get_option('footer_copyright_title', '') ?></span>

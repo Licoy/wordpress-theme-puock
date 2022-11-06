@@ -61,28 +61,57 @@ class OptionScript extends BaseOptionItem
                     'sdt' => 'Copyright Puock',
                 ],
                 [
-                    'id' => 'footer_about_me_title',
-                    'label' => '底部关于我们说明标题',
-                    'sdt' => '关于我们',
-                    'tips' => "若为空则不显示此栏目"
+                    'id' => '-',
+                    'type' => 'panel',
+                    'label' => '底部关于我们',
+                    'open' => pk_is_checked('footer_about_me_open'),
+                    'children' => [
+                        [
+                            'id' => 'footer_about_me_open',
+                            'label' => '启用',
+                            'type' => 'switch',
+                            'sdt' => true,
+                        ],
+                        [
+                            'id' => 'footer_about_me_title',
+                            'label' => '标题',
+                            'sdt' => '关于我们'
+                        ],
+                        [
+                            'id' => 'footer_about_me',
+                            'label' => '内容',
+                            'tips' => '支持HTML代码',
+                            'type' => 'textarea',
+                            'sdt' => '<strong>底部关于我们</strong>',
+                        ],
+                    ]
                 ],
                 [
-                    'id' => 'footer_about_me',
-                    'label' => '底部关于我们说明',
-                    'type' => 'textarea',
-                    'sdt' => '底部关于我们说明',
-                ],
-                [
-                    'id' => 'footer_copyright_title',
-                    'label' => '底部版权说明标题',
-                    'sdt' => '版权说明',
-                    'tips' => "若为空则不显示此栏目"
-                ],
-                [
-                    'id' => 'footer_copyright',
+                    'id' => '-',
+                    'type' => 'panel',
                     'label' => '底部版权说明',
-                    'type' => 'textarea',
-                    'sdt' => '底部版权说明',
+                    'open' => pk_is_checked('footer_copyright_open'),
+                    'children' => [
+                        [
+                            'id' => 'footer_copyright_open',
+                            'label' => '启用',
+                            'type' => 'switch',
+                            'sdt' => true,
+                        ],
+                        [
+                            'id' => 'footer_copyright_title',
+                            'label' => '标题',
+                            'sdt' => '版权说明',
+                            'tips' => "若为空则不显示此栏目"
+                        ],
+                        [
+                            'id' => 'footer_copyright',
+                            'label' => '内容',
+                            'tips' => '支持HTML代码',
+                            'type' => 'textarea',
+                            'sdt' => '底部版权说明',
+                        ],
+                    ]
                 ],
                 [
                     'id' => 'down_tips',
