@@ -1,4 +1,6 @@
+<?php if (!file_exists(dirname(__FILE__) . '/template-script-dev.php')): ?>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/assets/dist/setting/index.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
+<?php endif; ?>
 <style id="pk-options-style"></style>
 <div id="app">
     <div style="padding: 40px;font-size: 30px">loading...</div>
