@@ -84,12 +84,15 @@
                                                     href="<?php echo wp_logout_url(get_the_permalink()) ?>"><?php _e('登出', PUOCK) ?></a></span>
                                     </div>
                                 <?php endif; ?>
-                                <?php if (pk_is_checked('oauth_qq') && !is_user_logged_in()): ?>
+                                <?php if (!is_user_logged_in() && pk_oauth_platform_count() > 0): ?>
                                     <div class="d-inline-block">
-                                        <a data-no-instant
-                                           href="<?php echo pk_oauth_url_page_ajax('qq', get_the_permalink()) ?>"
-                                           class="btn btn-danger btn-ssm ahfff"><i
-                                                    class="fa-brands fa-qq"></i>&nbsp;<?php _e('QQ登录', PUOCK) ?></a>
+                                        <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
+                                                data-id="quick-oauth-login"
+                                                title="快捷登录"
+                                                data-url="<?php echo pk_ajax_url('pk_oauth_quick_page', ['redirect' => get_permalink()]) ?>">
+                                            <i
+                                                    class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>
+                                        </button>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -97,9 +100,10 @@
                                 <button id="comment-cancel" type="button"
                                         class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUOCK) ?></button>
                                 <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm" type="button"><i
-                                            class="fa-regular fa-face-grin-tongue t-md"></i></button>
+                                            class="fa-regular fa-face-smile t-md"></i></button>
                                 <button id="comment-submit" type="submit" class="btn btn-primary btn-ssm"><i
-                                            class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('发布评论', PUOCK) ?></button>
+                                            class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('发布评论', PUOCK) ?>
+                                </button>
                             </div>
                         </div>
                     </form>

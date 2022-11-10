@@ -1,5 +1,19 @@
 <?php
 
+function pk_ajax_url($action,$args=[]){
+    $url = admin_url('admin-ajax.php?action='.$action);
+    if(!empty($args)){
+        $url .= '&'.http_build_query($args);
+    }
+    return $url;
+}
+
+/**
+ * @param $name
+ * @param $callback callable
+ * @param $public
+ * @return void
+ */
 function pk_ajax_register($name, $callback, $public = false)
 {
     add_action('wp_ajax_' . $name, $callback);

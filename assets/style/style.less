@@ -114,14 +114,15 @@ blockquote {
   }
 
   .swiper-button-next, .swiper-button-prev {
-    opacity:0;
+    opacity: 0;
     padding: 15px;
     width: auto;
     height: auto;
     color: var(--pk-c-light);
     transition: all .2s;
-    &.swiper-button-disabled{
-      opacity:0;
+
+    &.swiper-button-disabled {
+      opacity: 0;
     }
 
     &:after {
@@ -589,6 +590,15 @@ a:hover {
     -webkit-backdrop-filter: blur(10px);
   }
 
+  &#header{
+    &>.navbar>.container{
+      flex-wrap: nowrap;
+      #menus{
+        overflow: hidden;
+      }
+    }
+  }
+
   height: 65px;
 
   nav a {
@@ -664,11 +674,17 @@ a:hover {
       transition-duration: .5s;
       margin: 0 10px 0 0;
       flex-shrink: 0;
+      overflow: hidden;
+
+      &>figure{
+        overflow: hidden;
+      }
 
       img {
         width: 100%;
         height: auto;
         border-radius: 2px;
+        transition: all .3s;
       }
     }
 
@@ -680,7 +696,9 @@ a:hover {
 
     &:hover {
       .thumbnail {
-        .ts-fun();
+        img {
+          .ts-fun();
+        }
       }
     }
 
@@ -733,12 +751,11 @@ a:hover {
     }
 
     .thumbnail {
-      max-width: 100%;
+      width: 100%;
+      padding: 10px;
 
       img {
-        width: 100% !important;
-        padding: 10px;
-        border-radius: 13px !important;
+        border-radius: 8px !important;
       }
     }
 
@@ -800,9 +817,13 @@ a:hover {
     align-items: stretch;
 
     .img {
-      transition: all .3s;
       flex-shrink: 0;
       margin-right: 10px;
+      overflow: hidden;
+
+      img {
+        transition: all .3s;
+      }
     }
 
     .magazine-media-item {
@@ -811,7 +832,9 @@ a:hover {
 
       &:hover {
         .img {
-          transform: scale(.95);
+          img {
+            transform: var(--pk-g-list-img-hover);
+          }
         }
       }
     }
@@ -1500,13 +1523,13 @@ a:hover {
     overflow: hidden;
 
     &:hover .img img {
-      transform: scale(.95);
-
+      transform: var(--pk-g-list-img-hover);
     }
 
     .img {
       flex-shrink: 0;
       margin-right: 10px;
+      overflow: hidden;
 
       img {
         border-radius: 3px;
@@ -1991,3 +2014,6 @@ a:hover {
     margin-top: 10px;
   }
 }
+
+
+@import "screen";

@@ -14,6 +14,7 @@ if (pk_is_checked('index_carousel')):
                 <div class="swiper-wrapper">
                     <?php
                     foreach ($index_carousel_list as $item):
+                        if (($item['hide'] ?? false) || empty($item['img'])) continue
                         ?>
                         <div class="swiper-slide swiper-lazy">
                             <a data-no-instant href="<?php echo $item['link'] ?? 'javascript:void(0);' ?>"

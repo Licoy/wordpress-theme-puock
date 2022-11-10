@@ -64,6 +64,7 @@ class Puock {
         this.eventSendPostLike()
         this.eventPostMainBoxResize()
         this.swiperOnceEvent()
+        this.initModalToggle()
     }
 
     pageInit() {
@@ -760,6 +761,54 @@ class Puock {
         })
     }
 
+
+    initModalToggle() {
+        $(document).on("click", ".pk-modal-toggle", (e) => {
+            const el = $(this.ct(e));
+            const id = el.attr("data-id");
+            let target = $("#" + id);
+            if (target.length === 0) {
+                const title = el.attr("title") ?? '提示';
+                const url = el.attr("data-url");
+                let html = `
+                <div class="modal fade" id="${id}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title puock-text">${title}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fa fa-close t-md"></i></span>
+                                </button>
+                            </div>
+                            <div class="modal-body puock-text t-md">
+                                <div class="text-center"><div class="spinner-grow text-primary" role="status"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `
+                $("body").append(html);
+                target = $("#" + id);
+                target.modal("show");
+                if (url) {
+                    setTimeout(() => {
+                        const bodyEl = target.find(".modal-body")
+                        $.get(url, (res) => {
+                            bodyEl.html(res);
+                        }).error((e) => {
+                            console.error(e)
+                            bodyEl.text("加载失败：" + (e.responseText || e.message || '未知错误'));
+                        })
+                    }, 100);
+                } else {
+                    target.find(".modal-body").text("无效加载页面")
+                }
+            } else {
+                target.modal("show");
+            }
+        })
+    }
+
     eventPostMainBoxResize() {
         $(document).on("click", ".post-main-size", () => {
             const postMain = $("#post-main"),
@@ -877,7 +926,7 @@ class Puock {
 
     swiperOnceEvent() {
         $(document).on("click", ".swiper-slide a", (e) => {
-            if(this.data.params.is_pjax){
+            if (this.data.params.is_pjax) {
                 e.preventDefault();
                 console.log(e.currentTarget.href)
                 InstantClick.go(e.currentTarget.href)
@@ -886,14 +935,21 @@ class Puock {
     }
 
     loadHitokoto() {
-        $(".widget-puock-hitokoto").each((_, v) => {
-            const el = $(v);
-            $.get("https://v1.hitokoto.cn/", (res) => {
-                el.find(".t").text(res.hitokoto);
-                el.find('.f').text(res.from);
-                el.find('.fb').removeClass("d-none");
-            }, 'json')
-        })
+        setTimeout(() => {
+            $(".widget-puock-hitokoto").each((_, v) => {
+                const el = $(v);
+                const api = el.attr("data-api") || "https://v1.hitokoto.cn/"
+                $.get(api, (res) => {
+                    el.find(".t").text(res.hitokoto ?? res.content ?? "无内容");
+                    el.find('.f').text(res.from);
+                    el.find('.fb').removeClass("d-none");
+                }, 'json').error((err) => {
+                    console.error(err)
+                    el.find(".t").text("加载失败：" + err.responseText || err);
+                    el.remove(".fb");
+                })
+            })
+        }, 300)
     }
 
 

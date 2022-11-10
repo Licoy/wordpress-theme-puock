@@ -3,7 +3,7 @@
     <article class="block card-plain post-item p-block post-item-list">
         <a class="t-sm thumbnail" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
             <img title="<?php the_title() ?>"
-                 alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 280, 212) ?> />
+                 alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 280, 160) ?> />
         </a>
         <div class="post-info">
             <div class="info-top">
@@ -14,7 +14,7 @@
                     <a class="a-link" title="<?php the_title() ?>" <?php pk_link_target() ?>
                        href="<?php the_permalink() ?>"><?php the_title() ?></a>
                 </h2>
-                <div class="info-meta c-sub text-2line">
+                <div class="info-meta c-sub text-2line d-none d-md-block">
                     <?php the_excerpt() ?>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         <span class="title-l-c bg-primary"></span>
     </article>
 <?php else: ?>
-    <article class="block card-plain post-item col-sm-6 col-12 post-item-card">
+    <article class="block card-plain post-item col-md-6 col-12 post-item-card">
         <div class="p-block post-item-card-box">
             <div class="thumbnail">
                 <figure>

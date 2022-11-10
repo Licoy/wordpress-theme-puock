@@ -1,12 +1,12 @@
 @import "var";
 
-a{
+a {
   color: var(--pk-c-primary);
 }
 
-.wh100{
-    width: 100%;
-    height: 100%;
+.wh100 {
+  width: 100%;
+  height: 100%;
 }
 
 .text-2line {
@@ -46,7 +46,7 @@ a{
 }
 
 .ts-fun() {
-  transform: scale(.95);
+  transform: var(--pk-g-list-img-hover);
 }
 
 .tsh {
@@ -117,19 +117,52 @@ a{
 }
 
 .--dynamic-distance(@pre,@attr,@step,@start,@end) when (@start<=@end) {
-  .--dynamic-distance(@pre, @attr, @step,@start + @step,@end);
+  .--dynamic-distance(@pre, @attr, @step, @start + @step, @end);
   .@{pre}@{start} {
       @{attr}: (@start * 1px);
   }
 }
 
-.--each-arr-color(@data, @pre, @attr,@after:'', @i:1) when(@i =< length(@data)) {
+.--each-arr-color(@data, @pre, @attr,@after:'', @i:1) when (@i =< length(@data)) {
   @item: extract(@data, @i);
-  .@{pre}-@{item}{
-    @{attr}: ~"var(--pk-c-@{item}) @{after}"
+  .@{pre}-@{item} {
+      @{attr}: ~"var(--pk-c-@{item}) @{after}"
   }
-  .--each-arr-color(@data, @pre, @attr,@after,@i+1)
+  .--each-arr-color(@data, @pre, @attr, @after, @i+1)
 }
+
+.--each-btn(@i) when (@i =< length(@colors)) {
+  @item: extract(@colors, @i);
+  .btn-@{item} {
+    background-color: ~"var(--pk-c-@{item})" !important;
+    color: var(--pk-c-light);
+    border-color: ~"var(--pk-c-@{item})" !important;
+  }
+}
+.--each-btn(1);
+
+.--each-btn-outline(@i) when (@i =< length(@colors)) {
+  @item: extract(@colors, @i);
+  .btn-outline-@{item} {
+    color: ~"var(--pk-c-@{item})" !important;
+    border-color: ~"var(--pk-c-@{item})" !important;
+    &:hover{
+        background-color: ~"var(--pk-c-@{item})" !important;
+        color: var(--pk-c-light) !important;
+    }
+  }
+}
+.--each-btn-outline(1);
+
+.--each-alert(@i) when (@i =< length(@colors)){
+  @item: extract(@colors, @i);
+  .alert-@{item} {
+    background-color: ~"var(--pk-c-@{item})" !important;
+    color: var(--pk-c-light);
+    border-color: ~"var(--pk-c-@{item})" !important;
+  }
+}
+.--each-alert(1)
 
 .--dynamic-distance(mt, margin-top, 5, 5, 20);
 .--dynamic-distance(mb, margin-bottom, 5, 5, 20);
@@ -142,27 +175,26 @@ a{
 .--dynamic-distance(pt, padding-top, 10, 10, 20);
 .--each-arr-color(@colors, bg, background-color, ' !important');
 .--each-arr-color(@colors, border, border-color, ' !important');
-.--each-arr-color(@colors, btn, background-color, ' !important');
-.--each-arr-color(@colors, alert, background-color, ' !important');
-.--each-arr-color(@colors, alert, border-color, ' !important');
-.--each-arr-color(@colors, btn, border-color, ' !important');
 .--each-arr-color(@colors, text, color, ' !important');
 .--each-arr-color(@colors, c, color);
-[class^=alert]{
-  color:var(--pk-c-light) !important;
-  a{
+[class^=alert] {
+  color: var(--pk-c-light) !important;
+
+  a {
     color: var(--pk-c-light) !important;
     text-decoration: underline;
   }
 }
-.btn{
+
+.btn {
   transition: all .3s;
-  &:hover{
+
+  &:hover {
     opacity: 0.8;
   }
 }
 
-.mtb10{
+.mtb10 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -287,8 +319,8 @@ a{
   }
 }
 
-.p-flex-sk-0{
-    flex-shrink: 0;
+.p-flex-sk-0 {
+  flex-shrink: 0;
 }
 
 .p-flex-sbc {
@@ -312,7 +344,8 @@ a{
 .text-line() {
   text-decoration: underline;
 }
-.text-line{
+
+.text-line {
   text-decoration: underline;
 }
 
@@ -332,12 +365,12 @@ a{
   .c-primary;
 }
 
-.p-border-r-1{
+.p-border-r-1 {
   border-color: var(--pk-c-border);
 }
 
-.round-3{
-    border-radius: 3px;
+.round-3 {
+  border-radius: 3px;
 }
 
 .curp {

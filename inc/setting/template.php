@@ -13,7 +13,7 @@
 
         function loadWpContentHeight() {
             var h = window.innerHeight - wpAdminBarEl.height() - wpFooterEl.height() - 50
-            pkOptionsStyleEl.html("#wpbody-content{height:" + h + "px}#pk-options-box{height:" + (window.innerHeight - wpAdminBarEl.height()) + "px}")
+            pkOptionsStyleEl.html("#wpbody-content{height:" + h + "px;padding:0;}#pk-options-box{height:" + (window.innerHeight - wpAdminBarEl.height()) + "px}")
         }
 
         window.addEventListener("resize", loadWpContentHeight)

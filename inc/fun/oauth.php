@@ -1,5 +1,7 @@
 <?php
 
+use Yurun\OAuthLogin\QQ\OAuth2;
+
 class PkOAuthBase
 {
     public $oauth;
@@ -19,18 +21,22 @@ class PkOAuthBase
 
 function pk_oauth_list($user = null)
 {
-    return [
+    $list = [
         'qq' => [
             'label' => 'QQ',
             'openid' => $user ? get_the_author_meta('qq_oauth', $user->ID) : null,
-            'class' => \Yurun\OAuthLogin\QQ\OAuth2::class,
+            'class' => OAuth2::class,
             'name_field' => 'nickname',
+            'icon'=>'fa-brands fa-qq',
+            'color_type'=>'danger',
             'secret_field' => 'key'
         ],
         'github' => [
             'label' => 'GitHub',
             'openid' => $user ? get_the_author_meta('github_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\Github\OAuth2::class,
+            'icon'=>'fa-brands fa-github',
+            'color_type'=>'primary',
             'name_field' => 'name'
         ],
         'weibo' => [
@@ -38,15 +44,20 @@ function pk_oauth_list($user = null)
             'openid' => $user ? get_the_author_meta('weibo_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\Weibo\OAuth2::class,
             'name_field' => 'name',
+            'icon'=>'fa-brands fa-weibo',
+            'color_type'=>'danger',
             'id_field' => 'key'
         ],
         'gitee' => [
             'label' => '码云',
             'openid' => $user ? get_the_author_meta('gitee_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\Gitee\OAuth2::class,
+            'icon'=>'fa-solid fa-globe',
+            'color_type'=>'info',
             'name_field' => 'name',
         ],
     ];
+    return apply_filters('pk_oauth_list', $list);
 }
 
 function pk_extra_user_profile_oauth($user)
@@ -214,7 +225,7 @@ function pk_oauth_callback()
         $users = get_users(array('meta_key' => $type . '_oauth', 'meta_value' => $oauthBase->openid));
         if (!$users || count($users) <= 0) {
             //不存在用户，先自动注册再登录
-            if(pk_is_checked('oauth_close_register')){
+            if (pk_is_checked('oauth_close_register')) {
                 oauth_redirect_page(false, '您的' . $oauth->oauth['label'] . '账号未绑定本站账户，当前已关闭自动注册，请手动注册后再进入个人资料中进行绑定', $redirect);
                 wp_die();
             }
@@ -257,3 +268,15 @@ function pk_oauth_form()
 
 add_action('login_form', 'pk_oauth_form');
 add_action('register_form', 'pk_oauth_form');
+
+function pk_oauth_platform_count()
+{
+    $count = 0;
+    $oauth_list = pk_oauth_list();
+    foreach ($oauth_list as $key => $val) {
+        if (pk_is_checked('oauth_' . $key)) {
+            $count++;
+        }
+    }
+    return apply_filters('pk_oauth_platform_count', $count);
+}

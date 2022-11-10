@@ -2,14 +2,15 @@
 
 namespace Puock\Theme\setting\options;
 
-class OptionBasic extends BaseOptionItem{
+class OptionBasic extends BaseOptionItem
+{
 
     function get_fields(): array
     {
         return [
             'key' => 'basic',
             'label' => '基础设置',
-            'icon'=>'dashicons-admin-generic',
+            'icon' => 'dashicons-admin-generic',
             'fields' => [
                 [
                     'id' => 'basic_img_lazy_s',
@@ -46,7 +47,7 @@ class OptionBasic extends BaseOptionItem{
                     'label' => '正文内容侧边目录菜单生成',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>'勾选此项会在正文目录显示文章目录'
+                    'tips' => '勾选此项会在正文目录显示文章目录'
                 ],
                 [
                     'id' => 'comment_ajax',
@@ -59,14 +60,14 @@ class OptionBasic extends BaseOptionItem{
                     'label' => '页面无刷新加载',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=> "新标签页打开的链接除外"
+                    'tips' => "新标签页打开的链接除外"
                 ],
                 [
                     'id' => 'async_view',
                     'label' => '异步浏览量统计',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>'此选项为开启缓存后浏览量不自增问题解决方案'
+                    'tips' => '此选项为开启缓存后浏览量不自增问题解决方案'
                 ],
                 [
                     'id' => 'page_animate',
@@ -103,6 +104,13 @@ class OptionBasic extends BaseOptionItem{
                     'label' => '显示正文底部相关推荐',
                     'type' => 'switch',
                     'sdt' => 'false',
+                ],
+                [
+                    'id' => 'page_b_recommend_num',
+                    'label' => '正文底部相关推荐文章梳理',
+                    'tips' => '建议是4的倍数，不然会出现空缺位置',
+                    'type' => 'number',
+                    'sdt' => 4,
                 ],
                 [
                     'id' => 'link_page',
@@ -144,8 +152,8 @@ class OptionBasic extends BaseOptionItem{
                             'label' => 'v2ex提供的SSL节点',
                         ],
                         [
-                            'value'=>'loli',
-                            'label'=>'loli.net节点'
+                            'value' => 'loli',
+                            'label' => 'loli.net节点'
                         ]
                     ],
                 ],
@@ -160,21 +168,21 @@ class OptionBasic extends BaseOptionItem{
                     'label' => '文章赞赏支付宝二维码',
                     'type' => 'img',
                     'showRefId' => 'post_reward',
-                    'tips'=>'请选择宽高比例为1:1的图片'
+                    'tips' => '请选择宽高比例为1:1的图片'
                 ],
                 [
                     'id' => 'post_reward_wx',
                     'label' => '文章赞赏微信二维码',
                     'type' => 'img',
                     'showRefId' => 'post_reward',
-                    'tips'=>'请选择宽高比例为1:1的图片'
+                    'tips' => '请选择宽高比例为1:1的图片'
                 ],
                 [
                     'id' => 'post_foot_qrcode_open',
                     'label' => '文章正文底部二维码',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>'请选择宽高比例为1:1的图片'
+                    'tips' => '请选择宽高比例为1:1的图片'
                 ],
                 [
                     'id' => 'post_foot_qrcode_title',

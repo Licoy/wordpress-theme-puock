@@ -18,7 +18,7 @@ if (is_single()):
         $relevants = pk_cache_get($_cache_key);
         if (!$relevants) {
             $relevants = query_posts(array('cat' => $relevant_cat_ids, 'ignore_sticky_posts' => true,
-                'posts_per_page' => 4, 'orderby' => 'rand'));
+                'posts_per_page' => pk_get_option('page_b_recommend_num', 4), 'orderby' => 'rand'));
             pk_cache_set($_cache_key, $relevants);
         }
 
