@@ -131,38 +131,45 @@ a {
   .--each-arr-color(@data, @pre, @attr, @after, @i+1)
 }
 
-.--each-btn(@i) when (@i =< length(@colors)) {
+.--each-btn(@i:1) when (@i =< length(@colors)) {
   @item: extract(@colors, @i);
   .btn-@{item} {
     background-color: ~"var(--pk-c-@{item})" !important;
     color: var(--pk-c-light);
     border-color: ~"var(--pk-c-@{item})" !important;
   }
+  .--each-btn(@i+1);
 }
-.--each-btn(1);
 
-.--each-btn-outline(@i) when (@i =< length(@colors)) {
+.--each-btn();
+
+.--each-btn-outline(@i:1) when (@i =< length(@colors)) {
   @item: extract(@colors, @i);
   .btn-outline-@{item} {
     color: ~"var(--pk-c-@{item})" !important;
     border-color: ~"var(--pk-c-@{item})" !important;
-    &:hover{
-        background-color: ~"var(--pk-c-@{item})" !important;
-        color: var(--pk-c-light) !important;
+
+    &:hover {
+      background-color: ~"var(--pk-c-@{item})" !important;
+      color: var(--pk-c-light) !important;
     }
   }
+  .--each-btn-outline(@i+1);
 }
-.--each-btn-outline(1);
 
-.--each-alert(@i) when (@i =< length(@colors)){
+.--each-btn-outline();
+
+.--each-alert(@i:1) when (@i =< length(@colors)) {
   @item: extract(@colors, @i);
   .alert-@{item} {
     background-color: ~"var(--pk-c-@{item})" !important;
     color: var(--pk-c-light);
     border-color: ~"var(--pk-c-@{item})" !important;
   }
+  .--each-alert(@i+1);
 }
-.--each-alert(1)
+
+.--each-alert();
 
 .--dynamic-distance(mt, margin-top, 5, 5, 20);
 .--dynamic-distance(mb, margin-bottom, 5, 5, 20);

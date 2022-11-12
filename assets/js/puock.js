@@ -54,7 +54,7 @@ class Puock {
         this.searchInit()
         this.eventShareStart()
         this.modeInit();
-        this.registerMobileMenuEvent()
+        this.registerMobileMenu()
         this.registerModeChangeEvent()
         this.eventCommentPageChangeEvent()
         this.eventCommentPreSubmit()
@@ -565,7 +565,7 @@ class Puock {
         infoToast.modal('show');
     }
 
-    registerMobileMenuEvent() {
+    registerMobileMenu() {
         const fn = (s) => {
             if (typeof (s) !== 'string') {
                 s = 'Out'

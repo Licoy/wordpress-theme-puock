@@ -594,7 +594,13 @@ a:hover {
     &>.navbar>.container{
       flex-wrap: nowrap;
       #menus{
-        overflow: hidden;
+        &>ul{
+          display: flex;
+          flex-wrap: nowrap;
+          &>li{
+            flex-shrink: 0;
+          }
+        }
       }
     }
   }
