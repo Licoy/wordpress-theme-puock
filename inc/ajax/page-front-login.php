@@ -151,7 +151,7 @@ pk_ajax_register('pk_font_login_page', 'pk_front_login_page_callback', true);
 function pk_front_login_page_callback()
 {
     $redirect = $_GET['redirect'] ?? get_edit_profile_url();
-    $forget_password_url = pk_ajax_url('pk_font_login_page', ['redirect' => $_SERVER['REQUEST_URI']]);
+    $forget_password_url = pk_ajax_url('pk_font_login_page', ['redirect' => $redirect]);
     $open_register = get_option('users_can_register') == 1;
     ?>
 

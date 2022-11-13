@@ -601,6 +601,7 @@ function get_all_category_id_row($type = null)
 //获取菜单数据
 function pk_get_main_menu($mobile = false)
 {
+    global $wp;
     $menus = get_nav_menu_object('primary');
     $out = $mobile ? "<ul class='puock-links t-md'>" : "<ul>";
     if ($menus && count($menus) > 0) {
@@ -612,7 +613,7 @@ function pk_get_main_menu($mobile = false)
         $out .= '<li><a data-no-instant data-toggle="tooltip" title="用户中心" href="' . get_edit_profile_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
         if (pk_is_checked('show_login_url')) {
-            $url = pk_ajax_url('pk_font_login_page', ['redirect' => $_SERVER['REQUEST_URI']]);
+            $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url( $wp->request )]);
             $out .= '<li><a data-no-instant data-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-id="front-login" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
         }
     }
