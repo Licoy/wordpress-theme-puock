@@ -108,12 +108,16 @@ class Puock {
             const el = $(this.ct(e));
             const target = $(el.attr("data-target"));
             const self = $(el.attr("data-self"));
+            const modalTitle = el.attr("data-modal-title");
             if (target.hasClass("d-none")) {
                 self.addClass("d-none");
                 target.removeClass("d-none");
             } else {
                 self.removeClass("d-none");
                 target.addClass("d-none");
+            }
+            if (modalTitle) {
+                el.closest(".modal").find(".modal-title").text(modalTitle);
             }
         });
         // form ajax submit
@@ -150,7 +154,7 @@ class Puock {
                                 setTimeout(() => {
                                     switch (resData.action) {
                                         case 'reload':
-                                            window.location.reload();
+                                            this.goUrl(window.location.href)
                                             break
                                     }
                                 }, 500)
@@ -158,10 +162,12 @@ class Puock {
                         }
                     } else {
                         this.toast(res.msg || errorTip, TYPE_DANGER)
+                        this.loadCommentCaptchaImage(form, true)
                     }
                 },
                 error: (e) => {
                     this.toast(`请求错误：${e.statusText}`, TYPE_DANGER)
+                    this.loadCommentCaptchaImage(form, true)
                 }
             })
         })
@@ -175,9 +181,15 @@ class Puock {
         }
     }
 
-    loadCommentCaptchaImage(el) {
-        const url = el.attr("src") + '&t=' + (new Date()).getTime()
-        el.attr("src", url)
+    loadCommentCaptchaImage(el, parent = false) {
+        if (parent) {
+            el.find(".captcha").each((_, item) => {
+                this.loadCommentCaptchaImage($(item))
+            })
+        } else {
+            const url = el.attr("src") + '&t=' + (new Date()).getTime()
+            el.attr("src", url)
+        }
     }
 
     searchInit() {
@@ -199,13 +211,18 @@ class Puock {
             toggle();
         })
         $(document).on("submit", ".global-search-form", (e) => {
-            if (this.data.params.is_pjax) {
-                const el = $(e.currentTarget)
-                InstantClick.go(el.attr("action") + "/?" + el.serialize())
-                return false;
-            }
-            return true;
+            e.preventDefault();
+            const el = $(this.ct(e));
+            this.goUrl(el.attr("action") + "/?" + el.serialize())
         })
+    }
+
+    goUrl(url) {
+        if (this.data.params.is_pjax) {
+            InstantClick.go(url)
+        } else {
+            window.location.href = url
+        }
     }
 
     eventShareStart() {
@@ -297,9 +314,10 @@ class Puock {
         }
     }
 
-    lazyLoadInit(el = '.lazyload') {
+    lazyLoadInit(parent = null, el = '.lazyload') {
         if (window.LazyLoad !== undefined) {
-            new window.LazyLoad(document.querySelectorAll([el, "[data-lazy=true]"]), {
+            const elList = parent ? parent.find(el) : document.querySelectorAll([el, "[data-lazy=true]"]);
+            new window.LazyLoad(elList, {
                 root: null,
                 rootMargin: "0px",
                 threshold: 0
@@ -855,6 +873,7 @@ class Puock {
                         const bodyEl = target.find(".modal-body")
                         $.get(url, (res) => {
                             bodyEl.html(res);
+                            this.lazyLoadInit(bodyEl);
                         }).error((e) => {
                             console.error(e)
                             bodyEl.text("加载失败：" + (e.responseText || e.message || '未知错误'));
@@ -988,8 +1007,7 @@ class Puock {
         $(document).on("click", ".swiper-slide a", (e) => {
             if (this.data.params.is_pjax) {
                 e.preventDefault();
-                console.log(e.currentTarget.href)
-                InstantClick.go(e.currentTarget.href)
+                this.goUrl(e.currentTarget.href)
             }
         });
     }

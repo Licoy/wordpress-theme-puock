@@ -340,7 +340,7 @@ function pk_post_qrcode($url)
 function pk_captcha()
 {
     $type = $_GET['type'] ?? '';
-    if (!in_array($type, ['comment', 'login', 'register'])) {
+    if (!in_array($type, ['comment', 'login', 'register','forget-password'])) {
         wp_die();
     }
     $width = $_GET['w'];

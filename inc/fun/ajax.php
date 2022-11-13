@@ -28,6 +28,19 @@ function pk_ajax_get_req_body()
     return json_decode($body, true);
 }
 
+function pk_ajax_result_page($success = true, $info = '', $from_redirect = '')
+{
+    if ($success && !empty($from_redirect)) {
+        wp_redirect($from_redirect);
+    } else {
+        pk_session_call(function () use ($info) {
+            $_SESSION['error_info'] = $info;
+        });
+        wp_redirect(PUOCK_ABS_URI . '/error.php');
+        wp_die();
+    }
+}
+
 function pk_ajax_get_theme_options()
 {
     if (current_user_can('edit_theme_options')) {

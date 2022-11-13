@@ -613,7 +613,7 @@ function pk_get_main_menu($mobile = false)
     } else {
         if (pk_is_checked('show_login_url')) {
             $url = pk_ajax_url('pk_font_login_page', ['redirect' => $_SERVER['REQUEST_URI']]);
-            $out .= '<li><a data-no-instant data-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-temp="true" data-id="front-login" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
+            $out .= '<li><a data-no-instant data-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-id="front-login" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
         }
     }
     if (!$mobile) {
@@ -821,7 +821,7 @@ function pk_get_req_data(array $model)
 {
     $data = [];
     foreach ($model as $key => $item) {
-        $val = $_REQUEST[$key] ?? null;
+        $val = trim($_REQUEST[$key] ?? '');
         if (empty($val)) {
             if ($item['required']) {
                 return ($item['name'] ?? $key) . '不能为空';
