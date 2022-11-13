@@ -36,7 +36,7 @@
                 </div>
                 <div>
                     <?php echo get_post_category_link('c-sub-a t-sm ml-md-2 line-h-20 d-inline-block d-md-none', '<i class="fa fa-tags mr-1"></i>') ?>
-                    <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><?php pk_get_post_date() ?></span>
+                    <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><i class="fa-solid fa-calendar-days"></i> <?php pk_get_post_date() ?></span>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div>
                         <?php echo get_post_category_link('c-sub-a t-sm ml-md-2 line-h-20 d-inline-block d-md-none', '<i class="fa fa-tags mr-1"></i>') ?>
-                        <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><?php pk_get_post_date() ?></span>
+                        <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><i class="fa-solid fa-calendar-days"></i> <?php pk_get_post_date() ?></span>
                     </div>
                 </div>
             </div>

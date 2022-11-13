@@ -59,6 +59,7 @@
                                 </ul>
                             </div>
                         <?php endif; ?>
+                        <div class="t-separator c-sub t-sm mt30">正文结束</div>
                         <?php if (pk_is_checked('post_foot_qrcode_open')): ?>
                             <div class="post-foot-qrcode">
                                 <div class="title"><?php echo pk_get_option('post_foot_qrcode_title', '无说明') ?></div>
@@ -67,17 +68,17 @@
                             </div>
                         <?php endif; ?>
                         <div class="footer-info puock-text mt20">
+                            <div class="mt20">
+                                <div>
+                                    <?php echo get_post_tags('mt20 tags') ?>
+                                </div>
+                            </div>
                             <div class="p-flex-sbc mt20 t-sm">
                                 <div>
                                     <span><?php _e('发表至：', PUOCK) ?></span><?php echo get_post_category_link_exec(true) ?>
                                 </div>
                                 <div>
-                                    <span class="c-sub"><?php pk_get_post_date() ?></span>
-                                </div>
-                            </div>
-                            <div class="mt20">
-                                <div>
-                                    <?php echo get_post_tags('mt20 tags') ?>
+                                    <span class="c-sub"><i class="fa-solid fa-calendar-days"></i> <?php pk_get_post_date() ?></span>
                                 </div>
                             </div>
                         </div>

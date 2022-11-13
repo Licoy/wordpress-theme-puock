@@ -445,6 +445,23 @@ a {
     background: var(--pk-c-border);
     max-width: 16%;
     height: 1px;
-    margin: 0 5px;
+    margin: 0 10px;
+  }
+}
+
+.pk-badge{
+  display: inline-block;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: var(--pk-bg-box-content);
+  color: #808695 !important;
+  &:hover{
+    background-color: var(--pk-c-primary);
+    color: var(--pk-c-light) !important;
+  }
+  &.pk-badge-sm{
+    padding: 3px 6px;
+    font-size: 12px;
   }
 }

@@ -144,7 +144,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
             if ($all) {
                 $out = "";
                 foreach ($cats as $cate) {
-                    $out .= '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>、';
+                    $out .= '<a ' . pk_link_target(false) . ' class="' . $class . ' mr5" href="' . get_category_link($cate) . '"><i class="fa-regular fa-folder-open"></i> ' . $icon . $cate->name . '</a> ';
                 }
                 $out = mb_substr($out, 0, mb_strlen($out) - 1);
                 return $out;
@@ -154,7 +154,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
                 } else {
                     $cate = get_category($cat);
                 }
-                return '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
+                return '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '"><i class="fa-regular fa-folder-open"></i> ' . $icon . $cate->name . '</a>';
             }
         }
     }
@@ -170,8 +170,8 @@ function get_post_tags($class = '')
     if ($tags && count($tags) > 0) {
         $out .= '<div class="' . $class . '">';
         foreach ($tags as $tag) {
-            $color_index = mt_rand(0, count($puock_colors_name) - 1);
-            $out .= '<a href="' . get_tag_link($tag) . '" class="ahfff curp mr-1 badge badge-' . $puock_colors_name[$color_index] . '"># ' . $tag->name . '</a>';
+//            $color_index = mt_rand(0, count($puock_colors_name) - 1);
+            $out .= '<a href="' . get_tag_link($tag) . '" class="pk-badge pk-badge-sm mr5"><i class="fa-solid fa-tag"></i> ' . $tag->name . '</a>';
         }
         $out .= '</div>';
     } else {
@@ -220,7 +220,7 @@ function pk_get_color_tag($ex = array())
         if (!in_array($c, $ex)) {
             return $c;
         }
-    };
+    }
 }
 
 

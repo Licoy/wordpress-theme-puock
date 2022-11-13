@@ -569,6 +569,7 @@ a:hover {
   color: var(--pk-c-font);
   border-radius: 2px;
 }
+
 .form-control:disabled, .form-control[readonly] {
   background-color: var(--pk-c-input-bg);
   opacity: .8;
@@ -594,14 +595,16 @@ a:hover {
     -webkit-backdrop-filter: blur(10px);
   }
 
-  &#header{
-    &>.navbar>.container{
+  &#header {
+    & > .navbar > .container {
       flex-wrap: nowrap;
-      #menus{
-        &>ul{
+
+      #menus {
+        & > ul {
           display: flex;
           flex-wrap: nowrap;
-          &>li{
+
+          & > li {
             flex-shrink: 0;
           }
         }
@@ -686,7 +689,7 @@ a:hover {
       flex-shrink: 0;
       overflow: hidden;
 
-      &>figure{
+      & > figure {
         overflow: hidden;
       }
 
@@ -957,6 +960,15 @@ a:hover {
     #post-main-content {
       &.p-indent > p {
         text-indent: 2rem;
+      }
+      a:not(.btn,.fancybox){
+        &:before {
+          content: "\f0c1";
+          font-family: var(--fa-style-family,"Font Awesome 6 Free");
+          margin-right: 3px;
+          font-weight: var(--fa-style,900);
+          font-size: 12px;
+        }
       }
     }
 
