@@ -17,9 +17,9 @@
                     <?php if (pk_oauth_platform_count() > 0): ?>
                         <div>
                             <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
-                                    data-id="quick-oauth-login"
+                                    data-id="front-login"
                                     title="快捷登录"
-                                    data-url="<?php echo pk_ajax_url('pk_oauth_quick_page', ['redirect' => get_permalink()]) ?>">
+                                    data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
                                 <i
                                         class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>
                             </button>
@@ -89,9 +89,9 @@
                                 <?php if (!is_user_logged_in() && pk_oauth_platform_count() > 0): ?>
                                     <div class="d-inline-block">
                                         <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
-                                                data-id="quick-oauth-login"
+                                                data-id="front-login"
                                                 title="快捷登录"
-                                                data-url="<?php echo pk_ajax_url('pk_oauth_quick_page', ['redirect' => get_permalink()]) ?>">
+                                                data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
                                             <i
                                                     class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>
                                         </button>
