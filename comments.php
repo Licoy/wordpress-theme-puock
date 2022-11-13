@@ -14,11 +14,15 @@
                                       name="comment" class="form-control form-control-sm t-sm" rows="4"></textarea>
                         </div>
                     </form>
-                    <?php if (pk_is_checked('oauth_qq')): ?>
+                    <?php if (pk_oauth_platform_count() > 0): ?>
                         <div>
-                            <a data-no-instant href="<?php echo pk_oauth_url_page_ajax('qq', get_the_permalink()) ?>"
-                               class="btn btn-danger btn-ssm ahfff"><i
-                                        class="fa-brands fa-qq"></i>&nbsp;<?php _e('QQ登录', PUOCK) ?></a>
+                            <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
+                                    data-id="quick-oauth-login"
+                                    title="快捷登录"
+                                    data-url="<?php echo pk_ajax_url('pk_oauth_quick_page', ['redirect' => get_permalink()]) ?>">
+                                <i
+                                        class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>
+                            </button>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -61,10 +65,8 @@
                                                    id="comment-vd">
                                         </div>
                                         <div class="col-4 col-sm-5 pr15">
-                                            <img class="comment-captcha lazyload"
-                                                 data-path="<?php echo get_admin_url() . 'admin-ajax.php?action=puock_comment_captcha&w=200&h=70' ?>"
-                                                 data-src=""
-                                                 src="<?php echo pk_get_lazy_pl_img() ?>"
+                                            <img class="comment-captcha captcha"
+                                                 src="<?php echo pk_captcha_url('comment', 100, 28) ?>"
                                                  alt="验证码">
                                         </div>
                                     </div>

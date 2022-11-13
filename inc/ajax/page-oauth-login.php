@@ -6,20 +6,30 @@ pk_ajax_register('pk_oauth_quick_page', 'pk_oauth_quick_page_callback', true);
 function pk_oauth_quick_page_callback()
 {
     $redirect = $_GET['redirect'] ?? get_edit_profile_url();
-    $oauth_list = pk_oauth_list();
-    echo "<div class='d-flex justify-content-center wh100'>";
-    foreach ($oauth_list as $key => $val) {
-        if (pk_is_checked('oauth_' . $key)) { ?>
-            <a class="btn btn-<?php echo $val['color_type'] ?? 'primary'; ?> btn-ssm mr5 mb5"
-               data-no-instant
-               href="<?php echo pk_oauth_url_page_ajax($key, $redirect) ?>">
-                <?php if ($val['icon'] ?? '') {
-                    echo "<i class='{$val['icon']}'></i>";
-                } ?>
-                <?php echo $val['label'] ?>
-            </a>
-        <?php }
-    }
-    echo "</div>";
+    pk_oauth_quick_buttons(true, $redirect);
     wp_die();
+}
+
+function pk_oauth_quick_buttons($echo = false, $redirect = '')
+{
+    $oauth_list = pk_oauth_list();
+    $out = "<div class='d-flex justify-content-center wh100'>";
+    foreach ($oauth_list as $key => $val) {
+        if (pk_is_checked('oauth_' . $key)) {
+            $url = pk_oauth_url_page_ajax($key, $redirect);
+            $icon = isset($val['icon']) ? "<i class='{$val['icon']}'></i>" : '';
+            $color_type = $val['color_type'] ?? 'primary';
+            $out .= "<a class='btn btn-{$color_type} btn-ssm mr5 mb5'
+               data-no-instant
+               href='{$url}'>
+                {$icon}
+                {$val['label']}
+            </a>";
+        }
+    }
+    $out .= "</div>";
+    if ($echo) {
+        echo $out;
+    }
+    return $out;
 }

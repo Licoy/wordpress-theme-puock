@@ -337,12 +337,16 @@ function pk_post_qrcode($url)
 
 // 评论验证码
 // request url: {host}/wp-admin/admin-ajax.php?action=puock_comment_captcha
-function pk_comment_captcha()
+function pk_captcha()
 {
+    $type = $_GET['type'] ?? '';
+    if (!in_array($type, ['comment', 'login', 'register'])) {
+        wp_die();
+    }
     $width = $_GET['w'];
     $height = $_GET['h'];
-    $captch = new CaptchaBuilder();
-    $captch->initialize([
+    $captcha = new CaptchaBuilder();
+    $captcha->initialize([
         'width' => intval($width),     // 宽度
         'height' => intval($height),     // 高度
         'line' => true,     // 直线
@@ -350,17 +354,35 @@ function pk_comment_captcha()
         'noise' => 1,   // 噪点背景
         'fonts' => [PUOCK_ABS_DIR . '/assets/fonts/G8321-Bold.ttf']       // 字体
     ]);
-    $result = $captch->create();
+    $result = $captcha->create();
     $text = $result->getText();
-    pk_session_call(function () use ($text) {
-        $_SESSION['comment_captcha'] = $text;
+    pk_session_call(function () use ($text, $type) {
+        $_SESSION[$type . '_vd'] = $text;
     });
     $result->output();
-    die;
+    wp_die();
 }
 
-add_action('wp_ajax_nopriv_puock_comment_captcha', 'pk_comment_captcha');
-add_action('wp_ajax_puock_comment_captcha', 'pk_comment_captcha');
+pk_ajax_register('pk_captcha', 'pk_captcha', true);
+
+function pk_captcha_url($type, $width = 100, $height = 40)
+{
+    return admin_url() . 'admin-ajax.php?action=pk_captcha&type=' . $type . '&w=' . $width . '&h=' . $height;
+}
+
+function pk_captcha_validate($type, $val, $success_clear = true)
+{
+    $res = false;
+    pk_session_call(function () use ($type, $val, $success_clear, &$res) {
+        if (isset($_SESSION[$type . '_vd']) && $_SESSION[$type . '_vd'] == $val) {
+            $res = true;
+            if ($success_clear) {
+                unset($_SESSION[$type . '_vd']);
+            }
+        }
+    });
+    return $res;
+}
 
 function pk_get_favicon_url($url)
 {

@@ -44,12 +44,13 @@ class Puock {
         $(document).on("click", ".colorMode", () => {
             this.modeChange(null, true);
         });
-        $(document).on("click", ".comment-captcha", (e) => {
+        $(document).on("click", ".captcha", (e) => {
             this.loadCommentCaptchaImage($(this.ct(e)))
         });
         if (this.data.params.is_pjax) {
             this.instanceClickLoad()
         }
+        this.initBasicDOMEvent()
         this.sidebarMenuEventInit()
         this.searchInit()
         this.eventShareStart()
@@ -69,7 +70,6 @@ class Puock {
 
     pageInit() {
         this.loadParams()
-        this.loadCommentCaptchaImage(null)
         this.pageChangeInit()
         if (this.data.params.is_single) {
             if (this.data.params.use_post_menu) {
@@ -102,6 +102,71 @@ class Puock {
         return e.currentTarget
     }
 
+    initBasicDOMEvent() {
+        // el show or hide event
+        $(document).on("click", ".toggle-el-show-hide", (e) => {
+            const el = $(this.ct(e));
+            const target = $(el.attr("data-target"));
+            const self = $(el.attr("data-self"));
+            if (target.hasClass("d-none")) {
+                self.addClass("d-none");
+                target.removeClass("d-none");
+            } else {
+                self.removeClass("d-none");
+                target.addClass("d-none");
+            }
+        });
+        // form ajax submit
+        $(document).on("submit", ".ajax-form", (e) => {
+            e.preventDefault();
+            const form = $(this.ct(e));
+            const formEls = form.find(":input")
+            if (formEls.length === 0) {
+                this.toast('表单元素为空', TYPE_DANGER)
+                return false;
+            }
+            for (let i = 0; i < formEls.length; i++) {
+                const el = $(formEls[i]);
+                if (el.attr("data-required") !== undefined && el.val() === "") {
+                    this.toast(el.attr("data-tip") || el.attr("placeholder"), TYPE_WARNING)
+                    return false;
+                }
+            }
+            const url = form.attr("action");
+            const method = form.attr("method");
+            const data = form.serialize();
+            const dataType = "json";
+            const successTip = form.attr("data-success");
+            const errorTip = form.attr("data-error");
+            $.ajax({
+                url, method, data, dataType,
+                success: (res) => {
+                    if (res.code === 0) {
+                        this.toast(res.msg || successTip, TYPE_SUCCESS)
+                        form.trigger("reset")
+                        if (res.data) {
+                            const resData = res.data
+                            if (resData.action) {
+                                setTimeout(() => {
+                                    switch (resData.action) {
+                                        case 'reload':
+                                            window.location.reload();
+                                            break
+                                    }
+                                }, 500)
+                            }
+                        }
+                    } else {
+                        this.toast(res.msg || errorTip, TYPE_DANGER)
+                    }
+                },
+                error: (e) => {
+                    this.toast(`请求错误：${e.statusText}`, TYPE_DANGER)
+                }
+            })
+        })
+    }
+
     pageLinkBlankOpenInit() {
         if (this.data.params.link_blank_open) {
             $("#post-main-content").find("a").each((_, item) => {
@@ -111,16 +176,8 @@ class Puock {
     }
 
     loadCommentCaptchaImage(el) {
-        if (el == null) {
-            el = $(".comment-captcha");
-        }
-        const url = el.attr("data-path") + '&t=' + (new Date()).getTime()
-        if (el.attr("src") == "") {
-            el.attr("data-src", url)
-        } else {
-            el.attr("src", url)
-        }
-
+        const url = el.attr("src") + '&t=' + (new Date()).getTime()
+        el.attr("src", url)
     }
 
     searchInit() {
@@ -270,7 +327,6 @@ class Puock {
         this.katexParse();
         this.initCodeHighlight();
         this.pageLinkBlankOpenInit()
-        this.loadCommentCaptchaImage(null);
         this.generatePostQrcode();
         this.initGithubCard();
         this.keyUpHandle();
@@ -643,7 +699,7 @@ class Puock {
             type: $(target).attr('method'),
             success: (data) => {
                 this.toast('评论已提交成功', TYPE_SUCCESS);
-                this.loadCommentCaptchaImage(null);
+                this.loadCommentCaptchaImage($(".comment-captcha"));
                 $("#comment-vd").val("");
                 $("#comment").val("");
                 if (this.data.comment.replyId != null) {
@@ -671,7 +727,7 @@ class Puock {
                 if (jsonVal) {
                     this.toast(jsonVal.msg, TYPE_DANGER);
                     if (jsonVal.refresh_code) {
-                        this.loadCommentCaptchaImage(null);
+                        this.loadCommentCaptchaImage($(".comment-captcha"));
                     }
                 } else {
                     this.toast(res.responseText, TYPE_DANGER);
@@ -765,10 +821,14 @@ class Puock {
     initModalToggle() {
         $(document).on("click", ".pk-modal-toggle", (e) => {
             const el = $(this.ct(e));
-            const id = el.attr("data-id");
+            let id = el.attr("data-id");
+            const temp = el.attr("data-temp") ? el.attr("data-temp") === 'true' : false;
+            if (temp) {
+                id += Math.ceil(Math.random() * 10000);
+            }
             let target = $("#" + id);
             if (target.length === 0) {
-                const title = el.attr("title") ?? '提示';
+                const title = el.attr("title") || el.attr("data-title") || '提示';
                 const url = el.attr("data-url");
                 let html = `
                 <div class="modal fade" id="${id}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -962,7 +1022,6 @@ class Puock {
             offset: {},
             className: 't-' + type,
         }, options)
-        console.log(options)
         const t = Toastify({
             text: msg,
             ...options

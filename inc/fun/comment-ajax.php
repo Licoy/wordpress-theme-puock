@@ -41,11 +41,11 @@ function pk_comment_ajax()
         }
         $validate_pass = true;
         pk_session_call(function () use ($token, &$validate_pass) {
-            $session_comment_captcha = $_SESSION['comment_captcha'];
+            $session_comment_captcha = $_SESSION['comment_vd'];
             if (!$session_comment_captcha || $session_comment_captcha == '' || trim($token) != $session_comment_captcha) {
                 $validate_pass = false;
             }
-            unset($_SESSION['comment_captcha']);
+            unset($_SESSION['comment_vd']);
         });
         if (!$validate_pass) {
             pk_comment_err('验证码不正确', false);

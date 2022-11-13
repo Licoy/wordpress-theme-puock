@@ -427,6 +427,24 @@ a {
   text-overflow: ellipsis;
 }
 
-.p-bg-primary {
+.t-hover-primary {
+  transition: all .3s;
 
+  &:hover {
+    color: var(--pk-c-primary) !important;
+  }
+}
+
+.t-separator{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  &:before,&:after{
+    flex: 1;
+    content: "";
+    background: var(--pk-c-border);
+    max-width: 16%;
+    height: 1px;
+    margin: 0 5px;
+  }
 }
