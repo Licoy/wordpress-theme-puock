@@ -57,11 +57,9 @@
 </div>
 <?php get_template_part('inc/metas') ?>
 <?php wp_footer(); ?>
-<script data-no-instant defer src="<?php echo pk_get_static_url(); ?>/assets/dist/libs.min.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
 <?php if (!empty(pk_get_option('tj_code_footer', ''))): ?>
     <?php echo pk_get_option('tj_code_footer', ''); ?>
 <?php endif; ?>
-<script data-no-instant defer src="<?php echo pk_get_static_url(); ?>/assets/dist/puock.min.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
 <?php pk_debug_print_sql_list(); ?>
 </body>
 </html>

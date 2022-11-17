@@ -325,9 +325,14 @@ function pk_get_comment_ua_os_icon($name)
 }
 
 // 二维码生成
-function pk_post_qrcode($url)
+function pk_post_qrcode($url, $base_dir = '/cache/qrcode')
 {
-    $file = '/cache/qr-' . md5($url) . '.png';
+    $file = $base_dir . '/qr-' . md5($url) . '.png';
+    if (!is_dir(PUOCK_ABS_DIR . $base_dir)) {
+        if (!mkdir(PUOCK_ABS_DIR . $base_dir, 0775, true)) {
+            return false;
+        }
+    }
     $filepath = PUOCK_ABS_DIR . $file;
     if (!file_exists($filepath)) {
         QRcode::png($url, $filepath, QR_ECLEVEL_L, 7, 1);
@@ -340,7 +345,7 @@ function pk_post_qrcode($url)
 function pk_captcha()
 {
     $type = $_GET['type'] ?? '';
-    if (!in_array($type, ['comment', 'login', 'register','forget-password'])) {
+    if (!in_array($type, ['comment', 'login', 'register', 'forget-password'])) {
         wp_die();
     }
     $width = $_GET['w'];
