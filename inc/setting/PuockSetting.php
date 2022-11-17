@@ -10,6 +10,7 @@ use Puock\Theme\setting\options\OptionCms;
 use Puock\Theme\setting\options\OptionCompany;
 use Puock\Theme\setting\options\OptionDebug;
 use Puock\Theme\setting\options\OptionEmail;
+use Puock\Theme\setting\options\OptionExtend;
 use Puock\Theme\setting\options\OptionGlobal;
 use Puock\Theme\setting\options\OptionOAuth;
 use Puock\Theme\setting\options\OptionResource;
@@ -38,6 +39,7 @@ class PuockSetting
         $classes[] = ['class' => OptionAd::class, 'sort' => 8];
         $classes[] = ['class' => OptionEmail::class, 'sort' => 9];
         $classes[] = ['class' => OptionSeo::class, 'sort' => 10];
+        $classes[] = ['class' => OptionExtend::class, 'sort' => 10];
         $classes[] = ['class' => OptionScript::class, 'sort' => 11];
         $classes[] = ['class' => OptionCache::class, 'sort' => 12];
         $classes[] = ['class' => OptionDebug::class, 'sort' => 13];

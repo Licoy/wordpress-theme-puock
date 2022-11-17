@@ -164,26 +164,38 @@ add_action('admin_notices', 'pk_env_check');
 function pk_init_register_assets()
 {
     if (!is_admin()) {
-        wp_enqueue_style('puock-libs-style', pk_get_static_url() . '/assets/dist/style/libs.min.css', [], PUOCK_CUR_VER_STR);
-        wp_enqueue_style('puock-style', pk_get_static_url() . '/assets/dist/style/style.min.css', [], PUOCK_CUR_VER_STR);
+        wp_enqueue_style('puock-libs', pk_get_static_url() . '/assets/dist/style/libs.min.css', [], PUOCK_CUR_VER_STR);
+        wp_enqueue_style('puock', pk_get_static_url() . '/assets/dist/style/style.min.css', ['puock-libs'], PUOCK_CUR_VER_STR);
         wp_enqueue_script('puock-jquery', pk_get_static_url() . '/assets/libs/jquery.min.js', [], PUOCK_CUR_VER_STR);
-        wp_enqueue_script('puock-libs-script', pk_get_static_url() . '/assets/dist/js/libs.min.js', [], PUOCK_CUR_VER_STR, true);
-        wp_enqueue_script('puock-script', pk_get_static_url() . '/assets/dist/js/puock.min.js', array('puock-libs-script'), PUOCK_CUR_VER_STR, true);
+        wp_enqueue_script('puock-libs', pk_get_static_url() . '/assets/dist/js/libs.min.js', [], PUOCK_CUR_VER_STR, true);
+        if (pk_is_checked('strawberry_icon')) {
+            wp_enqueue_style('puock-strawberry-icon', pk_get_static_url() . '/assets/libs/strawberry-icon.css', [], PUOCK_CUR_VER_STR);
+        }
+        if (pk_is_checked('dplayer')) {
+            wp_enqueue_style('puock-dplayer', pk_get_static_url() . '/assets/libs/dplayer/DPlayer.min.css', ['puock'], PUOCK_CUR_VER_STR);
+            wp_enqueue_script('puock-dplayer', pk_get_static_url() . '/assets/libs/dplayer/DPlayer.min.js', ['puock-libs'], PUOCK_CUR_VER_STR, true);
+        }
+        wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/puock.min.js', array('puock-libs'), PUOCK_CUR_VER_STR, true);
     } else {
-        wp_enqueue_script('puock-admin-script', pk_get_static_url() . '/assets/dist/js/admin.min.js', [], PUOCK_CUR_VER_STR, true);
+        wp_enqueue_script('puock-admin', pk_get_static_url() . '/assets/dist/js/admin.min.js', [], PUOCK_CUR_VER_STR, true);
     }
 }
 
 add_action('init', 'pk_init_register_assets');
 
 add_filter('script_loader_tag', 'pk_assets_scr_handle', 10, 3);
-add_filter('style_loader_tag', 'pk_assets_scr_handle', 10, 3);
+add_filter('style_loader_tag', 'pk_assets_href_handle', 10, 3);
 function pk_assets_scr_handle($tag, $handle, $source)
 {
-    if (in_array($handle, ['puock-jquery', 'puock-libs-script', 'puock-script'])) {
-//        $defer = in_array($handle, ['puock-libs-script', 'puock-script']) ? ' defer' : '';
+    if (str_starts_with($handle, 'puock')) {
         $tag = str_replace(' src', ' data-no-instant src', $tag);
-    } else if (in_array($handle, ['puock-libs-style', 'puock-style'])) {
+    }
+    return $tag;
+}
+
+function pk_assets_href_handle($tag, $handle, $source)
+{
+    if (str_starts_with($handle, 'puock')) {
         $tag = str_replace(' href', ' data-no-instant href', $tag);
     }
     return $tag;

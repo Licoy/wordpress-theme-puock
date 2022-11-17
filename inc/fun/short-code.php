@@ -152,9 +152,10 @@ function pk_dplayer_videos($attr, $content = null)
         $url = $href;
     }
     $id = mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
-    $auto = ($autoplay && $autoplay === 'true') ? 'true' : 'false';
-    $out = "<div id='dplayer-{$id}' class='{$class}'></div>";
-    $out .= "<script>$(function() {
+    $auto = ($autoplay === 'true') ? 'true' : 'false';
+    if(pk_is_checked('dplayer')){
+        $out = "<div id='dplayer-{$id}' class='{$class}'></div>";
+        $out .= "<script>$(function() {
             new DPlayer({
                 container: document.getElementById('dplayer-{$id}'),
                 autoplay: {$auto},
@@ -165,7 +166,11 @@ function pk_dplayer_videos($attr, $content = null)
                 },
             });
 })</script>";
-    return $out;
+        return $out;
+    }else{
+        $autoplay = $auto=='true' ? 'autoplay' : '';
+        return "<video src='$url' $autoplay controls></video>";
+    }
 }
 
 add_shortcode('video', 'pk_dplayer_videos');
