@@ -11,6 +11,10 @@ function pk_front_login_exec()
         echo pk_ajax_resp_error($data);
         wp_die();
     }
+    if (!pk_captcha_validate('login', $data['vd'])) {
+        echo pk_ajax_resp_error('验证码错误');
+        wp_die();
+    }
     $try_open = pk_is_checked('quick_login_try_max_open');
     $try_num = $try_open ? pk_get_option('quick_login_try_max_num', 3) : 0;
     $try_ban_time = $try_open ? pk_get_option('quick_login_try_max_ban_time', 10) : 0;
@@ -20,10 +24,6 @@ function pk_front_login_exec()
             echo pk_ajax_resp_error('登录失败次数过多，请' . $try_ban_time . '分钟后再试');
             wp_die();
         }
-    }
-    if (!pk_captcha_validate('login', $data['vd'])) {
-        echo pk_ajax_resp_error('验证码错误');
-        wp_die();
     }
     $user = wp_signon([
         'user_login' => $data['username'],
