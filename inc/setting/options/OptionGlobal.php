@@ -74,12 +74,6 @@ class OptionGlobal extends BaseOptionItem
                     'sdt' => true,
                 ],
                 [
-                    'id' => 'show_login_url',
-                    'label' => '导航栏显示登录入口',
-                    'type' => 'switch',
-                    'sdt' => 'false',
-                ],
-                [
                     'id' => 'nav_blur',
                     'label' => '导航栏毛玻璃效果',
                     'type' => 'switch',
@@ -187,28 +181,6 @@ class OptionGlobal extends BaseOptionItem
                                 另外开启后可能导致古腾堡编辑器出现通信异常问题，建议非必要不开启此选项',
                     'type' => 'switch',
                     'sdt' => 'false',
-                ],
-                [
-                    'id' => 'login_protection',
-                    'label' => '启用后台登录保护',
-                    'type' => 'switch',
-                    'sdt' => 'false',
-                    'tips' => 'func:(function(args){
-                            const link = `' . home_url() . '/wp-login.php?${args.data.lp_user}=${args.data.lp_pass}`
-                            return `<div>启用后则用 <a href="${link}" target="_blank">${link}</a> 的方式访问后台入口</div>`
-                        })(args)'
-                ],
-                [
-                    'id' => 'lp_user',
-                    'label' => '后台登录保护参数',
-                    'sdt' => 'admin',
-                    'showRefId' => 'login_protection',
-                ],
-                [
-                    'id' => 'lp_pass',
-                    'label' => '后台登录保护值',
-                    'sdt' => 'admin',
-                    'showRefId' => 'login_protection',
                 ],
                 [
                     'id' => 'thumbnail_allows',

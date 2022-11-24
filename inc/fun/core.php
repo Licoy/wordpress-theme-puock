@@ -612,7 +612,7 @@ function pk_get_main_menu($mobile = false)
         $avatar = get_avatar_url($user->user_email);
         $out .= '<li><a data-no-instant data-toggle="tooltip" title="用户中心" href="' . get_edit_profile_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
-        if (pk_is_checked('show_login_url')) {
+        if (pk_is_checked('open_quick_login')) {
             $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url( $wp->request )]);
             $out .= '<li><a data-no-instant data-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-id="front-login" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
         }

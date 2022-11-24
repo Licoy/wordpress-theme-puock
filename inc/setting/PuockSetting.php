@@ -12,7 +12,7 @@ use Puock\Theme\setting\options\OptionDebug;
 use Puock\Theme\setting\options\OptionEmail;
 use Puock\Theme\setting\options\OptionExtend;
 use Puock\Theme\setting\options\OptionGlobal;
-use Puock\Theme\setting\options\OptionOAuth;
+use Puock\Theme\setting\options\OptionAuth;
 use Puock\Theme\setting\options\OptionResource;
 use Puock\Theme\setting\options\OptionScript;
 use Puock\Theme\setting\options\OptionSeo;
@@ -34,7 +34,7 @@ class PuockSetting
         $classes[] = ['class' => OptionCarousel::class, 'sort' => 3];
         $classes[] = ['class' => OptionCms::class, 'sort' => 4];
         $classes[] = ['class' => OptionCompany::class, 'sort' => 5];
-        $classes[] = ['class' => OptionOAuth::class, 'sort' => 6];
+        $classes[] = ['class' => OptionAuth::class, 'sort' => 6];
         $classes[] = ['class' => OptionValidate::class, 'sort' => 7];
         $classes[] = ['class' => OptionAd::class, 'sort' => 8];
         $classes[] = ['class' => OptionEmail::class, 'sort' => 9];

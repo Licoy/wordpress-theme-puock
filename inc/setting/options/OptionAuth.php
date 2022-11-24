@@ -2,16 +2,91 @@
 
 namespace Puock\Theme\setting\options;
 
-class OptionOAuth extends BaseOptionItem
+class OptionAuth extends BaseOptionItem
 {
 
     function get_fields(): array
     {
         return [
-            'key' => 'oauth',
-            'label' => '第三方登录',
-            'icon' => 'dashicons-facebook',
+            'key' => 'auth',
+            'label' => '登录与授权',
+            'icon' => 'czs-qq',
             'fields' => [
+                [
+                    'id' => '-',
+                    'label' => '快捷登录',
+                    'type' => 'panel',
+                    'open' => true,
+                    'children' => [
+                        [
+                            'id' => 'open_quick_login',
+                            'label' => '开启快捷登录',
+                            'type' => 'switch',
+                            'sdt' => false,
+                        ],
+                        [
+                            'id' => 'only_quick_oauth',
+                            'label' => '仅允许第三方登录',
+                            'type' => 'switch',
+                            'sdt' => false,
+                        ],
+                        [
+                            'id' => 'quick_login_try_max_open',
+                            'label' => '启用登录最大尝试次数限制',
+                            'tips' => '超过此次数后，对应的IP将会被禁止登录',
+                            'type' => 'switch',
+                            'sdt' => false,
+                        ],
+                        [
+                            'id' => 'quick_login_try_max_num',
+                            'label' => '登录最大尝试次数',
+                            'type' => 'number',
+                            'sdt' => 3,
+                        ],
+                        [
+                            'id' => 'quick_login_try_max_ban_time',
+                            'label' => '登录尝试次数达到后禁止时间（分）',
+                            'type' => 'number',
+                            'sdt' => 10,
+                        ],
+                        [
+                            'id' => 'quick_login_forget_password',
+                            'label' => '启用忘记密码找回',
+                            'type' => 'switch',
+                            'sdt' => false,
+                        ],
+                    ]
+                ],
+                [
+                    'id' => '-',
+                    'type' => 'panel',
+                    'label' => '后台登录保护',
+                    'open' => pk_is_checked('login_protection'),
+                    'children' => [
+                        [
+                            'id' => 'login_protection',
+                            'label' => '启用后台登录保护',
+                            'type' => 'switch',
+                            'sdt' => 'false',
+                            'tips' => 'func:(function(args){
+                            const link = `' . home_url() . '/wp-login.php?${args.data.lp_user}=${args.data.lp_pass}`
+                            return `<div>启用后则用 <a href="${link}" target="_blank">${link}</a> 的方式访问后台入口</div>`
+                        })(args)'
+                        ],
+                        [
+                            'id' => 'lp_user',
+                            'label' => '后台登录保护参数',
+                            'sdt' => 'admin',
+                            'showRefId' => 'login_protection',
+                        ],
+                        [
+                            'id' => 'lp_pass',
+                            'label' => '后台登录保护值',
+                            'sdt' => 'admin',
+                            'showRefId' => 'login_protection',
+                        ],
+                    ]
+                ],
                 [
                     'id' => '-',
                     'label' => '第三方登录回调地址提示',

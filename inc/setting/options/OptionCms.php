@@ -9,7 +9,7 @@ class OptionCms extends BaseOptionItem{
         return [
             'key' => 'cms',
             'label' => 'CMS布局',
-            'icon'=>'dashicons-align-pull-right',
+            'icon'=>'czs-layers',
             'fields' => [
                 [
                     'id' => 'cms_show_new',

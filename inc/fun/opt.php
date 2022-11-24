@@ -468,3 +468,9 @@ function pk_get_excerpt_more_filter()
 }
 
 add_filter('excerpt_more', 'pk_get_excerpt_more_filter');
+
+
+function pk_get_client_ip()
+{
+    return preg_replace('/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR']);
+}
