@@ -94,6 +94,13 @@ class OptionBasic extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'post_poster_open',
+                    'label' => '文章海报生成',
+                    'tips' => '使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求',
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'page_copy_right',
                     'label' => '显示正文版权说明',
                     'type' => 'switch',

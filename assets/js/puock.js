@@ -841,6 +841,10 @@ class Puock {
             const el = $(this.ct(e));
             let id = el.attr("data-id");
             const temp = el.attr("data-temp") ? el.attr("data-temp") === 'true' : false;
+            let classStr = '';
+            classStr += el.attr("data-no-title") !== undefined ? ' modal-no-title' : '';
+            classStr += el.attr("data-no-padding") !== undefined ? ' modal-no-padding' : '';
+            classStr += el.attr("data-transparent") !== undefined ? ' modal-transparent' : '';
             if (temp) {
                 id += Math.ceil(Math.random() * 10000);
             }
@@ -849,7 +853,7 @@ class Puock {
                 const title = el.attr("title") || el.attr("data-title") || '提示';
                 const url = el.attr("data-url");
                 let html = `
-                <div class="modal fade" id="${id}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade ${classStr}" id="${id}" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
