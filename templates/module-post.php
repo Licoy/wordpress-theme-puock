@@ -2,8 +2,10 @@
 <?php if (pk_post_style_list()): ?>
     <article class="block card-plain post-item p-block post-item-list">
         <a class="t-sm thumbnail" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-            <img title="<?php the_title() ?>"
-                 alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 280, 160) ?> />
+            <div class="thumbnail-inner">
+                <img title="<?php the_title() ?>"
+                     alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 280, 160) ?> />
+            </div>
         </a>
         <div class="post-info">
             <div class="info-top">
@@ -36,7 +38,8 @@
                 </div>
                 <div>
                     <?php echo get_post_category_link('c-sub-a t-sm ml-md-2 line-h-20 d-inline-block d-md-none', '<i class="fa fa-tags mr-1"></i>') ?>
-                    <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><i class="fa-solid fa-calendar-days"></i> <?php pk_get_post_date() ?></span>
+                    <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><i
+                                class="fa-solid fa-calendar-days"></i> <?php pk_get_post_date() ?></span>
                 </div>
             </div>
         </div>
@@ -46,12 +49,12 @@
     <article class="block card-plain post-item col-md-6 col-12 post-item-card">
         <div class="p-block post-item-card-box">
             <div class="thumbnail">
-                <figure>
+                <div class="thumbnail-inner">
                     <a class="t-sm" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                         <img title="<?php the_title() ?>"
                              alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 400, 200) ?> />
                     </a>
-                </figure>
+                </div>
             </div>
             <div class="post-info">
                 <h2 class="info-title">
@@ -84,7 +87,8 @@
                     </div>
                     <div>
                         <?php echo get_post_category_link('c-sub-a t-sm ml-md-2 line-h-20 d-inline-block d-md-none', '<i class="fa fa-tags mr-1"></i>') ?>
-                        <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><i class="fa-solid fa-calendar-days"></i> <?php pk_get_post_date() ?></span>
+                        <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><i
+                                    class="fa-solid fa-calendar-days"></i> <?php pk_get_post_date() ?></span>
                     </div>
                 </div>
             </div>

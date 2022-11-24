@@ -33,7 +33,7 @@ function pk_poster_page_callback()
                         <p class="tip c-sub fs14">@<?php echo pk_get_web_title() ?></p>
                     <?php endif; ?>
                 </div>
-                <p class="tip c-sub fs12 mt20 p-flex-center"><i class="fa-solid fa-qrcode"></i> 长按识别二维码查看文章内容</p>
+                <p class="tip c-sub fs12 mt20 p-flex-center"><i class="fa-solid fa-qrcode"></i>&nbsp;长按识别二维码查看文章内容</p>
             </div>
         </div>
     </div>

@@ -532,7 +532,7 @@ body.pre-mac pre {
     }
   }
 
-  &.modal-transparent{
+  &.modal-transparent {
     .modal-content {
       background-color: rgb(255 255 255 / 0%);
     }
@@ -713,14 +713,14 @@ a:hover {
       flex-shrink: 0;
       overflow: hidden;
 
-      & > figure {
+      .thumbnail-inner {
+        border-radius: 5px;
         overflow: hidden;
       }
 
       img {
         width: 100%;
         height: auto;
-        border-radius: 2px;
         transition: all .3s;
       }
     }
@@ -769,7 +769,13 @@ a:hover {
   .post-item-card {
 
     .post-item-card-box {
-      //display: flex;
+      & > .thumbnail {
+        padding-bottom: 5px;
+      }
+
+      & > .post-info {
+        padding-top: 5px;
+      }
     }
 
     &:nth-child(even) {
@@ -791,7 +797,7 @@ a:hover {
       width: 100%;
       padding: 10px;
 
-      img {
+      .thumbnail-inner {
         border-radius: 8px !important;
       }
     }
@@ -2085,7 +2091,7 @@ a:hover {
       position: relative;
     }
 
-    .result{
+    .result {
       width: 100%;
     }
 
