@@ -21,7 +21,7 @@ function pk_poster_page_callback()
 
     <div class="post-poster">
         <div class="post-poster-main" id="<?php echo $el_id; ?>">
-            <div class="cover" style="background-image: url('<?php echo pkmp_get_post_images($post); ?>')"></div>
+            <div class="cover" style="background-image: url('<?php echo get_post_images($post); ?>')"></div>
             <div class="content">
                 <p class="title mt20 fs16"><?php echo $title ?></p>
                 <p class="excerpt fs14 mt20 c-sub"><?php echo get_the_excerpt() ?></p>

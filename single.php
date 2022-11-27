@@ -68,11 +68,7 @@
                             </div>
                         <?php endif; ?>
                         <div class="footer-info puock-text mt20">
-                            <div class="mt20">
-                                <div>
-                                    <?php echo get_post_tags('mt20 tags') ?>
-                                </div>
-                            </div>
+                            <?php echo get_post_tags('mt20 tags','mb10') ?>
                             <div class="p-flex-sbc mt20 t-sm">
                                 <div>
                                     <span><?php _e('发表至：', PUOCK) ?></span><?php echo get_post_category_link_exec(true) ?>

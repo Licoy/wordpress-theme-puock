@@ -162,7 +162,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
 }
 
 //获取文章标签
-function get_post_tags($class = '')
+function get_post_tags($class = '',$item_class='')
 {
     global $puock_colors_name;
     $tags = get_the_tags();
@@ -171,7 +171,7 @@ function get_post_tags($class = '')
         $out .= '<div class="' . $class . '">';
         foreach ($tags as $tag) {
 //            $color_index = mt_rand(0, count($puock_colors_name) - 1);
-            $out .= '<a href="' . get_tag_link($tag) . '" class="pk-badge pk-badge-sm mr5"><i class="fa-solid fa-tag"></i> ' . $tag->name . '</a>';
+            $out .= '<a href="' . get_tag_link($tag) . '" class="pk-badge pk-badge-sm mr5 '.$item_class.'"><i class="fa-solid fa-tag"></i> ' . $tag->name . '</a>';
         }
         $out .= '</div>';
     } else {

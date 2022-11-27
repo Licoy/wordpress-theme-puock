@@ -224,9 +224,11 @@ function pk_front_login_page_callback()
                        data-modal-title="注册"
                        data-self="#front-login-form" href="javascript:void(0)">还没有账号？立即注册</a>
                 <?php endif; ?>
-                <a class="c-sub t-hover-primary toggle-el-show-hide" data-target="#front-forget-password-form"
-                   data-modal-title="找回密码"
-                   data-self="#front-login-form" href="javascript:void(0)">忘记密码？立即找回密码</a>
+                <?php if (pk_is_checked('quick_login_forget_password')): ?>
+                    <a class="c-sub t-hover-primary toggle-el-show-hide" data-target="#front-forget-password-form"
+                       data-modal-title="找回密码"
+                       data-self="#front-login-form" href="javascript:void(0)">忘记密码？立即找回密码</a>
+                <?php endif; ?>
             </div>
         </form>
 
