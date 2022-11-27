@@ -9,20 +9,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="d-flex justify-content-center w-100 share-to">
-                    <div data-id="wb" class="circle-button circle-sm circle-hb text-center bg-danger text-light"><i
+                <div class="d-flex justify-content-center w-100">
+                    <div data-id="wb" class="share-to circle-button circle-sm circle-hb text-center bg-danger text-light"><i
                             class="fa-brands fa-weibo t-md"></i></div>
                     <div data-id="wx" id="wx-share" data-toggle="tooltip" data-html="true"
                          data-url="<?php echo PUOCK_ABS_URI . pk_post_qrcode(get_permalink()) ?>"
-                         class="circle-button circle-sm circle-hb text-center bg-success text-light"><i
+                         class="share-to circle-button circle-sm circle-hb text-center bg-success text-light"><i
                             class="fa-brands fa-weixin t-md"></i></div>
-                    <div data-id="qzone" class="circle-button circle-sm circle-hb text-center bg-warning text-light">
+                    <div data-id="qzone" class="share-to circle-button circle-sm circle-hb text-center bg-warning text-light">
                         <i class="fa-brands fa-qq t-md"></i></div>
-                    <div data-id="tw" class="circle-button circle-sm circle-hb text-center bg-info text-light"><i
+                    <div data-id="tw" class="share-to circle-button circle-sm circle-hb text-center bg-info text-light"><i
                             class="fa-brands fa-twitter t-md"></i></div>
-                    <div data-id="fb" class="circle-button circle-sm circle-hb text-center bg-primary text-light"><i
+                    <div data-id="fb" class="share-to circle-button circle-sm circle-hb text-center bg-primary text-light"><i
                             class="fa-brands fa-facebook t-md"></i></div>
-                    <div class="circle-button circle-sm circle-hb text-center bg-secondary text-light copy-opt" data-cp-val="<?php echo get_permalink() ?>" data-cp-title="文章链接"><i class="fa fa-copy t-md"></i></div>
                 </div>
             </div>
         </div>

@@ -226,7 +226,7 @@ class Puock {
     }
 
     eventShareStart() {
-        $(document).on("click", ".share-to>div", (e) => {
+        $(document).on("click", ".share-to", (e) => {
             const id = $(this.ct(e)).attr("data-id");
             if (id === 'wx') return;
             const url = window.location.href;
@@ -359,7 +359,7 @@ class Puock {
             navbar: false,
             url: this.data.params.main_lazy_img ? 'data-src' : 'src'
         });
-        const cp = new ClipboardJS('.copy-opt', {
+        const cp = new ClipboardJS('.pk-copy', {
             text: (trigger) => {
                 const t = $(trigger)
                 let input = t.attr("data-cp-input")
