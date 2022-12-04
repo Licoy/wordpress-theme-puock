@@ -14,6 +14,7 @@
         }
     ],
     "require": {
-        "yurunsoft/yurun-oauth-login": "~3.0"
+        "yurunsoft/yurun-oauth-login": "~3.0",
+        "zoujingli/ip2region": "^2.0"
     }
 }

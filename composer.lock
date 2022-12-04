@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e78cc9fc8f7e36f6ad3ba5f799449ab4",
+    "content-hash": "c76f20f355c868528b44055226298ea2",
     "packages": [
         {
             "name": "psr/http-message",
@@ -154,6 +154,58 @@
                 "source": "https://github.com/Yurunsoft/YurunOAuthLogin/tree/v3.0.6"
             },
             "time": "2021-12-07T05:56:44+00:00"
+        },
+        {
+            "name": "zoujingli/ip2region",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zoujingli/ip2region.git",
+                "reference": "8bf96bb720e206f1ade1673bae79fde7b97ba8ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zoujingli/ip2region/zipball/8bf96bb720e206f1ade1673bae79fde7b97ba8ca",
+                "reference": "8bf96bb720e206f1ade1673bae79fde7b97ba8ca",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Ip2Region.php",
+                    "XdbSearcher.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Anyon",
+                    "email": "zoujingli@qq.com",
+                    "homepage": "https://thinkadmin.top"
+                }
+            ],
+            "description": "Ip2Region for PHP",
+            "homepage": "https://github.com/zoujingli/Ip2Region",
+            "keywords": [
+                "Ip2Region"
+            ],
+            "support": {
+                "issues": "https://github.com/zoujingli/ip2region/issues",
+                "source": "https://github.com/zoujingli/ip2region/tree/v2.0.0"
+            },
+            "time": "2022-07-18T10:42:52+00:00"
         }
     ],
     "packages-dev": [],

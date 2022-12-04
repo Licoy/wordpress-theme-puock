@@ -94,6 +94,18 @@ class OptionBasic extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'comment_show_ua',
+                    'label' => '评论显示系统及浏览器信息',
+                    'type' => 'switch',
+                    'sdt' => true,
+                ],
+                [
+                    'id' => 'comment_show_ip',
+                    'label' => '评论显示IP归属地及运营商',
+                    'type' => 'switch',
+                    'sdt' => true,
+                ],
+                [
                     'id' => 'post_poster_open',
                     'label' => '文章海报生成',
                     'tips' => '使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求',

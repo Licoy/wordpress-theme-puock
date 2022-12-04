@@ -1,0 +1,26 @@
+{
+  "type": "library",
+  "name": "zoujingli/ip2region",
+  "homepage": "https://github.com/zoujingli/Ip2Region",
+  "description": "Ip2Region for PHP",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Anyon",
+      "email": "zoujingli@qq.com",
+      "homepage": "https://thinkadmin.top"
+    }
+  ],
+  "require": {
+    "php": ">=5.4"
+  },
+  "keywords": [
+    "Ip2Region"
+  ],
+  "autoload": {
+    "classmap": [
+      "Ip2Region.php",
+      "XdbSearcher.php"
+    ]
+  }
+}

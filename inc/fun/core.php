@@ -510,24 +510,13 @@ register_nav_menus(array(
 ));
 
 //获取主题配置
-function pk_get_option($name, $default = false)
+function pk_get_option($name, $default = null)
 {
     $config = get_option(PUOCK_OPT);
     if ($config && isset($config[$name])) {
-        if (!empty($config[$name])) {
-            return $config[$name];
-        }
+        return $config[$name];
     }
     return $default;
-}
-
-//主题模式
-function pk_theme_light()
-{
-    if (isset($_COOKIE['mode'])) {
-        return $_COOKIE['mode'] == 'light';
-    }
-    return pk_get_option('theme_mode', 'light') == 'light';
 }
 
 //配置是否选择
@@ -537,7 +526,10 @@ function pk_is_checked($name, $default = false)
     if ($val === true || $val === 'true' || $val === 1 || $val === '1') {
         return true;
     }
-    return $default;
+    if ($val === null) {
+        return $default;
+    }
+    return false;
 }
 
 //配置选择输出
@@ -546,6 +538,15 @@ function pk_checked_out($name, $out = '', $default = 0)
     if (pk_is_checked($name, $default)) {
         echo $out;
     }
+}
+
+//主题模式
+function pk_theme_light()
+{
+    if (isset($_COOKIE['mode'])) {
+        return $_COOKIE['mode'] == 'light';
+    }
+    return pk_get_option('theme_mode', 'light') == 'light';
 }
 
 //动画载入
@@ -613,7 +614,7 @@ function pk_get_main_menu($mobile = false)
         $out .= '<li><a data-no-instant data-toggle="tooltip" title="用户中心" href="' . get_edit_profile_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
         if (pk_is_checked('open_quick_login')) {
-            $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url( $wp->request )]);
+            $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url($wp->request)]);
             $out .= '<li><a data-no-instant data-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-id="front-login" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
         }
     }
@@ -835,4 +836,30 @@ function pk_get_req_data(array $model)
         }
     }
     return $data;
+}
+
+function pk_get_ip_region_str($ip)
+{
+    $ip2_instance = @$GLOBALS['ip2_region'];
+    if (!$ip2_instance) {
+        $ip2_instance = new \Ip2Region();
+        $GLOBALS['ip2_region'] = $ip2_instance;
+    }
+    try {
+        $s = $ip2_instance->memorySearch($ip);
+    } catch (Exception $e) {
+        return '未知';
+    }
+    if (str_contains($s['region'], '内网IP')) {
+        return '内网IP';
+    }
+    $region = explode('|', $s['region']);
+    $res = '';
+    foreach ($region as $item) {
+        if (str_starts_with($item, '0')) {
+            continue;
+        }
+        $res .= $item;
+    }
+    return $res;
 }

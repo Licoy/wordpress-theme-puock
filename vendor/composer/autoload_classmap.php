@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Ip2Region' => $vendorDir . '/zoujingli/ip2region/Ip2Region.php',
+    'XdbSearcher' => $vendorDir . '/zoujingli/ip2region/XdbSearcher.php',
 );

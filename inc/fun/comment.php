@@ -57,15 +57,25 @@ function pk_comment_callback($comment, $args, $depth)
                 <p class="c-sub mt-1"><i class="fa fa-warning mr-1"></i>您的评论正在等待审核！</p>
             <?php endif; ?>
 
-            <div class="comment-os c-sub">
-                <?php
-                $commentUserAgent = parse_user_agent($comment->comment_agent);
-                $commentOsIcon = pk_get_comment_ua_os_icon($commentUserAgent['platform']);
-                $commentBrowserIcon = pk_get_comment_ua_os_icon($commentUserAgent['browser']);
-                echo "<span title='${commentUserAgent['platform']}'><i class='$commentOsIcon'></i>&nbsp;<span>${commentUserAgent['platform']}&nbsp;</span></span>";
-                echo "<span title='${commentUserAgent['browser']} ${commentUserAgent['version']}'><i class='$commentBrowserIcon'></i>&nbsp;<span>${commentUserAgent['browser']}</span></span>";
-                ?>
-            </div>
+            <?php if (pk_is_checked('comment_show_ua', true) || pkmp_is_checked('comment_show_ip', true)): ?>
+                <div class="comment-os c-sub">
+                    <?php
+                    if (pk_is_checked('comment_show_ua', true)):
+                        $commentUserAgent = parse_user_agent($comment->comment_agent);
+                        $commentOsIcon = pk_get_comment_ua_os_icon($commentUserAgent['platform']);
+                        $commentBrowserIcon = pk_get_comment_ua_os_icon($commentUserAgent['browser']);
+                        echo "<span title='${commentUserAgent['platform']}'><i class='$commentOsIcon'></i>&nbsp;<span>${commentUserAgent['platform']}&nbsp;</span></span>";
+                        echo "<span title='${commentUserAgent['browser']} ${commentUserAgent['version']}'><i class='$commentBrowserIcon'></i>&nbsp;<span>${commentUserAgent['browser']}</span></span>";
+                    endif;
+                    ?>
+                    <?php
+                    if (pk_is_checked('comment_show_ip', true)):
+                        $ip = pk_get_ip_region_str($comment->comment_author_IP);
+                        echo "<span title='IP'><i class='fa-solid fa-location-dot'></i>&nbsp;$ip</span>";
+                    endif;
+                    ?>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="comment-box-reply d-none" id="comment-box-<?php comment_ID() ?>"></div>
     </div>
