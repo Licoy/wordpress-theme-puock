@@ -70,7 +70,6 @@ class Puock {
         this.eventPostMainBoxResize()
         this.swiperOnceEvent()
         this.initModalToggle()
-        this.validateInit()
     }
 
     pageInit() {
@@ -378,6 +377,7 @@ class Puock {
         this.loadHitokoto();
         this.asyncCacheViews();
         this.swiperInit()
+        this.validateInit()
         if (this.data.params.use_post_menu) {
             this.generatePostMenuHTML()
         }
