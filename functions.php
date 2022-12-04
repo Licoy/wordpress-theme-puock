@@ -511,16 +511,6 @@ function pk_update()
                 );
             }
             break;
-        case 'cnpmjs':
-            {
-                $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-                    'https://licoy.cn/go/puock-update.php?r=cnpmjs',
-                    __FILE__,
-                    'unique-plugin-or-theme-slug',
-                    $check_period
-                );
-            }
-            break;
         case 'fastgit':
             {
                 $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(

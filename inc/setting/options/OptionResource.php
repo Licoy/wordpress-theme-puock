@@ -66,11 +66,7 @@ class OptionResource extends BaseOptionItem{
                         [
                             'value' => 'fastgit',
                             'label' => 'fastgit',
-                        ],
-                        [
-                            'value' => 'cnpmjs',
-                            'label' => 'cnpmjs（已过时）',
-                        ],
+                        ]
                     ],
                 ],
                 [

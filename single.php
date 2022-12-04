@@ -74,7 +74,7 @@
                                     <span><?php _e('发表至：', PUOCK) ?></span><?php echo get_post_category_link_exec(true) ?>
                                 </div>
                                 <div>
-                                    <span class="c-sub"><i class="fa-solid fa-calendar-days"></i> <?php pk_get_post_date() ?></span>
+                                    <span class="c-sub"><i class="fa-regular fa-clock"></i> <?php pk_get_post_date() ?></span>
                                 </div>
                             </div>
                         </div>
