@@ -76,34 +76,48 @@ class OptionBasic extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
-                    'id' => 'comment_level',
-                    'label' => '显示评论等级',
-                    'type' => 'switch',
-                    'sdt' => 'false',
-                ],
-                [
-                    'id' => 'comment_mail_notify',
-                    'label' => '评论回复邮件通知',
-                    'type' => 'switch',
-                    'sdt' => 'false',
-                ],
-                [
-                    'id' => 'comment_has_at',
-                    'label' => '评论内容显示@',
-                    'type' => 'switch',
-                    'sdt' => 'false',
-                ],
-                [
-                    'id' => 'comment_show_ua',
-                    'label' => '评论显示系统及浏览器信息',
-                    'type' => 'switch',
-                    'sdt' => true,
-                ],
-                [
-                    'id' => 'comment_show_ip',
-                    'label' => '评论显示IP归属地及运营商',
-                    'type' => 'switch',
-                    'sdt' => true,
+                    'id' => '-',
+                    'type' => 'panel',
+                    'open' => true,
+                    'label' => '评论相关',
+                    'children' => [
+                        [
+                            'id' => 'comment_level',
+                            'label' => '显示评论等级',
+                            'type' => 'switch',
+                            'sdt' => 'false',
+                        ],
+                        [
+                            'id' => 'comment_mail_notify',
+                            'label' => '评论回复邮件通知',
+                            'type' => 'switch',
+                            'sdt' => 'false',
+                        ],
+                        [
+                            'id' => 'comment_has_at',
+                            'label' => '评论内容显示@',
+                            'type' => 'switch',
+                            'sdt' => 'false',
+                        ],
+                        [
+                            'id' => 'comment_show_ua',
+                            'label' => '评论显示系统及浏览器信息',
+                            'type' => 'switch',
+                            'sdt' => true,
+                        ],
+                        [
+                            'id' => 'comment_show_ip',
+                            'label' => '评论显示IP归属地及运营商',
+                            'type' => 'switch',
+                            'sdt' => true,
+                        ],
+                        [
+                            'id' => 'comment_dont_show_owner_ip',
+                            'label' => '不显示站长IP归属地及运营商',
+                            'type' => 'switch',
+                            'sdt' => false,
+                        ],
+                    ]
                 ],
                 [
                     'id' => 'post_poster_open',
