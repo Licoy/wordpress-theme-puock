@@ -48,7 +48,7 @@ function pk_comment_callback($comment, $args, $depth)
         </div>
     </div>
     <div class="content">
-        <div class="content-text t-sm mt10 puock-text" <?php if (!pk_open_show_comment_avatar()) {
+        <div class="content-text t-md mt10 puock-text" <?php if (!pk_open_show_comment_avatar()) {
             echo 'style="margin-left:0"';
         } ?>>
             <?php if (!$author_cat_comment || $is_author): comment_text(); else: ?>
