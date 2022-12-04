@@ -55,6 +55,7 @@
     </div>
 </footer>
 </div>
+<div id="gt-validate-box"></div>
 <?php get_template_part('inc/metas') ?>
 <?php wp_footer(); ?>
 <?php if (!empty(pk_get_option('tj_code_footer', ''))): ?>

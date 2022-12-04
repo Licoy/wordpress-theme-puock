@@ -181,6 +181,9 @@ function pk_init_register_assets()
         if (pk_is_checked('post_poster_open')) {
             wp_enqueue_script('puock-html2canvas', pk_get_static_url() . '/assets/libs/html2canvas.min.js', [], PUOCK_CUR_VER_STR, true);
         }
+        if (pk_get_option('vd_type') === 'gt') {
+            wp_enqueue_script('puock-gt4', pk_get_static_url() . '/assets/libs/gt4.js', [], PUOCK_CUR_VER_STR, true);
+        }
         wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/puock.min.js', array('puock-libs'), PUOCK_CUR_VER_STR, true);
     }
 }

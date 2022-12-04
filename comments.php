@@ -55,7 +55,7 @@
                                 </div>
 
                             <?php endif; ?>
-                            <?php if (pk_is_checked('vd_comment')): ?>
+                            <?php if (pk_is_checked('vd_comment') && pk_get_option('vd_type', 'img') === 'img'): ?>
                                 <div class="col-12 col-sm-3">
                                     <div class="row flex-row justify-content-end">
                                         <div class="col-8 col-sm-7 text-right pl15">
@@ -64,7 +64,7 @@
                                                    autocomplete="off"
                                                    id="comment-vd">
                                         </div>
-                                        <div class="col-4 col-sm-5 pr15">
+                                        <div class="col-4 col-sm-5 pr15" id="comment-captcha-box">
                                             <img class="comment-captcha captcha"
                                                  src="<?php echo pk_captcha_url('comment', 100, 28) ?>"
                                                  alt="验证码">

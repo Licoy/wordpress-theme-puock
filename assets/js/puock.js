@@ -9,6 +9,7 @@ const TYPE_SUCCESS = "success"
 const TYPE_INFO = "info"
 
 class Puock {
+
     data = {
         tag: 'puock',
         params: {
@@ -17,6 +18,8 @@ class Puock {
             is_single: false,
             is_pjax: false,
             vd_comment: false,
+            vd_gt_id: null,
+            vd_type: null,
             main_lazy_img: false,
             link_blank_open: false,
             async_view_id: null,
@@ -27,7 +30,8 @@ class Puock {
             time: 5,
             val: null,
             replyId: null
-        }
+        },
+        instance: {}
     }
 
     // 全局一次加载或注册的事件
@@ -66,6 +70,7 @@ class Puock {
         this.eventPostMainBoxResize()
         this.swiperOnceEvent()
         this.initModalToggle()
+        this.validateInit()
     }
 
     pageInit() {
@@ -222,6 +227,28 @@ class Puock {
             InstantClick.go(url)
         } else {
             window.location.href = url
+        }
+    }
+
+    gt = {
+        validate: (success = undefined) => {
+            this.data.instance.gt_callback = success
+            this.data.instance.gt.showCaptcha();
+        }
+    }
+
+    validateInit() {
+        if (this.data.params.vd_type === 'gt') {
+            initGeetest4({
+                captchaId: this.data.params.vd_gt_id,
+                product: 'bind',
+            }, (captchaObj) => {
+                this.data.instance.gt = captchaObj;
+                captchaObj.onSuccess(() => {
+                    const code = this.data.instance.gt.getValidate();
+                    this.data.instance.gt_callback && this.data.instance.gt_callback(code)
+                })
+            });
         }
     }
 
@@ -694,27 +721,40 @@ class Puock {
                 this.toast('评论信息不能为空', TYPE_WARNING);
                 return;
             }
-            if (this.data.params.vd_comment) {
-                if ($.trim($("#comment-vd").val()) === '') {
-                    this.toast('验证码不能为空', TYPE_WARNING);
-                    return;
-                }
-            }
             if ($.trim($("#comment").val()) === '') {
                 this.toast('评论内容不能为空', TYPE_WARNING);
                 return;
+            }
+            if (this.data.params.vd_comment) {
+                if (this.data.params.vd_type === 'img') {
+                    if ($.trim($("#comment-vd").val()) === '') {
+                        this.toast('验证码不能为空', TYPE_WARNING);
+                        return;
+                    }
+                } else {
+                    this.gt.validate((code) => {
+                        this.commentSubmit(this.ct(e), code)
+                    })
+                    return;
+                }
             }
             this.commentSubmit(this.ct(e))
         })
     }
 
-    commentSubmit(target) {
+    commentSubmit(target, args = {}) {
         let submitUrl = $("#comment-form").attr("action");
         this.commentFormLoadStateChange();
+        const el = $(target);
+        const dataArr = el.serializeArray();
+        const data = {...args};
+        for (let i = 0; i < dataArr.length; i++) {
+            data[dataArr[i].name] = dataArr[i].value;
+        }
         $.ajax({
             url: submitUrl,
-            data: $(target).serialize(),
-            type: $(target).attr('method'),
+            data: jQuery.param(data),
+            type: el.attr('method'),
             success: (data) => {
                 this.toast('评论已提交成功', TYPE_SUCCESS);
                 this.loadCommentCaptchaImage($(".comment-captcha"));

@@ -33,22 +33,29 @@ function pk_comment_ajax()
 
     //是否需要进行验证
     if (pk_is_checked('vd_comment')) {
+        if (pk_get_option('vd_type', 'img') === 'img') {
+            $token = $_REQUEST['comment-vd'];
 
-        $token = $_REQUEST['comment-vd'];
-
-        if (empty($token)) {
-            pk_comment_err('无效验证码，已刷新请重新输入');
-        }
-        $validate_pass = true;
-        pk_session_call(function () use ($token, &$validate_pass) {
-            $session_comment_captcha = $_SESSION['comment_vd'];
-            if (!$session_comment_captcha || $session_comment_captcha == '' || trim($token) != $session_comment_captcha) {
-                $validate_pass = false;
+            if (empty($token)) {
+                pk_comment_err('无效验证码，已刷新请重新输入');
             }
-            unset($_SESSION['comment_vd']);
-        });
-        if (!$validate_pass) {
-            pk_comment_err('验证码不正确', false);
+            $validate_pass = true;
+            pk_session_call(function () use ($token, &$validate_pass) {
+                $session_comment_captcha = $_SESSION['comment_vd'];
+                if (!$session_comment_captcha || $session_comment_captcha == '' || trim($token) != $session_comment_captcha) {
+                    $validate_pass = false;
+                }
+                unset($_SESSION['comment_vd']);
+            });
+            if (!$validate_pass) {
+                pk_comment_err('验证码不正确', false);
+            }
+        } else {
+            try {
+                pk_vd_gt_validate();
+            } catch (Exception $e) {
+                pk_comment_err($e->getMessage());
+            }
         }
     }
 
@@ -116,7 +123,7 @@ function pk_comment_ajax()
     if (empty($comment_content)) pk_comment_err('评论内容不能为空');
 
     // 检查重复评论功能
-    $query_params = [$comment_post_ID,$comment_author];
+    $query_params = [$comment_post_ID, $comment_author];
     $dupe = "SELECT comment_ID FROM $wpdb->comments WHERE comment_post_ID = %d AND ( comment_author = %s ";
     if ($comment_author_email) {
         $dupe .= "OR comment_author_email = %s ";
@@ -124,7 +131,7 @@ function pk_comment_ajax()
     }
     $dupe .= ") AND comment_content = %s LIMIT 1";
     $query_params[] = $comment_content;
-    if ($wpdb->get_var($wpdb->prepare($dupe,$query_params))) {
+    if ($wpdb->get_var($wpdb->prepare($dupe, $query_params))) {
         pk_comment_err('您已经发表过相同的评论了!');
     }
 

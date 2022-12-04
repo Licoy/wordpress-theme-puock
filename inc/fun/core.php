@@ -863,3 +863,35 @@ function pk_get_ip_region_str($ip)
     }
     return $res;
 }
+
+/**
+ * 极验验证码校验
+ * @throws Exception
+ */
+function pk_vd_gt_validate(array $args = null)
+{
+    if ($args == null) {
+        $args = [
+            'lot_number' => $_REQUEST['lot_number'] ?? '',
+            'captcha_output' => $_REQUEST['captcha_output'] ?? '',
+            'captcha_id' => $_REQUEST['captcha_id'] ?? '',
+            'pass_token' => $_REQUEST['pass_token'] ?? '',
+            'gen_time' => $_REQUEST['gen_time'] ?? '',
+        ];
+    }
+    $key = pk_get_option('vd_gt_key');
+    $args['sign_token'] = hash_hmac('sha256', $args['lot_number'], $key);
+    $result = wp_remote_request('https://gcaptcha4.geetest.com/validate?captcha_id=' . $args['captcha_id'], [
+        'method' => 'POST',
+        'body' => $args,
+        'timeout' => 5
+    ]);
+    if (is_wp_error($result)) {
+        throw new Exception('验证行为失败');
+    }
+    $result = json_decode($result['body'], true);
+    if ($result['status'] != 'success' || $result['result'] != 'success') {
+        throw new Exception('验证行为失败: ' . $result['msg'] ?? $result['reason']);
+    }
+    return true;
+}
