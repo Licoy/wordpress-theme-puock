@@ -140,40 +140,51 @@ class Puock {
                     return false;
                 }
             }
-            const url = form.attr("action");
-            const method = form.attr("method");
-            const data = form.serialize();
-            const dataType = "json";
-            const successTip = form.attr("data-success");
-            const errorTip = form.attr("data-error");
-            $.ajax({
-                url, method, data, dataType,
-                success: (res) => {
-                    if (res.code === 0) {
-                        this.toast(res.msg || successTip, TYPE_SUCCESS)
-                        form.trigger("reset")
-                        if (res.data) {
-                            const resData = res.data
-                            if (resData.action) {
-                                setTimeout(() => {
-                                    switch (resData.action) {
-                                        case 'reload':
-                                            this.goUrl(window.location.href)
-                                            break
-                                    }
-                                }, 500)
+            const validateType = form.data("validate");
+            const startSubmit = (args = {}) => {
+                const url = form.attr("action");
+                const method = form.attr("method");
+                const data = this.parseFormData(form, args);
+                const dataType = "json";
+                const successTip = form.attr("data-success");
+                const errorTip = form.attr("data-error");
+                $.ajax({
+                    url, method, data, dataType,
+                    success: (res) => {
+                        if (res.code === 0) {
+                            this.toast(res.msg || successTip, TYPE_SUCCESS)
+                            form.trigger("reset")
+                            if (res.data) {
+                                const resData = res.data
+                                if (resData.action) {
+                                    setTimeout(() => {
+                                        switch (resData.action) {
+                                            case 'reload':
+                                                this.goUrl(window.location.href)
+                                                break
+                                        }
+                                    }, 500)
+                                }
                             }
+                        } else {
+                            this.toast(res.msg || errorTip, TYPE_DANGER)
+                            this.loadCommentCaptchaImage(form, true)
                         }
-                    } else {
-                        this.toast(res.msg || errorTip, TYPE_DANGER)
+                    },
+                    error: (e) => {
+                        this.toast(`请求错误：${e.statusText}`, TYPE_DANGER)
                         this.loadCommentCaptchaImage(form, true)
                     }
-                },
-                error: (e) => {
-                    this.toast(`请求错误：${e.statusText}`, TYPE_DANGER)
-                    this.loadCommentCaptchaImage(form, true)
-                }
-            })
+                })
+            }
+            if (validateType === 'gt') {
+                this.gt.validate((code) => {
+                    startSubmit(code)
+                });
+            } else {
+                startSubmit()
+            }
+            return false;
         })
     }
 
@@ -714,6 +725,15 @@ class Puock {
 
     }
 
+    parseFormData(formEl, args = {}) {
+        const dataArr = formEl.serializeArray();
+        const data = {...args};
+        for (let i = 0; i < dataArr.length; i++) {
+            data[dataArr[i].name] = dataArr[i].value;
+        }
+        return jQuery.param(data);
+    }
+
     eventCommentPreSubmit() {
         $(document).on('submit', '#comment-form', (e) => {
             e.preventDefault();
@@ -746,14 +766,9 @@ class Puock {
         let submitUrl = $("#comment-form").attr("action");
         this.commentFormLoadStateChange();
         const el = $(target);
-        const dataArr = el.serializeArray();
-        const data = {...args};
-        for (let i = 0; i < dataArr.length; i++) {
-            data[dataArr[i].name] = dataArr[i].value;
-        }
         $.ajax({
             url: submitUrl,
-            data: jQuery.param(data),
+            data: this.parseFormData(el, args),
             type: el.attr('method'),
             success: (data) => {
                 this.toast('评论已提交成功', TYPE_SUCCESS);

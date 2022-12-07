@@ -17,7 +17,7 @@ class OptionExtend extends BaseOptionItem
                     'label' => 'Puock官方小程序支持',
                     'type' => 'switch',
                     'value' => defined('PUOCK_MP_VERSION'),
-                    'tips' => "Puock官方小程序支持，此选项安装小程序插件后会自动开启，如需关闭请在小程序插件中关闭",
+                    'tips' => "Puock官方小程序支持，此选项安装小程序插件后会自动开启，如需关闭请在小程序插件中关闭 （<a target='_blank' href='https://licoy.cn/puock-mp.html'>了解小程序？</a>）",
                     'disabled' => true,
                 ],
                 [

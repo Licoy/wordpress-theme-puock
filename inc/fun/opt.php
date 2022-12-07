@@ -316,6 +316,10 @@ function pk_get_comment_ua_os_icon($name)
         case "Weixin":
             $res_class = "fa-weixin";
             break;
+        case "Puock MiniProgram":
+            $prefix = "fa-regular ";
+            $res_class = "fa-circle-dot pk-breathe";
+            break;
         default:
             $prefix = "fa ";
             $res_class = "fa-tablet";
