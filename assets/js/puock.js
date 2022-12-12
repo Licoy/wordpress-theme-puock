@@ -891,8 +891,8 @@ class Puock {
     }
 
     getRemoteHtmlNode(url, callback) {
-        const loading = layer.load(1, {
-            shade: [0.1, '#fff']
+        const loading = layer.load(0, {
+            shade: [0.6, '#000']
         });
         $.get(url, {}, (res) => {
             layer.close(loading)
