@@ -14,7 +14,7 @@
             <?php if(pk_is_checked('post_poster_open')):?>
             <div class="circle-button puock-bg text-center pk-modal-toggle"
                  data-id="post-poster-<?php echo $post->ID ?>"
-                 title="海报" data-no-title data-transparent
+                 title="海报" data-no-title data-no-padding
                  data-url="<?php echo pk_ajax_url('pk_poster', ['id' => $post->ID]) ?>"
             ><i class="fa-regular fa-images"></i></div>
             <?php endif; ?>

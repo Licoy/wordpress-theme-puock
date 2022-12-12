@@ -90,12 +90,31 @@ blockquote {
   background-color: var(--pk-bg-box);
 }
 
-.layui-layer-page{
-  color:var(--pk-c-font) !important;
+.layui-layer-page {
+  color: var(--pk-c-font) !important;
   background-color: var(--pk-bg-box) !important;
-  .layui-layer-title{
-    color:var(--pk-c-font) !important;
+  border-radius: 6px !important;
+
+  .layui-layer-title {
+    color: var(--pk-c-font) !important;
     border-bottom-color: var(--pk-c-border) !important;
+  }
+
+  .layui-layer-close1 {
+    background: none !important;
+    font-family: var(--fa-style-family,"Font Awesome 6 Free");
+    font-weight: var(--fa-style,900);
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display,inline-block);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    font-size: 15px;
+    transition: all .3s;
+    &:before {
+      content: "\f00d";
+    }
   }
 }
 
@@ -578,6 +597,7 @@ body.pre-mac pre {
     border: none;
   }
 }
+
 .modal-backdrop, .mobile-menu-backdrop {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);

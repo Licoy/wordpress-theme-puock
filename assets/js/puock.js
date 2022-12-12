@@ -890,60 +890,39 @@ class Puock {
         })
     }
 
+    getRemoteHtmlNode(url, callback) {
+        const loading = layer.load(1, {
+            shade: [0.1, '#fff']
+        });
+        $.get(url, {}, (res) => {
+            layer.close(loading)
+            callback(res)
+        }).error((e) => {
+            console.error(e)
+            layer.close(loading)
+            this.toast("获取内容节点数据失败", TYPE_DANGER)
+        })
+    }
 
     initModalToggle() {
         $(document).on("click", ".pk-modal-toggle", (e) => {
             const el = $(this.ct(e));
-            let id = el.attr("data-id");
-            const temp = el.attr("data-temp") ? el.attr("data-temp") === 'true' : false;
             let classStr = '';
-            classStr += el.attr("data-no-title") !== undefined ? ' modal-no-title' : '';
-            classStr += el.attr("data-no-padding") !== undefined ? ' modal-no-padding' : '';
-            classStr += el.attr("data-transparent") !== undefined ? ' modal-transparent' : '';
-            if (temp) {
-                id += Math.ceil(Math.random() * 10000);
-            }
-            let target = $("#" + id);
-            if (target.length === 0) {
-                const title = el.attr("title") || el.attr("data-title") || '提示';
-                const url = el.attr("data-url");
-                let html = `
-                <div class="modal fade ${classStr}" id="${id}" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title puock-text">${title}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true"><i class="fa fa-close t-md"></i></span>
-                                </button>
-                            </div>
-                            <div class="modal-body puock-text t-md">
-                                <div class="text-center"><div class="spinner-grow text-primary" role="status"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `
-                $("body").append(html);
-                target = $("#" + id);
-                target.modal("show");
-                if (url) {
-                    setTimeout(() => {
-                        const bodyEl = target.find(".modal-body")
-                        $.get(url, (res) => {
-                            bodyEl.html(res);
-                            this.lazyLoadInit(bodyEl);
-                        }).error((e) => {
-                            console.error(e)
-                            bodyEl.text("加载失败：" + (e.responseText || e.message || '未知错误'));
-                        })
-                    }, 100);
-                } else {
-                    target.find(".modal-body").text("无效加载页面")
-                }
-            } else {
-                target.modal("show");
-            }
+            const noTitle = el.attr("data-no-title") !== undefined;
+            const noPadding = el.attr("data-no-padding") !== undefined;
+            // classStr += el.attr("data-transparent") !== undefined ? ' modal-transparent' : '';
+            const title = el.attr("title") || el.attr("data-title") || '提示';
+            const url = el.attr("data-url");
+            console.log(noPadding, noTitle)
+            this.getRemoteHtmlNode(url, (res) => {
+                layer.open({
+                    type: 1,
+                    title: noTitle ? false : title,
+                    shade: 0.6,
+                    content: `<div style='${noPadding ? '' : 'padding: 20px'}' class='fs14'>${res}</div>`,
+                    shadeClose: true,
+                })
+            })
         })
     }
 

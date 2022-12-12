@@ -171,6 +171,7 @@ function pk_init_register_assets()
         wp_enqueue_style('puock', pk_get_static_url() . '/assets/dist/style/style.min.css', ['puock-libs'], PUOCK_CUR_VER_STR);
         wp_enqueue_script('puock-jquery', pk_get_static_url() . '/assets/libs/jquery.min.js', [], PUOCK_CUR_VER_STR);
         wp_enqueue_script('puock-libs', pk_get_static_url() . '/assets/dist/js/libs.min.js', [], PUOCK_CUR_VER_STR, true);
+        wp_enqueue_script('puock-layer', pk_get_static_url() . '/assets/libs/layer/layer.js', [], PUOCK_CUR_VER_STR, true);
         if (pk_is_checked('strawberry_icon')) {
             wp_enqueue_style('puock-strawberry-icon', pk_get_static_url() . '/assets/libs/strawberry-icon.css', [], PUOCK_CUR_VER_STR);
         }
