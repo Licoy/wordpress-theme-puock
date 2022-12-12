@@ -15,8 +15,8 @@ function pk_oauth_quick_buttons($echo = false, $redirect = '')
     $oauth_list = pk_oauth_list();
     $out = "<div class='d-flex justify-content-center wh100'>";
     foreach ($oauth_list as $key => $val) {
-        if (pk_is_checked('oauth_' . $key)) {
-            $url = pk_oauth_url_page_ajax($key, $redirect);
+        if (!isset($val['system']) || !$val['system'] || pk_is_checked('oauth_' . $key)) {
+            $url = $val['url'] ?? pk_oauth_url_page_ajax($key, $redirect);
             $icon = isset($val['icon']) ? "<i class='{$val['icon']}'></i>" : '';
             $color_type = $val['color_type'] ?? 'primary';
             $out .= "<a class='btn btn-{$color_type} btn-ssm mr5 mb5'

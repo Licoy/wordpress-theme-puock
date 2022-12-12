@@ -133,11 +133,14 @@ a {
 
 .--each-btn(@i:1) when (@i =< length(@colors)) {
   @item: extract(@colors, @i);
-  .btn-@{item} {
+  .btn-@{item},.btn-@{item}:hover {
     background-color: ~"var(--pk-c-@{item})" !important;
     color: var(--pk-c-light);
     border-color: ~"var(--pk-c-@{item})" !important;
   }
+  .btn-@{item}:hover:hover{
+     opacity: .8;
+   }
   .--each-btn(@i+1);
 }
 

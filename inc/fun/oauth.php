@@ -29,7 +29,8 @@ function pk_oauth_list($user = null)
             'name_field' => 'nickname',
             'icon'=>'fa-brands fa-qq',
             'color_type'=>'danger',
-            'secret_field' => 'key'
+            'secret_field' => 'key',
+            'system' => true,
         ],
         'github' => [
             'label' => 'GitHub',
@@ -37,7 +38,8 @@ function pk_oauth_list($user = null)
             'class' => \Yurun\OAuthLogin\Github\OAuth2::class,
             'icon'=>'fa-brands fa-github',
             'color_type'=>'primary',
-            'name_field' => 'name'
+            'name_field' => 'name',
+            'system' => true,
         ],
         'weibo' => [
             'label' => '微博',
@@ -46,7 +48,8 @@ function pk_oauth_list($user = null)
             'name_field' => 'name',
             'icon'=>'fa-brands fa-weibo',
             'color_type'=>'danger',
-            'id_field' => 'key'
+            'id_field' => 'key',
+            'system' => true,
         ],
         'gitee' => [
             'label' => '码云',
@@ -55,6 +58,7 @@ function pk_oauth_list($user = null)
             'icon'=>'fa-solid fa-globe',
             'color_type'=>'info',
             'name_field' => 'name',
+            'system' => true,
         ],
     ];
     return apply_filters('pk_oauth_list', $list);
