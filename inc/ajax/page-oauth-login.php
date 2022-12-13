@@ -13,7 +13,7 @@ function pk_oauth_quick_page_callback()
 function pk_oauth_quick_buttons($echo = false, $redirect = '')
 {
     $oauth_list = pk_oauth_list();
-    $out = "<div class='d-flex justify-content-center wh100'>";
+    $out = "<div class='d-flex justify-content-center wh100 flex-wrap'>";
     foreach ($oauth_list as $key => $val) {
         if (!isset($val['system']) || !$val['system'] || pk_is_checked('oauth_' . $key)) {
             $url = $val['url'] ?? pk_oauth_url_page_ajax($key, $redirect);

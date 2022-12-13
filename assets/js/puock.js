@@ -148,9 +148,11 @@ class Puock {
                 const dataType = "json";
                 const successTip = form.attr("data-success");
                 const errorTip = form.attr("data-error");
+                const loading = this.startLoading()
                 $.ajax({
                     url, method, data, dataType,
                     success: (res) => {
+                        this.stopLoading(loading)
                         if (res.code === 0) {
                             this.toast(res.msg || successTip, TYPE_SUCCESS)
                             form.trigger("reset")
@@ -172,6 +174,7 @@ class Puock {
                         }
                     },
                     error: (e) => {
+                        this.stopLoading(loading)
                         this.toast(`请求错误：${e.statusText}`, TYPE_DANGER)
                         this.loadCommentCaptchaImage(form, true)
                     }
@@ -890,16 +893,24 @@ class Puock {
         })
     }
 
-    getRemoteHtmlNode(url, callback) {
-        const loading = layer.load(0, {
+    startLoading() {
+        return layer.load(0, {
             shade: [0.6, '#000']
-        });
+        })
+    }
+
+    stopLoading(id = null) {
+        layer.close(id)
+    }
+
+    getRemoteHtmlNode(url, callback) {
+        const loading = this.startLoading()
         $.get(url, {}, (res) => {
-            layer.close(loading)
+            this.stopLoading(loading)
             callback(res)
         }).error((e) => {
             console.error(e)
-            layer.close(loading)
+            this.stopLoading(loading)
             this.toast("获取内容节点数据失败", TYPE_DANGER)
         })
     }
@@ -907,13 +918,10 @@ class Puock {
     initModalToggle() {
         $(document).on("click", ".pk-modal-toggle", (e) => {
             const el = $(this.ct(e));
-            let classStr = '';
             const noTitle = el.attr("data-no-title") !== undefined;
             const noPadding = el.attr("data-no-padding") !== undefined;
-            // classStr += el.attr("data-transparent") !== undefined ? ' modal-transparent' : '';
             const title = el.attr("title") || el.attr("data-title") || '提示';
             const url = el.attr("data-url");
-            console.log(noPadding, noTitle)
             this.getRemoteHtmlNode(url, (res) => {
                 layer.open({
                     type: 1,
