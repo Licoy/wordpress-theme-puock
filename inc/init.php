@@ -136,6 +136,8 @@ add_theme_support('custom-background');
 
 add_action('init', array(\Puock\Theme\classes\meta\PuockAbsMeta::class, 'load'));
 
+$pk_right_slug = 'PGRpdiBjbGFzcz0iZnMxMiBtdDEwIGMtc3ViIj4NCiAgICAgICAgICAgICAgICA8c3Bhbj4NCiAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9ImZhLWJyYW5kcyBmYS13b3JkcHJlc3MiPjwvaT4mbmJzcDtUaGVtZSBieSA8YSB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9ImMtc3ViIiB0aXRsZT0iUHVvY2sgdjw/cGhwIGVjaG8gUFVPQ0tfQ1VSX1ZFUl9TVFI7ID8+Ig0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9MaWNveS93b3JkcHJlc3MtdGhlbWUtcHVvY2siPlB1b2NrPC9hPg0KICAgICAgICAgICAgICAgIDwvc3Bhbj4NCiAgICAgICAgICAgIDwvZGl2Pg==';
+
 function pk_env_check()
 {
     $php_version = phpversion();

@@ -86,6 +86,16 @@ function get_path_query($query)
     return $params;
 }
 
+function pk_theme_footer_copyright($content)
+{
+    global $pk_right_slug;
+    $user_custom = pk_get_option('footer_info');
+    $user_custom.= base64_decode($pk_right_slug);
+    return $user_custom;
+}
+
+add_filter('pk_footer_info', 'pk_theme_footer_copyright', 10, 1);
+
 //GrAvatar头像源
 $gravatar_urls = array('www.gravatar.com', '0.gravatar.com', '1.gravatar.com', '2.gravatar.com', 'secure.gravatar.com', 'cn.gravatar.com');
 function cn_avatar($avatar)

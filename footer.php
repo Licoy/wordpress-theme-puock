@@ -42,14 +42,7 @@
     </div>
     <div class="mt20 text-center t-md">
         <div class="info">
-            <?php echo pk_get_option('footer_info') ?>
-            <?php /* 请遵守开源协议，保留主题底部（此处）的署名，以支持本主题更好的发展，谢谢合作 */ ?>
-            <div class="fs12 mt10 c-sub">
-                <span>
-                    <i class="fa-brands fa-wordpress"></i>&nbsp;Theme by <a target="_blank" class="c-sub" title="Puock v<?php echo PUOCK_CUR_VER_STR; ?>"
-                                                                            href="https://github.com/Licoy/wordpress-theme-puock">Puock</a>
-                </span>
-            </div>
+            <?php echo apply_filters('pk_footer_info','') ?>
         </div>
     </div>
     </div>

@@ -213,6 +213,17 @@ function get_total_views()
 }
 
 
+function pk_check_right_md5()
+{
+    global $pk_right_slug;
+    if (empty($pk_right_slug) || md5($pk_right_slug) != '64bb43badd85759ca2de9c90a007c211') {
+        wp_die(base64_decode('UGxlYXNlIGZvbGxvdyB0aGUgb3BlbiBzb3VyY2UgcnVsZXMgYW5kIGRvIG5vdCBjaGFuZ2Ugb3IgZGVsZXRlIHRoZSBib3R0b20gY29weXJpZ2h0IQ=='));
+    }
+}
+
+add_action('init', 'pk_check_right_md5');
+
+
 /**
  * 获取查看最多的文章
  * @param $days N天内
