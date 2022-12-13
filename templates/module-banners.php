@@ -13,6 +13,7 @@ if (pk_is_checked('index_carousel')):
             <div class="swiper index-banner-swiper">
                 <div class="swiper-wrapper">
                     <?php
+                    $index_carousel_hide_title = pk_is_checked('index_carousel_hide_title');
                     foreach ($index_carousel_list as $item):
                         if (($item['hide'] ?? false) || empty($item['img'])) continue
                         ?>
@@ -24,7 +25,7 @@ if (pk_is_checked('index_carousel')):
                                 <img class="w-100" src="<?php echo $item['img']; ?>"
                                      alt="<?php echo $item['title'] ?? ''; ?>">
 
-                                <?php if (isset($item['title']) && !empty($item['title'])): ?>
+                                <?php if (!$index_carousel_hide_title && isset($item['title']) && !empty($item['title'])): ?>
                                     <div class="swiper-title">
                                         <div class="swiper-title-text"><?php echo $item['title'] ?></div>
                                     </div>

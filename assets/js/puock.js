@@ -70,6 +70,7 @@ class Puock {
         this.eventPostMainBoxResize()
         this.swiperOnceEvent()
         this.initModalToggle()
+        layer.config({shade:0.5})
     }
 
     pageInit() {
@@ -895,7 +896,7 @@ class Puock {
 
     startLoading() {
         return layer.load(0, {
-            shade: [0.6, '#000']
+            shade: [0.5, '#000']
         })
     }
 
@@ -926,7 +927,6 @@ class Puock {
                 layer.open({
                     type: 1,
                     title: noTitle ? false : title,
-                    shade: 0.6,
                     content: `<div style='${noPadding ? '' : 'padding: 20px'}' class='fs14'>${res}</div>`,
                     shadeClose: true,
                 })

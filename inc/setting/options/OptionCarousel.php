@@ -52,6 +52,12 @@ class OptionCarousel extends BaseOptionItem
                             'sdt' => true,
                         ],
                         [
+                            'id' => 'index_carousel_hide_title',
+                            'label' => '隐藏幻灯片标题',
+                            'type' => 'switch',
+                            'sdt' => false,
+                        ],
+                        [
                             'id' => 'index_carousel_loop',
                             'label' => '首页幻灯片循环播放',
                             'type' => 'switch',

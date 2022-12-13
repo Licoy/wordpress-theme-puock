@@ -90,7 +90,7 @@ blockquote {
   background-color: var(--pk-bg-box);
 }
 
-.layui-layer-page {
+.layui-layer {
   color: var(--pk-c-font) !important;
   background-color: var(--pk-bg-box) !important;
   border-radius: 6px !important;
@@ -102,23 +102,44 @@ blockquote {
 
   .layui-layer-close1 {
     background: none !important;
-    font-family: var(--fa-style-family,"Font Awesome 6 Free");
-    font-weight: var(--fa-style,900);
+    font-family: var(--fa-style-family, "Font Awesome 6 Free");
+    font-weight: var(--fa-style, 900);
     -webkit-font-smoothing: antialiased;
-    display: var(--fa-display,inline-block);
+    display: var(--fa-display, inline-block);
     font-style: normal;
     font-variant: normal;
     line-height: 1;
     text-rendering: auto;
-    font-size: 15px;
+    font-size: 16px;
     transition: all .3s;
+
     &:before {
       content: "\f00d";
     }
   }
+
+  .layui-layer-btn {
+    font-size: 14px;
+    .layui-layer-btn0, .layui-layer-btn0:hover {
+      background-color: var(--pk-c-primary) !important;
+      color: var(--pk-c-light);
+      border: 1px solid var(--pk-c-primary) !important;
+    }
+    [class^=layui-layer-btn]{
+      padding: 0 10px;
+      transition: all .3s;
+      border-radius: 4px;
+      &:not(.layui-layer-btn0):hover{
+        color: var(--pk-c-dark) !important;
+        opacity: .6;
+      }
+    }
+  }
 }
-.layui-layer-loading{
-  .layui-layer-content{
+
+.layui-layer-loading {
+  background-color: transparent !important;
+  .layui-layer-content {
     height: 60px !important;
   }
 }
