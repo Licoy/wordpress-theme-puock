@@ -606,6 +606,11 @@ body.pre-mac pre {
         .fs16;
       }
 
+      & > button {
+        border: none;
+        background: transparent;
+      }
+
       .close {
         i {
           display: inline-block;
@@ -640,7 +645,7 @@ a:hover {
 }
 
 .btn:hover,
-.btn:focus, .form-control:hover, .form-control:focus, button:focus, .abc-checkbox label:focus {
+.btn:focus, .form-control:hover, .form-control:focus, button:focus, .abc-checkbox label:focus,.form-check-input:focus {
   outline: none;
   box-shadow: none;
 }
@@ -1420,7 +1425,7 @@ a:hover {
 #search {
   position: fixed;
   top: 90px;
-  z-index: 1041;
+  z-index: 9999;
   width: 100%;
 
   #search-main {

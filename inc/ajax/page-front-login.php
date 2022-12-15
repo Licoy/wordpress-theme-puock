@@ -235,8 +235,9 @@ function pk_front_login_page_callback()
                     </div>
                 </div>
             <?php endif; ?>
-            <div class="mb15">
-                <label><input type="checkbox" name="remember"> 记住我</label>
+            <div class="mb15 form-check form-switch">
+                <input class="form-check-input" name="remember" type="checkbox" role="switch" id="front-login-remember-me">
+                <label class="form-check-label" for="front-login-remember-me"> 记住我</label>
             </div>
             <div class="mb15 d-flex justify-content-center wh100">
                 <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-right-to-bracket"></i> 立即登录

@@ -6,10 +6,10 @@
                 <i class="fa-regular fa-thumbs-up t-md"></i>&nbsp;<span
                         class="t-sm"><?php echo get_post_meta($post->ID, 'puock_like', true) ?></span></div>
             <?php if (pk_is_checked('post_reward')): ?>
-                <div class="circle-button puock-bg text-center" data-toggle="modal" data-target="#rewardModal">
+                <div class="circle-button puock-bg text-center" data-bs-toggle="modal" data-bs-target="#rewardModal">
                     <span>赏</span></div>
             <?php endif; ?>
-            <div class="circle-button puock-bg text-center" data-toggle="modal" data-target="#shareModal"><i
+            <div class="circle-button puock-bg text-center" data-bs-toggle="modal" data-bs-target="#shareModal"><i
                         class="fa fa-share-from-square t-md"></i></div>
             <?php if(pk_is_checked('post_poster_open')):?>
             <div class="circle-button puock-bg text-center pk-modal-toggle"

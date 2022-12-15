@@ -70,7 +70,7 @@ class Puock {
         this.eventPostMainBoxResize()
         this.swiperOnceEvent()
         this.initModalToggle()
-        layer.config({shade:0.5})
+        layer.config({shade: 0.5})
     }
 
     pageInit() {
@@ -396,7 +396,9 @@ class Puock {
         if (this.data.params.use_post_menu) {
             this.generatePostMenuHTML()
         }
-        $('[data-toggle="tooltip"]').tooltip({placement: 'auto', trigger: 'hover'});
+        [...document.querySelectorAll('[data-toggle="tooltip"]')].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl, {
+            placement: 'bottom', trigger: 'hover'
+        }))
         $(".entry-content").viewer({
             navbar: false,
             url: this.data.params.main_lazy_img ? 'data-src' : 'src'
@@ -1096,8 +1098,13 @@ class Puock {
 
 }
 
-$(() => {
-    window.Puock = new Puock()
-    window.Puock.onceInit()
-})
+$(
+    () => {
+        window
+            .Puock = new Puock()
+        window
+            .Puock
+            .onceInit()
+    }
+)
 
