@@ -120,16 +120,19 @@ blockquote {
 
   .layui-layer-btn {
     font-size: 14px;
+
     .layui-layer-btn0, .layui-layer-btn0:hover {
       background-color: var(--pk-c-primary) !important;
       color: var(--pk-c-light);
       border: 1px solid var(--pk-c-primary) !important;
     }
-    [class^=layui-layer-btn]{
+
+    [class^=layui-layer-btn] {
       padding: 0 10px;
       transition: all .3s;
       border-radius: 4px;
-      &:not(.layui-layer-btn0):hover{
+
+      &:not(.layui-layer-btn0):hover {
         color: var(--pk-c-dark) !important;
         opacity: .6;
       }
@@ -139,6 +142,7 @@ blockquote {
 
 .layui-layer-loading {
   background-color: transparent !important;
+
   .layui-layer-content {
     height: 60px !important;
   }
@@ -624,11 +628,11 @@ body.pre-mac pre {
   }
 }
 
-.modal-backdrop, .mobile-menu-backdrop {
+.modal-backdrop, .mobile-menu-backdrop, .layui-layer-shade {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   opacity: 1 !important;
-  background-color: rgba(0, 0, 0, 0.53);
+  background-color: rgba(0, 0, 0, 0.53) !important;
 }
 
 a:hover {
@@ -2139,7 +2143,7 @@ a:hover {
     border-radius: var(--pk-g-box-radius);
 
     .cover {
-      img{
+      img {
         width: 100%;
         height: auto;
       }
