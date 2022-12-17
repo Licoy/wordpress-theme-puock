@@ -53,7 +53,7 @@
                                                    title="<?php the_title() ?>" <?php pk_link_target() ?>
                                                    href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                             </div>
-                                            <div class="col-lg-3 text-right d-none d-lg-block">
+                                            <div class="col-lg-3 text-end d-none d-lg-block">
                                                 <span class="c-sub t-sm"><?php pk_get_post_date() ?></span>
                                             </div>
                                         </div>

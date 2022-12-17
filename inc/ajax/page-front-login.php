@@ -200,161 +200,169 @@ function pk_front_login_page_callback()
     $open_register = get_option('users_can_register') == 1;
     $only_quick_oauth = pk_is_checked('only_quick_oauth');
     $validate_type = pk_get_option('vd_type', 'img');
+    ?>
+    <div class="min-width-modal">
+        <?php
+        if (!$only_quick_oauth):
+            ?>
 
-    if (!$only_quick_oauth):
-        ?>
-
-        <form id="front-login-form" action="<?php echo pk_ajax_url('pk_front_login_exec'); ?>" method="post"
-              class="ajax-form" data-validate="<?php echo $validate_type; ?>">
-            <div class="mb15">
-                <label for="_front_login_username" class="form-label">用户名/邮箱</label>
-                <input type="text" name="username" class="form-control form-control-sm" id="_front_login_username"
-                       data-required
-                       placeholder="请输入用户名或邮箱">
-            </div>
-            <div class="mb15">
-                <label for="_front_login_password" class="form-label">密码</label>
-                <input type="password" name="password" class="form-control form-control-sm" data-required
-                       id="_front_login_password"
-                       placeholder="请输入密码">
-            </div>
-            <?php if ($validate_type === 'img'): ?>
+            <form id="front-login-form" action="<?php echo pk_ajax_url('pk_front_login_exec'); ?>" method="post"
+                  class="ajax-form" data-validate="<?php echo $validate_type; ?>">
                 <div class="mb15">
-                    <label for="_front_login_vd" class="form-label">验证码</label>
-                    <div class="row flex-row justify-content-end">
-                        <div class="col-8 col-sm-7 text-right pl15">
-                            <input type="text" data-required placeholder="请输入验证码" maxlength="4"
-                                   class="form-control form-control-sm t-sm" name="vd"
-                                   autocomplete="off"
-                                   id="_front_login_vd">
-                        </div>
-                        <div class="col-4 col-sm-5 pr15">
-                            <img class="captcha lazyload" data-src="<?php echo pk_captcha_url('login', 100, 28) ?>"
-                                 alt="验证码">
+                    <label for="_front_login_username" class="form-label">用户名/邮箱</label>
+                    <input type="text" name="username" class="form-control form-control-sm" id="_front_login_username"
+                           data-required
+                           placeholder="请输入用户名或邮箱">
+                </div>
+                <div class="mb15">
+                    <label for="_front_login_password" class="form-label">密码</label>
+                    <input type="password" name="password" class="form-control form-control-sm" data-required
+                           id="_front_login_password"
+                           placeholder="请输入密码">
+                </div>
+                <?php if ($validate_type === 'img'): ?>
+                    <div class="mb15">
+                        <label for="_front_login_vd" class="form-label">验证码</label>
+                        <div class="row flex-row justify-content-end">
+                            <div class="col-8 col-sm-7 text-end pl15">
+                                <input type="text" data-required placeholder="请输入验证码" maxlength="4"
+                                       class="form-control form-control-sm t-sm" name="vd"
+                                       autocomplete="off"
+                                       id="_front_login_vd">
+                            </div>
+                            <div class="col-4 col-sm-5 pr15">
+                                <img class="captcha lazyload" data-src="<?php echo pk_captcha_url('login', 100, 28) ?>"
+                                     alt="验证码">
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endif; ?>
-            <div class="mb15 form-check form-switch">
-                <input class="form-check-input" name="remember" type="checkbox" role="switch" id="front-login-remember-me">
-                <label class="form-check-label" for="front-login-remember-me"> 记住我</label>
-            </div>
-            <div class="mb15 d-flex justify-content-center wh100">
-                <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-right-to-bracket"></i> 立即登录
-                </button>
-            </div>
-            <div class="mb15 d-flex justify-content-between align-content-center fs12">
-                <?php if ($open_register): ?>
-                    <a class="c-sub t-hover-primary toggle-el-show-hide" data-target="#front-register-form"
-                       data-modal-title="注册"
-                       data-self="#front-login-form" href="javascript:void(0)">还没有账号？立即注册</a>
                 <?php endif; ?>
-                <?php if (pk_is_checked('quick_login_forget_password')): ?>
-                    <a class="c-sub t-hover-primary toggle-el-show-hide" data-target="#front-forget-password-form"
-                       data-modal-title="找回密码"
-                       data-self="#front-login-form" href="javascript:void(0)">忘记密码？立即找回密码</a>
+                <div class="mb15 form-check form-switch">
+                    <input class="form-check-input" name="remember" type="checkbox" role="switch"
+                           id="front-login-remember-me">
+                    <label class="form-check-label" for="front-login-remember-me"> 记住我</label>
+                </div>
+                <div class="mb15 d-flex justify-content-center wh100">
+                    <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-right-to-bracket"></i>
+                        立即登录
+                    </button>
+                </div>
+                <div class="mb15 d-flex justify-content-between align-content-center fs12">
+                    <?php if ($open_register): ?>
+                        <a class="c-sub t-hover-primary toggle-el-show-hide" data-target="#front-register-form"
+                           data-modal-title="注册"
+                           data-self="#front-login-form" href="javascript:void(0)">还没有账号？立即注册</a>
+                    <?php endif; ?>
+                    <?php if (pk_is_checked('quick_login_forget_password')): ?>
+                        <a class="c-sub t-hover-primary toggle-el-show-hide" data-target="#front-forget-password-form"
+                           data-modal-title="找回密码"
+                           data-self="#front-login-form" href="javascript:void(0)">忘记密码？立即找回密码</a>
+                    <?php endif; ?>
+                </div>
+            </form>
+
+            <?php if ($open_register): ?>
+            <form id="front-register-form" action="<?php echo pk_ajax_url('pk_front_register_exec'); ?>" method="post"
+                  class="d-none ajax-form" data-validate="<?php echo $validate_type; ?>">
+                <div class="mb15">
+                    <label for="_front_register_username" class="form-label">用户名</label>
+                    <input type="text" name="username" class="form-control form-control-sm" data-required
+                           id="_front_register_username" placeholder="请输入最少5～10位的用户名">
+                </div>
+                <div class="mb15">
+                    <label for="_front_register_email" class="form-label">邮箱</label>
+                    <input type="email" name="email" class="form-control form-control-sm" data-required
+                           id="_front_register_email" placeholder="请输入邮箱">
+                </div>
+                <div class="mb15">
+                    <label for="_front_register_password" class="form-label">密码</label>
+                    <input type="password" name="password" class="form-control form-control-sm" data-required
+                           id="_front_register_password" placeholder="请输入6～18位字符的密码">
+                </div>
+                <?php if ($validate_type === 'img'): ?>
+                    <div class="mb15">
+                        <label for="_front_register_vd" class="form-label">验证码</label>
+                        <div class="row flex-row justify-content-end">
+                            <div class="col-8 col-sm-7 text-end pl15">
+                                <input type="text" data-required placeholder="请输入验证码" maxlength="4"
+                                       class="form-control form-control-sm t-sm" name="vd"
+                                       autocomplete="off"
+                                       id="_front_register_vd">
+                            </div>
+                            <div class="col-4 col-sm-5 pr15">
+                                <img class="captcha lazyload"
+                                     data-src="<?php echo pk_captcha_url('register', 100, 28) ?>"
+                                     alt="验证码">
+                            </div>
+                        </div>
+                    </div>
                 <?php endif; ?>
-            </div>
-        </form>
-
-        <?php if ($open_register): ?>
-        <form id="front-register-form" action="<?php echo pk_ajax_url('pk_front_register_exec'); ?>" method="post"
-              class="d-none ajax-form" data-validate="<?php echo $validate_type; ?>">
-            <div class="mb15">
-                <label for="_front_register_username" class="form-label">用户名</label>
-                <input type="text" name="username" class="form-control form-control-sm" data-required
-                       id="_front_register_username" placeholder="请输入最少5～10位的用户名">
-            </div>
-            <div class="mb15">
-                <label for="_front_register_email" class="form-label">邮箱</label>
-                <input type="email" name="email" class="form-control form-control-sm" data-required
-                       id="_front_register_email" placeholder="请输入邮箱">
-            </div>
-            <div class="mb15">
-                <label for="_front_register_password" class="form-label">密码</label>
-                <input type="password" name="password" class="form-control form-control-sm" data-required
-                       id="_front_register_password" placeholder="请输入6～18位字符的密码">
-            </div>
-            <?php if ($validate_type === 'img'): ?>
+                <div class="mb15 d-flex justify-content-center wh100">
+                    <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-right-to-bracket"></i>
+                        立即注册
+                    </button>
+                </div>
+                <div class="mb15 d-flex justify-content-end fs12">
+                    <a class="c-sub t-hover-primary toggle-el-show-hide" href="javascript:void(0)"
+                       data-self="#front-register-form" data-target="#front-login-form"
+                       data-modal-title="登入">已有账号？立即登录</a>
+                </div>
+            </form>
+        <?php endif; ?>
+            <?php if (pk_is_checked('quick_login_forget_password')): ?>
+            <form id="front-forget-password-form" action="<?php echo pk_ajax_url('pk_front_forget_password_exec'); ?>"
+                  method="post" class="d-none ajax-form" data-validate="<?php echo $validate_type; ?>">
                 <div class="mb15">
-                    <label for="_front_register_vd" class="form-label">验证码</label>
-                    <div class="row flex-row justify-content-end">
-                        <div class="col-8 col-sm-7 text-right pl15">
-                            <input type="text" data-required placeholder="请输入验证码" maxlength="4"
-                                   class="form-control form-control-sm t-sm" name="vd"
-                                   autocomplete="off"
-                                   id="_front_register_vd">
-                        </div>
-                        <div class="col-4 col-sm-5 pr15">
-                            <img class="captcha lazyload" data-src="<?php echo pk_captcha_url('register', 100, 28) ?>"
-                                 alt="验证码">
+                    <label for="_front_forget_password_email" class="form-label">邮箱</label>
+                    <input type="email" name="email" class="form-control form-control-sm" data-required
+                           id="_front_forget_password_email" placeholder="请输入邮箱">
+                </div>
+                <div class="mb15">
+                    <label for="_front_forget_password_password" class="form-label">新密码</label>
+                    <input type="password" name="password" class="form-control form-control-sm" data-required
+                           id="_front_forget_password_password" placeholder="请输入6～18位字符的新密码">
+                </div>
+                <div class="mb15">
+                    <label for="_front_forget_password_password_re" class="form-label">重复新密码</label>
+                    <input type="password" name="re-password" class="form-control form-control-sm" data-required
+                           id="_front_forget_password_password_re" placeholder="请重复输入6～18位字符的新密码">
+                </div>
+                <?php if ($validate_type === 'img'): ?>
+                    <div class="mb15">
+                        <label for="_front_forget_password_vd" class="form-label">验证码</label>
+                        <div class="row flex-row justify-content-end">
+                            <div class="col-8 col-sm-7 text-end pl15">
+                                <input type="text" data-required placeholder="请输入验证码" maxlength="4"
+                                       class="form-control form-control-sm t-sm" name="vd"
+                                       autocomplete="off"
+                                       id="_front_forget_password_vd">
+                            </div>
+                            <div class="col-4 col-sm-5 pr15">
+                                <img class="captcha lazyload"
+                                     data-src="<?php echo pk_captcha_url('forget-password', 100, 28) ?>"
+                                     alt="验证码">
+                            </div>
                         </div>
                     </div>
+                <?php endif; ?>
+                <div class="mb15 d-flex justify-content-center wh100">
+                    <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-paper-plane"></i> 发送邮件
+                    </button>
                 </div>
-            <?php endif; ?>
-            <div class="mb15 d-flex justify-content-center wh100">
-                <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-right-to-bracket"></i> 立即注册
-                </button>
-            </div>
-            <div class="mb15 d-flex justify-content-end fs12">
-                <a class="c-sub t-hover-primary toggle-el-show-hide" href="javascript:void(0)"
-                   data-self="#front-register-form" data-target="#front-login-form" data-modal-title="登入">已有账号？立即登录</a>
-            </div>
-        </form>
-    <?php endif; ?>
-        <?php if (pk_is_checked('quick_login_forget_password')): ?>
-        <form id="front-forget-password-form" action="<?php echo pk_ajax_url('pk_front_forget_password_exec'); ?>"
-              method="post" class="d-none ajax-form" data-validate="<?php echo $validate_type; ?>">
-            <div class="mb15">
-                <label for="_front_forget_password_email" class="form-label">邮箱</label>
-                <input type="email" name="email" class="form-control form-control-sm" data-required
-                       id="_front_forget_password_email" placeholder="请输入邮箱">
-            </div>
-            <div class="mb15">
-                <label for="_front_forget_password_password" class="form-label">新密码</label>
-                <input type="password" name="password" class="form-control form-control-sm" data-required
-                       id="_front_forget_password_password" placeholder="请输入6～18位字符的新密码">
-            </div>
-            <div class="mb15">
-                <label for="_front_forget_password_password_re" class="form-label">重复新密码</label>
-                <input type="password" name="re-password" class="form-control form-control-sm" data-required
-                       id="_front_forget_password_password_re" placeholder="请重复输入6～18位字符的新密码">
-            </div>
-            <?php if ($validate_type === 'img'): ?>
-                <div class="mb15">
-                    <label for="_front_forget_password_vd" class="form-label">验证码</label>
-                    <div class="row flex-row justify-content-end">
-                        <div class="col-8 col-sm-7 text-right pl15">
-                            <input type="text" data-required placeholder="请输入验证码" maxlength="4"
-                                   class="form-control form-control-sm t-sm" name="vd"
-                                   autocomplete="off"
-                                   id="_front_forget_password_vd">
-                        </div>
-                        <div class="col-4 col-sm-5 pr15">
-                            <img class="captcha lazyload"
-                                 data-src="<?php echo pk_captcha_url('forget-password', 100, 28) ?>"
-                                 alt="验证码">
-                        </div>
-                    </div>
+                <div class="mb15 d-flex justify-content-end fs12">
+                    <a class="c-sub t-hover-primary toggle-el-show-hide" href="javascript:void(0)"
+                       data-self="#front-forget-password-form" data-target="#front-login-form"
+                       data-modal-title="登入">想起密码？立即登录</a>
                 </div>
-            <?php endif; ?>
-            <div class="mb15 d-flex justify-content-center wh100">
-                <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-paper-plane"></i> 发送邮件
-                </button>
-            </div>
-            <div class="mb15 d-flex justify-content-end fs12">
-                <a class="c-sub t-hover-primary toggle-el-show-hide" href="javascript:void(0)"
-                   data-self="#front-forget-password-form" data-target="#front-login-form"
-                   data-modal-title="登入">想起密码？立即登录</a>
-            </div>
-        </form>
-    <?php endif;endif; ?>
+            </form>
+        <?php endif;endif; ?>
 
-    <div class="mb15">
-        <p class="c-sub text-center fs12 t-separator">第三方登录</p>
-        <?php pk_oauth_quick_buttons(true, $redirect) ?>
+        <div class="mb15">
+            <p class="c-sub text-center fs12 t-separator">第三方登录</p>
+            <?php pk_oauth_quick_buttons(true, $redirect) ?>
+        </div>
+
     </div>
-
     <?php
 
     wp_die();

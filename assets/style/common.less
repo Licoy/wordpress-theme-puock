@@ -125,6 +125,36 @@ a {
   margin-left: 0.25rem !important;
 }
 
+.ml-2 {
+  margin-left: 0.5rem !important;
+}
+
+.ml-3 {
+  margin-left: 1rem !important;
+}
+
+.mr-1 {
+  margin-right: 0.25rem !important;
+}
+
+.mr-2 {
+  margin-right: 0.5rem !important;
+}
+
+.mr-3 {
+  margin-right: 1rem !important;
+}
+
+.min-width-modal {
+  min-width: 420px;
+}
+
+@media (max-width: 576px) {
+  .min-width-modal {
+    min-width: 300px;
+  }
+}
+
 .--dynamic-distance(@pre,@attr,@step,@start,@end) when (@start<=@end) {
   .--dynamic-distance(@pre, @attr, @step, @start + @step, @end);
   .@{pre}@{start} {

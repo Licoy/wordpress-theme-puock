@@ -94,7 +94,7 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
     <div id="mobile-menu" class="d-none">
         <div class="menus">
             <div class="p-block">
-                <div class="text-right"><i class="fa fa-close t-xl puock-link mobile-menu-close ta3"></i></div>
+                <div class="text-end"><i class="fa fa-close t-xl puock-link mobile-menu-close ta3"></i></div>
                 <nav>
                     <?php echo pk_get_main_menu(true) ?>
                 </nav>

@@ -926,12 +926,14 @@ class Puock {
             const title = el.attr("title") || el.attr("data-title") || '提示';
             const url = el.attr("data-url");
             this.getRemoteHtmlNode(url, (res) => {
+                const id = "pk-modal-" + (new Date()).getTime();
                 layer.open({
                     type: 1,
                     title: noTitle ? false : title,
-                    content: `<div style='${noPadding ? '' : 'padding: 20px'}' class='fs14'>${res}</div>`,
+                    content: `<div id="${id}" style='${noPadding ? '' : 'padding: 20px'}' class='fs14'>${res}</div>`,
                     shadeClose: true,
                 })
+                this.lazyLoadInit($("#" + id));
             })
         })
     }

@@ -58,7 +58,7 @@
                             <?php if (pk_is_checked('vd_comment') && pk_get_option('vd_type', 'img') === 'img'): ?>
                                 <div class="col-12 col-sm-3">
                                     <div class="row flex-row justify-content-end">
-                                        <div class="col-8 col-sm-7 text-right pl15">
+                                        <div class="col-8 col-sm-7 text-end pl15">
                                             <input type="text" value="" placeholder="验证码" maxlength="4"
                                                    class="form-control form-control-sm t-sm" name="comment-vd"
                                                    autocomplete="off"
