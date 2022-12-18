@@ -121,30 +121,6 @@ a {
   text-align: right;
 }
 
-.ml-1 {
-  margin-left: 0.25rem !important;
-}
-
-.ml-2 {
-  margin-left: 0.5rem !important;
-}
-
-.ml-3 {
-  margin-left: 1rem !important;
-}
-
-.mr-1 {
-  margin-right: 0.25rem !important;
-}
-
-.mr-2 {
-  margin-right: 0.5rem !important;
-}
-
-.mr-3 {
-  margin-right: 1rem !important;
-}
-
 .min-width-modal {
   min-width: 420px;
 }
@@ -159,6 +135,21 @@ a {
   .--dynamic-distance(@pre, @attr, @step, @start + @step, @end);
   .@{pre}@{start} {
       @{attr}: (@start * 1px);
+  }
+}
+
+.--dynamic-rem-distance(@pre,@attr) {
+  .@{pre}-0 {
+      @{attr}: 0;
+  }
+  .@{pre}-1 {
+      @{attr}: 0.25rem;
+  }
+  .@{pre}-2 {
+      @{attr}: 0.5rem;
+  }
+  .@{pre}-3 {
+      @{attr}: 1rem;
   }
 }
 
@@ -222,6 +213,16 @@ a {
 .--dynamic-distance(fs, font-size, 2, 12, 20);
 .--dynamic-distance(p, padding, 10, 10, 20);
 .--dynamic-distance(pt, padding-top, 10, 10, 20);
+.--dynamic-rem-distance(p, padding);
+.--dynamic-rem-distance(pt, padding-top);
+.--dynamic-rem-distance(pb, padding-bottom);
+.--dynamic-rem-distance(pl, padding-left);
+.--dynamic-rem-distance(pr, padding-right);
+.--dynamic-rem-distance(m, margin);
+.--dynamic-rem-distance(mt, margin-top);
+.--dynamic-rem-distance(mb, margin-bottom);
+.--dynamic-rem-distance(ml, margin-left);
+.--dynamic-rem-distance(mr, margin-right);
 .--each-arr-color(@colors, bg, background-color, ' !important');
 .--each-arr-color(@colors, border, border-color, ' !important');
 .--each-arr-color(@colors, text, color, ' !important');
