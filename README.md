@@ -56,9 +56,6 @@
 
 - WordPress `5.0+`
 - PHP `7.4+`
-  - 必须开启扩展
-      - `fileinfo`: 用于获取文件的MIME类型
-      - `exif`: 用于获取图片的EXIF信息
 - MySQL `5.6+`
 
 ## 版本迭代

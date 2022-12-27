@@ -146,7 +146,7 @@ function pk_env_check()
     if (version_compare($php_version, $last_version, '<')) {
         $content[] = '<p>您正在使用过时的PHP版本<code>' . $php_version . '</code>，Puock主题需要PHP版本大于<code>' . $last_version . '</code>才能完整使用全部功能，请升级PHP版本。</p>';
     }
-    $need_ext = ['fileinfo', 'exif', 'gd'];
+    $need_ext = ['gd'];
     $not_ext = [];
     foreach ($need_ext as $ext) {
         if (!extension_loaded($ext)) {
@@ -174,6 +174,7 @@ function pk_init_register_assets()
         wp_enqueue_script('puock-jquery', pk_get_static_url() . '/assets/libs/jquery.min.js', [], PUOCK_CUR_VER_STR);
         wp_enqueue_script('puock-libs', pk_get_static_url() . '/assets/dist/js/libs.min.js', [], PUOCK_CUR_VER_STR, true);
         wp_enqueue_script('puock-layer', pk_get_static_url() . '/assets/libs/layer/layer.js', [], PUOCK_CUR_VER_STR, true);
+        wp_enqueue_script('puock-spark-md5', pk_get_static_url() . '/assets/libs/spark-md5.min.js', [], PUOCK_CUR_VER_STR, true);
         if (pk_is_checked('strawberry_icon')) {
             wp_enqueue_style('puock-strawberry-icon', pk_get_static_url() . '/assets/libs/strawberry-icon.css', [], PUOCK_CUR_VER_STR);
         }

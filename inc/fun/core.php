@@ -622,18 +622,18 @@ function pk_get_main_menu($mobile = false)
     if (is_user_logged_in()) {
         $user = wp_get_current_user();
         $avatar = get_avatar_url($user->user_email);
-        $out .= '<li><a data-no-instant data-toggle="tooltip" title="用户中心" href="' . get_edit_profile_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
+        $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="用户中心" href="' . get_edit_profile_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
         if (pk_is_checked('open_quick_login')) {
             $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url($wp->request)]);
-            $out .= '<li><a data-no-instant data-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-id="front-login" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
+            $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-once-load="true" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
         }
     }
     if (!$mobile) {
         if (pk_is_checked('theme_mode_s')) {
-            $out .= '<li><a class="colorMode" data-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="fa-regular fa-' . (pk_theme_light() ? 'sun' : 'moon') . '"></i></a></li>';
+            $out .= '<li><a class="colorMode" data-bs-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="fa-regular fa-' . (pk_theme_light() ? 'sun' : 'moon') . '"></i></a></li>';
         }
-        $out .= '<li><a class="search-modal-btn" data-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>';
+        $out .= '<li><a class="search-modal-btn" data-bs-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>';
     }
     $out .= '</ul>';
     return $out;
@@ -693,7 +693,7 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
         }
         if (count($menu->children) > 0) {
             if ($mobile) {
-                $out .= '<a href="#menu-sub-' . $menu->ID . '" data-toggle="collapse"><i class="fa fa-chevron-down t-sm ml-1 menu-sub-icon"></i></a>';
+                $out .= '<a href="#menu-sub-' . $menu->ID . '" data-bs-toggle="collapse"><i class="fa fa-chevron-down t-sm ml-1 menu-sub-icon"></i></a>';
             } else {
                 $out .= '<i class="fa fa-chevron-down t-sm ml-1 menu-sub-icon"></i>';
             }

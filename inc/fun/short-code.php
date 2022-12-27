@@ -314,7 +314,7 @@ function pk_sc_collapse($attr, $content = null)
     extract(shortcode_atts(array(
         'title' => null,
     ), $attr));
-    $out = '<div class="pk-sc-collapse"><a class="btn btn-primary btn-sm" data-toggle="collapse" href="#' . $scId . '" role="button"
+    $out = '<div class="pk-sc-collapse"><a class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#' . $scId . '" role="button"
         aria-expanded="false" aria-controls="' . $scId . '"><i class="fa fa-angle-up"></i>&nbsp;' . $title . '</a></div>';
     $out .= '<div class="collapse" id="' . $scId . '">' . $content . '</div>';
     return $out;

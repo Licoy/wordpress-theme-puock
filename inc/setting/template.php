@@ -24,8 +24,14 @@
     window.puockSettingId = "puock-theme-options-global";
     window.puockSettingMetaInfo = {
         version: "V<?php echo PUOCK_CUR_VER_STR ?>",
+        colors: {
+            primaryColor: '#ae4af7',
+            primaryColorHover: '#903eca',
+            primaryColorPressed: '#8912e6',
+            primaryColorSuppl: '#a537fb',
+        },
         description:'简单/方便/高颜值',
-        tag: {text: '主题', color: 'rgb(134,12,220)'},
+        tag: {text: '主题', color: 'rgb(155,39,238)'},
         github: "https://github.com/Licoy/wordpress-theme-puock",
         qq: "https://licoy.cn/go/puock-update.php?r=qq_qun",
         license: "GPL V3",

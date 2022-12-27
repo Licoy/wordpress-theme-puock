@@ -36,9 +36,6 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 
 - WordPress `5.0+`
 - PHP `7.4+`
-    - extension must be enabled
-        - `fileinfo`: the MIME type used to get the file
-        - `exif`: used to get the EXIF information of the image
 - MySQL `5.6+`
 
 ## Version iteration

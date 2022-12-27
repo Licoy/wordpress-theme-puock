@@ -8,15 +8,9 @@
     <meta http-equiv='content-language' content='<?php echo get_locale() ?>'>
     <link rel="shortcut icon" href="<?php echo pk_get_option('favicon') ?>">
     <link rel="apple-touch-icon" href="<?php echo pk_get_option('favicon') ?>"/>
-    <?php get_template_part('inc/seo') ?>
+    <?php if(pk_is_checked('seo_open',true)) get_template_part('inc/seo') ?>
     <?php wp_head(); ?>
     <?php get_template_part('templates/css', 'grey') ?>
-<!--    <link rel="stylesheet" data-no-instant-->
-<!--          href="--><?php //echo pk_get_static_url(); ?><!--/assets/dist/style/libs.min.css?ver=--><?php //echo PUOCK_CUR_VER_STR ?><!--">-->
-<!--    <link rel="stylesheet" data-no-instant-->
-<!--          href="--><?php //echo pk_get_static_url(); ?><!--/assets/dist/style/style.min.css?ver=--><?php //echo PUOCK_CUR_VER_STR ?><!--">-->
-<!--    <script data-no-instant-->
-<!--            src="--><?php //echo pk_get_static_url(); ?><!--/assets/libs/jquery.min.js?ver=--><?php //echo PUOCK_CUR_VER_STR ?><!--"></script>-->
     <?php get_template_part('templates/css', 'custom') ?>
     <?php echo pk_head_style_var() ?>
     <?php if (!empty(pk_get_option('tj_code_header', ''))): ?>

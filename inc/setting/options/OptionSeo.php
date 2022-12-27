@@ -56,14 +56,12 @@ class OptionSeo extends BaseOptionItem{
                     'label' => '不显示分类链接中的"category"',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'showRefId' => 'seo_open',
                 ],
                 [
                     'id' => 'open_baidu_submit',
                     'label' => '发布文章主动推送至百度',
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'showRefId' => 'seo_open',
                 ],
                 [
                     'id' => 'baidu_submit_url',

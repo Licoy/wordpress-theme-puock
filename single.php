@@ -41,6 +41,7 @@
                     <div class="entry-content mt20">
                         <div class="content-main puock-text <?php pk_checked_out('post_content_indent', 'p-indent') ?>" id="post-main-content">
                             <?php the_content(); ?>
+                            <?php do_action('pk_post_content_footer'); ?>
                         </div>
                         <?php
                         $link_pages = wp_link_pages(array(
@@ -59,7 +60,7 @@
                                 </ul>
                             </div>
                         <?php endif; ?>
-                        <div class="t-separator c-sub t-sm mt30">正文结束</div>
+                        <div class="t-separator c-sub t-sm mt30">正文完</div>
                         <?php if (pk_is_checked('post_foot_qrcode_open')): ?>
                             <div class="post-foot-qrcode">
                                 <div class="title"><?php echo pk_get_option('post_foot_qrcode_title', '无说明') ?></div>
@@ -137,10 +138,6 @@
         </div>
         <?php get_template_part('ad/global', 'bottom') ?>
     </div>
-
-    <?php get_template_part('templates/module', 'smiley') ?>
-    <?php get_template_part('templates/module', 'reward') ?>
-    <?php get_template_part('templates/post', 'share') ?>
 
 <?php endwhile; ?>
 

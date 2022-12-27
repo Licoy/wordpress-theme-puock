@@ -18,6 +18,7 @@
                         <div>
                             <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
                                     data-id="front-login"
+                                    data-once-load="true"
                                     title="快捷登录"
                                     data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
                                 <i
@@ -89,6 +90,7 @@
                                 <?php if (!is_user_logged_in() && pk_oauth_platform_count() > 0): ?>
                                     <div class="d-inline-block">
                                         <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
+                                                data-once-load="true"
                                                 data-id="front-login"
                                                 title="快捷登录"
                                                 data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
@@ -101,8 +103,10 @@
                             <div>
                                 <button id="comment-cancel" type="button"
                                         class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUOCK) ?></button>
-                                <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm" type="button"><i
-                                            class="fa-regular fa-face-smile t-md"></i></button>
+                                <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm pk-modal-toggle" type="button"
+                                        title="表情" data-once-load="true"
+                                        data-url="<?php echo pk_ajax_url('pk_ajax_dialog_smiley') ?>">
+                                    <i class="fa-regular fa-face-smile t-md"></i></button>
                                 <button id="comment-submit" type="submit" class="btn btn-primary btn-ssm"><i
                                             class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('发布评论', PUOCK) ?>
                                 </button>

@@ -28,6 +28,7 @@
                         </div>
                         <div class="mt20 puock-text entry-content">
                             <?php the_content() ?>
+                            <?php do_action('pk_page_content_footer'); ?>
                             <?php
                             $link_pages = wp_link_pages(array(
                                 'before'=> '<li>',
@@ -46,6 +47,7 @@
                                 </div>
                             <?php endif; ?>
                         </div>
+                        <?php get_template_part('templates/post', 'actions') ?>
                     </div>
                     <?php dynamic_sidebar('page_content_comment_top'); ?>
                     <?php comments_template() ?>
@@ -53,10 +55,9 @@
                 </div>
                 <?php get_sidebar() ?>
             </div>
+            <?php get_template_part('ad/global', 'bottom') ?>
         </div>
     <?php endwhile; ?>
 </div>
-
-<?php get_template_part('templates/module', 'smiley') ?>
 
 <?php get_footer() ?>

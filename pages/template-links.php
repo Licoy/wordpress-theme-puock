@@ -47,7 +47,7 @@ get_header();
                                 <?php foreach ($group['links'] as $link): ?>
                                 <a class="link-item a-link col-lg-3 col-md-4 col-sm-6 col-6" href="<?php echo $use_theme_link_forward ? pk_go_link($link->link_url,$link->link_name) : $link->link_url; ?>" target="<?php echo $link->link_target ?>"
                                     rel="<?php echo $link->link_rel ?>" title="<?php echo empty($link->link_notes) ? $link->link_name : $link->link_notes ?>"
-                                   data-toggle="tooltip">
+                                   data-bs-toggle="tooltip">
                                     <div class="clearfix puock-bg">
                                         <img class="md-avatar" src="<?php echo pk_get_favicon_url($link->link_url) ?>" alt="<?php echo $link->link_name ?>">
                                         <div class="info">
