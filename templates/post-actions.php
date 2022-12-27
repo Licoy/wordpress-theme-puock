@@ -6,9 +6,9 @@
                 <i class="fa-regular fa-thumbs-up t-md"></i>&nbsp;<span
                         class="t-sm"><?php echo get_post_meta($post->ID, 'puock_like', true) ?></span></div>
             <?php if (pk_is_checked('post_reward')): ?>
-                <div class="circle-button puock-bg text-center pk-modal-toggle" title="分享" data-once-load="true"
+                <div class="circle-button puock-bg text-center pk-modal-toggle" title="赞赏" data-once-load="true"
                      data-url="<?php echo pk_ajax_url('pk_ajax_dialog_reward') ?>">
-                    <span>赏</span></div>
+                    <strong>赏</strong></div>
             <?php endif; ?>
             <div class="circle-button puock-bg text-center pk-modal-toggle"
                  title="分享" data-once-load="true"
@@ -20,9 +20,6 @@
                      data-url="<?php echo pk_ajax_url('pk_poster', ['id' => $post->ID]) ?>"
                 ><i class="fa-regular fa-images"></i></div>
             <?php endif; ?>
-            <div class="circle-button puock-bg text-center pk-copy" data-cp-title="文章链接"
-                 data-cp-val="<?php echo get_permalink() ?>"><i
-                        class="fa fa-copy t-md"></i></div>
             <div class="ls">
                 <div class="circle-button puock-bg text-center post-menu-toggle post-menus-box"><i
                             class="fa fa-bars t-md"></i></div>

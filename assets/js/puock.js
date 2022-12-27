@@ -44,7 +44,7 @@ class Puock {
         $(document).on("click", "#return-top-bottom>div", (e) => {
             const to = $(this.ct(e)).attr("data-to");
             const scroll_val = to === 'top' ? 0 : window.document.body.clientHeight;
-            $('html,body').animate({scrollTop: scroll_val}, 800)
+            $('html,body').stop().animate({scrollTop: scroll_val}, 50)
         });
         $(document).on("click", ".colorMode", () => {
             this.modeChange(null, true);
@@ -331,10 +331,10 @@ class Puock {
         $(document).on("click", ".pk-menu-to", (e) => {
             const to = $(this.ct(e)).attr("href");
             const headerHeight = $("#header").innerHeight();
-            $("html, body").animate({
+            $("html, body").stop().animate({
                 scrollTop: ($(to).offset().top - headerHeight - 10) + "px"
             }, {
-                duration: 500,
+                duration: 50,
                 easing: "swing"
             });
             return false;
@@ -695,9 +695,9 @@ class Puock {
         });
     }
 
-    gotoCommentArea(speed = 800) {
+    gotoCommentArea(speed = 50) {
         const top = $("#comments").offset().top - $("#header").height() - 10;
-        $('html,body').animate({scrollTop: top}, speed);
+        $('html,body').stop().animate({scrollTop: top}, speed);
         this.lazyLoadInit()
     }
 
@@ -713,7 +713,7 @@ class Puock {
             let href = $(this.ct(e)).attr("href");
             this.pushAjaxCommentHistoryState(href);
             postCommentsEl.html(" ");
-            this.gotoCommentArea(200);
+            this.gotoCommentArea();
             loadBox.removeClass('d-none');
             $.post(href, {}, (data) => {
                 postCommentsEl.html($(data).find("#post-comments"));
