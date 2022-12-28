@@ -41,10 +41,18 @@ class Puock {
         $(document).on("click", ".fancybox", () => {
             return false;
         });
-        $(document).on("click", "#return-top-bottom>div", (e) => {
-            const to = $(this.ct(e)).attr("data-to");
-            const scroll_val = to === 'top' ? 0 : window.document.body.clientHeight;
-            $('html,body').stop().animate({scrollTop: scroll_val}, 50)
+        $(document).on("click", "#rb-float-actions>div", (e) => {
+            const el = $(this.ct(e));
+            const to = el.data("to");
+            if (to) {
+                const scroll_val = to === 'top' ? 0 : window.document.body.clientHeight;
+                $('html,body').stop().animate({scrollTop: scroll_val}, 50)
+                return;
+            }
+            const toArea = el.data("to-area");
+            if (toArea) {
+                this.gotoArea(toArea)
+            }
         });
         $(document).on("click", ".colorMode", () => {
             this.modeChange(null, true);
@@ -72,6 +80,9 @@ class Puock {
         this.swiperOnceEvent()
         this.initModalToggle()
         layer.config({shade: 0.5})
+        console.log("\n %c Puock Theme %c https://github.com/Licoy/wordpress-theme-puock \n\n",
+            "color:#f1ab0e;background:#030307;padding:5px 0;border-top-left-radius:8px;border-bottom-left-radius:8px",
+            "background:#aa80ff;padding:5px 0;border-top-right-radius:8px;border-bottom-right-radius:8px");
     }
 
     pageInit() {
@@ -695,10 +706,9 @@ class Puock {
         });
     }
 
-    gotoCommentArea(speed = 50) {
-        const top = $("#comments").offset().top - $("#header").height() - 10;
+    gotoArea(el, speed = 50) {
+        const top = $(el).offset().top - $("#header").height() - 10;
         $('html,body').stop().animate({scrollTop: top}, speed);
-        this.lazyLoadInit()
     }
 
     pushAjaxCommentHistoryState(href) {
@@ -713,13 +723,13 @@ class Puock {
             let href = $(this.ct(e)).attr("href");
             this.pushAjaxCommentHistoryState(href);
             postCommentsEl.html(" ");
-            this.gotoCommentArea();
+            this.gotoArea("#comments");
             loadBox.removeClass('d-none');
             $.post(href, {}, (data) => {
                 postCommentsEl.html($(data).find("#post-comments"));
                 loadBox.addClass('d-none');
                 this.initCodeHighlight(false);
-                this.gotoCommentArea()
+                this.lazyLoadInit(postCommentsEl);
             }).error(() => {
                 location = href;
             });

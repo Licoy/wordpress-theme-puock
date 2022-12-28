@@ -1729,18 +1729,21 @@ a:hover {
 }
 
 //返回顶部，返回底部
-#return-top-bottom {
+#rb-float-actions {
   position: fixed;
   right: 10px;
   bottom: 50px;
 
   .p-block {
+    .--pk-wh(34px, 34px);
     .primary-hover();
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    padding: 4px 8px;
     margin-bottom: 0;
 
-    &:first-child {
+    &:not(:last-child) {
       margin-bottom: 5px;
     }
   }

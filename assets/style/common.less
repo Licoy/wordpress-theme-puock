@@ -131,6 +131,11 @@ a {
   }
 }
 
+.--pk-wh(@width, @height) {
+  width: @width;
+  height: @height;
+}
+
 .--dynamic-distance(@pre,@attr,@step,@start,@end) when (@start<=@end) {
   .--dynamic-distance(@pre, @attr, @step, @start + @step, @end);
   .@{pre}@{start} {
@@ -526,4 +531,16 @@ a {
     padding: 3px 6px;
     font-size: 12px;
   }
+}
+
+.pk-round {
+  border-radius: 50%;
+}
+
+.pk-border-1 {
+  border: 1px solid var(--pk-c-border);
+}
+
+.pk-border-2 {
+  border: 2px solid var(--pk-c-border);
 }

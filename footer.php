@@ -15,7 +15,8 @@
 </div>
 <?php if (pk_is_checked('use_post_menu')) get_template_part('templates/module', 'menus') ?>
 <!--返回顶部和底部-->
-<div id="return-top-bottom">
+<div id="rb-float-actions">
+    <?php echo apply_filters('pk_rb_float_actions','') ?>
     <div data-to="top" class="p-block"><i class="fa fa-arrow-up puock-text"></i></div>
     <div data-to="bottom" class="p-block"><i class="fa fa-arrow-down puock-text"></i></div>
 </div>

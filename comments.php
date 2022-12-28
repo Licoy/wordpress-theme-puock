@@ -1,5 +1,8 @@
 <?php if (get_comments_number() == 0 && !comments_open() || pk_post_comment_is_closed()):echo ''; else: ?>
     <?php get_template_part('ad/comment', 'top') ?>
+<?php add_filter('pk_rb_float_actions',function ($content){
+        return $content.'<div data-to-area="#comments" class="p-block"><i class="fa-regular fa-comments puock-text"></i></div>';
+    }) ?>
     <div class="p-block" id="comments">
         <div>
             <span class="t-lg border-bottom border-primary puock-text pb-2"><i

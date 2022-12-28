@@ -28,7 +28,7 @@ function pk_comment_callback($comment, $args, $depth)
             </div>
         <?php endif; ?>
         <div class="<?php if (pk_open_show_comment_avatar()) {
-            echo 'ml-3';
+            echo 'ml-2';
         } ?> two-info">
             <div class="puock-text ta3b">
                 <span class="t-md puock-links"><?php pk_comment_author_url() ?></span>
