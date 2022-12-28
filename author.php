@@ -19,7 +19,7 @@
         <div class="row row-cols-1 mt15">
             <div class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12
             <?php pk_open_box_animated('animated fadeInLeft') ?> ">
-                <div class="data">
+                <div class="author-tab-data">
                     <div class="data-header">
                         <div class="item cur">
                             文章 <span class="c-sub fs12"><?php echo count_user_posts(get_the_author_meta('ID')) ?></span>

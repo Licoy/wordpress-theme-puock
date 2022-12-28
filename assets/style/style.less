@@ -1892,7 +1892,7 @@ a:hover {
   margin-bottom: 15px;
 
   @avatar-wh:150px;
-  .bg {
+  &>.bg {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     height: 280px;
@@ -1910,13 +1910,13 @@ a:hover {
       }
     }
   }
-  .info{
+  &>.info{
     padding-left: @avatar-wh + 30px;
     padding-top: var(--pk-g-basic-distance);
     height: 100px;
     background-color: var(--pk-bg-box);
   }
-  .data{
+  .author-tab-data{
     background-color: var(--pk-bg-box);
     padding: var(--pk-g-basic-distance);
     .data-header{
@@ -1942,8 +1942,8 @@ a:hover {
       }
     }
     .data-content{
-      .posts{
-        .post-item{
+      #posts{
+        .post-item,.post-item-card-box{
           box-shadow: none !important;
         }
       }
