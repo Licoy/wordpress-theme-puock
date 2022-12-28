@@ -845,7 +845,7 @@ class puockTagHitokoto extends puockWidgetBase {
         $this->get_common_widget_header($instance); ?>
         <div class="widget-puock-hitokoto" data-api="<?php echo $api; ?>">
             <div class="t puock-text">
-                <div class="text-center"><div class="spinner-grow text-primary" role="status"></div></div>
+                <?php echo pk_skeleton() ?>
             </div>
             <div class="fb d-none">-「<span class="f"></span>」</div>
         </div>

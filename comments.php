@@ -121,9 +121,7 @@
         <?php endif; ?>
         <?php if (pk_is_checked('comment_ajax')): ?>
             <div id="comment-ajax-load" class="text-center mt20 d-none">
-                <div class="spinner-grow text-primary" role="status">
-                    <span class="sr-only"><?php _e('载入中...', PUOCK) ?></span>
-                </div>
+                <?php echo pk_skeleton('comment',3) ?>
             </div>
         <?php endif; ?>
         <div id="post-comments">

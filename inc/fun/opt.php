@@ -90,7 +90,7 @@ function pk_theme_footer_copyright($content)
 {
     global $pk_right_slug;
     $user_custom = pk_get_option('footer_info');
-    $user_custom.= base64_decode($pk_right_slug);
+    $user_custom .= base64_decode($pk_right_slug);
     return $user_custom;
 }
 
@@ -487,4 +487,24 @@ add_filter('excerpt_more', 'pk_get_excerpt_more_filter');
 function pk_get_client_ip()
 {
     return preg_replace('/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR']);
+}
+
+function pk_skeleton($type = 'default', $line = 1)
+{
+    switch ($type) {
+        case 'comment':
+        {
+            $out = '<div class="pk-skeleton _comment"><div class="_h"><div class="_avatar"></div>
+                <div class="_info"><div class="_name"></div><div class="_date"></div></div></div><div class="_text"><div></div><div></div><div></div></div></div>';
+            break;
+        }
+        default:
+        {
+            $out = '<div class="pk-skeleton _default"><div></div><div></div><div></div><div></div></div>';
+        }
+    }
+    if($line > 1){
+        $out = str_repeat($out, $line);
+    }
+    return $out;
 }
