@@ -381,15 +381,15 @@ if (pk_get_option('gravatar_url', 'wp') != 'wp') {
 function pk_comment_author_url($comment_ID = 0)
 {
     global $comment;
-    $target = '';
+    $attr = '';
     if (!empty($comment) && $comment->user_id != 0) {
         $url = get_author_posts_url($comment->user_id);
     } else {
         $url = get_comment_author_url($comment_ID);
-        $target = "target='_blank'";
+        $attr = "target='_blank' rel='external nofollow'";
     }
     $author = get_comment_author($comment_ID);
-    echo empty($url) ? $author : "<a ".$target." href='" . pk_go_link($url) . "' rel='external nofollow' class='url'>$author</a>";
+    echo empty($url) ? $author : "<a ".$attr." href='" . pk_go_link($url) . "' class='url'>$author</a>";
 }
 
 //评论回复通知
