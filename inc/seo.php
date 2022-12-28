@@ -20,7 +20,7 @@ if (isset($other_page_title)) { ?>
 <?php } else if (is_day()) { ?><title><?php the_time('Y年m月d日'); ?>
     的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
 <?php } else if (is_author()) { ?><title><?php the_author(); ?>
-    发表的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
+    <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
 <?php } else if (is_category()) { ?>
     <title><?php single_cat_title(); ?><?php echo $pkSeoPageInfo . $titleConn . $blog_name ?> </title>
 <?php } else if (is_tag()) { ?>

@@ -595,16 +595,16 @@ class Puock {
             emailText = this.localstorageToggle("comment_email"),
             urlText = this.localstorageToggle("comment_url");
         if (authorText != null && emailText != null) {
-            $("#author").val(authorText);
-            $("#email").val(emailText);
-            $("#url").val(urlText);
+            $("#comment_author").val(authorText);
+            $("#comment_email").val(emailText);
+            $("#comment_url").val(urlText);
         }
     }
 
     setCommentInfo() {
-        this.localstorageToggle("comment_author", $("#author").val());
-        this.localstorageToggle("comment_email", $("#email").val());
-        this.localstorageToggle("comment_url", $("#url").val());
+        this.localstorageToggle("comment_author", $("#comment_author").val());
+        this.localstorageToggle("comment_email", $("#comment_email").val());
+        this.localstorageToggle("comment_url", $("#comment_url").val());
     }
 
     asyncCacheViews() {
@@ -750,7 +750,7 @@ class Puock {
     eventCommentPreSubmit() {
         $(document).on('submit', '#comment-form', (e) => {
             e.preventDefault();
-            if ($("#comment-logged").val() === '0' && ($.trim($("#author").val()) === '' || $.trim($("#email").val()) === '')) {
+            if ($("#comment-logged").val() === '0' && ($.trim($("#comment_author").val()) === '' || $.trim($("#comment_email").val()) === '')) {
                 this.toast('评论信息不能为空', TYPE_WARNING);
                 return;
             }

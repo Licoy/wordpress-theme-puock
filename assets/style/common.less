@@ -78,6 +78,13 @@ a {
   }
 }
 
+.primary-text-hover() {
+  .ta3-fun();
+  &:hover {
+    color: var(--pk-c-primary);
+  }
+}
+
 .primary-hover {
   .ta3-fun();
   cursor: pointer;
@@ -543,4 +550,20 @@ a {
 
 .pk-border-2 {
   border: 2px solid var(--pk-c-border);
+}
+
+.--pk-after-bottom-border(@h:0px,@border-height:3px){
+  &:after {
+    .ta3-fun();
+    content: " ";
+    position: absolute;
+    width: 100%;
+    top: @h - @border-height;
+    left: 0;
+    background: var(--pk-c-primary);
+    height: @border-height;
+    border-radius: 2px;
+    opacity: 0;
+  }
+
 }

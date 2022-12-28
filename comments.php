@@ -42,17 +42,17 @@
                             <?php $commentInfoCol = pk_is_checked('vd_comment') ? 3 : 4; ?>
                             <?php if (!is_user_logged_in()): ?>
                                 <input type="text" value="0" hidden name="comment-logged" id="comment-logged">
-                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="author"
+                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="comment_author"
                                                                                                 name="author"
                                                                                                 class="form-control form-control-sm t-sm"
                                                                                                 placeholder="<?php _e('昵称（必填）', PUOCK) ?>">
                                 </div>
-                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="email" id="email"
+                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="email" id="comment_email"
                                                                                                 name="email"
                                                                                                 class="form-control form-control-sm t-sm"
                                                                                                 placeholder="<?php _e('邮箱（必填）', PUOCK) ?>">
                                 </div>
-                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="url"
+                                <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="comment_url"
                                                                                                 name="url"
                                                                                                 class="form-control form-control-sm t-sm"
                                                                                                 placeholder="<?php _e('网站', PUOCK) ?>">
