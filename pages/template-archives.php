@@ -26,7 +26,7 @@ get_header();
             <div id="page-<?php the_ID() ?>" class="w-100">
                 <div id="posts" class="<?php pk_open_box_animated('animated fadeInLeft') ?> ">
                     <div class="p-block puock-text">
-                        <div class="entry-content mb15">
+                        <div class="<?php get_entry_content_class() ?> mb15">
                             <?php the_content(); ?>
                         </div>
                         <div class="timeline no-style">

@@ -35,7 +35,7 @@ get_header();
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
                 <div id="posts" class="col-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
                     <?php if(!empty(get_the_content())): ?>
-                        <div class="mt20 p-block puock-text entry-content">
+                        <div class="mt20 p-block puock-text <?php get_entry_content_class() ?>">
                             <?php the_content() ?>
                         </div>
                     <?php endif; ?>

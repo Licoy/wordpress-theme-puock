@@ -19,7 +19,7 @@ get_header();
                     <div class="p-block puock-text">
                         <h2 class="t-lg"><?php the_title() ?></h2>
                         <?php if(!empty(get_the_content())): ?>
-                            <div class="mt20 entry-content">
+                            <div class="mt20 <?php get_entry_content_class() ?>">
                                 <?php the_content() ?>
                             </div>
                         <?php endif; ?>

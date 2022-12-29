@@ -38,8 +38,8 @@
                         </div>
                         <?php endif; ?>
                     </div>
-                    <div class="entry-content mt20">
-                        <div class="content-main puock-text <?php pk_checked_out('post_content_indent', 'p-indent') ?>" id="post-main-content">
+                    <div class="mt20 entry-content-box">
+                        <div class="<?php get_entry_content_class() ?> content-main puock-text <?php pk_checked_out('post_content_indent', 'p-indent') ?>">
                             <?php the_content(); ?>
                             <?php do_action('pk_post_content_footer'); ?>
                         </div>

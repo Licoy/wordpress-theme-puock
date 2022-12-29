@@ -508,3 +508,14 @@ function pk_skeleton($type = 'default', $line = 1)
     }
     return $out;
 }
+
+function get_entry_content_class($echo=true){
+    $class = 'entry-content';
+    if(pk_is_checked('page_link_before_icon')){
+        $class .= ' show-link-icon';
+    }
+    if($echo){
+        echo $class;
+    }
+    return $class;
+}

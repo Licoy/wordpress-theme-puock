@@ -205,7 +205,7 @@ class Puock {
 
     pageLinkBlankOpenInit() {
         if (this.data.params.link_blank_open) {
-            $("#post-main-content").find("a").each((_, item) => {
+            $(".entry-content").find("a").each((_, item) => {
                 $(item).attr('target', 'blank')
             })
         }

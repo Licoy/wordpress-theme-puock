@@ -1039,21 +1039,28 @@ a:hover {
     font-size: 20px;
   }
 
-  .entry-content {
+  .entry-content,.entry-content-box {
     font-size: 15px;
 
-    #post-main-content {
-      &.p-indent > p {
-        text-indent: 2rem;
-      }
+    &.p-indent > p {
+      text-indent: 2rem;
+    }
 
-      a:not(.btn,.fancybox,.no-icon) {
-        &:before {
-          content: "\f0c1";
-          font-family: var(--fa-style-family, "Font Awesome 6 Free");
-          margin-right: 3px;
-          font-weight: var(--fa-style, 900);
-          font-size: 12px;
+    a:not(.btn,.fancybox,.no-icon) {
+      &:before {
+        content: "\f0c1";
+        font-family: var(--fa-style-family, "Font Awesome 6 Free");
+        margin-right: 3px;
+        font-weight: var(--fa-style, 900);
+        font-size: 12px;
+        display: none;
+      }
+    }
+
+    &.show-link-icon{
+      a:not(.btn,.fancybox,.no-icon){
+        &:before{
+          display: inline-block;
         }
       }
     }

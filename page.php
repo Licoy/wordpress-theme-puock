@@ -27,7 +27,7 @@
                             </div>
                             <?php endif; ?>
                         </div>
-                        <div class="mt20 puock-text entry-content">
+                        <div class="mt20 puock-text <?php get_entry_content_class() ?>">
                             <?php the_content() ?>
                             <?php do_action('pk_page_content_footer'); ?>
                             <?php

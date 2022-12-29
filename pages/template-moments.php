@@ -41,7 +41,7 @@ get_header();
                                 <div class="c-sub"><?php echo get_the_date('Y-m-d'); ?></div>
                             </div>
                         </div>
-                        <div class="mt10 moment-content entry-content">
+                        <div class="mt10 moment-content <?php get_entry_content_class() ?>">
                             <?php the_content(); ?>
                         </div>
                         <div class="mt10 moment-footer p-flex-s-right">

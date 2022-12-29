@@ -76,6 +76,12 @@ class OptionBasic extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'page_link_before_icon',
+                    'label' => '页面内容链接前显示图标',
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => '-',
                     'type' => 'panel',
                     'open' => true,
