@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
 <div id="page" class="container mt20">
+    <?php get_template_part('ad/global', 'top') ?>
     <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
         <div id="page-empty">
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
