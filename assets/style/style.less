@@ -1040,7 +1040,7 @@ a:hover {
   }
 
   .entry-content {
-    .fs14();
+    font-size: 15px;
 
     #post-main-content {
       &.p-indent > p {
@@ -1068,7 +1068,6 @@ a:hover {
     p {
       margin: 10px 0 !important;
       line-height: 2;
-      letter-spacing: 1px;
     }
 
     video {
@@ -1130,10 +1129,13 @@ a:hover {
     }
 
     code:not([class]) {
-      margin: 0 5px;
-      padding: 2px 5px;
+      margin: 2px 4px;
+      padding: 0 6px;
       border-radius: 4px;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+      background-color: var(--pk-bg-body);
+      display: inline-block;
+      font-family: "Segoe UI", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
     }
 
     img:not(.wp-smiley) {
