@@ -89,9 +89,9 @@ function get_path_query($query)
 function pk_theme_footer_copyright($content)
 {
     global $pk_right_slug;
-    $user_custom = pk_get_option('footer_info');
-    $user_custom .= base64_decode($pk_right_slug);
-    return $user_custom;
+    $content .= pk_get_option('footer_info');
+    $content .= str_replace('{PUOCK_VERSION}',PUOCK_CUR_VER_STR,base64_decode($pk_right_slug));
+    return $content;
 }
 
 add_filter('pk_footer_info', 'pk_theme_footer_copyright', 10, 1);
