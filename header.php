@@ -39,13 +39,13 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
         <div class="navbar navbar-dark shadow-sm">
             <div class="container">
                 <a href="<?php echo home_url() ?>" id="logo" class="navbar-brand">
-                    <?php if (!pk_is_checked('on_txt_logo') || empty(pk_get_option('light_logo'))): ?>
+                    <?php if (pk_is_checked('on_txt_logo') || empty(pk_get_option('light_logo')) || empty(pk_get_option('dark_logo'))): ?>
+                        <span class="puock-text txt-logo"><?php echo pk_get_web_title() ?></span>
+                    <?php else: ?>
                         <img id="logo-light" alt="logo" class="w-100 <?php echo pk_theme_light() ? '' : 'd-none' ?>"
                              src="<?php echo pk_get_option('light_logo') ?>">
                         <img id="logo-dark" alt="logo" class="w-100 <?php echo pk_theme_light() ? 'd-none' : '' ?>"
                              src="<?php echo pk_get_option('dark_logo') ?>">
-                    <?php else: ?>
-                        <span class="puock-text txt-logo"><?php echo pk_get_web_title() ?></span>
                     <?php endif; ?>
                 </a>
                 <div class="d-none d-lg-block puock-links">
