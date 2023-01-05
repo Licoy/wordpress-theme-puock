@@ -275,6 +275,9 @@ add_action('init', 'puock_twemoji_smiley', 3);
 function get_wpsmiliestrans()
 {
     global $wpsmiliestrans, $output;
+    if(!is_array($wpsmiliestrans)){
+        $wpsmiliestrans = array();
+    }
     $wpsmilies = array_unique($wpsmiliestrans);
     foreach ($wpsmilies as $alt => $src_path) {
         $output .= '<a class="add-smily" data-smilies="' . $alt . '"><img src="' . get_bloginfo('template_directory') . '/assets/img/smiley/' . rtrim($src_path, "png") . 'png" /></a>';
