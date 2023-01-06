@@ -497,12 +497,12 @@ class puockNewComment extends puockWidgetBase {
         }
         $this->get_common_widget_header($instance); ?>
         <div class="min-comments t-md">
-            <?php foreach ($comments as $comment): $text=convert_smilies( $comment->text ); ?>
+            <?php foreach ($comments as $comment): ?>
              <div class="comment t-md t-line-1">
                 <img class="min-avatar" src="<?php echo get_avatar_url($comment->mail) ?>" alt="<?php echo $comment->name ?>">
                 <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->pid).'#comment-'.$comment->id ?>">
                 <span class="ta3 link-hover"><?php echo $comment->name ?></span></a>
-                <span class="c-sub t-w-400"><?php echo $text ?></span>
+                <span class="c-sub t-w-400"><?php echo strip_tags(convert_smilies($comment->text),['img']) ?></span>
             </div>
             <?php endforeach; ?>
         </div>
