@@ -58,7 +58,12 @@ function pk_favicon_http_redirect($code, $cache_filename)
 
 function pk_favicon_validate($cache_file)
 {
-    return @exif_imagetype($cache_file);
+    if(file_exists($cache_file)){
+        if(!getimagesize($cache_file)) return 0;
+        return true;
+    }else {
+        return false;
+    }
 }
 
 function pk_favicon_put_default_and_output($cache_file, $cache_filename, $default_ico)
