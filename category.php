@@ -20,7 +20,7 @@
         </div>
 
         <div class="container mt15">
-            <?php get_template_part('ad/global','top') ?>
+            <?php get_template_part('templates/box', 'global-top') ?>
             <div class="row row-cols-1">
                 <div class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
 
@@ -29,7 +29,7 @@
                 </div>
                 <?php get_sidebar() ?>
             </div>
-            <?php get_template_part('ad/global','bottom') ?>
+            <?php get_template_part('templates/box', 'global-bottom') ?>
         </div>
 
 

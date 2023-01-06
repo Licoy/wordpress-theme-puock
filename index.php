@@ -3,7 +3,7 @@
 <?php if (pk_get_option('index_mode') != 'company'): ?>
 
     <div id="content" class="mt15 container">
-        <?php get_template_part('ad/global', 'top') ?>
+        <?php get_template_part('templates/box', 'global-top') ?>
         <div class="row row-cols-1">
             <div class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
                 <?php if (isset($paged) && $paged <= 1): ?>
@@ -25,7 +25,7 @@
 
         <?php get_template_part('templates/module', 'links') ?>
 
-        <?php get_template_part('ad/global', 'bottom') ?>
+        <?php get_template_part('templates/box', 'global-bottom') ?>
 
         <?php dynamic_sidebar('index_bottom') ?>
 

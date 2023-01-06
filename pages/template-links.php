@@ -28,6 +28,7 @@ get_header();
 ?>
 
 <div id="page" class="container mt20">
+    <?php get_template_part('templates/box', 'global-top') ?>
     <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
         <?php
          ?>
@@ -66,6 +67,7 @@ get_header();
             </div>
         </div>
     <?php endwhile; ?>
+    <?php get_template_part('templates/box', 'global-bottom') ?>
 </div>
 
 <?php get_template_part('templates/module', 'smiley') ?>

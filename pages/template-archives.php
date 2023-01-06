@@ -21,6 +21,7 @@ get_header();
 ?>
 
     <div id="page" class="container mt20">
+        <?php get_template_part('templates/box', 'global-top') ?>
         <?php echo pk_breadcrumbs();?>
         <div id="page-archives">
             <div id="page-<?php the_ID() ?>" class="w-100">
@@ -52,6 +53,7 @@ get_header();
                 </div>
             </div>
         </div>
+        <?php get_template_part('templates/box', 'global-bottom') ?>
     </div>
 
 <?php get_template_part('templates/module', 'smiley') ?>

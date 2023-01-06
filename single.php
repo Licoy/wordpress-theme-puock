@@ -2,7 +2,7 @@
 
 <?php while (have_posts()) : the_post(); ?>
     <div id="post" class="container mt20">
-        <?php get_template_part('ad/global', 'top') ?>
+        <?php get_template_part('templates/box', 'global-top') ?>
         <?php echo pk_breadcrumbs() ?>
         <?php get_template_part('ad/page', 'top') ?>
         <div class="row row-cols-1 post-row">
@@ -136,7 +136,7 @@
             </div>
             <?php get_sidebar() ?>
         </div>
-        <?php get_template_part('ad/global', 'bottom') ?>
+        <?php get_template_part('templates/box', 'global-bottom') ?>
     </div>
 
 <?php endwhile; ?>

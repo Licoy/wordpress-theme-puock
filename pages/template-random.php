@@ -7,6 +7,7 @@ get_header();
 ?>
 
 <div id="page" class="container mt15">
+    <?php get_template_part('templates/box', 'global-top') ?>
     <?php echo pk_breadcrumbs();?>
     <div id="page-random">
         <div id="page-<?php the_ID() ?>" class="row">
@@ -21,6 +22,7 @@ get_header();
             <?php get_sidebar() ?>
         </div>
     </div>
+    <?php get_template_part('templates/box', 'global-bottom') ?>
 </div>
 
 <?php get_template_part('templates/module', 'smiley') ?>

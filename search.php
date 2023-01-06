@@ -1,7 +1,7 @@
 <?php get_header() ?>
 
     <div id="content" class="mt15 container min-height-container">
-        <?php get_template_part('ad/global','top') ?>
+        <?php get_template_part('templates/box', 'global-top') ?>
         <?php echo pk_breadcrumbs() ?>
 
         <div class="row row-cols-1">
@@ -22,7 +22,7 @@
             <?php get_sidebar() ?>
         </div>
 
-        <?php get_template_part('ad/global','bottom') ?>
+        <?php get_template_part('templates/box', 'global-bottom') ?>
 
 
     </div>

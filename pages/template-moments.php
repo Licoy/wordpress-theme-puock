@@ -8,6 +8,7 @@ get_header();
 ?>
 
 <div id="page" class="container mt20">
+    <?php get_template_part('templates/box', 'global-top') ?>
     <?php echo pk_breadcrumbs(); ?>
     <?php
     $page = get_query_var('paged') ? get_query_var('paged') : 1;
@@ -66,6 +67,7 @@ get_header();
             get_sidebar() ?>
         </div>
     </div>
+    <?php get_template_part('templates/box', 'global-bottom') ?>
 </div>
 
 <?php get_footer() ?>

@@ -12,6 +12,7 @@ get_header();
 ?>
 
 <div id="page" class="container mt20">
+    <?php get_template_part('templates/box', 'global-top') ?>
     <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
         <div id="page-books">
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
@@ -39,6 +40,7 @@ get_header();
             </div>
         </div>
     <?php endwhile; ?>
+    <?php get_template_part('templates/box', 'global-bottom') ?>
 </div>
 
 <?php get_template_part('templates/module', 'smiley') ?>

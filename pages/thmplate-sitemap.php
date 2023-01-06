@@ -9,6 +9,7 @@ get_header();
 ?>
 
 <div id="page" class="container mt20">
+    <?php get_template_part('templates/box', 'global-top') ?>
     <?php echo pk_breadcrumbs();?>
     <div id="page-sitemap">
         <div id="page-<?php the_ID() ?>" class="row row-cols-1">
@@ -49,6 +50,7 @@ get_header();
             <?php get_sidebar() ?>
         </div>
     </div>
+    <?php get_template_part('templates/box', 'global-bottom') ?>
 </div>
 
 <?php get_template_part('templates/module', 'smiley') ?>
