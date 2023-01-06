@@ -124,6 +124,7 @@ class OptionCarousel extends BaseOptionItem
                             'dynamicModel' => [
                                 ['id' => 'title', 'label' => '公告标题(支持HTML)', 'type'=>'textarea', 'std' => ''],
                                 ['id' => 'link', 'label' => '指向链接(可空)', 'std' => ''],
+                                ['id' => 'icon', 'label' => '图标class(可空)', 'std' => ''],
                                 ['id' => 'hide', 'label' => '隐藏', 'type' => 'switch', 'sdt' => false, 'tips' => '隐藏后将不会显示'],
                             ],
                         ],

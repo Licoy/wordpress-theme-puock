@@ -1810,11 +1810,15 @@ a:hover {
 
 // 全局顶部公告
 .global-top-notice{
+  @wh:22px;
+  .swiper{
+    height: @wh;
+  }
   .notice-icon{
     background-color: var(--pk-c-primary);
-    width: 22px;
-    height: 22px;
-    line-height: 22px;
+    width: @wh;
+    height: @wh;
+    line-height: @wh;
     display: inline-block;
     text-align: center;
     color: #fff;

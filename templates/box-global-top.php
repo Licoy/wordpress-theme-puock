@@ -18,13 +18,15 @@ function pk_global_notice_html()
                              'autoplay' => ['delay' => pk_get_option('global_notice_autoplay_speed', 3000), 'disableOnInteraction' => false],
                              'loop' => true
                          ]) ?>'>
-                        <div class="swiper global-top-notice-swiper" style="height: 22px">
+                        <div class="swiper global-top-notice-swiper">
                             <div class="swiper-wrapper">
                                 <?php
                                 foreach ($final_list as $item) { ?>
                                     <div class="swiper-slide t-line-1">
-                                        <a class="ta3" data-no-instant href="<?php echo empty($item['link']) ? 'javascript:void(0)':$item['link'] ?>">
-                                            <span class="notice-icon"><i class="fa-regular fa-bell"></i></span>
+                                        <a class="ta3" data-no-instant
+                                           href="<?php echo empty($item['link']) ? 'javascript:void(0)' : $item['link'] ?>">
+                                            <span class="notice-icon"><i
+                                                        class="<?php echo empty($item['icon']) ? 'fa-regular fa-bell' : $item['icon'] ?>"></i></span>
                                             <span><?php echo $item['title'] ?></span>
                                         </a>
                                     </div>
