@@ -1593,9 +1593,12 @@ a:hover {
   .header {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    height: 150px;
+    @height: 150px;
+    height: @height;
     background-size: cover;
     position: relative;
+    display: flex;
+    justify-content: center;
 
     .avatar {
       @wh: 80px;
@@ -1603,8 +1606,7 @@ a:hover {
       height: @wh;
       border-radius: (@wh / 2);
       position: absolute;
-      top: 100px;
-      left: 38.333%;
+      top: (@height - (@wh / 2));
     }
   }
 
