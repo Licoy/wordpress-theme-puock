@@ -1094,6 +1094,15 @@ a:hover {
     h1, h2, h3, h4, h5, h6 {
       position: relative;
       margin: 16px 0;
+      &:after{
+        content: ' ';
+        display: block;
+        border: 2px solid var(--pk-c-primary);
+        border-radius: 5px;
+        width: 36px;
+        opacity: .8;
+        margin-top: 2px;
+      }
     }
 
     .entry-h-border(@color) {
