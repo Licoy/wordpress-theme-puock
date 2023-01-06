@@ -20,10 +20,28 @@
   }
 }
 
+
+@-webkit-keyframes words-loop {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+  }
+}
+
 .pk-breathe{
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-name: breathe;
   -webkit-animation-duration: 1200ms;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-direction: alternate;
+}
+
+.pk-words-loop{
+  white-space: nowrap;
+  display: inline-block;
+  animation: 30s words-loop linear infinite normal;
 }

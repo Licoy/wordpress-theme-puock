@@ -7,13 +7,23 @@ class OptionCarousel extends BaseOptionItem
 
     public static function getCarouselIndexArgs($encode = true)
     {
-        $args = [];
+        $args = [
+            'navigation' => [
+                'nextEl' => '.index-banner-swiper .swiper-button-next',
+                'prevEl' => '.index-banner-swiper .swiper-button-prev',
+            ],
+            'pagination' => [
+                'el' => '.index-banner-swiper .swiper-pagination',
+                'clickable' => true,
+                'dynamicBullets' => true,
+            ],
+        ];
         if (pk_is_checked('index_carousel_mousewheel')) {
             $args['mousewheel'] = ['invert' => true];
         }
         $speed = pk_get_option('index_carousel_autoplay_speed');
         if ($speed && $speed > 0) {
-            $args['autoplay'] = ['delay' => $speed];
+            $args['autoplay'] = ['delay' => $speed, 'disableOnInteraction' => false];
         }
         if (pk_is_checked('index_carousel_loop')) {
             $args['loop'] = true;
@@ -25,7 +35,7 @@ class OptionCarousel extends BaseOptionItem
     {
         return [
             'key' => 'carousel',
-            'label' => '幻灯片设置',
+            'label' => '幻灯与公告',
             'icon' => 'dashicons-format-gallery',
             'fields' => [
                 [
@@ -86,6 +96,39 @@ class OptionCarousel extends BaseOptionItem
                         ],
                     ]
                 ],
+                [
+                    'id' => '-',
+                    'type' => 'panel',
+                    'label' => '全局公告',
+                    'open' => pk_is_checked('global_notice'),
+                    'children' => [
+                        [
+                            'id' => 'global_notice',
+                            'label' => '开启全局公告',
+                            'type' => 'switch',
+                            'sdt' => false,
+                        ],
+                        [
+                            'id' => 'global_notice_autoplay_speed',
+                            'label' => '全局公告自动播放速度（毫秒）',
+                            'tips' => '填写0则不自动播放',
+                            'type' => 'number',
+                            'sdt' => 3000,
+                        ],
+                        [
+                            'id' => 'global_notice_list',
+                            'label' => '全局公告列表',
+                            'type' => 'dynamic-list',
+                            'sdt' => [],
+                            'draggable' => true,
+                            'dynamicModel' => [
+                                ['id' => 'title', 'label' => '公告标题(支持HTML)', 'type'=>'textarea', 'std' => ''],
+                                ['id' => 'link', 'label' => '指向链接(可空)', 'std' => ''],
+                                ['id' => 'hide', 'label' => '隐藏', 'type' => 'switch', 'sdt' => false, 'tips' => '隐藏后将不会显示'],
+                            ],
+                        ],
+                    ]
+                ]
             ],
         ];
     }

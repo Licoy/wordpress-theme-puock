@@ -1058,18 +1058,7 @@ class Puock {
             if (elArgs) {
                 args = JSON.parse(elArgs)
             }
-            new Swiper('.' + swiperClass, {
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                    dynamicBullets: true,
-                },
-                ...args
-            });
+            new Swiper('.' + swiperClass, args);
         });
     }
 
