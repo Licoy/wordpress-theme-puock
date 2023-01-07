@@ -277,6 +277,23 @@ class Puock {
         }
     }
 
+    rippleInit(){
+        const args ={
+            debug: false,
+            on: 'mousedown',
+            opacity: 0.4,
+            color: "var(--pk-c-light)",
+            multi: false,
+            duration: 0.6,
+            rate: function(pxPerSecond) {
+                return pxPerSecond;
+            },
+            easing: 'linear'
+        }
+        $.ripple(".btn", args);
+        $.ripple(".ww", args);
+    }
+
     eventShareStart() {
         $(document).on("click", ".share-to", (e) => {
             const id = $(this.ct(e)).attr("data-id");
@@ -409,8 +426,9 @@ class Puock {
         this.keyUpHandle();
         this.loadHitokoto();
         this.asyncCacheViews();
-        this.swiperInit()
-        this.validateInit()
+        this.swiperInit();
+        this.validateInit();
+        this.rippleInit();
         if (this.data.params.use_post_menu) {
             this.generatePostMenuHTML()
         }

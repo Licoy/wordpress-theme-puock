@@ -179,7 +179,7 @@ abstract class puockWidgetBase extends WP_Widget{
                 $img = pk_get_lazy_img_info(get_post_images($post), '', 120,80);
                 $out .= '<div class="mt10">
                     <div class="widget-common-media-post">
-                        <a class="img" title="'.$title.'" '.$target.' href="'.$link.'"><img '.$img.' alt="'.$title.'"/></a>
+                        <a class="img ww" title="'.$title.'" '.$target.' href="'.$link.'"><img '.$img.' alt="'.$title.'"/></a>
                         <div class="info">
                         <h2 class="t-lg t-line-1"><a class="a-link t-w-400 t-md" title="'.$title.'" '.$target.'
                          href="'.$link.'">'.$title.'</a></h2>

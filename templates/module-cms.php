@@ -32,7 +32,7 @@
                             <?php foreach ($posts as $post) : setup_postdata($post); ?>
                                 <?php if ($post_index == 0): ?>
                                     <div class="mtb10 magazine-media-item">
-                                        <a class="img" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
+                                        <a class="img ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                                             <img title="<?php the_title() ?>"
                                                  alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'w-100 round-3', 120, 80) ?>/>
                                         </a>

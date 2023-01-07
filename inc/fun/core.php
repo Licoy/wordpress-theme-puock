@@ -694,7 +694,7 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
         $cur = $menu->current ? 'menu-current' : '';
         $out .= "<li id='menu-item-{$menu->ID}' class='menu-item-{$menu->ID} {$classes} {$child_class} {$cur}'>";
         if (!$mobile) {
-            $out .= "<a {$target} href='{$menu->url}'>{$menu->title}";
+            $out .= "<a class='ww' data-color='auto' {$target} href='{$menu->url}'>{$menu->title}";
         } else {
             $out .= '<span><a ' . $target . ' href="' . $menu->url . '">' . $menu->title . '</a>';
         }
