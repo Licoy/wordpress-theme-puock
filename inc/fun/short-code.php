@@ -280,21 +280,14 @@ function pk_password_read($attr, $content = null)
             $error = sc_tips_danger(null, "<i class='fa-regular fa-eye'></i>&nbsp;密码输入错误，请重新输入！");
         }
     }
-    if (trim($desc) == "") {
+    if (empty(trim($desc))) {
         $desc = "此处含有隐藏内容，需要正确输入密码后可见！";
     }
-    $out .= '<div class="p-block pk-sc-password-red">' . sc_tips_primary(null, "<i class='fa-regular fa-eye'></i>&nbsp;{$desc}") . '
-            ' . $error . '<form action="' . get_permalink() . '" method="post">
-            <div class="row">
-            <div class="col-8 col-md-10">
-            <input type="password" placeholder="请输入密码" required class="form-control form-control-sm" name="pass"/>
-            </div>
-            <div class="col-4 col-md-2 pl-0">
-            <button class="btn btn-sm btn-primary w-100">立即查看</button>
-            </div>
-            </div>
-            </form>
-            </div>';
+    $out .= "<div class=\"p-block pk-sc-password-red\">".sc_tips_primary(null, "<i class='fa-regular fa-eye'></i>&nbsp;{$desc}")
+        ."$error<form action=\"".get_permalink()."\" method=\"post\"><div class=\"row\"><div class=\"col-8 col-md-10\">"
+        ."<input type=\"password\" placeholder=\"请输入密码\" required class=\"form-control form-control-sm\" name=\"pass\"/>"
+        ."</div><div class=\"col-4 col-md-2 pl-0\"><button class=\"btn btn-sm btn-primary w-100\">立即查看</button></div></div></form>"
+        ."</div>";
     return $out;
 }
 
