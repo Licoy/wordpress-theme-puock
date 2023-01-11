@@ -196,22 +196,22 @@ REGEX
             } elseif (strpos($platform, 'BB') === 0) {
                 $browser = 'BlackBerry Browser';
                 $platform = 'BlackBerry';
-            } elseif (strpos($u_agent, 'PuockMP') !== -1) {
+            } elseif (strpos($u_agent, 'PuockMP') !== false) {
                 $browser = 'Puock MiniProgram';
                 $skip_version = true;
-            } elseif (strpos($u_agent, 'MicroMessenger') !== -1) {
+            } elseif (strpos($u_agent, 'MicroMessenger') !== false) {
                 $browser = 'Weixin';
                 $skip_version = true;
-            }  elseif ($platform == 'BlackBerry' || $platform == 'PlayBook') {
+            } elseif ($platform == 'BlackBerry' || $platform == 'PlayBook') {
                 $browser = 'BlackBerry Browser';
             } else {
                 $find('Safari', $key, $browser) || $find('TizenBrowser', $key, $browser);
             }
 
-            if(!$skip_version){
+            if (!$skip_version) {
                 $find('Version', $key);
                 $version = $result[BROWSER_VERSION][$key];
-            }else{
+            } else {
                 $version = null;
             }
         } elseif ($pKey = preg_grep('/playstation \d/i', $result[BROWSER])) {
