@@ -1026,7 +1026,7 @@ class Puock {
             const repo = el.attr("data-repo");
             if (repo) {
                 $.get(`https://api.github.com/repos/${repo}`, (res) => {
-                    const link_html = `class="hide-hover" href="${res.url}" target="_blank" rel="noreferrer"`;
+                    const link_html = `class="hide-hover" href="${res.html_url}" target="_blank" rel="noreferrer"`;
                     el.html(`<div class="card-header"><i class="fa-brands fa-github"></i><a ${link_html}>${res.full_name}</a></div>
                     <div class="card-body">${res.description}</div>
                     <div class="card-footer">

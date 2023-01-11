@@ -2135,28 +2135,36 @@ a:hover {
 //短代码模块
 //github短代码
 .github-card {
+  padding: 15px;
   margin: 15px 0;
 
   &.loaded {
-    border: 1px solid rgba(0, 0, 0, .125);
+    border: 1px solid var(--pk-c-border);
     background-color: var(--pk-bg-card);
+    border-radius: 5px;
 
     a {
       color: var(--pk-c-font);
     }
   }
 
+  .card-header,.card-body{
+    margin-bottom: 15px;
+  }
 
   .card-header, .card-footer {
     a {
-      color: var(--pk-c-font);
+      color: var(--pk-c-font) !important;
       display: inline-block;
       margin-left: 3px;
-      transition: all .1s;
+      transition: all .3s;
       cursor: pointer;
 
       &:hover {
-        font-weight: bold;
+        color: var(--pk-c-primary) !important;
+      }
+      &:before{
+        display: none !important;
       }
     }
   }
