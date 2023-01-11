@@ -427,7 +427,11 @@ function pk_compatible_githuber_md_katex($good_protocol_url, $original_url, $_co
 //获取网站标题
 function pk_get_web_title()
 {
-    return pk_get_option('web_title', get_bloginfo('name'));
+    $title = pk_get_option('web_title');
+    if(empty($title)){
+        $title = get_bloginfo('name');
+    }
+    return $title;
 }
 
 // 获取链接的target属性
