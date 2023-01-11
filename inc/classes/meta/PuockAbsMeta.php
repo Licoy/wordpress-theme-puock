@@ -67,9 +67,6 @@ abstract class PuockAbsMeta
         $data = array();
         foreach ($args['options'] as $option) {
             $val = $_POST[$option['id']] ?? '';
-            if (empty($val)) {
-                continue;
-            }
             if ($args['single']) {
                 update_post_meta($post_id, $option['id'], $val);
             } else {
