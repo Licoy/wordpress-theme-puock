@@ -22,7 +22,7 @@ function pk_poster_page_callback()
     <div class="post-poster">
         <div class="post-poster-main" id="<?php echo $el_id; ?>">
             <div class="cover">
-                <img src="<?php echo get_post_images($post); ?>" alt="">
+                <img src="<?php echo pk_get_img_thumbnail_src(get_post_images($post),640,320) ?>" alt="">
             </div>
             <div class="content">
                 <p class="title mt20 fs16"><?php echo $title ?></p>
