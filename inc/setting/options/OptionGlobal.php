@@ -183,6 +183,13 @@ class OptionGlobal extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'thumbnail_rewrite_open',
+                    'label' => '缩略图伪静态',
+                    'type' => 'switch',
+                    'sdt'=>false,
+                    'tips' => "⚠️若开启此选项，请自行手动在Nginx配置中添加伪静态规则：<code>rewrite ^/timthumb/w_([0-9]+)/h_([0-9]+)/q_([0-9]+)/zc_([0-9])/a_([a-z]+)/([0-9A-Za-z]+)\.([0-9a-z]+)$ /wp-content/themes/".get_template()."/timthumb.php?w=$1&h=$2&q=$3&zc=$4&a=$5&src=$6;</code>"
+                ],
+                [
                     'id' => 'thumbnail_allows',
                     'label' => '缩略图白名单',
                     'type' => 'textarea',

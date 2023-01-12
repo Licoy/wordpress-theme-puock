@@ -218,6 +218,9 @@ class timthumb
 
         $this->myHost = preg_replace('/^www\./i', '', $_SERVER['HTTP_HOST']);
         $this->src = $this->param('src');
+        if(filter_var($this->src, FILTER_VALIDATE_URL) === false){
+            $this->src = base64_decode($this->src);
+        }
         $this->url = parse_url($this->src);
         $this->src = preg_replace('/https?:\/\/(?:www\.)?' . $this->myHost . '/i', '', $this->src);
 

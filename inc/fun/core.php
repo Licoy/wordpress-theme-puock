@@ -341,7 +341,10 @@ function pk_get_img_thumbnail_src($src, $width, $height)
     if ($width == null || $height == null) {
         return $src;
     }
-    return PUOCK_ABS_URI . "/timthumb.php?w={$width}&h={$height}&a=&zc=1&src=" . $src;
+    if(pk_is_checked('thumbnail_rewrite_open')){
+        return home_url() . "/timthumb/w_{$width}/h_{$height}/q_90/zc_1/a_c/".str_replace("=","",base64_encode($src)).".png";
+    }
+    return PUOCK_ABS_URI . "/timthumb.php?w={$width}&h={$height}&a=c&zc=1&q=90&src=" . $src;
 }
 
 //获取文章样式是否是卡片式
