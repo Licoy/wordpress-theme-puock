@@ -2,6 +2,7 @@
 
 namespace Puock\Theme\setting;
 
+use Puock\Theme\setting\options\OptionAbout;
 use Puock\Theme\setting\options\OptionAd;
 use Puock\Theme\setting\options\OptionBasic;
 use Puock\Theme\setting\options\OptionCache;
@@ -44,6 +45,7 @@ class PuockSetting
         $classes[] = ['class' => OptionCache::class, 'sort' => 12];
         $classes[] = ['class' => OptionDebug::class, 'sort' => 13];
         $classes[] = ['class' => OptionResource::class, 'sort' => 14];
+        $classes[] = ['class' => OptionAbout::class, 'sort' => 99];
         $classes = apply_filters('pk_theme_option_menus_register', $classes, 10, 1);
         array_multisort(array_column($classes, 'sort'), SORT_ASC, $classes);
         return $classes;
