@@ -35,7 +35,7 @@
         github: "https://github.com/Licoy/wordpress-theme-puock",
         qq: "https://licoy.cn/go/puock-update.php?r=qq_qun",
         license: "GPL V3",
-        donate: "https://licoy.cn/go/zs",
+        donate: "https://licoy.cn/puock-theme-sponsor.html",
         get_url: '<?php echo admin_url('admin-ajax.php') ?>?action=get_theme_options',
         update_url: '<?php echo admin_url('admin-ajax.php') ?>?action=update_theme_options',
         fields_url: '<?php echo admin_url('admin-ajax.php') ?>?action=get_theme_option_fields',
