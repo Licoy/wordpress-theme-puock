@@ -83,25 +83,52 @@ function pk_get_theme_option_url($to = '')
 
 
 // 顶部添加自定义菜单
-function pk_toolbar_link($bar)
+function pk_toolbar_link(WP_Admin_Bar $bar)
 {
+    $menu_id = 'theme-quick-start';
+    $bar->add_node(array(
+        'id' => $menu_id,
+        'title' => '<i class="czs-paper-plane"></i>&nbsp;Puock Theme 快捷入口',
+        'href' => '#'
+    ));
     $bar->add_node(array(
         'id' => 'theme-setting',
-        'title' => '🎨 主题设置',
+        'parent' => $menu_id,
+        'title' => '<i class="czs-setting" style="color:#9627e3"></i>&nbsp;主题设置',
         'href' => pk_get_theme_option_url()
     ));
     $bar->add_node(array(
         'id' => 'theme-docs',
-        'title' => '📚 主题使用文档',
+        'parent' => $menu_id,
+        'title' => '<i class="czs-doc-file" style="color:#496cf9"></i>&nbsp;主题文档',
         'href' => 'https://licoy.cn/puock-doc.html',
         'meta' => array(
             'target' => 'blank'
         )
     ));
     $bar->add_node(array(
-        'id' => 'theme-qq-qun',
-        'title' => '🐧 主题交流QQ群',
+        'id' => 'theme-sponsor',
+        'parent' => $menu_id,
+        'title' => '<i class="czs-heart" style="color:#f54747"></i>&nbsp;赞助主题',
+        'href' => 'https://licoy.cn/puock-theme-sponsor.html',
+        'meta' => array(
+            'target' => 'blank'
+        )
+    ));
+    $bar->add_node(array(
+        'id' => 'theme-group',
+        'parent' => $menu_id,
+        'title' => '<i class="czs-weixin" style="color:#177b17"></i>&nbsp;主题交流群',
         'href' => 'https://licoy.cn/go/puock-update.php?r=qq_qun',
+        'meta' => array(
+            'target' => 'blank'
+        )
+    ));
+    $bar->add_node(array(
+        'id' => 'theme-github',
+        'parent' => $menu_id,
+        'title' => '<i class="czs-github-logo"></i>&nbsp;Github 开源主页',
+        'href' => 'https://github.com/Licoy/wordpress-theme-puock',
         'meta' => array(
             'target' => 'blank'
         )
