@@ -11,6 +11,7 @@ class OptionGlobal extends BaseOptionItem
             'key' => 'global',
             'label' => '全局设置',
             'icon' => 'dashicons-admin-site',
+            'badge' => ['dot'=>'true','processing'=>true],
             'fields' => [
                 [
                     'id' => 'index_mode',
@@ -117,6 +118,7 @@ class OptionGlobal extends BaseOptionItem
                     'id' => 'logo_loop_light',
                     'label' => 'logo闪光动画',
                     'type' => 'switch',
+                    'badge' => ['value'=>'New'],
                     'sdt' => false,
                 ],
                 [
@@ -172,6 +174,7 @@ class OptionGlobal extends BaseOptionItem
                     'id' => 'disable_not_admin_user_profile',
                     'label' => '禁止非管理员进入资料页',
                     'type' => 'switch',
+                    'badge' => ['value'=>'New'],
                     'sdt' => false,
                 ],
                 [
@@ -198,6 +201,7 @@ class OptionGlobal extends BaseOptionItem
                     'id' => 'thumbnail_rewrite_open',
                     'label' => '缩略图伪静态',
                     'type' => 'switch',
+                    'badge' => ['value'=>'New'],
                     'sdt'=>false,
                     'tips' => "⚠️若开启此选项，请自行手动在Nginx配置中添加伪静态规则：<code>rewrite ^/timthumb/w_([0-9]+)/h_([0-9]+)/q_([0-9]+)/zc_([0-9])/a_([a-z]+)/([0-9A-Za-z]+)\.([0-9a-z]+)$ /wp-content/themes/".get_template()."/timthumb.php?w=$1&h=$2&q=$3&zc=$4&a=$5&src=$6;</code>"
                 ],
