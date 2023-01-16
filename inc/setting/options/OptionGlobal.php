@@ -114,6 +114,12 @@ class OptionGlobal extends BaseOptionItem
                     'tips' => "比例：500*125，请尽量选择png无底色图片",
                 ],
                 [
+                    'id' => 'logo_loop_light',
+                    'label' => 'logo闪光动画',
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'favicon',
                     'label' => '网站favicon',
                     'type' => 'img',

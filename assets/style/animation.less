@@ -1,4 +1,4 @@
-@-webkit-keyframes breathe {
+@keyframes breathe {
   0% {
     opacity: .5;
   }
@@ -8,7 +8,7 @@
   }
 }
 
-@-webkit-keyframes skeleton-loading {
+@keyframes skeleton-loading {
   0% {
     opacity: 0;
   }
@@ -21,7 +21,7 @@
 }
 
 
-@-webkit-keyframes words-loop {
+@keyframes words-loop {
   0% {
     transform: translateX(0px);
     -webkit-transform: translateX(0px);
@@ -32,7 +32,24 @@
   }
 }
 
-.pk-breathe{
+@keyframes logo-loop-light {
+  0%,79%{
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+    left: -60px;
+    top: 0;
+  }
+
+  100% {
+    opacity: 1;
+    left: 160px;
+    top: 0;
+  }
+}
+
+.pk-breathe {
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-name: breathe;
   -webkit-animation-duration: 1200ms;
@@ -40,7 +57,7 @@
   -webkit-animation-direction: alternate;
 }
 
-.pk-words-loop{
+.pk-words-loop {
   white-space: nowrap;
   display: inline-block;
   animation: 30s words-loop linear infinite normal;

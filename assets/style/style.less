@@ -505,7 +505,10 @@ body.pre-mac pre {
 #logo {
   padding: 10px;
   max-width: 200px;
+  display: inline-block;
   @height: 45px;
+  position: relative;
+  overflow: hidden;
 
   img {
     height: @height;
@@ -514,6 +517,18 @@ body.pre-mac pre {
   .txt-logo {
     color: var(--pk-c-font);
     line-height: @height;
+  }
+
+  &.logo-loop-light:before{
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, .4);
+    -webkit-transform: rotate(-45deg);
+    -webkit-animation: logo-loop-light 4s ease-in 0s infinite;
+    transform: rotate(-45deg);
+    animation: logo-loop-light 4s ease-in 0s infinite;
   }
 }
 

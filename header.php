@@ -38,7 +38,7 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
             } ?>">
         <div class="navbar navbar-dark shadow-sm">
             <div class="container">
-                <a href="<?php echo home_url() ?>" id="logo" class="navbar-brand">
+                <a href="<?php echo home_url() ?>" id="logo" class="navbar-brand <?php if(pk_is_checked('logo_loop_light')) echo 'logo-loop-light'; ?>">
                     <?php if (pk_is_checked('on_txt_logo') || empty(pk_get_option('light_logo')) || empty(pk_get_option('dark_logo'))): ?>
                         <span class="puock-text txt-logo"><?php echo pk_get_web_title() ?></span>
                     <?php else: ?>
