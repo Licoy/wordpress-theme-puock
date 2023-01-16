@@ -523,3 +523,12 @@ function get_entry_content_class($echo=true){
     }
     return $class;
 }
+
+function pk_disable_not_admin_user_profile(){
+    if(is_admin() && !current_user_can('administrator')){
+        wp_die( '您无权访问' );
+    }
+}
+if(pk_is_checked('disable_not_admin_user_profile')){
+    add_action('load-profile.php', 'pk_disable_not_admin_user_profile');
+}

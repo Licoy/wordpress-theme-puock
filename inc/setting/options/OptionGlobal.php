@@ -163,6 +163,12 @@ class OptionGlobal extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'disable_not_admin_user_profile',
+                    'label' => '禁止非管理员进入资料页',
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'compress_html',
                     'label' => '将HTML压缩成一行',
                     'type' => 'switch',
