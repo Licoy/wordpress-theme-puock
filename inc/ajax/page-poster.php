@@ -22,7 +22,7 @@ function pk_poster_page_callback()
     <div class="post-poster">
         <div class="post-poster-main" id="<?php echo $el_id; ?>">
             <div class="cover">
-                <img src="<?php echo pk_get_img_thumbnail_src(get_post_images($post),640,320) ?>" alt="">
+                <img crossOrigin="anonymous" src="<?php echo pk_get_img_thumbnail_src(get_post_images($post),640,320) ?>" alt="poster">
             </div>
             <div class="content">
                 <p class="title mt20 fs16"><?php echo $title ?></p>
@@ -46,7 +46,8 @@ function pk_poster_page_callback()
         $(function () {
             html2canvas(document.querySelector("#<?php echo $el_id; ?>"), {
                 allowTaint: true,
-                useCORS: true
+                useCORS: true,
+                backgroundColor:'#ffffff'
             }).then(canvas => {
                 const el = $("#<?php echo $el_id; ?>");
                 el.show();

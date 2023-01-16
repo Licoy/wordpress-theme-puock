@@ -363,7 +363,7 @@ if (pk_is_checked('basic_img_lazy_z')) {
     add_filter('the_content', 'pk_content_img_lazy');
 }
 //获取图片缩略图链接
-function pk_get_img_thumbnail_src($src, $width, $height)
+function pk_get_img_thumbnail_src($src, $width, $height,$args=array())
 {
     if ($width == null || $height == null) {
         return $src;
