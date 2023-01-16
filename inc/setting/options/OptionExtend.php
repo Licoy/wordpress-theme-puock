@@ -11,6 +11,7 @@ class OptionExtend extends BaseOptionItem
             'key' => 'extend',
             'label' => '扩展及兼容',
             'icon' => 'dashicons-admin-plugins',
+            'badge' => ['dot'=>true],
             'fields' => [
                 [
                     'id' => 'office_mp_support',
@@ -19,6 +20,7 @@ class OptionExtend extends BaseOptionItem
                     'value' => defined('PUOCK_MP_VERSION'),
                     'tips' => "Puock官方小程序支持，此选项安装小程序插件后会自动开启，如需关闭请在小程序插件中关闭 （<a target='_blank' href='https://licoy.cn/puock-mp.html'>了解小程序？</a>）",
                     'disabled' => true,
+                    'badge' => ['value'=>'Hot','processing'=>true]
                 ],
                 [
                     'id' => 'strawberry_icon',
