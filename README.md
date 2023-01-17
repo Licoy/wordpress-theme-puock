@@ -23,13 +23,13 @@
         <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg?logo=github" alt="Author">
       </a>
     <br>
-    <a href="https://licoy.cn/go/zs/">
+    <a href="https://licoy.cn/puock-theme-sponsor.html">
         <img src="https://img.shields.io/badge/赞赏-开发不易-CC3333.svg?logo=Buy-Me-A-Coffee" alt="赞赏支持">
       </a>
-    <a href="https://licoy.cn/go/zs/">
+    <a href="https://licoy.cn/puock-theme-sponsor.html">
         <img src="https://img.shields.io/badge/捐赠-微信-68b600.svg?logo=WeChat" alt="微信捐赠">
       </a>
-    <a href="https://licoy.cn/go/zs/">
+    <a href="https://licoy.cn/puock-theme-sponsor.html">
         <img src="https://img.shields.io/badge/捐赠-支付宝-00a2ef.svg?logo=AliPay" alt="支付宝捐赠">
       </a>
     <br><br>
