@@ -162,7 +162,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
 }
 
 //获取文章标签
-function get_post_tags($class = '',$item_class='')
+function get_post_tags($class = '', $item_class = '')
 {
     global $puock_colors_name;
     $tags = get_the_tags();
@@ -170,8 +170,8 @@ function get_post_tags($class = '',$item_class='')
     if ($tags && count($tags) > 0) {
         $out .= '<div class="' . $class . '">';
         foreach ($tags as $tag) {
-//            $color_index = mt_rand(0, count($puock_colors_name) - 1);
-            $out .= '<a href="' . get_tag_link($tag) . '" class="pk-badge pk-badge-sm mr5 '.$item_class.'"><i class="fa-solid fa-tag"></i> ' . $tag->name . '</a>';
+            //            $color_index = mt_rand(0, count($puock_colors_name) - 1);
+            $out .= '<a href="' . get_tag_link($tag) . '" class="pk-badge pk-badge-sm mr5 ' . $item_class . '"><i class="fa-solid fa-tag"></i> ' . $tag->name . '</a>';
         }
         $out .= '</div>';
     } else {
@@ -186,7 +186,7 @@ function pk_get_post_date()
     $c_time = time() - $time;
     $day = 86400;
     switch ($c_time) {
-        //todo 本地化翻译
+            //todo 本地化翻译
         case $c_time < $day:
             $res = '近一天内';
             break;
@@ -227,7 +227,8 @@ function pk_get_color_tag($ex = array())
 function get_smiley_codes()
 {
     //todo 本地化翻译
-    return array(":?:" => "疑问", ":razz:" => "调皮", ":sad:" => "难过", ":evil:" => "抠鼻", ":naughty:" => "顽皮",
+    return array(
+        ":?:" => "疑问", ":razz:" => "调皮", ":sad:" => "难过", ":evil:" => "抠鼻", ":naughty:" => "顽皮",
         ":!:" => "吓", ":smile:" => "微笑", ":oops:" => "憨笑", ":neutral:" => "亲亲", ":cry:" => "大哭", ":mrgreen:" => "呲牙",
         ":grin:" => "坏笑", ":eek:" => "惊讶", ":shock:" => "发呆", ":???:" => "撇嘴", ":cool:" => "酷", ":lol:" => "偷笑",
         ":mad:" => "咒骂", ":twisted:" => "发怒", ":roll:" => "白眼", ":wink:" => "鼓掌", ":idea:" => "想法", ":despise:" => "蔑视",
@@ -275,7 +276,7 @@ add_action('init', 'puock_twemoji_smiley', 3);
 function get_wpsmiliestrans()
 {
     global $wpsmiliestrans, $output;
-    if(!is_array($wpsmiliestrans)){
+    if (!is_array($wpsmiliestrans)) {
         $wpsmiliestrans = array();
     }
     $wpsmilies = array_unique($wpsmiliestrans);
@@ -297,7 +298,7 @@ function smilies_custom_button($context)
 function get_post_images($_post = null)
 {
     global $post;
-    if($_post != null){
+    if ($_post != null) {
         $post = $_post;
     }
     $post_id = $post->ID;
@@ -436,6 +437,14 @@ function count_words($text = null)
     }
     return mb_strlen(preg_replace('/\s/', '', html_entity_decode(strip_tags($text))), 'UTF-8');
 }
+//阅读时间统计
+function count_read_time()
+{
+    global $post;
+    $text_num = count_words();
+    $read_time = ceil($text_num / 400);
+    return mb_strlen($read_time);
+}
 
 //给文章内容添加灯箱
 function light_box_text_replace($content)
@@ -504,8 +513,7 @@ function pk_update()
     $current_theme_dir_name = basename(dirname(__FILE__));
     include('update-checker/update-checker.php');
     switch ($update_server) {
-        case 'github':
-            {
+        case 'github': {
                 $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
                     'https://github.com/Licoy/wordpress-theme-puock',
                     __FILE__,
@@ -514,8 +522,7 @@ function pk_update()
                 );
             }
             break;
-        case 'fastgit':
-            {
+        case 'fastgit': {
                 $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
                     'https://licoy.cn/go/puock-update.php?r=fastgit',
                     __FILE__,
@@ -524,15 +531,14 @@ function pk_update()
                 );
             }
             break;
-        default:
-        {
-            $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-                'https://licoy.cn/go/puock-update.php?r=worker',
-                __FILE__,
-                $current_theme_dir_name,
-                $check_period
-            );
-        }
+        default: {
+                $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                    'https://licoy.cn/go/puock-update.php?r=worker',
+                    __FILE__,
+                    $current_theme_dir_name,
+                    $check_period
+                );
+            }
     }
 }
 

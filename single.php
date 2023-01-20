@@ -24,6 +24,15 @@
                                                 class="fa-regular fa-comment mr-1"></i><?php comments_number() ?></div>
                                 </a>
                             <?php endif; ?>
+                            <!-- 字数和阅读时间统计 -->
+                            <div class="option puock-bg ta3 t-sm mr-1"><i class="fa fa-font"></i>
+                                <span id="count_words">
+                                    <?php _e('共计', PUOCK) ?><?php echo count_words() ?><?php _e('字  ', PUOCK) ?>
+                                </span>
+                                <span id="count_read_time">
+                                    <?php _e('预计', PUOCK) ?><?php echo count_read_time() ?><?php _e('分钟读完', PUOCK) ?>
+                                </span>
+                          </div>
                             <?php if (is_user_logged_in() && current_user_can('edit_post', $post->ID)): ?>
                                 <a target="_blank" href="<?php echo get_edit_post_link() ?>">
                                     <div class="option puock-bg ta3 t-sm mr-1"><i
