@@ -8,18 +8,18 @@ class OptionResource extends BaseOptionItem{
     {
         return [
             'key' => 'resource',
-            'label' => '资源或更新',
+            'label' => __('资源与更新', PUOCK),
             'icon'=>'dashicons-cloud-saved',
             'fields' => [
                 [
                     'id' => 'static_load_origin',
-                    'label' => '主题静态资源加载源',
+                    'label' => __('主题静态资源加载源', PUOCK),
                     'type' => 'radio',
                     'sdt' => 'self',
                     'options' => [
                         [
                             'value' => 'self',
-                            'label' => '本地',
+                            'label' => __('本地', PUOCK),
                         ],
                         [
                             'value' => 'jsdelivr',
@@ -39,25 +39,25 @@ class OptionResource extends BaseOptionItem{
                         ],
                         [
                             'value' => 'custom',
-                            'label' => '自定义（在下方一栏中填入）',
+                            'label' => __('自定义（在下方一栏中填入）', PUOCK),
                         ],
                     ],
                 ],
                 [
                     'id' => 'custom_static_load_origin',
-                    'label' => '自定义静态资源加载URI',
+                    'label' => __('自定义静态资源加载URI', PUOCK),
                     'sdt' => '',
-                    'tips'=>'需填写完整地址，如https://example.com/puock，路径需要指向到可以访问主题根目录为准'
+                    'tips'=>__('需填写完整地址，如<code>https://example.com/puock</code>，路径需要指向到可以访问主题根目录为准', PUOCK)
                 ],
                 [
                     'id' => 'update_server',
-                    'label' => '主题在线更新源',
+                    'label' => __('主题在线更新源', PUOCK),
                     'type' => 'radio',
                     'sdt' => 'worker',
                     'options' => [
                         [
                             'value' => 'worker',
-                            'label' => '官方代理',
+                            'label' => __('官方代理', PUOCK),
                         ],
                         [
                             'value' => 'github',
@@ -71,10 +71,10 @@ class OptionResource extends BaseOptionItem{
                 ],
                 [
                     'id' => 'update_server_check_period',
-                    'label' => '主题更新检测频率',
+                    'label' => __('主题更新检测频率', PUOCK),
                     'type' => 'number',
                     'sdt' => 6,
-                    'tips'=>'单位为小时'
+                    'tips'=>__('单位为小时', PUOCK),
                 ],
             ],
         ];

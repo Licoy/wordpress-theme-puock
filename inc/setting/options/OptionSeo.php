@@ -8,67 +8,67 @@ class OptionSeo extends BaseOptionItem{
     {
         return [
             'key' => 'seo',
-            'label' => 'SEO搜索优化',
+            'label' => __('SEO搜索优化', PUOCK),
             'icon'=>'dashicons-google',
             'fields' => [
                 [
                     'id' => 'seo_open',
-                    'label' => 'SEO功能',
+                    'label' => __('开启SEO', PUOCK),
                     'type' => 'switch',
                     'sdt' => true,
-                    'tips'=>"若您正在使用其它的SEO插件，请取消勾选"
+                    'tips'=>__('若您正在使用其它的SEO插件，请取消勾选', PUOCK),
                 ],
                 [
                     'id' => 'web_title',
-                    'label' => '网站Title',
+                    'label' => __('网站标题', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'seo_open',
                 ],
                 [
                     'id' => 'web_title_2',
-                    'label' => '网站首页副标题',
+                    'label' => __('网站副标题', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'seo_open',
                 ],
                 [
                     'id' => 'title_conn',
-                    'label' => 'Title连接符',
+                    'label' => __('标题连接符', PUOCK),
                     'sdt' => '-',
                     'showRefId' => 'seo_open',
-                    'tips'=>'Title连接符号，例如 "-"、"|"'
+                    'tips'=>__('Title连接符号，例如 "-"、"|"', PUOCK),
                 ],
                 [
                     'id' => 'description',
-                    'label' => '网站描述',
+                    'label' => __('网站描述', PUOCK),
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'seo_open',
                 ],
                 [
                     'id' => 'keyword',
-                    'label' => '网站关键词',
+                    'label' => __('网站关键词', PUOCK),
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'seo_open',
                 ],
                 [
                     'id' => 'no_category',
-                    'label' => '不显示分类链接中的"category"',
+                    'label' => __('不显示分类链接中的<code>category</code>', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'open_baidu_submit',
-                    'label' => '发布文章主动推送至百度',
+                    'label' => __('发布文章主动推送至百度', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'baidu_submit_url',
-                    'label' => '百度推送接口地址',
+                    'label' => __('百度推送接口地址', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'open_baidu_submit',
-                    'tips'=>"百度推送接口地址，如：http://data.zz.baidu.com/urls?site=https://xxx.com&token=XXXXXX"
+                    'tips'=>__('百度推送接口地址，如：', PUOCK)."http://data.zz.baidu.com/urls?site=https://xxx.com&token=XXXXXX"
                 ],
             ],
         ];
