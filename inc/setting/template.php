@@ -30,6 +30,7 @@
             primaryColorPressed: '#8912e6',
             primaryColorSuppl: '#a537fb',
         },
+        language:"<?php echo get_user_locale() ?>",
         description:"<?php _e('简单/方便/高颜值', PUOCK) ?>",
         tag: {text: "<?php _e('主题', PUOCK) ?>", color: 'rgb(155,39,238)'},
         github: "https://github.com/Licoy/wordpress-theme-puock",
@@ -41,6 +42,7 @@
         fields_url: '<?php echo admin_url('admin-ajax.php') ?>?action=get_theme_option_fields',
     }
 </script>
+<script type="text/javascript" crossorigin src="<?php echo get_template_directory_uri() ?>/assets/dist/setting/language/<?php echo get_user_locale() ?>.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
 <?php
 if (file_exists(dirname(__FILE__) . '/template-script-dev.php')) {
     include_once dirname(__FILE__) . '/template-script-dev.php';
