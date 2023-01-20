@@ -327,7 +327,7 @@ function pk_get_wp_links($link_cats = '')
 //获取懒加载图片信息
 function pk_get_lazy_pl_img()
 {
-    return pk_get_static_url() . "/assets/img/z/load-tip.png";
+    return pk_get_static_url() . "/assets/img/z/load.svg";
 }
 
 function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = null, $thumbnail = true)
@@ -341,13 +341,11 @@ function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = nul
             $out .= "class='{$class}' ";
         }
     } else {
+        $out = "src='" . pk_get_lazy_pl_img() . "'";
+        $out .= "class='lazyload " . $class . "' ";
         if ($thumbnail) {
-            $out = "src='" . pk_get_img_thumbnail_src(pk_get_lazy_pl_img(), $width, $height) . "' ";
-            $out .= "class='lazyload " . $class . "' ";
             $out .= "data-src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "'";
         } else {
-            $out = "src='" . pk_get_lazy_pl_img() . "' ";
-            $out .= "class='lazyload " . $class . "' ";
             $out .= "data-src='" . $origin . "'";
         }
     }

@@ -519,7 +519,7 @@ body.pre-mac pre {
     line-height: @height;
   }
 
-  &.logo-loop-light:before{
+  &.logo-loop-light:before {
     content: "";
     position: absolute;
     width: 180px;
@@ -786,11 +786,13 @@ a:hover {
       .thumbnail-inner {
         border-radius: 5px;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100px;
       }
 
       img {
-        width: 100%;
-        height: auto;
         transition: all .3s;
       }
     }
@@ -798,6 +800,10 @@ a:hover {
     &.post-item-card {
       .thumbnail {
         width: 100%;
+
+        .thumbnail-inner {
+          min-height: 160px;
+        }
       }
     }
 
@@ -826,6 +832,10 @@ a:hover {
       .info-meta {
         .fs14;
         color: #393e46;
+
+        p {
+          .text-2line;
+        }
       }
 
       .info-footer {
@@ -931,6 +941,13 @@ a:hover {
     .magazine-media-item {
       display: flex;
       align-items: stretch;
+
+      .img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80px;
+      }
 
       &:hover {
         .img {
@@ -1668,6 +1685,10 @@ a:hover {
       margin-right: 10px;
       border-radius: 3px;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80px;
 
       img {
         border-radius: 3px;
@@ -2152,7 +2173,7 @@ a:hover {
     }
   }
 
-  .card-header,.card-body{
+  .card-header, .card-body {
     margin-bottom: 15px;
   }
 
@@ -2167,7 +2188,8 @@ a:hover {
       &:hover {
         color: var(--pk-c-primary) !important;
       }
-      &:before{
+
+      &:before {
         display: none !important;
       }
     }
@@ -2283,6 +2305,7 @@ a:hover {
       display: flex;
       align-content: center;
       justify-content: center;
+
       img {
         width: 100%;
         height: 100%;
