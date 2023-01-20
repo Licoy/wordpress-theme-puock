@@ -8,31 +8,31 @@ class OptionCms extends BaseOptionItem{
     {
         return [
             'key' => 'cms',
-            'label' => 'CMS布局',
+            'label' => __('CMS布局', PUOCK),
             'icon'=>'czs-layers',
             'fields' => [
                 [
                     'id' => 'cms_show_new',
-                    'label' => '显示最新文章',
+                    'label' => __('显示最新文章', PUOCK),
                     'type' => 'switch',
                     'sdt' => true,
                 ],
                 [
                     'id' => 'cms_show_new_num',
-                    'label' => '最新文章显示数量',
+                    'label' => __('最新文章数量', PUOCK),
                     'type' => 'number',
                     'sdt' => 6,
                     'showRefId' => 'cms_show_new',
                 ],
                 [
                     'id' => 'cms_show_2box',
-                    'label' => '两栏CMS分类列表',
+                    'label' => __('显示CMS两栏布局', PUOCK),
                     'type' => 'switch',
                     'sdt' => true,
                 ],
                 [
                     'id' => 'cms_show_2box_id',
-                    'label' => '两栏CMS分类ID列表',
+                    'label' => __('CMS两栏布局分类ID', PUOCK),
                     'type' => 'select',
                     'sdt' => '',
                     'multiple' => true,
@@ -41,7 +41,7 @@ class OptionCms extends BaseOptionItem{
                 ],
                 [
                     'id' => 'cms_show_2box_num',
-                    'label' => '两栏CMS分类每栏显示数量',
+                    'label' => __('CMS两栏布局每栏数量', PUOCK),
                     'type' => 'number',
                     'sdt' => 6,
                     'showRefId' => 'cms_show_2box',

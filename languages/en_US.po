@@ -1,253 +1,863 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Puock\n"
-"POT-Creation-Date: 2020-09-11 14:24+0800\n"
-"PO-Revision-Date: 2020-09-12 17:38+0800\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2023-01-20 10:50+0800\n"
+"PO-Revision-Date: 2023-01-20 10:56+0800\n"
+"Last-Translator: Licoy <licoycn@gmail.com>\n"
+"Language-Team: Licoy <licoycn@gmail.com>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-WPHeader: style.css\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
 "_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
-"X-Poedit-SearchPathExcluded-1: inc/setting/includes\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
 
 #: 404.php:12
 msgid "你访问的资源不存在！"
 msgstr "The resource you visited does not exist!"
 
-#: 404.php:13 error.php:23
+#: 404.php:13
 msgid "秒后即将跳转至首页"
 msgstr "Jump to the homepage in seconds"
 
-#: 404.php:15 error.php:25
+#: 404.php:15 error.php:26
 msgid "返回首页"
 msgstr "To homepage"
 
-#: comments.php:5
+#: comments.php:9
 msgid "评论"
 msgstr "Comment"
 
-#: comments.php:12
+#: comments.php:16
 msgid "您必须要登录之后才可以进行评论"
 msgstr "You must be logged in to comment"
 
-#: comments.php:17 comments.php:49
-msgid "QQ登录"
-msgstr "QQ login"
+#: comments.php:28 comments.php:101 inc/setting/options/OptionAuth.php:17
+msgid "快捷登录"
+msgstr "Quick login"
 
-#: comments.php:26
+#: comments.php:38
 msgid "世界这么大发表一下你的看法~"
 msgstr "The world is so big and express your opinion~"
 
-#: comments.php:32
+#: comments.php:48
 msgid "昵称（必填）"
 msgstr "Nickname (required)"
 
-#: comments.php:33
+#: comments.php:53
 msgid "邮箱（必填）"
 msgstr "Email (required)"
 
-#: comments.php:34
+#: comments.php:58
 msgid "网站"
 msgstr "Website"
 
-#: comments.php:44
+#: comments.php:90
 msgid "登出"
 msgstr "Sign out"
 
-#: comments.php:54
+#: comments.php:108
 msgid "取消"
 msgstr "Cancel"
 
-#: comments.php:56
+#: comments.php:114
 msgid "发布评论"
 msgstr "Publish"
 
-#: comments.php:66
-msgid "载入中..."
-msgstr "Loading..."
-
-#: error.php:12
+#: error.php:13
 msgid "无错误信息"
 msgstr "No error message"
 
-#: footer.php:20
-msgid "关于我们"
-msgstr "About us"
-
-#: footer.php:24
-msgid "友情链接"
-msgstr "Links"
-
-#: footer.php:41
-msgid "更多链接"
-msgstr "More links"
-
-#: functions.php:67
+#: functions.php:86
 msgid "评论达人"
 msgstr "Commentator"
 
-#: functions.php:77
+#: functions.php:96
 msgid "博主"
 msgstr "Blogger"
 
-#: functions.php:104
+#: functions.php:134
 msgid "无分类"
 msgstr "none"
 
-#: functions.php:250 functions.php:251
+#: functions.php:293 functions.php:294
 msgid "添加表情"
 msgstr "Add emoticons"
 
-#: functions.php:332
+#: functions.php:375
 msgid "首页"
 msgstr "Home"
 
-#: functions.php:347
+#: functions.php:394
 msgid "正文"
 msgstr "Text"
 
-#: functions.php:349
+#: functions.php:396
 msgid "文章列表"
 msgstr "Article list"
 
-#: functions.php:353
+#: functions.php:400
 msgid "搜索结果"
 msgstr "Search results"
 
-#: functions.php:355
-msgid "的文章列表"
-msgstr "List of articles"
-
-#: functions.php:361
+#: functions.php:410
 msgid "标签"
 msgstr "Tag"
 
-#: functions.php:364
+#: functions.php:415
 msgid "你访问的资源不存在"
 msgstr "The resource you are accessing does not exist"
 
-#: header.php:57
+#: header.php:73
 msgid "请输入搜索关键字"
 msgstr "Please enter keyword to search"
 
-#: header.php:60
-msgid "开始搜索"
+#: header.php:77
+msgid "搜索"
 msgstr "Search"
 
-#: inc/fun/sidebar.php:5
-msgid "正文内容侧边栏"
+#: inc/fun/opt.php:186 inc/fun/opt.php:187
+msgid "添加短代码"
+msgstr "Add a shortcode"
+
+#: inc/setting/PuockSetting.php:62 inc/setting/PuockSetting.php:63
+msgid "Puock主题配置"
+msgstr "Puock Theme"
+
+#: inc/setting/PuockSetting.php:75
+msgid "权限不足"
+msgstr "Permission Denied"
+
+#: inc/setting/options/OptionAbout.php:12
+msgid "关于及指引"
+msgstr "About & Guide"
+
+#: inc/setting/options/OptionAd.php:11
+msgid "广告设置"
+msgstr "Ad Setting"
+
+#: inc/setting/options/OptionAd.php:16
+msgid "全站顶部广告"
+msgstr "Site-wide top-of-the-line ads"
+
+#: inc/setting/options/OptionAd.php:22
+msgid "全站顶部广告内容"
+msgstr "Site-wide top-of-the-line ad content"
+
+#: inc/setting/options/OptionAd.php:29
+msgid "全站底部广告"
+msgstr "Ads at the bottom of the site"
+
+#: inc/setting/options/OptionAd.php:35
+msgid "全站底部广告内容"
+msgstr "Advertising content at the bottom of the site"
+
+#: inc/setting/options/OptionAd.php:42
+msgid "文章内顶部广告"
+msgstr "Ads at the top of the article"
+
+#: inc/setting/options/OptionAd.php:48
+msgid "文章内顶部广告内容"
+msgstr "Top-of-the-line ad content within an article"
+
+#: inc/setting/options/OptionAd.php:56
+msgid "文章内容底部广告"
+msgstr "Ads at the bottom of the article content"
+
+#: inc/setting/options/OptionAd.php:62
+msgid "文章内容底部广告内容"
+msgstr "Advertising content at the bottom of article content"
+
+#: inc/setting/options/OptionAd.php:70
+msgid "评论上方广告"
+msgstr "Comment on the ad above"
+
+#: inc/setting/options/OptionAd.php:76
+msgid "评论上方广告内容"
+msgstr "Comment on the ad content above"
+
+#: inc/setting/options/OptionAuth.php:12
+msgid "登录与授权"
+msgstr "Login & Auth"
+
+#: inc/setting/options/OptionAuth.php:23
+msgid "开启快捷登录"
+msgstr "Turn on Express Login"
+
+#: inc/setting/options/OptionAuth.php:29
+msgid "仅允许第三方登录"
+msgstr "Only third parties are allowed to sign in"
+
+#: inc/setting/options/OptionAuth.php:35
+msgid "启用登录最大尝试次数限制"
+msgstr "Enable the maximum login attempt limit"
+
+#: inc/setting/options/OptionAuth.php:36
+msgid "超过此次数后，对应的IP将会被禁止登录"
 msgstr ""
+"After this number of times, the corresponding IP address will be blocked "
+"from logging in"
 
-#: inc/fun/sidebar.php:7
-msgid "文章正文内容侧边栏"
+#: inc/setting/options/OptionAuth.php:42
+msgid "登录最大尝试次数"
+msgstr "Maximum number of login attempts"
+
+#: inc/setting/options/OptionAuth.php:48
+msgid "登录尝试次数达到后禁止时间（分）"
 msgstr ""
+"Prohibition time after the number of login attempts is reached (minutes)"
 
-#: inc/fun/sidebar.php:15 inc/fun/sidebar.php:17
-msgid "首页侧边栏"
+#: inc/setting/options/OptionAuth.php:54
+msgid "启用忘记密码找回"
+msgstr "Enable Forgot Password Recovery"
+
+#: inc/setting/options/OptionAuth.php:63
+msgid "后台登录保护"
+msgstr "Background login protection"
+
+#: inc/setting/options/OptionAuth.php:68
+msgid "启用后台登录保护"
+msgstr "Enable background sign-in protection"
+
+#: inc/setting/options/OptionAuth.php:78
+msgid "后台登录保护参数"
+msgstr "Background login protection parameters"
+
+#: inc/setting/options/OptionAuth.php:84
+msgid "后台登录保护密码"
+msgstr "Background login protection password"
+
+#: inc/setting/options/OptionAuth.php:92
+msgid "第三方登录回调地址提示"
+msgstr "Third-party login callback address hint"
+
+#: inc/setting/options/OptionAuth.php:99
+msgid "关闭第三方登录直接注册"
+msgstr "Turn off third-party login for direct registration"
+
+#: inc/setting/options/OptionAuth.php:101
+msgid "开启后，若用户未绑定过账户进行第三方登录时则不会自动创建新的账户"
 msgstr ""
+"After it is enabled, if the user has not bound an account for third-party "
+"login, the account will not be automatically created"
 
-#: inc/fun/sidebar.php:25 inc/fun/sidebar.php:27
-msgid "搜索页侧边栏"
+#: inc/setting/options/OptionAuth.php:106
+#: inc/setting/options/OptionAuth.php:133
+#: inc/setting/options/OptionAuth.php:160
+#: inc/setting/options/OptionAuth.php:187
+msgid "登录配置"
+msgstr "Login configuration"
+
+#: inc/setting/options/OptionAuth.php:109
+#: inc/setting/options/OptionAuth.php:136
+#: inc/setting/options/OptionAuth.php:163
+#: inc/setting/options/OptionAuth.php:190
+msgid "申请步骤及说明"
+msgstr "Application steps and instructions"
+
+#: inc/setting/options/OptionAuth.php:113
+#: inc/setting/options/OptionAuth.php:140
+#: inc/setting/options/OptionAuth.php:167
+#: inc/setting/options/OptionAuth.php:194
+msgid "登录"
+msgstr "Login"
+
+#: inc/setting/options/OptionAuth.php:119
+#: inc/setting/options/OptionAuth.php:125
+msgid "QQ互联"
+msgstr "QQ interconnection"
+
+#: inc/setting/options/OptionAuth.php:160
+#: inc/setting/options/OptionAuth.php:167
+#: inc/setting/options/OptionAuth.php:173
+#: inc/setting/options/OptionAuth.php:179
+msgid "微博"
+msgstr "Weibo"
+
+#: inc/setting/options/OptionBasic.php:12
+msgid "基础设置"
+msgstr "Basic Settings"
+
+#: inc/setting/options/OptionBasic.php:17
+msgid "图片懒加载"
+msgstr "Images lazy to load"
+
+#: inc/setting/options/OptionBasic.php:23
+msgid "正文图片懒加载"
+msgstr "The body image is lazy to load"
+
+#: inc/setting/options/OptionBasic.php:29
+msgid "留言头像懒加载"
+msgstr "Message avatar lazy loading"
+
+#: inc/setting/options/OptionBasic.php:35
+msgid "正文内容首行缩进"
+msgstr "The body content is indented on the first line"
+
+#: inc/setting/options/OptionBasic.php:41
+msgid "正文内容链接新标签页打开"
+msgstr "The body content link opens in a new tab"
+
+#: inc/setting/options/OptionBasic.php:47
+msgid "正文内容侧边目录菜单生成"
+msgstr "The body content side table of contents menu is generated"
+
+#: inc/setting/options/OptionBasic.php:50
+msgid "勾选此项会在正文目录显示文章目录"
 msgstr ""
+"Tick this option to display the article table of contents in the body "
+"directory"
 
-#: inc/fun/sidebar.php:35 inc/fun/sidebar.php:37
-msgid "分类/标签页侧边栏"
+#: inc/setting/options/OptionBasic.php:54
+msgid "评论ajax翻页"
+msgstr "Comment on ajax to turn the page"
+
+#: inc/setting/options/OptionBasic.php:60
+msgid "页面无刷新加载"
+msgstr "No refresh load of the page"
+
+#: inc/setting/options/OptionBasic.php:67
+msgid "异步浏览量统计"
+msgstr "Asynchronous page count counts"
+
+#: inc/setting/options/OptionBasic.php:70
+msgid "此选项为开启缓存后浏览量不自增问题解决方案"
 msgstr ""
+"This option is the solution to the problem that the number of views does "
+"not increase after caching is enabled"
 
-#: inc/fun/sidebar.php:45 inc/fun/sidebar.php:47
-msgid "单页面侧边栏"
+#: inc/setting/options/OptionBasic.php:74
+msgid "页面模块载入动画"
+msgstr "Page modules load animations"
+
+#: inc/setting/options/OptionBasic.php:80
+msgid "页面内容链接前显示图标"
+msgstr "Displays an icon before the page content link"
+
+#: inc/setting/options/OptionBasic.php:88
+msgid "评论相关"
+msgstr "Comment related"
+
+#: inc/setting/options/OptionBasic.php:92
+msgid "评论等级"
+msgstr "Comment level"
+
+#: inc/setting/options/OptionBasic.php:98
+msgid "评论回复邮件通知"
+msgstr "Comment reply email notification"
+
+#: inc/setting/options/OptionBasic.php:104
+msgid "评论@功能"
+msgstr "Comment @ features"
+
+#: inc/setting/options/OptionBasic.php:110
+msgid "评论显示用户UA"
+msgstr "Comments show user UA"
+
+#: inc/setting/options/OptionBasic.php:116
+msgid "评论显示IP归属地及运营商"
+msgstr "The comment shows the IP origin and carrier"
+
+#: inc/setting/options/OptionBasic.php:122
+msgid "不显示站长IP归属地及运营商"
+msgstr "The webmaster's IP address location and operator are not displayed"
+
+#: inc/setting/options/OptionBasic.php:130
+msgid "文章海报生成"
+msgstr "Article poster generation"
+
+#: inc/setting/options/OptionBasic.php:131
+msgid "使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求"
 msgstr ""
+"If an image cannot be generated using this feature, check whether the "
+"image meets the cross-domain requirements"
 
-#: inc/fun/sidebar.php:55
-msgid "其他页面侧边栏"
+#: inc/setting/options/OptionBasic.php:137
+msgid "显示正文版权说明"
+msgstr "Displays the body copyright statement"
+
+#: inc/setting/options/OptionBasic.php:143
+msgid "显示正文底部相关推荐"
+msgstr "Displays relevant recommendations at the bottom of the text"
+
+#: inc/setting/options/OptionBasic.php:149
+msgid "正文底部相关推荐文章数量"
 msgstr ""
+"The number of relevant recommended articles at the bottom of the text"
 
-#: inc/fun/sidebar.php:57
-msgid "包括作者/404等其他页面"
+#: inc/setting/options/OptionBasic.php:150
+msgid "建议是4的倍数，不然会出现空缺位置"
 msgstr ""
+"It is recommended to be a multiple of 4, otherwise there will be vacant "
+"positions"
 
-#: inc/fun/sidebar.php:65
-msgid "通用侧边栏"
-msgstr ""
+#: inc/setting/options/OptionBasic.php:156
+msgid "友情链接页面"
+msgstr "Links page"
 
-#: inc/fun/sidebar.php:67
-msgid "若指定页面未配置任何栏目，则显示此栏目下的数据"
-msgstr ""
+#: inc/setting/options/OptionBasic.php:162
+msgid "首页友情链接目录ID"
+msgstr "Home link directory ID"
 
-#: page.php:18 single.php:14
-msgid "次阅读"
-msgstr "Views"
+#: inc/setting/options/OptionBasic.php:168
+msgid "Gravatar头像源"
+msgstr "Gravatar source"
 
-#: single.php:45
-msgid "发表于："
-msgstr "Published on : "
+#: inc/setting/options/OptionBasic.php:175
+msgid "WordPress默认"
+msgstr "WordPress defaults"
 
-#: single.php:56
-msgid "复制链接"
-msgstr "Copy link"
+#: inc/setting/options/OptionBasic.php:179
+msgid "WordPress国内默认"
+msgstr "WordPress China default"
 
-#: single.php:71 single.php:79
-msgid "版权声明："
-msgstr "Copyright notice: "
+#: inc/setting/options/OptionBasic.php:183
+msgid "WordPress国内默认SSL"
+msgstr "WordPress China default SSL"
 
-#: single.php:71
-msgid "本站原创文章，由"
-msgstr "Our original article, by "
+#: inc/setting/options/OptionBasic.php:201
+msgid "文章赞赏"
+msgstr "Article appreciated"
 
-#: single.php:74
-msgid "发表，"
-msgstr " publish, "
+#: inc/setting/options/OptionBasic.php:207
+msgid "文章赞赏支付宝二维码"
+msgstr "The article appreciates the Alipay QR code"
 
-#: single.php:74
-msgid "共计"
-msgstr "total "
+#: inc/setting/options/OptionBasic.php:210
+#: inc/setting/options/OptionBasic.php:217
+#: inc/setting/options/OptionBasic.php:224
+msgid "请选择宽高比例为1:1的图片"
+msgstr "Please select an image with a 1:1 aspect ratio"
 
-#: single.php:74 single.php:81
-msgid "字。"
-msgstr " words."
+#: inc/setting/options/OptionBasic.php:214
+msgid "文章赞赏微信二维码"
+msgstr "The article appreciates the WeChat QR code"
 
-#: single.php:76 single.php:83
-msgid "转载提示："
-msgstr "Reprint tips: "
+#: inc/setting/options/OptionBasic.php:221
+#: inc/setting/options/OptionBasic.php:234
+msgid "文章正文底部二维码"
+msgstr "QR code at the bottom of the body of the article"
 
-#: single.php:76
+#: inc/setting/options/OptionBasic.php:228
+msgid "文章正文底部二维码标题"
+msgstr "QR code title at the bottom of the article body"
+
+#: inc/setting/options/OptionBasic.php:240
+msgid "文章转载说明"
+msgstr "Article reprint instructions"
+
+#: inc/setting/options/OptionBasic.php:242
 msgid "除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。"
 msgstr ""
 "Unless otherwise specified, all articles are published by cc-4.0 protocol. "
 "Please indicate the source of reprint."
 
-#: single.php:79
+#: inc/setting/options/OptionCache.php:11
+msgid "缓存与性能"
+msgstr "Cache & Performance"
+
+#: inc/setting/options/OptionCache.php:16
+msgid "缓存过期秒数"
+msgstr "The number of seconds for the cache to expire"
+
+#: inc/setting/options/OptionCache.php:19
+msgid "0为不过期"
+msgstr "0 is not expired"
+
+#: inc/setting/options/OptionCarousel.php:41
+msgid "幻灯与公告"
+msgstr "Slides & Notice"
+
+#: inc/setting/options/OptionCarousel.php:47
+msgid "首页幻灯片"
+msgstr "Home slideshow"
+
+#: inc/setting/options/OptionCarousel.php:53
+msgid ""
+"说明：幻灯片尺寸建议统一为2:1的比例，例如800*400，另外所有的幻灯片尺寸必须"
+"完全一致，否则会出现高度不一的情况！"
+msgstr ""
+"Note: The slide size is recommended to be unified to a 2:1 ratio, such as "
+"800*400, in addition, all slide sizes must be exactly the same, otherwise "
+"there will be different heights!"
+
+#: inc/setting/options/OptionCarousel.php:57
+#: inc/setting/options/OptionCarousel.php:124
+msgid "启用"
+msgstr "Enable"
+
+#: inc/setting/options/OptionCarousel.php:63
+msgid "鼠标滚轮切换"
+msgstr "Mouse wheel switching"
+
+#: inc/setting/options/OptionCarousel.php:69
+msgid "隐藏标题"
+msgstr "Hide the title"
+
+#: inc/setting/options/OptionCarousel.php:75
+msgid "循环播放"
+msgstr "Loop playback"
+
+#: inc/setting/options/OptionCarousel.php:81
+#: inc/setting/options/OptionCarousel.php:130
+msgid "自动播放速度（毫秒）"
+msgstr "Autoplay speed (ms)"
+
+#: inc/setting/options/OptionCarousel.php:82
+#: inc/setting/options/OptionCarousel.php:131
+msgid "0为不自动播放"
+msgstr "0 is not autoplayed"
+
+#: inc/setting/options/OptionCarousel.php:88
+msgid "切换效果"
+msgstr "Transition effects"
+
+#: inc/setting/options/OptionCarousel.php:92
+msgid "默认"
+msgstr "Default"
+
+#: inc/setting/options/OptionCarousel.php:93
+msgid "淡入淡出"
+msgstr "Fade in and out"
+
+#: inc/setting/options/OptionCarousel.php:94
+msgid "立方体"
+msgstr "cube"
+
+#: inc/setting/options/OptionCarousel.php:95
+msgid "快速翻转"
+msgstr "Quick flip"
+
+#: inc/setting/options/OptionCarousel.php:96
+msgid "覆盖流"
+msgstr "Overlay the stream"
+
+#: inc/setting/options/OptionCarousel.php:97
+msgid "卡片"
+msgstr "card"
+
+#: inc/setting/options/OptionCarousel.php:102
+msgid "幻灯片列表"
+msgstr "A list of slides"
+
+#: inc/setting/options/OptionCarousel.php:107
+msgid "幻灯标题"
+msgstr "Slide title"
+
+#: inc/setting/options/OptionCarousel.php:108
+msgid "幻灯图片"
+msgstr "Slide pictures"
+
+#: inc/setting/options/OptionCarousel.php:108
+msgid "建议尺寸2:1，所有图片大小必须一致"
+msgstr "The recommended size is 2:1, and all images must be the same size"
+
+#: inc/setting/options/OptionCarousel.php:109
+msgid "指向链接"
+msgstr "Point to a link"
+
+#: inc/setting/options/OptionCarousel.php:110
+msgid "新标签打开"
+msgstr "A new tab opens"
+
+#: inc/setting/options/OptionCarousel.php:111
+#: inc/setting/options/OptionCarousel.php:145
+msgid "隐藏"
+msgstr "Hide"
+
+#: inc/setting/options/OptionCarousel.php:111
+#: inc/setting/options/OptionCarousel.php:145
+msgid "隐藏后将不会显示"
+msgstr "When hidden, it will not be displayed"
+
+#: inc/setting/options/OptionCarousel.php:119
+msgid "全局公告"
+msgstr "Global Announcement"
+
+#: inc/setting/options/OptionCarousel.php:137
+msgid "公告列表"
+msgstr "List of announcements"
+
+#: inc/setting/options/OptionCarousel.php:142
+msgid "公告标题(支持HTML)"
+msgstr "Announcement title (HTML supported)"
+
+#: inc/setting/options/OptionCarousel.php:143
+msgid "指向链接(可空)"
+msgstr "Point to link (nullable)"
+
+#: inc/setting/options/OptionCarousel.php:144
+msgid "图标class(可空)"
+msgstr ""
+
+#: inc/setting/options/OptionCms.php:11
+msgid "CMS布局"
+msgstr "CMS layout"
+
+#: inc/setting/options/OptionCms.php:16
+msgid "显示最新文章"
+msgstr "Displays the latest articles"
+
+#: inc/setting/options/OptionCms.php:22
+msgid "最新文章数量"
+msgstr "Number of latest articles"
+
+#: inc/setting/options/OptionCms.php:29
+msgid "显示CMS两栏布局"
+msgstr "Displays the CMS two-column layout"
+
+#: inc/setting/options/OptionCms.php:35
+msgid "CMS两栏布局分类ID"
+msgstr "CMS two-column layout category ID"
+
+#: inc/setting/options/OptionCms.php:44
+msgid "CMS两栏布局每栏数量"
+msgstr "CMS two-column layout with the number of each column"
+
+#: inc/setting/options/OptionDebug.php:11
+msgid "调试与开发"
+msgstr "Debug & Dev"
+
+#: inc/setting/options/OptionDebug.php:16
+msgid "显示SQL查询统计"
+msgstr "Displays SQL query statistics"
+
+#: inc/setting/options/OptionDebug.php:19
+msgid "此数据会显示在<code>console</code>，需<code>F12</code>打开控制台查看"
+msgstr ""
+"This data will be displayed in<code>console</code> and you need "
+"to<code>F12</code> open the console to view it"
+
+#: inc/setting/options/OptionDebug.php:23
+msgid "显示SQL查询详情"
+msgstr "Displays the details of the SQL query"
+
+#: inc/setting/options/OptionDebug.php:26
+msgid ""
+"此数据会显示在<code>console</code>，需<code>F12</code>打开控制台查看，需要"
+"在<code>wp-config.php</code>中加入<code>define('SAVEQUERIES', true);</code>"
+msgstr ""
+"This data will be displayed in<code>console</code>, you need to open the "
+"console to view, you need to<code>F12</code><code>wp-config.php</code> "
+"join it<code>define('SAVEQUERIES', true);</code>"
+
+#: inc/setting/options/OptionEmail.php:11
+msgid "SMTP邮件"
+msgstr "SMTP mail"
+
+#: inc/setting/options/OptionEmail.php:16
+msgid "开启SMTP"
+msgstr "Turn on SMTP"
+
+#: inc/setting/options/OptionEmail.php:19
+msgid "开启会覆盖WordPress默认配置"
+msgstr "Turning on overrides the WordPress default configuration"
+
+#: inc/setting/options/OptionEmail.php:23
+msgid "SMTP加密"
+msgstr "SMTP encryption"
+
+#: inc/setting/options/OptionEmail.php:30
+msgid "发件人邮箱"
+msgstr "Sender mailbox"
+
+#: inc/setting/options/OptionEmail.php:36
+msgid "SMTP服务器"
+msgstr "SMTP server"
+
+#: inc/setting/options/OptionEmail.php:43
+msgid "SMTP端口"
+msgstr "SMTP port"
+
+#: inc/setting/options/OptionEmail.php:49
+msgid "SMTP账户"
+msgstr "SMTP account"
+
+#: inc/setting/options/OptionEmail.php:55
+msgid "SMTP密码"
+msgstr "SMTP password"
+
+#: inc/setting/options/OptionEmail.php:58
+msgid "一般非邮箱账号直接密码，而是对应的平台的POP3/SMTP授权码"
+msgstr ""
+"Generally, it is not the direct password of the email account, but the "
+"POP3/SMTP authorization code of the corresponding platform"
+
+#: inc/setting/options/OptionExtend.php:12
+msgid "扩展及兼容"
+msgstr "Extends & Compatible"
+
+#: inc/setting/options/OptionExtend.php:18
+msgid "Puock官方小程序支持"
+msgstr "Puock official mini program support"
+
+#: inc/setting/options/OptionExtend.php:21
+msgid ""
+"Puock官方小程序支持，此选项安装小程序插件后会自动开启，如需关闭请在小程序插"
+"件中关闭"
+msgstr ""
+"Puock official Mini Program support, this option will be automatically "
+"turned on after installing the Mini Program plug-in, if you need to turn "
+"it off, please turn it off in the Mini Program Plug-in"
+
+#: inc/setting/options/OptionExtend.php:21
+msgid "了解小程序?"
+msgstr "Understanding Mini Programs?"
+
+#: inc/setting/options/OptionExtend.php:23
+msgid "热门 & 推荐"
+msgstr "Popular & recommended"
+
+#: inc/setting/options/OptionExtend.php:27
+msgid "Strawberry图标库"
+msgstr "Strawberry icon library"
+
+#: inc/setting/options/OptionExtend.php:30
+msgid "开启之后会在前台加载Strawberry图标库支持"
+msgstr ""
+"When enabled, Strawberry icon library support will be loaded in the "
+"foreground"
+
+#: inc/setting/options/OptionExtend.php:34
+msgid "支持"
+msgstr "Support"
+
+#: inc/setting/options/OptionExtend.php:37
+msgid "开启之后会在前台加载DPlayer支持"
+msgstr "When enabled, DPlayer support will be loaded in the foreground"
+
+#: inc/setting/template.php:33
+msgid "简单/方便/高颜值"
+msgstr "Simple / Convenient / Good-looking"
+
+#: inc/setting/template.php:34
+msgid "主题"
+msgstr "Theme"
+
+#: page.php:14 single.php:18
+msgid "次阅读"
+msgstr "Views"
+
+#: page.php:20 single.php:39
+msgid "编辑"
+msgstr ""
+
+#: single.php:30 single.php:114
+msgid "共计"
+msgstr "total "
+
+#: single.php:30
+msgid "字  "
+msgstr ""
+
+#: single.php:33
+msgid "预计"
+msgstr ""
+
+#: single.php:33
+msgid "分钟读完"
+msgstr ""
+
+#: single.php:84
+msgid "发表至："
+msgstr ""
+
+#: single.php:107 single.php:122
+msgid "版权声明："
+msgstr "Copyright notice: "
+
+#: single.php:107
+msgid "本站原创文章，由"
+msgstr "Our original article, by "
+
+#: single.php:114
+msgid "发表，"
+msgstr " publish, "
+
+#: single.php:114 single.php:126
+msgid "字。"
+msgstr " words."
+
+#: single.php:117
+msgid "转载说明："
+msgstr ""
+
+#: single.php:122
 msgid "本文于"
 msgstr "This paper is published in "
 
-#: single.php:80
+#: single.php:123
 msgid "转载自"
 msgstr " Reprinted from "
 
-#: single.php:81
+#: single.php:126
 msgid "，共计"
 msgstr " , total "
 
-#: single.php:83
+#: single.php:129
+msgid "转载提示："
+msgstr "Reprint tips: "
+
+#: single.php:130
 msgid "此文章非本站原创文章，若需转载请联系原作者获得转载授权。"
 msgstr ""
 "This article is not our original article, if you need to reprint, please "
 "contact the original author to obtain the reprint authorization."
 
-#: single.php:106
-msgid "分享至"
-msgstr "Share to"
+#: templates/module-links.php:34
+msgid "更多链接"
+msgstr "More links"
+
+#: update-checker/Puc/v4p11/Plugin/Ui.php:54
+msgid "View details"
+msgstr ""
+
+#: update-checker/Puc/v4p11/Plugin/Ui.php:77
+#, php-format
+msgid "More information about %s"
+msgstr ""
+
+#: update-checker/Puc/v4p11/Plugin/Ui.php:128
+msgid "Check for updates"
+msgstr ""
+
+#: update-checker/Puc/v4p11/Plugin/Ui.php:214
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr ""
+
+#: update-checker/Puc/v4p11/Plugin/Ui.php:216
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr ""
+
+#: update-checker/Puc/v4p11/Plugin/Ui.php:218
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+
+#: update-checker/Puc/v4p11/Plugin/Ui.php:224
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr ""
+
+#: update-checker/Puc/v4p11/Vcs/PluginUpdateChecker.php:98
+msgid "There is no changelog available."
+msgstr ""
 
 #. Theme Name of the plugin/theme
 msgid "Puock"
@@ -255,7 +865,7 @@ msgstr ""
 
 #. Theme URI of the plugin/theme
 #. Author URI of the plugin/theme
-msgid "https://www.licoy.cn"
+msgid "https://github.com/Licoy/wordpress-theme-puock"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -265,3 +875,24 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Licoy"
 msgstr ""
+
+#~ msgid "载入中..."
+#~ msgstr "Loading..."
+
+#~ msgid "关于我们"
+#~ msgstr "About us"
+
+#~ msgid "的文章列表"
+#~ msgstr "List of articles"
+
+#~ msgid "开始搜索"
+#~ msgstr "Search"
+
+#~ msgid "发表于："
+#~ msgstr "Published on : "
+
+#~ msgid "复制链接"
+#~ msgstr "Copy link"
+
+#~ msgid "分享至"
+#~ msgstr "Share to"

@@ -9,49 +9,49 @@ class OptionAuth extends BaseOptionItem
     {
         return [
             'key' => 'auth',
-            'label' => '登录与授权',
+            'label' => __('登录与授权', PUOCK),
             'icon' => 'czs-qq',
             'fields' => [
                 [
                     'id' => '-',
-                    'label' => '快捷登录',
+                    'label' => __('快捷登录', PUOCK),
                     'type' => 'panel',
                     'open' => true,
                     'children' => [
                         [
                             'id' => 'open_quick_login',
-                            'label' => '开启快捷登录',
+                            'label' => __('开启快捷登录', PUOCK),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
                         [
                             'id' => 'only_quick_oauth',
-                            'label' => '仅允许第三方登录',
+                            'label' => __('仅允许第三方登录', PUOCK),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
                         [
                             'id' => 'quick_login_try_max_open',
-                            'label' => '启用登录最大尝试次数限制',
-                            'tips' => '超过此次数后，对应的IP将会被禁止登录',
+                            'label' => __('启用登录最大尝试次数限制', PUOCK),
+                            'tips' => __('超过此次数后，对应的IP将会被禁止登录', PUOCK),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
                         [
                             'id' => 'quick_login_try_max_num',
-                            'label' => '登录最大尝试次数',
+                            'label' => __('登录最大尝试次数', PUOCK),
                             'type' => 'number',
                             'sdt' => 3,
                         ],
                         [
                             'id' => 'quick_login_try_max_ban_time',
-                            'label' => '登录尝试次数达到后禁止时间（分）',
+                            'label' => __('登录尝试次数达到后禁止时间（分）', PUOCK),
                             'type' => 'number',
                             'sdt' => 10,
                         ],
                         [
                             'id' => 'quick_login_forget_password',
-                            'label' => '启用忘记密码找回',
+                            'label' => __('启用忘记密码找回', PUOCK),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
@@ -60,12 +60,12 @@ class OptionAuth extends BaseOptionItem
                 [
                     'id' => '-',
                     'type' => 'panel',
-                    'label' => '后台登录保护',
+                    'label' => __('后台登录保护', PUOCK),
                     'open' => pk_is_checked('login_protection'),
                     'children' => [
                         [
                             'id' => 'login_protection',
-                            'label' => '启用后台登录保护',
+                            'label' => __('启用后台登录保护', PUOCK),
                             'type' => 'switch',
                             'sdt' => 'false',
                             'tips' => 'func:(function(args){
@@ -75,13 +75,13 @@ class OptionAuth extends BaseOptionItem
                         ],
                         [
                             'id' => 'lp_user',
-                            'label' => '后台登录保护参数',
+                            'label' => __('后台登录保护参数', PUOCK),
                             'sdt' => 'admin',
                             'showRefId' => 'login_protection',
                         ],
                         [
                             'id' => 'lp_pass',
-                            'label' => '后台登录保护值',
+                            'label' => __('后台登录保护密码', PUOCK),
                             'sdt' => 'admin',
                             'showRefId' => 'login_protection',
                         ],
@@ -89,40 +89,40 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => '第三方登录回调地址提示',
+                    'label' => __('第三方登录回调地址提示', PUOCK),
                     'type' => 'info',
                     'infoType' => 'info',
                     'tips' => '通用回调地址（callback url）为: <code>' . home_url() . '/wp-admin/admin-ajax.php</code>'
                 ],
                 [
                     'id' => 'oauth_close_register',
-                    'label' => '关闭第三方登录直接注册',
+                    'label' => __('关闭第三方登录直接注册', PUOCK),
                     'type' => 'switch',
-                    'tips' => '开启后，若用户未绑定过账户进行第三方登录时则不会自动创建新的账户',
+                    'tips' => __('开启后，若用户未绑定过账户进行第三方登录时则不会自动创建新的账户', PUOCK),
                     'std' => false
                 ],
                 [
                     'id' => '-',
-                    'label' => 'QQ登录配置',
+                    'label' => 'QQ ' . __('登录配置', PUOCK),
                     'type' => 'panel',
                     'open' => pk_is_checked('oauth_qq'),
-                    'tips' => '<a target="_blank" href="https://wiki.connect.qq.com/%E7%BD%91%E7%AB%99%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B">申请步骤及说明</a>',
+                    'tips' => '<a target="_blank" href="https://wiki.connect.qq.com/%E7%BD%91%E7%AB%99%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B">' . __('申请步骤及说明', PUOCK) . '</a>',
                     'children' => [
                         [
                             'id' => 'oauth_qq',
-                            'label' => 'QQ登录',
+                            'label' => 'QQ ' . __('登录', PUOCK),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
                         [
                             'id' => 'oauth_qq_id',
-                            'label' => 'QQ互联 APP ID',
+                            'label' => __('QQ互联', PUOCK) . ' APP ID',
                             'sdt' => '',
                             'showRefId' => 'oauth_qq',
                         ],
                         [
                             'id' => 'oauth_qq_key',
-                            'label' => 'QQ互联 APP KEY',
+                            'label' => __('QQ互联', PUOCK) . ' APP KEY',
                             'sdt' => '',
                             'showRefId' => 'oauth_qq',
                         ],
@@ -130,14 +130,14 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => 'Github登录配置',
+                    'label' => 'Github ' . __('登录配置', PUOCK),
                     'type' => 'panel',
                     'open' => pk_is_checked('oauth_github'),
-                    'tips' => '<a target="_blank" href="https://www.ruanyifeng.com/blog/2019/04/github-oauth.html">申请步骤及说明</a>',
+                    'tips' => '<a target="_blank" href="https://www.ruanyifeng.com/blog/2019/04/github-oauth.html">' . __('申请步骤及说明', PUOCK) . '</a>',
                     'children' => [
                         [
                             'id' => 'oauth_github',
-                            'label' => 'Github登录',
+                            'label' => 'Github ' . __('登录', PUOCK),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
@@ -157,26 +157,26 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => '微博登录配置',
+                    'label' => __('微博', PUOCK).' ' . __('登录配置', PUOCK),
                     'type' => 'panel',
                     'open' => pk_is_checked('oauth_weibo'),
-                    'tips' => '<a target="_blank" href="https://open.weibo.com/wiki/%E7%BD%91%E7%AB%99%E6%8E%A5%E5%85%A5%E4%BB%8B%E7%BB%8D">申请步骤及说明</a>',
+                    'tips' => '<a target="_blank" href="https://open.weibo.com/wiki/%E7%BD%91%E7%AB%99%E6%8E%A5%E5%85%A5%E4%BB%8B%E7%BB%8D">' . __('申请步骤及说明', PUOCK) . '</a>',
                     'children' => [
                         [
                             'id' => 'oauth_weibo',
-                            'label' => '微博登录',
+                            'label' => __('微博', PUOCK) . ' ' . __('登录', PUOCK),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
                         [
                             'id' => 'oauth_weibo_key',
-                            'label' => '微博 App Key',
+                            'label' => __('微博', PUOCK) . ' App Key',
                             'sdt' => '',
                             'showRefId' => 'oauth_weibo',
                         ],
                         [
                             'id' => 'oauth_weibo_secret',
-                            'label' => '微博 App Secret',
+                            'label' => __('微博', PUOCK) . ' App Secret',
                             'sdt' => '',
                             'showRefId' => 'oauth_weibo',
                         ],
@@ -184,26 +184,26 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => 'Gitee登录配置',
+                    'label' => 'Gitee ' . __('登录配置', PUOCK),
                     'type' => 'panel',
                     'open' => pk_is_checked('oauth_gitee'),
-                    'tips' => '<a target="_blank" href="https://gitee.com/api/v5/oauth_doc#/list-item-3">申请步骤及说明</a>',
+                    'tips' => '<a target="_blank" href="https://gitee.com/api/v5/oauth_doc#/list-item-3">' . __('申请步骤及说明', PUOCK) . '</a>',
                     'children' => [
                         [
                             'id' => 'oauth_gitee',
-                            'label' => 'Gitee（码云）登录',
+                            'label' => 'Gitee ' . __('登录', PUOCK),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
                         [
                             'id' => 'oauth_gitee_id',
-                            'label' => 'Gitee（码云）Client ID',
+                            'label' => 'Gitee Client ID',
                             'sdt' => '',
                             'showRefId' => 'oauth_gitee',
                         ],
                         [
                             'id' => 'oauth_gitee_secret',
-                            'label' => 'Gitee（码云）Client Secret',
+                            'label' => 'Gitee Client Secret',
                             'sdt' => '',
                             'showRefId' => 'oauth_gitee',
                         ],

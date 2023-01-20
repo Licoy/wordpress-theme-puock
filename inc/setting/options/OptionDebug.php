@@ -8,22 +8,22 @@ class OptionDebug extends BaseOptionItem{
     {
         return [
             'key' => 'debug',
-            'label' => '调试与开发',
+            'label' =>  __('调试与开发' , PUOCK),
             'icon'=>'dashicons-code-standards',
             'fields' => [
                 [
                     'id' => 'debug_sql_count',
-                    'label' => '显示SQL查询统计',
+                    'label' => __('显示SQL查询统计', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>'此数据会显示在<code>console</code>，需<code>F12</code>打开控制台查看'
+                    'tips'=>__('此数据会显示在<code>console</code>，需<code>F12</code>打开控制台查看', PUOCK),
                 ],
                 [
                     'id' => 'debug_sql_detail',
-                    'label' => '显示SQL查询详情',
+                    'label' => __('显示SQL查询详情', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>"此数据会显示在<code>console</code>，需<code>F12</code>打开控制台查看，需要在<code>wp-config.php</code>中加入<code>define('SAVEQUERIES', true);</code>"
+                    'tips'=>__("此数据会显示在<code>console</code>，需<code>F12</code>打开控制台查看，需要在<code>wp-config.php</code>中加入<code>define('SAVEQUERIES', true);</code>", PUOCK)
                 ],
             ],
         ];

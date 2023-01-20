@@ -9,7 +9,7 @@ class OptionAbout extends BaseOptionItem
     {
         return [
             'key' => 'about',
-            'label' => '关于及指引',
+            'label' => __('关于及指引', PUOCK),
             'icon' => 'czs-label-info',
             'fields' => [
                 [

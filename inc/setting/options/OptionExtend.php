@@ -9,32 +9,32 @@ class OptionExtend extends BaseOptionItem
     {
         return [
             'key' => 'extend',
-            'label' => '扩展及兼容',
+            'label' => __('扩展及兼容', PUOCK),
             'icon' => 'dashicons-admin-plugins',
-            'badge' => ['dot'=>true,'processing'=>true],
+            'badge' => ['dot' => true, 'processing' => true],
             'fields' => [
                 [
                     'id' => 'office_mp_support',
-                    'label' => 'Puock官方小程序支持',
+                    'label' => __('Puock官方小程序支持', PUOCK),
                     'type' => 'switch',
                     'value' => defined('PUOCK_MP_VERSION'),
-                    'tips' => "Puock官方小程序支持，此选项安装小程序插件后会自动开启，如需关闭请在小程序插件中关闭 （<a target='_blank' href='https://licoy.cn/puock-mp.html'>了解小程序？</a>）",
+                    'tips' => __('Puock官方小程序支持，此选项安装小程序插件后会自动开启，如需关闭请在小程序插件中关闭', PUOCK) . " （<a target='_blank' href='https://licoy.cn/puock-mp.html'>" . __('了解小程序?', PUOCK) . "</a>）",
                     'disabled' => true,
-                    'badge' => ['value'=>'🔥 热门 & 推荐']
+                    'badge' => ['value' => '🔥 ' . __('热门 & 推荐', PUOCK)]
                 ],
                 [
                     'id' => 'strawberry_icon',
-                    'label' => '草莓图标库',
+                    'label' => __('Strawberry图标库', PUOCK),
                     'type' => 'switch',
                     'sdt' => false,
-                    'tips' => "开启之后会在前台加载草莓图标库支持"
+                    'tips' => __('开启之后会在前台加载Strawberry图标库支持', PUOCK)
                 ],
                 [
                     'id' => 'dplayer',
-                    'label' => 'DPlayer支持',
+                    'label' => 'DPlayer' . ' ' . __('支持', PUOCK),
                     'type' => 'switch',
                     'sdt' => false,
-                    'tips' => "开启之后会将视频播放器替换为dplayer"
+                    'tips' => __('开启之后会在前台加载DPlayer支持', PUOCK)
                 ],
             ],
         ];

@@ -8,54 +8,54 @@ class OptionEmail extends BaseOptionItem{
     {
         return [
             'key' => 'email',
-            'label' => 'SMTP邮件',
+            'label' => __('SMTP邮件', PUOCK),
             'icon'=>'dashicons-email-alt',
             'fields' => [
                 [
                     'id' => 'smtp_open',
-                    'label' => '自定义SMTP邮件',
+                    'label' => __('开启SMTP', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips'=>'开启会覆盖WordPress默认配置'
+                    'tips'=>__('开启会覆盖WordPress默认配置', PUOCK),
                 ],
                 [
                     'id' => 'smtp_ssl',
-                    'label' => '启用SSL安全模式',
+                    'label' => __('SMTP加密', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
                     'showRefId' => 'smtp_open',
                 ],
                 [
                     'id' => 'smtp_form',
-                    'label' => '发件人地址',
+                    'label' => __('发件人邮箱', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'smtp_open',
                 ],
                 [
                     'id' => 'smtp_host',
-                    'label' => 'SMTP服务器',
+                    'label' => __('SMTP服务器', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'smtp_open',
                     'tips'=>'如163邮箱的为：smtp.163.com'
                 ],
                 [
                     'id' => 'smtp_port',
-                    'label' => 'SMTP服务器端口',
+                    'label' => __('SMTP端口', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'smtp_open',
                 ],
                 [
                     'id' => 'smtp_u',
-                    'label' => '邮箱账号',
+                    'label' => __('SMTP账户', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'smtp_open',
                 ],
                 [
                     'id' => 'smtp_p',
-                    'label' => '邮箱密码',
+                    'label' => __('SMTP密码', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'smtp_open',
-                    'tips'=>'一般非邮箱账号直接密码，而是对应的平台的POP3/SMTP授权码'
+                    'tips'=>__('一般非邮箱账号直接密码，而是对应的平台的POP3/SMTP授权码', PUOCK),
                 ],
             ],
         ];
