@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Puock\n"
-"POT-Creation-Date: 2023-01-20 11:30+0800\n"
-"PO-Revision-Date: 2023-01-20 11:36+0800\n"
+"POT-Creation-Date: 2023-01-20 14:15+0800\n"
+"PO-Revision-Date: 2023-01-20 14:16+0800\n"
 "Last-Translator: Licoy <licoycn@gmail.com>\n"
 "Language-Team: Licoy <licoycn@gmail.com>\n"
 "Language: en_US\n"
@@ -949,9 +949,10 @@ msgid "关闭全站评论功能"
 msgstr "Turn off site-wide commenting"
 
 #: inc/setting/options/OptionGlobal.php:163
-msgid "隐藏底部\"感谢使用WordPress进行创作\"和左上角标识"
+msgid "隐藏底部<code>感谢使用WordPress进行创作</code>和左上角标识"
 msgstr ""
-"Hide the bottom \"Thanks for authoring with WordPress\" and the top left logo"
+"Hide the bottom<code>Thanks for using WordPress for creation</code> and "
+"upper-left logos"
 
 #: inc/setting/options/OptionGlobal.php:169
 msgid "全站变灰"
@@ -1241,11 +1242,11 @@ msgstr "Geetest ID"
 msgid "极验验证Key"
 msgstr "Geetest key"
 
-#: inc/setting/template.php:33
+#: inc/setting/template.php:34
 msgid "简单/方便/高颜值"
 msgstr "Simple / Convenient / Good-looking"
 
-#: inc/setting/template.php:34
+#: inc/setting/template.php:35
 msgid "主题"
 msgstr "Theme"
 

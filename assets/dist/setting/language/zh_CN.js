@@ -34,6 +34,7 @@ window.puockSettingLangMessage = {
         'tip: long press the drag icon after each column option to drag up and down to change the order':'提示：长按每列选项后的拖拽图标可以上下拖动改变顺序',
         'drag and drop to change the order':'拖拽改变顺序',
         'add {msg}':'添加{msg}',
+        'add a line {msg}':'添加一行{msg}',
         'delete':'删除',
         'please select the image file':'请选择图片文件',
         'please select the text file':'请选择文本文件',

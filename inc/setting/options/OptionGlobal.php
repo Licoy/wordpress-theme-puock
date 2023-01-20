@@ -160,7 +160,7 @@ class OptionGlobal extends BaseOptionItem
                 ],
                 [
                     'id' => 'hide_footer_wp_t',
-                    'label' => __('隐藏底部"感谢使用WordPress进行创作"和左上角标识', PUOCK),
+                    'label' => __('隐藏底部<code>感谢使用WordPress进行创作</code>和左上角标识', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
