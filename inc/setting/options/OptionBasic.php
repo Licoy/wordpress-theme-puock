@@ -67,7 +67,7 @@ class OptionBasic extends BaseOptionItem
                     'label' => __('异步浏览量统计', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips' => __('此选项为开启缓存后浏览量不自增问题解决方案',PUOCK)
+                    'tips' => __('此选项为开启缓存后浏览量不自增问题解决方案', PUOCK)
                 ],
                 [
                     'id' => 'page_animate',
@@ -128,7 +128,7 @@ class OptionBasic extends BaseOptionItem
                 [
                     'id' => 'post_poster_open',
                     'label' => __('文章海报生成', PUOCK),
-                    'tips' => __('使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求',PUOCK),
+                    'tips' => __('使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求', PUOCK),
                     'type' => 'switch',
                     'sdt' => false,
                 ],
@@ -147,7 +147,7 @@ class OptionBasic extends BaseOptionItem
                 [
                     'id' => 'page_b_recommend_num',
                     'label' => __('正文底部相关推荐文章数量', PUOCK),
-                    'tips' => __('建议是4的倍数，不然会出现空缺位置',PUOCK),
+                    'tips' => __('建议是4的倍数，不然会出现空缺位置', PUOCK),
                     'type' => 'number',
                     'sdt' => 4,
                 ],
@@ -218,7 +218,7 @@ class OptionBasic extends BaseOptionItem
                 ],
                 [
                     'id' => 'post_foot_qrcode_open',
-                    'label' => __('文章正文底部二维码',PUOCK),
+                    'label' => __('文章正文底部二维码', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
                     'tips' => __('请选择宽高比例为1:1的图片', PUOCK)
@@ -231,7 +231,7 @@ class OptionBasic extends BaseOptionItem
                 ],
                 [
                     'id' => 'post_foot_qrcode_img',
-                    'label' => __('文章正文底部二维码',PUOCK),
+                    'label' => __('文章正文底部二维码', PUOCK),
                     'type' => 'img',
                     'showRefId' => 'post_foot_qrcode_open',
                 ],
@@ -241,6 +241,12 @@ class OptionBasic extends BaseOptionItem
                     'type' => 'textarea',
                     'sdt' => __('除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。', PUOCK),
                 ],
+                [
+                    'id' => 'post_read_time',
+                    'label' => __('文章阅读时间', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => false,
+                ]
             ],
         ];
     }

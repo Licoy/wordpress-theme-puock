@@ -437,14 +437,6 @@ function count_words($text = null)
     }
     return mb_strlen(preg_replace('/\s/', '', html_entity_decode(strip_tags($text))), 'UTF-8');
 }
-//阅读时间统计
-function count_read_time()
-{
-    global $post;
-    $text_num = count_words();
-    $read_time = ceil($text_num / 400);
-    return mb_strlen($read_time);
-}
 
 //给文章内容添加灯箱
 function light_box_text_replace($content)

@@ -90,7 +90,7 @@ function pk_theme_footer_copyright($content)
 {
     global $pk_right_slug;
     $content .= pk_get_option('footer_info');
-    $content .= str_replace('{PUOCK_VERSION}',PUOCK_CUR_VER_STR,base64_decode($pk_right_slug));
+    $content .= str_replace('{PUOCK_VERSION}', PUOCK_CUR_VER_STR, base64_decode($pk_right_slug));
     return $content;
 }
 
@@ -428,7 +428,7 @@ function pk_compatible_githuber_md_katex($good_protocol_url, $original_url, $_co
 function pk_get_web_title()
 {
     $title = pk_get_option('web_title');
-    if(empty($title)){
+    if (empty($title)) {
         $title = get_bloginfo('name');
     }
     return $title;
@@ -507,28 +507,39 @@ function pk_skeleton($type = 'default', $line = 1)
             $out = '<div class="pk-skeleton _default"><div></div><div></div><div></div><div></div></div>';
         }
     }
-    if($line > 1){
+    if ($line > 1) {
         $out = str_repeat($out, $line);
     }
     return $out;
 }
 
-function get_entry_content_class($echo=true){
+function get_entry_content_class($echo = true)
+{
     $class = 'entry-content';
-    if(pk_is_checked('page_link_before_icon')){
+    if (pk_is_checked('page_link_before_icon')) {
         $class .= ' show-link-icon';
     }
-    if($echo){
+    if ($echo) {
         echo $class;
     }
     return $class;
 }
 
-function pk_disable_not_admin_user_profile(){
-    if(is_admin() && !current_user_can('administrator')){
-        wp_die( '您无权访问' );
+function pk_disable_not_admin_user_profile()
+{
+    if (is_admin() && !current_user_can('administrator')) {
+        wp_die('您无权访问');
     }
 }
-if(pk_is_checked('disable_not_admin_user_profile')){
+
+if (pk_is_checked('disable_not_admin_user_profile')) {
     add_action('load-profile.php', 'pk_disable_not_admin_user_profile');
+}
+
+
+function pk_read_time_tip(): string
+{
+    $words_count = count_words();
+    $read_time = ceil($words_count / 400);
+    return sprintf(__('共计 %d 个字符，预计需要花费 %d 分钟才能阅读完成。'), $words_count, $read_time);
 }

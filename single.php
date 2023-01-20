@@ -24,31 +24,29 @@
                                                 class="fa-regular fa-comment mr-1"></i><?php comments_number() ?></div>
                                 </a>
                             <?php endif; ?>
-                            <!-- 字数和阅读时间统计 -->
-                            <div class="option puock-bg ta3 t-sm mr-1"><i class="fa fa-font"></i>
-                                <span id="count_words">
-                                    <?php _e('共计', PUOCK) ?><?php echo count_words() ?><?php _e('字  ', PUOCK) ?>
-                                </span>
-                                <span id="count_read_time">
-                                    <?php _e('预计', PUOCK) ?><?php echo count_read_time() ?><?php _e('分钟读完', PUOCK) ?>
-                                </span>
-                          </div>
                             <?php if (is_user_logged_in() && current_user_can('edit_post', $post->ID)): ?>
                                 <a target="_blank" href="<?php echo get_edit_post_link() ?>">
                                     <div class="option puock-bg ta3 t-sm mr-1"><i
-                                                class="fa-regular fa-pen-to-square mr-1"></i><?php _e('编辑', PUOCK) ?></div>
+                                                class="fa-regular fa-pen-to-square mr-1"></i><?php _e('编辑', PUOCK) ?>
+                                    </div>
                                 </a>
                             <?php endif; ?>
                         </div>
-                        <?php if(!pk_is_checked("hide_global_sidebar")): ?>
-                        <div>
-                            <div class="option puock-bg ta3 t-sm mr-1 d-none d-lg-inline-block post-main-size">
-                                <i class="fa fa-up-right-and-down-left-from-center"></i></div>
-                        </div>
+                        <?php if (!pk_is_checked("hide_global_sidebar")): ?>
+                            <div>
+                                <div class="option puock-bg ta3 t-sm mr-1 d-none d-lg-inline-block post-main-size">
+                                    <i class="fa fa-up-right-and-down-left-from-center"></i></div>
+                            </div>
                         <?php endif; ?>
                     </div>
                     <div class="mt20 entry-content-box">
                         <div class="<?php get_entry_content_class() ?> content-main puock-text <?php pk_checked_out('post_content_indent', 'p-indent') ?>">
+                            <?php if (pk_is_checked('post_read_time')): ?>
+                                <p class="fs14 c-sub">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <?php echo pk_read_time_tip() ?>
+                                </p>
+                            <?php endif; ?>
                             <?php the_content(); ?>
                             <?php do_action('pk_post_content_footer'); ?>
                         </div>
@@ -78,7 +76,7 @@
                             </div>
                         <?php endif; ?>
                         <div class="footer-info puock-text mt20">
-                            <?php echo get_post_tags('mt20 tags','mb10') ?>
+                            <?php echo get_post_tags('mt20 tags', 'mb10') ?>
                             <div class="p-flex-sbc mt20 t-sm">
                                 <div>
                                     <span><?php _e('发表至：', PUOCK) ?></span><?php echo get_post_category_link_exec(true) ?>
