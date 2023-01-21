@@ -387,7 +387,9 @@ class Puock {
         if (window.LazyLoad !== undefined) {
             new window.LazyLoad({
                 container: document.querySelector("body"),
-                elements_selector: [`img[data-lazy="true"]`, el]
+                elements_selector: [`img[data-lazy="true"]`, el],
+                threshold:0,
+                use_native:true
             });
         }
     }
