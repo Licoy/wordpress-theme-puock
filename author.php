@@ -9,7 +9,7 @@
         <div class="bg"
              style="background-image: url('<?php echo PUOCK_ABS_URI.'/assets/img/show/author-bg.jpg' ?>')">
             <div class="avatar">
-                <?php echo get_avatar(get_the_author_meta('ID'), 200) ?>
+                <img <?php echo pk_get_lazy_img_info(get_avatar_url(get_the_author_meta('ID'),['size'=>200]),'avatar') ?>>
             </div>
         </div>
         <div class="info">

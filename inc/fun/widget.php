@@ -442,7 +442,7 @@ class puockReadPerson extends puockWidgetBase {
                  <div class="p-2 text-truncate text-nowrap">
                     <a href="<?php echo empty($author->url) ? 'javascript:void(0)':pk_go_link($author->url) ?>" class="a-link"
                         <?php echo empty($author->url) ? '':'target="_blank"' ?> rel="nofollow">
-                        <img class="md-avatar" src="<?php echo get_avatar_url($author->mail) ?>" alt="<?php echo $author->name?>">
+                        <img <?php echo pk_get_lazy_img_info(get_avatar_url($author->mail),'md-avatar') ?> alt="<?php echo $author->name?>">
                         <span class="t-sm"><?php echo $author->name?></span>
                     </a>
                 </div>
@@ -499,7 +499,7 @@ class puockNewComment extends puockWidgetBase {
         <div class="min-comments t-md">
             <?php foreach ($comments as $comment): ?>
              <div class="comment t-md t-line-1">
-                <img class="min-avatar" src="<?php echo get_avatar_url($comment->mail) ?>" alt="<?php echo $comment->name ?>">
+                <img <?php echo pk_get_lazy_img_info(get_avatar_url($comment->mail),'min-avatar') ?> alt="<?php echo $comment->name ?>">
                 <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->pid).'#comment-'.$comment->id ?>">
                 <span class="ta3 link-hover"><?php echo $comment->name ?></span></a>
                 <span class="c-sub t-w-400"><?php echo strip_tags(convert_smilies($comment->text),['img']) ?></span>
@@ -672,7 +672,7 @@ class puockAboutAuthor extends puockWidgetBase {
         ?>
         <div class="widget-puock-author widget">
             <div class="header" style="background-image: url('<?php echo $cover ?>')">
-                <img class="avatar" src="<?php pk_get_gravatar($email) ?>"
+                <img <?php echo pk_get_lazy_img_info(pk_get_gravatar($email,false),'avatar') ?>
                  alt="<?php echo $name ?>" title="<?php echo $name ?>">
             </div>
             <div class="content t-md puock-text">
