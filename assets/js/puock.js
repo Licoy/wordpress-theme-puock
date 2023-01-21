@@ -384,13 +384,17 @@ class Puock {
     }
 
     lazyLoadInit(parent = null, el = '.lazy') {
-        if (window.LazyLoad !== undefined) {
-            new window.LazyLoad({
-                container: document.querySelector("body"),
-                elements_selector: [`img[data-lazy="true"]`, el],
-                threshold:0,
-                use_native:true
+        if(window.lozad){
+            const observer = lozad([el,'img[data-lazy="true"]'], {
+                rootMargin: '10px 0px',
+                threshold: 0.1,
+                enableAutoReload: true,
+                load:(el)=>{
+                    el.classList.add('loaded');
+                    el.src = el.getAttribute('data-src');
+                }
             });
+            observer.observe();
         }
     }
 
