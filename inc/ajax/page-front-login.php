@@ -231,7 +231,7 @@ function pk_front_login_page_callback()
                                        id="_front_login_vd">
                             </div>
                             <div class="col-4 col-sm-5 pr15">
-                                <img class="captcha lazyload" data-src="<?php echo pk_captcha_url('login', 100, 28) ?>"
+                                <img class="captcha lazy" data-src="<?php echo pk_captcha_url('login', 100, 28) ?>"
                                      alt="验证码">
                             </div>
                         </div>
@@ -290,7 +290,7 @@ function pk_front_login_page_callback()
                                        id="_front_register_vd">
                             </div>
                             <div class="col-4 col-sm-5 pr15">
-                                <img class="captcha lazyload"
+                                <img class="captcha lazy"
                                      data-src="<?php echo pk_captcha_url('register', 100, 28) ?>"
                                      alt="验证码">
                             </div>
@@ -338,7 +338,7 @@ function pk_front_login_page_callback()
                                        id="_front_forget_password_vd">
                             </div>
                             <div class="col-4 col-sm-5 pr15">
-                                <img class="captcha lazyload"
+                                <img class="captcha lazy"
                                      data-src="<?php echo pk_captcha_url('forget-password', 100, 28) ?>"
                                      alt="验证码">
                             </div>

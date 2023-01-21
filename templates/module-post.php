@@ -1,12 +1,12 @@
 <!--文章ID：<?php the_ID() ?> -->
 <?php if (pk_post_style_list()): ?>
     <article class="block card-plain post-item p-block post-item-list">
-        <a class="t-sm thumbnail" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-            <div class="thumbnail-inner ww">
+        <div class="thumbnail">
+            <a class="t-sm  ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                 <img title="<?php the_title() ?>"
                      alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 280, 160) ?> />
-            </div>
-        </a>
+            </a>
+        </div>
         <div class="post-info">
             <div class="info-top">
                 <h2 class="info-title">
@@ -47,14 +47,12 @@
     </article>
 <?php else: ?>
     <article class="block card-plain post-item col-md-6 col-12 post-item-card">
-        <div class="p-block post-item-card-box">
+        <div class="p-block post-item-block">
             <div class="thumbnail">
-                <div class="thumbnail-inner">
-                    <a class="t-sm ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-                        <img title="<?php the_title() ?>"
-                             alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 400, 200) ?> />
-                    </a>
-                </div>
+                <a class="t-sm ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
+                    <img title="<?php the_title() ?>"
+                         alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 400, 200) ?> />
+                </a>
             </div>
             <div class="post-info">
                 <h2 class="info-title">

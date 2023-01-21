@@ -767,12 +767,17 @@ a:hover {
 
 
 #posts {
+
   .post-item {
     display: flex;
     flex-wrap: nowrap;
     align-items: stretch;
 
     .ta3-fun();
+
+    .post-item-block {
+      padding: 10px;
+    }
 
     .thumbnail {
       position: relative;
@@ -782,14 +787,24 @@ a:hover {
       margin: 0 10px 0 0;
       flex-shrink: 0;
       overflow: hidden;
+      border-radius: var(--pk-g-box-radius);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      .thumbnail-inner {
-        border-radius: 5px;
-        overflow: hidden;
+      a {
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100px;
+
+        img {
+          height: 100%;
+          &.lazy:not(.loaded){
+            height: auto !important;
+          }
+        }
       }
 
       img {
@@ -800,9 +815,11 @@ a:hover {
     &.post-item-card {
       .thumbnail {
         width: 100%;
-
-        .thumbnail-inner {
-          min-height: 160px;
+        img{
+          width: 100%;
+          &.lazy:not(.loaded){
+            width: 120px;
+          }
         }
       }
     }
@@ -869,17 +886,11 @@ a:hover {
     }
 
     .p-block {
-      padding: 0;
       width: 100%;
     }
 
     .thumbnail {
       width: 100%;
-      padding: 10px;
-
-      .thumbnail-inner {
-        border-radius: 8px !important;
-      }
     }
 
     .info-meta {
@@ -889,7 +900,7 @@ a:hover {
     }
 
     .post-info {
-      padding: 10px;
+      margin-top: 10px;
 
       .info-footer {
         padding-right: 0;
@@ -942,7 +953,7 @@ a:hover {
       display: flex;
       align-items: stretch;
 
-      .img{
+      .img {
         display: flex;
         justify-content: center;
         align-items: center;

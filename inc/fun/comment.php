@@ -21,7 +21,7 @@ function pk_comment_callback($comment, $args, $depth)
                 <?php if (pk_is_checked('basic_img_lazy_a')): ?>
                     <img src="<?php echo pk_get_lazy_pl_img() ?>"
                          data-src="<?php echo get_avatar_url($comment->comment_author_email, 64); ?>"
-                         class="avatar avatar-64 photo md-avatar lazyload" width="60" height="60">
+                         class="avatar avatar-64 photo md-avatar lazy" width="60" height="60">
                 <?php else: ?>
                     <?php echo get_avatar($comment, 64, '', '', array('class' => 'md-avatar')) ?>
                 <?php endif; ?>
