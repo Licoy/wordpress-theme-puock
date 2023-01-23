@@ -32,8 +32,7 @@ get_header();
                     <div class="mt20 p-block puock-text moments-item">
                         <div class="meta p-flex-sc">
                             <div class="avatar mr10">
-                                <img class="md-avatar mt-1"
-                                     src="<?php echo pk_get_gravatar(get_the_author_meta('email')) ?>"
+                                <img <?php echo pk_get_lazy_img_info(get_avatar_url(get_the_author_meta('email')),'md-avatar mt-1') ?>
                                      alt="<?php the_author_meta('display_name') ?>"
                                      title="<?php the_author_meta('display_name') ?>">
                             </div>

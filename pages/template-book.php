@@ -27,7 +27,7 @@ get_header();
                             <?php foreach ($books as $book): ?>
                             <li class="col-6 col-sm-4 col-md-3 col-lg-auto">
                                 <a class="shadow" title="<?php echo $book->link_name ?>" data-bs-toggle="tooltip" href="<?php echo pk_go_link($book->link_url) ?>" target="_blank" rel="nofollow">
-                                    <img class="cover" src="<?php echo $book->link_description ?>" alt="<?php echo $book->link_name ?>">
+                                    <img <?php echo pk_get_lazy_img_info($book->link_description,'cover') ?> alt="<?php echo $book->link_name ?>">
                                     <p class="puock-text text-nowrap text-truncate t-sm mt-1 w-100 mb-0"><?php echo $book->link_name ?></p>
                                 </a>
                             </li>

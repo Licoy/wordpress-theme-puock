@@ -341,7 +341,7 @@ function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = nul
             $out .= "class='{$class}' ";
         }
     } else {
-        $out = "src='" . pk_get_lazy_pl_img() . "'";
+        $out = "src='" . pk_get_lazy_pl_img() . "' ";
         $out .= "class='lazy " . $class . "' ";
         if ($thumbnail) {
             $out .= "data-src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "'";
