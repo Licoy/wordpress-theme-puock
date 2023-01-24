@@ -24,6 +24,7 @@ class Puock {
             link_blank_open: false,
             async_view_id: null,
             mode_switch: false,
+            async_view_generate_time: null,
         },
         comment: {
             loading: false,
@@ -384,12 +385,12 @@ class Puock {
     }
 
     lazyLoadInit(parent = null, el = '.lazy') {
-        if(window.lozad){
-            const observer = lozad([el,'img[data-lazy="true"]'], {
+        if (window.lozad) {
+            const observer = lozad([el, 'img[data-lazy="true"]'], {
                 rootMargin: '10px 0px',
                 threshold: 0.1,
                 enableAutoReload: true,
-                load:(el)=>{
+                load: (el) => {
                     el.classList.add('loaded');
                     el.src = el.getAttribute('data-src');
                 }
@@ -630,17 +631,19 @@ class Puock {
     }
 
     asyncCacheViews() {
-        if (this.data.params.async_view_id) {
-            $.post(this.data.params.home + "/wp-admin/admin-ajax.php?action=async_pk_views",
-                {id: this.data.params.async_view_id}, (res) => {
-                    if (res.code !== 0) {
-                        console.error(res.msg)
-                    } else {
-                        $("#post-views").text(res.data)
-                    }
-                }, 'json').error((e) => {
-                console.error(e)
-            })
+        if (this.data.params.async_view_id && this.data.params.async_view_generate_time) {
+            if (((new Date()).getTime()/1000) - this.data.params.async_view_generate_time > 10) {
+                $.post(this.data.params.home + "/wp-admin/admin-ajax.php?action=async_pk_views",
+                    {id: this.data.params.async_view_id}, (res) => {
+                        if (res.code !== 0) {
+                            console.error(res.msg)
+                        } else {
+                            $("#post-views").text(res.data)
+                        }
+                    }, 'json').error((e) => {
+                    console.error(e)
+                })
+            }
         }
     }
 

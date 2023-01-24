@@ -1,18 +1,3 @@
-<!-- 消息提示框 -->
-<div class="modal fade" id="infoToast" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title puock-text" id="infoToastTitle"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="fa fa-close t-md"></i></span>
-                </button>
-            </div>
-            <div class="modal-body puock-text t-md" id="infoToastText">
-            </div>
-        </div>
-    </div>
-</div>
 <?php if (pk_is_checked('use_post_menu')) get_template_part('templates/module', 'menus') ?>
 <!--返回顶部和底部-->
 <div id="rb-float-actions">

@@ -21,5 +21,8 @@ $headMetas = [
     'async_view_id' => pk_metas_get_async_view_id(),
     'mode_switch' => pk_is_checked('theme_mode_s')
 ];
+if($headMetas['async_view_id']){
+    $headMetas['async_view_generate_time'] = time();
+}
 ?>
 <script data-instant>var puock_metas =<?php echo json_encode($headMetas) ?>;</script>

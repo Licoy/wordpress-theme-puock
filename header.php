@@ -19,8 +19,6 @@
     <?php if (!empty(pk_get_option('css_code_header', ''))): ?>
         <?php echo "<style>" . pk_get_option('css_code_header', '') . "</style>"; ?>
     <?php endif; ?>
-    <?php if (is_single() || is_page()): ?>
-    <?php endif; ?>
 </head>
 <body class="puock-<?php echo pk_theme_light() ? 'light' : 'dark';
 echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>">
