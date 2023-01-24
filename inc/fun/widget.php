@@ -192,6 +192,7 @@ abstract class puockWidgetBase extends WP_Widget{
         $this->get_common_widget_header($instance);
         echo $out;
         $this->get_common_widget_footer($instance);
+        wp_reset_postdata();
     }
 
     /**
