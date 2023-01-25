@@ -90,21 +90,6 @@ function pk_page_meta_basic()
             )
         ]
     ]);
-    return array(
-        array(
-            "name" => "hide_side",
-            "std" => "",
-            "title" => "隐藏侧边栏",
-            "type" => "checkbox"
-        ),
-        "author_cat_comment" => array(
-            "name" => "author_cat_comment",
-            "std" => "",
-            "title" => "评论仅对作者可见",
-            "type" => "checkbox"
-        ),
-
-    );
 }
 
 pk_page_meta_basic();

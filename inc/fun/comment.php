@@ -1,4 +1,21 @@
 <?php
+
+function pk_comment_author_view($text, $comment)
+{
+    global $authordata;
+    $author_view = get_post_meta($comment->comment_post_ID, 'author_cat_comment', true) == 'true';
+    if(empty($authordata)){
+        $authordata = get_userdata(get_post_field('post_author', $comment->comment_post_ID));
+    }
+    $is_author = $authordata->ID == get_current_user_id();
+    if($author_view && !$is_author){
+        $text = apply_filters('pk_comment_author_view','<div class="fs12 c-sub"><i class="fa fa-lock"></i> 评论仅对作者可见</div>');
+    }
+    return $text;
+}
+
+add_filter('comment_text', 'pk_comment_author_view', 10, 2);
+
 function pk_comment_callback($comment, $args, $depth)
 {
     global $authordata;
@@ -51,8 +68,7 @@ function pk_comment_callback($comment, $args, $depth)
         <div class="content-text t-md mt10 puock-text" <?php if (!pk_open_show_comment_avatar()) {
             echo 'style="margin-left:0"';
         } ?>>
-            <?php if (!$author_cat_comment || $is_author): comment_text(); else: ?>
-                <?php echo "<span><i class='fa fa-lock'></i>&nbsp;此评论仅对作者可见</span>";endif; ?>
+            <?php comment_text() ?>
             <?php if ($comment->comment_approved == '0') : ?>
                 <p class="c-sub mt-1"><i class="fa fa-warning mr-1"></i>您的评论正在等待审核！</p>
             <?php endif; ?>
