@@ -11,7 +11,6 @@ class OptionExtend extends BaseOptionItem
             'key' => 'extend',
             'label' => __('扩展及兼容', PUOCK),
             'icon' => 'dashicons-admin-plugins',
-            'badge' => ['dot' => true, 'processing' => true],
             'fields' => [
                 [
                     'id' => 'office_mp_support',

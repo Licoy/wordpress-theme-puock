@@ -11,7 +11,6 @@ class OptionGlobal extends BaseOptionItem
             'key' => 'global',
             'label' => __('全局设置', PUOCK),
             'icon' => 'dashicons-admin-site',
-            'badge' => ['dot' => 'true', 'processing' => true],
             'fields' => [
                 [
                     'id' => 'index_mode',
