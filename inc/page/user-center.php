@@ -29,7 +29,7 @@ get_header();
                 </div>
             </div>
             <div class="col-lg-9 col-md-12 fs14">
-                <form action="">
+                <form action="<?php echo pk_ajax_url('pk_user_update_profile') ?>" class="ajax-form" data-no-reset>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">ID</label>
                         <div class="col-sm-10">
@@ -46,20 +46,23 @@ get_header();
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">昵称</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" value="<?php echo $userinfo->nickname ?>">
+                            <input name="nickname" type="text" class="form-control" value="<?php echo $userinfo->nickname ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">网站地址</label>
                         <div class="col-sm-10">
-                            <input type="url" class="form-control" value="<?php echo $userinfo->user_url ?>">
+                            <input name="user_url" type="url" class="form-control" value="<?php echo $userinfo->user_url ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">个人说明</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="4"><?php echo $userinfo->description ?></textarea>
+                            <textarea name="description" class="form-control" rows="4"><?php echo $userinfo->description ?></textarea>
                         </div>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button class="btn btn-primary btn-sm" type="submit">提交保存</button>
                     </div>
                 </form>
             </div>

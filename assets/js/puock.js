@@ -168,7 +168,9 @@ class Puock {
                         this.stopLoading(loading)
                         if (res.code === 0) {
                             this.toast(res.msg || successTip, TYPE_SUCCESS)
-                            form.trigger("reset")
+                            if (form.data("no-reset") === undefined) {
+                                form.trigger("reset")
+                            }
                             if (res.data) {
                                 const resData = res.data
                                 if (resData.action) {
@@ -632,7 +634,7 @@ class Puock {
 
     asyncCacheViews() {
         if (this.data.params.async_view_id && this.data.params.async_view_generate_time) {
-            if (((new Date()).getTime()/1000) - this.data.params.async_view_generate_time > 10) {
+            if (((new Date()).getTime() / 1000) - this.data.params.async_view_generate_time > 10) {
                 $.post(this.data.params.home + "/wp-admin/admin-ajax.php?action=async_pk_views",
                     {id: this.data.params.async_view_id}, (res) => {
                         if (res.code !== 0) {

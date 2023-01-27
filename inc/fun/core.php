@@ -877,7 +877,13 @@ function pk_get_req_data(array $model)
             if (isset($item['default'])) {
                 $data[$key] = $item['default'];
             }
+            if ($item['empty'] ?? false) {
+                $data[$key] = '';
+            }
         } else {
+            if ($item['remove_html'] ?? false) {
+                $val = sanitize_text_field($val);
+            }
             $data[$key] = $val;
         }
     }
@@ -944,15 +950,15 @@ function pk_vd_gt_validate(array $args = null)
 
 function pk_user_center_url(): string
 {
-    if(pk_is_checked('user_center')){
-        return home_url().'/uc';
+    if (pk_is_checked('user_center')) {
+        return home_url() . '/uc';
     }
     return get_edit_profile_url();
 }
 
 function pk_rewrite_rule()
 {
-    if(pk_is_checked('user_center')){
+    if (pk_is_checked('user_center')) {
         add_rewrite_rule("^uc/?", 'index.php?pagename=user-center', "top");
     }
 }
@@ -967,7 +973,7 @@ function pk_template_redirect()
         $template = '';
         switch ($page_name) {
             case 'user-center':
-                $template = PUOCK_ABS_DIR.'/inc/page/user-center.php';
+                $template = PUOCK_ABS_DIR . '/inc/page/user-center.php';
                 break;
             default:
                 break;
@@ -981,7 +987,8 @@ function pk_template_redirect()
 
 add_action('template_redirect', 'pk_template_redirect');
 
-function pk_load_template($_template_file, $require_once = true, $args = array()){
+function pk_load_template($_template_file, $require_once = true, $args = array())
+{
     status_header(200);
     load_template($_template_file, $require_once, $args);
 }
