@@ -74,13 +74,14 @@ foreach (array_merge($shortCodeColors, array('link')) as $sc_btn) {
     add_shortcode('btn-' . $sc_btn, 'sc_btn');
 }
 
-//集成dplayer播放器
-function pk_dplayer_videos($attr, $content = null)
+//视频
+function pk_sc_video($attr, $content = null)
 {
     extract(shortcode_atts(array(
         'url' => '', 'href' => '',
         'autoplay' => false, 'type' => 'auto',
         'pic' => '', 'class' => '',
+        'ssl'=>false,
     ), $attr));
     if (empty($url) && empty($href)) {
         return sc_tips(array('outline'=>true), '<span class="c-sub fs14">视频警告：播放链接不能为空</span>', 't-warning');
@@ -88,9 +89,12 @@ function pk_dplayer_videos($attr, $content = null)
     if (empty($url)) {
         $url = $href;
     }
-    $id = mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
+    if(strpos($url, 'http://') === false && strpos($url, 'https://') === false){
+        $url = ($ssl ? 'https://' : 'http://') . $url;
+    }
     $auto = ($autoplay === 'true') ? 'true' : 'false';
     if (pk_is_checked('dplayer')) {
+        $id = mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
         $out = "<div id='dplayer-{$id}' class='{$class}'></div>";
         $out .= "<script>$(function() {
             new DPlayer({
@@ -106,12 +110,12 @@ function pk_dplayer_videos($attr, $content = null)
         return $out;
     } else {
         $autoplay = $auto == 'true' ? 'autoplay' : '';
-        return "<video src='$url' $autoplay controls></video>";
+        return "<video $autoplay src=\"$url\" controls></video>";
     }
 }
+add_shortcode('video', 'pk_sc_video');
+add_shortcode('videos', 'pk_sc_video');
 
-add_shortcode('video', 'pk_dplayer_videos');
-add_shortcode('videos', 'pk_dplayer_videos');
 //解析音频链接
 function pk_music($attr, $content = null)
 {
