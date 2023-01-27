@@ -60,6 +60,7 @@ function pk_ajax_update_theme_options()
         $body = pk_ajax_get_req_body();
         update_option(PUOCK_OPT, $body);
         do_action('pk_option_updated', $body);
+        flush_rewrite_rules();
         wp_send_json_success();
     } else {
         wp_send_json_error('权限不足');

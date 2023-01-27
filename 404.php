@@ -15,17 +15,17 @@ get_header();
                 <a class="a-link" href="<?php echo home_url() ?>"><i class="fa fa-home"></i>&nbsp;<?php _e('返回首页', PUOCK) ?></a>
             </div>
         </div>
-        <script>
-            var timeCountDownS = 3;
-            var timeCountDownVal = 3;
-            timeCountDownVal = setInterval(function () {
-                $("#time-count-down").text(--timeCountDownS);
-            },1000);
-            setTimeout(function () {
-                window.clearInterval(timeCountDownVal);
-                window.location = '/';
-            },3000);
-        </script>
+<!--        <script>-->
+<!--            var timeCountDownS = 3;-->
+<!--            var timeCountDownVal = 3;-->
+<!--            timeCountDownVal = setInterval(function () {-->
+<!--                $("#time-count-down").text(--timeCountDownS);-->
+<!--            },1000);-->
+<!--            setTimeout(function () {-->
+<!--                window.clearInterval(timeCountDownVal);-->
+<!--                window.location = '/';-->
+<!--            },3000);-->
+<!--        </script>-->
     </div>
 
 

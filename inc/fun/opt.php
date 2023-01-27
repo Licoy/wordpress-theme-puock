@@ -543,3 +543,17 @@ function pk_read_time_tip(): string
     $read_time = ceil($words_count / 400);
     return sprintf(__('共计 %d 个字符，预计需要花费 %d 分钟才能阅读完成。'), $words_count, $read_time);
 }
+
+function pk_set_custom_seo($title, $keywords = '', $description = '')
+{
+    $GLOBALS['pk-seo'] = array(
+        'title' => $title,
+        'keywords' => $keywords,
+        'description' => $description
+    );
+}
+
+function pk_get_custom_seo()
+{
+    return $GLOBALS['pk-seo'] ?? array();
+}

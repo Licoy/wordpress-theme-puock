@@ -361,13 +361,13 @@ if (pk_is_checked('basic_img_lazy_z')) {
     add_filter('the_content', 'pk_content_img_lazy');
 }
 //获取图片缩略图链接
-function pk_get_img_thumbnail_src($src, $width, $height,$args=array())
+function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
 {
     if ($width == null || $height == null) {
         return $src;
     }
-    if(pk_is_checked('thumbnail_rewrite_open')){
-        return home_url() . "/timthumb/w_{$width}/h_{$height}/q_90/zc_1/a_c/".str_replace("=","",base64_encode($src)).".png";
+    if (pk_is_checked('thumbnail_rewrite_open')) {
+        return home_url() . "/timthumb/w_{$width}/h_{$height}/q_90/zc_1/a_c/" . str_replace("=", "", base64_encode($src)) . ".png";
     }
     return PUOCK_ABS_URI . "/timthumb.php?w={$width}&h={$height}&a=c&zc=1&q=90&src=" . $src;
 }
@@ -417,7 +417,7 @@ function pk_comment_author_url($comment_ID = 0)
         $attr = "target='_blank' rel='external nofollow'";
     }
     $author = get_comment_author($comment_ID);
-    echo empty($url) ? $author : "<a ".$attr." href='" . pk_go_link($url) . "' class='url'>$author</a>";
+    echo empty($url) ? $author : "<a " . $attr . " href='" . pk_go_link($url) . "' class='url'>$author</a>";
 }
 
 //评论回复通知
@@ -657,7 +657,7 @@ function pk_get_main_menu($mobile = false)
     if (is_user_logged_in()) {
         $user = wp_get_current_user();
         $avatar = get_avatar_url($user->user_email);
-        $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="用户中心" href="' . get_edit_profile_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
+        $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="用户中心" href="' . pk_user_center_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
         if (pk_is_checked('open_quick_login')) {
             $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url($wp->request)]);
@@ -766,7 +766,7 @@ function pk_pre_post_set($query)
 {
     if ($query->is_home() && $query->is_main_query()) {
         if (pk_get_option('index_mode', '') == 'cms') {
-            $query->set('posts_per_page', pk_get_option('cms_show_new_num', 5));
+            $query->set('posts_per_page', pk_get_option('cms_show_new_num', 6));
         }
     }
 }
@@ -940,4 +940,48 @@ function pk_vd_gt_validate(array $args = null)
         throw new Exception('验证行为失败: ' . $result['msg'] ?? $result['reason']);
     }
     return true;
+}
+
+function pk_user_center_url(): string
+{
+    if(pk_is_checked('user_center')){
+        return home_url().'/uc';
+    }
+    return get_edit_profile_url();
+}
+
+function pk_rewrite_rule()
+{
+    if(pk_is_checked('user_center')){
+        add_rewrite_rule("^uc/?", 'index.php?pagename=user-center', "top");
+    }
+}
+
+add_action('init', 'pk_rewrite_rule');
+
+function pk_template_redirect()
+{
+    global $wp_query;
+    $page_name = $wp_query->get('pagename');
+    if (!empty($page_name)) {
+        $template = '';
+        switch ($page_name) {
+            case 'user-center':
+                $template = PUOCK_ABS_DIR.'/inc/page/user-center.php';
+                break;
+            default:
+                break;
+        }
+        if (!empty($template)) {
+            pk_load_template($template);
+            exit;
+        }
+    }
+}
+
+add_action('template_redirect', 'pk_template_redirect');
+
+function pk_load_template($_template_file, $require_once = true, $args = array()){
+    status_header(200);
+    load_template($_template_file, $require_once, $args);
 }

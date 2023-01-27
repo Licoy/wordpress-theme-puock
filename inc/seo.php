@@ -1,12 +1,14 @@
 <?php $titleConn = " " . pk_get_option("title_conn") . " " ?>
 <?php $blog_name = pk_get_web_title();
 $pkSeoPageInfo = ''; ?>
-<?php global $other_page_title;
+<?php
+$custom_seo = pk_get_custom_seo();
+$custom_seo_title = $custom_seo['title'] ?? '';
 if (get_query_var('paged')) {
     $pkSeoPageInfo = $titleConn . '第' . get_query_var('paged') . '页';
 }
-if (isset($other_page_title)) { ?>
-    <title><?php echo $other_page_title . $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
+if (!empty($custom_seo_title)) { ?>
+    <title><?php echo $custom_seo['title'] . $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
 <?php } else if (is_home()) { ?>
     <title><?php echo $blog_name . $pkSeoPageInfo . (pk_get_option('web_title_2') ? $titleConn . pk_get_option('web_title_2') : ''); ?></title>
 <?php } else if (is_search()) { ?><title>搜索"<?php echo $_REQUEST['s'] ?>

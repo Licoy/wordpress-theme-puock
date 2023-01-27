@@ -22,6 +22,14 @@ class OptionExtend extends BaseOptionItem
                     'badge' => ['value' => '🔥 ' . __('热门 & 推荐', PUOCK)]
                 ],
                 [
+                    'id' => 'user_center',
+                    'label' => __('用户中心', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => false,
+                    'badge' => ['value' => 'New'],
+                    'tips' => __('使用前请先配置wordpress伪静态规则：<code>try_files $uri $uri/ /index.php?$args</code>', PUOCK)
+                ],
+                [
                     'id' => 'strawberry_icon',
                     'label' => __('Strawberry图标库', PUOCK),
                     'type' => 'switch',

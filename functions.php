@@ -186,7 +186,7 @@ function pk_get_post_date()
     $c_time = time() - $time;
     $day = 86400;
     switch ($c_time) {
-            //todo 本地化翻译
+        //todo 本地化翻译
         case $c_time < $day:
             $res = '近一天内';
             break;
@@ -368,7 +368,8 @@ if (!function_exists('pk_paging')) {
 //获取面包屑导航
 function pk_breadcrumbs()
 {
-    global $cat, $other_page_title;
+    global $cat;
+    $custom_seo_title = pk_get_custom_seo()['title'] ?? '';
     $out = '<div id="breadcrumb" class="' . (pk_open_box_animated('animated fadeInUp', false)) . '">';
     $out .= '<nav aria-label="breadcrumb">';
     $out .= '<ol class="breadcrumb">';
@@ -409,8 +410,8 @@ function pk_breadcrumbs()
         $tag_name = single_tag_title('', false);
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('标签', PUOCK) . '</li>';
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($tag_name) . '</li>';
-    } else if (isset($other_page_title)) {
-        $out .= '<li class="breadcrumb-item active " aria-current="page">' . $other_page_title . '</li>';
+    } else if (!empty($custom_seo_title)) {
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . $custom_seo_title . '</li>';
     } else if (is_404()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('你访问的资源不存在', PUOCK) . '</li>';
     }
@@ -505,7 +506,8 @@ function pk_update()
     $current_theme_dir_name = basename(dirname(__FILE__));
     include('update-checker/update-checker.php');
     switch ($update_server) {
-        case 'github': {
+        case 'github':
+            {
                 $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
                     'https://github.com/Licoy/wordpress-theme-puock',
                     __FILE__,
@@ -514,7 +516,8 @@ function pk_update()
                 );
             }
             break;
-        case 'fastgit': {
+        case 'fastgit':
+            {
                 $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
                     'https://licoy.cn/go/puock-update.php?r=fastgit',
                     __FILE__,
@@ -523,14 +526,15 @@ function pk_update()
                 );
             }
             break;
-        default: {
-                $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-                    'https://licoy.cn/go/puock-update.php?r=worker',
-                    __FILE__,
-                    $current_theme_dir_name,
-                    $check_period
-                );
-            }
+        default:
+        {
+            $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                'https://licoy.cn/go/puock-update.php?r=worker',
+                __FILE__,
+                $current_theme_dir_name,
+                $check_period
+            );
+        }
     }
 }
 
