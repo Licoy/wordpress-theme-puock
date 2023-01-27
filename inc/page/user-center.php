@@ -13,19 +13,13 @@ get_header();
     <div class="p-block" id="user-center">
         <div class="row row-cols-1">
             <div class="col-lg-3 col-md-12">
-                <div class="list-group">
-                    <a href="#" class="ta3 list-group-item d-flex justify-content-between align-items-start">
+                <div class="list-group user-center-menus">
+                    <a href="#" class="ta3 list-group-item d-flex justify-content-between align-items-start current">
                         <div class="ms-2 me-auto">
                             <div>基本信息</div>
-                            <span class="c-sub fs12">基本信息</span>
+                            <span class="sub-title d-none d-md-inline-block">基本信息</span>
                         </div>
                     </a>
-<!--                    <a href="#" class="ta3 list-group-item d-flex justify-content-between align-items-start">-->
-<!--                        <div class="ms-2 me-auto">-->
-<!--                            <div>社交账号</div>-->
-<!--                            <span class="c-sub fs12">第三方社交账号绑定</span>-->
-<!--                        </div>-->
-<!--                    </a>-->
                 </div>
             </div>
             <div class="col-lg-9 col-md-12 fs14">

@@ -801,7 +801,8 @@ a:hover {
 
         img {
           height: 100%;
-          &.lazy:not(.loaded){
+
+          &.lazy:not(.loaded) {
             height: auto !important;
           }
         }
@@ -815,9 +816,11 @@ a:hover {
     &.post-item-card {
       .thumbnail {
         width: 100%;
-        img{
+
+        img {
           width: 100%;
-          &.lazy:not(.loaded){
+
+          &.lazy:not(.loaded) {
             width: 120px;
           }
         }
@@ -2047,9 +2050,23 @@ a:hover {
   }
 }
 
-#user-center{
-  .form-control{
+#user-center {
+  .form-control {
     .fs14;
+  }
+
+  .user-center-menus {
+    .sub-title{
+      .fs12;
+      color: var(--pk-c-secondary);
+    }
+    .list-group-item:hover, .current {
+      background-color: var(--pk-c-primary);
+      color: #fff;
+      .sub-title{
+        color: #fff !important;
+      }
+    }
   }
 }
 

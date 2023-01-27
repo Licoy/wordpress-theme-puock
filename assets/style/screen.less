@@ -24,4 +24,22 @@
       padding-left: 130px;
     }
   }
+  #user-center{
+    .user-center-menus{
+      flex-direction: row;
+      overflow-x: scroll;
+
+      .list-group-item{
+        flex-shrink: 0;
+      }
+      .list-group-item:last-child:not(:first-child){
+        border-top-right-radius: var(--bs-list-group-border-radius);
+        border-bottom-left-radius: 0;
+      }
+      .list-group-item+.list-group-item{
+        border-top-width: var(--bs-list-group-border-width);
+        border-left-width: 0;
+      }
+    }
+  }
 }
