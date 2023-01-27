@@ -657,7 +657,7 @@ function pk_get_main_menu($mobile = false)
     if (is_user_logged_in()) {
         $user = wp_get_current_user();
         $avatar = get_avatar_url($user->user_email);
-        $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="用户中心" href="' . pk_user_center_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
+        $out .= '<li><a ' . (pk_is_checked('user_center') ? '' : 'data-no-instant') . ' data-bs-toggle="tooltip" title="用户中心" href="' . pk_user_center_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
         if (pk_is_checked('open_quick_login')) {
             $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url($wp->request)]);
