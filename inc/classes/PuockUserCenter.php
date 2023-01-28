@@ -50,11 +50,13 @@ class PuockUserCenter implements IPuockClassLoad
         if (!empty($data['nickname'])) {
             $data['display_name'] = $data['nickname'];
         }
+        do_action('pk_update_user_profile_before', $data);
         if (!wp_update_user($data)) {
             echo pk_ajax_resp_error(__('保存失败', PUOCK));
             wp_die();
         }
         echo pk_ajax_resp(null, __('保存成功', PUOCK));
+        do_action('pk_update_user_profile_after', $data);
         wp_die();
     }
 

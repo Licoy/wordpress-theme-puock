@@ -6,13 +6,13 @@ if (!is_user_logged_in()) {
     wp_redirect(home_url());
     exit;
 }
-pk_set_custom_seo('用户中心');
-get_header();
 $current_user_center_menu = get_query_var('id', 'profile');
-if(empty($current_user_center_menu)){
+if (empty($current_user_center_menu)) {
     $current_user_center_menu = 'profile';
 }
 $user_center_menus = PuockUserCenter::get_menus();
+pk_set_custom_seo((isset($user_center_menus[$current_user_center_menu]) ? $user_center_menus[$current_user_center_menu]['title'].' - ' : '') . '用户中心');
+get_header();
 ?>
 
 <div id="content" class="mt20 container min-height-container">
