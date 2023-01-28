@@ -794,7 +794,7 @@ class puockTagCloud extends puockWidgetBase {
             pk_cache_set(PKC_WIDGET_TAGS,$tags);
         }
         $max_count = $this->get_num_val($instance, 'max_count');
-        if(count($tags) == 0){
+        if(count($tags) > 0){
             $count = 0;
             foreach ($tags as $tag){
                 if ($max_count > 0 && $count >= $max_count){
