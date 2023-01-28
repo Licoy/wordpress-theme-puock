@@ -794,7 +794,7 @@ class puockTagCloud extends puockWidgetBase {
             pk_cache_set(PKC_WIDGET_TAGS,$tags);
         }
         $max_count = $this->get_num_val($instance, 'max_count');
-        if(count($tags) > 0){
+        if(count($tags) == 0){
             $count = 0;
             foreach ($tags as $tag){
                 if ($max_count > 0 && $count >= $max_count){
@@ -805,7 +805,7 @@ class puockTagCloud extends puockWidgetBase {
                 $count++;
             }
         }else{
-            echo sc_tips_primary(null, "暂无标签");
+            echo "<span class='c-sub fs14'>暂无标签</span>";
         }
         echo '</div>';
         $this->get_common_widget_footer($instance);

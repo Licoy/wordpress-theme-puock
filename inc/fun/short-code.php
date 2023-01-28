@@ -46,12 +46,15 @@ function sc_tips($attr, $content, $tag)
         'outline' => false,
         'class' => ''
     ), $attr));
-    $_class = $class . ' alert alert-' . $type;
+    $_class =  'alert alert-' . $type;
     if (!empty($icon)) {
         $content = "<i class=\"{$icon} mr-1\"></i>" . $content;
     }
     if ($outline) {
         $_class .= ' alert-outline';
+    }
+    if($class){
+        $_class .= ' '.$class;
     }
     return "<div class=\"{$_class}\">{$content}</div>";
 }
