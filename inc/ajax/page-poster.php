@@ -26,7 +26,7 @@ function pk_poster_page_callback()
             </div>
             <div class="content">
                 <p class="title mt20 fs16"><?php echo $title ?></p>
-                <p class="excerpt fs14 mt20 c-sub"><?php echo get_the_excerpt() ?></p>
+                <p class="excerpt text-3line fs14 mt20 c-sub"><?php echo get_the_excerpt() ?></p>
                 <div class="info mt20">
                     <img class="qrcode" src="<?php echo $qrcode_url ?>" alt="<?php echo $title ?>">
                     <?php if (!pk_is_checked('on_txt_logo') || empty(pk_get_option('light_logo'))): ?>
@@ -44,6 +44,7 @@ function pk_poster_page_callback()
     <!--    </div>-->
     <script>
         $(function () {
+            const i = window.Puock.startLoading();
             html2canvas(document.querySelector("#<?php echo $el_id; ?>"), {
                 allowTaint: true,
                 useCORS: true,
@@ -52,6 +53,7 @@ function pk_poster_page_callback()
                 const el = $("#<?php echo $el_id; ?>");
                 el.show();
                 el.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo $title ?>'>");
+                window.Puock.stopLoading(i);
             }).catch(err => {
                 console.error(err)
                 window.Puock.toast("生成海报失败，请到Console查看错误信息", TYPE_DANGER);
