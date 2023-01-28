@@ -557,3 +557,18 @@ function pk_get_custom_seo()
 {
     return $GLOBALS['pk-seo'] ?? array();
 }
+
+function pk_safe_base64_encode($string)
+{
+    $data = base64_encode($string);
+    return str_replace(array('+', '/', '='), array('-', '_', ''), $data);
+}
+
+function pk_safe_base64_decode($string){
+    $data = str_replace(array('-','_'),array('+','/'),$string);
+    $mod4 = strlen($data) % 4;
+    if ($mod4) {
+        $data .= substr('====', $mod4);
+    }
+    return base64_decode($data);
+}

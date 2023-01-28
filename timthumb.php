@@ -188,6 +188,15 @@ class timthumb
         exit(0);
     }
 
+    private static function safe_base64_decode($string){
+        $data = str_replace(array('-','_'),array('+','/'),$string);
+        $mod4 = strlen($data) % 4;
+        if ($mod4) {
+            $data .= substr('====', $mod4);
+        }
+        return base64_decode($data);
+    }
+
     public function __construct()
     {
         global $ALLOWED_SITES;
@@ -218,8 +227,8 @@ class timthumb
 
         $this->myHost = preg_replace('/^www\./i', '', $_SERVER['HTTP_HOST']);
         $this->src = $this->param('src');
-        if(filter_var($this->src, FILTER_VALIDATE_URL) === false){
-            $this->src = base64_decode($this->src);
+        if(strpos($this->src,"http://")===false && strpos($this->src,"https://")===false){
+            $this->src = self::safe_base64_decode($this->src);
         }
         $this->url = parse_url($this->src);
         $this->src = preg_replace('/https?:\/\/(?:www\.)?' . $this->myHost . '/i', '', $this->src);
