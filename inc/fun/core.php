@@ -380,7 +380,7 @@ function pk_post_style_list()
 
 //评论添加@功能
 if (pk_is_checked('comment_has_at')) {
-    add_filter('comment_text', 'pk_comment_add_at', 20, 2);
+    add_filter('comment_text', 'pk_comment_add_at', 10, 2);
 }
 //GrAvatar头像源切换
 if (pk_get_option('gravatar_url', 'wp') != 'wp') {
