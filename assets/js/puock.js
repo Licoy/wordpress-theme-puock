@@ -293,8 +293,8 @@ class Puock {
             },
             easing: 'linear'
         }
-        $.ripple(".btn", args);
-        $.ripple(".ww", args);
+        jQuery.ripple(".btn", args);
+        jQuery.ripple(".ww", args);
     }
 
     eventShareStart() {
@@ -1085,7 +1085,7 @@ class Puock {
             if (elArgs) {
                 args = JSON.parse(elArgs)
             }
-            new Swiper('.' + swiperClass, args);
+            // new Swiper('.' + swiperClass, args);
         });
     }
 
@@ -1136,13 +1136,12 @@ class Puock {
 
 }
 
-$(
-    () => {
-        window
-            .Puock = new Puock()
-        window
-            .Puock
-            .onceInit()
+jQuery(() => {
+        if (window.$ === undefined) {
+            window.$ = jQuery;
+        }
+        window.Puock = new Puock()
+        window.Puock.onceInit()
     }
 )
 
