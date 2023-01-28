@@ -46,8 +46,13 @@ class PuockUserCenter implements IPuockClassLoad
             echo pk_ajax_resp_error($data);
             wp_die();
         }
-        $data['ID'] = get_current_user_id();
-        if (!empty($data['nickname'])) {
+        $user = wp_get_current_user();
+        if (!$user) {
+            echo pk_ajax_resp_error(__('请先登录', PUOCK));
+            wp_die();
+        }
+        $data['ID'] = $user->ID;
+        if ($data['nickname'] != $user->nickname) {
             $data['display_name'] = $data['nickname'];
         }
         do_action('pk_update_user_profile_before', $data);

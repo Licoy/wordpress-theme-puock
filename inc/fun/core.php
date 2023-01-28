@@ -886,7 +886,7 @@ function pk_get_req_data(array $model)
             }
         } else {
             if ($item['remove_html'] ?? false) {
-                $val = sanitize_text_field($val);
+                $val = esc_html($val);
             }
             $data[$key] = $val;
         }
