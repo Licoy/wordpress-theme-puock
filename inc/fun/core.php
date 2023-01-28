@@ -1,5 +1,8 @@
 <?php
 
+
+use Puock\Theme\classes\PuockClassLoad;
+
 add_action('after_setup_theme', 'puock_theme_setup');
 function puock_theme_setup()
 {
@@ -46,6 +49,7 @@ require_once PUOCK_ABS_DIR . '/inc/ajax/index.php';
 if (pk_is_checked('no_category')) {
     require_once PUOCK_ABS_DIR . '/inc/no-category.php';
 }
+$puock_class_load = new PuockClassLoad();
 
 /*Auth-Domains*/
 
@@ -959,7 +963,7 @@ function pk_user_center_url(): string
 function pk_rewrite_rule()
 {
     if (pk_is_checked('user_center')) {
-        add_rewrite_rule("^uc/?", 'index.php?pagename=user-center', "top");
+        add_rewrite_rule('^uc/?([0-9A-Za-z_\-]+)?$', 'index.php?pagename=user-center&id=$matches[1]', "top");
     }
 }
 
@@ -986,6 +990,12 @@ function pk_template_redirect()
 }
 
 add_action('template_redirect', 'pk_template_redirect');
+
+function pk_query_vars($vars){
+    $vars[] = 'id';
+    return $vars;
+}
+add_filter( 'query_vars', 'pk_query_vars' );
 
 function pk_load_template($_template_file, $require_once = true, $args = array())
 {
