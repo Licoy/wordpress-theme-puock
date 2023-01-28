@@ -440,7 +440,7 @@ class Puock {
             this.generatePostMenuHTML()
         }
         this.tooltipInit()
-        $(".entry-content").viewer({
+        jQuery(".entry-content").viewer({
             navbar: false,
             url: this.data.params.main_lazy_img ? 'data-src' : 'src'
         });
@@ -1085,7 +1085,7 @@ class Puock {
             if (elArgs) {
                 args = JSON.parse(elArgs)
             }
-            // new Swiper('.' + swiperClass, args);
+            new Swiper('.' + swiperClass, args);
         });
     }
 
