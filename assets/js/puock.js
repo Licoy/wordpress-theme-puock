@@ -642,7 +642,7 @@ class Puock {
                         } else {
                             $("#post-views").text(res.data)
                         }
-                    }, 'json').error((e) => {
+                    }, 'json').fail((e) => {
                     console.error(e)
                 })
             }
@@ -757,7 +757,7 @@ class Puock {
                 loadBox.addClass('d-none');
                 this.initCodeHighlight(false);
                 this.lazyLoadInit(postCommentsEl);
-            }).error(() => {
+            }).fail(() => {
                 location = href;
             });
             return false;
@@ -912,7 +912,7 @@ class Puock {
                 } else {
                     this.toast(res.t);
                 }
-            }, 'json').error(() => {
+            }, 'json').fail(() => {
                 this.toast('点赞异常', TYPE_DANGER);
             })
         })
@@ -938,13 +938,18 @@ class Puock {
 
     getRemoteHtmlNode(url, callback) {
         const loading = this.startLoading()
-        $.get(url, {}, (res) => {
-            this.stopLoading(loading)
-            callback(res)
-        }).error((e) => {
-            console.error(e)
-            this.stopLoading(loading)
-            this.toast("获取内容节点数据失败", TYPE_DANGER)
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: (res)=>{
+                this.stopLoading(loading)
+                callback(res)
+            },
+            error: (err)=> {
+                console.error(err)
+                this.stopLoading(loading)
+                this.toast("获取内容节点数据失败", TYPE_DANGER)
+            }
         })
     }
 
@@ -1047,7 +1052,7 @@ class Puock {
                     </div>
                 `);
                     el.addClass("loaded");
-                }, 'json').error((err) => {
+                }, 'json').fail((err) => {
                     el.html(`<div class="alert alert-danger"><i class="fa fa-warning"></i>&nbsp;请求Github项目详情异常：${repo}</div>`)
                 });
             }
@@ -1107,7 +1112,7 @@ class Puock {
                     el.find(".t").text(res.hitokoto ?? res.content ?? "无内容");
                     el.find('.f').text(res.from);
                     el.find('.fb').removeClass("d-none");
-                }, 'json').error((err) => {
+                }, 'json').fail((err) => {
                     console.error(err)
                     el.find(".t").text("加载失败：" + err.responseText || err);
                     el.remove(".fb");
