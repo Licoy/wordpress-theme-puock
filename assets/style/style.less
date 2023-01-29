@@ -138,6 +138,14 @@ blockquote {
       }
     }
   }
+
+  &.layui-layer-prompt .layui-layer-input{
+    background-color: var(--pk-bg-box-content) !important;
+    border: none !important;
+    color: var(--pk-c-font);
+    border-radius: var(--pk-g-box-radius);
+    font-size: 14px;
+  }
 }
 
 .layui-layer-loading {
@@ -652,7 +660,7 @@ a:hover {
 }
 
 .btn:hover,
-.btn:focus, .form-control:hover, .form-control:focus, button:focus, .abc-checkbox label:focus, .form-check-input:focus {
+.btn:focus, .form-control:hover, .form-control:focus, button:focus, .abc-checkbox label:focus, .form-check-input:focus,.layui-layer-input,.layui-layer-input:focus {
   outline: none;
   box-shadow: none;
 }

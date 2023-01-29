@@ -249,7 +249,7 @@ a {
   --bs-alert-padding-x: .7rem;
   --bs-alert-padding-y: .7rem;
 
-  &.alert-outline{
+  &.alert-outline {
     border: 1px dashed;
     background-color: transparent !important;
     color: var(--pk-c-font) !important;
@@ -274,10 +274,10 @@ a {
   }
 }
 
-.list-group{
-  --bs-list-group-bg:var(--pk-bg-box);
-  --bs-list-group-color:var(--pk-c-font);
-  --bs-list-group-border-color:var(--pk-c-border);
+.list-group {
+  --bs-list-group-bg: var(--pk-bg-box);
+  --bs-list-group-color: var(--pk-c-font);
+  --bs-list-group-border-color: var(--pk-c-border);
 }
 
 .mtb10 {
@@ -469,6 +469,15 @@ a {
   cursor: pointer;
 }
 
+.curph {
+  transition: all .3s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 .h-scroll {
   white-space: nowrap;
   overflow-y: auto;
@@ -585,9 +594,11 @@ a {
 
 .pk-skeleton {
   animation: skeleton-loading 1s linear infinite;
-  &:not(:last-child){
+
+  &:not(:last-child) {
     margin-bottom: var(--pk-g-basic-distance);
   }
+
   &._comment {
     display: flex;
     align-items: flex-start;
@@ -637,24 +648,31 @@ a {
       }
     }
   }
-  &._default{
-    &>div{
-      @h:12px;
-      &:nth-child(1){
+
+  &._default {
+    & > div {
+      @h: 12px;
+
+      &:nth-child(1) {
         .--pk-wh(50%, @h);
       }
-      &:nth-child(2){
+
+      &:nth-child(2) {
         .--pk-wh(57%, @h);
       }
-      &:nth-child(3){
+
+      &:nth-child(3) {
         .--pk-wh(45%, @h);
       }
-      &:nth-child(4){
+
+      &:nth-child(4) {
         .--pk-wh(78%, @h);
       }
-      &:nth-child(5){
+
+      &:nth-child(5) {
         .--pk-wh(64%, @h);
       }
+
       background-color: var(--pk-bg-skeleton);
       border-radius: 6px;
 
