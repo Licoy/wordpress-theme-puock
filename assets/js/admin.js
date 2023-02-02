@@ -20,11 +20,7 @@ jQuery(function () {
     }
 
     function putTextToEditor(content) {
-        if (puock_admin_setting.compatible.githubermd) {
-            window.githuber_md_editor.insertValue(content)
-            return
-        }
-        send_to_editor(content)
+        wp.media.editor.insert(content)
     }
 
     mediaButtonEventHandle('#insert-smiley-button', '#insert-smiley-wrap');
