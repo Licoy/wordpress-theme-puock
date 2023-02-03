@@ -4,12 +4,12 @@ function pk_comment_author_view($text, $comment)
 {
     global $authordata;
     $author_view = get_post_meta($comment->comment_post_ID, 'author_cat_comment', true) == 'true';
-    if(empty($authordata)){
+    if (empty($authordata)) {
         $authordata = get_userdata(get_post_field('post_author', $comment->comment_post_ID));
     }
-    $is_author = $authordata->ID == get_current_user_id();
-    if($author_view && !$is_author){
-        $text = apply_filters('pk_comment_author_view','<div class="fs12 c-sub"><i class="fa fa-lock"></i> 评论仅对作者可见</div>');
+    $is_author = apply_filters('pk_comment_author_view_is_author', $authordata->ID, $authordata->ID == get_current_user_id());
+    if ($author_view && !$is_author) {
+        $text = apply_filters('pk_comment_author_view', '<div class="fs12 c-sub"><i class="fa fa-lock"></i> 评论仅对作者可见</div>');
     }
     return $text;
 }
