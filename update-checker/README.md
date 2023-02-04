@@ -19,7 +19,8 @@ From the users' perspective, it works just like with plugins and themes hosted o
   - [BitBucket Integration](#bitbucket-integration)
     - [How to Release an Update](#how-to-release-an-update-2)
   - [GitLab Integration](#gitlab-integration)
-    - [How to Release an Update](#how-to-release-an-update-3)
+    - [How to Release a GitLab Update](#how-to-release-a-gitlab-update)
+- [Migrating from 4.x](#migrating-from-4x)
 - [License Management](#license-management)
 - [Resources](#resources)
 
@@ -40,7 +41,7 @@ Getting Started
 		{
 			"name" : "Plugin Name",
 			"version" : "2.0",
-			"download_url" : "http://example.com/plugin-name-2.0.zip",
+			"download_url" : "https://example.com/plugin-name-2.0.zip",
 			"sections" : {
 				"description" : "Plugin description here. You can use HTML."
 			}
@@ -53,8 +54,8 @@ Getting Started
 		```json
 		{
 			"version": "2.0",
-			"details_url": "http://example.com/version-2.0-details.html",
-			"download_url": "http://example.com/example-theme-2.0.zip"
+			"details_url": "https://example.com/version-2.0-details.html",
+			"download_url": "https://example.com/example-theme-2.0.zip"
 		}
 		```
 		
@@ -64,8 +65,10 @@ Getting Started
 
 	```php
 	require 'path/to/plugin-update-checker/plugin-update-checker.php';
-	$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-		'http://example.com/path/to/details.json',
+	use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+ 
+	$myUpdateChecker = PucFactory::buildUpdateChecker(
+		'https://example.com/path/to/details.json',
 		__FILE__, //Full path to the main plugin file or functions.php.
 		'unique-plugin-or-theme-slug'
 	);
@@ -96,7 +99,9 @@ By default, the library will check the specified URL for changes every 12 hours.
 
 	```php
 	require 'plugin-update-checker/plugin-update-checker.php';
-	$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+ 
+	$myUpdateChecker = PucFactory::buildUpdateChecker(
 		'https://github.com/user-name/repo-name/',
 		__FILE__,
 		'unique-plugin-or-theme-slug'
@@ -127,7 +132,7 @@ This library supports a couple of different ways to release updates on GitHub. P
 	
 	To release version 1.2.3, create a new Git tag named `v1.2.3` or `1.2.3`. That's it.
 	
-	PUC doesn't require strict adherence to [SemVer](http://semver.org/). These are all valid tag names: `v1.2.3`, `v1.2-foo`, `1.2.3_rc1-ABC`, `1.2.3.4.5`. However, be warned that it's not smart enough to filter out alpha/beta/RC versions. If that's a problem, you might want to use GitHub releases or branches instead.
+	PUC doesn't require strict adherence to [SemVer](https://semver.org/). These are all valid tag names: `v1.2.3`, `v1.2-foo`, `1.2.3_rc1-ABC`, `1.2.3.4.5`. However, be warned that it's not smart enough to filter out alpha/beta/RC versions. If that's a problem, you might want to use GitHub releases or branches instead.
 	
 - **Stable branch** 
 	
@@ -175,7 +180,9 @@ The library will pull update details from the following parts of a release/tag/b
 
 	```php
 	require 'plugin-update-checker/plugin-update-checker.php';
-	$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+ 
+	$myUpdateChecker = PucFactory::buildUpdateChecker(
 		'https://bitbucket.org/user-name/repo-name',
 		__FILE__,
 		'unique-plugin-or-theme-slug'
@@ -214,7 +221,7 @@ BitBucket doesn't have an equivalent to GitHub's releases, so the process is sli
 	
 	You can skip the "stable tag" bit and just create a new Git tag named `v1.2.3` or `1.2.3`. The update checker will look at the most recent tags and pick the one that looks like the highest version number.
 	
-	PUC doesn't require strict adherence to [SemVer](http://semver.org/). These are all valid tag names: `v1.2.3`, `v1.2-foo`, `1.2.3_rc1-ABC`, `1.2.3.4.5`. However, be warned that it's not smart enough to filter out alpha/beta/RC versions.
+	PUC doesn't require strict adherence to [SemVer](https://semver.org/). These are all valid tag names: `v1.2.3`, `v1.2-foo`, `1.2.3_rc1-ABC`, `1.2.3.4.5`. However, be warned that it's not smart enough to filter out alpha/beta/RC versions.
 	
 - **Stable branch** 
 	
@@ -227,11 +234,13 @@ BitBucket doesn't have an equivalent to GitHub's releases, so the process is sli
 ### GitLab Integration
 
 1. Download [the latest release](https://github.com/YahnisElsts/plugin-update-checker/releases/latest) and copy the `plugin-update-checker` directory to your plugin or theme.
-2. Add the following code to the main plugin file or `functions.php`:
+2. Add the following code to the main plugin file or `functions.php` and define how you want to check for updates from Gitlab (refer to: [Gitlab: How to Release an Update](#how-to-release-a-gitlab-update)):
 
 	```php
 	require 'plugin-update-checker/plugin-update-checker.php';
-	$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+	$myUpdateChecker = PucFactory::buildUpdateChecker(
 		'https://gitlab.com/user-name/repo-name/',
 		__FILE__,
 		'unique-plugin-or-theme-slug'
@@ -239,63 +248,136 @@ BitBucket doesn't have an equivalent to GitHub's releases, so the process is sli
 
 	//Optional: If you're using a private repository, specify the access token like this:
 	$myUpdateChecker->setAuthentication('your-token-here');
-
-	//Optional: Set the branch that contains the stable release.
-	$myUpdateChecker->setBranch('stable-branch-name');
 	```
-	
+
 	Alternatively, if you're using a self-hosted GitLab instance, initialize the update checker like this:
 	```php
-    $myUpdateChecker = new Puc_v4p11_Vcs_PluginUpdateChecker(
-        new Puc_v4p11_Vcs_GitLabApi('https://myserver.com/user-name/repo-name/'),
-        __FILE__,
-        'unique-plugin-or-theme-slug'
-    );
-   //Optional: Add setAuthentication(...) and setBranch(...) as shown above.  
-   ```
-   If you're using a self-hosted GitLab instance and [subgroups or nested groups](https://docs.gitlab.com/ce/user/group/subgroups/index.html), you have to tell the update checker which parts of the URL are subgroups:
-   ```php
-       $myUpdateChecker = new Puc_v4p11_Vcs_PluginUpdateChecker(
-           new Puc_v4p11_Vcs_GitLabApi('https://myserver.com/group-name/subgroup-level1/subgroup-level2/subgroup-level3/repo-name/', null, 'subgroup-level1/subgroup-level2/subgroup-level3'),
-           __FILE__,
-           'unique-plugin-or-theme-slug'
-       );
-    
-   ```
+	use YahnisElsts\PluginUpdateChecker\v5p0\Vcs\PluginUpdateChecker;
+	use YahnisElsts\PluginUpdateChecker\v5p0\Vcs\GitLabApi;
+	
+	$myUpdateChecker = new PluginUpdateChecker(
+		new GitLabApi('https://myserver.com/user-name/repo-name/'),
+		__FILE__,
+		'unique-plugin-or-theme-slug'
+	);
+	//Optional: Add setAuthentication(...) and setBranch(...) as shown above.  
+	```
+	If you're using a self-hosted GitLab instance and [subgroups or nested groups](https://docs.gitlab.com/ce/user/group/subgroups/index.html), you have to tell the update checker which parts of the URL are subgroups:
+	```php
+	use YahnisElsts\PluginUpdateChecker\v5p0\Vcs\PluginUpdateChecker;
+	use YahnisElsts\PluginUpdateChecker\v5p0\Vcs\GitLabApi;
    
+	$myUpdateChecker = new PluginUpdateChecker(
+		new GitLabApi(
+			'https://myserver.com/group-name/subgroup-level1/subgroup-level2/subgroup-level3/repo-name/', 
+			null, 
+			'subgroup-level1/subgroup-level2/subgroup-level3'
+		),
+		__FILE__,
+		'unique-plugin-or-theme-slug'
+	);
+	```
+
 3. Plugins only: Add a `readme.txt` file formatted according to the [WordPress.org plugin readme standard](https://wordpress.org/plugins/readme.txt) to your repository. The contents of this file will be shown when the user clicks the "View version 1.2.3 details" link.
 
-#### How to Release an Update
+#### How to Release a GitLab Update
+A Gitlab repository can be checked for updates in 4 different ways.
 
-GitLab doesn't have an equivalent to GitHub's releases, so the process is slightly different. You can use any of the following approaches: 
-	
-- **Tags** 
-	
-	To release version 1.2.3, create a new Git tag named `v1.2.3` or `1.2.3`. That's it.
-	
-	PUC doesn't require strict adherence to [SemVer](http://semver.org/). These are all valid tag names: `v1.2.3`, `v1.2-foo`, `1.2.3_rc1-ABC`, `1.2.3.4.5`. However, be warned that it's not smart enough to filter out alpha/beta/RC versions. If that's a problem, you might want to use GitLab branches instead.
+1. **Stable branch** (other than `master` or `main`):
+	- Point the update checker at any stable, production-ready branch and PUC will periodically check the `Version` header in the main plugin file or `style.css` and display a notification if it's greater than the installed version.
+	- Add the following code:
+		```php
+		//Add the following code to your main plugin file or `functions.php` file to check for updates from a custom branch
+		$myUpdateChecker->setBranch('stable-branch-name');
+		```
+	- Caveats:
+		- If you set the branch to `main` (the default) or `master` (the historical default), the update checker will look for recent releases and tags first. It'll only use the `main` or `master` branch if it doesn't find anything else suitable.
 
-- **Stable branch** 
-	
-	Point the update checker at a stable, production-ready branch: 
-	 ```php
-	 $updateChecker->setBranch('branch-name');
-	 ```
-	 PUC will periodically check the `Version` header in the main plugin file or `style.css` and display a notification if it's greater than the installed version.
-	 
-	 Caveat: If you set the branch to `master` (the default), the update checker will look for recent releases and tags first. It'll only use the `master` branch if it doesn't find anything else suitable.
+2. **GitLab Releases using Generic Packages**:
+	- Use a Gitlab CI/CD Pipeline to automatically generate your update on release using a Generic Package. The benefit of using Generic Package assets over the Source Code assets is that the code can already be built and production ready.
+	- Add the following code:
+		```php
+		//Add the following code to your main plugin file or `functions.php` file to check for a new update from releases using generic packages
+		$myUpdateChecker->getVcsApi()->enableReleasePackages();
+		```
+	- PUC will periodically check the release version (i.e. the tag name of the release) and will display a notification if the release is a greater version than the installed version.
+	- The release tag name should loosely follow [SemVer](https://semver.org/) but these are all valid release names: `v1.2.3`, `v1.2-foo`, `1.2.3_rc1-ABC`, `1.2.3.4.5` However, be warned that it's not smart enough to filter out alpha/beta/RC versions. If that's a problem, you might want to use GitLab branches instead.
+	- For more information about *Gitlab Release Generic Packages* refer to the following links:
+		- [Gitlab CI/CD Release Documentation](https://docs.gitlab.com/ee/user/project/releases/#create-release-from-gitlab-ci)
+		- [Gitlab Release Assets as Generic Package Documentation](https://gitlab.com/gitlab-org/release-cli/-/tree/master/docs/examples/release-assets-as-generic-package/)
+		- [Example .gitlab-ci.yml file using Release Generic Packages for generating a update package from the Sensei-LMS wordpress plugin](https://gist.github.com/timwiel/9dfd3526c768efad4973254085e065ce)
+
+
+3. **GitLab Releases using Source Code Assets**:
+    - Create a new release using the "Releases" feature on Gitlab.
+    - Add the following code:
+        ```php
+        //Add the following code to your main plugin file or `functions.php` file to check for a new update from releases using release assets
+        $myUpdateChecker->getVcsApi()->enableReleaseAssets();
+        ```
+    - PUC will periodically check the release version (based on release tag name) and display a notification if the release version is greater than the installed version.
+    - The release name should loosely follow [SemVer](https://semver.org/) but these are all valid release names: `v1.2.3`, `v1.2-foo`, `1.2.3_rc1-ABC`, `1.2.3.4.5` However, be warned that it's not smart enough to filter out alpha/beta/RC versions. If that's a problem, you might want to use GitLab branches instead.
+
+
+4. **Tags** (this is the default option):
+	- To release version 1.2.3, create a new Git tag named `v1.2.3` or `1.2.3`.
+	- Optionally, add the following code:
+		```php
+		//Add the following code to your main plugin file or `functions.php` file to check for updates from the default branch
+		$myUpdateChecker->setBranch('master'); //or 'main'
+		```
+	- PUC doesn't require strict adherence to [SemVer](https://semver.org/). These are all valid tag names: `v1.2.3`, `v1.2-foo`, `1.2.3_rc1-ABC`, `1.2.3.4.5`. However, be warned that it's not smart enough to filter out alpha/beta/RC versions. If that's a problem, you might want to use GitLab branches instead.
+
+Migrating from 4.x
+------------------
+
+Older versions of the library didn't use namespaces. Code that was written for those versions will need to be updated to work with the current version. At a minimum, you'll need to change the factory class name. 
+
+Old code:
+```php
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	'https://example.com/info.json',
+	__FILE__,
+	'my-slug'
+);
+```
+
+New code:
+```php
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://example.com/info.json',
+	__FILE__,
+	'my-slug'
+);
+```
+
+Other classes have also been renamed, usually by simply removing the `Puc_vXpY_` prefix and converting `Category_Thing` to `Category\Thing`. Here's a table of the most commonly used classes and their new names:
+
+| Old class name                      | New class name                                                 |
+|-------------------------------------|----------------------------------------------------------------|
+| `Puc_v4_Factory`                    | `YahnisElsts\PluginUpdateChecker\v5\PucFactory`                |
+| `Puc_v4p13_Factory`                 | `YahnisElsts\PluginUpdateChecker\v5p0\PucFactory`              |
+| `Puc_v4p13_Plugin_UpdateChecker`    | `YahnisElsts\PluginUpdateChecker\v5p0\Plugin\UpdateChecker`    |
+| `Puc_v4p13_Theme_UpdateChecker`     | `YahnisElsts\PluginUpdateChecker\v5p0\Theme\UpdateChecker`     |
+| `Puc_v4p13_Vcs_PluginUpdateChecker` | `YahnisElsts\PluginUpdateChecker\v5p0\Vcs\PluginUpdateChecker` |
+| `Puc_v4p13_Vcs_ThemeUpdateChecker`  | `YahnisElsts\PluginUpdateChecker\v5p0\Vcs\ThemeUpdateChecker`  |
+| `Puc_v4p13_Vcs_GitHubApi`           | `YahnisElsts\PluginUpdateChecker\v5p0\Vcs\GitHubApi`           |
+| `Puc_v4p13_Vcs_GitLabApi`           | `YahnisElsts\PluginUpdateChecker\v5p0\Vcs\GitLabApi`           |
+| `Puc_v4p13_Vcs_BitBucketApi`        | `YahnisElsts\PluginUpdateChecker\v5p0\Vcs\BitBucketApi`        |
 
 License Management
 ------------------
 
-Currently, the update checker doesn't have any built-in license management features. It only provides some hooks that you can use to, for example, append license keys to update requests (`$updateChecker->addQueryArgFilter()`). If you're looking for ways to manage and verify licenses, please post your feedback in [this issue](https://github.com/YahnisElsts/plugin-update-checker/issues/222).  
+Currently, the update checker doesn't have any built-in license management features. It only provides some hooks that you can use to, for example, append license keys to update requests (`$updateChecker->addQueryArgFilter()`). If you're looking for ways to manage and verify licenses, please post your feedback in [this issue](https://github.com/YahnisElsts/plugin-update-checker/issues/222).
 
 Resources
 ---------
 
-- [This blog post](http://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/) has more information about the update checker API. *Slightly out of date.*
+- [This blog post](https://w-shadow.com/blog/2010/09/02/automatic-updates-for-any-plugin/) has more information about the update checker API. *Slightly out of date.*
 - [Debug Bar](https://wordpress.org/plugins/debug-bar/) - useful for testing and debugging the update checker.
 - [Update format reference](https://docs.google.com/spreadsheets/d/1eOBbW7Go2qEQXReOOCdidMTf_tDYRq4JfegcO1CBPIs/edit?usp=sharing) - describes all fields supported by the JSON-based update information format used by the update checker. Only covers plugins. Themes use a similar but more limited format.
-- [Securing download links](http://w-shadow.com/blog/2013/03/19/plugin-updates-securing-download-links/) - a general overview.
-- [A GUI for entering download credentials](http://open-tools.net/documentation/tutorial-automatic-updates.html#wordpress)
-- [Theme Update Checker](http://w-shadow.com/blog/2011/06/02/automatic-updates-for-commercial-themes/) - an older, theme-only variant of this update checker.
+- [Securing download links](https://w-shadow.com/blog/2013/03/19/plugin-updates-securing-download-links/) - a general overview.
+- [A GUI for entering download credentials](https://open-tools.net/documentation/tutorial-automatic-updates.html#wordpress)
+- [Theme Update Checker](https://w-shadow.com/blog/2011/06/02/automatic-updates-for-commercial-themes/) - an older, theme-only variant of this update checker.

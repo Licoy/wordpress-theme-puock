@@ -504,34 +504,34 @@ function pk_update()
         $check_period = 6;
     }
     $current_theme_dir_name = basename(dirname(__FILE__));
-    include('update-checker/update-checker.php');
+    include('update-checker/plugin-update-checker.php');
     switch ($update_server) {
         case 'github':
             {
-                $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
                     'https://github.com/Licoy/wordpress-theme-puock',
                     __FILE__,
-                    'unique-plugin-or-theme-slug',
+                    PUOCK,
                     $check_period
                 );
             }
             break;
         case 'fastgit':
             {
-                $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+                $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
                     'https://licoy.cn/go/puock-update.php?r=fastgit',
                     __FILE__,
-                    'unique-plugin-or-theme-slug',
+                    PUOCK,
                     $check_period
                 );
             }
             break;
         default:
         {
-            $pkUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+            $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
                 'https://licoy.cn/go/puock-update.php?r=worker',
                 __FILE__,
-                $current_theme_dir_name,
+                PUOCK,
                 $check_period
             );
         }
