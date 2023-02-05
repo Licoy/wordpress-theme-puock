@@ -38,45 +38,43 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 - PHP `7.4+`
 - MySQL `5.6+`
 
-## Version iteration
-- Upgrade 1.5 and the following versions to 1.6+ configuration incompatibility handling method:
-```
-Please refer to the introduction of Chinese version
-```
-
 ## Theme characteristics
 - [x] Support day and dark mode
-- [x] Global loading without refresh
-- [x] Support blog and CMS layout
+- [x] Global load without refresh
+- [x] Support blog, CMS, enterprise three layouts
 - [x] Built-in WP optimization strategy
-- [x] One-click, the entire site turns gray
-- [x] Compressed web pages into one line
+- [x] Built-in frontend user center
+- [x] Support QQ / Github / Gitee / Weibo login
+- [x] Support thumbnail pseudo-static
+- [x] Global top scrolling announcements
+- [x] Graphics and geetest captcha support
+- [x] Custom SMTP support
+- [x] All sites are grayed out with one click
+- [x] Web page compressed into one line
 - [x] Background anti-malicious login
-- [x] Built-in excellent SEO function
-- [x] Comment Ajax loading
-- [x] Likes and rewards for articles
-- [x] Support Twemoji integration
-- [x] Support QQ login
+- [x] Great SEO features built in
+- [x] Comments ajax loaded
+- [x] Article likes, rewards, poster generation, sharing
+- [x] Twemoji integration
 - [x] Rich ad slots
-- [x] Rich gadgets
+- [x] Rich widgets
 - [x] Automatic Baidu link submission
-- [x] Numerous page templates
-- [x] Support comments are visible
-- [x] Support password is visible
+- [x] Numerous page templates (Reader Wall/Archives/Book Recommendations/Site Navigation/Tags/Sitemap etc.)
+- [x] Numerous shortcode support (visible after downloading / commenting / visible after login / visible after login and verification email / multiple prompt boxes / Github cards, etc.)
 - [x] Support Dplayer player
-- [x] Code style and copy code imitating MacOS `v2.5.6`
-- [x] Vue3+NaiveUI integrated high beauty background configuration `v2.6.0`
-- [x] Article multi-level directory generation `v2.6.2`
-- [x] Sidebar Sticky Scroll `v2.6.2`
-- [x] Support Github/Getee/Weibo login `v2.6.2`
-- [x] WP cache support `v2.6.2`
-- [x] Customize the main color `v2.6.3`
+- [x] MacOS-like code style and copy code
+- [x] High-value background configuration integrated with Vue3+NaiveUI
+- [x] Article multi-level directory generation
+- [x] Sidebar sticky scrolling
+- [x] WP cache support
+- [x] Custom primary color
+- [x] LOGO sweep light animation
 - [x] Please refer to the release notes for more feature updates：[releases](https://github.com/Licoy/wordpress-theme-puock/releases)
 - [x] More features, waiting for your [proposal](https://github.com/Licoy/wordpress-theme-puock/issues)
 ## Documentation
 - Theme use document: [Use immediately](https://www.licoy.cn/puock-doc.html)
 ## Support
-- Reward theme to support：[Click me in](https://licoy.cn/go/zs/)
+- Reward theme to support：[Click me in](https://licoy.cn/puock-theme-sponsor.html)
 ## Thanks
 - [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
 ## License

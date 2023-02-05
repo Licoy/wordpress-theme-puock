@@ -58,47 +58,38 @@
 - PHP `7.4+`
 - MySQL `5.6+`
 
-## 版本迭代
-
-- 1.5及以下版本升级至1.6+配置不兼容处理方法：
-
-因为在1.6版本中将配置字段更改为了`puock_options`，所以会导致配置读取不到，用户可以重新进行配置或恢复配置，恢复配置SQL（**执行前请先备份数据库，原配置字段名为`optionsframework`，~~
-若其他主题或插件使用了同名字段为配置名则会覆盖~~，原则上若使用旧版本不会存在其他插件或主题同名字段，因为`option_name`字段为主键，是不允许重复的！**）：
-
-```sql
-UPDATE `wp_options`
-SET `option_name` = 'puock_options'
-WHERE `option_name` = 'optionsframework'
-```
-
 ## 主题特性
 
 - [x] 支持白天与暗黑模式
 - [x] 全局无刷新加载
-- [x] 支持博客与CMS布局
+- [x] 支持博客、CMS、企业三种布局
 - [x] 内置WP优化策略
+- [x] 内置前台用户中心
+- [x] 支持QQ / Github / Gitee / 微博登录
+- [x] 支持缩略图伪静态
+- [x] 全局顶部滚动公告
+- [x] 图形及极验验证码支持
+- [x] 自定义SMTP支持
 - [x] 一键全站变灰
 - [x] 网页压缩成一行
 - [x] 后台防恶意登录
 - [x] 内置出色的SEO功能
-- [x] 评论Ajax加载
-- [x] 文章点赞、打赏
-- [x] 支持Twemoji集成
-- [x] 支持QQ登录
+- [x] 评论ajax加载
+- [x] 文章点赞、打赏、海报生成、分享
+- [x] Twemoji集成
 - [x] 丰富的广告位
 - [x] 丰富的小工具
 - [x] 自动百度链接提交
-- [x] 众多页面模板
-- [x] 支持评论可见
-- [x] 支持密码可见
+- [x] 众多页面模板（读者墙 / 归档 / 书籍推荐/ 站点导航 / 标签 / 站点地图等）
+- [x] 众多短代码支持（下载 / 评论后可见 / 登录后可见 / 登录且验证邮箱可见 / 多种提示框 / Github卡片等）
 - [x] 支持Dplayer播放器
-- [x] 仿MacOS的代码风格及拷贝代码 `v2.5.6`
-- [x] Vue3+NaiveUI集成的高颜值后台配置 `v2.6.0`
-- [x] 文章多级目录生成 `v2.6.2`
-- [x] 侧边栏粘性滚动 `v2.6.2`
-- [x] 支持Github/Gitee/微博登录 `v2.6.2`
-- [x] WP缓存支持 `v2.6.2`
-- [x] 自定义主色调 `v2.6.3`
+- [x] 仿MacOS的代码风格及拷贝代码
+- [x] Vue3+NaiveUI集成的高颜值后台配置
+- [x] 文章多级目录生成
+- [x] 侧边栏粘性滚动
+- [x] WP缓存支持
+- [x] 自定义主色调
+- [x] LOGO扫光动画
 - [x] 更多特性更新请查阅版本发布说明：[releases](https://github.com/Licoy/wordpress-theme-puock/releases)
 - [x] 更多功能等你的[提议](https://github.com/Licoy/wordpress-theme-puock/issues)
 
@@ -106,12 +97,12 @@ WHERE `option_name` = 'optionsframework'
 
 - 主题使用文档：[立即使用](https://www.licoy.cn/puock-doc.html)
 - 建议或BUG反馈：[立即进入](https://github.com/Licoy/wordpress-theme-puock/issues)
-- QQ交流群：[点我加入](https://licoy.cn/go/puock-update.php?r=qq_qun) （此群皆为大家提供交流使用的地方，有BUG请直接提交ISSUE）
+- QQ/微信交流群：[点我加入](https://licoy.cn/go/puock-update.php?r=qq_qun) （此群皆为大家提供交流使用的地方，有BUG请直接提交ISSUE）
 - **若您有任何建议或BUG发现，并且您也有解决或实现的思路，欢迎直接提交PR！**
 
 ## 支持
 
-- 打赏主题以支持：[点我进入](https://licoy.cn/go/zs/)
+- 捐赠我们以支持更好的发展：[点我进入](https://licoy.cn/puock-theme-sponsor.html)
 
 ## 趋势
 
