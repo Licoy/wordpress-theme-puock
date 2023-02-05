@@ -166,7 +166,7 @@ class Puock {
                     url, method, data, dataType,
                     success: (res) => {
                         this.stopLoading(loading)
-                        if (res.code === 0) {
+                        if (res.code === 0 || res.success) {
                             this.toast(res.msg || successTip, TYPE_SUCCESS)
                             if (form.data("no-reset") === undefined) {
                                 form.trigger("reset")
@@ -184,7 +184,7 @@ class Puock {
                                 }
                             }
                         } else {
-                            this.toast(res.msg || errorTip, TYPE_DANGER)
+                            this.toast(res.msg || res.data || errorTip, TYPE_DANGER)
                             this.loadCommentCaptchaImage(form, true)
                         }
                     },
