@@ -193,8 +193,18 @@ class OptionBasic extends BaseOptionItem
                         [
                             'value' => 'loli',
                             'label' => 'loli.net'
+                        ],
+                        [
+                            'value' => 'custom',
+                            'label' => __('自定义', PUOCK)
                         ]
                     ],
+                ],
+                [
+                    'id'=>'gravatar_custom_url',
+                    'label'=>__('自定义Gravatar源', PUOCK),
+                    'tips'=>__('例如：',PUOCK).'<code>gravatar.example.com</code>',
+                    'showRefId'=>'func:(function(args){return args.data.gravatar_url==="custom"})(args)'
                 ],
                 [
                     'id' => 'post_reward',

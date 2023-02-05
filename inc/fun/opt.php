@@ -134,6 +134,11 @@ function v2ex_ssl_avatar($avatar)
     return str_replace("http://", "https://", str_replace("/avatar", "/gravatar", str_replace($gravatar_urls, 'cdn.v2ex.com', $avatar)));
 }
 
+function pk_custom_avatar($avatar){
+    global $gravatar_urls;
+    return str_replace($gravatar_urls, pk_get_option('gravatar_custom_url'), $avatar);
+}
+
 //评论回复邮件通知
 function comment_mail_notify($comment_id)
 {
