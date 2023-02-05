@@ -139,7 +139,7 @@ blockquote {
     }
   }
 
-  &.layui-layer-prompt .layui-layer-input{
+  &.layui-layer-prompt .layui-layer-input {
     background-color: var(--pk-bg-box-content) !important;
     border: none !important;
     color: var(--pk-c-font);
@@ -660,7 +660,7 @@ a:hover {
 }
 
 .btn:hover,
-.btn:focus, .form-control:hover, .form-control:focus, button:focus, .abc-checkbox label:focus, .form-check-input:focus,.layui-layer-input,.layui-layer-input:focus {
+.btn:focus, .form-control:hover, .form-control:focus, button:focus, .abc-checkbox label:focus, .form-check-input:focus, .layui-layer-input, .layui-layer-input:focus {
   outline: none;
   box-shadow: none;
 }
@@ -2064,15 +2064,42 @@ a:hover {
   }
 
   .user-center-menus {
-    .sub-title{
+    .sub-title {
       .fs12;
       color: var(--pk-c-secondary);
     }
+
     .list-group-item:hover, .current {
       background-color: var(--pk-c-primary);
       color: #fff;
-      .sub-title{
+
+      .sub-title {
         color: #fff !important;
+      }
+    }
+  }
+}
+
+#page-moments {
+  .moments-item {
+    .meta {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .moment-content-box {
+      position: relative;
+
+      .al {
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 4px;
+        left: -16px;
+        border: 8px solid;
+        border-color: var(--pk-bg-box) transparent transparent transparent;
+        transform: rotate(90deg);
       }
     }
   }
