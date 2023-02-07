@@ -1,5 +1,13 @@
 [中文](./README.md) | English
+
+<div align="center">
+<img alt="logo" height="120" src="./assets/img/logo/puock.png" width="120"/>
+</div>
+
 ## Introduction
+
+![cover](./screenshot.png)
+
 <div align="center">
     <h1>WordPress Theme - Puock</h1>
     <p>A high-value adaptive theme based on WordPress, supporting day and night modes.</p>

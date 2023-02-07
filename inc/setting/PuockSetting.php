@@ -64,7 +64,7 @@ class PuockSetting
             "manage_options",
             "puock-options",
             array($this, 'setting_page'),
-            'dashicons-buddicons-topics',
+            PUOCK_ABS_URI.'/assets/img/logo/puock-20.png',
         );
     }
 

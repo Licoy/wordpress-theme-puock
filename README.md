@@ -1,8 +1,12 @@
 中文 | [English](./README_EN.md)
 
+<div align="center">
+<img alt="logo" height="120" src="./assets/img/logo/puock.png" width="120"/>
+</div>
+
 ## 介绍
 
-![cover](./cover.png)
+![cover](./screenshot.png)
 
 <div align="center">
     <h1>WordPress Theme - Puock</h1>
