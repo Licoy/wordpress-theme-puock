@@ -8,7 +8,7 @@ PuockAbsMeta::newPostMeta('pk-post-seo', [
         array(
             "id" => "seo_keywords",
             "title" => "自定义SEO关键词",
-            'desc' => '多个关键词之间使用', '分隔，默认为设置的标签',
+            'desc' => '多个关键词之间使用", "分隔，默认为设置的标签',
             "type" => "text"
         ),
         array(
