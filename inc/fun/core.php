@@ -247,7 +247,7 @@ function get_total_views()
 function pk_check_right_md5()
 {
     global $pk_right_slug;
-    if (empty($pk_right_slug) || md5($pk_right_slug) != 'd8775b419146efc39dea7b0ab50c56d0') {
+    if (empty($pk_right_slug) || md5($pk_right_slug) != 'e4c59f977f77b28e1b14db2e9297d2d2') {
         wp_die(base64_decode('UGxlYXNlIGZvbGxvdyB0aGUgb3BlbiBzb3VyY2UgcnVsZXMgYW5kIGRvIG5vdCBjaGFuZ2Ugb3IgZGVsZXRlIHRoZSBib3R0b20gY29weXJpZ2h0IQ=='));
     }
 }
