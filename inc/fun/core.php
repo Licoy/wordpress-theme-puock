@@ -849,6 +849,22 @@ function pk_get_thumbnail_allow_sites()
     return $sites;
 }
 
+//获取封面图链接
+function pk_get_custome_covers()
+{
+    $covers = [];
+    $custome_covers = trim(pk_get_option("custome_covers", ''));
+    if (!empty($custome_covers)) {
+        foreach (explode("\n", $custome_covers) as $cover) {
+            $cover = trim($cover);
+            if (!empty($cover)) {
+                $covers[] = $cover;
+            }
+        }
+    }
+    return $covers;
+}
+
 //生成缩略图白名单文件名称
 function pk_get_thumbnail_allow_sites_filepath()
 {

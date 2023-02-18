@@ -11,6 +11,8 @@ include_once('vendor/autoload.php');
 include_once('inc/fun/core.php');
 include_once('gutenberg/index.php');
 
+$cover_count = count(pk_get_custome_covers());
+
 //去除感谢使用wordpress创作
 if (pk_is_checked('hide_footer_wp_t')) {
     function my_admin_footer_text()
@@ -318,7 +320,18 @@ function get_post_images($_post = null)
     if ($matches && $matches[1]) {
         $res = $matches[1][0];
     } else {
-        $res = get_stylesheet_directory_uri() . '/assets/img/random/' . mt_rand(1, 8) . '.jpg';
+        if(!empty(pk_get_custome_covers())) {
+            global $cover_count;
+            $covers = pk_get_custome_covers();
+            $res = $covers[$cover_count-1];
+            if($cover_count == 1) {
+                $cover_count = count(pk_get_custome_covers());
+            } else {
+                $cover_count = $cover_count - 1;
+            }
+        } else {
+            $res = get_stylesheet_directory_uri() . '/assets/img/random/' . mt_rand(1, 8) . '.jpg';
+        }
     }
     return $res;
 }

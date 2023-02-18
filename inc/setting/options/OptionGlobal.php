@@ -211,6 +211,13 @@ class OptionGlobal extends BaseOptionItem
                     'sdt' => '',
                     'tips' => __("<strong>若使用了其他外链图片须在此处添加外链域名以允许</strong>：一行一个，不要带 <code>http://</code> 或 <code>https://</code> 协议头，例如：<code>blog.example.com</code>", PUOCK)
                 ],
+                [
+                    'id' => 'custome_covers',
+                    'label' => __('封面图链接', PUOCK),
+                    'type' => 'textarea',
+                    'sdt' => '',
+                    'tips' => __("<strong>一行一个</strong>", PUOCK)
+                ],
             ],
         ];
     }
