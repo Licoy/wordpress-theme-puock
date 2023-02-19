@@ -2,24 +2,6 @@
 
 use Puock\Theme\classes\meta\PuockAbsMeta;
 
-PuockAbsMeta::newPostMeta('pk-post-seo', [
-    'title' => 'SEO设置',
-    'options' => [
-        array(
-            "id" => "seo_keywords",
-            "title" => "自定义SEO关键词",
-            'desc' => '多个关键词之间使用", "分隔，默认为设置的标签',
-            "type" => "text"
-        ),
-        array(
-            "id" => "seo_desc",
-            "title" => "自定义SEO描述",
-            'desc' => '默认为文章前150个字符（推荐不超过150个字符）',
-            "type" => "text"
-        )
-    ]
-]);
-
 PuockAbsMeta::newPostMeta('pk-post-basic', [
     'title' => '基本设置',
     'options' => [

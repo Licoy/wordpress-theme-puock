@@ -8,7 +8,6 @@
     <meta http-equiv='content-language' content='<?php echo get_locale() ?>'>
     <link rel="shortcut icon" href="<?php echo pk_get_option('favicon') ?>">
     <link rel="apple-touch-icon" href="<?php echo pk_get_option('favicon') ?>"/>
-    <?php if(pk_is_checked('seo_open',true)) get_template_part('inc/seo') ?>
     <?php wp_head(); ?>
     <?php get_template_part('templates/css', 'grey') ?>
     <?php get_template_part('templates/css', 'custom') ?>
