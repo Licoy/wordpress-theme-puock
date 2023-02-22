@@ -522,7 +522,7 @@ function pk_update()
         case 'github':
             {
                 $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-                    'https://github.com/Licoy/wordpress-theme-puock',
+                    'https://github.com/baddate/puck',
                     __FILE__,
                     PUOCK,
                     $check_period

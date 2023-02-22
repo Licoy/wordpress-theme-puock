@@ -9,7 +9,7 @@ function pk_shortcode_register()
         'music' => array('name' => '音乐播放', 'content' => '输入链接地址'),
         'reply' => array('name' => '回复可见', 'content' => '输入内容'),
         'login' => array('name' => '登录可见', 'content' => '输入内容'),
-        'github' => array('name' => 'Github仓库卡片', 'content' => 'Licoy/wordpress-theme-puock'),
+        'github' => array('name' => 'Github仓库卡片', 'content' => 'baddate/puck'),
         'login_email' => array('name' => '登录并验证邮箱可见', 'content' => '输入内容'),
         'video' => array('name' => '视频播放', 'content' => '视频地址', 'attr' => array(
             'autoplay' => false, 'type' => 'auto',

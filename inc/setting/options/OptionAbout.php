@@ -17,7 +17,7 @@ class OptionAbout extends BaseOptionItem
                     'type' => 'md',
                     'tips' => file_get_contents(PUOCK_ABS_DIR.'/README.md'),
                     'md'=>[
-                        'baseUrl'=>'https://raw.githubusercontent.com/Licoy/wordpress-theme-puock/master/',
+                        'baseUrl'=>'https://raw.githubusercontent.com/baddate/puck/master/',
                     ]
                 ]
             ]

@@ -6,11 +6,11 @@
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'reference' => '954aaf6a11b8ef5b7ffb8f68852fb7124e44cb0e',
-        'name' => 'licoy/wordpress-theme-puock',
+        'name' => 'baddate/puck',
         'dev' => true,
     ),
     'versions' => array(
-        'licoy/wordpress-theme-puock' => array(
+        'baddate/puck' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
             'type' => 'project',

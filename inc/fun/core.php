@@ -132,7 +132,7 @@ function pk_toolbar_link(WP_Admin_Bar $bar)
         'id' => 'theme-github',
         'parent' => $menu_id,
         'title' => '<i class="czs-github-logo"></i>&nbsp;Github 开源主页',
-        'href' => 'https://github.com/Licoy/wordpress-theme-puock',
+        'href' => 'https://github.com/baddate/puck',
         'meta' => array(
             'target' => 'blank'
         )
@@ -786,16 +786,16 @@ function pk_get_static_url()
     $type = pk_get_option('static_load_origin', 'self');
     switch ($type) {
         case "jsdelivr":
-            $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            $url_pre = "https://cdn.jsdelivr.net/gh/baddate/puck@v" . PUOCK_CUR_VER_STR;
             break;
         case "jsdelivr-fastly":
-            $url_pre = "https://fastly.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            $url_pre = "https://fastly.jsdelivr.net/gh/baddate/puck@v" . PUOCK_CUR_VER_STR;
             break;
         case "jsdelivr-testingcf":
-            $url_pre = "https://testingcf.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            $url_pre = "https://testingcf.jsdelivr.net/gh/baddate/puck@v" . PUOCK_CUR_VER_STR;
             break;
         case "jsdelivr-gcore":
-            $url_pre = "https://gcore.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            $url_pre = "https://gcore.jsdelivr.net/gh/baddate/puck@v" . PUOCK_CUR_VER_STR;
             break;
         case 'custom':
             $url_pre = pk_get_option('custom_static_load_origin', '');

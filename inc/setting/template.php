@@ -33,7 +33,7 @@
         language:"<?php echo get_user_locale() ?>",
         description:"<?php _e('简单/方便/高颜值', PUOCK) ?>",
         tag: {text: "<?php _e('主题', PUOCK) ?>", color: 'rgb(155,39,238)'},
-        github: "https://github.com/Licoy/wordpress-theme-puock",
+        github: "https://github.com/baddate/puck",
         qq: "https://licoy.cn/go/puock-update.php?r=qq_qun",
         license: "GPL V3",
         donate: "https://licoy.cn/puock-theme-sponsor.html",
