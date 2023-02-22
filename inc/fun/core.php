@@ -42,7 +42,7 @@ require_once PUOCK_ABS_DIR . '/inc/fun/post-meta.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/sidebar.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/post-tags.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/comment-notify.php';
-require_once PUOCK_ABS_DIR . '/inc/user-agent-parse.php';
+//require_once PUOCK_ABS_DIR . '/inc/user-agent-parse.php';
 require_once PUOCK_ABS_DIR . '/inc/phpqrcode.php';
 require_once PUOCK_ABS_DIR . '/inc/php-captcha.php';
 require_once PUOCK_ABS_DIR . '/inc/ajax/index.php';
