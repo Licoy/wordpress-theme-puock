@@ -90,7 +90,9 @@ function pk_theme_footer_copyright($content)
 {
     global $pk_right_slug;
     $content .= pk_get_option('footer_info');
-    $content .= str_replace('{PUOCK_VERSION}', PUOCK_CUR_VER_STR, base64_decode($pk_right_slug));
+    if(!pk_is_checked('ext_dont_show_copyright')){
+        $content .= str_replace('{PUOCK_VERSION}', PUOCK_CUR_VER_STR, base64_decode($pk_right_slug));
+    }
     return $content;
 }
 

@@ -64,7 +64,7 @@ class PuockSetting
             "manage_options",
             "puock-options",
             array($this, 'setting_page'),
-            PUOCK_ABS_URI.'/assets/img/logo/puock-20.png',
+            PUOCK_ABS_URI . '/assets/img/logo/puock-20.png',
         );
     }
 
@@ -76,7 +76,8 @@ class PuockSetting
         }
         $fields = [];
         foreach ($menus as $menu) {
-            $fields[] = (new $menu['class']())->get_fields();
+            $f = (new $menu['class']())->get_fields();
+            $fields[] = apply_filters('pk_load_theme_option_fields_'.$f['key'], $f);
         }
         do_action('pk_get_theme_option_fields', $fields);
         wp_send_json_success($fields);
