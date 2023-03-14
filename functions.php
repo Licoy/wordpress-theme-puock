@@ -538,7 +538,24 @@ function pk_update()
     }
 }
 
+//添加文章修改时间提示
+function pk_last_updated_date( $content ) {
+    $u_time = get_the_time('U');
+    $u_modified_time = get_the_modified_time('U');
+    $custom_content = '';
+    if ($u_modified_time >= $u_time + 8640000) { //判断文章更新的时间是否大于100天
+        $updated_date = get_the_modified_time('Y-m-j');
+        $updated_time = get_the_modified_time('h:i');
+        $custom_content .= '<div class="c-alert c-alert-warning"><i class="far fa-exclamation-triangle"></i>提醒：本文最后更新于 '. $updated_date . ' at '. $updated_time .' 文中所描述的信息可能已发生改变，请仔细核实。</div>';
+    }
+    $custom_content .= $content;
+    return $custom_content;
+}
+add_filter( 'the_content', 'pk_last_updated_date' );
+
+
 if (is_admin()) {
     // 在线更新支持
     pk_update();
 }
+
