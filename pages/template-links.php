@@ -70,6 +70,4 @@ get_header();
     <?php get_template_part('templates/box', 'global-bottom') ?>
 </div>
 
-<?php get_template_part('templates/module', 'smiley') ?>
-
 <?php get_footer() ?>

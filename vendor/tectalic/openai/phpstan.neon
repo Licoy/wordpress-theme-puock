@@ -1,0 +1,9 @@
+parameters:
+	paths:
+		- src
+		- tests
+	fileExtensions:
+		- php
+	level: max
+	checkMissingIterableValueType: false
+	treatPhpDocTypesAsCertain: false

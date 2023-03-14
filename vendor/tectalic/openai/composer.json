@@ -1,0 +1,85 @@
+{
+  "name": "tectalic/openai",
+  "description": "An OpenAI REST API Client with ChatGPT, GPT-3, Codex, DALL·E and Whisper support. Includes fully typed Data Transfer Objects (DTOs) for all requests and responses and IDE autocomplete support.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "ai",
+    "api",
+    "chatgpt",
+    "dalle",
+    "dall-e",
+    "gpt-3",
+    "gpt3",
+    "openai",
+    "rest",
+    "tectalic",
+    "whisper"
+  ],
+  "homepage": "https://tectalic.com/apis/openai",
+  "autoload": {
+    "psr-4": {
+      "Tectalic\\OpenAi\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": false
+    }
+  },
+  "conflict": {
+    "cebe/php-openapi": "<1.7",
+    "riverline/multipart-parser": "<2.0.9",
+    "symfony/yaml": "<3.4.31 || >4.0 <4.3.4"
+  },
+  "require": {
+    "php": "^7.2.5 || ^8.0",
+    "ext-json": "*",
+    "nyholm/psr7": "^1.4",
+    "php-http/message": "^1.11",
+    "php-http/multipart-stream-builder": "^1.2",
+    "psr/http-client": "^1.0.1",
+    "spatie/data-transfer-object": "^1.14"
+  },
+  "require-dev": {
+    "league/openapi-psr7-validator": "^0.17.0",
+    "mikey179/vfsstream": "^1.6.10",
+    "php-http/mock-client": "^1.5",
+    "phpstan/phpstan": "^1.4",
+    "phpunit/phpunit": "^8.5.14 || ^9.5 || ^10.0",
+    "squizlabs/php_codesniffer": "^3.6",
+    "symfony/http-client": "^5.3"
+  },
+  "scripts": {
+    "test": [
+      "@test:phpcs",
+      "@test:phpstan",
+      "@test:unit",
+      "@test:integration"
+    ],
+    "test:coverage": [
+      "Composer\\Config::disableProcessTimeout",
+      "XDEBUG_MODE=coverage phpunit --coverage-html=coverage"
+    ],
+    "test:integration": "phpunit --testsuite=integration",
+    "test:phpcs": "phpcs -q -s",
+    "test:phpstan": "phpstan analyse --memory-limit=1G",
+    "test:unit": "phpunit --testsuite=unit"
+  },
+  "scripts-descriptions": {
+    "test": "Run common test.",
+    "test:coverage": "Coverage test via phpunit.",
+    "test:integration": "Integration test via phpunit.",
+    "test:phpstan": "Static test via phpstan.",
+    "test:phpcs": "Style test via phpcs.",
+    "test:unit": "Unit test via phpunit."
+  },
+  "suggest": {
+    "php-http/mock-client": "Simplify testing by using a mock HTTP client"
+  }
+}

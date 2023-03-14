@@ -4,6 +4,7 @@ namespace Puock\Theme\setting;
 
 use Puock\Theme\setting\options\OptionAbout;
 use Puock\Theme\setting\options\OptionAd;
+use Puock\Theme\setting\options\OptionAi;
 use Puock\Theme\setting\options\OptionBasic;
 use Puock\Theme\setting\options\OptionCache;
 use Puock\Theme\setting\options\OptionCarousel;
@@ -36,6 +37,7 @@ class PuockSetting
         $classes[] = ['class' => OptionCms::class, 'sort' => 4];
         $classes[] = ['class' => OptionCompany::class, 'sort' => 5];
         $classes[] = ['class' => OptionAuth::class, 'sort' => 6];
+        $classes[] = ['class' => OptionAi::class, 'sort' => 7];
         $classes[] = ['class' => OptionValidate::class, 'sort' => 7];
         $classes[] = ['class' => OptionAd::class, 'sort' => 8];
         $classes[] = ['class' => OptionEmail::class, 'sort' => 9];
