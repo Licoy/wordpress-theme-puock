@@ -539,7 +539,7 @@ function pk_update()
 }
 
 //添加文章修改时间提示
-function wpb_last_updated_date( $content ) {
+function pk_last_updated_date( $content ) {
     $u_time = get_the_time('U');
     $u_modified_time = get_the_modified_time('U');
     $custom_content = '';
@@ -551,7 +551,7 @@ function wpb_last_updated_date( $content ) {
     $custom_content .= $content;
     return $custom_content;
 }
-add_filter( 'the_content', 'wpb_last_updated_date' );
+add_filter( 'the_content', 'pk_last_updated_date' );
 
 
 if (is_admin()) {
