@@ -5,7 +5,7 @@ Template Name: 读者墙
 
 $year = 2;
 $sql = "SELECT count(comment_ID) as num, comment_author_email as mail,comment_author as `name`,comment_author_url as url
-                FROM $wpdb->comments WHERE user_id !=1 AND comment_approved !=0 AND TO_DAYS(now()) - TO_DAYS(comment_date) < (".($year*365).")
+                FROM $wpdb->comments WHERE user_id !=1 AND comment_approved =1 AND TO_DAYS(now()) - TO_DAYS(comment_date) < (".($year*365).")
                  group by comment_author_email order by num desc limit 0, 100";
 $reads = $wpdb->get_results($sql);
 get_header();
