@@ -579,3 +579,23 @@ function pk_safe_base64_decode($string){
     }
     return base64_decode($data);
 }
+
+
+//添加文章修改时间提示
+function pk_post_expire_tips_open($content)
+{
+    $u_time = get_the_time('U');
+    $u_modified_time = get_the_modified_time('U');
+    $custom_content = '';
+    if ($u_modified_time >= $u_time + (86400*pk_get_option('post_expire_tips_day',100))) {
+        $updated_date = get_the_modified_time('Y-m-d H:i');
+        $tips = str_replace('{date}', $updated_date, pk_get_option('post_expire_tips',''));
+        $custom_content .= '<p class="fs12 c-sub">'.$tips.'</p>';
+    }
+    $custom_content .= $content;
+    return $custom_content;
+}
+
+if (pk_is_checked('post_expire_tips_open')) {
+    add_filter('the_content', 'pk_post_expire_tips_open');
+}

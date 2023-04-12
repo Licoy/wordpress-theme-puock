@@ -84,6 +84,32 @@ class OptionBasic extends BaseOptionItem
                 [
                     'id' => '-',
                     'type' => 'panel',
+                    'open' => pk_is_checked('post_expire_tips_open'),
+                    'label' => __('文章超过时效提示', PUOCK),
+                    'children'=>[
+                        [
+                            'id' => 'post_expire_tips_open',
+                            'label' => __('启用', PUOCK),
+                            'type' => 'switch',
+                            'sdt' => 'false',
+                        ],
+                        [
+                            'id' => 'post_expire_tips_day',
+                            'label' => __('大于N天', PUOCK),
+                            'type' => 'number',
+                            'sdt' => 100,
+                        ],
+                        [
+                            'id' => 'post_expire_tips',
+                            'label' => __('提示内容', PUOCK),
+                            'sdt' => __('<i class="fa fa-circle-exclamation me-1"></i>提醒：本文最后更新于{date}，文中所关联的信息可能已发生改变，请知悉！', PUOCK),
+                            'tips' => __('{date}：文章最后更新时间', PUOCK),
+                        ],
+                    ]
+                ],
+                [
+                    'id' => '-',
+                    'type' => 'panel',
                     'open' => true,
                     'label' => __('评论相关', PUOCK),
                     'children' => [
