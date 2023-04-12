@@ -50,7 +50,11 @@ get_header();
                                     rel="<?php echo $link->link_rel ?>" title="<?php echo empty($link->link_notes) ? $link->link_name : $link->link_notes ?>"
                                    data-bs-toggle="tooltip">
                                     <div class="clearfix puock-bg">
-                                        <img <?php echo pk_get_lazy_img_info(pk_get_favicon_url($link->link_url),'md-avatar') ?> alt="<?php echo $link->link_name ?>">
+                                        <?php if (empty($link->link_image)) : ?>
+                                            <img <?php echo pk_get_lazy_img_info(pk_get_favicon_url($link->link_url),'md-avatar') ?> alt="<?php echo $link->link_name ?>">
+                                        <?php else :?>      
+                                            <img src="<?php echo $link->link_image ;?>"  alt="<?php echo $link->link_name ;?>" class="md-avatar" />
+                                        <?php endif;?>
                                         <div class="info">
                                             <p class="ml-1 text-nowrap text-truncate"><?php echo $link->link_name ?></p>
                                             <p class="c-sub ml-1 text-nowrap text-truncate"><?php echo empty($link->link_notes) ? '暂无介绍' : $link->link_notes ?></p>

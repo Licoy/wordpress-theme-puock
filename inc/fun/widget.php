@@ -667,7 +667,7 @@ class puockAboutAuthor extends puockWidgetBase {
         $cover = $instance['cover'];
         $comment_num = pk_cache_get(PKC_TOTAL_COMMENTS);
         if(!$comment_num){
-            $comment_num = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments");
+            $comment_num = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_approved =1");
             pk_cache_set(PKC_TOTAL_COMMENTS, $comment_num);
         }
         ?>
