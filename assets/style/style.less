@@ -1500,16 +1500,19 @@ a:hover {
     }
 
     .search-layout {
-      & > div {
-        display: inline-block;
-      }
+      display: flex;
 
       .search-input {
-        width: 70%;
+        flex: 1;
+        input{
+          border-radius: 6px;
+        }
       }
 
       .search-start {
-        width: ~"calc(100% - 75%)";
+        margin-left: 10px;
+        width: 100px;
+        flex-shrink: 0;
         position: relative;
         top: -2px;
 
