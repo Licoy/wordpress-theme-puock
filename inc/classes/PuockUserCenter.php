@@ -73,7 +73,17 @@ class PuockUserCenter implements IPuockClassLoad
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">ID</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control" value="<?php echo $userinfo->ID ?>">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <input type="text" readonly class="form-control" value="<?php echo $userinfo->ID ?>">
+                        </div>
+                        <div class="col-6">
+                            <button type="button" onclick="layer.confirm('确认注销登陆吗？',function (){window.Puock.goUrl('<?php echo wp_logout_url('/'); ?>')})" class="btn btn-ssm btn-danger">
+                                <i class="fa fa-sign-out"></i>
+                                <span>注销登录</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="mb-3 row">
