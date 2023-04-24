@@ -25,6 +25,11 @@ abstract class Attributes
     const RETRY = 'retry';
 
     /**
+     * 重试回调.
+     */
+    const RETRY_CALLBACK = 'retry_callback';
+
+    /**
      * 下载文件保存路径.
      */
     const SAVE_FILE_PATH = 'saveFilePath';

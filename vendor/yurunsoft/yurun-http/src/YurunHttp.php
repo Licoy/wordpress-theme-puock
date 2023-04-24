@@ -51,13 +51,20 @@ abstract class YurunHttp
     /**
      * 获取处理器类.
      *
+     * @param array $options
+     *
      * @return \Yurun\Util\YurunHttp\Handler\IHandler
      */
-    public static function getHandler()
+    public static function getHandler($options = [])
     {
         if (static::$defaultHandler)
         {
             $class = static::$defaultHandler;
+            // @phpstan-ignore-next-line
+            if (!is_subclass_of($class, IHandler::class))
+            {
+                throw new \RuntimeException(sprintf('Class %s does not implement %s', $class, IHandler::class));
+            }
         }
         elseif (\defined('SWOOLE_VERSION') && Coroutine::getuid() > -1)
         {
@@ -68,7 +75,7 @@ abstract class YurunHttp
             $class = \Yurun\Util\YurunHttp\Handler\Curl::class;
         }
 
-        return new $class();
+        return new $class($options);
     }
 
     /**
@@ -76,10 +83,11 @@ abstract class YurunHttp
      *
      * @param \Yurun\Util\YurunHttp\Http\Request                 $request
      * @param \Yurun\Util\YurunHttp\Handler\IHandler|string|null $handlerClass
+     * @param array                                              $options
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
-    public static function send($request, $handlerClass = null)
+    public static function send($request, $handlerClass = null, $options = [])
     {
         if ($handlerClass instanceof IHandler)
         {
@@ -91,15 +99,14 @@ abstract class YurunHttp
             $needClose = true;
             if (null === $handlerClass)
             {
-                $handler = static::getHandler();
+                $handler = static::getHandler($options);
             }
             else
             {
+                /** @var IHandler $handler */
                 $handler = new $handlerClass();
             }
         }
-        /** @var IHandler $handler */
-        $time = microtime(true);
         foreach (static::$attributes as $name => $value)
         {
             if (null === $request->getAttribute($name))
@@ -109,11 +116,6 @@ abstract class YurunHttp
         }
         $handler->send($request);
         $response = $handler->recv();
-        if (!$response)
-        {
-            return $response;
-        }
-        $response = $response->withTotalTime(microtime(true) - $time);
         if ($needClose)
         {
             $handler->close();
@@ -127,10 +129,11 @@ abstract class YurunHttp
      *
      * @param \Yurun\Util\YurunHttp\Http\Request            $request
      * @param \Yurun\Util\YurunHttp\Handler\IHandler|string $handlerClass
+     * @param array                                         $options
      *
      * @return \Yurun\Util\YurunHttp\WebSocket\IWebSocketClient
      */
-    public static function websocket($request, $handlerClass = null)
+    public static function websocket($request, $handlerClass = null, $options = [])
     {
         if ($handlerClass instanceof IHandler)
         {
@@ -138,7 +141,7 @@ abstract class YurunHttp
         }
         elseif (null === $handlerClass)
         {
-            $handler = static::getHandler();
+            $handler = static::getHandler($options);
         }
         else
         {

@@ -61,13 +61,17 @@ class XdbSearcher
      * initialize the xdb searcher
      * @throws Exception
      */
-    function __construct($dbFile, $vectorIndex = null, $cBuff = null)
+    function __construct($dbFile = null, $vectorIndex = null, $cBuff = null)
     {
         // check the content buffer first
         if ($cBuff != null) {
             $this->vectorIndex = null;
             $this->contentBuff = $cBuff;
         } else {
+            // 加载默认数据文件 by Anyon
+            if (is_null($dbFile)) {
+                $dbFile = __DIR__ . DIRECTORY_SEPARATOR . 'ip2region.xdb';
+            }
             // open the xdb binary file
             $this->handle = fopen($dbFile, "r");
             if ($this->handle === false) {
@@ -122,7 +126,7 @@ class XdbSearcher
             // read the vector index block
             $buff = $this->read(self::HeaderInfoLength + $idx, 8);
             if ($buff === null) {
-                throw new Exception("failed to read vector index at ${idx}");
+                throw new Exception("failed to read vector index at {$idx}");
             }
 
             $sPtr = self::getLong($buff, 0);
@@ -143,7 +147,7 @@ class XdbSearcher
             // read the segment index
             $buff = $this->read($p, self::SegmentIndexSize);
             if ($buff == null) {
-                throw new Exception("failed to read segment index at ${p}");
+                throw new Exception("failed to read segment index at {$p}");
             }
 
             $sip = self::getLong($buff, 0);
@@ -265,7 +269,7 @@ class XdbSearcher
             'indexPolicy'   => self::getShort($buff, 2),
             'createdAt'     => self::getLong($buff, 4),
             'startIndexPtr' => self::getLong($buff, 8),
-            'endIndexPtr'   => self::getLong($buff, 12),
+            'endIndexPtr'   => self::getLong($buff, 12)
         ];
     }
 
@@ -277,7 +281,9 @@ class XdbSearcher
             return null;
         }
 
-        return self::loadHeader($handle);
+        $header = self::loadHeader($handle);
+        fclose($handle);
+        return $header;
     }
 
     // load vector index from a file handle
@@ -308,7 +314,9 @@ class XdbSearcher
             return null;
         }
 
-        return self::loadVectorIndex($handle);
+        $vIndex = self::loadVectorIndex($handle);
+        fclose($handle);
+        return $vIndex;
     }
 
     // load the xdb content from a file handle

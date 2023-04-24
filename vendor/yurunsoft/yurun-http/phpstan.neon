@@ -13,6 +13,7 @@ parameters:
     
     treatPhpDocTypesAsCertain: false
     checkGenericClassInNonGenericObjectType: false
+    reportUnmatchedIgnoredErrors: false
 
     ignoreErrors:
         - '#Unsafe usage of new static\(\).+#'
@@ -20,6 +21,8 @@ parameters:
         - '#Method \S+ has parameter \S+ with no value type specified in iterable type array.#'
         - '#Property \S+ type has no value type specified in iterable type array.#'
         - '#Access to an undefined property Workerman\\Connection\\TcpConnection::\$__request.#'
+        - '#unknown class CurlHandle#'
+        - '#invalid typehint type CurlHandle#'
         -
             message: '#Method \S+ has no return typehint specified.#'
             paths:

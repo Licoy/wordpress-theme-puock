@@ -27,7 +27,7 @@ class OptionAi
                     'id'=>'openai_api_agent',
                     'label'=>__('OpenAI API 代理域', PUOCK),
                     'type'=>'text',
-                    'tips'=>__('默认为<code>https://api.openai.com/v1</code>，如果你的服务器无法访问该域名，请自行配置代理域名', PUOCK),
+                    'tips'=>__('默认为<code>https://api.openai.com</code>，如果你的服务器无法访问该域名，请自行配置代理域名', PUOCK),
                 ],
                 [
                     'id'=>'openai_max_tokens',

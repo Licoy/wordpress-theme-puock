@@ -16,7 +16,12 @@
     "require": {
         "yurunsoft/yurun-oauth-login": "~3.0",
         "zoujingli/ip2region": "^2.0",
-        "tectalic/openai": "^1.4",
-        "guzzlehttp/guzzle": "^7.5"
+        "orhanerday/open-ai": "^4.7",
+        "gioni06/gpt3-tokenizer": "^1.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
     }
 }

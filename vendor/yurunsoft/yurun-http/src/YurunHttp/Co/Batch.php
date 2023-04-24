@@ -14,10 +14,11 @@ abstract class Batch
      * @param \Yurun\Util\YurunHttp\Http\Request[]|\Yurun\Util\HttpRequest[] $requests
      * @param float|null                                                     $timeout      超时时间，单位：秒。默认为 null 不限制
      * @param string|null                                                    $handlerClass
+     * @param array                                                          $options
      *
      * @return \Yurun\Util\YurunHttp\Http\Response[]
      */
-    public static function run($requests, $timeout = null, $handlerClass = null)
+    public static function run($requests, $timeout = null, $handlerClass = null, $options = [])
     {
         $batchRequests = [];
         $downloadAutoExt = [];
@@ -40,7 +41,7 @@ abstract class Batch
         }
         if (null === $handlerClass)
         {
-            $handler = YurunHttp::getHandler();
+            $handler = YurunHttp::getHandler($options);
         }
         else
         {

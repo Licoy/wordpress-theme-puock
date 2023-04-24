@@ -308,6 +308,10 @@ $response = YurunHttp::send($request);
 var_dump($response);
 ```
 
+---
+
+更多用法详见文档：<https://doc.yurunsoft.com/YurunHttp>
+
 ## 商业合作
 
 现在使用 Swoole 的项目越来越多，使用 YurunHttp 开发的代码，可以原生兼容 php-fpm 和 Swoole 两种环境。
