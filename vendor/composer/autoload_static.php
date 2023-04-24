@@ -4,13 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4f6b69ae626959092fc09391096ba5a1
+class ComposerStaticInitf74d6302ff22d6ca9f1ebbf1a19d8e44
 {
     public static $prefixLengthsPsr4 = array (
         'Y' => 
         array (
             'Yurun\\Util\\' => 11,
             'Yurun\\OAuthLogin\\' => 17,
+        ),
+        'R' => 
+        array (
+            'Rahul900day\\Gpt3Encoder\\' => 24,
         ),
         'P' => 
         array (
@@ -22,10 +26,6 @@ class ComposerStaticInit4f6b69ae626959092fc09391096ba5a1
         array (
             'Orhanerday\\OpenAi\\' => 18,
         ),
-        'G' => 
-        array (
-            'Gioni06\\Gpt3Tokenizer\\' => 22,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -36,6 +36,10 @@ class ComposerStaticInit4f6b69ae626959092fc09391096ba5a1
         'Yurun\\OAuthLogin\\' => 
         array (
             0 => __DIR__ . '/..' . '/yurunsoft/yurun-oauth-login/src',
+        ),
+        'Rahul900day\\Gpt3Encoder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rahul900day/gpt-3-encoder/src',
         ),
         'Puock\\Theme\\' => 
         array (
@@ -53,10 +57,6 @@ class ComposerStaticInit4f6b69ae626959092fc09391096ba5a1
         array (
             0 => __DIR__ . '/..' . '/orhanerday/open-ai/src',
         ),
-        'Gioni06\\Gpt3Tokenizer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/gioni06/gpt3-tokenizer/src',
-        ),
     );
 
     public static $classMap = array (
@@ -68,9 +68,9 @@ class ComposerStaticInit4f6b69ae626959092fc09391096ba5a1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4f6b69ae626959092fc09391096ba5a1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4f6b69ae626959092fc09391096ba5a1::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4f6b69ae626959092fc09391096ba5a1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf74d6302ff22d6ca9f1ebbf1a19d8e44::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf74d6302ff22d6ca9f1ebbf1a19d8e44::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf74d6302ff22d6ca9f1ebbf1a19d8e44::$classMap;
 
         }, null, ClassLoader::class);
     }

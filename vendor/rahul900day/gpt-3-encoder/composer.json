@@ -1,0 +1,39 @@
+{
+    "name": "rahul900day/gpt-3-encoder",
+    "description": "GPT-3-Encoder is a PHP implementation of OpenAI's original python encoder/decoder.",
+    "keywords": ["php", "GPT-2", "GPT-3", "tokenizer", "encoder", "decoder", "GPT-3-Tokenizer", "GPT-2-Tokenizer", "GPT-3-Encoder", "GPT-2-Encoder"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rahul Dey",
+            "email": "rahul900day@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.4 || ^6.0",
+        "pestphp/pest": "^1.22",
+        "phpstan/phpstan": "^1.10",
+        "rector/rector": "^0.15.21"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rahul900day\\Gpt3Encoder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

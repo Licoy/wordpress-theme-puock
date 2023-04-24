@@ -8,9 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'Yurun\\Util\\' => array($vendorDir . '/yurunsoft/yurun-http/src'),
     'Yurun\\OAuthLogin\\' => array($vendorDir . '/yurunsoft/yurun-oauth-login/src'),
+    'Rahul900day\\Gpt3Encoder\\' => array($vendorDir . '/rahul900day/gpt-3-encoder/src'),
     'Puock\\Theme\\' => array($baseDir . '/inc'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Orhanerday\\OpenAi\\' => array($vendorDir . '/orhanerday/open-ai/src'),
-    'Gioni06\\Gpt3Tokenizer\\' => array($vendorDir . '/gioni06/gpt3-tokenizer/src'),
 );

@@ -1,14 +1,11 @@
 <?php
 
-
-use Gioni06\Gpt3Tokenizer\Gpt3Tokenizer;
-use Gioni06\Gpt3Tokenizer\Gpt3TokenizerConfig;
 use Orhanerday\OpenAi\OpenAi;
+use Rahul900day\Gpt3Encoder\Encoder;
 
-function pk_ajax_openai_token_len($text): int
+function pk_openai_token_len($text): int
 {
-    $tokenizer = new Gpt3Tokenizer(new Gpt3TokenizerConfig());
-    return $tokenizer->count($text);
+    return count(Encoder::encode($text));
 }
 
 function pk_ajax_ai_ask()
@@ -33,10 +30,10 @@ function pk_ajax_ai_ask()
     $openaiClient->setBaseURL($openai_url);
     $sys_content = pk_get_option('openai_model_sys_content');
     $messages = [];
-    $use_total_token = pk_ajax_openai_token_len($text);
+    $use_total_token = pk_openai_token_len($text);
     if (!empty($sys_content)) {
         $messages[] = ['role' => 'system', 'content' => $sys_content];
-        $use_total_token += pk_ajax_openai_token_len($sys_content);
+        $use_total_token += pk_openai_token_len($sys_content);
     }
     $messages[] = ['role' => 'user', 'content' => $text];
     $max_tokens = pk_get_option('openai_max_tokens', 0);

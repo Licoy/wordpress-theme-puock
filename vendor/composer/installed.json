@@ -1,62 +1,6 @@
 {
     "packages": [
         {
-            "name": "gioni06/gpt3-tokenizer",
-            "version": "v1.2.0",
-            "version_normalized": "1.2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Gioni06/GPT3Tokenizer.git",
-                "reference": "86f824f0e852e6a26887dac367e03bdeed07ef42"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Gioni06/GPT3Tokenizer/zipball/86f824f0e852e6a26887dac367e03bdeed07ef42",
-                "reference": "86f824f0e852e6a26887dac367e03bdeed07ef42",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": "^8.0.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5.8"
-            },
-            "time": "2023-04-16T12:49:18+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Gioni06\\Gpt3Tokenizer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Jonas Duri",
-                    "email": "jonas.duri@gmail.com"
-                }
-            ],
-            "description": "PHP package for Byte Pair Encoding (BPE) used by GPT-3.",
-            "homepage": "https://github.com/Gioni06/GPT3Tokenizer",
-            "keywords": [
-                "GPT-3",
-                "decode",
-                "encode",
-                "gpt-2",
-                "openai",
-                "tokenizer"
-            ],
-            "support": {
-                "issues": "https://github.com/Gioni06/GPT3Tokenizer/issues",
-                "source": "https://github.com/Gioni06/GPT3Tokenizer"
-            },
-            "install-path": "../gioni06/gpt3-tokenizer"
-        },
-        {
             "name": "orhanerday/open-ai",
             "version": "4.7.1",
             "version_normalized": "4.7.1.0",
@@ -228,6 +172,74 @@
             "install-path": "../psr/log"
         },
         {
+            "name": "rahul900day/gpt-3-encoder",
+            "version": "1.1.0",
+            "version_normalized": "1.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RahulDey12/gpt-3-encoder.git",
+                "reference": "4c3c706a0ddcad137d0f9d592d141d0a23fa2502"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RahulDey12/gpt-3-encoder/zipball/4c3c706a0ddcad137d0f9d592d141d0a23fa2502",
+                "reference": "4c3c706a0ddcad137d0f9d592d141d0a23fa2502",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.22",
+                "phpstan/phpstan": "^1.10",
+                "rector/rector": "^0.15.21",
+                "symfony/var-dumper": "^5.4 || ^6.0"
+            },
+            "time": "2023-03-22T20:12:00+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Rahul900day\\Gpt3Encoder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rahul Dey",
+                    "email": "rahul900day@gmail.com"
+                }
+            ],
+            "description": "GPT-3-Encoder is a PHP implementation of OpenAI's original python encoder/decoder.",
+            "keywords": [
+                "GPT-2-Encoder",
+                "GPT-2-Tokenizer",
+                "GPT-3",
+                "GPT-3-Encoder",
+                "GPT-3-Tokenizer",
+                "decoder",
+                "encoder",
+                "gpt-2",
+                "php",
+                "tokenizer"
+            ],
+            "support": {
+                "issues": "https://github.com/RahulDey12/gpt-3-encoder/issues",
+                "source": "https://github.com/RahulDey12/gpt-3-encoder/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://ko-fi.com/rahul900day",
+                    "type": "ko_fi"
+                }
+            ],
+            "install-path": "../rahul900day/gpt-3-encoder"
+        },
+        {
             "name": "yurunsoft/yurun-http",
             "version": "v4.4.2",
             "version_normalized": "4.4.2.0",
@@ -285,13 +297,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Yurunsoft/YurunOAuthLogin/zipball/3f67cc3ead9e14963fd0a40efe066530fac60746",
                 "reference": "3f67cc3ead9e14963fd0a40efe066530fac60746",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
