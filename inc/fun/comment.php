@@ -76,11 +76,11 @@ function pk_comment_callback($comment, $args, $depth)
             <div class="comment-os c-sub">
                 <?php
                 if (pk_is_checked('comment_show_ua', true)):
-                    $commentUserAgent = parse_user_agent($comment->comment_agent);
+                    $commentUserAgent = \donatj\UserAgent\parse_user_agent($comment->comment_agent);
                     $commentOsIcon = pk_get_comment_ua_os_icon($commentUserAgent['platform']);
                     $commentBrowserIcon = pk_get_comment_ua_os_icon($commentUserAgent['browser']);
-                    echo "<span class='mt10' title='${commentUserAgent['platform']}'><i class='$commentOsIcon'></i>&nbsp;<span>${commentUserAgent['platform']}&nbsp;</span></span>";
-                    echo "<span class='mt10' title='${commentUserAgent['browser']} ${commentUserAgent['version']}'><i class='$commentBrowserIcon'></i>&nbsp;<span>${commentUserAgent['browser']}</span></span>";
+                    echo "<span class='mt10' title='{$commentUserAgent['platform']}'><i class='$commentOsIcon'></i>&nbsp;<span>{$commentUserAgent['platform']}&nbsp;</span></span>";
+                    echo "<span class='mt10' title='{$commentUserAgent['browser']} {$commentUserAgent['version']}'><i class='$commentBrowserIcon'></i>&nbsp;<span>{$commentUserAgent['browser']}</span></span>";
                 endif;
                 ?>
                 <?php

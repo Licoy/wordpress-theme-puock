@@ -42,7 +42,7 @@
                     <div class="mt20 entry-content-box">
                         <div class="<?php get_entry_content_class() ?> content-main puock-text <?php pk_checked_out('post_content_indent', 'p-indent') ?>">
                             <?php if (pk_is_checked('post_read_time')): ?>
-                                <p class="fs14 c-sub">
+                                <p class="fs14 c-sub no-indent">
                                     <i class="fa-regular fa-clock"></i>
                                     <?php echo pk_read_time_tip() ?>
                                 </p>

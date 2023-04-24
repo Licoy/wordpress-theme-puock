@@ -217,7 +217,7 @@ function pk_password_read($attr, $content = null)
     ), $attr));
     $out = '';
     $error = '';
-    if (empty(trim($desc))) {
+    if (empty(trim($desc ?? ''))) {
         $desc = "此处含有隐藏内容，需要正确输入密码后可见！";
     }
     $info = "<p class='fs14 c-sub'><i class='fa-regular fa-eye'></i>&nbsp;{$desc}</p>";
