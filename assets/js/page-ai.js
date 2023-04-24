@@ -43,7 +43,7 @@ jQuery(function () {
                     const chatEl = $("#" + chatId)
                     const contentEl = chatEl.find(".content-box")
                     const closeLoading = () => {
-                        chatEl.find(".loading").remove()
+                        chatEl.find(".cursor-blink-after").removeClass("cursor-blink-after")
                         el.attr("disabled", false)
                     }
                     $.post(aiMetaInfo.url, {text: text}, function (res) {
@@ -60,15 +60,14 @@ jQuery(function () {
 
             putMsg(data) {
                 const id = "chat-" + ((new Date().getTime()) + "") + (Math.floor(Math.random() * 1000) + "")
-                const loadHtml = data.load ? `<div class="d-flex justify-content-end loading">
-                                    <div class="spinner-border spinner-border-sm" role="status"></div>
-                                </div>` : ""
-                const html = `<div id="${id}" class="chat-item is-${data.ai ? 'ai' : 'user'}"><div class="row">
-                                <div class="col-auto">
-                                    <img src="${data.avatar}" class="avatar md-avatar" alt="avatar">
+                const html = `<div id="${id}" class="chat-item is-${data.ai ? 'ai' : 'user'}">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <img src="${data.avatar}" class="avatar md-avatar" alt="avatar">
+                                    </div>
+                                    <div class="col fs14 content-box ${data.ai ? 'cursor-blink-after':''}">${data.content}</div>
                                 </div>
-                                <div class="col fs14 content-box">${data.content}</div>
-                            </div>${loadHtml}</div>`
+                            </div>`
                 $(".chats").append(html)
                 return id
             }

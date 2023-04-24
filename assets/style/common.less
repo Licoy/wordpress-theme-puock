@@ -682,3 +682,28 @@ a {
     }
   }
 }
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cursor-blink-after {
+  &:after {
+    content: '';
+    display: inline-block;
+    background-color: var(--pk-c-font);
+    width: .4em;
+    height: 1em;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+    margin-left: 5px;
+  }
+}
