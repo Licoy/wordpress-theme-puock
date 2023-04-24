@@ -18,7 +18,7 @@
         <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress" alt="WordPress-Version">
       </a>
     <a href="https://github.com/Licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/PHP-V7.4+-666699.svg?logo=php" alt="PHP-Version">
+        <img src="https://img.shields.io/badge/PHP-V8.0.2+-666699.svg?logo=php" alt="PHP-Version">
       </a>
      <a href="https://gitee.com/licoy/wordpress-theme-puock">
         <img src="https://img.shields.io/badge/Gitee-码云-CC3333.svg?logo=gitee" alt="Gitee">
@@ -59,7 +59,7 @@
 ### 环境要求
 
 - WordPress `5.0+`
-- PHP `7.4+`
+- PHP `8.0.2+`
 - MySQL `5.6+`
 
 ## 主题特性

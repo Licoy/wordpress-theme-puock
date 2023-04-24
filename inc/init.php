@@ -140,7 +140,7 @@ $pk_right_slug = 'PGRpdiBjbGFzcz0iZnMxMiBtdDEwIGMtc3ViIj4NCiAgICAgICAgICAgICAgIC
 function pk_env_check()
 {
     $php_version = phpversion();
-    $last_version = '7.4';
+    $last_version = '8.0.2';
     $content = [];
     if (version_compare($php_version, $last_version, '<')) {
         $content[] = '<p>您正在使用过时的PHP版本<code>' . $php_version . '</code>，Puock主题需要PHP版本大于<code>' . $last_version . '</code>才能完整使用全部功能，请升级PHP版本。</p>';
