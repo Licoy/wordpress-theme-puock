@@ -8,6 +8,7 @@ $sql = "SELECT count(comment_ID) as num, comment_author_email as mail,comment_au
                 FROM $wpdb->comments WHERE user_id !=1 AND comment_approved =1 AND TO_DAYS(now()) - TO_DAYS(comment_date) < (".($year*365).")
                  group by comment_author_email order by num desc limit 0, 100";
 $reads = $wpdb->get_results($sql);
+$use_theme_link_forward = get_post_meta($post->ID,'use_theme_link_forward',true);
 get_header();
 ?>
 
@@ -28,7 +29,7 @@ get_header();
                             <?php foreach ($reads as $read): ?>
                                 <div class="col col-6 col-md-4 col-lg-3 pl-0">
                                     <div class="p-2 text-truncate text-nowrap">
-                                        <a href="<?php echo empty($read->url) ? 'javascript:void(0)':pk_go_link($read->url) ?>"
+                                        <a href="<?php echo $use_theme_link_forward ? pk_go_link($read->url) : $read->url; ?>"
                                             <?php echo empty($read->url) ? '':'target="_blank"' ?> rel="nofollow">
                                             <img data-bs-toggle="tooltip" <?php echo pk_get_lazy_img_info(get_avatar_url($read->mail),'md-avatar') ?>
                                                  title="<?php echo $read->name?>" alt="<?php echo $read->name?>">

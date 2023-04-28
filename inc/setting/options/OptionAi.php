@@ -9,7 +9,7 @@ class OptionAi
         return [
             'key' => 'ai',
             'label' => __('ChatGPT问答', PUOCK),
-            'icon' => 'fa-solid fa-robot',
+            'icon' => 'czs-robot',
             'fields' => [
                 [
                     'id'=>'openai_enable',
