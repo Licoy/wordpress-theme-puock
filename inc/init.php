@@ -16,7 +16,6 @@ function deel_setup()
     remove_action('wp_head', 'wp_generator');//移除WordPress版本号
     remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);//本页短链接
 
-    add_filter('xmlrpc_enabled', '__return_false');
     add_filter('embed_oembed_discover', '__return_false');
     remove_action('wp_head', 'wp_oembed_add_discovery_links');
     remove_action('wp_head', 'wp_oembed_add_host_js');
@@ -29,6 +28,10 @@ function deel_setup()
         add_filter('rest_authentication_errors', function ($access) {
             return new WP_Error('rest_cannot_access', 'REST API已经被关闭，请打开后再进行尝试', array('status' => 403));
         });
+    }
+
+    if(pk_is_checked('close_xmlrpc')){
+        add_filter('xmlrpc_enabled', '__return_false');
     }
 
     // 移除头部 wp-json 标签和 HTTP header 中的 link

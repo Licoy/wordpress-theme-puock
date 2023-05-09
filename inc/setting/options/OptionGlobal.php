@@ -197,6 +197,12 @@ class OptionGlobal extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'close_xmlrpc',
+                    'label' => __('禁止使用', PUOCK) . ' XML-RPC',
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'thumbnail_rewrite_open',
                     'label' => __('缩略图伪静态', PUOCK),
                     'type' => 'switch',
