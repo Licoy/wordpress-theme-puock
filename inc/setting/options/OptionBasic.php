@@ -25,6 +25,12 @@ class OptionBasic extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'off_img_viewer',
+                    'label' => __('禁用正文图片灯箱预览', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'basic_img_lazy_a',
                     'label' => __('留言头像懒加载', PUOCK),
                     'type' => 'switch',
