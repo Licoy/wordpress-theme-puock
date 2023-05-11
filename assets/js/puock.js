@@ -25,7 +25,8 @@ class Puock {
             async_view_id: null,
             mode_switch: false,
             async_view_generate_time: null,
-            off_img_viewer:false
+            off_img_viewer:false,
+            off_code_highlighting:false
         },
         comment: {
             loading: false,
@@ -585,6 +586,9 @@ class Puock {
     }
 
     initCodeHighlight(fullChange = true) {
+        if(this.data.params.off_code_highlighting){
+            return
+        }
         if (window.hljs !== undefined) {
             window.hljs.configure({ignoreUnescapedHTML: true})
             document.querySelectorAll('pre').forEach((block, index) => {

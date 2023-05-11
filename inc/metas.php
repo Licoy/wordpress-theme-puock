@@ -21,6 +21,7 @@ $headMetas = [
     'async_view_id' => pk_metas_get_async_view_id(),
     'mode_switch' => pk_is_checked('theme_mode_s'),
     'off_img_viewer'=>pk_is_checked('off_img_viewer'),
+    'off_code_highlighting'=>pk_is_checked('off_code_highlighting'),
 ];
 if($headMetas['async_view_id']){
     $headMetas['async_view_generate_time'] = time();
