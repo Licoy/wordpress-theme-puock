@@ -80,8 +80,13 @@ a {
 .primary-text-hover() {
   .ta3-fun();
   &:hover {
-    color: var(--pk-c-primary);
+    color: var(--pk-c-primary) !important;
   }
+}
+
+.primary-text-hover{
+  cursor: pointer;
+  .primary-text-hover();
 }
 
 .primary-hover {

@@ -454,8 +454,11 @@ class Puock {
                 let input = t.attr("data-cp-input")
                 let el = t.attr("data-cp-el")
                 let val = t.attr("data-cp-val")
+                let func = t.attr("data-cp-func")
                 let text;
-                if (typeof val !== "undefined") {
+                if(typeof func !=="undefined"){
+                    text = window[func](t)
+                }else if (typeof val !== "undefined") {
                     text = val
                 } else if (typeof input !== "undefined") {
                     text = $(input).val()
@@ -585,13 +588,13 @@ class Puock {
         }
     }
 
-    initCodeHighlight(fullChange = true) {
+    initCodeHighlight(fullChange = true, bodyEl="body") {
         if(this.data.params.off_code_highlighting){
             return
         }
         if (window.hljs !== undefined) {
             window.hljs.configure({ignoreUnescapedHTML: true})
-            document.querySelectorAll('pre').forEach((block, index) => {
+            $(bodyEl).find("pre").each((index, block) => {
                 const el = $(block);
                 const codeChildClass = el.children("code") ? el.children("code").attr("class") : undefined;
                 if (codeChildClass) {

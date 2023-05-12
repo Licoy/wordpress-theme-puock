@@ -2,7 +2,8 @@
 /*
 Template Name: ChatGPT问答
 */
-wp_enqueue_script('puock-page-ai', pk_get_static_url() . '/assets/dist/js/page-ai.min.js', ['puock-libs'], PUOCK_CUR_VER_STR, true);
+wp_enqueue_script('puock-md', pk_get_static_url() . '/assets/libs/marked.js', ['puock-libs'], PUOCK_CUR_VER_STR, true);
+wp_enqueue_script('puock-page-ai', pk_get_static_url() . '/assets/dist/js/page-ai.min.js', ['puock-md'], PUOCK_CUR_VER_STR, true);
 
 get_header();
 
@@ -35,12 +36,14 @@ $gc_ai_avatar = pk_get_option('favicon',get_avatar_url(1));
                     <div class="mt20 p-block puock-text">
                         <div class="chats">
                             <?php if(!empty(pk_get_option('openai_default_welcome_chat'))): ?>
-                            <div class="chat-item is-ai">
+                            <div class="chat-item is-ai chat-template">
                                 <div class="row">
                                     <div class="col-auto">
                                         <img src="<?php echo $gc_ai_avatar ?>" class="avatar md-avatar">
                                     </div>
-                                    <div class="col fs14 content-box"><?php echo pk_get_option('openai_default_welcome_chat') ?></div>
+                                    <div class="col">
+                                        <div class="fs14 content-box"><?php echo pk_get_option('openai_default_welcome_chat') ?></div>
+                                    </div>
                                 </div>
                             </div>
                             <?php endif; ?>
