@@ -30,6 +30,7 @@ jQuery(function () {
                     const el = $(e.currentTarget)
                     const inputEl = $(".chat-input")
                     const text = $.trim(inputEl.val())
+                    const useImgMode = $("#chat-use-img-mode").is(":checked")
                     if (text === "") {
                         $p.toast('请先输入内容')
                         return
@@ -69,7 +70,7 @@ jQuery(function () {
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({text: text}),
+                            body: JSON.stringify({text: text, imgMode:useImgMode}),
                         });
                         if (!f.ok) {
                             callback("请求失败：发起请求错误", true, true)

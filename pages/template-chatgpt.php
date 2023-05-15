@@ -56,9 +56,18 @@ $gc_ai_avatar = pk_get_option('favicon',get_avatar_url(1));
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt10 d-none chat-btn-box">
-                            <button class="btn btn-primary btn-sm mr-2 chat-submit"><i class="fa-regular fa-paper-plane me-1"></i>立即提问</button>
-                            <button class="btn btn-dark btn-sm chat-clear-history"><i class="fa-solid fa-broom me-1"></i>清屏</button>
+                        <div class="d-flex justify-content-between align-items-center mt10 d-none chat-btn-box">
+                            <div class="form-check form-switch">
+                                <?php if(pk_is_checked('openai_dall_e')):?>
+                                <input class="form-check-input" name="remember" type="checkbox" role="switch"
+                                       id="chat-use-img-mode">
+                                <label class="form-check-label fs14" for="chat-use-img-mode">AI绘画</label>
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-sm mr-2 chat-submit"><i class="fa-regular fa-paper-plane me-1"></i>立即提问</button>
+                                <button class="btn btn-dark btn-sm chat-clear-history"><i class="fa-solid fa-broom me-1"></i>清屏</button>
+                            </div>
                         </div>
                     </div>
                 </div>

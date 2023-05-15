@@ -50,6 +50,23 @@ class OptionAi
                     'tips'=>__('模型系统预设，可让AI主动进行一些违规话题的屏蔽，不懂勿轻易填充', PUOCK),
                 ],
                 [
+                    'id'=>'openai_dall_e',
+                    'label'=>__('AI绘画支持', PUOCK),
+                    'type'=>'switch',
+                    'tips'=>__('启用后前端界面<code>勾选绘画模式</code>即可绘画', PUOCK),
+                ],
+                [
+                    'id'=>'openai_dall_e_size',
+                    'label'=>__('AI绘画图片大小', PUOCK),
+                    'type'=>'select',
+                    'sdt'=>'512x512',
+                    'options'=>[
+                        ['label'=>'256x256','value'=>'256x256'],
+                        ['label'=>'512x512','value'=>'512x512'],
+                        ['label'=>'1024x1024','value'=>'1024x1024']
+                    ],
+                ],
+                [
                     'id'=>'openai_guest_use',
                     'label'=>__('允许游客使用', PUOCK),
                     'type'=>'switch',
@@ -57,9 +74,8 @@ class OptionAi
                 ],
                 [
                     'id'=>'openai_stream',
-                    'label'=>__('使用Stream(实时输出)模式<code>即将支持</code>', PUOCK),
+                    'label'=>__('使用Stream(实时输出)模式', PUOCK),
                     'type'=>'switch',
-                    'disabled'=>true,
                     'tips'=>__('启用后请关闭nginx的<code>gzip</code>模式', PUOCK),
                 ],
                 [
