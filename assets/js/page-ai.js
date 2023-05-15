@@ -26,7 +26,7 @@ jQuery(function () {
                         $(".chat-submit").click()
                     }
                 });
-                $(".chat-submit").on("click", (e) => {
+                $(".chat-submit").on("click", async (e) => {
                     const el = $(e.currentTarget)
                     const inputEl = $(".chat-input")
                     const text = $.trim(inputEl.val())
@@ -53,17 +53,56 @@ jQuery(function () {
                         chatEl.find(".cursor-blink-after").removeClass("cursor-blink-after")
                         el.attr("disabled", false)
                     }
-                    $.post(aiMetaInfo.url, {text: text}, (res)=> {
-                        chat.content = res
-                        contentEl.html(this.parseContent(res))
+                    const callback = (res, err, done) => {
+                        if(err){
+                            chat.content += res
+                        }else{
+                            chat.content = res
+                        }
+                        contentEl.html(this.parseContent(chat.content))
                         $p.initCodeHighlight("#"+chat.id)
-                        closeLoading()
                         $('html,body').stop().animate({scrollTop: $(document).height()}, 200)
-                    }).fail(function (err) {
+                    }
+                    try {
+                        const f = await fetch(aiMetaInfo.url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({text: text}),
+                        });
+                        if (!f.ok) {
+                            callback("请求失败：发起请求错误", true, true)
+                            return
+                        }
+                        const res = f.body
+                        if (!res) {
+                            callback("请求失败：获取内容为空", true, true)
+                            return
+                        }
+                        let reader = res.getReader()
+                        let decoder = new TextDecoder
+                        let allDone = false;
+                        let allText = "";
+                        while (!allDone) {
+                            let {value, done} = await reader.read();
+                            allDone = done;
+                            let s = decoder.decode(value);
+                            if (s) {
+                                allText += s;
+                                callback(allText, false, false)
+                            }
+                        }
+                        callback(allText, false, true)
+                    } catch (e) {
+                        if((e+"").indexOf('aborted') > -1){
+                            callback("", true, true)
+                            return
+                        }
+                        callback(`请求异常：${e}`, true, true)
+                    }finally {
                         closeLoading()
-                        console.error(err)
-                        contentEl.html("<code>请求异常</code>")
-                    })
+                    }
                 })
             }
 
