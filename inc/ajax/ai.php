@@ -32,6 +32,9 @@ function pk_ajax_ai_ask()
     $openaiClient->setBaseURL($openai_url);
     $use_img_mode = $body['imgMode'] ?? false;
     if($use_img_mode){
+        if(!pk_is_checked('openai_dall_e')){
+            wp_die('<code>暂未启用AI绘图</code>');
+        }
         try{
             $chat_res = $openaiClient->image([
                 'prompt' => $text,
