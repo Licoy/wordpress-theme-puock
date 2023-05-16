@@ -77,6 +77,7 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 - [x] WP cache support
 - [x] Custom primary color
 - [x] LOGO sweep light animation
+- [x] ChatGPT and AI painting support
 - [x] Please refer to the release notes for more feature updates：[releases](https://github.com/Licoy/wordpress-theme-puock/releases)
 - [x] More features, waiting for your [proposal](https://github.com/Licoy/wordpress-theme-puock/issues)
 ## Documentation

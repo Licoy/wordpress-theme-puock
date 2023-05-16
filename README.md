@@ -94,6 +94,7 @@
 - [x] WP缓存支持
 - [x] 自定义主色调
 - [x] LOGO扫光动画
+- [x] ChatGPT及AI绘画支持
 - [x] 更多特性更新请查阅版本发布说明：[releases](https://github.com/Licoy/wordpress-theme-puock/releases)
 - [x] 更多功能等你的[提议](https://github.com/Licoy/wordpress-theme-puock/issues)
 
