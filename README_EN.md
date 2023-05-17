@@ -11,20 +11,18 @@
 <div align="center">
     <h1>WordPress Theme - Puock</h1>
     <p>A high-value adaptive theme based on WordPress, supporting day and night modes.</p>
-      <a href="https://github.com/Licoy/wordpress-theme-puock/releases/latest">
+      <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock/releases/latest">
         <img src="https://img.shields.io/github/v/release/Licoy/wordpress-theme-puock.svg?logo=git" alt="Release-Version">
       </a>
-    <a href="https://github.com/Licoy/wordpress-theme-puock">
+    <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock">
         <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress" alt="WordPress-Version">
       </a>
-    <a href="https://github.com/Licoy/wordpress-theme-puock">
+    <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock">
         <img src="https://img.shields.io/badge/PHP-V7.4+-666699.svg?logo=php" alt="PHP-Version">
       </a>
-     <a href="https://gitee.com/licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/Gitee-%E7%A0%81%E4%BA%91-CC3333.svg?logo=gitee" alt="Gitee">
-      </a>
-    <a href="https://github.com/Licoy">
-        <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg?logo=github" alt="Author">
+    <br>
+    <a target="_blank" href="https://t.me/puocktheme">
+        <img src="https://img.shields.io/badge/TG-@PuockTheme-29a9ec.svg?logo=Telegram" alt="Telegram Group">
       </a>
     <br><br>
     <img src='https://repobeats.axiom.co/api/embed/5f966833712409c00d4269bf2800b2d4762e09ea.svg'></img>

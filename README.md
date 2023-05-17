@@ -11,30 +11,31 @@
 <div align="center">
     <h1>WordPress Theme - Puock</h1>
     <p>一款基于WordPress开发的高颜值的自适应主题，支持白天与黑夜模式。</p>
-      <a href="https://github.com/Licoy/wordpress-theme-puock/releases/latest">
+      <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock/releases/latest">
         <img src="https://img.shields.io/github/v/release/Licoy/wordpress-theme-puock.svg?logo=git" alt="Release-Version">
       </a>
-    <a href="https://github.com/Licoy/wordpress-theme-puock">
+    <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock">
         <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress" alt="WordPress-Version">
       </a>
-    <a href="https://github.com/Licoy/wordpress-theme-puock">
+    <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock">
         <img src="https://img.shields.io/badge/PHP-V7.4+-666699.svg?logo=php" alt="PHP-Version">
       </a>
-     <a href="https://gitee.com/licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/Gitee-码云-CC3333.svg?logo=gitee" alt="Gitee">
-      </a>
-    <a href="https://github.com/Licoy">
-        <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg?logo=github" alt="Author">
-      </a>
     <br>
-    <a href="https://licoy.cn/puock-theme-sponsor.html">
+    <a target="_blank" href="https://licoy.cn/puock-theme-sponsor.html">
         <img src="https://img.shields.io/badge/赞赏-开发不易-CC3333.svg?logo=Buy-Me-A-Coffee" alt="赞赏支持">
       </a>
-    <a href="https://licoy.cn/puock-theme-sponsor.html">
+    <a target="_blank" href="https://licoy.cn/puock-theme-sponsor.html">
+        <img src="https://img.shields.io/badge/捐赠-支付宝-00a2ef.svg?logo=AliPay" alt="支付宝捐赠">
+      </a>
+    <a target="_blank" href="https://licoy.cn/puock-theme-sponsor.html">
         <img src="https://img.shields.io/badge/捐赠-微信-68b600.svg?logo=WeChat" alt="微信捐赠">
       </a>
-    <a href="https://licoy.cn/puock-theme-sponsor.html">
-        <img src="https://img.shields.io/badge/捐赠-支付宝-00a2ef.svg?logo=AliPay" alt="支付宝捐赠">
+    <br>
+    <a target="_blank" href="https://licoy.cn/go/puock-update.php?r=qq_qun">
+        <img src="https://img.shields.io/badge/WeChat-交流群-07c160.svg?logo=WeChat" alt="Wechat Group">
+      </a>
+    <a target="_blank" href="https://t.me/puocktheme">
+        <img src="https://img.shields.io/badge/TG-@PuockTheme-29a9ec.svg?logo=Telegram" alt="Telegram Group">
       </a>
     <br><br>
     <img src='https://repobeats.axiom.co/api/embed/5f966833712409c00d4269bf2800b2d4762e09ea.svg'></img>
