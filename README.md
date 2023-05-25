@@ -117,6 +117,7 @@
 ## 鸣谢
 
 - [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
+- [Cloudflare](https://www.cloudflare.com/?from=wordpress-theme-puock)
 
 ## 开源协议
 
