@@ -74,46 +74,54 @@ class PuockUserCenter implements IPuockClassLoad
                 <label class="col-sm-2 col-form-label">ID</label>
                 <div class="col-sm-10">
                     <div class="row align-items-center">
-                        <div class="col-6">
+                        <div class="col-4">
                             <input type="text" readonly class="form-control" value="<?php echo $userinfo->ID ?>">
                         </div>
-                        <div class="col-6">
-                            <button type="button" onclick="layer.confirm('确认注销登陆吗？',function (){window.Puock.goUrl('<?php echo wp_logout_url('/'); ?>')})" class="btn btn-ssm btn-danger">
+                        <div class="col-8 d-flex">
+                            <?php if (current_user_can('administrator')): ?>
+                                <a data-no-instant href="<?php echo get_admin_url() ?>" type="button" class="btn btn-ssm btn-primary me-1">
+                                    <i class="fa fa-magic"></i>
+                                    <span><?php _e('WP后台', PUOCK) ?></span>
+                                </a>
+                            <?php endif; ?>
+                            <button type="button"
+                                    onclick="layer.confirm('<?php _e('确认注销登陆吗？', PUOCK) ?>',function (){window.Puock.goUrl('<?php echo wp_logout_url('/'); ?>')})"
+                                    class="btn btn-ssm btn-danger">
                                 <i class="fa fa-sign-out"></i>
-                                <span>注销登录</span>
+                                <span><?php _e('注销登录', PUOCK) ?></span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">用户名</label>
+                <label class="col-sm-2 col-form-label"><?php _e('用户名', PUOCK) ?></label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="form-control" value="<?php echo $userinfo->user_nicename ?>">
-                    <small class="c-sub">用户名不可更改</small>
+                    <small class="c-sub"><?php _e('用户名不可更改', PUOCK) ?></small>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">昵称</label>
+                <label class="col-sm-2 col-form-label"><?php _e('昵称', PUOCK) ?></label>
                 <div class="col-sm-10">
                     <input name="nickname" type="text" class="form-control" value="<?php echo $userinfo->nickname ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">网站地址</label>
+                <label class="col-sm-2 col-form-label"><?php _e('网站地址', PUOCK) ?></label>
                 <div class="col-sm-10">
                     <input name="user_url" type="url" class="form-control" value="<?php echo $userinfo->user_url ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">个人说明</label>
+                <label class="col-sm-2 col-form-label"><?php _e('个人说明', PUOCK) ?></label>
                 <div class="col-sm-10">
                     <textarea name="description" class="form-control"
                               rows="4"><?php echo $userinfo->description ?></textarea>
                 </div>
             </div>
             <div class="mb-3 text-center">
-                <button class="btn btn-primary btn-sm" type="submit">提交保存</button>
+                <button class="btn btn-primary btn-sm" type="submit"><?php _e('提交保存', PUOCK) ?></button>
             </div>
         </form>
         <?php
