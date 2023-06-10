@@ -306,9 +306,9 @@ class CaptchaBuilder
         list($red,$green,$blue) = $this->getRandColor();
         $increase  = 30 + mt_rand(1,254);
 
-        $red = abs(min(255,$red - $increase));
-        $green  = abs(min(255,$green - $increase));
-        $blue  = abs(min(255,$blue - $increase));
+        $red = abs(min(255,abs($red - $increase)));
+        $green = abs(min(255,abs($green - $increase)));
+        $blue = abs(min(255,abs($blue - $increase)));
 
         return [$red,$green,$blue];
     }

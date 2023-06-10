@@ -371,6 +371,7 @@ function pk_captcha()
     }
     $width = $_GET['w'];
     $height = $_GET['h'];
+    include_once PUOCK_ABS_DIR.'/inc/php-captcha.php';
     $captcha = new CaptchaBuilder();
     $captcha->initialize([
         'width' => intval($width),     // 宽度
