@@ -397,7 +397,7 @@ function pk_breadcrumbs()
             $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('文章列表', PUOCK) . '</li>';
         }
     } else if (is_search()) {
-        $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($_GET['s']) . '</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . (esc_html($_GET['s'])) . '</li>';
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('搜索结果', PUOCK) . '</li>';
     } else if (is_author()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . get_the_author_meta('nickname') . '</li>';
