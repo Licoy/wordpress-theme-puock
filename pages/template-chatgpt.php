@@ -11,7 +11,8 @@ $gc_user_id = get_current_user_id();
 if (!$gc_user_id) {
     $gc_user_id = 'null@null.com';
 }
-$gc_ai_avatar = pk_get_option('favicon',get_avatar_url(1));
+$gc_ai_avatar = pk_get_option('favicon');
+$gc_ai_avatar = empty($gc_ai_avatar) ? get_avatar_url(1) : $gc_ai_avatar
 ?>
 <script>
     const aiMetaInfo = {
@@ -35,22 +36,23 @@ $gc_ai_avatar = pk_get_option('favicon',get_avatar_url(1));
                     <?php endif; ?>
                     <div class="mt20 p-block puock-text">
                         <div class="chats">
-                            <?php if(!empty(pk_get_option('openai_default_welcome_chat'))): ?>
-                            <div class="chat-item is-ai chat-template">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <img src="<?php echo $gc_ai_avatar ?>" class="avatar md-avatar">
-                                    </div>
-                                    <div class="col">
-                                        <div class="fs14 content-box"><?php echo pk_get_option('openai_default_welcome_chat') ?></div>
+                            <?php if (!empty(pk_get_option('openai_default_welcome_chat'))): ?>
+                                <div class="chat-item is-ai chat-template">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <img alt="ai_avatar" src="<?php echo $gc_ai_avatar ?>" class="avatar md-avatar">
+                                        </div>
+                                        <div class="col">
+                                            <div class="fs14 content-box"><?php echo pk_get_option('openai_default_welcome_chat') ?></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php endif; ?>
                         </div>
                     </div>
                     <div class="mt-20 p-block puock-text">
-                        <textarea class="form-control fs14 chat-input" rows="3" placeholder="请在此处描述您的问题"></textarea>
+                        <textarea class="form-control fs14 chat-input" rows="3"
+                                  placeholder="请在此处描述您的问题"></textarea>
                         <div class="chat-btn-init d-flex justify-content-end mt10">
                             <div class="spinner-grow text-primary" role="status">
                                 <span class="visually-hidden">Loading...</span>
@@ -58,15 +60,19 @@ $gc_ai_avatar = pk_get_option('favicon',get_avatar_url(1));
                         </div>
                         <div class="d-flex justify-content-between align-items-center mt10 d-none chat-btn-box">
                             <div class="form-check form-switch">
-                                <?php if(pk_is_checked('openai_dall_e')):?>
-                                <input class="form-check-input" name="remember" type="checkbox" role="switch"
-                                       id="chat-use-img-mode">
-                                <label class="form-check-label fs14" for="chat-use-img-mode">AI绘画</label>
+                                <?php if (pk_is_checked('openai_dall_e')): ?>
+                                    <input class="form-check-input" name="remember" type="checkbox" role="switch"
+                                           id="chat-use-img-mode">
+                                    <label class="form-check-label fs14" for="chat-use-img-mode">AI绘画</label>
                                 <?php endif; ?>
                             </div>
                             <div>
-                                <button class="btn btn-primary btn-sm mr-2 chat-submit"><i class="fa-regular fa-paper-plane me-1"></i>立即提问</button>
-                                <button class="btn btn-dark btn-sm chat-clear-history"><i class="fa-solid fa-broom me-1"></i>清屏</button>
+                                <button class="btn btn-primary btn-sm mr-2 chat-submit"><i
+                                            class="fa-regular fa-paper-plane me-1"></i>立即提问
+                                </button>
+                                <button class="btn btn-dark btn-sm chat-clear-history"><i
+                                            class="fa-solid fa-broom me-1"></i>清屏
+                                </button>
                             </div>
                         </div>
                     </div>
