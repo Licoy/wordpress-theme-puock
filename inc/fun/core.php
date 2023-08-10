@@ -727,6 +727,14 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
     foreach ($menus as $menu) {
         $classes = join(" ", $menu->classes);
         $cur = $menu->current ? 'menu-current' : '';
+        $tar = '';
+        if ($target) {
+            $tar = $target;
+        } else {
+            if ($menu->target) {
+                $tar = 'target="' . $menu->target . '"';
+            }
+        }
         $out .= "<li id='menu-item-{$menu->ID}' class='menu-item-{$menu->ID} {$classes} {$child_class} {$cur}'>";
         if (!$mobile) {
             $out .= "<a class='ww' data-color='auto' {$target} href='{$menu->url}'>{$menu->title}";
