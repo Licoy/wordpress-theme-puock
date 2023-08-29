@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: ChatGPT问答
+Template Name: AI助手
 */
 wp_enqueue_script('puock-md', pk_get_static_url() . '/assets/libs/marked.js', ['puock-libs'], PUOCK_CUR_VER_STR, true);
 wp_enqueue_script('puock-page-ai', pk_get_static_url() . '/assets/dist/js/page-ai.min.js', ['puock-md'], PUOCK_CUR_VER_STR, true);
@@ -12,7 +12,8 @@ if (!$gc_user_id) {
     $gc_user_id = 'null@null.com';
 }
 $gc_ai_avatar = pk_get_option('favicon');
-$gc_ai_avatar = empty($gc_ai_avatar) ? get_avatar_url(1) : $gc_ai_avatar
+$gc_ai_avatar = empty($gc_ai_avatar) ? get_avatar_url(1) : $gc_ai_avatar;
+$gc_ai_chat_models = pk_get_option('ai_chat_models', []);
 ?>
 <script>
     const aiMetaInfo = {
@@ -36,14 +37,15 @@ $gc_ai_avatar = empty($gc_ai_avatar) ? get_avatar_url(1) : $gc_ai_avatar
                     <?php endif; ?>
                     <div class="mt20 p-block puock-text">
                         <div class="chats">
-                            <?php if (!empty(pk_get_option('openai_default_welcome_chat'))): ?>
+                            <?php if (!empty(pk_get_option('ai_chat_welcome'))): ?>
                                 <div class="chat-item is-ai chat-template">
                                     <div class="row">
                                         <div class="col-auto">
-                                            <img alt="ai_avatar" src="<?php echo $gc_ai_avatar ?>" class="avatar md-avatar">
+                                            <img alt="ai_avatar" src="<?php echo $gc_ai_avatar ?>"
+                                                 class="avatar md-avatar">
                                         </div>
                                         <div class="col">
-                                            <div class="fs14 content-box"><?php echo pk_get_option('openai_default_welcome_chat') ?></div>
+                                            <div class="fs14 content-box"><?php echo pk_get_option('ai_chat_welcome') ?></div>
                                         </div>
                                     </div>
                                 </div>
@@ -59,12 +61,19 @@ $gc_ai_avatar = empty($gc_ai_avatar) ? get_avatar_url(1) : $gc_ai_avatar
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mt10 d-none chat-btn-box">
-                            <div class="form-check form-switch">
-                                <?php if (pk_is_checked('openai_dall_e')): ?>
-                                    <input class="form-check-input" name="remember" type="checkbox" role="switch"
-                                           id="chat-use-img-mode">
-                                    <label class="form-check-label fs14" for="chat-use-img-mode">AI绘画</label>
-                                <?php endif; ?>
+                            <div class="d-flex align-items-center">
+                                <select id="chat-model" class="form-control me-3">
+                                    <?php if (is_array($gc_ai_chat_models)): foreach ($gc_ai_chat_models as $chat_val): if ($chat_val['enable']): ?>
+                                        <option value="<?php echo $chat_val['name'] ?>"><?php echo $chat_val['alias'] ?? strtoupper($chat_val['name']) ?></option>
+                                    <?php endif;endforeach; endif; ?>
+                                </select>
+                                <div class="form-check form-switch flex-shrink-0">
+                                    <?php if (pk_is_checked('ai_draw_dall_e')): ?>
+                                        <input class="form-check-input" name="remember" type="checkbox" role="switch"
+                                               id="chat-use-img-mode">
+                                        <label class="form-check-label fs14" for="chat-use-img-mode">AI绘画</label>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                             <div>
                                 <button class="btn btn-primary btn-sm mr-2 chat-submit"><i
