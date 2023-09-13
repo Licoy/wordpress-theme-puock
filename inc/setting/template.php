@@ -37,9 +37,9 @@
         qq: "https://licoy.cn/go/puock-update.php?r=qq_qun",
         license: "GPL V3",
         donate: "https://licoy.cn/puock-theme-sponsor.html",
-        get_url: '<?php echo admin_url('admin-ajax.php') ?>?action=get_theme_options',
         update_url: '<?php echo admin_url('admin-ajax.php') ?>?action=update_theme_options',
-        fields_url: '<?php echo admin_url('admin-ajax.php') ?>?action=get_theme_option_fields',
+        fields:<?php echo json_encode($fields); ?>,
+        data:<?php echo json_encode(get_option(PUOCK_OPT)); ?>,
     }
 </script>
 <script type="text/javascript" crossorigin src="<?php echo get_template_directory_uri() ?>/assets/dist/setting/language/<?php echo get_user_locale() ?>.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>

@@ -42,5 +42,6 @@ window.puockSettingLangMessage = {
         'select upload':'选择上传',
         'on':'开启',
         'off':'关闭',
+        'config change tips':'您的配置发生改变，记得保存喔~'
     }
 }

@@ -55,7 +55,6 @@ class PuockSetting
 
     public function __wp_admin_init()
     {
-        pk_ajax_register('get_theme_option_fields', array($this, '__wp_get_settings_ajax'));
     }
 
     public function __wp_reg_menu()
@@ -70,7 +69,7 @@ class PuockSetting
         );
     }
 
-    function __wp_get_settings_ajax()
+    function setting_page()
     {
         $menus = $this->option_menus_register();
         if (!current_user_can('edit_theme_options')) {
@@ -82,11 +81,6 @@ class PuockSetting
             $fields[] = apply_filters('pk_load_theme_option_fields_'.$f['key'], $f);
         }
         do_action('pk_get_theme_option_fields', $fields);
-        wp_send_json_success($fields);
-    }
-
-    function setting_page()
-    {
         require_once dirname(__FILE__) . '/template.php';
     }
 }
