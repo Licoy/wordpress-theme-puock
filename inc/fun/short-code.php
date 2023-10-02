@@ -7,6 +7,7 @@ function pk_shortcode_register()
     global $shortCodeColors;
     $list = array(
         'music' => array('name' => '音乐播放', 'content' => '输入链接地址'),
+        'pre' => array('name' => '代码嵌入', 'content' => '输入代码'),
         'reply' => array('name' => '回复可见', 'content' => '输入内容'),
         'login' => array('name' => '登录可见', 'content' => '输入内容'),
         'github' => array('name' => 'Github仓库卡片', 'content' => 'Licoy/wordpress-theme-puock'),
