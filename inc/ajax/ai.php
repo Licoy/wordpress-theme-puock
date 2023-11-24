@@ -38,6 +38,7 @@ function pk_ajax_ai_ask()
         }
         try {
             $chat_res = $openaiClient->image([
+                'model'=> pk_get_option('ai_draw_dall_e_model', 'dall-e-2'),
                 'prompt' => $text,
                 'n' => 1,
                 'size' => pk_get_option('ai_draw_dall_e_size', '512x512'),

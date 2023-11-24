@@ -78,6 +78,16 @@ class OptionAi
                     'tips' => __('启用后前端界面<code>勾选绘画模式</code>即可绘画', PUOCK),
                 ],
                 [
+                    'id' => 'ai_draw_dall_e_model',
+                    'label' => __('AI绘画模型', PUOCK),
+                    'type' => 'select',
+                    'sdt' => pk_get_option('ai_draw_dall_e_model', 'dall-e-2'),
+                    'options' => [
+                        ['label' => 'DallE-2', 'value' => 'dall-e-2'],
+                        ['label' => 'DallE-3', 'value' => 'dall-e-3'],
+                    ],
+                ],
+                [
                     'id' => 'ai_draw_dall_e_size',
                     'label' => __('AI绘画图片大小', PUOCK),
                     'type' => 'select',
@@ -85,7 +95,9 @@ class OptionAi
                     'options' => [
                         ['label' => '256x256', 'value' => '256x256'],
                         ['label' => '512x512', 'value' => '512x512'],
-                        ['label' => '1024x1024', 'value' => '1024x1024']
+                        ['label' => '1024x1024', 'value' => '1024x1024'],
+                        ['label' => '1792x1024（仅DallE-3支持）', 'value' => '1792x1024'],
+                        ['label' => '1024x1792（仅DallE-3支持）', 'value' => '1024x1792'],
                     ],
                 ],
                 [
