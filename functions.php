@@ -13,14 +13,6 @@ include_once('gutenberg/index.php');
 
 
 
-/* 解析<pre>标签 小恐龙“太好拉”注: 此处特别感谢阿云的技术支持*/
-function pre_tag_fix($content){
-    $pattern = '/\[pre\](.*?)\[\/pre\]/s';
-    $replacement = '<pre>$1</pre>';
-    $content = preg_replace($pattern, $replacement, $content);
-    return $content;
-}
-add_filter('the_content', 'pre_tag_fix', 100);
 
 //去除感谢使用wordpress创作
 if (pk_is_checked('hide_footer_wp_t')) {
