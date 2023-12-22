@@ -32,10 +32,7 @@
       </a>
     <br>
     <a target="_blank" href="https://licoy.cn/go/puock-update.php?r=qq_qun">
-        <img src="https://img.shields.io/badge/WeChat-交流群-07c160.svg?logo=WeChat" alt="Wechat Group">
-      </a>
-    <a target="_blank" href="https://t.me/puocktheme">
-        <img src="https://img.shields.io/badge/TG-@PuockTheme-29a9ec.svg?logo=Telegram" alt="Telegram Group">
+        <img src="https://img.shields.io/badge/QQ/微信-交流群-07c160.svg?logo=WeChat" alt="Wechat Group">
       </a>
     <br><br>
     <img src='https://repobeats.axiom.co/api/embed/5f966833712409c00d4269bf2800b2d4762e09ea.svg'></img>
