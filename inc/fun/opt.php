@@ -272,7 +272,7 @@ if (pk_is_checked('use_post_menu')) {
                 $start = stripos($content, $ms[0][$i]);
                 $end = strlen($ms[0][$i]);
                 $level = substr($ms[0][$i], 1, 2);
-                $content = substr_replace($content, "<$level id='pk-menu-${i}'>{$title}</{$level}>", $start, $end);
+                $content = substr_replace($content, "<$level id='pk-menu-{$i}'>{$title}</{$level}>", $start, $end);
             }
         }
         return $content;
