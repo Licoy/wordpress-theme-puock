@@ -132,7 +132,7 @@ function oauth_redirect_page($success = true, $info = '', $from_redirect = '')
             $_SESSION['error_info'] = $info;
         });
         wp_redirect(PUOCK_ABS_URI . '/error.php');
-        wp_die();
+        exit;
     }
 }
 
@@ -169,7 +169,7 @@ function pk_oauth_start_redirect()
     $oauth = pk_oauth_get_base($type, $redirect);
     if (!$oauth) {
         oauth_redirect_page(false, '不支持的第三方授权请求', $redirect);
-        wp_die();
+        exit;
     }
     $url = $oauth->base->getAuthUrl();
     if (!empty($url)) {
@@ -178,7 +178,7 @@ function pk_oauth_start_redirect()
         });
         wp_redirect($url);
     }
-    wp_die();
+    exit;
 }
 
 pk_ajax_register('pk_oauth_start_redirect', 'pk_oauth_start_redirect', true);
@@ -193,7 +193,7 @@ function pk_oauth_callback()
     $oauth = pk_oauth_get_base($type, $redirect);
     if (!$oauth) {
         oauth_redirect_page(false, '无效授权请求', $redirect);
-        wp_die();
+        exit;
     }
     $oauth_state = null;
     pk_session_call(function () use (&$oauth_state, $type) {
@@ -201,7 +201,7 @@ function pk_oauth_callback()
     });
     if (empty($oauth_state)) {
         oauth_redirect_page(false, '无效的授权状态', $redirect);
-        wp_die();
+        exit;
     }
     $oauthBase = $oauth->base;
     try {
@@ -209,29 +209,29 @@ function pk_oauth_callback()
         $userInfo = $oauthBase->getUserInfo();
     } catch (Exception $e) {
         oauth_redirect_page(false, '授权失败：' . $e->getMessage(), $redirect);
-        wp_die();
+        exit;
     }
     if (is_user_logged_in()) {
         $bind_users = get_users(array('meta_key' => $type . '_oauth', 'meta_value' => $oauthBase->openid, 'exclude' => get_current_user_id()));
         if ($bind_users && count($bind_users) > 0) {
             oauth_redirect_page(false, '绑定失败：此授权' . $oauth->oauth['label'] . '账户已被其他账户使用', $redirect);
-            wp_die();
+            exit;
         }
         if (!empty(get_user_meta(get_current_user_id(), $type . "_oauth"))) {
             oauth_redirect_page(false, '绑定失败：此账户已绑定其他' . $oauth->oauth['label'] . '授权账户', $redirect);
-            wp_die();
+            exit;
         }
         $user = wp_get_current_user();
         update_user_meta($user->ID, $type . "_oauth", $oauthBase->openid);
         oauth_redirect_page(true, '', $redirect);
-        wp_die();
+        exit;
     } else {
         $users = get_users(array('meta_key' => $type . '_oauth', 'meta_value' => $oauthBase->openid));
         if (!$users || count($users) <= 0) {
             //不存在用户，先自动注册再登录
             if (pk_is_checked('oauth_close_register')) {
                 oauth_redirect_page(false, '您的' . $oauth->oauth['label'] . '账号未绑定本站账户，当前已关闭自动注册，请手动注册后再进入个人资料中进行绑定', $redirect);
-                wp_die();
+                exit;
             }
             $wp_create_nonce = wp_create_nonce($oauthBase->openid);
             $username = $type . '_' . $wp_create_nonce;

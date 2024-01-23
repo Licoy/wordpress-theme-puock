@@ -218,6 +218,9 @@ function wp_compress_html()
         $count = count($buffer);
         $out = "";
         for ($i = 0; $i <= $count; $i++) {
+            if(!($buffer[$i] ?? null)){
+                continue;
+            }
             if (stristr($buffer[$i], '<!--wp-compress-html no compression-->')) {
                 $buffer[$i] = (str_replace("<!--wp-compress-html no compression-->", " ", $buffer[$i]));
             } else {
