@@ -37,6 +37,12 @@ function pk_shortcode_register()
     }
     return $list;
 }
+// 解析pre标签 感谢阿云。小恐龙太好拉注。
+function pk_pre($atts, $content = null) {
+    $content = '<pre>' . htmlspecialchars($content) . '</pre>';
+    return $content;
+}
+add_shortcode('pre', 'pk_pre');
 
 //提示框部分
 function sc_tips($attr, $content, $tag)
