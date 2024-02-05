@@ -61,7 +61,7 @@ abstract class PuockAbsMeta
     public function baseSaveData($post_id)
     {
         $args = $this->instance_args;
-        if (!wp_verify_nonce(@$_POST[$args['id'] . '_noncename'], plugin_basename(__FILE__))) {
+        if (!wp_verify_nonce($_POST[$args['id'] . '_noncename'] ?? '', plugin_basename(__FILE__))) {
             return $post_id;
         }
         $data = array();
