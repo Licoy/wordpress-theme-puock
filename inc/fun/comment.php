@@ -26,7 +26,7 @@ function pk_comment_callback($comment, $args, $depth)
     $is_author = $authordata->ID == get_current_user_id();
     if ($comment->comment_parent == 0) {
         $pccci_key = 'pk_comment_callback_cur_id';
-        $pccci = @$GLOBALS[$pccci_key];
+        $pccci = $GLOBALS[$pccci_key] ?? '';
         if (!empty($pccci)) {
             echo '</div>';
         }
