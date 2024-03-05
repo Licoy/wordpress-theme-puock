@@ -5,12 +5,12 @@ const WP_DEBUG = false;
 $ALLOWED_SITES = [];
 $allow_sites_filename = __DIR__ . '/.tas.php';
 if (!file_exists($allow_sites_filename)) {
-    require_once dirname(__DIR__) . '/../../wp-load.php';
+    require dirname(__DIR__) . '/../../wp-load.php';
     if (pk_generate_thumbnail_allow_sites_file()) {
-        require_once $allow_sites_filename;
+        require $allow_sites_filename;
     }
 } else {
-    require_once $allow_sites_filename;
+    require $allow_sites_filename;
 }
 
 /**
@@ -36,7 +36,7 @@ if (!file_exists($allow_sites_filename)) {
 */
 define('VERSION', '2.8.14');                                                                        // Version of this script
 //Load a config file if it exists. Otherwise, use the values below
-if (file_exists(dirname(__FILE__) . '/timthumb-config.php')) require_once('timthumb-config.php');
+if (file_exists(dirname(__FILE__) . '/timthumb-config.php')) require('timthumb-config.php');
 if (!defined('DEBUG_ON')) define('DEBUG_ON', false);                                // Enable debug logging to web server error log (STDERR)
 if (!defined('DEBUG_LEVEL')) define('DEBUG_LEVEL', 1);                                // Debug level 1 is less noisy and 3 is the most noisy
 if (!defined('MEMORY_LIMIT')) define('MEMORY_LIMIT', '30M');                            // Set PHP memory limit

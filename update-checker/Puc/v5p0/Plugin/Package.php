@@ -145,7 +145,7 @@ if ( !class_exists(Package::class, false) ):
 			}
 
 			if ( !function_exists('get_plugin_data') ) {
-				require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+				require(ABSPATH . '/wp-admin/includes/plugin.php');
 			}
 			return get_plugin_data($this->pluginAbsolutePath, false, false);
 		}

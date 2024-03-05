@@ -81,6 +81,6 @@ class PuockSetting
             $fields[] = apply_filters('pk_load_theme_option_fields_'.$f['key'], $f);
         }
         do_action('pk_get_theme_option_fields', $fields);
-        require_once dirname(__FILE__) . '/template.php';
+        require dirname(__FILE__) . '/template.php';
     }
 }

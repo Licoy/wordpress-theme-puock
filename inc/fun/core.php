@@ -11,7 +11,7 @@ function puock_theme_setup()
 
 if (is_dir(PUOCK_ABS_DIR . '/inc/puock')) {
     if (file_exists(PUOCK_ABS_DIR . '/inc/puock/fun.php')) {
-        require_once PUOCK_ABS_DIR . '/inc/puock/fun.php';
+        require PUOCK_ABS_DIR . '/inc/puock/fun.php';
     }
 }
 
@@ -26,28 +26,28 @@ function pk_ajax_resp_error($msg = 'fail', $data = null)
     return pk_ajax_resp($data, $msg, -1);
 }
 
-require_once PUOCK_ABS_DIR . '/inc/fun/cache.php';
-require_once PUOCK_ABS_DIR . '/inc/setting/index.php';
-require_once PUOCK_ABS_DIR . '/inc/ext/init.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/ajax.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/oauth.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/security.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/comment-ajax.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/widget.php';
-require_once PUOCK_ABS_DIR . '/inc/init.php';
-require_once PUOCK_ABS_DIR . '/inc/category-seo.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/comment.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/short-code.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/opt.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/post-meta.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/sidebar.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/post-tags.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/comment-notify.php';
-require_once PUOCK_ABS_DIR . '/inc/user-agent-parse.php';
-require_once PUOCK_ABS_DIR . '/inc/phpqrcode.php';
-require_once PUOCK_ABS_DIR . '/inc/ajax/index.php';
+require PUOCK_ABS_DIR . '/inc/fun/cache.php';
+require PUOCK_ABS_DIR . '/inc/setting/index.php';
+require PUOCK_ABS_DIR . '/inc/ext/init.php';
+require PUOCK_ABS_DIR . '/inc/fun/ajax.php';
+require PUOCK_ABS_DIR . '/inc/fun/oauth.php';
+require PUOCK_ABS_DIR . '/inc/fun/security.php';
+require PUOCK_ABS_DIR . '/inc/fun/comment-ajax.php';
+require PUOCK_ABS_DIR . '/inc/fun/widget.php';
+require PUOCK_ABS_DIR . '/inc/init.php';
+require PUOCK_ABS_DIR . '/inc/category-seo.php';
+require PUOCK_ABS_DIR . '/inc/fun/comment.php';
+require PUOCK_ABS_DIR . '/inc/fun/short-code.php';
+require PUOCK_ABS_DIR . '/inc/fun/opt.php';
+require PUOCK_ABS_DIR . '/inc/fun/post-meta.php';
+require PUOCK_ABS_DIR . '/inc/fun/sidebar.php';
+require PUOCK_ABS_DIR . '/inc/fun/post-tags.php';
+require PUOCK_ABS_DIR . '/inc/fun/comment-notify.php';
+require PUOCK_ABS_DIR . '/inc/user-agent-parse.php';
+require PUOCK_ABS_DIR . '/inc/phpqrcode.php';
+require PUOCK_ABS_DIR . '/inc/ajax/index.php';
 if (pk_is_checked('no_category')) {
-    require_once PUOCK_ABS_DIR . '/inc/no-category.php';
+    require PUOCK_ABS_DIR . '/inc/no-category.php';
 }
 $puock_class_load = new PuockClassLoad();
 
@@ -822,7 +822,7 @@ function pk_off_widgets_block()
 //获取中文格式化的实例
 function pk_chinese_format($content)
 {
-    include_once dirname(__FILE__) . '/../lib/ChineseTypesetting.php';
+    include dirname(__FILE__) . '/../lib/ChineseTypesetting.php';
     $typesetting = new ChineseTypesetting();
     $content = $typesetting->insertSpace($content);
     $content = $typesetting->removeSpace($content);
@@ -1000,8 +1000,8 @@ function pk_query_vars($vars){
 }
 add_filter( 'query_vars', 'pk_query_vars' );
 
-function pk_load_template($_template_file, $require_once = true, $args = array())
+function pk_load_template($_template_file, $require = true, $args = array())
 {
     status_header(200);
-    load_template($_template_file, $require_once, $args);
+    load_template($_template_file, $require, $args);
 }

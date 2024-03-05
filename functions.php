@@ -7,9 +7,9 @@ const PUOCK = 'puock';
 const PUOCK_OPT = 'puock_options';
 $puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
-include_once('vendor/autoload.php');
-include_once('inc/fun/core.php');
-include_once('gutenberg/index.php');
+include('vendor/autoload.php');
+include('inc/fun/core.php');
+include('gutenberg/index.php');
 
 
 
@@ -496,7 +496,7 @@ function pk_init_wp_empty_style()
 
 add_action('wp_enqueue_scripts', 'pk_init_wp_empty_style');
 
-require_once dirname(__FILE__) . '/fun-custom.php';
+require dirname(__FILE__) . '/fun-custom.php';
 
 //更新支持
 function pk_update()
