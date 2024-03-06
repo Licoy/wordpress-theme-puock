@@ -899,7 +899,7 @@ function pk_get_req_data(array $model)
 
 function pk_get_ip_region_str($ip)
 {
-    $ip2_instance = @$GLOBALS['ip2_region'];
+    $ip2_instance = $GLOBALS['ip2_region'] ?? false;
     if (!$ip2_instance) {
         $ip2_instance = new \Ip2Region();
         $GLOBALS['ip2_region'] = $ip2_instance;
