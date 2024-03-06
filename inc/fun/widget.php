@@ -428,12 +428,17 @@ class puockReadPerson extends puockWidgetBase {
         global $wpdb;
         $authors = pk_cache_get(PKC_WIDGET_READ_PERSONS);
         if(!$authors){
-            $days = $this->get_num_val($instance, 'days',31);
+            // 下面这个day参数没定义过，不知道什么用处
+            //$days = $this->get_num_val($instance, 'days',31);
             $nums = $this->get_num_val($instance, 'nums');
-            $sql = "SELECT count(comment_ID) as num, comment_author_email as mail,comment_author as `name`,comment_author_url as url
-                    FROM $wpdb->comments WHERE user_id !=1 AND TO_DAYS(now()) - TO_DAYS(comment_date) < {$days}
-                     group by comment_author_email order by num desc limit 0,{$nums}";
-            $authors = $wpdb->get_results($sql);
+            // $sql = "SELECT count(comment_ID) as num, comment_author_email as mail,comment_author as `name`,comment_author_url as url
+            //         FROM $wpdb->comments WHERE user_id !=1 AND TO_DAYS(now()) - TO_DAYS(comment_date) < {$days}
+            //          group by comment_author_email order by num desc limit 0,{$nums}";
+            // $authors = $wpdb->get_results($sql);
+            $args = array(
+                'number' => $nums,
+            );
+            $authors = get_comments($args);
             pk_cache_set(PKC_WIDGET_READ_PERSONS, $authors);
         }
         $this->get_common_widget_header($instance); ?>
@@ -441,10 +446,10 @@ class puockReadPerson extends puockWidgetBase {
             <?php foreach ($authors as $author): ?>
              <div class="col col-12 col-lg-6 pl-0">
                  <div class="p-2 text-truncate text-nowrap">
-                    <a href="<?php echo empty($author->url) ? 'javascript:void(0)':pk_go_link($author->url) ?>" class="a-link"
-                        <?php echo empty($author->url) ? '':'target="_blank"' ?> rel="nofollow">
-                        <img <?php echo pk_get_lazy_img_info(get_avatar_url($author->mail),'md-avatar') ?> alt="<?php echo $author->name?>">
-                        <span class="t-sm"><?php echo $author->name?></span>
+                    <a href="<?php echo empty($author->author_url) ? 'javascript:void(0)':pk_go_link($author->author_url) ?>" class="a-link"
+                        <?php echo empty($author->author_url) ? '':'target="_blank"' ?> rel="nofollow">
+                        <img <?php echo pk_get_lazy_img_info(get_avatar_url($author->comment_author_email),'md-avatar') ?> alt="<?php echo $author->comment_author?>">
+                        <span class="t-sm"><?php echo $author->comment_author?></span>
                     </a>
                 </div>
             </div>
