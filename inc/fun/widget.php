@@ -490,20 +490,27 @@ class puockNewComment extends puockWidgetBase {
         global $wpdb;
         $comments = pk_cache_get(PKC_WIDGET_NEW_COMMENTS);
         if(!$comments){
+            // $sql = "SELECT comment_ID as id,comment_post_ID as pid,comment_author_email as mail,comment_author as `name`,comment_author_url as url,comment_content as text
+            //         FROM $wpdb->comments WHERE user_id !=1 and comment_approved=1 order by comment_date desc limit 0,{$nums}";
             $nums = $this->get_num_val($instance, 'nums');
-            $sql = "SELECT comment_ID as id,comment_post_ID as pid,comment_author_email as mail,comment_author as `name`,comment_author_url as url,comment_content as text
-                    FROM $wpdb->comments WHERE user_id !=1 and comment_approved=1 order by comment_date desc limit 0,{$nums}";
-            $comments = $wpdb->get_results($sql);
+            $args = array(
+                'number' => $nums,
+                'date_query' => array(
+                    'before' => 'tomorrow',
+                    'inclusive' => true,
+                ),    
+            );
+            $comments = get_comments($args);
             pk_cache_set(PKC_WIDGET_NEW_COMMENTS, $comments);
         }
         $this->get_common_widget_header($instance); ?>
         <div class="min-comments t-md">
             <?php foreach ($comments as $comment): ?>
-             <div class="comment t-md t-line-1">
-                <img <?php echo pk_get_lazy_img_info(get_avatar_url($comment->mail),'min-avatar') ?> alt="<?php echo $comment->name ?>">
-                <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->pid).'#comment-'.$comment->id ?>">
-                <span class="ta3 link-hover"><?php echo $comment->name ?></span></a>
-                <span class="c-sub t-w-400"><?php echo strip_tags(convert_smilies($comment->text),['img']) ?></span>
+            <div class="comment t-md t-line-1">
+                <img <?php echo pk_get_lazy_img_info(get_avatar_url($comment->comment_author_email),'min-avatar') ?> alt="<?php echo $comment->comment_author ?>">
+                <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->comment_ID).'#comment-'.$comment->comment_ID ?>">
+                <span class="ta3 link-hover"><?php echo $comment->comment_author ?></span></a>
+                <span class="c-sub t-w-400"><?php echo strip_tags(convert_smilies($comment->comment_content),['img']) ?></span>
             </div>
             <?php endforeach; ?>
         </div>
