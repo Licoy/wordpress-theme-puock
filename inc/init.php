@@ -194,8 +194,8 @@ function pk_init_register_assets()
         wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/puock.min.js', array('puock-libs'), PUOCK_CUR_VER_STR, true);
 
         //加载全站黑白样式
-        if(pk_is_checked('grey')){
-            wp_add_inline_style( 'puock',  'html {
+        if (pk_is_checked('grey')) {
+            wp_add_inline_style('puock', 'html {
                 filter: grayscale(100%);
                 -webkit-filter: grayscale(100%);
                 -moz-filter: grayscale(100%);
@@ -203,9 +203,17 @@ function pk_init_register_assets()
             }');
         }
 
+        //加载自定义主题色
+        if (!empty(pk_get_option('style_color_primary'))) {
+            wp_add_inline_style('puock', 'body{--pk-c-primary:' . pk_get_option('style_color_primary') . '}');
+        }
+
+        //加载头部样式
+        wp_add_inline_style('puock', pk_head_style_var());
+
         //加载自定义样式
-        if (!empty(pk_get_option('css_code_header', ''))){
-            wp_add_inline_style( 'puock',  pk_get_option('css_code_header', ''));
+        if (!empty(pk_get_option('css_code_header', ''))) {
+            wp_add_inline_style('puock', pk_get_option('css_code_header', ''));
         }
     }
 }

@@ -463,7 +463,7 @@ function pk_head_style_var()
     $vars = [
         "--puock-block-not-tran:" . pk_get_option('block_not_tran', 100) . "%",
     ];
-    return "<style>:root{" . join(";", $vars) . "}</style>";
+    return ":root{" . join(";", $vars) . "}";
 }
 
 // 加载文件媒体文件
