@@ -40,9 +40,8 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 
 ### Environmental requirements
 
-- WordPress `5.0+`
+- WordPress `6.0+`
 - PHP `7.4+`
-- MySQL `5.6+`
 
 ## Theme characteristics
 - [x] Support day and dark mode
