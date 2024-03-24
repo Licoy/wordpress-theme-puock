@@ -4,7 +4,7 @@
             <div class="circle-button puock-bg text-center <?php if (puock_post_is_like()): ?>bg-primary text-light<?php endif; ?>"
                  id="post-like" data-id="<?php the_ID() ?>">
                 <i class="fa-regular fa-thumbs-up t-md"></i>&nbsp;<span
-                        class="t-sm"><?php echo get_post_meta($post->ID, 'puock_like', true) ?></span></div>
+                        class="t-sm"><?php echo puock_post_like_num($post->ID) ?></span></div>
             <?php if (pk_is_checked('post_poster_open')): ?>
                 <div class="circle-button puock-bg text-center pk-modal-toggle"
                      title="海报" data-no-title data-no-padding data-once-load="true"

@@ -34,6 +34,22 @@ function puock_post_is_like()
     return !empty($_COOKIE['puock_like_' . $post->ID]);
 }
 
+// 点赞数显示
+function puock_post_like_num(int $id)
+{
+    $number = get_post_meta($id, 'puock_like', true) ?: 0;
+    if (!is_numeric($number)) {
+        $number = 0;
+    }
+    if ($number < 1000) {
+        return $number; // 小于1000直接返回
+    } elseif ($number < 1000000) {
+        return round($number / 1000, 0) . 'k'; // 1000到999999之间返回“k”格式
+    } else {
+        return round($number / 1000000, 0) . 'M'; // 大于等于1000000返回“M”格式
+    }
+}
+
 //移除wp自带的widget
 function init_unregister_widgets()
 {
