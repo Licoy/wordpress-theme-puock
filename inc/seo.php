@@ -1,34 +1,3 @@
-<?php $titleConn = " " . pk_get_option("title_conn") . " " ?>
-<?php $blog_name = pk_get_web_title();
-$pkSeoPageInfo = ''; ?>
-<?php
-$custom_seo = pk_get_custom_seo();
-$custom_seo_title = $custom_seo['title'] ?? '';
-if (get_query_var('paged')) {
-    $pkSeoPageInfo = $titleConn . '第' . get_query_var('paged') . '页';
-}
-if (!empty($custom_seo_title)) { ?>
-    <title><?php echo $custom_seo['title'] . $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
-<?php } else if (is_home()) { ?>
-    <title><?php echo $blog_name . $pkSeoPageInfo . (pk_get_option('web_title_2') ? $titleConn . pk_get_option('web_title_2') : ''); ?></title>
-<?php } else if (is_search()) { ?><title>搜索"<?php echo $_REQUEST['s'] ?>
-    "的结果<?php echo $titleConn . $pkSeoPageInfo . $blog_name ?></title>
-<?php } else if (is_single() || is_page()) { ?>
-    <title><?php echo trim(wp_title('', 0)); ?><?php echo $titleConn . $blog_name; ?></title>
-<?php } else if (is_year()) { ?><title><?php the_time('Y年'); ?>
-    的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
-<?php } else if (is_month()) { ?><title><?php the_time('m'); ?>
-    份的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
-<?php } else if (is_day()) { ?><title><?php the_time('Y年m月d日'); ?>
-    的所有文章 <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
-<?php } else if (is_author()) { ?><title><?php the_author(); ?>
-    <?php echo $pkSeoPageInfo . $titleConn . $blog_name ?></title>
-<?php } else if (is_category()) { ?>
-    <title><?php single_cat_title(); ?><?php echo $pkSeoPageInfo . $titleConn . $blog_name ?> </title>
-<?php } else if (is_tag()) { ?>
-    <title><?php single_tag_title("", true); ?><?php echo $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
-<?php } else if (is_404()) { ?> <title>你访问的资源不存在<?php echo $pkSeoPageInfo . $titleConn . $blog_name; ?></title>
-<?php } else { ?> <title><?php echo $blog_name . $pkSeoPageInfo . $titleConn . $blog_name; ?></title><?php } ?>
 <?php if (is_home()) : ?>
     <meta name="keywords" content="<?php echo pk_get_option('keyword') ?>"/>
     <meta name="description" content="<?php echo pk_get_option('description') ?>"/>

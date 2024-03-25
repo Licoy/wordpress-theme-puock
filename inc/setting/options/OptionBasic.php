@@ -55,6 +55,12 @@ class OptionBasic extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'link_go_page',
+                    'label' => __('正文内容链接加跳转', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => 'false',
+                ],
+                [
                     'id' => 'use_post_menu',
                     'label' => __('正文内容侧边目录菜单生成', PUOCK),
                     'type' => 'switch',

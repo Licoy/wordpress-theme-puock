@@ -273,10 +273,37 @@ function pk_go_link($url, $name = '')
     return $url;
 }
 
+//开启了内页链接跳转
+if (pk_is_checked('link_go_page')) {
+    /**
+     * 内页跳转链接
+     *
+     * @param string $content 修改前的内容
+     * @return string 修改后的内容
+     * @author lvshujun
+     * @date 2024-03-19
+     */
+    function pk_content_addlink($content) {
+        //匹配链接
+        preg_match_all('/<a(.*?)href="(.*?)"(.*?)>/',$content,$matches);
+        if ($matches) {
+            foreach ($matches[2] as $val) {
+                if (strpos($val,'://') !== false 
+                    && pk_is_cur_site($val) === false 
+                    && !preg_match('/\.(jpg|jepg|png|ico|bmp|gif|tiff)/i',$val)) {
+                    $content = str_replace('href="'.$val.'"', 'href="'.pk_go_link($val).'"', $content);
+                }
+            }
+        }
+        return $content;
+    }
+    add_filter('the_content', 'pk_content_addlink');
+}
+
 //检测链接是否属于本站
 function pk_is_cur_site($url)
 {
-    if (strpos($url, home_url()) === 0) {
+    if (str_starts_with($url, home_url()) === 0) {
         return true;
     }
     return false;
