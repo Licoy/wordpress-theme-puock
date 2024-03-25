@@ -276,7 +276,7 @@ function pk_go_link($url, $name = '')
 //检测链接是否属于本站
 function pk_is_cur_site($url)
 {
-    if (strpos($url, home_url()) === 0) {
+    if (str_starts_with($url, home_url()) === 0) {
         return true;
     }
     return false;

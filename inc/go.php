@@ -15,7 +15,7 @@ if (empty($url)) {
     if (strpos($url, "https://") !== 0 && strpos($url, "http://") !== 0) {
         $error = "跳转链接协议有误";
     } else {
-        if (str_starts_with($url, home_url()) === 0) {
+        if (pk_is_cur_site($url)) {
             header("Location:" . $url);
             exit();
         }
