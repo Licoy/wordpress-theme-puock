@@ -422,6 +422,26 @@ function pk_breadcrumbs()
     return $out;
 }
 
+/**
+ * 返回图标信息
+ *
+ * @return string
+ * @author lvshujun
+ * @date 2024-03-19
+ */
+function pk_icon_mate() {
+    //获取icon地址
+    $pk_icon = pk_get_option('favicon');
+    //未设置返回空
+    if ($pk_icon === '') return '';
+    
+    //连接字符串
+    $str = '<link rel="shortcut icon" href="' . $pk_icon . '">
+    <link rel="apple-touch-icon" href="' . $pk_icon . '"/>';
+
+    return $str;
+}
+
 //获取阅读数量
 function pk_get_post_views()
 {
