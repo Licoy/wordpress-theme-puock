@@ -15,7 +15,7 @@ if (empty($url)) {
     if (strpos($url, "https://") !== 0 && strpos($url, "http://") !== 0) {
         $error = "跳转链接协议有误";
     } else {
-        if (strpos($url, home_url()) === 0) {
+        if (str_starts_with($url, home_url()) === 0) {
             header("Location:" . $url);
             exit();
         }
@@ -37,9 +37,7 @@ get_header();
             <p class="mt20"><?php echo $error ?></p>
         <?php else: ?>
             <p class="mt20">
-                <span>您即将离开<?php echo get_bloginfo('name') ?>跳转至</span>
-                <a class="a-link text-line" rel="nofollow"
-                   href="<?php echo $url ?>"><?php echo empty($name) ? $url : $name; ?></a><span> ，确定进入吗？</span>
+                <span>您即将离开<?php echo get_bloginfo('name') ?>跳转至</span><?php echo empty($name) ? $url : $name; ?><span> ，确定进入吗？</span>
             </p>
         <?php endif; ?>
         <div class="text-center mt20">
