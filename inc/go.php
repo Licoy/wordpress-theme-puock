@@ -2,8 +2,8 @@
 
 include '../../../../wp-blog-header.php';
 pk_set_custom_seo("链接跳转");
-$url = @$_GET['to'];
-$name = @$_GET['name'];
+$url = $_GET['to'] ?? '';
+$name = $_GET['name'] ?? '';
 if (!empty($name)) {
     $name = base64_decode(str_replace(' ','+',$name));
 }
