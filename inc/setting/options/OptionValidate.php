@@ -54,6 +54,13 @@ class OptionValidate extends BaseOptionItem
                     ]
                 ],
                 [
+                    'id' => 'vd_comment_need_chinese',
+                    'label' => __('评论内容中必须含有中文字符', PUOCK),
+                    'type' => 'switch',
+                    'tips' => __('开启后，评论中必须含有至少1个中文字符，否则将会被拦截', PUOCK),
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'vd_kwd_access_reject',
                     'label' => __('恶意统计关键字访问屏蔽', PUOCK),
                     'type' => 'switch',

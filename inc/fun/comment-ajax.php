@@ -17,6 +17,18 @@ function pk_comment_err($msg, $refresh_code = true)
     exit();
 }
 
+function pk_check_comment_for_chinese($comment) {
+    $pattern = '/[\x{4e00}-\x{9fa5}]/u';
+    if (!preg_match($pattern, $comment)) {
+        pk_comment_err('您的评论必须包含至少一个中文字符');
+    }
+    return $comment;
+}
+if(pk_is_checked('vd_comment_need_chinese')){
+    add_filter('pre_comment_content', 'pk_check_comment_for_chinese');
+}
+
+
 function pk_comment_ajax()
 {
     global $wpdb;
