@@ -175,7 +175,7 @@ function pk_comment_ajax()
     $comment_approved_str = '';
 
     if ($comment->comment_approved == '0') {
-        $comment_approved_str = '<p class="c-sub mt-1 t-sm"><i class="fa fa-warning mr-1"></i>您的评论正在等待审核！</p>';
+        $comment_approved_str = '<p class="c-sub mt-1"><i class="fa fa-warning mr-1"></i>您的评论正在等待审核！</p>';
     }
 
     wp_set_comment_cookies($comment, $user);
@@ -186,7 +186,7 @@ function pk_comment_ajax()
                 <div class="ml-3 two-info">
                     <div class="puock-text ta3b">
                         <span class="t-md puock-links">' . get_comment_author_link($comment_id) . '</span>
-                        ' . pk_the_author_class(false, $comment) . '
+                        ' . (pk_is_checked('comment_level') ? pk_the_author_class(false, $comment) : '') . '
                     </div>
                     <div class="t-sm c-sub">' . get_comment_date('Y-m-d H:i:s', $comment_id) . '</div>
                 </div>
