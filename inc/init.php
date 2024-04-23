@@ -224,7 +224,7 @@ add_filter('script_loader_tag', 'pk_assets_scr_handle', 10, 3);
 add_filter('style_loader_tag', 'pk_assets_href_handle', 10, 3);
 function pk_assets_scr_handle($tag, $handle, $source)
 {
-    if (str_starts_with($handle, 'puock') && strpos($source,'instant=true')===false)
+    if (strpos($handle, 'puock') === 0 && strpos($source,'instant=true')===false)
     {
         $tag = str_replace(' src', ' data-no-instant src', $tag);
     }
@@ -233,7 +233,7 @@ function pk_assets_scr_handle($tag, $handle, $source)
 
 function pk_assets_href_handle($tag, $handle, $source)
 {
-    if (str_starts_with($handle, 'puock') && strpos($source,'instant=true')===false) {
+    if (strpos($handle, 'puock') === 0 && strpos($source,'instant=true')===false) {
         $tag = str_replace(' href', ' data-no-instant href', $tag);
     }
     return $tag;
