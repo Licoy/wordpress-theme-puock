@@ -909,13 +909,13 @@ function pk_get_ip_region_str($ip)
     } catch (Exception $e) {
         return '未知';
     }
-    if (str_contains($s['region'], '内网IP')) {
+    if (strpos($s['region'], '内网IP') !== false) {
         return '内网IP';
     }
     $region = explode('|', $s['region']);
     $res = '';
     foreach ($region as $item) {
-        if (str_starts_with($item, '0')) {
+        if (strpos($item, '0') === 0) {
             continue;
         }
         $res .= $item;

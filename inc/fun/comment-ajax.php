@@ -1,5 +1,6 @@
 <?php
 
+use function donatj\UserAgent\parse_user_agent;
 function pk_comment_err($msg, $refresh_code = true)
 {
     $protocol = $_SERVER['SERVER_PROTOCOL'];
@@ -185,15 +186,34 @@ function pk_comment_ajax()
                 <div class="ml-3 two-info">
                     <div class="puock-text ta3b">
                         <span class="t-md puock-links">' . get_comment_author_link($comment_id) . '</span>
-                        ' . pk_the_author_class(false, $comment) . '
+                        ' . (pk_is_checked('comment_level') ? pk_the_author_class(false, $comment) : '') . '
                     </div>
                     <div class="t-sm c-sub">' . get_comment_date('Y-m-d H:i:s', $comment_id) . '</div>
                 </div>
             </div>
-            <div class="content t-sm mt10 puock-text">
-                <div class="content-text">
-                    ' . get_comment_text($comment_id) . '
+            <div class="content">
+                <div class="content-text t-md mt10 puock-text">
+                    <p>' . get_comment_text($comment_id) . '</p>
                     ' . $comment_approved_str . '
+                    <div class="comment-os c-sub">';
+                
+                if (pk_is_checked('comment_show_ua', true)):
+                    $commentUserAgent = parse_user_agent($comment->comment_agent);
+                    $commentOsIcon = pk_get_comment_ua_os_icon($commentUserAgent['platform']);
+                    $commentBrowserIcon = pk_get_comment_ua_os_icon($commentUserAgent['browser']);
+                    echo "<span class='mt10' title='{$commentUserAgent['platform']}'><i class='$commentOsIcon'></i>&nbsp;<span>{$commentUserAgent['platform']}&nbsp;</span></span>";
+                    echo "<span class='mt10' title='{$commentUserAgent['browser']} {$commentUserAgent['version']}'><i class='$commentBrowserIcon'></i>&nbsp;<span>{$commentUserAgent['browser']}</span></span>";
+                endif;
+                ?>
+                <?php
+                if (pk_is_checked('comment_show_ip', true)) {
+                    if (!pk_is_checked('comment_dont_show_owner_ip') || (pk_is_checked('comment_dont_show_owner_ip') && $comment->user_id != 1)) {
+                        $ip = pk_get_ip_region_str($comment->comment_author_IP);
+                        echo "<span class='mt10' title='IP'><i class='fa-solid fa-location-dot'></i>&nbsp;$ip</span>";
+                    }
+                }
+                
+    echo '          </div>
                 </div>
             </div>
         </div>';
