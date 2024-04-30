@@ -508,7 +508,7 @@ class puockNewComment extends puockWidgetBase {
             <?php foreach ($comments as $comment): ?>
             <div class="comment t-md t-line-1">
                 <img <?php echo pk_get_lazy_img_info(get_avatar_url($comment->comment_author_email),'min-avatar') ?> alt="<?php echo $comment->comment_author ?>">
-                <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->comment_ID).'#comment-'.$comment->comment_ID ?>">
+                <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->comment_post_ID).'#comment-'.$comment->comment_ID ?>">
                 <span class="ta3 link-hover"><?php echo $comment->comment_author ?></span></a>
                 <span class="c-sub t-w-400"><?php echo strip_tags(convert_smilies($comment->comment_content),['img']) ?></span>
             </div>
