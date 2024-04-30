@@ -691,11 +691,11 @@ class puockAboutAuthor extends puockWidgetBase {
                 </div>
                 <div class="row mt10">
                     <div class="col-6 text-center">
-                        <div class="c-sub t-sm">阅读量</div>
+                        <div class="c-sub t-sm"><?php _e('阅读量', PUOCK) ?></div>
                         <div><?php echo get_total_views() ?></div>
                     </div>
                     <div class="col-6 text-center">
-                        <div class="c-sub t-sm">评论数</div>
+                        <div class="c-sub t-sm"><?php _e('评论数', PUOCK) ?></div>
                         <div><?php echo $comment_num ?></div>
                     </div>
                 </div>

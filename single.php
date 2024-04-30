@@ -67,7 +67,7 @@
                                 </ul>
                             </div>
                         <?php endif; ?>
-                        <div class="t-separator c-sub t-sm mt30">正文完</div>
+                        <div class="t-separator c-sub t-sm mt30"><?php _e('正文完', PUOCK) ?></div>
                         <?php if (pk_is_checked('post_foot_qrcode_open')): ?>
                             <div class="post-foot-qrcode">
                                 <div class="title"><?php echo pk_get_option('post_foot_qrcode_title', '无说明') ?></div>
@@ -108,7 +108,7 @@
                                        if ($authordata) {
                                            echo get_author_posts_url($authordata->ID,
                                                $authordata->user_nicename);
-                                       } ?>"><?php the_author() ?> </a><?php the_date('Y-m-d') ?><?php
+                                       } ?>"><?php the_author() ?> </a><?php _e('于', PUOCK) ?><?php the_date('Y-m-d') ?><?php
                                     _e('发表，', PUOCK) ?><?php _e('共计', PUOCK) ?><?php echo count_words() ?><?php _e('字。', PUOCK) ?>
                                 </div>
                                 <div class="mt-2">

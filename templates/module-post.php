@@ -26,13 +26,13 @@
                             <?php if (!pk_is_checked('hide_post_views')): ?>
                                 <span class="mr-2"><i
                                             class="fa-regular fa-eye mr-1"></i><?php pk_get_post_views() ?><span
-                                            class="t-sm d-none d-sm-inline-block">次阅读</span></span>
+                                            class="t-sm d-none d-sm-inline-block"><?php _e('次阅读', PUOCK) ?></span></span>
                             <?php endif; ?>
                         <?php if (!pk_post_comment_is_closed()): ?>
                             <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
                                 <i class="fa-regular fa-comment mr-1"></i>
                                 <?php echo get_comments_number() ?><span
-                                        class="t-sm d-none d-sm-inline-block">个评论</span></a>
+                                        class="t-sm d-none d-sm-inline-block"><?php _e('个评论', PUOCK) ?></span></a>
                         <?php endif; ?>
                     </span>
                 </div>
@@ -73,13 +73,13 @@
                             <?php if (!pk_is_checked('hide_post_views')): ?>
                                 <span class="mr-2">
                                 <i class="fa-regular fa-eye mr-1"></i><?php pk_get_post_views() ?><span
-                                            class="t-sm d-none d-sm-inline-block">次阅读</span></span>
+                                            class="t-sm d-none d-sm-inline-block"><?php _e('次阅读', PUOCK) ?></span></span>
                             <?php endif; ?>
                        <?php if (!pk_post_comment_is_closed()): ?>
                            <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
                                 <i class="fa-regular fa-comment mr-1"></i>
                                 <?php echo get_comments_number() ?><span
-                                       class="t-sm d-none d-sm-inline-block">个评论</span></a>
+                                       class="t-sm d-none d-sm-inline-block"><?php _e('个评论', PUOCK) ?></span></a>
                        <?php endif; ?>
                     </span>
                     </div>
