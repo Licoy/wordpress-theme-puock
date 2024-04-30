@@ -1252,7 +1252,7 @@ msgstr "Theme"
 
 #: page.php:14 single.php:18
 msgid "次阅读"
-msgstr "Views"
+msgstr " Views"
 
 #: page.php:20 single.php:39
 msgid "编辑"
@@ -1276,19 +1276,22 @@ msgstr ""
 
 #: single.php:84
 msgid "发表至："
-msgstr ""
+msgstr "Posted to: "
 
 #: single.php:107 single.php:122
 msgid "版权声明："
-msgstr "Copyright notice: "
+msgstr "Copyright Notice: "
 
 #: single.php:107
 msgid "本站原创文章，由"
-msgstr "Our original article, by "
+msgstr "Our original article was published by"
 
 #: single.php:114
 msgid "发表，"
-msgstr " publish, "
+msgstr ", "
+
+msgid "于"
+msgstr "on "
 
 #: single.php:114 single.php:126
 msgid "字。"
@@ -1296,7 +1299,7 @@ msgstr " words."
 
 #: single.php:117
 msgid "转载说明："
-msgstr ""
+msgstr "Reproduction Note: "
 
 #: single.php:122
 msgid "本文于"
@@ -1398,3 +1401,27 @@ msgstr ""
 
 #~ msgid "分享至"
 #~ msgstr "Share to"
+
+msgid "正文完"
+msgstr "END"
+
+msgid "下一篇"
+msgstr "Next"
+
+msgid "上一篇"
+msgstr "Previous"
+
+msgid "已是最新的文章"
+msgstr "Already the latest article. "
+
+msgid "已是最早的文章"
+msgstr "Already the earliest article. "
+
+msgid "阅读量"
+msgstr "Views"
+
+msgid "评论数"
+msgstr "Comments"
+
+msgid "个评论"
+msgstr " Comments"
