@@ -495,6 +495,7 @@ class puockNewComment extends puockWidgetBase {
             $nums = $this->get_num_val($instance, 'nums');
             $args = array(
                 'number' => $nums,
+                'status'  => 'approve',
                 'date_query' => array(
                     'before' => 'tomorrow',
                     'inclusive' => true,
