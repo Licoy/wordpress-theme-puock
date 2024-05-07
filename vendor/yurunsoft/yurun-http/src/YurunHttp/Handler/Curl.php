@@ -98,10 +98,10 @@ class Curl implements IHandler
     public function __construct($options = [])
     {
         $this->options = $options;
-        if (null === static::$defaultUA)
+        if (null === self::$defaultUA)
         {
             $version = curl_version();
-            static::$defaultUA = sprintf('Mozilla/5.0 YurunHttp/%s Curl/%s', YurunHttp::VERSION, isset($version['version']) ? $version['version'] : 'unknown');
+            self::$defaultUA = sprintf('Mozilla/5.0 YurunHttp/%s Curl/%s', YurunHttp::VERSION, isset($version['version']) ? $version['version'] : 'unknown');
         }
         $this->initCookieManager();
     }
@@ -183,7 +183,7 @@ class Curl implements IHandler
             $retry = $request->getAttribute(Attributes::RETRY, 0);
             $retryCallback = $request->getAttribute(Attributes::RETRY_CALLBACK);
             $beginTime = microtime(true);
-            do
+            while (true)
             {
                 // 请求方法
                 if ($isLocation && \in_array($statusCode, [301, 302, 303]))
@@ -253,7 +253,8 @@ class Curl implements IHandler
                 $this->cookieManager->gc();
                 $this->saveCookieJar();
                 break;
-            } while (true);
+            }
+
             // 关闭保存至文件的句柄
             if (null !== $saveFileFp)
             {
@@ -293,11 +294,6 @@ class Curl implements IHandler
         {
             $options[\CURLOPT_RETURNTRANSFER] = true;
         }
-        // 保存cookie
-        if (!isset($options[\CURLOPT_COOKIEJAR]))
-        {
-            $options[\CURLOPT_COOKIEJAR] = 'php://memory';
-        }
         // 允许复用连接
         if (!isset($options[\CURLOPT_FORBID_REUSE]))
         {
@@ -323,7 +319,6 @@ class Curl implements IHandler
         $this->parseSSL($request, $options);
         $this->parseProxy($request, $options);
         $this->parseHeaders($request, $options);
-        $this->parseCookies($request, $options);
         $this->parseNetwork($request, $options);
         curl_setopt_array($handler, $options);
     }
@@ -386,6 +381,7 @@ class Curl implements IHandler
         {
             $requestOptions[\CURLOPT_NOBODY] = true;
         }
+        $this->parseCookies($request, $requestOptions);
         curl_setopt_array($handler, $requestOptions);
     }
 
@@ -459,7 +455,7 @@ class Curl implements IHandler
     {
         $tmpHeaders = [];
         $count = \count($headers);
-        //从1开始，第0行包含了协议信息和状态信息，排除该行
+        // 从1开始，第0行包含了协议信息和状态信息，排除该行
         for ($i = 1; $i < $count; ++$i)
         {
             $line = trim($headers[$i]);
@@ -610,7 +606,7 @@ class Curl implements IHandler
     {
         if (!$request->hasHeader('User-Agent'))
         {
-            $request = $request->withHeader('User-Agent', $request->getAttribute(Attributes::USER_AGENT, static::$defaultUA));
+            $request = $request->withHeader('User-Agent', $request->getAttribute(Attributes::USER_AGENT, self::$defaultUA));
         }
         if (!$request->hasHeader('Connection') && $request->getProtocolVersion() >= 1.1)
         {
@@ -677,7 +673,7 @@ class Curl implements IHandler
         }
         else
         {
-            $userPwd = '';
+            $userPwd = null;
         }
         // 连接超时
         $options[\CURLOPT_CONNECTTIMEOUT_MS] = $request->getAttribute(Attributes::CONNECT_TIMEOUT, 30000);
@@ -687,8 +683,11 @@ class Curl implements IHandler
         $options[\CURLOPT_MAX_RECV_SPEED_LARGE] = $request->getAttribute(Attributes::DOWNLOAD_SPEED);
         // 上传限速
         $options[\CURLOPT_MAX_SEND_SPEED_LARGE] = $request->getAttribute(Attributes::UPLOAD_SPEED);
-        // 连接中用到的用户名和密码
-        $options[\CURLOPT_USERPWD] = $userPwd;
+        if (null !== $userPwd)
+        {
+            // 连接中用到的用户名和密码
+            $options[\CURLOPT_USERPWD] = $userPwd;
+        }
     }
 
     /**
@@ -751,7 +750,7 @@ class Curl implements IHandler
             $running = null;
             $beginTime = microtime(true);
             // 执行批处理句柄
-            do
+            while (true)
             {
                 curl_multi_exec($mh, $running);
                 if ($running > 0)
@@ -766,7 +765,8 @@ class Curl implements IHandler
                 {
                     break;
                 }
-            } while (true);
+            }
+
             foreach ($requests as $k => $request)
             {
                 $handler = $curlHandlers[$k];

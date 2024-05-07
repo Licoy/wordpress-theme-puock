@@ -113,7 +113,7 @@ class Url
      */
     public static function fineTuneUrl(): string
     {
-        return self::OPEN_AI_URL . "/fine-tunes";
+        return self::OPEN_AI_URL . "/fine_tuning/jobs";
     }
 
     /**

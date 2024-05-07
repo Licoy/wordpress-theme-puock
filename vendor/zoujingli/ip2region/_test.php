@@ -6,7 +6,6 @@ require 'Ip2Region.php';
 
 $ip2region = new Ip2Region();
 
-
 // array (
 //     'city_id' => 1713,
 //     'region' => '中国|0|广东省|广州市|电信',
@@ -41,12 +40,11 @@ function test()
 
     echo PHP_EOL . "===============================";
     echo PHP_EOL . "测试 IP 地址: {$ip}";
-    echo PHP_EOL . "--------【完整结果】------------" . PHP_EOL;
+    echo PHP_EOL . "--------【完整查询】------------" . PHP_EOL;
     $info = $ip2region->memorySearch($ip);
     var_export($info);
 
-    echo PHP_EOL . "---------【简易结果】----------" . PHP_EOL;
+    echo PHP_EOL . "---------【简易查询】----------" . PHP_EOL;
     var_export($ip2region->simple($ip));
     echo PHP_EOL . "===============================" . PHP_EOL . PHP_EOL;
-    sleep(2);
 }

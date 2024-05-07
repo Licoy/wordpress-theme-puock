@@ -93,15 +93,26 @@ class SwooleHttp2ConnectionPool extends BaseConnectionPool
     /**
      * 释放连接占用.
      *
-     * @param mixed $connection
+     * @param Client $connection
      *
      * @return void
      */
     public function release($connection)
     {
-        if (\in_array($connection, $this->connections))
+        if ($connection->connected)
         {
-            $this->channel->push($connection);
+            if (\in_array($connection, $this->connections))
+            {
+                $this->channel->push($connection);
+            }
+        }
+        else
+        {
+            $index = array_search($connection, $this->connections);
+            if (false !== $index)
+            {
+                unset($this->connections[$index]);
+            }
         }
     }
 

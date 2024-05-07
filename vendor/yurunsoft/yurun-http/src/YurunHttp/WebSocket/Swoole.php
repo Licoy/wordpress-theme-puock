@@ -43,6 +43,13 @@ class Swoole implements IWebSocketClient
     private $connected = false;
 
     /**
+     * 是否启用压缩.
+     *
+     * @var bool
+     */
+    private $compressed = false;
+
+    /**
      * 初始化.
      *
      * @param \Yurun\Util\YurunHttp\Handler\Swoole $httpHandler
@@ -57,6 +64,7 @@ class Swoole implements IWebSocketClient
         $this->request = $request;
         $this->response = $response;
         $this->handler = $request->getAttribute(Attributes::PRIVATE_CONNECTION);
+        $this->compressed = $request->getAttribute(Attributes::WEBSOCKET_COMPRESSION);
         $this->connected = true;
     }
 
@@ -120,10 +128,10 @@ class Swoole implements IWebSocketClient
      *
      * @return bool
      */
-    public function send($data)
+    public function send($data, int $opcode = Opcode::TEXT)
     {
         $handler = $this->handler;
-        $result = $handler->push($data);
+        $result = $handler->push($data, $opcode, \SWOOLE_WEBSOCKET_FLAG_FIN | ($this->compressed ? \SWOOLE_WEBSOCKET_FLAG_COMPRESS : 0));
         if (!$result)
         {
             $errCode = $handler->errCode;
@@ -189,5 +197,13 @@ class Swoole implements IWebSocketClient
     public function getClient()
     {
         return $this->handler;
+    }
+
+    /**
+     * 是否启用压缩.
+     */
+    public function isCompressed(): bool
+    {
+        return $this->compressed;
     }
 }

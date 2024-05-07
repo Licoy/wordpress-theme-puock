@@ -152,9 +152,10 @@ class SwooleClient implements IHttp2Client
         }
         $recvChannels = [];
         $this->requestMap = [];
-        $this->http2Client = null;
+        $this->http2Client->close();
         $url = ($this->ssl ? 'https://' : 'http://') . $this->host . ':' . $this->port;
-        $this->handler->getHttp2ConnectionManager()->closeConnection($url);
+        $this->handler->getHttp2ConnectionManager()->release($url, $this->http2Client);
+        $this->http2Client = null;
     }
 
     /**

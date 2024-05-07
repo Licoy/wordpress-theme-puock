@@ -199,7 +199,7 @@ class Uri implements UriInterface
      *
      * @return string the URI scheme
      */
-    public function getScheme()
+    public function getScheme(): string
     {
         return $this->scheme;
     }
@@ -223,7 +223,7 @@ class Uri implements UriInterface
      *
      * @return string the URI authority, in "[user-info@]host[:port]" format
      */
-    public function getAuthority()
+    public function getAuthority(): string
     {
         $result = $this->host;
         if ('' !== $this->userInfo)
@@ -253,7 +253,7 @@ class Uri implements UriInterface
      *
      * @return string the URI user information, in "username[:password]" format
      */
-    public function getUserInfo()
+    public function getUserInfo(): string
     {
         return $this->userInfo;
     }
@@ -270,7 +270,7 @@ class Uri implements UriInterface
      *
      * @return string the URI host
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->host;
     }
@@ -290,7 +290,7 @@ class Uri implements UriInterface
      *
      * @return int|null the URI port
      */
-    public function getPort()
+    public function getPort(): ?int
     {
         return $this->port;
     }
@@ -321,7 +321,7 @@ class Uri implements UriInterface
      *
      * @return string the URI path
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -347,7 +347,7 @@ class Uri implements UriInterface
      *
      * @return string the URI query string
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return $this->query;
     }
@@ -369,7 +369,7 @@ class Uri implements UriInterface
      *
      * @return string the URI fragment
      */
-    public function getFragment()
+    public function getFragment(): string
     {
         return $this->fragment;
     }
@@ -391,7 +391,7 @@ class Uri implements UriInterface
      *
      * @throws \InvalidArgumentException for invalid or unsupported schemes
      */
-    public function withScheme($scheme)
+    public function withScheme($scheme): UriInterface
     {
         if (!\is_string($scheme))
         {
@@ -418,7 +418,7 @@ class Uri implements UriInterface
      *
      * @return static a new instance with the specified user information
      */
-    public function withUserInfo($user, $password = null)
+    public function withUserInfo($user, $password = null): UriInterface
     {
         $self = clone $this;
         $self->userInfo = $user;
@@ -444,7 +444,7 @@ class Uri implements UriInterface
      *
      * @throws \InvalidArgumentException for invalid hostnames
      */
-    public function withHost($host)
+    public function withHost($host): UriInterface
     {
         $self = clone $this;
         $self->host = $host;
@@ -471,7 +471,7 @@ class Uri implements UriInterface
      *
      * @throws \InvalidArgumentException for invalid ports
      */
-    public function withPort($port)
+    public function withPort($port): UriInterface
     {
         $self = clone $this;
         $self->port = $port;
@@ -503,7 +503,7 @@ class Uri implements UriInterface
      *
      * @throws \InvalidArgumentException for invalid paths
      */
-    public function withPath($path)
+    public function withPath($path): UriInterface
     {
         $self = clone $this;
         $self->path = $path;
@@ -528,7 +528,7 @@ class Uri implements UriInterface
      *
      * @throws \InvalidArgumentException for invalid query strings
      */
-    public function withQuery($query)
+    public function withQuery($query): UriInterface
     {
         $self = clone $this;
         $self->query = $query;
@@ -551,7 +551,7 @@ class Uri implements UriInterface
      *
      * @return static a new instance with the specified fragment
      */
-    public function withFragment($fragment)
+    public function withFragment($fragment): UriInterface
     {
         $self = clone $this;
         $self->fragment = $fragment;
@@ -583,7 +583,7 @@ class Uri implements UriInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return static::makeUriString($this->host, $this->path, $this->query, $this->port, $this->scheme, $this->fragment, $this->userInfo);
     }

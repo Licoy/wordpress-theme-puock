@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "orhanerday/open-ai",
-            "version": "4.7.1",
-            "version_normalized": "4.7.1.0",
+            "version": "4.9.1",
+            "version_normalized": "4.9.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orhanerday/open-ai.git",
-                "reference": "d2d96d0521ef3118cc4f33a5d54718b62aedd336"
+                "reference": "2ccdf2f6b4287b9e570a1ddcf33083b7ad9f7e9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orhanerday/open-ai/zipball/d2d96d0521ef3118cc4f33a5d54718b62aedd336",
-                "reference": "d2d96d0521ef3118cc4f33a5d54718b62aedd336",
+                "url": "https://api.github.com/repos/orhanerday/open-ai/zipball/2ccdf2f6b4287b9e570a1ddcf33083b7ad9f7e9c",
+                "reference": "2ccdf2f6b4287b9e570a1ddcf33083b7ad9f7e9c",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,7 @@
                 "pestphp/pest": "^1.20",
                 "spatie/ray": "^1.28"
             },
-            "time": "2023-03-08T08:04:02+00:00",
+            "time": "2023-11-13T04:03:05+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -52,7 +52,7 @@
             ],
             "support": {
                 "issues": "https://github.com/orhanerday/open-ai/issues",
-                "source": "https://github.com/orhanerday/open-ai/tree/4.7.1"
+                "source": "https://github.com/orhanerday/open-ai/tree/4.9.1"
             },
             "funding": [
                 {
@@ -64,27 +64,27 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.1",
-            "version_normalized": "1.1.0.0",
+            "version": "2.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
-            "time": "2023-04-04T09:50:52+00:00",
+            "time": "2023-04-04T09:54:51+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -100,7 +100,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
@@ -114,39 +114,39 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/1.1"
+                "source": "https://github.com/php-fig/http-message/tree/2.0"
             },
             "install-path": "../psr/http-message"
         },
         {
             "name": "psr/log",
-            "version": "3.0.0",
-            "version_normalized": "3.0.0.0",
+            "version": "1.1.4",
+            "version_normalized": "1.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
-                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.0"
+                "php": ">=5.3.0"
             },
-            "time": "2021-07-14T16:46:02+00:00",
+            "time": "2021-05-03T11:20:27+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "src"
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -167,7 +167,7 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/3.0.0"
+                "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "install-path": "../psr/log"
         },
@@ -241,22 +241,22 @@
         },
         {
             "name": "yurunsoft/yurun-http",
-            "version": "v4.4.2",
-            "version_normalized": "4.4.2.0",
+            "version": "v5.0.1",
+            "version_normalized": "5.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yurunsoft/YurunHttp.git",
-                "reference": "9528c26753d29392d19b9af69ffcfd792fcf8798"
+                "reference": "df62abcb81166f4fa1a1eca426cd0b6792b0edce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yurunsoft/YurunHttp/zipball/9528c26753d29392d19b9af69ffcfd792fcf8798",
-                "reference": "9528c26753d29392d19b9af69ffcfd792fcf8798",
+                "url": "https://api.github.com/repos/Yurunsoft/YurunHttp/zipball/df62abcb81166f4fa1a1eca426cd0b6792b0edce",
+                "reference": "df62abcb81166f4fa1a1eca426cd0b6792b0edce",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0",
-                "psr/http-message": "~1.0",
+                "php": ">=7.1",
+                "psr/http-message": "~1.0|~2.0",
                 "psr/log": "~1.0|~2.0|~3.0"
             },
             "require-dev": {
@@ -265,7 +265,7 @@
                 "swoole/ide-helper": "^4.5",
                 "workerman/workerman": "^4.0"
             },
-            "time": "2023-03-15T08:20:56+00:00",
+            "time": "2024-01-17T02:20:44+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -280,33 +280,33 @@
             "description": "YurunHttp 是开源的 PHP HTTP 类库，支持链式操作，简单易用。支持 Curl、Swoole，支持 Http、Http2、WebSocket！",
             "support": {
                 "issues": "https://github.com/Yurunsoft/YurunHttp/issues",
-                "source": "https://github.com/Yurunsoft/YurunHttp/tree/v4.4.2"
+                "source": "https://github.com/Yurunsoft/YurunHttp/tree/v5.0.1"
             },
             "install-path": "../yurunsoft/yurun-http"
         },
         {
             "name": "yurunsoft/yurun-oauth-login",
-            "version": "v3.0.6",
-            "version_normalized": "3.0.6.0",
+            "version": "v3.1.0",
+            "version_normalized": "3.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yurunsoft/YurunOAuthLogin.git",
-                "reference": "3f67cc3ead9e14963fd0a40efe066530fac60746"
+                "reference": "e026602773daa59b3a1e519db772897e46d118cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yurunsoft/YurunOAuthLogin/zipball/3f67cc3ead9e14963fd0a40efe066530fac60746",
-                "reference": "3f67cc3ead9e14963fd0a40efe066530fac60746",
+                "url": "https://api.github.com/repos/Yurunsoft/YurunOAuthLogin/zipball/e026602773daa59b3a1e519db772897e46d118cd",
+                "reference": "e026602773daa59b3a1e519db772897e46d118cd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
-                "yurunsoft/yurun-http": "~4.0"
+                "yurunsoft/yurun-http": "~4.0|~5.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "2.18.3"
             },
-            "time": "2021-12-07T05:56:44+00:00",
+            "time": "2023-10-17T06:15:44+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -318,32 +318,42 @@
             "license": [
                 "MIT"
             ],
-            "description": "YurunOAuthLogin是一个PHP 第三方登录授权 SDK，集成了QQ、微信、微博、Github等常用接口。",
+            "authors": [
+                {
+                    "name": "Yurun",
+                    "email": "admin@yurunsoft.com"
+                },
+                {
+                    "name": "Lu Fei",
+                    "email": "lufei@simps.io"
+                }
+            ],
+            "description": "YurunOAuthLogin 是一个 PHP 第三方登录授权 SDK，集成了 QQ、微信、微博、GitHub 等常用接口。",
             "support": {
                 "issues": "https://github.com/Yurunsoft/YurunOAuthLogin/issues",
-                "source": "https://github.com/Yurunsoft/YurunOAuthLogin/tree/v3.0.6"
+                "source": "https://github.com/Yurunsoft/YurunOAuthLogin/tree/v3.1.0"
             },
             "install-path": "../yurunsoft/yurun-oauth-login"
         },
         {
             "name": "zoujingli/ip2region",
-            "version": "v2.0.4",
-            "version_normalized": "2.0.4.0",
+            "version": "v2.0.5",
+            "version_normalized": "2.0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zoujingli/ip2region.git",
-                "reference": "21ed5393a93ea62c277d91ee739b2373d60bf16d"
+                "reference": "95d9064c057b978f8985b67389693ecd31f48c7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zoujingli/ip2region/zipball/21ed5393a93ea62c277d91ee739b2373d60bf16d",
-                "reference": "21ed5393a93ea62c277d91ee739b2373d60bf16d",
+                "url": "https://api.github.com/repos/zoujingli/ip2region/zipball/95d9064c057b978f8985b67389693ecd31f48c7f",
+                "reference": "95d9064c057b978f8985b67389693ecd31f48c7f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4"
             },
-            "time": "2023-03-28T02:20:00+00:00",
+            "time": "2024-03-21T12:09:30+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -370,7 +380,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zoujingli/ip2region/issues",
-                "source": "https://github.com/zoujingli/ip2region/tree/v2.0.4"
+                "source": "https://github.com/zoujingli/ip2region/tree/v2.0.5"
             },
             "install-path": "../zoujingli/ip2region"
         }

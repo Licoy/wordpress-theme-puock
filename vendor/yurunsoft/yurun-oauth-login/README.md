@@ -6,7 +6,7 @@
 
 ## 介绍
 
-YurunOAuthLogin是一个PHP 第三方登录授权 SDK，集成了QQ、微信、微博、Github等常用接口。
+YurunOAuthLogin 是一个 PHP 第三方登录授权 SDK，集成了 QQ、微信、微博、GitHub 等常用接口。
 
 无框架依赖，支持所有框架，支持 Swoole 协程环境。
 
@@ -18,7 +18,7 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/YurunOAuthLogin](https://apidoc
 
 程序员日常划水群：74401592 [![点击加群](https://pub.idqqimg.com/wpa/images/group.png "点击加群")](https://shang.qq.com/wpa/qunwpa?idkey=e2e6b49e9a648aae5285b3aba155d59107bb66fde02e229e078bd7359cac8ac3)。
 
-大家在开发中肯定会对接各种各样的第三方平台，我个人精力有限，欢迎各位来提交 PR （[Github](https://github.com/Yurunsoft/YurunOAuthLogin)），一起完善它，让它能够支持更多的平台，更加好用。
+大家在开发中肯定会对接各种各样的第三方平台，我个人精力有限，欢迎各位来提交 PR （[GitHub](https://github.com/Yurunsoft/YurunOAuthLogin)），一起完善它，让它能够支持更多的平台，更加好用。
 
 ## 支持的登录平台
 
@@ -27,18 +27,21 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/YurunOAuthLogin](https://apidoc
 - 支付宝网页、支付宝 APP、支付宝小程序
 - 微博
 - 百度
-- Github
+- GitHub
 - Gitee
 - Coding
 - 开源中国(OSChina)
 - CSDN
 - GitLab
+- 飞书
+- 钉钉
+- 企业微信
 
 > 后续将不断添加新的平台支持，也欢迎你来提交PR，一起完善！
 
 ## 安装
 
-在您的composer.json中加入配置：
+在您的 composer.json 中加入配置：
 
 `PHP >= 5.5.0`
 
@@ -66,9 +69,9 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/YurunOAuthLogin](https://apidoc
 
 ## 代码实例
 
-自v1.2起所有方法统一参数调用，如果需要额外参数的可使用对象属性赋值，具体参考test目录下的测试代码。
+自 v1.2 起所有方法统一参数调用，如果需要额外参数的可使用对象属性赋值，具体参考 test 目录下的测试代码。
 
-下面代码以QQ接口举例，完全可以把QQ字样改为其它任意接口字样使用。
+下面代码以 QQ 接口举例，完全可以把 QQ 字样改为其它任意接口字样使用。
 
 ### 实例化
 

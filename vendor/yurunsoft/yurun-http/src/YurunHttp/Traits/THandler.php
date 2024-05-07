@@ -2,7 +2,6 @@
 
 namespace Yurun\Util\YurunHttp\Traits;
 
-use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 use Yurun\Util\YurunHttp\Http\Psr7\Uri;
 
@@ -23,7 +22,7 @@ trait THandler
         {
             if (!isset($location[0]))
             {
-                throw new InvalidArgumentException(sprintf('Invalid $location: %s', $location));
+                throw new \InvalidArgumentException(sprintf('Invalid $location: %s', $location));
             }
             if ('/' === $location[0])
             {
@@ -35,7 +34,7 @@ trait THandler
                 $path = $currentUri->getPath();
                 if ('/' !== substr($path, -1, 1))
                 {
-                    $path = $path . '/';
+                    $path .= '/';
                 }
                 $path .= $location;
                 $uri = $uri->withPath($path);

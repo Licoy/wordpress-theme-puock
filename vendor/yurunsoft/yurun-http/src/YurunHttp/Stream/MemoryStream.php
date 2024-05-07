@@ -51,7 +51,7 @@ class MemoryStream implements StreamInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->content;
     }
@@ -61,7 +61,7 @@ class MemoryStream implements StreamInterface
      *
      * @return void
      */
-    public function close()
+    public function close(): void
     {
         $this->content = '';
         $this->size = -1;
@@ -84,7 +84,7 @@ class MemoryStream implements StreamInterface
      *
      * @return int|null returns the size in bytes if known, or null if unknown
      */
-    public function getSize()
+    public function getSize(): ?int
     {
         return $this->size;
     }
@@ -96,7 +96,7 @@ class MemoryStream implements StreamInterface
      *
      * @throws \RuntimeException on error
      */
-    public function tell()
+    public function tell(): int
     {
         return $this->position;
     }
@@ -106,7 +106,7 @@ class MemoryStream implements StreamInterface
      *
      * @return bool
      */
-    public function eof()
+    public function eof(): bool
     {
         return $this->position > $this->size;
     }
@@ -116,7 +116,7 @@ class MemoryStream implements StreamInterface
      *
      * @return bool
      */
-    public function isSeekable()
+    public function isSeekable(): bool
     {
         return true;
     }
@@ -137,7 +137,7 @@ class MemoryStream implements StreamInterface
      *
      * @throws \RuntimeException on failure
      */
-    public function seek($offset, $whence = \SEEK_SET)
+    public function seek($offset, $whence = \SEEK_SET): void
     {
         switch ($whence)
         {
@@ -170,7 +170,7 @@ class MemoryStream implements StreamInterface
      *
      * @throws \RuntimeException on failure
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
@@ -180,7 +180,7 @@ class MemoryStream implements StreamInterface
      *
      * @return bool
      */
-    public function isWritable()
+    public function isWritable(): bool
     {
         return true;
     }
@@ -194,7 +194,7 @@ class MemoryStream implements StreamInterface
      *
      * @throws \RuntimeException on failure
      */
-    public function write($string)
+    public function write($string): int
     {
         $content = &$this->content;
         $position = &$this->position;
@@ -211,7 +211,7 @@ class MemoryStream implements StreamInterface
      *
      * @return bool
      */
-    public function isReadable()
+    public function isReadable(): bool
     {
         return true;
     }
@@ -228,7 +228,7 @@ class MemoryStream implements StreamInterface
      *
      * @throws \RuntimeException if an error occurs
      */
-    public function read($length)
+    public function read($length): string
     {
         $position = &$this->position;
         $result = substr($this->content, $position, $length);
@@ -245,7 +245,7 @@ class MemoryStream implements StreamInterface
      * @throws \RuntimeException if unable to read or an error occurs while
      *                           reading
      */
-    public function getContents()
+    public function getContents(): string
     {
         $position = &$this->position;
         if (0 === $position)
@@ -268,7 +268,7 @@ class MemoryStream implements StreamInterface
      *
      * @see http://php.net/manual/en/function.stream-get-meta-data.php
      *
-     * @param string $key specific metadata to retrieve
+     * @param string|null $key specific metadata to retrieve
      *
      * @return array|mixed|null Returns an associative array if no key is
      *                          provided. Returns a specific key value if a key is provided and the

@@ -199,9 +199,9 @@ abstract class MediaType
     public static function getExt($contentType)
     {
         list($firstContentType) = explode(';', $contentType, 2);
-        if (isset(static::$extMap[$firstContentType]))
+        if (isset(self::$extMap[$firstContentType]))
         {
-            return static::$extMap[$firstContentType];
+            return self::$extMap[$firstContentType];
         }
         else
         {

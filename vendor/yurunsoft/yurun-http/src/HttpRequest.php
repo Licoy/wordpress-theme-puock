@@ -63,7 +63,7 @@ class HttpRequest
      *
      * @var callable|null
      */
-    public $retryCallback = null;
+    public $retryCallback;
 
     /**
      * 是否使用代理，默认false.
@@ -175,7 +175,7 @@ class HttpRequest
      *
      * @var string
      */
-    public $certPassword = null;
+    public $certPassword;
 
     /**
      * certType规定的私钥的加密类型，支持的密钥类型为"PEM"(默认值)、"DER"和"ENG".
@@ -196,7 +196,7 @@ class HttpRequest
      *
      * @var string
      */
-    public $keyPassword = null;
+    public $keyPassword;
 
     /**
      * 请求方法.
@@ -217,7 +217,14 @@ class HttpRequest
      *
      * @var bool|null
      */
-    public $connectionPool = null;
+    public $connectionPool;
+
+    /**
+     * 是否启用 WebSocket 压缩.
+     *
+     * @var bool
+     */
+    public $websocketCompression = false;
 
     /**
      * 代理认证方式.
@@ -654,7 +661,7 @@ class HttpRequest
      */
     public function retry($retry, $callback = null)
     {
-        $this->retry = $retry < 0 ? 0 : $retry;   //至少请求1次，即重试0次
+        $this->retry = $retry < 0 ? 0 : $retry;   // 至少请求1次，即重试0次
         $this->retryCallback = $callback;
 
         return $this;
@@ -844,6 +851,18 @@ class HttpRequest
     }
 
     /**
+     * 设置是否启用 WebSocket 压缩.
+     *
+     * @return static
+     */
+    public function websocketCompression(bool $websocketCompression): self
+    {
+        $this->websocketCompression = $websocketCompression;
+
+        return $this;
+    }
+
+    /**
      * 设置是否启用连接池.
      *
      * @param bool $connectionPool
@@ -950,8 +969,9 @@ class HttpRequest
                             ->withAttribute(Attributes::CONNECTION_POOL, $this->connectionPool)
                             ->withAttribute(Attributes::RETRY, $this->retry)
                             ->withAttribute(Attributes::RETRY_CALLBACK, $this->retryCallback)
+                            ->withAttribute(Attributes::WEBSOCKET_COMPRESSION, $this->websocketCompression)
                             ->withProtocolVersion($this->protocolVersion)
-                            ;
+        ;
         foreach ($this->proxy as $name => $value)
         {
             $request = $request->withAttribute('proxy.' . $name, $value);

@@ -79,7 +79,7 @@ class FileStream implements StreamInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         try
         {
@@ -98,7 +98,7 @@ class FileStream implements StreamInterface
      *
      * @return void
      */
-    public function close()
+    public function close(): void
     {
         fclose($this->stream);
         $this->stream = null;
@@ -124,7 +124,7 @@ class FileStream implements StreamInterface
      *
      * @return int|null returns the size in bytes if known, or null if unknown
      */
-    public function getSize()
+    public function getSize(): ?int
     {
         $stat = fstat($this->stream);
         if (false === $stat)
@@ -142,7 +142,7 @@ class FileStream implements StreamInterface
      *
      * @throws \RuntimeException on error
      */
-    public function tell()
+    public function tell(): int
     {
         $result = ftell($this->stream);
         if (false === $result)
@@ -158,7 +158,7 @@ class FileStream implements StreamInterface
      *
      * @return bool
      */
-    public function eof()
+    public function eof(): bool
     {
         return feof($this->stream);
     }
@@ -168,7 +168,7 @@ class FileStream implements StreamInterface
      *
      * @return bool
      */
-    public function isSeekable()
+    public function isSeekable(): bool
     {
         return (bool) $this->getMetadata('seekable');
     }
@@ -189,7 +189,7 @@ class FileStream implements StreamInterface
      *
      * @throws \RuntimeException on failure
      */
-    public function seek($offset, $whence = \SEEK_SET)
+    public function seek($offset, $whence = \SEEK_SET): void
     {
         if (-1 === fseek($this->stream, $offset, $whence))
         {
@@ -210,7 +210,7 @@ class FileStream implements StreamInterface
      *
      * @throws \RuntimeException on failure
      */
-    public function rewind()
+    public function rewind(): void
     {
         if (!rewind($this->stream))
         {
@@ -223,7 +223,7 @@ class FileStream implements StreamInterface
      *
      * @return bool
      */
-    public function isWritable()
+    public function isWritable(): bool
     {
         return \in_array($this->mode, [
             StreamMode::WRITE_CLEAN,
@@ -245,7 +245,7 @@ class FileStream implements StreamInterface
      *
      * @throws \RuntimeException on failure
      */
-    public function write($string)
+    public function write($string): int
     {
         $result = fwrite($this->stream, $string);
         if (false === $result)
@@ -261,7 +261,7 @@ class FileStream implements StreamInterface
      *
      * @return bool
      */
-    public function isReadable()
+    public function isReadable(): bool
     {
         return \in_array($this->mode, [
             StreamMode::READ_WRITE,
@@ -284,7 +284,7 @@ class FileStream implements StreamInterface
      *
      * @throws \RuntimeException if an error occurs
      */
-    public function read($length)
+    public function read($length): string
     {
         $result = fread($this->stream, $length);
         if (false === $result)
@@ -303,7 +303,7 @@ class FileStream implements StreamInterface
      * @throws \RuntimeException if unable to read or an error occurs while
      *                           reading
      */
-    public function getContents()
+    public function getContents(): string
     {
         $result = stream_get_contents($this->stream);
         if (false === $result)
@@ -355,7 +355,7 @@ class FileStream implements StreamInterface
      *
      * @return UriInterface
      */
-    public function getUri()
+    public function getUri(): UriInterface
     {
         return $this->uri;
     }

@@ -44,13 +44,6 @@ class Swoole implements IHandler
     private $result;
 
     /**
-     * 连接池键.
-     *
-     * @var string
-     */
-    private $poolKey;
-
-    /**
      * 连接池是否启用.
      *
      * @var bool
@@ -77,9 +70,9 @@ class Swoole implements IHandler
     public function __construct($options = [])
     {
         $this->options = $options;
-        if (null === static::$defaultUA)
+        if (null === self::$defaultUA)
         {
-            static::$defaultUA = sprintf('Mozilla/5.0 YurunHttp/%s Swoole/%s', YurunHttp::VERSION, \defined('SWOOLE_VERSION') ? \SWOOLE_VERSION : 'unknown');
+            self::$defaultUA = sprintf('Mozilla/5.0 YurunHttp/%s Swoole/%s', YurunHttp::VERSION, \defined('SWOOLE_VERSION') ? \SWOOLE_VERSION : 'unknown');
         }
         $this->initCookieManager();
         $this->httpConnectionManager = new SwooleHttpConnectionManager();
@@ -178,7 +171,7 @@ class Swoole implements IHandler
         }
         if (!$request->hasHeader('User-Agent'))
         {
-            $request = $request->withHeader('User-Agent', $request->getAttribute(Attributes::USER_AGENT, static::$defaultUA));
+            $request = $request->withHeader('User-Agent', $request->getAttribute(Attributes::USER_AGENT, self::$defaultUA));
         }
         $headers = [];
         foreach ($request->getHeaders() as $name => $value)
@@ -269,7 +262,7 @@ class Swoole implements IHandler
         $uri = $request->getUri();
         try
         {
-            $this->poolKey = $poolKey = ConnectionPool::getKey($uri);
+            $poolKey = ConnectionPool::getKey($uri);
             if ($isHttp2)
             {
                 /** @var \Swoole\Coroutine\Http2\Client $connection */
@@ -415,8 +408,8 @@ class Swoole implements IHandler
             }
             else
             {
-                // 状态码为5XX或者0才需要重试
-                $retry = (0 === $statusCode || (5 === (int) ($statusCode / 100)));
+                // 状态码为5XX或者<0才需要重试
+                $retry = ($statusCode <= 0 || (5 === (int) ($statusCode / 100)));
             }
             if ($retry)
             {

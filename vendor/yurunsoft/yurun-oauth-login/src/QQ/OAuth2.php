@@ -271,6 +271,10 @@ class OAuth2 extends Base
         $aesIV = base64_decode($iv);
         $aesCipher = base64_decode($encryptedData);
         $result = openssl_decrypt($aesCipher, 'AES-128-CBC', $aesKey, 1, $aesIV);
+        if (!$result)
+        {
+            throw new \InvalidArgumentException('解密失败');
+        }
         $dataObj = json_decode($result, true);
         if (!$dataObj)
         {

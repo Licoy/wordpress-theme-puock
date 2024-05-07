@@ -12,7 +12,7 @@ abstract class YurunHttp
      *
      * @var string|null
      */
-    private static $defaultHandler = null;
+    private static $defaultHandler;
 
     /**
      * 属性.
@@ -24,7 +24,7 @@ abstract class YurunHttp
     /**
      * 版本号.
      */
-    const VERSION = '4.3';
+    const VERSION = '5.0';
 
     /**
      * 设置默认处理器类.
@@ -35,7 +35,7 @@ abstract class YurunHttp
      */
     public static function setDefaultHandler($class)
     {
-        static::$defaultHandler = $class;
+        self::$defaultHandler = $class;
     }
 
     /**
@@ -45,7 +45,7 @@ abstract class YurunHttp
      */
     public static function getDefaultHandler()
     {
-        return static::$defaultHandler;
+        return self::$defaultHandler;
     }
 
     /**
@@ -57,9 +57,9 @@ abstract class YurunHttp
      */
     public static function getHandler($options = [])
     {
-        if (static::$defaultHandler)
+        if (self::$defaultHandler)
         {
-            $class = static::$defaultHandler;
+            $class = self::$defaultHandler;
             // @phpstan-ignore-next-line
             if (!is_subclass_of($class, IHandler::class))
             {
@@ -107,7 +107,7 @@ abstract class YurunHttp
                 $handler = new $handlerClass();
             }
         }
-        foreach (static::$attributes as $name => $value)
+        foreach (self::$attributes as $name => $value)
         {
             if (null === $request->getAttribute($name))
             {
@@ -147,7 +147,7 @@ abstract class YurunHttp
         {
             $handler = new $handlerClass();
         }
-        foreach (static::$attributes as $name => $value)
+        foreach (self::$attributes as $name => $value)
         {
             if (null === $request->getAttribute($name))
             {
@@ -165,7 +165,7 @@ abstract class YurunHttp
      */
     public static function getAttributes()
     {
-        return static::$attributes;
+        return self::$attributes;
     }
 
     /**
@@ -178,9 +178,9 @@ abstract class YurunHttp
      */
     public static function getAttribute($name, $default = null)
     {
-        if (\array_key_exists($name, static::$attributes))
+        if (\array_key_exists($name, self::$attributes))
         {
-            return static::$attributes[$name];
+            return self::$attributes[$name];
         }
         else
         {
@@ -198,6 +198,6 @@ abstract class YurunHttp
      */
     public static function setAttribute($name, $value)
     {
-        static::$attributes[$name] = $value;
+        self::$attributes[$name] = $value;
     }
 }

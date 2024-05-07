@@ -57,7 +57,7 @@ interface IWebSocketClient
      *
      * @return bool
      */
-    public function send($data);
+    public function send($data, int $opcode = Opcode::TEXT);
 
     /**
      * 接收数据.
@@ -95,4 +95,9 @@ interface IWebSocketClient
      * @return mixed
      */
     public function getClient();
+
+    /**
+     * 是否启用压缩.
+     */
+    public function isCompressed(): bool;
 }

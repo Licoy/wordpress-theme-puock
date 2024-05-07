@@ -180,6 +180,11 @@ abstract class Attributes
     const CONNECTION_POOL = 'connection_pool';
 
     /**
+     * WebSocket 压缩.
+     */
+    const WEBSOCKET_COMPRESSION = 'websocket_compression';
+
+    /**
      * 重试计数.
      */
     const PRIVATE_RETRY_COUNT = '__retryCount';

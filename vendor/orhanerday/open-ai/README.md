@@ -1,4 +1,4 @@
-# OpenAI GPT-3 Api Client in PHP
+# OpenAI API Client in PHP
 
 <br />
 
@@ -44,10 +44,11 @@ repository useful! <br /><br /> Orhan*
 
 # Comparison With Other Packages
 
-| Project Name           | Required PHP Version | Downloads                                                                                                                                                                     | Description                                                                                                                                                | Type (Official / Community) | Support                                                                                                                                |
-|------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| **orhanerday/open-ai** | **PHP 7.4+**         | [![Total Downloads](https://img.shields.io/packagist/dt/orhanerday/open-ai.svg?style=flat-square)](https://packagist.org/packages/orhanerday/open-ai) <br>              | **Most downloaded, forked, contributed, huge community supported, and used PHP SDK for OpenAI GPT-3 and DALL-E. It also supports chatGPT-like streaming.** | Community                   | Available, ([Community driven Discord Server](https://discord.gg/xpGUD528XJ) or personal mail [orhan@duck.com](mailto:orhan@duck.com)) |
-| openai-php/client      | PHP 8.1+             | <a href="https://packagist.org/packages/openai-php/client"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/openai-php/client"></a>                        | OpenAI PHP API client.                                                                                                                                     | Community                   | -                                                                                                                                      |
+| Project Name           | Required PHP Version | Description                                                                                                                                                | Type (Official / Community) | Support                                                                                                                                |
+|------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| **orhanerday/open-ai** | **PHP 7.4+**         | **Most downloaded, forked, contributed, huge community supported, and used PHP SDK for OpenAI GPT-3 and DALL-E. It also supports chatGPT-like streaming.** | Community                   | Available, ([Community driven Discord Server](https://discord.gg/xpGUD528XJ) or personal mail [orhann@duck.com](mailto:orhann@duck.com)) |
+| openai-** */c****t      | PHP 8.1+             | OpenAI PHP API client.                                                                                                                                     | Community                   | -                                                                                                                                      |
+
 
 <br />
 
@@ -99,6 +100,9 @@ ensure that the project can continue to grow and improve.
 
 **Orhan Erday** / Creator.
 
+# Documentation
+Please visit https://orhanerday.gitbook.io/openai-php-api-1/
+
 # Endpoint Support
 
 - Chat
@@ -146,7 +150,7 @@ You can install the package via composer:
 composer require orhanerday/open-ai
 ```
 
-## Quick Start
+## Quick Start ⚡
 
 Before you get starting, you should set OPENAI_API_KEY as ENV key, and set OpenAI key as env value with the following
 commands;
@@ -185,7 +189,7 @@ use Orhanerday\OpenAi\OpenAi;
 $open_ai_key = getenv('OPENAI_API_KEY');
 $open_ai = new OpenAi($open_ai_key);
 
-$complete = $open_ai->chat([
+$chat = $open_ai->chat([
    'model' => 'gpt-3.5-turbo',
    'messages' => [
        [
@@ -211,7 +215,15 @@ $complete = $open_ai->chat([
    'presence_penalty' => 0,
 ]);
 
-var_dump($complete);
+
+var_dump($chat);
+echo "<br>";
+echo "<br>";
+echo "<br>";
+// decode response
+$d = json_decode($chat);
+// Get Content
+echo($d->choices[0]->message->content);
 ```
 
 _Run the server with the following command_
@@ -311,6 +323,42 @@ $complete = $open_ai->chat([
 ]);
 ```
 
+## Accessing the Element 
+
+```php
+<?php
+// Dummy Response For Chat API 
+$j = '
+{
+   "id":"chatcmpl-*****",
+   "object":"chat.completion",
+   "created":1679748856,
+   "model":"gpt-3.5-turbo-0301",
+   "usage":{
+      "prompt_tokens":9,
+      "completion_tokens":10,
+      "total_tokens":19
+   },
+   "choices":[
+      {
+         "message":{
+            "role":"assistant",
+            "content":"This is a test of the AI language model."
+         },
+         "finish_reason":"length",
+         "index":0
+      }
+   ]
+}
+';
+
+// decode response
+$d = json_decode($j);
+
+// Get Content
+echo($d->choices[0]->message->content);
+```
+
 > ### Related: [ChatGPT Clone Project](#chatgpt-clone-project)
 
 ## Completions
@@ -320,7 +368,7 @@ alternative tokens at each position.
 
  ```php
 $complete = $open_ai->completion([
-    'model' => 'text-davinci-002',
+    'model' => 'gpt-3.5-turbo-instruct',
     'prompt' => 'Hello',
     'temperature' => 0.9,
     'max_tokens' => 150,
@@ -728,6 +776,7 @@ Manage fine-tuning jobs to tailor a model to your specific training data.
 
  ```php
 $result = $open_ai->createFineTune([
+        "model" => "gpt-3.5-turbo-1106",
         "training_file" => "file-U3KoAAtGsjUKSPXwEUDdtw86",
 ]);
 ```
@@ -849,3 +898,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 #### doge
 
 ![image](https://user-images.githubusercontent.com/22305274/209946556-164798d0-e404-4b6c-8669-d63e78f24228.png)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=orhanerday/open-ai&type=Date)](https://star-history.com/#orhanerday/open-ai&Date)

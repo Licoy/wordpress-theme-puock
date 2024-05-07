@@ -97,7 +97,7 @@ class UploadedFile implements UploadedFileInterface
      * @throws \RuntimeException in cases when no stream is available or can be
      *                           created
      */
-    public function getStream()
+    public function getStream(): StreamInterface
     {
         if (null === $this->stream)
         {
@@ -143,7 +143,7 @@ class UploadedFile implements UploadedFileInterface
      * @throws \RuntimeException         on any error during the move operation, or on
      *                                   the second or subsequent call to the method
      */
-    public function moveTo($targetPath)
+    public function moveTo($targetPath): void
     {
         if (!\is_string($targetPath))
         {
@@ -176,7 +176,7 @@ class UploadedFile implements UploadedFileInterface
      *
      * @return int|null the file size in bytes or null if unknown
      */
-    public function getSize()
+    public function getSize(): ?int
     {
         return $this->size;
     }
@@ -196,7 +196,7 @@ class UploadedFile implements UploadedFileInterface
      *
      * @return int one of PHP's UPLOAD_ERR_XXX constants
      */
-    public function getError()
+    public function getError(): int
     {
         return $this->error;
     }
@@ -214,7 +214,7 @@ class UploadedFile implements UploadedFileInterface
      * @return string|null the filename sent by the client or null if none
      *                     was provided
      */
-    public function getClientFilename()
+    public function getClientFilename(): ?string
     {
         return $this->fileName;
     }
@@ -232,7 +232,7 @@ class UploadedFile implements UploadedFileInterface
      * @return string|null the media type sent by the client or null if none
      *                     was provided
      */
-    public function getClientMediaType()
+    public function getClientMediaType(): ?string
     {
         return $this->mediaType;
     }
@@ -242,7 +242,7 @@ class UploadedFile implements UploadedFileInterface
      *
      * @return string
      */
-    public function getTempFileName()
+    public function getTempFileName(): string
     {
         return $this->tmpFileName;
     }

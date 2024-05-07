@@ -47,7 +47,7 @@ class ComposerStaticInitf74d6302ff22d6ca9f1ebbf1a19d8e44
         ),
         'Psr\\Log\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/log/src',
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
