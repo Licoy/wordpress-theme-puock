@@ -1425,3 +1425,6 @@ msgstr "Comments"
 
 msgid "个评论"
 msgstr " Comments"
+
+msgid "共计 %s 个字符，预计需要 %s 分钟阅读。"
+msgstr "Total %s of characters, estimated to take %s of minutes to read."

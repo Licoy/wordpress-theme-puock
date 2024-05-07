@@ -594,7 +594,7 @@ function pk_read_time_tip(): string
 {
     $words_count = count_words();
     $read_time = ceil($words_count / 400);
-    return sprintf(__('共计 %d 个字符，预计需要花费 %d 分钟才能阅读完成。'), $words_count, $read_time);
+    return sprintf(__('共计 %d 个字符，预计需要 %d 分钟阅读。', PUOCK), $words_count, $read_time);
 }
 
 function pk_set_custom_seo($title, $keywords = '', $description = '')
