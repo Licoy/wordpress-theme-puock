@@ -446,7 +446,7 @@ function pk_captcha_validate($type, $val, $success_clear = true)
 {
     $res = false;
     pk_session_call(function () use ($type, $val, $success_clear, &$res) {
-        if (isset($_SESSION[$type . '_vd']) && $_SESSION[$type . '_vd'] == $val) {
+        if (isset($_SESSION[$type . '_vd']) && strtolower($_SESSION[$type . '_vd']) == strtolower($val)) {
             $res = true;
             if ($success_clear) {
                 unset($_SESSION[$type . '_vd']);
