@@ -24,7 +24,12 @@ function pk_ajax_ai_ask()
     if (empty($text)) {
         wp_die('<code>请输入描述</code>');
     }
-    $openai_url = pk_get_option('ai_chat_agent', 'https://api.openai.com');
+    $ai_platform = pk_get_option('ai_chat_platform','gptnb');
+    switch ($ai_platform){
+        case 'gptnb': $openai_url='https://goapi.gptnb.me';break;
+        case 'openai': $openai_url='https://api.openai.com';break;
+        default:$openai_url=pk_get_option('ai_chat_agent', 'https://api.openai.com');
+    }
     $openai_api_key = pk_get_option('ai_chat_key');
     if (empty($openai_api_key)) {
         wp_die('<code>请先配置OpenAI API Key</code>');
