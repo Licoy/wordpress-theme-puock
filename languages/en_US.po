@@ -1425,3 +1425,21 @@ msgstr "Comments"
 
 msgid "个评论"
 msgstr " Comments"
+
+msgid "近一天内"
+msgstr "In the last day"
+
+msgid "近两天内"
+msgstr "In the last two days"
+
+msgid "近三天内"
+msgstr "In the last three days"
+
+msgid "四天前"
+msgstr "4 days ago"
+
+msgid "五天前"
+msgstr "5 days ago"
+
+msgid "六天前"
+msgstr "6 days ago"
