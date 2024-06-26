@@ -114,6 +114,7 @@
 
 - [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
 - [Cloudflare](https://www.cloudflare.com/?from=wordpress-theme-puock)
+- <a href="http://idc.daozhiyun.cn"><img src="http://idc.daozhiyun.cn/upload/logo.png" width="100"></a>
 
 ## 开源协议
 

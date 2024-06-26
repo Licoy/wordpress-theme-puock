@@ -84,6 +84,7 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 ## Thanks
 - [Jetbrains](https://www.jetbrains.com/?from=wordpress-theme-puock)
 - [Cloudflare](https://www.cloudflare.com/?from=wordpress-theme-puock)
+- <a href="http://idc.daozhiyun.cn"><img src="http://idc.daozhiyun.cn/upload/logo.png" width="100"></a>
 ## License
 - [GPL 3.0](./LICENSE)
 - Please abide by the open source agreement and keep the author's signature at the bottom of the subject
