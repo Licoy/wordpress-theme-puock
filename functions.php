@@ -189,24 +189,23 @@ function pk_get_post_date()
     $c_time = time() - $time;
     $day = 86400;
     switch ($c_time) {
-        //todo 本地化翻译
         case $c_time < $day:
-            $res = '近一天内';
+            $res = __('近一天内',PUOCK);
             break;
         case $c_time < ($day * 2):
-            $res = '近两天内';
+            $res = __('近两天内',PUOCK);
             break;
         case $c_time < ($day * 3):
-            $res = '近三天内';
+            $res = __('近三天内',PUOCK);
             break;
         case $c_time < ($day * 4):
-            $res = '四天前';
+            $res = __('四天前',PUOCK);
             break;
         case $c_time < ($day * 5):
-            $res = '五天前';
+            $res = __('五天前',PUOCK);
             break;
         case $c_time < ($day * 6):
-            $res = '六天前';
+            $res = __('六天前',PUOCK);
             break;
         default:
             $res = date('Y-m-d', $time);
