@@ -25,7 +25,7 @@ class OptionCms extends BaseOptionItem{
                         ['label'=>__('发布时间', PUOCK),'value'=>'published'],
                         ['label'=>__('更新时间', PUOCK),'value'=>'updated'],
                     ],
-                    'sdt' => 'create',
+                    'sdt' => 'published',
                 ],
                 [
                     'id' => 'cms_show_new_num',
