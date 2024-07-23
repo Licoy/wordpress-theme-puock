@@ -773,7 +773,15 @@ function pk_pre_post_set($query)
 {
     if ($query->is_home() && $query->is_main_query()) {
         if (pk_get_option('index_mode', '') == 'cms') {
+            $sort = pk_get_option('cms_new_sort', 'published');
             $query->set('posts_per_page', pk_get_option('cms_show_new_num', 6));
+            if ( $sort == 'published' ) {
+                $query->set( 'orderby', 'date' );
+                $query->set( 'order', 'DESC' );
+            } elseif ( $sort == 'updated' ) {
+                $query->set( 'orderby', 'modified' );
+                $query->set( 'order', 'DESC' );
+            }
         }
     }
 }

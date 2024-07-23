@@ -18,6 +18,16 @@ class OptionCms extends BaseOptionItem{
                     'sdt' => true,
                 ],
                 [
+                    'id' => 'cms_new_sort',
+                    'label' => __('最新文章排序规则', PUOCK),
+                    'type' => 'radio',
+                    'options'=>[
+                        ['label'=>__('发布时间', PUOCK),'value'=>'published'],
+                        ['label'=>__('更新时间', PUOCK),'value'=>'updated'],
+                    ],
+                    'sdt' => 'create',
+                ],
+                [
                     'id' => 'cms_show_new_num',
                     'label' => __('最新文章数量', PUOCK),
                     'type' => 'number',
