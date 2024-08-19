@@ -26,7 +26,7 @@ function pk_ajax_ai_ask()
     }
     $ai_platform = pk_get_option('ai_chat_platform','gptnb');
     switch ($ai_platform){
-        case 'gptnb': $openai_url='https://goapi.gptnb.me';break;
+        case 'gptnb': $openai_url='https://goapi.gptnb.ai';break;
         case 'openai': $openai_url='https://api.openai.com';break;
         default:$openai_url=pk_get_option('ai_chat_agent', 'https://api.openai.com');
     }
