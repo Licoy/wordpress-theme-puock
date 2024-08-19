@@ -912,7 +912,15 @@ class Puock {
     }
 
     eventSendPostLike() {
+        let lastSendTime = 0;
+        let throttleTimeMs = 3000;
         $(document).on("click", "#post-like", (e) => {
+            const currentTime = new Date().getTime();
+            if (currentTime - lastSendTime < throttleTimeMs) {
+                this.toast("操作过于频繁", TYPE_WARNING);
+                return
+            }
+            lastSendTime = currentTime
             const vm = $(this.ct(e))
             let id = vm.attr("data-id");
             $.post("/wp-admin/admin-ajax.php", {action: 'puock_like', um_id: id, um_action: 'like'}, (res) => {
