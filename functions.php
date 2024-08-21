@@ -152,11 +152,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
                 $out = mb_substr($out, 0, mb_strlen($out) - 1);
                 return $out;
             } else {
-                if (!is_category()) {
-                    $cate = $cats[0];
-                } else {
-                    $cate = get_category($cat);
-                }
+                $cate = $cats[0];
                 return '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '"><i class="fa-regular fa-folder-open"></i> ' . $icon . $cate->name . '</a>';
             }
         }
