@@ -24,6 +24,9 @@ blockquote {
 }
 
 //覆盖样式
+[id^=hljs-item]{
+  font-size: 13px;
+}
 .hljs-ln-numbers {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -2333,17 +2336,18 @@ a:hover {
   background-color: #0b1c2c;
   border-top-left-radius: var(--pk-g-box-radius);
   border-top-right-radius: var(--pk-g-box-radius);
-  padding: 5px 10px 0 10px;
+  padding: 5px 10px 5px 10px;
   display: flex;
   justify-content: space-between;
   align-content: center;
+  border-bottom: 1px dashed var(--pk-c-dark);
 
   .dot {
     i {
       display: inline-block;
-      width: 12px;
-      height: 12px;
-      border-radius: 6px;
+      width: 11px;
+      height: 11px;
+      border-radius: 5.5px;
 
       &:not(:last-child) {
         margin-right: 5px;
@@ -2365,6 +2369,7 @@ a:hover {
 
   .actions {
     .i {
+      font-size: 12px;
       color: var(--pk-c-light);
       cursor: pointer;
       transition: all .3s;
