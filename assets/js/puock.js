@@ -1081,19 +1081,21 @@ class Puock {
         const prevOrNextEl = $(".single-next-or-pre")
         if (prevOrNextEl) {
             window.onkeyup = function (event) {
-                let url = null;
-                switch (event.key) {
-                    case 'ArrowLeft': {
-                        url = prevOrNextEl.find("a[rel='prev']").attr("href");
-                        break
+                if('BODY'===event.target?.tagName){
+                    let url = null;
+                    switch (event.key) {
+                        case 'ArrowLeft': {
+                            url = prevOrNextEl.find("a[rel='prev']").attr("href");
+                            break
+                        }
+                        case 'ArrowRight': {
+                            url = prevOrNextEl.find("a[rel='next']").attr("href");
+                            break
+                        }
                     }
-                    case 'ArrowRight': {
-                        url = prevOrNextEl.find("a[rel='next']").attr("href");
-                        break
+                    if (url) {
+                        window.location = url
                     }
-                }
-                if (url) {
-                    window.location = url
                 }
             }
         }
