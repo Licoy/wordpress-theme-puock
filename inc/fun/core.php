@@ -488,7 +488,7 @@ function pk_baidu_submit($post_ID)
     $post_url = get_permalink($post_ID);
     $api_url = pk_get_option('baidu_submit_url');
     $resp = wp_remote_post($api_url, array('body' => $post_url, 'headers' => 'Content-Type: text/plain'));
-    $res = json_decode($resp['body'], true);
+    $res = @json_decode($resp['body'], true);
     if (isset($res['success'])) {
         add_post_meta($post_ID, 'baidu_submit_url_status', 1, true);
     }
