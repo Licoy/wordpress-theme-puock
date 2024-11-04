@@ -51,7 +51,7 @@ get_header();
                                    data-bs-toggle="tooltip">
                                     <div class="clearfix puock-bg">
                                         <?php if (empty($link->link_image)) : ?>
-                                            <img <?php echo pk_get_lazy_img_info(pk_get_favicon_url($link->link_url),'md-avatar') ?> alt="<?php echo $link->link_name ?>">
+                                            <img alt="<?php echo $link->link_name ?>" <?php echo pk_get_lazy_img_info(pk_get_favicon_url($link->link_url),'md-avatar') ?> alt="<?php echo $link->link_name ?>">
                                         <?php else :?>      
                                             <img src="<?php echo $link->link_image ;?>"  alt="<?php echo $link->link_name ;?>" class="md-avatar" />
                                         <?php endif;?>

@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__DIR__) . '/../../../wp-load.php';
+
 function pk_get_website_favicon_ico($url, $cache_time, $default_ico, $basename = "favicon.ico")
 {
     $cache_filename = 'icon-'.md5($url) . '.ico';
@@ -79,6 +81,12 @@ $url = @$_GET['url'];
 
 if (empty($url)) {
     die('website url is empty');
+}
+
+$exists = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(1) FROM $wpdb->links WHERE link_url LIKE %s", '%' . $wpdb->esc_like( $url ) . '%') );
+
+if(!$exists){
+    die('invalid url: '.$url);
 }
 
 pk_get_website_favicon_ico($url, 86400 * 3, dirname(__FILE__) . '/../assets/img/favicon.ico');
