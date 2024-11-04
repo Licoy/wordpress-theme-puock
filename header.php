@@ -14,7 +14,7 @@
         <?php echo pk_get_option('tj_code_header', ''); ?>
     <?php endif; ?>
 </head>
-<body class="puock-<?php echo pk_theme_light() ? 'light' : 'dark';
+<body class="puock-<?php echo pk_theme_mode();
 echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>">
 <div>
     <?php if (is_single()): ?>
@@ -46,9 +46,9 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
                     </div>
                 </div>
                 <div class="mobile-menus d-block d-lg-none p-1 puock-text">
-                    <i class="fa fa-bars t-xl mr-2 mobile-menu-s"></i>
+                    <i class="fa fa-bars t-md mr-2 mobile-menu-s"></i>
                     <?php if (pk_is_checked('theme_mode_s')): ?>
-                        <i class="fa-regular fa-<?php echo(pk_theme_light() ? 'sun' : 'moon'); ?> colorMode t-xl mr-2"></i>
+                        <i class="fa fa-<?php echo((pk_theme_mode() === 'auto' ? 'laptop' : (pk_theme_light() ? 'sun' : 'moon'))); ?> colorMode t-md mr-2"></i>
                     <?php endif; ?>
                     <i class="search-modal-btn fa fa-search t-md"></i>
                 </div>

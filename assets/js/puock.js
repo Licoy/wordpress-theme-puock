@@ -660,25 +660,35 @@ class Puock {
     }
 
     modeInit() {
-        let light = this.localstorageToggle('light');
-        if (light !== undefined) {
-            this.modeChange(light);
-        }
+        this.modeChange();
     }
 
-    modeChange(isLight = null, isSwitch = false) {
+    modeChange(toLight = null, isSwitch = false) {
         const body = $("body");
-        if (typeof (isLight) === "string") {
-            isLight = isLight === 'true';
+        if (typeof (toLight) === "string") {
+            toLight = toLight === 'true';
         }
-        if (isLight === null) {
-            isLight = body.hasClass(this.data.tag + "-light");
+        let mode = Cookies.get('mode') || 'auto'
+        if (toLight === null) {
+            toLight = mode==='light';
+            if(mode==='auto'){
+                toLight = !window.matchMedia('(prefers-color-scheme:dark)').matches
+            }
         }
         if (isSwitch) {
-            isLight = !isLight;
+            if(mode==='light'){
+                mode = 'dark'
+                toLight = !toLight;
+            }else if(mode==='dark'){
+                mode = 'auto'
+                toLight = !window.matchMedia('(prefers-color-scheme:dark)').matches;
+            }else{
+                mode = 'light'
+                toLight = !toLight;
+            }
         }
         let dn = 'd-none';
-        if (isLight) {
+        if (toLight) {
             $("#logo-light").removeClass(dn);
             $("#logo-dark").addClass(dn);
         } else {
@@ -694,17 +704,21 @@ class Puock {
                 target = $(el).find("i");
             }
             if (target) {
-                target.removeClass("fa-sun").removeClass("fa-moon").addClass(isLight ? "fa-sun" : "fa-moon");
+                target.removeClass("fa-sun").removeClass("fa-moon").removeClass('fa-laptop')
+                    .addClass(mode==='auto' ? 'fa-laptop' : (mode==='light' ? "fa-sun" : "fa-moon"));
             }
         })
-        body.removeClass(isLight ? this.data.tag + "-dark" : this.data.tag + "-light");
-        body.addClass(isLight ? this.data.tag + "-light" : this.data.tag + "-dark");
-        this.localstorageToggle('light', isLight)
-        Cookies.set('mode', isLight ? 'light' : 'dark')
+        body.removeClass(this.data.tag + "-auto")
+        body.removeClass(toLight ? this.data.tag + "-dark" : this.data.tag + "-light");
+        body.addClass(toLight ? this.data.tag + "-light" : this.data.tag + "-dark");
+        // this.localstorageToggle('light', toLight)
+        Cookies.set('mode', mode)
     }
 
     modeChangeListener() {
-        this.modeChange(!window.matchMedia('(prefers-color-scheme:dark)').matches);
+        if(Cookies.get('mode')==='auto'){
+            this.modeChange(!window.matchMedia('(prefers-color-scheme:dark)').matches);
+        }
     }
 
     registerModeChangeEvent() {
