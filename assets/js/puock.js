@@ -678,13 +678,13 @@ class Puock {
         if (isSwitch) {
             if(mode==='light'){
                 mode = 'dark'
-                toLight = !toLight;
+                toLight = false;
             }else if(mode==='dark'){
                 mode = 'auto'
                 toLight = !window.matchMedia('(prefers-color-scheme:dark)').matches;
             }else{
                 mode = 'light'
-                toLight = !toLight;
+                toLight = true;
             }
         }
         let dn = 'd-none';
