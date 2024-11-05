@@ -686,6 +686,7 @@ class Puock {
                 mode = 'light'
                 toLight = true;
             }
+            console.log(mode, toLight)
         }
         let dn = 'd-none';
         if (toLight) {
@@ -704,8 +705,8 @@ class Puock {
                 target = $(el).find("i");
             }
             if (target) {
-                target.removeClass("fa-sun").removeClass("fa-moon").removeClass('fa-laptop')
-                    .addClass(mode==='auto' ? 'fa-laptop' : (mode==='light' ? "fa-sun" : "fa-moon"));
+                target.removeClass("fa-sun").removeClass("fa-moon").removeClass('fa-circle-half-stroke')
+                    .addClass(mode==='auto' ? 'fa-circle-half-stroke' : (mode==='light' ? "fa-sun" : "fa-moon"));
             }
         })
         body.removeClass(this.data.tag + "-auto")

@@ -48,9 +48,9 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
                 <div class="mobile-menus d-block d-lg-none p-1 puock-text">
                     <i class="fa fa-bars t-md mr-2 mobile-menu-s"></i>
                     <?php if (pk_is_checked('theme_mode_s')): ?>
-                        <i class="fa fa-<?php echo((pk_theme_mode() === 'auto' ? 'laptop' : (pk_theme_light() ? 'sun' : 'moon'))); ?> colorMode t-md mr-2"></i>
+                        <i class="fa fa-<?php echo((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))); ?> colorMode t-md mr-2"></i>
                     <?php endif; ?>
-                    <i class="search-modal-btn fa fa-search t-md"></i>
+                    <i class="search-modal-btn fa fa-search t-md position-relative" style="top:0.5px"></i>
                 </div>
             </div>
         </div>
