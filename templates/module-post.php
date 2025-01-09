@@ -48,16 +48,18 @@
 <?php else: ?>
     <article class="block card-plain post-item col-md-6 col-12 post-item-card">
         <div class="p-block post-item-block">
-            <div class="thumbnail">
+            <div class="thumbnail position-relative">
                 <a class="t-sm ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                     <img title="<?php the_title() ?>"
                          alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 400, 200) ?> />
                 </a>
+                <div class="post-tags">
+                    <?php if (is_sticky()): ?><span class="badge bg-danger"><i
+                                class="fa fa-bolt-lightning"></i>置顶</span><?php endif; ?>
+                </div>
             </div>
             <div class="post-info">
                 <h2 class="info-title">
-                    <?php if (is_sticky()): ?><span class="badge bg-danger"><i
-                                class="fa fa-bolt-lightning"></i>置顶</span><?php endif; ?>
                     <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
                     <a class="a-link puock-text" title="<?php the_title() ?>" <?php pk_link_target() ?>
                        href="<?php the_permalink() ?>"><?php the_title() ?></a>

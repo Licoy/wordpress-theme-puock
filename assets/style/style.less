@@ -843,6 +843,24 @@ a:hover {
           }
         }
       }
+      .post-tags{
+        position: absolute;
+        top:6px;
+        left: 6px;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        .badge{
+          transition: all .3s;
+          opacity: .8;
+          &:not(:last-child){
+            margin-right: 2px;
+          }
+          &:hover{
+            opacity: 1;
+          }
+        }
+      }
     }
 
     &:hover {
