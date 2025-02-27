@@ -4,8 +4,8 @@
 use Puock\Theme\setting\options\OptionCarousel;
 
 if (pk_is_checked('index_carousel')):
-    $index_carousel_list = pk_get_option('index_carousel_list', []);
-    if (is_array($index_carousel_list) && count($index_carousel_list) > 0):
+    global $home_banner_ava;
+    if (is_array($home_banner_ava) && count($home_banner_ava) > 0):
         ?>
         <div id="index-banners" data-swiper="init" data-swiper-class="index-banner-swiper"
              data-swiper-args='<?php echo OptionCarousel::getCarouselIndexArgs() ?>'
@@ -14,8 +14,7 @@ if (pk_is_checked('index_carousel')):
                 <div class="swiper-wrapper">
                     <?php
                     $index_carousel_hide_title = pk_is_checked('index_carousel_hide_title');
-                    foreach ($index_carousel_list as $item):
-                        if (($item['hide'] ?? false) || empty($item['img'])) continue
+                    foreach ($home_banner_ava as $item):
                         ?>
                         <div class="swiper-slide swiper-lazy">
                             <a data-no-instant href="<?php echo $item['link'] ?? 'javascript:void(0);' ?>"
