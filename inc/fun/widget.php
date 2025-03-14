@@ -637,7 +637,6 @@ add_action( 'widgets_init', function (){ register_widget('puockRandomPost'); });
 //关于博主
 class puockAboutAuthor extends puockWidgetBase {
 
-
     protected $title = "关于博主";
 
     protected $pre_title = "显示博客的主人-";
@@ -649,6 +648,10 @@ class puockAboutAuthor extends puockWidgetBase {
             array('id'=>'email', 'val'=>get_bloginfo('admin_email')),
             array('id'=>'des', 'val'=>get_bloginfo('description')),
             array('id'=>'cover', 'val'=>pk_get_static_url().'/assets/img/show/head-cover.jpg'),
+            array('id'=>'show_views', 'val'=>'on'),
+            array('id'=>'show_comments', 'val'=>'on'), 
+            array('id'=>'show_posts', 'val'=>'on'),
+            array('id'=>'show_users', 'val'=>'on'),
         ));
     }
 
@@ -659,6 +662,10 @@ class puockAboutAuthor extends puockWidgetBase {
         $this->html_gen($instance, '介绍(支持html/js)', 'des','text');
         $this->html_gen($instance, '邮箱(用于获取头像)', 'email');
         $this->html_gen($instance, '顶部背景图url', 'cover');
+        $this->html_gen($instance, '显示用户数', 'show_users','checkbox',false);
+        $this->html_gen($instance, '显示文章数', 'show_posts','checkbox',false);
+        $this->html_gen($instance, '显示评论数', 'show_comments','checkbox',false);
+        $this->html_gen($instance, '显示阅读量', 'show_views','checkbox',false);
         $this->merge_common_form($instance);
     }
 
@@ -673,11 +680,29 @@ class puockAboutAuthor extends puockWidgetBase {
         $des = $instance['des'];
         $email = $instance['email'];
         $cover = $instance['cover'];
+
+        // 获取评论数
         $comment_num = pk_cache_get(PKC_TOTAL_COMMENTS);
         if(!$comment_num){
             $comment_num = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_approved =1");
             pk_cache_set(PKC_TOTAL_COMMENTS, $comment_num);
         }
+
+        // 获取文章数
+        $posts_count = wp_count_posts()->publish;
+
+        // 获取用户数
+        $users_count = count_users()['total_users'];
+
+        // 计算要显示的统计项数量
+        $stats_count = 0;
+        if($this->is_checked($instance['show_views'])) $stats_count++;
+        if($this->is_checked($instance['show_comments'])) $stats_count++;
+        if($this->is_checked($instance['show_posts'])) $stats_count++;
+        if($this->is_checked($instance['show_users'])) $stats_count++;
+
+        // 根据显示的统计项数量计算列宽
+        $col_width = 12 / ($stats_count > 0 ? $stats_count : 1);
         ?>
         <div class="widget-puock-author widget">
             <div class="header" style="background-image: url('<?php echo $cover ?>')">
@@ -690,14 +715,30 @@ class puockAboutAuthor extends puockWidgetBase {
                     <div class="mt10 t-sm"><?php echo $des ?></div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-6 text-center">
-                        <div class="c-sub t-sm"><?php _e('阅读量', PUOCK) ?></div>
-                        <div><?php echo get_total_views() ?></div>
+                    <?php if($this->is_checked($instance['show_users'])): ?>
+                    <div class="col-<?php echo $col_width ?> text-center">
+                        <div class="c-sub t-sm"><?php _e('用户数', PUOCK) ?></div>
+                        <div><?php echo $users_count ?></div>
                     </div>
-                    <div class="col-6 text-center">
+                    <?php endif; ?>
+                    <?php if($this->is_checked($instance['show_posts'])): ?>
+                    <div class="col-<?php echo $col_width ?> text-center">
+                        <div class="c-sub t-sm"><?php _e('文章数', PUOCK) ?></div>
+                        <div><?php echo $posts_count ?></div>
+                    </div>
+                    <?php endif; ?>
+                    <?php if($this->is_checked($instance['show_comments'])): ?>
+                    <div class="col-<?php echo $col_width ?> text-center">
                         <div class="c-sub t-sm"><?php _e('评论数', PUOCK) ?></div>
                         <div><?php echo $comment_num ?></div>
                     </div>
+                    <?php endif; ?>
+                    <?php if($this->is_checked($instance['show_views'])): ?>
+                    <div class="col-<?php echo $col_width ?> text-center">
+                        <div class="c-sub t-sm"><?php _e('阅读量', PUOCK) ?></div>
+                        <div><?php echo get_total_views() ?></div>
+                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
