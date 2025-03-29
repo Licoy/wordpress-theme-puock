@@ -453,62 +453,111 @@ body.pre-mac pre {
 #post-menus {
   user-select: none;
   position: fixed;
-  right: 0;
-  top: ~"calc(100% - 75%)";
-  background-color: var(--pk-bg-box);
-  @border-radius: 10px;
-  @h: 400px;
-  border-top-left-radius: @border-radius;
-  border-bottom-left-radius: @border-radius;
+  right: auto;
+  left: 10px;
+  bottom: 100px;
+  top: auto;
   z-index: 999;
+  
+  &.show {
+    #post-menu-content {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    #post-menu-state {
+      border-radius: 10px 0 0 10px; // 展开时改变按钮圆角，只保留左侧圆角
+      border-right: none; // 去掉右边框
+      left: 0; // 保持在左侧
+      box-shadow: none; // 去掉阴影
+      border-color: transparent; // 边框透明
+    }
+  }
 
   #post-menu-state {
-    @w: 18px;
-    position: absolute;
-    left: -@w;
-    background-color: var(--pk-c-primary);
+    @w: 40px;
+    position: absolute; // 使用绝对定位
+    left: 0; // 按钮位于左侧
+    bottom: 0; // 底部对齐
+    background-color: var(--pk-c-primary); // 使用主题色
     width: @w;
-    height: 80px;
-    top: (@h / 2 - 40);
-    @border-radius: 5px;
-    border-top-left-radius: @border-radius;
-    border-bottom-left-radius: @border-radius;
+    height: @w;
+    border-radius: 10px; // 默认全圆角
     text-align: center;
     cursor: pointer;
-    color: #fff;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: none; // 去掉边框
+    transition: all 0.3s ease;
+    z-index: 1001; // 确保按钮始终在最上层
+    
     i {
-      font-size: 12px;
-      line-height: 80px;
-      font-weight: bold;
-      color: #fff;
+      font-size: 16px;
+      color: #fff; // 图标颜色为白色
+      transition: all 0.3s ease;
+    }
+    
+    &:hover {
+      opacity: 0.9;
     }
   }
 
   #post-menu-content {
+    position: absolute;
+    bottom: 0; // 底部对齐
+    left: 40px; // 位于按钮右侧
     width: 260px;
-    height: @h;
-    //box-shadow: 0 0 22px -7px rgba(149, 148, 147, 0.3);
-    display: none;
-    padding: 12px;
+    max-height: 400px;
+    height: auto;
+    padding: 15px;
     overflow-y: auto;
+    border-radius: 10px 10px 10px 0;
+    background-color: var(--pk-bg-box);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: translateX(-20px) scale(0.9);
+    transform-origin: bottom left;
+    opacity: 0;
+    pointer-events: none; // 隐藏时不可点击
+    transition: all 0.3s ease;
+    z-index: 1000;
 
     [class^=post-menu-sub] {
       display: none;
-      margin-top: 4px;
+      margin-top: 8px;
+      padding-left: 10px;
     }
 
     ul {
       list-style: none;
       padding: 0;
+      margin: 0;
 
       li {
         &:not(:last-child) {
-          margin-bottom: 8px;
+          margin-bottom: 10px;
+        }
+        
+        a {
+          display: block;
+          padding: 5px 0;
+          transition: all 0.2s;
+          border-radius: 4px;
+          padding-left: 5px;
+          
+          &:hover, &.active {
+            color: var(--pk-c-primary);
+            background-color: var(--pk-bg-box-content);
+            padding-left: 8px;
+          }
         }
 
         i {
-
+          margin-right: 5px;
+          width: 16px;
+          text-align: center;
         }
       }
     }

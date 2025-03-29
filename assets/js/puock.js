@@ -375,16 +375,19 @@ class Puock {
     }
 
     toggleMenu() {
-        const el = $("#post-menu-state")
+        const menuContainer = $("#post-menus");
+        const menuButton = $("#post-menu-state");
         const className = "data-open";
-        const open = el.hasClass(className);
-        const content = $("#post-menu-content");
-        if (open) {
-            content.hide();
-            el.removeClass(className);
+        const isOpen = menuButton.hasClass(className);
+        
+        if (isOpen) {
+            // 关闭菜单
+            menuContainer.removeClass("show");
+            menuButton.removeClass(className);
         } else {
-            content.show();
-            el.addClass(className);
+            // 打开菜单
+            menuContainer.addClass("show");
+            menuButton.addClass(className);
         }
     }
 
