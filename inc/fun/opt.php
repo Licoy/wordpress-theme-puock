@@ -310,12 +310,14 @@ if (pk_is_checked('use_post_menu')) {
     //生成目录锚点
     function pk_post_menu_id($content)
     {
-        if (preg_match_all("/<h[1234]>(.*?)<\/h[1234]>/im", $content, $ms)) {
-            foreach ($ms[1] as $i => $title) {
-                $start = stripos($content, $ms[0][$i]);
-                $end = strlen($ms[0][$i]);
-                $level = substr($ms[0][$i], 1, 2);
-                $content = substr_replace($content, "<$level id='pk-menu-{$i}'>{$title}</{$level}>", $start, $end);
+        if (preg_match_all("/<h([1234])(.*?)>(.*?)<\/h\\1>/im", $content, $ms)) {
+            foreach ($ms[0] as $i => $full) {
+                $level = $ms[1][$i];
+                $attrs = $ms[2][$i];
+                $title = $ms[3][$i];
+                $start = stripos($content, $full);
+                $end = strlen($full);
+                $content = substr_replace($content, "<h{$level}{$attrs} id='pk-menu-{$i}'>{$title}</h{$level}>", $start, $end);
             }
         }
         return $content;
