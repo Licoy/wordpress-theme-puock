@@ -453,9 +453,9 @@ body.pre-mac pre {
 #post-menus {
   user-select: none;
   position: fixed;
-  right: auto;
-  left: 10px;
-  bottom: 100px;
+  left: auto;
+  right: 47px;
+  bottom: 170px;
   top: auto;
   z-index: 999;
   
@@ -467,9 +467,9 @@ body.pre-mac pre {
     }
     
     #post-menu-state {
-      border-radius: 10px 0 0 10px; // 展开时改变按钮圆角，只保留左侧圆角
-      border-right: none; // 去掉右边框
-      left: 0; // 保持在左侧
+      border-radius: 0 10px 10px 0; // 展开时改变按钮圆角，只保留左侧圆角
+      border-left: none; // 去掉右边框
+      right: 0; // 保持在左侧
       box-shadow: none; // 去掉阴影
       border-color: transparent; // 边框透明
     }
@@ -508,13 +508,13 @@ body.pre-mac pre {
   #post-menu-content {
     position: absolute;
     bottom: 0; // 底部对齐
-    left: 40px; // 位于按钮右侧
+    left: -260px; // 位于按钮右侧
     width: 260px;
     max-height: 400px;
     height: auto;
     padding: 15px;
     overflow-y: auto;
-    border-radius: 10px 10px 10px 0;
+    border-radius: 10px 10px 0 10px;
     background-color: var(--pk-bg-box);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     transform: translateX(-20px) scale(0.9);
