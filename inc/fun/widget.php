@@ -680,6 +680,10 @@ class puockAboutAuthor extends puockWidgetBase {
         $des = $instance['des'];
         $email = $instance['email'];
         $cover = $instance['cover'];
+        $show_views = $instance['show_views'] ?? 'on';
+        $show_comments = $instance['show_comments'] ?? 'on';
+        $show_posts = $instance['show_posts'] ?? 'on';
+        $show_users = $instance['show_users'] ?? 'on';
 
         // 获取评论数
         $comment_num = pk_cache_get(PKC_TOTAL_COMMENTS);
@@ -696,10 +700,10 @@ class puockAboutAuthor extends puockWidgetBase {
 
         // 计算要显示的统计项数量
         $stats_count = 0;
-        if($this->is_checked($instance['show_views'])) $stats_count++;
-        if($this->is_checked($instance['show_comments'])) $stats_count++;
-        if($this->is_checked($instance['show_posts'])) $stats_count++;
-        if($this->is_checked($instance['show_users'])) $stats_count++;
+        if($show_views) $stats_count++;
+        if($show_comments) $stats_count++;
+        if($show_posts) $stats_count++;
+        if($show_users) $stats_count++;
 
         // 根据显示的统计项数量计算列宽
         $col_width = 12 / ($stats_count > 0 ? $stats_count : 1);
@@ -715,25 +719,25 @@ class puockAboutAuthor extends puockWidgetBase {
                     <div class="mt10 t-sm"><?php echo $des ?></div>
                 </div>
                 <div class="row mt10">
-                    <?php if($this->is_checked($instance['show_users'])): ?>
+                    <?php if($show_users): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
                         <div class="c-sub t-sm"><?php _e('用户数', PUOCK) ?></div>
                         <div><?php echo $users_count ?></div>
                     </div>
                     <?php endif; ?>
-                    <?php if($this->is_checked($instance['show_posts'])): ?>
+                    <?php if($show_posts): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
                         <div class="c-sub t-sm"><?php _e('文章数', PUOCK) ?></div>
                         <div><?php echo $posts_count ?></div>
                     </div>
                     <?php endif; ?>
-                    <?php if($this->is_checked($instance['show_comments'])): ?>
+                    <?php if($show_comments): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
                         <div class="c-sub t-sm"><?php _e('评论数', PUOCK) ?></div>
                         <div><?php echo $comment_num ?></div>
                     </div>
                     <?php endif; ?>
-                    <?php if($this->is_checked($instance['show_views'])): ?>
+                    <?php if($show_views): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
                         <div class="c-sub t-sm"><?php _e('阅读量', PUOCK) ?></div>
                         <div><?php echo get_total_views() ?></div>
