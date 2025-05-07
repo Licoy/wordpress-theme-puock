@@ -5,7 +5,7 @@
             <?php get_template_part('templates/module','post') ?>
         <?php endwhile; ?>
     </div>
-    <?php if(!(pk_get_option('index_mode','')=='cms' && is_home())): ?>
+    <?php if(!(pk_get_option('index_mode','')=='cms' && is_home()) || pk_get_option('cms_show_pagination',false)): ?>
     <?php pk_paging(); ?>
     <?php endif; ?>
 </div>
