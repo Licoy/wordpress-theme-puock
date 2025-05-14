@@ -12,6 +12,12 @@ class OptionCms extends BaseOptionItem{
             'icon'=>'czs-layers',
             'fields' => [
                 [
+                    'id' => 'cms_show_pagination',
+                    'label' => __('显示分页', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'cms_show_new',
                     'label' => __('显示最新文章', PUOCK),
                     'type' => 'switch',
