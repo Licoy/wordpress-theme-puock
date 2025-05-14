@@ -106,7 +106,7 @@ function pk_sc_video($attr, $content = null)
     if (pk_is_checked('dplayer')) {
         $id = mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
         $out = "<div id='dplayer-{$id}' class='{$class}'></div>";
-        $out .= "<script>$(function() {
+        $out .= "<script>jQuery(function() {
             new DPlayer({
                 container: document.getElementById('dplayer-{$id}'),
                 autoplay: {$auto},
