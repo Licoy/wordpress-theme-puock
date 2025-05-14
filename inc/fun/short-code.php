@@ -12,9 +12,10 @@ function pk_shortcode_register()
         'login' => array('name' => '登录可见', 'content' => '输入内容'),
         'github' => array('name' => 'Github仓库卡片', 'content' => 'Licoy/wordpress-theme-puock'),
         'login_email' => array('name' => '登录并验证邮箱可见', 'content' => '输入内容'),
-        'video' => array('name' => '视频播放', 'content' => '视频地址', 'attr' => array(
+        'video' => array('name' => '视频播放', 'attr' => array(
+            'url'=>'example.com/test.mp4',
             'autoplay' => false, 'type' => 'auto',
-            'pic' => 'https://xxx.com/cover.jpg', 'class' => ''
+            'pic' => '', 'class' => ''
         )),
         'download' => array('name' => '文件下载', 'content' => '文件地址', 'attr' => array(
             'file' => 'xxx.zip', 'size' => '12MB'
@@ -112,7 +113,6 @@ function pk_sc_video($attr, $content = null)
                 autoplay: {$auto},
                 video: {
                     url: '{$url}',
-                    pic: '{$pic}',
                     type: '{$type}'
                 },
             });
