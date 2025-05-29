@@ -279,8 +279,8 @@ class HttpRequest
         $this->url = $this->content = '';
         $this->useProxy = false;
         $this->proxy = [
-            'auth'    => 'basic',
-            'type'    => 'http',
+            'auth' => 'basic',
+            'type' => 'http',
         ];
         $this->isVerifyCA = false;
         $this->caCert = null;
@@ -300,8 +300,7 @@ class HttpRequest
      */
     public function close()
     {
-        if ($this->handler)
-        {
+        if ($this->handler) {
             $handler = $this->handler;
             $this->handler = null;
             $handler->close();
@@ -390,8 +389,7 @@ class HttpRequest
     public function options($options)
     {
         $thisOptions = &$this->options;
-        foreach ($options as $key => $value)
-        {
+        foreach ($options as $key => $value) {
             $thisOptions[$key] = $value;
         }
 
@@ -401,8 +399,8 @@ class HttpRequest
     /**
      * 设置CURL的Option.
      *
-     * @param int   $option 需要设置的CURLOPT_XXX选项
-     * @param mixed $value  值
+     * @param int $option 需要设置的CURLOPT_XXX选项
+     * @param mixed $value 值
      *
      * @return static
      */
@@ -432,7 +430,7 @@ class HttpRequest
      * 设置请求头.
      *
      * @param string $header 请求头名称
-     * @param string $value  值
+     * @param string $value 值
      *
      * @return static
      */
@@ -453,8 +451,7 @@ class HttpRequest
     public function rawHeaders($headers)
     {
         $thisHeaders = &$this->headers;
-        foreach ($headers as $header)
-        {
+        foreach ($headers as $header) {
             $list = explode(':', $header, 2);
             $thisHeaders[trim($list[0])] = trim($list[1]);
         }
@@ -564,7 +561,7 @@ class HttpRequest
     /**
      * 设置Cookie.
      *
-     * @param string $name  名称
+     * @param string $name 名称
      * @param string $value 值
      *
      * @return static
@@ -647,7 +644,7 @@ class HttpRequest
     /**
      * 设置失败重试次数，状态码为5XX或者0才需要重试.
      *
-     * @param int           $retry
+     * @param int $retry
      * @param callable|null $callback
      *
      * @return static
@@ -664,9 +661,9 @@ class HttpRequest
      * 代理.
      *
      * @param string $server 代理服务器地址
-     * @param int    $port   代理服务器端口
-     * @param string $type   代理类型，支持：http、socks4、socks4a、socks5
-     * @param string $auth   代理认证方式，支持：basic、ntlm。一般默认basic
+     * @param int $port 代理服务器端口
+     * @param string $type 代理类型，支持：http、socks4、socks4a、socks5
+     * @param string $auth 代理认证方式，支持：basic、ntlm。一般默认basic
      *
      * @return static
      */
@@ -674,10 +671,10 @@ class HttpRequest
     {
         $this->useProxy = true;
         $this->proxy = [
-            'server'    => $server,
-            'port'      => $port,
-            'type'      => $type,
-            'auth'      => $auth,
+            'server' => $server,
+            'port' => $port,
+            'type' => $type,
+            'auth' => $auth,
         ];
 
         return $this;
@@ -702,19 +699,17 @@ class HttpRequest
     /**
      * 设置超时时间.
      *
-     * @param int $timeout        总超时时间，单位：毫秒
+     * @param int $timeout 总超时时间，单位：毫秒
      * @param int $connectTimeout 连接超时时间，单位：毫秒
      *
      * @return static
      */
     public function timeout($timeout = null, $connectTimeout = null)
     {
-        if (null !== $timeout)
-        {
+        if (null !== $timeout) {
             $this->timeout = $timeout;
         }
-        if (null !== $connectTimeout)
-        {
+        if (null !== $connectTimeout) {
             $this->connectTimeout = $connectTimeout;
         }
 
@@ -725,7 +720,7 @@ class HttpRequest
      * 限速
      *
      * @param int $download 下载速度，为0则不限制，单位：字节
-     * @param int $upload   上传速度，为0则不限制，单位：字节
+     * @param int $upload 上传速度，为0则不限制，单位：字节
      *
      * @return static
      */
@@ -784,8 +779,8 @@ class HttpRequest
     /**
      * 设置SSL证书.
      *
-     * @param string $path     一个包含 PEM 格式证书的文件名
-     * @param string $type     证书类型，支持的格式有”PEM”(默认值),“DER”和”ENG”
+     * @param string $path 一个包含 PEM 格式证书的文件名
+     * @param string $type 证书类型，支持的格式有”PEM”(默认值),“DER”和”ENG”
      * @param string $password 使用证书需要的密码
      *
      * @return static
@@ -793,12 +788,10 @@ class HttpRequest
     public function sslCert($path, $type = null, $password = null)
     {
         $this->certPath = $path;
-        if (null !== $type)
-        {
+        if (null !== $type) {
             $this->certType = $type;
         }
-        if (null !== $password)
-        {
+        if (null !== $password) {
             $this->certPassword = $password;
         }
 
@@ -808,8 +801,8 @@ class HttpRequest
     /**
      * 设置SSL私钥.
      *
-     * @param string $path     包含 SSL 私钥的文件名
-     * @param string $type     certType规定的私钥的加密类型，支持的密钥类型为”PEM”(默认值)、”DER”和”ENG”
+     * @param string $path 包含 SSL 私钥的文件名
+     * @param string $type certType规定的私钥的加密类型，支持的密钥类型为”PEM”(默认值)、”DER”和”ENG”
      * @param string $password SSL私钥的密码
      *
      * @return static
@@ -817,12 +810,10 @@ class HttpRequest
     public function sslKey($path, $type = null, $password = null)
     {
         $this->keyPath = $path;
-        if (null !== $type)
-        {
+        if (null !== $type) {
             $this->keyType = $type;
         }
-        if (null !== $password)
-        {
+        if (null !== $password) {
             $this->keyPassword = $password;
         }
 
@@ -861,42 +852,32 @@ class HttpRequest
      * 处理请求主体.
      *
      * @param string|object|array $requestBody
-     * @param string|null         $contentType 内容类型，支持null/json，为null时不处理
+     * @param string|null $contentType 内容类型，支持null/json，为null时不处理
      *
      * @return array
      */
     protected function parseRequestBody($requestBody, $contentType)
     {
         $body = $files = [];
-        if (\is_string($requestBody))
-        {
+        if (\is_string($requestBody)) {
             $body = $requestBody;
-        }
-        elseif (\is_array($requestBody) || \is_object($requestBody))
-        {
-            switch ($contentType)
-            {
+        } elseif (\is_array($requestBody) || \is_object($requestBody)) {
+            switch ($contentType) {
                 case 'json':
                     $body = json_encode($requestBody);
                     $this->header('Content-Type', MediaType::APPLICATION_JSON);
                     break;
                 default:
-                    foreach ($requestBody as $k => $v)
-                    {
-                        if ($v instanceof UploadedFile)
-                        {
+                    foreach ($requestBody as $k => $v) {
+                        if ($v instanceof UploadedFile) {
                             $files[$k] = $v;
-                        }
-                        else
-                        {
+                        } else {
                             $body[$k] = $v;
                         }
                     }
                     $body = http_build_query($body, '', '&');
             }
-        }
-        else
-        {
+        } else {
             throw new \InvalidArgumentException('$requestBody only can be string or array');
         }
 
@@ -906,54 +887,50 @@ class HttpRequest
     /**
      * 构建请求类.
      *
-     * @param string              $url         请求地址，如果为null则取url属性值
+     * @param string $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     * @param string|null         $method      请求方法，GET、POST等
-     * @param string|null         $contentType 内容类型，支持null/json，为null时不处理
+     * @param string|null $method 请求方法，GET、POST等
+     * @param string|null $contentType 内容类型，支持null/json，为null时不处理
      *
      * @return \Yurun\Util\YurunHttp\Http\Request
      */
     public function buildRequest($url = null, $requestBody = null, $method = null, $contentType = null)
     {
-        if (null === $url)
-        {
+        if (null === $url) {
             $url = $this->url;
         }
-        if (null === $method)
-        {
+        if (null === $method) {
             $method = $this->method;
         }
         list($body, $files) = $this->parseRequestBody(null === $requestBody ? $this->content : $requestBody, $contentType);
         $request = new Request($url, $this->headers, $body, $method);
         $saveFileOption = $this->saveFileOption;
         $request = $request->withUploadedFiles($files)
-                            ->withCookieParams($this->cookies)
-                            ->withAttribute(Attributes::MAX_REDIRECTS, $this->maxRedirects)
-                            ->withAttribute(Attributes::IS_VERIFY_CA, $this->isVerifyCA)
-                            ->withAttribute(Attributes::CA_CERT, $this->caCert)
-                            ->withAttribute(Attributes::CERT_PATH, $this->certPath)
-                            ->withAttribute(Attributes::CERT_PASSWORD, $this->certPassword)
-                            ->withAttribute(Attributes::CERT_TYPE, $this->certType)
-                            ->withAttribute(Attributes::KEY_PATH, $this->keyPath)
-                            ->withAttribute(Attributes::KEY_PASSWORD, $this->keyPassword)
-                            ->withAttribute(Attributes::KEY_TYPE, $this->keyType)
-                            ->withAttribute(Attributes::OPTIONS, $this->options)
-                            ->withAttribute(Attributes::SAVE_FILE_PATH, isset($saveFileOption['filePath']) ? $saveFileOption['filePath'] : null)
-                            ->withAttribute(Attributes::USE_PROXY, $this->useProxy)
-                            ->withAttribute(Attributes::USERNAME, $this->username)
-                            ->withAttribute(Attributes::PASSWORD, $this->password)
-                            ->withAttribute(Attributes::CONNECT_TIMEOUT, $this->connectTimeout)
-                            ->withAttribute(Attributes::TIMEOUT, $this->timeout)
-                            ->withAttribute(Attributes::DOWNLOAD_SPEED, $this->downloadSpeed)
-                            ->withAttribute(Attributes::UPLOAD_SPEED, $this->uploadSpeed)
-                            ->withAttribute(Attributes::FOLLOW_LOCATION, $this->followLocation)
-                            ->withAttribute(Attributes::CONNECTION_POOL, $this->connectionPool)
-                            ->withAttribute(Attributes::RETRY, $this->retry)
-                            ->withAttribute(Attributes::RETRY_CALLBACK, $this->retryCallback)
-                            ->withProtocolVersion($this->protocolVersion)
-                            ;
-        foreach ($this->proxy as $name => $value)
-        {
+            ->withCookieParams($this->cookies)
+            ->withAttribute(Attributes::MAX_REDIRECTS, $this->maxRedirects)
+            ->withAttribute(Attributes::IS_VERIFY_CA, $this->isVerifyCA)
+            ->withAttribute(Attributes::CA_CERT, $this->caCert)
+            ->withAttribute(Attributes::CERT_PATH, $this->certPath)
+            ->withAttribute(Attributes::CERT_PASSWORD, $this->certPassword)
+            ->withAttribute(Attributes::CERT_TYPE, $this->certType)
+            ->withAttribute(Attributes::KEY_PATH, $this->keyPath)
+            ->withAttribute(Attributes::KEY_PASSWORD, $this->keyPassword)
+            ->withAttribute(Attributes::KEY_TYPE, $this->keyType)
+            ->withAttribute(Attributes::OPTIONS, $this->options)
+            ->withAttribute(Attributes::SAVE_FILE_PATH, isset($saveFileOption['filePath']) ? $saveFileOption['filePath'] : null)
+            ->withAttribute(Attributes::USE_PROXY, $this->useProxy)
+            ->withAttribute(Attributes::USERNAME, $this->username)
+            ->withAttribute(Attributes::PASSWORD, $this->password)
+            ->withAttribute(Attributes::CONNECT_TIMEOUT, $this->connectTimeout)
+            ->withAttribute(Attributes::TIMEOUT, $this->timeout)
+            ->withAttribute(Attributes::DOWNLOAD_SPEED, $this->downloadSpeed)
+            ->withAttribute(Attributes::UPLOAD_SPEED, $this->uploadSpeed)
+            ->withAttribute(Attributes::FOLLOW_LOCATION, $this->followLocation)
+            ->withAttribute(Attributes::CONNECTION_POOL, $this->connectionPool)
+            ->withAttribute(Attributes::RETRY, $this->retry)
+            ->withAttribute(Attributes::RETRY_CALLBACK, $this->retryCallback)
+            ->withProtocolVersion($this->protocolVersion);
+        foreach ($this->proxy as $name => $value) {
             $request = $request->withAttribute('proxy.' . $name, $value);
         }
 
@@ -963,16 +940,35 @@ class HttpRequest
     /**
      * 发送请求，所有请求的老祖宗.
      *
-     * @param string|null         $url         请求地址，如果为null则取url属性值
+     * @param string|null $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     * @param string              $method      请求方法，GET、POST等
-     * @param string|null         $contentType 内容类型，支持null/json，为null时不处理
+     * @param string $method 请求方法，GET、POST等
+     * @param string|null $contentType 内容类型，支持null/json，为null时不处理
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
-    public function send($url = null, $requestBody = null, $method = null, $contentType = null)
+    public function send($url = null, $requestBody = null, $method = null, $contentType = null, $header = null)
     {
         $request = $this->buildRequest($url, $requestBody, $method, $contentType);
+
+        if ($header) {
+            if (\is_array($header)) {
+                foreach ($header as $name => $value) {
+                    if (\is_int($name)) {
+                        $list = explode(':', $value, 2);
+                        $name = trim($list[0]);
+                        $value = trim($list[1]);
+                    } else {
+                        $name = trim($name);
+                        $value = trim($value);
+                    }
+                    $request = $request->withHeader($name, $value);
+                }
+            } else {
+                $list = explode(':', $header, 2);
+                $request = $request->withHeader(trim($list[0]), trim($list[1]));
+            }
+        }
 
         return YurunHttp::send($request, $this->handler);
     }
@@ -980,18 +976,18 @@ class HttpRequest
     /**
      * 发送 Http2 请求不调用 recv().
      *
-     * @param string|null         $url         请求地址，如果为null则取url属性值
+     * @param string|null $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     * @param string              $method      请求方法，GET、POST等
-     * @param string|null         $contentType 内容类型，支持null/json，为null时不处理
+     * @param string $method 请求方法，GET、POST等
+     * @param string|null $contentType 内容类型，支持null/json，为null时不处理
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
     public function sendHttp2WithoutRecv($url = null, $requestBody = null, $method = 'GET', $contentType = null)
     {
         $request = $this->buildRequest($url, $requestBody, $method, $contentType)
-                        ->withProtocolVersion('2.0')
-                        ->withAttribute(Attributes::HTTP2_NOT_RECV, true);
+            ->withProtocolVersion('2.0')
+            ->withAttribute(Attributes::HTTP2_NOT_RECV, true);
 
         return YurunHttp::send($request, $this->handler);
     }
@@ -999,47 +995,43 @@ class HttpRequest
     /**
      * GET请求
      *
-     * @param string              $url         请求地址，如果为null则取url属性值
+     * @param string $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     *
+     * @param array $header
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
-    public function get($url = null, $requestBody = null)
+    public function get($url = null, $requestBody = null, $header = null)
     {
-        if (!empty($requestBody))
-        {
-            if (strpos($url, '?'))
-            {
+        if (!empty($requestBody)) {
+            if (strpos($url, '?')) {
                 $url .= '&';
-            }
-            else
-            {
+            } else {
                 $url .= '?';
             }
             $url .= http_build_query($requestBody, '', '&');
         }
 
-        return $this->send($url, [], 'GET');
+        return $this->send($url, [], 'GET', null, $header);
     }
 
     /**
      * POST请求
      *
-     * @param string              $url         请求地址，如果为null则取url属性值
+     * @param string $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     * @param string|null         $contentType 内容类型，支持null/json，为null时不处理
+     * @param string|null $contentType 内容类型，支持null/json，为null时不处理
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
-    public function post($url = null, $requestBody = null, $contentType = null)
+    public function post($url = null, $requestBody = null, $contentType = null, $header = null)
     {
-        return $this->send($url, $requestBody, 'POST', $contentType);
+        return $this->send($url, $requestBody, 'POST', $contentType, $header);
     }
 
     /**
      * HEAD请求
      *
-     * @param string              $url         请求地址，如果为null则取url属性值
+     * @param string $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
@@ -1052,9 +1044,9 @@ class HttpRequest
     /**
      * PUT请求
      *
-     * @param string              $url         请求地址，如果为null则取url属性值
+     * @param string $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     * @param string|null         $contentType 内容类型，支持null/json，为null时不处理
+     * @param string|null $contentType 内容类型，支持null/json，为null时不处理
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
@@ -1066,9 +1058,9 @@ class HttpRequest
     /**
      * PATCH请求
      *
-     * @param string              $url         请求地址，如果为null则取url属性值
+     * @param string $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     * @param string|null         $contentType 内容类型，支持null/json，为null时不处理
+     * @param string|null $contentType 内容类型，支持null/json，为null时不处理
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
@@ -1080,9 +1072,9 @@ class HttpRequest
     /**
      * DELETE请求
      *
-     * @param string              $url         请求地址，如果为null则取url属性值
+     * @param string $url 请求地址，如果为null则取url属性值
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     * @param string|null         $contentType 内容类型，支持null/json，为null时不处理
+     * @param string|null $contentType 内容类型，支持null/json，为null时不处理
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
@@ -1094,10 +1086,10 @@ class HttpRequest
     /**
      * 直接下载文件.
      *
-     * @param string              $fileName    保存路径，如果以 .* 结尾，则根据 Content-Type 自动决定扩展名
-     * @param string              $url         下载文件地址
+     * @param string $fileName 保存路径，如果以 .* 结尾，则根据 Content-Type 自动决定扩展名
+     * @param string $url 下载文件地址
      * @param string|object|array $requestBody 发送内容，可以是字符串、数组，如果为空则取content属性值
-     * @param string              $method      请求方法，GET、POST等，一般用GET
+     * @param string $method 请求方法，GET、POST等，一般用GET
      *
      * @return \Yurun\Util\YurunHttp\Http\Response|null
      */
@@ -1105,8 +1097,7 @@ class HttpRequest
     {
         $isAutoExt = self::checkDownloadIsAutoExt($fileName, $fileName);
         $result = $this->saveFile($fileName)->send($url, $requestBody, $method);
-        if ($isAutoExt)
-        {
+        if ($isAutoExt) {
             self::parseDownloadAutoExt($result, $fileName);
         }
         $this->saveFileOption = [];
@@ -1139,8 +1130,7 @@ class HttpRequest
     public static function checkDownloadIsAutoExt($fileName, &$tempFileName)
     {
         $flagLength = \strlen(self::AUTO_EXT_FLAG);
-        if (self::AUTO_EXT_FLAG !== substr($fileName, -$flagLength))
-        {
+        if (self::AUTO_EXT_FLAG !== substr($fileName, -$flagLength)) {
             return false;
         }
         $tempFileName = substr($fileName, 0, -$flagLength) . self::AUTO_EXT_TEMP_EXT;
@@ -1152,15 +1142,14 @@ class HttpRequest
      * 处理下载的自动扩展名.
      *
      * @param \Yurun\Util\YurunHttp\Http\Response $response
-     * @param string                              $tempFileName
+     * @param string $tempFileName
      *
      * @return void
      */
     public static function parseDownloadAutoExt(&$response, $tempFileName)
     {
         $ext = MediaType::getExt($response->getHeaderLine('Content-Type'));
-        if (null === $ext)
-        {
+        if (null === $ext) {
             $ext = 'file';
         }
         $savedFileName = substr($tempFileName, 0, -\strlen(self::AUTO_EXT_TEMP_EXT)) . '.' . $ext;
@@ -1169,19 +1158,18 @@ class HttpRequest
     }
 }
 
-if (\extension_loaded('curl'))
-{
+if (\extension_loaded('curl')) {
     // 代理认证方式
     HttpRequest::$proxyAuths = [
         'basic' => \CURLAUTH_BASIC,
-        'ntlm'  => \CURLAUTH_NTLM,
+        'ntlm' => \CURLAUTH_NTLM,
     ];
 
     // 代理类型
     HttpRequest::$proxyType = [
-        'http'      => \CURLPROXY_HTTP,
-        'socks4'    => \CURLPROXY_SOCKS4,
-        'socks4a'   => 6,    // CURLPROXY_SOCKS4A
-        'socks5'    => \CURLPROXY_SOCKS5,
+        'http' => \CURLPROXY_HTTP,
+        'socks4' => \CURLPROXY_SOCKS4,
+        'socks4a' => 6,    // CURLPROXY_SOCKS4A
+        'socks5' => \CURLPROXY_SOCKS5,
     ];
 }

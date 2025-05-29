@@ -30,7 +30,7 @@ require_once PUOCK_ABS_DIR . '/inc/fun/cache.php';
 require_once PUOCK_ABS_DIR . '/inc/setting/index.php';
 require_once PUOCK_ABS_DIR . '/inc/ext/init.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/ajax.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/oauth.php';
+require_once PUOCK_ABS_DIR . '/inc/oauth/oauth.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/security.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/comment-ajax.php';
 require_once PUOCK_ABS_DIR . '/inc/fun/widget.php';

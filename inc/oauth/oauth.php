@@ -27,8 +27,8 @@ function pk_oauth_list($user = null)
             'openid' => $user ? get_the_author_meta('qq_oauth', $user->ID) : null,
             'class' => OAuth2::class,
             'name_field' => 'nickname',
-            'icon'=>'fa-brands fa-qq',
-            'color_type'=>'danger',
+            'icon' => 'fa-brands fa-qq',
+            'color_type' => 'danger',
             'secret_field' => 'key',
             'system' => true,
         ],
@@ -36,8 +36,8 @@ function pk_oauth_list($user = null)
             'label' => 'GitHub',
             'openid' => $user ? get_the_author_meta('github_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\Github\OAuth2::class,
-            'icon'=>'fa-brands fa-github',
-            'color_type'=>'primary',
+            'icon' => 'fa-brands fa-github',
+            'color_type' => 'primary',
             'name_field' => 'name',
             'system' => true,
         ],
@@ -46,8 +46,8 @@ function pk_oauth_list($user = null)
             'openid' => $user ? get_the_author_meta('weibo_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\Weibo\OAuth2::class,
             'name_field' => 'name',
-            'icon'=>'fa-brands fa-weibo',
-            'color_type'=>'danger',
+            'icon' => 'fa-brands fa-weibo',
+            'color_type' => 'danger',
             'id_field' => 'key',
             'system' => true,
         ],
@@ -55,11 +55,20 @@ function pk_oauth_list($user = null)
             'label' => '码云',
             'openid' => $user ? get_the_author_meta('gitee_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\Gitee\OAuth2::class,
-            'icon'=>'fa-solid fa-globe',
-            'color_type'=>'info',
+            'icon' => 'fa-solid fa-globe',
+            'color_type' => 'info',
             'name_field' => 'name',
             'system' => true,
         ],
+        'linuxdo' => [
+            'label' => 'LinuxDo',
+            'openid' => $user ? get_the_author_meta('linuxdo_oauth', $user->ID) : null,
+            'class' => \Yurun\OAuthLogin\LinuxDo\OAuth2::class,
+            'icon' => PUOCK_ABS_URI . '/assets/img/oauth/linuxdo.png',
+            'color_type' => 'warning',
+            'name_field' => 'name',
+            'system' => true,
+        ]
     ];
     return apply_filters('pk_oauth_list', $list);
 }
@@ -187,6 +196,11 @@ function pk_oauth_callback()
 {
     $type = $_GET['type'];
     $redirect = $_GET['redirect'];
+    pk_oauth_callback_execute($type, $redirect);
+}
+
+function pk_oauth_callback_execute($type, $redirect)
+{
     if (!empty($redirect)) {
         $redirect = urldecode($redirect);
     }

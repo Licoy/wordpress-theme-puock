@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LinuxDo登录</title>
+</head>
+<body>
+    <script>
+        var GWC = {
+            urlParams: {},
+            appendParams: function(url, params) {
+                if (url.indexOf('?') === -1) {
+                    url += '?';
+                } else {
+                    url += '&';
+                }
+                for (var k in params) {
+                    url += k + '=' + encodeURIComponent(params[k]) + '&';
+                }
+                if (url.substr(url.length - 1) === '&') {
+                    return url.substr(0, url.length - 1);
+                }
+                return url;
+            }
+        };
+        window.location = GWC.appendParams(location.href.substr(0, location.href.indexOf('#')), GWC.urlParams);
+    </script>
+</body>
+</html>

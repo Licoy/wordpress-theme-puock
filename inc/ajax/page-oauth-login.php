@@ -17,9 +17,9 @@ function pk_oauth_quick_buttons($echo = false, $redirect = '')
     foreach ($oauth_list as $key => $val) {
         if (!isset($val['system']) || !$val['system'] || pk_is_checked('oauth_' . $key)) {
             $url = $val['url'] ?? pk_oauth_url_page_ajax($key, $redirect);
-            $icon = isset($val['icon']) ? "<i class='{$val['icon']}'></i>" : '';
+            $icon = isset($val['icon']) ? str_starts_with($val['icon'], 'http') ? "<img src='{$val['icon']}' width='15' class='mr-1' alt='{$val['label']}'/>":"<i class='{$val['icon']} mr-1'></i>" : '';
             $color_type = $val['color_type'] ?? 'primary';
-            $out .= "<a class='btn btn-{$color_type} btn-ssm mr5 mb5'
+            $out .= "<a class='btn btn-{$color_type} btn-ssm mr5 mb5 d-flex align-items-center'
                data-no-instant
                href='{$url}'>
                 {$icon}

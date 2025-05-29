@@ -209,6 +209,40 @@ class OptionAuth extends BaseOptionItem
                         ],
                     ]
                 ],
+                [
+                    'id' => '-',
+                    'label' => 'LinuxDO ' . __('登录配置', PUOCK),
+                    'type' => 'panel',
+                    'open' => pk_is_checked('oauth_linuxdo'),
+                    'tips' => '<a target="_blank" href="https://connect.linux.do">' . __('申请步骤及说明', PUOCK) . '</a>',
+                    'children' => [
+                        [
+                            'id' => '-',
+                            'label' => __('第三方登录回调地址提示', PUOCK),
+                            'type' => 'info',
+                            'infoType' => 'info',
+                            'tips' => '通用回调地址（callback url）为: <code>' . PUOCK_ABS_URI . '/inc/oauth/callback/linuxdo.php</code>'
+                        ],
+                        [
+                            'id' => 'oauth_linuxdo',
+                            'label' => 'LinuxDO ' . __('登录', PUOCK),
+                            'type' => 'switch',
+                            'sdt' => 'false',
+                        ],
+                        [
+                            'id' => 'oauth_linuxdo_id',
+                            'label' => 'LinuxDO Client ID',
+                            'sdt' => '',
+                            'showRefId' => 'oauth_linuxdo',
+                        ],
+                        [
+                            'id' => 'oauth_linuxdo_secret',
+                            'label' => 'LinuxDO Client Secret',
+                            'sdt' => '',
+                            'showRefId' => 'oauth_linuxdo',
+                        ],
+                    ]
+                ],
             ],
         ];
     }
