@@ -47,6 +47,15 @@
 
     ?>
 <?php endif; ?>
+
+<?php if (is_author()) : ?>
+    <meta name="description" content="<?php echo the_author_meta('description') ?>"/>
+<?php endif; ?>
+
+<?php if (is_tag()) : ?>
+    <meta name="description" content="<?php echo preg_replace('/<[^>]*>/', '', tag_description()) ?>"/>
+<?php endif; ?>
+
 <?php
 if (is_home()) {
     echo '<link rel="canonical" href="' . home_url() . '">';
@@ -54,4 +63,3 @@ if (is_home()) {
     echo '<link rel="canonical" href="' . get_permalink() . '">';
 }
 ?>
-
