@@ -12,10 +12,12 @@ if (!empty($link_cid)):
             <?php
             $links = pk_cache_get(PKC_FOOTER_LINKS);
             if(!$links){
+                $order = pk_get_option('index_link_order', 'ASC');
+                $orderby = pk_get_option('index_link_order_by', 'link_id');
                 $links = get_bookmarks(array(
                     'category' => $link_cid,
-                    'orderby' => 'rating',  //  根据Wordpress链接中评级进行排序。
-                    'order' => 'DESC',      //  ASC：升序排列（缺省默认值）、DESC：降序排列。
+                    'orderby' => $orderby,
+                    'order' => $order,
                     'category_before' => '',
                     'title_li' => '',
                     'echo' => 0,
