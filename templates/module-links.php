@@ -14,6 +14,8 @@ if (!empty($link_cid)):
             if(!$links){
                 $links = get_bookmarks(array(
                     'category' => $link_cid,
+                    'orderby' => 'rating',  //  根据Wordpress链接中评级进行排序。
+                    'order' => 'DESC',      //  ASC：升序排列（缺省默认值）、DESC：降序排列。
                     'category_before' => '',
                     'title_li' => '',
                     'echo' => 0,
