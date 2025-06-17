@@ -208,6 +208,20 @@ class OptionBasic extends BaseOptionItem
                     'options' => self::get_link_category(),
                 ],
                 [
+                    'id' => 'index_link_order_by',
+                    'label' => __('首页友情链接排序字段', PUOCK),
+                    'tips' => __('根据链接字段进行排序，缺省默认值为ID排序', PUOCK),
+                    'type' => 'select',
+                    'options' => self::get_link_order_by(),
+                ],
+                [
+                    'id' => 'index_link_order',
+                    'label' => __('首页友情链接排序顺序', PUOCK),
+                    'tips' => __('缺省默认值为升序 (ASC)', PUOCK),
+                    'type' => 'select',
+                    'options' => self::get_link_order(),
+                ],
+                [
                     'id' => 'gravatar_url',
                     'label' => __('Gravatar头像源', PUOCK),
                     'type' => 'radio',

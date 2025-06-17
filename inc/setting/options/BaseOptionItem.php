@@ -32,6 +32,39 @@ abstract class BaseOptionItem
         }
         return self::$_link_category;
     }
+    /**
+     * 获取友情链接排序顺序。
+     * 
+     * 升序 (ASC)、降序(DESC)，默认为升序 (ASC)。
+     * https://developer.wordpress.org/reference/functions/get_bookmarks/#parameters
+     * 
+     */
+    protected static function get_link_order()
+    {
+        return [
+            ["label"=>"升序 (ASC)","value"=>"ASC"],
+            ["label"=>"降序(DESC)","value"=>"DESC"]
+        ];
+    }
+
+    /**
+     * 获取友情链接排序字段。
+     * 
+     * 下面仅为部分字段，所支持的全部字段请查看官方文档`orderby`部分
+     * https://developer.wordpress.org/reference/functions/get_bookmarks/#parameters
+     * 
+     */
+    protected static function get_link_order_by()
+    {
+        return [
+            ["label"=>"ID排序","value"=>"link_id"],
+            ["label"=>"链接排序","value"=>"url"],
+            ["label"=>"名字排序","value"=>"name"],
+            ["label"=>"评级排序","value"=>"rating"],
+            ["label"=>"长度排序","value"=>"length"],
+            ["label"=>"随机排序","value"=>"rand"]
+        ];
+    }
 
     protected static function get_pages()
     {
