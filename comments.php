@@ -126,12 +126,15 @@
         <?php endif; ?>
         <div id="post-comments">
             <?php
-            if (get_comments_number() > 0):
+            if (have_comments()):
                 wp_list_comments(array(
                     'type' => 'comment',
                     'callback' => 'pk_comment_callback',
                 ));
-                echo '</div>';
+
+                if (isset($GLOBALS['pk_comment_callback_cur_id'])) {
+                    echo '</div>';
+                }
             endif;
             ?>
 
