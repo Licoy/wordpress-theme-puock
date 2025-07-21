@@ -226,7 +226,7 @@ function pk_front_login_page_callback()
                         <div class="row flex-row justify-content-end">
                             <div class="col-8 col-sm-7 text-end pl15">
                                 <input type="text" data-required placeholder="请输入验证码" maxlength="4"
-                                       class="form-control form-control-sm t-sm" name="vd"
+                                       class="form-control form-control-sm t-sm captcha-input" name="vd"
                                        autocomplete="off"
                                        id="_front_login_vd">
                             </div>

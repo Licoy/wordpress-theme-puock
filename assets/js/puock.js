@@ -232,6 +232,9 @@ class Puock {
         } else {
             const url = el.attr("src") + '&t=' + (new Date()).getTime()
             el.attr("src", url)
+            el.parent().parent().find(".captcha-input").each((_, item) => {
+                $(item).val("")
+            })
         }
     }
 
