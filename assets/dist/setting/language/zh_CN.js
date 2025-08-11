@@ -5,7 +5,7 @@ window.puockSettingLangMessage = {
         'setting value loading...': '配置值加载中...',
         'setting value load failed': '配置值加载失败',
         'configuration saved successfully': '配置保存成功',
-        'configuration save failed': '配置保存失败',
+        'configuration save failed': '配置保存失败，请检查网络连接或F12查看Console的错误详情',
         'setting load failed': '配置加载失败',
         'this road is blocked~please refresh this page or f12 open the console to view the error message! if you have any questions, please submit them to github issue or join the communication group for feedback':'此路不通~请刷新此页面或 f12 打开 console 查看错误信息！有任何疑问请提交到 github issue 或加入交流群进行反馈',
         'refresh page':'刷新页面',
