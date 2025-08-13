@@ -13,6 +13,14 @@ class OptionBasic extends BaseOptionItem
             'icon' => 'dashicons-admin-generic',
             'fields' => [
                 [
+                    'id' => 'mobile_sidebar_enable',
+                    'label' => __('移动端侧边栏启用', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => 'false',
+                    'badge' => ['value' => 'New'],
+                    'tips' => __('开启后，移动端将显示侧边栏按钮', PUOCK)
+                ],
+                [
                     'id' => 'basic_img_lazy_s',
                     'label' => __('图片懒加载', PUOCK),
                     'type' => 'switch',

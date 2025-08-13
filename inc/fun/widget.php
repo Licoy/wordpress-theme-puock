@@ -683,7 +683,8 @@ class puockAboutAuthor extends puockWidgetBase {
         $show_views = $instance['show_views'] ?? 'on';
         $show_comments = $instance['show_comments'] ?? 'on';
         $show_posts = $instance['show_posts'] ?? 'on';
-        $show_users = $instance['show_users'] ?? 'on';
+        //修复用户数关闭后仍然显示问题
+        $show_users = isset($instance['show_users']) && $instance['show_users'] === 'on';
 
         // 获取评论数
         $comment_num = pk_cache_get(PKC_TOTAL_COMMENTS);

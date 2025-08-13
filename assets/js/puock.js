@@ -39,6 +39,11 @@ class Puock {
         modalStorage: {}
     }
 
+    // 移动端侧边栏初始化已迁移到独立文件 mobile-sidebar.js
+    mobileSidebarInit() {
+        // 空实现，已迁移
+    }
+
     // 全局一次加载或注册的事件
     onceInit() {
         this.pageInit()
@@ -496,6 +501,7 @@ class Puock {
             this.toast(`复制${name}失败`, TYPE_DANGER)
         })
         this.lazyLoadInit()
+        this.mobileSidebarInit()
         $('#post-main, #sidebar').theiaStickySidebar({
             additionalMarginTop: 20
         });
