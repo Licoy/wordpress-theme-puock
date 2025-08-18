@@ -45,19 +45,35 @@ function pk_poster_page_callback()
     <script>
         $(function () {
             const i = window.Puock.startLoading();
-            html2canvas(document.querySelector("#<?php echo $el_id; ?>"), {
-                allowTaint: true,
-                useCORS: true,
-                backgroundColor:'#ffffff'
-            }).then(canvas => {
-                const el = $("#<?php echo $el_id; ?>");
-                el.show();
-                el.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo $title ?>'>");
-                window.Puock.stopLoading(i);
-            }).catch(err => {
-                console.error(err)
-                window.Puock.toast("生成海报失败，请到Console查看错误信息", TYPE_DANGER);
-            });
+            // 等待图像加载完成后再生成海报
+            setTimeout(() => {
+                // 确保所有图片都设置了crossOrigin属性
+                document.querySelectorAll('#<?php echo $el_id; ?> img').forEach(img => {
+                    img.crossOrigin = 'anonymous';
+                });
+                
+                html2canvas(document.querySelector("#<?php echo $el_id; ?>"), {
+                    allowTaint: true,
+                    useCORS: true,
+                    backgroundColor: '#ffffff',
+                    // 提高清晰度
+                    scale: window.devicePixelRatio || 2,
+                    // 优化字体渲染
+                    letterRendering: true,
+                    // 确保所有元素都被捕获
+                    logging: false,
+                    // 延迟以确保字体加载
+                    timeOut: 2000
+                }).then(canvas => {
+                    const el = $("#<?php echo $el_id; ?>");
+                    el.show();
+                    el.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo $title ?>'>");
+                    window.Puock.stopLoading(i);
+                }).catch(err => {
+                    console.error(err)
+                    window.Puock.toast("生成海报失败，请到Console查看错误信息", TYPE_DANGER);
+                });
+            }, 500);
         })
     </script>
     <?php

@@ -180,7 +180,8 @@ class OptionBasic extends BaseOptionItem
                 [
                     'id' => 'post_poster_open',
                     'label' => __('文章海报生成', PUOCK),
-                    'tips' => __('使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求', PUOCK),
+                    'tips' => __('使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求；若站点logo不显示，请将logo上传到媒体库并使用媒体库中的logo链接', PUOCK),
+
                     'type' => 'switch',
                     'sdt' => false,
                 ],
