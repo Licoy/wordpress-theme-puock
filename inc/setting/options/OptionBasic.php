@@ -13,6 +13,14 @@ class OptionBasic extends BaseOptionItem
             'icon' => 'dashicons-admin-generic',
             'fields' => [
                 [
+                    'id' => 'mobile_sidebar_enable',
+                    'label' => __('移动端侧边栏启用', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => 'false',
+                    'badge' => ['value' => 'New'],
+                    'tips' => __('开启后，移动端将显示侧边栏按钮', PUOCK)
+                ],
+                [
                     'id' => 'basic_img_lazy_s',
                     'label' => __('图片懒加载', PUOCK),
                     'type' => 'switch',
@@ -172,7 +180,8 @@ class OptionBasic extends BaseOptionItem
                 [
                     'id' => 'post_poster_open',
                     'label' => __('文章海报生成', PUOCK),
-                    'tips' => __('使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求', PUOCK),
+                    'tips' => __('使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求；若站点logo不显示，请将logo上传到媒体库并使用媒体库中的logo链接', PUOCK),
+
                     'type' => 'switch',
                     'sdt' => false,
                 ],

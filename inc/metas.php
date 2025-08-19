@@ -22,6 +22,7 @@ $headMetas = [
     'mode_switch' => pk_is_checked('theme_mode_s'),
     'off_img_viewer'=>pk_is_checked('off_img_viewer'),
     'off_code_highlighting'=>pk_is_checked('off_code_highlighting'),
+    'mobile_sidebar_enable' => pk_is_checked('mobile_sidebar_enable'),
 ];
 if($headMetas['async_view_id']){
     $headMetas['async_view_generate_time'] = time();
