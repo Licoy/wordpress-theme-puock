@@ -683,7 +683,8 @@ class puockAboutAuthor extends puockWidgetBase {
         // 修复阅读量、评论量、文章量、用户数关闭后仍显示的问题
         $show_views = isset($instance['show_views']) && $instance['show_views'] === 'on';
         $show_comments = isset($instance['show_comments']) && $instance['show_comments'] === 'on';
-        $show_posts = isset($instance['show_posts']) && $instance['show_posts'] === 'on';
+        $show_posts = isset($instance['show_posts']) && $instance['show_posts'] === 
+        //修复用户数关闭后仍然显示问题
         $show_users = isset($instance['show_users']) && $instance['show_users'] === 'on';
 
         // 获取评论数

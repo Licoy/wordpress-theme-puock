@@ -204,7 +204,7 @@ function pk_get_post_date()
             $res = __('六天前',PUOCK);
             break;
         default:
-            $res = date('Y-m-d', $time);
+            $res = get_the_date(get_option('date_format'));
     }
     echo $res;
 }
