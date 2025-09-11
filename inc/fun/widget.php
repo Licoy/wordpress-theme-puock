@@ -680,10 +680,10 @@ class puockAboutAuthor extends puockWidgetBase {
         $des = $instance['des'];
         $email = $instance['email'];
         $cover = $instance['cover'];
-        $show_views = isset($instance['show_views']) && $instance['show_views'] ?? 'on';
-        $show_comments = isset($instance['show_comments']) && $instance['show_comments'] ?? 'on';
-        $show_posts = isset($instance['show_posts']) && $instance['show_posts'] ?? 'on';
-        $show_users = isset($instance['show_users']) && $instance['show_users'] ?? 'on';
+        $show_views = isset($instance['show_views']) && $instance['show_views'] === 'on';
+        $show_comments = isset($instance['show_comments']) && $instance['show_comments'] === 'on';
+        $show_posts = isset($instance['show_posts']) && $instance['show_posts'] === 'on';
+        $show_users = isset($instance['show_users']) && $instance['show_users'] === 'on';
 
         // 获取评论数
         $comment_num = pk_cache_get(PKC_TOTAL_COMMENTS);
