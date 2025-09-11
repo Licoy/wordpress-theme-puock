@@ -292,33 +292,68 @@ function smilies_custom_button($context)
         <span>' . __('添加表情', PUOCK) . '</span> 
         </a><div id="insert-smiley-wrap" class="pk-media-wrap" style="display: none">' . get_wpsmiliestrans() . '</div>';
 }
-
-function get_post_images($_post = null)
+/**
+ * 获取文章封面图：优先级 = 特色图 > 内容第一张图（支持 Markdown）> 随机默认图
+ *
+ * @param int|WP_Post|null $_post 文章 ID 或对象，null 则使用全局 $post
+ * @return string 图片 URL
+ */
+function get_post_images($_post = null): string
 {
     global $post;
-    if ($_post != null) {
-        $post = $_post;
+
+    // 1. 获取文章对象
+    $post_obj = $_post ? get_post($_post) : $post;
+    if (!$post_obj) {
+        return get_random_default_image();
     }
-    $post_id = $post->ID;
-    // 如果有封面图取封面图
-    if (has_post_thumbnail()) {
-        $res = get_the_post_thumbnail_url($post, 'large');
-        if ($res != null) {
-            return $res;
+
+    $post_id = $post_obj->ID;
+    $content = $post_obj->post_content;
+
+    // 2. 优先：特色图（支持 attachment 和 外部链接）
+    if (has_post_thumbnail($post_id)) {
+        $featured_url = get_the_post_thumbnail_url($post_id, 'large');
+        if ($featured_url) {
+            return esc_url($featured_url);
         }
     }
-    if ($post_id == null && $post) {
-        $content = $post->post_content;
-    } else {
-        $content = get_post($post_id)->post_content;
+
+    // 可选：支持外部特色图（如果你用了之前“external_thumbnail_url”的方案）
+    $external_thumb = get_post_meta($post_id, 'external_thumbnail_url', true);
+    if ($external_thumb) {
+        return esc_url($external_thumb);
     }
-    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
-    if ($matches && $matches[1]) {
-        $res = $matches[1][0];
-    } else {
-        $res = get_template_directory_uri() . '/assets/img/random/' . mt_rand(1, 8) . '.jpg';
+
+    // 3. 次选：从内容提取第一张图（支持 Markdown 和 HTML）
+    $first_image = null;
+
+    // 匹配 Markdown 图片：![alt](url)
+    if (preg_match('/!\[[^\]]*\]\(\s*([^\s\)]+?)\s*([\'"][^\'"]*?[\'"])?\s*\)/i', $content, $matches)) {
+        $first_image = trim($matches[1]);
     }
-    return $res;
+    // 如果没找到 Markdown 图片，再匹配 HTML 图片
+    elseif (preg_match('/<img[^>]+src=[\'"]([^\'"]+)[\'"]/i', $content, $matches)) {
+        $first_image = $matches[1];
+    }
+
+    if ($first_image && filter_var($first_image, FILTER_VALIDATE_URL)) {
+        return esc_url($first_image);
+    }
+
+    // 4. 最后：返回随机默认图
+    return get_random_default_image();
+}
+
+/**
+ * 获取随机默认图片
+ *
+ * @return string 默认图 URL
+ */
+function get_random_default_image(): string
+{
+    $img_dir = get_template_directory_uri() . '/assets/img/random/';
+    return esc_url($img_dir . mt_rand(1, 8) . '.jpg');
 }
 
 //分页功能
