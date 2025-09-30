@@ -407,7 +407,7 @@ if (pk_get_option('gravatar_url', 'wp') != 'wp') {
     } else if ($type == 'v2ex') {
         add_filter('get_avatar', 'v2ex_ssl_avatar');
         add_filter('get_avatar_url', 'v2ex_ssl_avatar');
-    } else if($type=='custom'){
+    } else if ($type == 'custom') {
         add_filter('get_avatar', 'pk_custom_avatar');
         add_filter('get_avatar_url', 'pk_custom_avatar');
     }
@@ -783,12 +783,12 @@ function pk_pre_post_set($query)
         if (pk_get_option('index_mode', '') == 'cms') {
             $sort = pk_get_option('cms_new_sort', 'published');
             $query->set('posts_per_page', pk_get_option('cms_show_new_num', 6));
-            if ( $sort == 'published' ) {
-                $query->set( 'orderby', 'date' );
-                $query->set( 'order', 'DESC' );
-            } elseif ( $sort == 'updated' ) {
-                $query->set( 'orderby', 'modified' );
-                $query->set( 'order', 'DESC' );
+            if ($sort == 'published') {
+                $query->set('orderby', 'date');
+                $query->set('order', 'DESC');
+            } elseif ($sort == 'updated') {
+                $query->set('orderby', 'modified');
+                $query->set('order', 'DESC');
             }
         }
     }
@@ -1010,11 +1010,13 @@ function pk_template_redirect()
 
 add_action('template_redirect', 'pk_template_redirect');
 
-function pk_query_vars($vars){
+function pk_query_vars($vars)
+{
     $vars[] = 'id';
     return $vars;
 }
-add_filter( 'query_vars', 'pk_query_vars' );
+
+add_filter('query_vars', 'pk_query_vars');
 
 function pk_load_template($_template_file, $require_once = true, $args = array())
 {

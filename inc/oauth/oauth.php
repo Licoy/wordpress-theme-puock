@@ -138,6 +138,9 @@ function oauth_redirect_page($success = true, $info = '', $from_redirect = '')
         }
     } else {
         pk_session_call(function () use ($info) {
+            if (empty($info)){
+                $info = '发生未知错误';
+            }
             $_SESSION['error_info'] = $info;
         });
         wp_redirect(PUOCK_ABS_URI . '/error.php');

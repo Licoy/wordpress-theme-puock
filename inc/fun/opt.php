@@ -106,7 +106,7 @@ function pk_theme_footer_copyright($content)
 {
     global $pk_right_slug;
     $content .= pk_get_option('footer_info');
-    if(!pk_is_checked('ext_dont_show_copyright')){
+    if (!pk_is_checked('ext_dont_show_copyright')) {
         $content .= str_replace('{PUOCK_VERSION}', PUOCK_CUR_VER_STR, base64_decode($pk_right_slug));
     }
     return $content;
@@ -152,7 +152,8 @@ function v2ex_ssl_avatar($avatar)
     return str_replace("http://", "https://", str_replace("/avatar", "/gravatar", str_replace($gravatar_urls, 'cdn.v2ex.com', $avatar)));
 }
 
-function pk_custom_avatar($avatar){
+function pk_custom_avatar($avatar)
+{
     global $gravatar_urls;
     return str_replace($gravatar_urls, pk_get_option('gravatar_custom_url'), $avatar);
 }
@@ -234,7 +235,7 @@ function wp_compress_html()
         $count = count($buffer);
         $out = "";
         for ($i = 0; $i <= $count; $i++) {
-            if(!($buffer[$i] ?? null)){
+            if (!($buffer[$i] ?? null)) {
                 continue;
             }
             if (stristr($buffer[$i], '<!--wp-compress-html no compression-->')) {
@@ -283,20 +284,22 @@ if (pk_is_checked('link_go_page')) {
      * @author lvshujun
      * @date 2024-03-19
      */
-    function pk_content_addlink($content) {
+    function pk_content_addlink($content)
+    {
         //匹配链接
-        preg_match_all('/<a(.*?)href="(.*?)"(.*?)>/',$content,$matches);
+        preg_match_all('/<a(.*?)href="(.*?)"(.*?)>/', $content, $matches);
         if ($matches) {
             foreach ($matches[2] as $val) {
-                if (strpos($val,'://') !== false 
-                    && pk_is_cur_site($val) === false 
-                    && !preg_match('/\.(jpg|jepg|png|ico|bmp|gif|tiff)/i',$val)) {
-                    $content = str_replace('href="'.$val.'"', 'href="'.pk_go_link($val).'"', $content);
+                if (strpos($val, '://') !== false
+                    && pk_is_cur_site($val) === false
+                    && !preg_match('/\.(jpg|jepg|png|ico|bmp|gif|tiff)/i', $val)) {
+                    $content = str_replace('href="' . $val . '"', 'href="' . pk_go_link($val) . '"', $content);
                 }
             }
         }
         return $content;
     }
+
     add_filter('the_content', 'pk_content_addlink');
 }
 
@@ -416,7 +419,7 @@ function pk_captcha()
     }
     $width = $_GET['w'];
     $height = $_GET['h'];
-    include_once PUOCK_ABS_DIR.'/inc/php-captcha.php';
+    include_once PUOCK_ABS_DIR . '/inc/php-captcha.php';
     $captcha = new CaptchaBuilder();
     $captcha->initialize([
         'width' => intval($width),     // 宽度
@@ -616,8 +619,9 @@ function pk_safe_base64_encode($string)
     return str_replace(array('+', '/', '='), array('-', '_', ''), $data);
 }
 
-function pk_safe_base64_decode($string){
-    $data = str_replace(array('-','_'),array('+','/'),$string);
+function pk_safe_base64_decode($string)
+{
+    $data = str_replace(array('-', '_'), array('+', '/'), $string);
     $mod4 = strlen($data) % 4;
     if ($mod4) {
         $data .= substr('====', $mod4);
@@ -632,10 +636,10 @@ function pk_post_expire_tips_open($content)
     $u_time = get_the_time('U');
     $u_modified_time = get_the_modified_time('U');
     $custom_content = '';
-    if ($u_modified_time >= $u_time + (86400*pk_get_option('post_expire_tips_day',100))) {
+    if ($u_modified_time >= $u_time + (86400 * pk_get_option('post_expire_tips_day', 100))) {
         $updated_date = get_the_modified_time('Y-m-d H:i');
-        $tips = str_replace('{date}', $updated_date, pk_get_option('post_expire_tips',''));
-        $custom_content .= '<p class="fs12 c-sub">'.$tips.'</p>';
+        $tips = str_replace('{date}', $updated_date, pk_get_option('post_expire_tips', ''));
+        $custom_content .= '<p class="fs12 c-sub">' . $tips . '</p>';
     }
     $custom_content .= $content;
     return $custom_content;
@@ -649,14 +653,14 @@ if (pk_is_checked('post_expire_tips_open')) {
 function pk_ava_home_banners()
 {
     $index_carousel_list = pk_get_option('index_carousel_list', []);
-    if (is_array($index_carousel_list) && count($index_carousel_list) > 0){
+    if (is_array($index_carousel_list) && count($index_carousel_list) > 0) {
         $ava = [];
-        foreach ($index_carousel_list as $item){
+        foreach ($index_carousel_list as $item) {
             if (($item['hide'] ?? false) || empty($item['img'])) continue;
             $ava[] = $item;
         }
         return $ava;
-    }else{
+    } else {
         return false;
     }
 }

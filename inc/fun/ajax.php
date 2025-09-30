@@ -1,9 +1,10 @@
 <?php
 
-function pk_ajax_url($action,$args=[]){
-    $url = admin_url('admin-ajax.php?action='.$action);
-    if(!empty($args)){
-        $url .= '&'.http_build_query($args);
+function pk_ajax_url($action, $args = [])
+{
+    $url = admin_url('admin-ajax.php?action=' . $action);
+    if (!empty($args)) {
+        $url .= '&' . http_build_query($args);
     }
     return $url;
 }
