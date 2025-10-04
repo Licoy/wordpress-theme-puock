@@ -454,8 +454,8 @@ body.pre-mac pre {
   user-select: none;
   position: fixed;
   left: auto;
-  right: 47px;
-  bottom: 170px;
+  right: 45px;
+  bottom: 166px;
   top: auto;
   z-index: 999;
   
@@ -476,27 +476,26 @@ body.pre-mac pre {
   }
 
   #post-menu-state {
-    @w: 40px;
+    @w: 34px;
     position: absolute; // 使用绝对定位
     left: 0; // 按钮位于左侧
     bottom: 0; // 底部对齐
-    background-color: var(--pk-c-primary); // 使用主题色
     width: @w;
     height: @w;
-    border-radius: 10px; // 默认全圆角
+    border-radius: 4px;
     text-align: center;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border: none; // 去掉边框
     transition: all 0.3s ease;
-    z-index: 1001; // 确保按钮始终在最上层
+    background-color: var(--pk-bg-box);
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px var(--pk-c-block-shadow);
+    z-index: 0; // 确保按钮始终在最上层
     
     i {
       font-size: 16px;
-      color: #fff; // 图标颜色为白色
       transition: all 0.3s ease;
     }
     
@@ -1886,6 +1885,7 @@ a:hover {
   position: fixed;
   right: 10px;
   bottom: 50px;
+  z-index: 999;
 
   .p-block {
     .--pk-wh(34px, 34px);
