@@ -2262,27 +2262,82 @@ a:hover {
     .prod-item {
       .p-block {
         min-height: 400px;
+        position: relative;
+        padding-top: 40px;
+        padding-bottom: 20px;
+        transition: all 0.3s ease;
+
+        // 深色渐变背景遮罩，提升文字可读性
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0.5) 20%,
+            rgba(0, 0, 0, 0.3) 50%,
+            rgba(20, 20, 20, 0.4) 80%,
+            rgba(40, 40, 40, 0.5) 100%);
+          z-index: 1;
+          transition: background 0.3s ease;
+        }
+
+        // 悬停时增强遮罩效果
+        &:hover::before {
+          background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.6) 25%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(20, 20, 20, 0.5) 75%,
+            rgba(40, 40, 40, 0.6) 100%);
+        }
+
+        // 确保文字在遮罩层之上
+        a, .go, .desc {
+          position: relative;
+          z-index: 2;
+        }
       }
 
       margin-top: 60px;
 
       a {
-        color: var(--pk-c-font);
+        color: #ffffff !important;
         transition: all .3s;
       }
 
       .go {
-        color: var(--pk-c-font);
+        color: #ffffff !important;
         margin-top: 30px;
         text-align: center;
         font-size: @title-font-size;
+        font-weight: bold;
+        // 添加文字阴影增强可读性
+        text-shadow:
+          -1px -1px 0 #000,
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000,
+          0 0 6px rgba(0, 0, 0, 0.9),
+          0 0 10px rgba(0, 0, 0, 0.7);
       }
 
       .desc {
-        color: var(--pk-c-font);
+        color: #f5f5f5 !important;
         font-size: @desc-font-size;
         margin-bottom: 0;
         text-align: center;
+        line-height: 1.5;
+        // 添加文字阴影增强可读性
+        text-shadow:
+          -0.5px -0.5px 0 #000,
+          0.5px -0.5px 0 #000,
+          -0.5px 0.5px 0 #000,
+          0.5px 0.5px 0 #000,
+          0 0 5px rgba(0, 0, 0, 0.8);
       }
     }
   }
