@@ -123,6 +123,7 @@ function pk_oauth_clear_bind()
         delete_user_meta(get_current_user_id(), $type . '_oauth');
     }
     wp_redirect($redirect);
+    exit;
 }
 
 pk_ajax_register('pk_oauth_clear_bind', 'pk_oauth_clear_bind');
@@ -133,8 +134,10 @@ function oauth_redirect_page($success = true, $info = '', $from_redirect = '')
     if ($success) {
         if (empty($from_redirect)) {
             wp_redirect(get_admin_url());
+            exit;
         } else {
             wp_redirect($from_redirect);
+            exit;
         }
     } else {
         pk_session_call(function () use ($info) {

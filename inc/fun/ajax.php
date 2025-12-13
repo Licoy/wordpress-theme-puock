@@ -33,6 +33,7 @@ function pk_ajax_result_page($success = true, $info = '', $from_redirect = '')
 {
     if ($success && !empty($from_redirect)) {
         wp_redirect($from_redirect);
+        exit;
     } else {
         pk_session_call(function () use ($info) {
             $_SESSION['error_info'] = $info;

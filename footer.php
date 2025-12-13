@@ -40,6 +40,22 @@
 <div id="gt-validate-box"></div>
 <?php get_template_part('inc/metas') ?>
 <?php wp_footer(); ?>
+<script>
+// Bypass PJAX for WordPress core auth pages to avoid redirect issues
+if (window.Puock && typeof window.Puock.goUrl === 'function') {
+    (function(P){
+        var origGo = P.goUrl;
+        P.goUrl = function(url){
+            var bypass = url.indexOf('/wp-login.php') !== -1 || url.indexOf('/wp-admin') !== -1;
+            if (P.data && P.data.params && P.data.params.is_pjax && !bypass) {
+                origGo.call(P, url);
+            } else {
+                window.location.href = url;
+            }
+        };
+    })(window.Puock);
+}
+</script>
 <?php if (!empty(pk_get_option('tj_code_footer', ''))): ?>
     <?php echo pk_get_option('tj_code_footer', ''); ?>
 <?php endif; ?>

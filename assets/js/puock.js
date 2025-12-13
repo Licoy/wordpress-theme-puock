@@ -269,7 +269,11 @@ class Puock {
     }
 
     goUrl(url) {
-        if (this.data.params.is_pjax) {
+        const bypassPjax = (
+            url.indexOf('/wp-login.php') !== -1 ||
+            url.indexOf('/wp-admin') !== -1
+        );
+        if (this.data.params.is_pjax && !bypassPjax) {
             InstantClick.go(url)
         } else {
             window.location.href = url
