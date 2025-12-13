@@ -98,6 +98,7 @@
 ## 文档
 
 - 主题使用文档：[立即使用](https://www.licoy.cn/puock-doc.html)
+- **功能使用指南：[查看详细教程](./USAGE.md)** （友情链接、提示框等功能的详细使用说明）
 - 建议或BUG反馈：[立即进入](https://github.com/Licoy/wordpress-theme-puock/issues)
 - QQ/微信交流群：[点我加入](https://licoy.cn/go/puock-update.php?r=qq_qun) （此群皆为大家提供交流使用的地方，有BUG请直接提交ISSUE）
 - **若您有任何建议或BUG发现，并且您也有解决或实现的思路，欢迎直接提交PR！**
