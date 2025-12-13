@@ -818,6 +818,7 @@ class puockTagCloud extends puockWidgetBase {
         return $this->merge_common_fields(array(
             array('id'=>'title','strip'=>true, 'val'=>$this->title),
             array('id'=>'max_count','strip'=>true, 'val'=>0),
+            array('id'=>'random_sort', 'strip'=>true, 'val'=>0),
         ));
     }
 
@@ -825,6 +826,7 @@ class puockTagCloud extends puockWidgetBase {
         $instance = $this->default_value($instance);
         $this->html_gen($instance, '标题', 'title');
         $this->html_gen($instance, '最大显示数量（0为不限制）', 'max_count');
+        $this->html_gen($instance, '随机显示标签', 'random_sort', 'checkbox');
         $this->merge_common_form($instance);
     }
 
@@ -841,10 +843,14 @@ class puockTagCloud extends puockWidgetBase {
     function widget( $args, $instance ){
         $this->get_common_widget_header($instance);
         echo '<div class="widget-puock-tag-cloud">';
+        $is_random_checked = isset($instance['random_sort']) && $instance['random_sort'] === 'on';
         $tags = pk_cache_get(PKC_WIDGET_TAGS);
         if(!$tags){
             $tags = get_tags();
             pk_cache_set(PKC_WIDGET_TAGS,$tags);
+        }
+        if ($is_random_checked) {
+            shuffle($tags);
         }
         $max_count = $this->get_num_val($instance, 'max_count');
         if(count($tags) > 0){
