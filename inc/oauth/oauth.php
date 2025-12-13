@@ -201,8 +201,11 @@ pk_ajax_register('pk_oauth_start_redirect', 'pk_oauth_start_redirect', true);
 function pk_oauth_callback()
 {
     $type = $_GET['type'];
-    $redirect = $_GET['redirect'];
+    // GitHub 等平台授权成功后可能不带 redirect，这里提供首页兜底，避免停留在 admin-ajax 返回 "0" 的空白页
+    $redirect = empty($_GET['redirect']) ? home_url('/') : $_GET['redirect'];
     pk_oauth_callback_execute($type, $redirect);
+    // 兜底阻止 admin-ajax 后续输出默认的 "0"
+    wp_die();
 }
 
 function pk_oauth_callback_execute($type, $redirect)
