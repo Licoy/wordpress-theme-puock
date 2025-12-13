@@ -731,15 +731,23 @@ function get_nav_menu_object($location)
 function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1, $max_dpath = 2)
 {
     $child_class = $dpath_cur != 1 ? 'menu-item-child' : '';
-    $target = pk_link_target(false);
+    // 全局默认打开方式（例如主题设置为新窗口），但优先使用每个菜单项自身的 target 设置
+    $default_target = pk_link_target(false);
     foreach ($menus as $menu) {
         $classes = join(" ", $menu->classes);
         $cur = $menu->current ? 'menu-current' : '';
         $out .= "<li id='menu-item-{$menu->ID}' class='menu-item-{$menu->ID} {$classes} {$child_class} {$cur}'>";
-        if (!$mobile) {
-            $out .= "<a class='ww' data-color='auto' {$target} href='{$menu->url}'>{$menu->title}";
+        // 计算当前菜单项应使用的 target 属性：当菜单项有设置时优先生效
+        $item_target = '';
+        if (!empty($menu->target)) {
+            $item_target = 'target="' . $menu->target . '"';
         } else {
-            $out .= '<span><a ' . $target . ' href="' . $menu->url . '">' . $menu->title . '</a>';
+            $item_target = $default_target;
+        }
+        if (!$mobile) {
+            $out .= "<a class='ww' data-color='auto' {$item_target} href='{$menu->url}'>{$menu->title}";
+        } else {
+            $out .= '<span><a ' . $item_target . ' href="' . $menu->url . '">' . $menu->title . '</a>';
         }
         if (count($menu->children) > 0) {
             if ($mobile) {
