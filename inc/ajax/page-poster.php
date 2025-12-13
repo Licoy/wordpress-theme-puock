@@ -44,36 +44,71 @@ function pk_poster_page_callback()
     <!--    </div>-->
     <script>
         $(function () {
-            const i = window.Puock.startLoading();
-            // 等待图像加载完成后再生成海报
-            setTimeout(() => {
-                // 确保所有图片都设置了crossOrigin属性
-                document.querySelectorAll('#<?php echo $el_id; ?> img').forEach(img => {
-                    img.crossOrigin = 'anonymous';
+            const loadingId = window.Puock.startLoading();
+            const rootSelector = "#<?php echo $el_id; ?>";
+            const rootEl = document.querySelector(rootSelector);
+
+            const waitForImages = (node) => {
+                if (!node) return Promise.resolve();
+                const imgs = Array.from(node.querySelectorAll('img'));
+                // 预先设置 crossOrigin，避免已加载的图片污染 canvas
+                imgs.forEach(img => {
+                    if (!img.crossOrigin) img.crossOrigin = 'anonymous';
                 });
-                
-                html2canvas(document.querySelector("#<?php echo $el_id; ?>"), {
-                    allowTaint: true,
-                    useCORS: true,
-                    backgroundColor: '#ffffff',
-                    // 提高清晰度
-                    scale: window.devicePixelRatio || 2,
-                    // 优化字体渲染
-                    letterRendering: true,
-                    // 确保所有元素都被捕获
-                    logging: false,
-                    // 延迟以确保字体加载
-                    timeOut: 2000
-                }).then(canvas => {
-                    const el = $("#<?php echo $el_id; ?>");
-                    el.show();
-                    el.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo $title ?>'>");
-                    window.Puock.stopLoading(i);
-                }).catch(err => {
-                    console.error(err)
+                const tasks = imgs.map(img => img.complete ? Promise.resolve() : new Promise(resolve => {
+                    img.addEventListener('load', resolve, {once: true});
+                    img.addEventListener('error', resolve, {once: true});
+                }));
+                return Promise.all(tasks);
+            };
+
+            const waitForFonts = async () => {
+                if (document.fonts && document.fonts.ready) {
+                    await document.fonts.ready;
+                }
+                // 字体 ready 后再给一点缓冲，避免字体 fallback -> 目标字体切换时的布局抖动
+                await new Promise(resolve => setTimeout(resolve, 150));
+            };
+
+            const settleLayout = async () => {
+                // 两帧保证最新布局
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                // 再小延时，等字体重排完成
+                await new Promise(resolve => setTimeout(resolve, 80));
+            };
+
+            (async () => {
+                try {
+                    if (!rootEl) {
+                        throw new Error('未找到海报容器');
+                    }
+
+                    await Promise.all([waitForImages(rootEl), waitForFonts()]);
+
+                    // 确保布局稳定后再截图（图片、字体、布局都稳定）
+                    await settleLayout();
+
+                    const canvas = await html2canvas(rootEl, {
+                        allowTaint: true,
+                        useCORS: true,
+                        backgroundColor: '#ffffff',
+                        scale: window.devicePixelRatio || 2,
+                        letterRendering: true,
+                        logging: false,
+                        scrollX: 0,
+                        scrollY: 0
+                    });
+
+                    const $root = $(rootSelector);
+                    $root.show();
+                    $root.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo $title ?>'>");
+                } catch (err) {
+                    console.error(err);
                     window.Puock.toast("生成海报失败，请到Console查看错误信息", TYPE_DANGER);
-                });
-            }, 500);
+                } finally {
+                    window.Puock.stopLoading(loadingId);
+                }
+            })();
         })
     </script>
     <?php
