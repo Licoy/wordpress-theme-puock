@@ -69,7 +69,7 @@ add_filter('pre_option_link_manager_enabled', '__return_true');
 
 1. Go to `Pages` → `Add New` in WordPress admin
 2. Enter a page title, such as "Friendship Links"
-3. In the right sidebar under `Page Attributes` → `Template`, select **`友情链接` (Friendship Links)** template
+3. In the right sidebar under `Page Attributes` → `Template`, select **Friendship Links (`友情链接`)** template
 4. You can add introductory text in the page editor (optional)
 5. In the custom fields or page settings area at the bottom:
    - **page_links_id**: Select the link category ID(s) to display
@@ -312,7 +312,7 @@ Display GitHub repository information card:
 If using Gutenberg editor, you can directly add the `Puock Alert` block:
 1. Click `+` to add a block
 2. Search for `Puock` or `Alert`
-3. Select `Puock提示框` (Puock Alert) block
+3. Select Puock Alert (Puock提示框) block
 4. Configure color, text, icons, etc. in block settings
 
 ### 4. Nested Shortcodes
@@ -356,7 +356,7 @@ A: WordPress hides the Link Manager by default in newer versions. You need to in
 
 A: Check the following:
 1. Have you added friendship links and set them as visible?
-2. Is the page template set to "友情链接" (Friendship Links)?
+2. Is the page template set to Friendship Links (友情链接)?
 3. Is the `page_links_id` field correctly set with category ID?
 4. Is the link category ID correct?
 
