@@ -138,17 +138,19 @@ function pk_comment_ajax()
 
     if (empty($comment_content)) pk_comment_err('评论内容不能为空');
 
-    // 检查重复评论功能
-    $query_params = [$comment_post_ID, $comment_author];
-    $dupe = "SELECT comment_ID FROM $wpdb->comments WHERE comment_post_ID = %d AND ( comment_author = %s ";
-    if ($comment_author_email) {
-        $dupe .= "OR comment_author_email = %s ";
-        $query_params[] = $comment_author_email;
-    }
-    $dupe .= ") AND comment_content = %s LIMIT 1";
-    $query_params[] = $comment_content;
-    if ($wpdb->get_var($wpdb->prepare($dupe, $query_params))) {
-        pk_comment_err('您已经发表过相同的评论了!');
+    // 检查重复评论功能（根据主题配置决定是否启用）
+    if (pk_is_checked('comment_duplicate_check')) {
+        $query_params = [$comment_post_ID, $comment_author];
+        $dupe = "SELECT comment_ID FROM $wpdb->comments WHERE comment_post_ID = %d AND ( comment_author = %s ";
+        if ($comment_author_email) {
+            $dupe .= "OR comment_author_email = %s ";
+            $query_params[] = $comment_author_email;
+        }
+        $dupe .= ") AND comment_content = %s LIMIT 1";
+        $query_params[] = $comment_content;
+        if ($wpdb->get_var($wpdb->prepare($dupe, $query_params))) {
+            pk_comment_err('您已经发表过相同的评论了!');
+        }
     }
 
     // 检查评论时间

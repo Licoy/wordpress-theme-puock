@@ -175,6 +175,13 @@ class OptionBasic extends BaseOptionItem
                             'type' => 'switch',
                             'sdt' => false,
                         ],
+                        [
+                            'id' => 'comment_duplicate_check',
+                            'label' => __('启用重复评论检测', PUOCK),
+                            'type' => 'switch',
+                            'sdt' => false,
+                            'tips' => __('开启后将禁止用户发表完全相同的评论内容。关闭后用户可以发送重复的简短回复（如"谢谢"），推荐关闭以提升用户体验', PUOCK),
+                        ],
                     ]
                 ],
                 [
