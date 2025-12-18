@@ -89,7 +89,5 @@ if (window.Puock && typeof window.Puock.goUrl === 'function') {
     <div id="mobile-sidebar-overlay" class="mobile-sidebar-overlay"></div>
 </div>
 
-<!-- 移动端侧边栏JS -->
-<script src="<?php echo get_template_directory_uri(); ?>/assets/js/mobile-sidebar.js"></script>
 </body>
 </html>
