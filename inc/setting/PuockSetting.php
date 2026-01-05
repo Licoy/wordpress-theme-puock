@@ -83,4 +83,48 @@ class PuockSetting
         do_action('pk_get_theme_option_fields', $fields);
         require_once dirname(__FILE__) . '/template.php';
     }
+
+    /**
+     * 从字段定义中提取默认值
+     *
+     * @return array
+     */
+    public function get_default_options(): array
+    {
+        $menus = $this->option_menus_register();
+        $defaults = [];
+        foreach ($menus as $menu) {
+            $f = (new $menu['class']())->get_fields();
+            $f = apply_filters('pk_load_theme_option_fields_' . $f['key'], $f);
+            if (isset($f['fields']) && is_array($f['fields'])) {
+                $this->extract_defaults_from_fields($f['fields'], $defaults);
+            }
+        }
+        return $defaults;
+    }
+
+    /**
+     * 递归提取字段默认值
+     *
+     * @param array $fields 字段数组
+     * @param array $defaults 默认值数组（引用传递）
+     * @return void
+     */
+    private function extract_defaults_from_fields(array $fields, array &$defaults): void
+    {
+        foreach ($fields as $field) {
+            // 如果字段有id和sdt（默认值），则提取
+            if (isset($field['id']) && array_key_exists('sdt', $field)) {
+                $defaults[$field['id']] = $field['sdt'];
+            }
+            // 递归处理子字段（如panel类型）
+            if (isset($field['children']) && is_array($field['children'])) {
+                $this->extract_defaults_from_fields($field['children'], $defaults);
+            }
+            // 处理嵌套的fields
+            if (isset($field['fields']) && is_array($field['fields'])) {
+                $this->extract_defaults_from_fields($field['fields'], $defaults);
+            }
+        }
+    }
 }

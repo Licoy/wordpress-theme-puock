@@ -70,3 +70,43 @@ function pk_ajax_update_theme_options()
 }
 
 pk_ajax_register('update_theme_options', 'pk_ajax_update_theme_options');
+
+/**
+ * 获取主题设置默认值
+ */
+function pk_ajax_get_theme_options_defaults()
+{
+    if (current_user_can('edit_theme_options')) {
+        $setting = new \Puock\Theme\setting\PuockSetting();
+        $defaults = $setting->get_default_options();
+        wp_send_json_success([
+            'defaults' => $defaults,
+        ]);
+    } else {
+        wp_send_json_error(__('权限不足', PUOCK));
+    }
+}
+
+pk_ajax_register('get_theme_options_defaults', 'pk_ajax_get_theme_options_defaults');
+
+/**
+ * 重置主题设置为默认值
+ */
+function pk_ajax_reset_theme_options()
+{
+    if (current_user_can('edit_theme_options')) {
+        $setting = new \Puock\Theme\setting\PuockSetting();
+        $defaults = $setting->get_default_options();
+        update_option(PUOCK_OPT, $defaults);
+        do_action('pk_option_updated', $defaults);
+        flush_rewrite_rules();
+        wp_send_json_success([
+            'message' => __('设置已重置为默认值', PUOCK),
+            'data' => $defaults,
+        ]);
+    } else {
+        wp_send_json_error(__('权限不足', PUOCK));
+    }
+}
+
+pk_ajax_register('reset_theme_options', 'pk_ajax_reset_theme_options');
