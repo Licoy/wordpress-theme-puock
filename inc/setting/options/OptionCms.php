@@ -18,6 +18,12 @@ class OptionCms extends BaseOptionItem{
                     'sdt' => false,
                 ],
                 [
+                    'id' => 'cms_show_load_more',
+                    'label' => __('显示加载更多', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'cms_show_new',
                     'label' => __('显示最新文章', PUOCK),
                     'type' => 'switch',

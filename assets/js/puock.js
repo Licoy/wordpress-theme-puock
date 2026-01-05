@@ -80,6 +80,7 @@ class Puock {
         this.eventOpenCommentBox()
         this.eventCloseCommentBox()
         this.eventSendPostLike()
+        this.eventLoadMore()
         this.eventPostMainBoxResize()
         this.swiperOnceEvent()
         this.initModalToggle()
@@ -968,6 +969,41 @@ class Puock {
                 }
             }, 'json').fail(() => {
                 this.toast('点赞异常', TYPE_DANGER);
+            })
+        })
+    }
+
+    eventLoadMore() {
+        $(document).on("click", "#load-more-btn", (e) => {
+            const btn = $(this.ct(e));
+            const paged = btn.data("paged");
+            const postsContainer = $("#posts > div:first");
+
+            btn.prop("disabled", true).html('<i class="fa fa-spinner fa-spin"></i> 加载中...');
+
+            $.post("/wp-admin/admin-ajax.php", {action: 'pk_load_more_posts', paged: paged}, (res) => {
+                if (res.code === 0) {
+                    const newPosts = $(res.data.html);
+                    newPosts.hide();
+                    postsContainer.append(newPosts);
+                    newPosts.fadeIn();
+                    btn.data("paged", res.data.paged);
+
+                    if (!res.data.has_more) {
+                        btn.remove();
+                    } else {
+                        btn.prop("disabled", false).html('<i class="fa fa-plus"></i> 加载更多');
+                    }
+
+                    this.lazyLoadInit(newPosts);
+                    this.tooltipInit(newPosts.find("[data-bs-toggle=\"tooltip\"]"));
+                } else {
+                    this.toast(res.msg || '加载失败', TYPE_DANGER);
+                    btn.prop("disabled", false).html('<i class="fa fa-plus"></i> 加载更多');
+                }
+            }, 'json').fail(() => {
+                this.toast('加载异常', TYPE_DANGER);
+                btn.prop("disabled", false).html('<i class="fa fa-plus"></i> 加载更多');
             })
         })
     }

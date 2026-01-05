@@ -51,6 +51,12 @@ class OptionGlobal extends BaseOptionItem
                     ],
                 ],
                 [
+                    'id' => 'blog_show_load_more',
+                    'label' => __('博客模式显示加载更多', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
                     'id' => 'theme_mode',
                     'label' => __('主题模式', PUOCK),
                     'type' => 'radio',
