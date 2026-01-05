@@ -698,6 +698,9 @@ function get_nav_menu_object($location)
     }
     $menu_id = $locations[$location];
     $menu_object = wp_get_nav_menu_object($menu_id);
+    if (!$menu_object) {
+        return array();
+    }
     $menu_items = wp_get_nav_menu_items($menu_object->term_id);
     $menus = array();
     if ($menu_items == null || count($menu_items) == 0) {
