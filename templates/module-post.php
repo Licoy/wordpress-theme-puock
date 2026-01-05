@@ -46,7 +46,16 @@
         <span class="title-l-c bg-primary"></span>
     </article>
 <?php else: ?>
-    <article class="block card-plain post-item col-md-6 col-12 post-item-card">
+    <?php
+    $card_cols = pk_cms_card_columns();
+    $card_col_class = 'col-md-6 col-12';
+    if ($card_cols == 3) {
+        $card_col_class = 'col-lg-4 col-md-6 col-sm-6 col-12';
+    } elseif ($card_cols == 4) {
+        $card_col_class = 'col-lg-3 col-md-4 col-sm-6 col-12';
+    }
+    ?>
+    <article class="block card-plain post-item <?php echo $card_col_class; ?> post-item-card">
         <div class="p-block post-item-block">
             <div class="thumbnail position-relative">
                 <a class="t-sm ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">

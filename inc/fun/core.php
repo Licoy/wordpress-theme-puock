@@ -382,6 +382,31 @@ function pk_post_style_list()
     return pk_get_option('post_style', 'list') == 'list';
 }
 
+function pk_cms_card_columns(): int
+{
+    $cols = (int)pk_get_option('cms_card_columns', 2);
+    if ($cols < 2 || $cols > 4) {
+        $cols = 2;
+    }
+
+    // 仅在「文章列表」且「卡片风格」下生效（首页/分类/标签/作者/搜索/日期归档等）
+    if (pk_post_style_list()) {
+        return 2;
+    }
+
+    $is_post_list = is_home() || is_archive() || is_search();
+    if (!$is_post_list) {
+        return 2;
+    }
+
+    // 有侧边栏时最多 2 列（仅当全局侧边栏未被禁用）
+    if (!pk_is_checked('hide_global_sidebar') && $cols > 2) {
+        $cols = 2;
+    }
+
+    return $cols;
+}
+
 //评论添加@功能
 if (pk_is_checked('comment_has_at')) {
     add_filter('comment_text', 'pk_comment_add_at', 10, 2);

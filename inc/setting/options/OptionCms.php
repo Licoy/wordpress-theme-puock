@@ -47,6 +47,18 @@ class OptionCms extends BaseOptionItem{
                     'showRefId' => 'cms_show_new',
                 ],
                 [
+                    'id' => 'cms_card_columns',
+                    'label' => __('CMS卡片列数', PUOCK),
+                    'type' => 'select',
+                    'sdt' => 2,
+                    'options' => [
+                        ['label' => '2', 'value' => 2],
+                        ['label' => '3', 'value' => 3],
+                        ['label' => '4', 'value' => 4],
+                    ],
+                    'tips' => __('适用于文章列表的卡片风格（首页/分类/标签/作者/搜索等）；当页面显示侧边栏时最大仅2列；默认2列', PUOCK),
+                ],
+                [
                     'id' => 'cms_show_2box',
                     'label' => __('显示CMS两栏布局', PUOCK),
                     'type' => 'switch',

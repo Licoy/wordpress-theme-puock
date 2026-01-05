@@ -215,6 +215,31 @@ function pk_init_register_assets()
         if (!empty(pk_get_option('css_code_header', ''))) {
             wp_add_inline_style('puock', pk_get_option('css_code_header', ''));
         }
+
+        // 修复：文章列表卡片模式 3/4 列时（第2/3卡片）横向间距缺失
+        // 主题现有的 odd/even padding 仅适用于 2 列，需要额外覆盖
+        $pk_posts_card_gutter_fix_css = <<<'CSS'
+@media (min-width: 768px) {
+  #posts .post-item-card.col-md-4:nth-child(3n+1){padding-left:0!important;padding-right:7px!important;}
+  #posts .post-item-card.col-md-4:nth-child(3n+2){padding-left:7px!important;padding-right:7px!important;}
+  #posts .post-item-card.col-md-4:nth-child(3n){padding-left:7px!important;padding-right:0!important;}
+}
+@media (min-width: 992px) {
+  #posts .post-item-card.col-lg-4:nth-child(3n+1){padding-left:0!important;padding-right:7px!important;}
+  #posts .post-item-card.col-lg-4:nth-child(3n+2){padding-left:7px!important;padding-right:7px!important;}
+  #posts .post-item-card.col-lg-4:nth-child(3n){padding-left:7px!important;padding-right:0!important;}
+  #posts .post-item-card.col-lg-3:nth-child(4n+1){padding-left:0!important;padding-right:7px!important;}
+  #posts .post-item-card.col-lg-3:nth-child(4n+2),
+  #posts .post-item-card.col-lg-3:nth-child(4n+3){padding-left:7px!important;padding-right:7px!important;}
+  #posts .post-item-card.col-lg-3:nth-child(4n){padding-left:7px!important;padding-right:0!important;}
+}
+@media (max-width: 576px) {
+  #posts .post-item-card,
+  #posts .post-item-card:nth-child(odd),
+  #posts .post-item-card:nth-child(even){padding-left:0!important;padding-right:0!important;}
+}
+CSS;
+        wp_add_inline_style('puock', $pk_posts_card_gutter_fix_css);
     }
 }
 

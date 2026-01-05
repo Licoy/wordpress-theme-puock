@@ -972,6 +972,60 @@ a:hover {
       padding-right: 7px;
     }
 
+    // 修复 3/4 列时横向间距（odd/even 仅适用于 2 列）
+    // 4列在 md 断点会变为 3 列（col-md-4），同样需要处理
+    @media (min-width: 768px) {
+      &.col-md-4:nth-child(3n+1) {
+        padding-left: 0;
+        padding-right: 7px;
+      }
+
+      &.col-md-4:nth-child(3n+2) {
+        padding-left: 7px;
+        padding-right: 7px;
+      }
+
+      &.col-md-4:nth-child(3n) {
+        padding-left: 7px;
+        padding-right: 0;
+      }
+    }
+
+    @media (min-width: 992px) {
+      // 3列（col-lg-4）：[L0 Rg] [Lg Rg] [Lg R0]
+      &.col-lg-4:nth-child(3n+1) {
+        padding-left: 0;
+        padding-right: 7px;
+      }
+
+      &.col-lg-4:nth-child(3n+2) {
+        padding-left: 7px;
+        padding-right: 7px;
+      }
+
+      &.col-lg-4:nth-child(3n) {
+        padding-left: 7px;
+        padding-right: 0;
+      }
+
+      // 4列（col-lg-3）：[L0 Rg] [Lg Rg] [Lg Rg] [Lg R0]
+      &.col-lg-3:nth-child(4n+1) {
+        padding-left: 0;
+        padding-right: 7px;
+      }
+
+      &.col-lg-3:nth-child(4n+2),
+      &.col-lg-3:nth-child(4n+3) {
+        padding-left: 7px;
+        padding-right: 7px;
+      }
+
+      &.col-lg-3:nth-child(4n) {
+        padding-left: 7px;
+        padding-right: 0;
+      }
+    }
+
     .p-block {
       width: 100%;
     }
