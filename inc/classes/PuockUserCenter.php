@@ -20,6 +20,12 @@ class PuockUserCenter implements IPuockClassLoad
             'subtitle' => __('您的基本个人资料', PUOCK),
             'call' => array(__CLASS__, 'page_profile'),
         ];
+
+        self::$menus['oauth'] = [
+            'title' => __('账号绑定', PUOCK),
+            'subtitle' => __('绑定或解绑第三方账号', PUOCK),
+            'call' => array(__CLASS__, 'page_oauth'),
+        ];
     }
 
     public static function get_menus()
@@ -124,6 +130,76 @@ class PuockUserCenter implements IPuockClassLoad
                 <button class="btn btn-primary btn-sm" type="submit"><?php _e('提交保存', PUOCK) ?></button>
             </div>
         </form>
+        <?php
+    }
+
+    public static function page_oauth()
+    {
+        $user = wp_get_current_user();
+        $oauth_list = function_exists('pk_oauth_list') ? pk_oauth_list($user) : [];
+        $redirect = home_url('/uc/oauth');
+
+        $enabled_oauth_list = [];
+        foreach ($oauth_list as $item_key => $item_val) {
+            if (!pk_is_checked('oauth_' . $item_key)) {
+                continue;
+            }
+            $enabled_oauth_list[$item_key] = $item_val;
+        }
+        ?>
+        <div class="mb-3">
+            <h5 class="mb-3"><?php _e('第三方账号绑定', PUOCK); ?></h5>
+
+            <?php if (empty($enabled_oauth_list)): ?>
+                <div class="alert alert-warning mb-0">
+                    <?php _e('站点暂未开启任何第三方登录/绑定方式', PUOCK); ?>
+                </div>
+            <?php else: ?>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                        <thead>
+                        <tr>
+                            <th><?php _e('平台', PUOCK); ?></th>
+                            <th><?php _e('状态', PUOCK); ?></th>
+                            <th class="text-end"><?php _e('操作', PUOCK); ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($enabled_oauth_list as $item_key => $item_val): ?>
+                            <tr>
+                                <td><?php echo esc_html($item_val['label'] ?? $item_key); ?></td>
+                                <td>
+                                    <?php if (empty($item_val['openid'])): ?>
+                                        <span class="badge bg-secondary"><?php _e('未绑定', PUOCK); ?></span>
+                                    <?php else: ?>
+                                        <span class="badge bg-success"><?php _e('已绑定', PUOCK); ?></span>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="text-end">
+                                    <?php if (empty($item_val['openid'])): ?>
+                                        <a class="btn btn-sm btn-outline-primary"
+                                           target="_blank"
+                                           href="<?php echo esc_url(pk_oauth_url_page_ajax($item_key, $redirect)); ?>">
+                                            <?php _e('立即绑定', PUOCK); ?>
+                                        </a>
+                                    <?php else: ?>
+                                        <a class="btn btn-sm btn-outline-danger"
+                                           href="<?php echo esc_url(pk_oauth_clear_bind_url2($item_key, $redirect)); ?>"
+                                           onclick="return confirm('<?php echo esc_js(__('确认解除绑定吗？', PUOCK)); ?>')">
+                                            <?php _e('解除绑定', PUOCK); ?>
+                                        </a>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="c-sub fs12">
+                    <?php _e('绑定成功后，可使用第三方账号直接登录。', PUOCK); ?>
+                </div>
+            <?php endif; ?>
+        </div>
         <?php
     }
 }
