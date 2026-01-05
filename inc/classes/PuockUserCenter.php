@@ -141,7 +141,7 @@ class PuockUserCenter implements IPuockClassLoad
 
         $enabled_oauth_list = [];
         foreach ($oauth_list as $item_key => $item_val) {
-            if (!pk_is_checked('oauth_' . $item_key)) {
+            if (!pk_oauth_is_enabled($item_key, $item_val)) {
                 continue;
             }
             $enabled_oauth_list[$item_key] = $item_val;
@@ -155,45 +155,62 @@ class PuockUserCenter implements IPuockClassLoad
                     <?php _e('站点暂未开启任何第三方登录/绑定方式', PUOCK); ?>
                 </div>
             <?php else: ?>
-                <div class="table-responsive">
-                    <table class="table table-sm align-middle">
-                        <thead>
-                        <tr>
-                            <th><?php _e('平台', PUOCK); ?></th>
-                            <th><?php _e('状态', PUOCK); ?></th>
-                            <th class="text-end"><?php _e('操作', PUOCK); ?></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($enabled_oauth_list as $item_key => $item_val): ?>
-                            <tr>
-                                <td><?php echo esc_html($item_val['label'] ?? $item_key); ?></td>
-                                <td>
-                                    <?php if (empty($item_val['openid'])): ?>
-                                        <span class="badge bg-secondary"><?php _e('未绑定', PUOCK); ?></span>
-                                    <?php else: ?>
-                                        <span class="badge bg-success"><?php _e('已绑定', PUOCK); ?></span>
-                                    <?php endif; ?>
-                                </td>
-                                <td class="text-end">
-                                    <?php if (empty($item_val['openid'])): ?>
-                                        <a class="btn btn-sm btn-outline-primary"
-                                           target="_blank"
-                                           href="<?php echo esc_url(pk_oauth_url_page_ajax($item_key, $redirect)); ?>">
-                                            <?php _e('立即绑定', PUOCK); ?>
-                                        </a>
-                                    <?php else: ?>
-                                        <a class="btn btn-sm btn-outline-danger"
-                                           href="<?php echo esc_url(pk_oauth_clear_bind_url2($item_key, $redirect)); ?>"
-                                           onclick="return confirm('<?php echo esc_js(__('确认解除绑定吗？', PUOCK)); ?>')">
-                                            <?php _e('解除绑定', PUOCK); ?>
-                                        </a>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                <div class="d-flex flex-column gap-2 w-100">
+                    <?php foreach ($enabled_oauth_list as $item_key => $item_val):
+                        $bind_url = pk_oauth_url_page_ajax($item_key, $redirect);
+                        $unbind_url = pk_oauth_clear_bind_url2($item_key, $redirect);
+
+                        $is_bound = !empty($item_val['openid']);
+                        $label = (string)($item_val['label'] ?? $item_key);
+                        $color_type = (string)($item_val['color_type'] ?? 'primary');
+                        $icon = isset($item_val['icon']) ? (string)$item_val['icon'] : '';
+                        ?>
+                        <div class="pk-border-1 rounded px-3 py-2 d-flex align-items-center justify-content-between flex-wrap gap-3 w-100">
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <?php if ($icon && (strpos($icon, 'http://') === 0 || strpos($icon, 'https://') === 0 || strpos($icon, '//') === 0)) : ?>
+                                    <img
+                                        src="<?php echo esc_url($icon); ?>"
+                                        alt="<?php echo esc_attr($label); ?>"
+                                        width="22"
+                                        height="22"
+                                        class="rounded-circle flex-shrink-0"
+                                    />
+                                <?php elseif ($icon) : ?>
+                                    <i class="<?php echo esc_attr($icon); ?> text-<?php echo esc_attr($color_type); ?> fs-5"></i>
+                                <?php endif; ?>
+
+                                <div class="fw-semibold lh-sm">
+                                    <?php echo esc_html($label); ?>
+                                </div>
+
+                                <?php if ($is_bound) : ?>
+                                    <span class="badge bg-success"><?php _e('已绑定', PUOCK); ?></span>
+                                <?php else : ?>
+                                    <span class="badge bg-secondary"><?php _e('未绑定', PUOCK); ?></span>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-end">
+                                <?php if ($is_bound) : ?>
+                                    <a
+                                        href="<?php echo esc_url($unbind_url); ?>"
+                                        class="btn btn-sm btn-outline-danger px-2 py-0"
+                                        onclick="return confirm('<?php echo esc_js(__('确认解除绑定吗？', PUOCK)); ?>');"
+                                    >
+                                        <?php _e('解除绑定', PUOCK); ?>
+                                    </a>
+                                <?php else : ?>
+                                    <a
+                                        href="<?php echo esc_url($bind_url); ?>"
+                                        class="btn btn-sm btn-outline-<?php echo esc_attr($color_type); ?> px-2 py-0"
+                                        target="_blank"
+                                    >
+                                        <?php _e('立即绑定', PUOCK); ?>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
                 <div class="c-sub fs12">
                     <?php _e('绑定成功后，可使用第三方账号直接登录。', PUOCK); ?>

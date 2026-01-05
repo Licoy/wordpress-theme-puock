@@ -243,6 +243,73 @@ class OptionAuth extends BaseOptionItem
                         ],
                     ]
                 ],
+                [
+                    'id' => '-',
+                    'label' => '彩虹聚合登录 ' . __('登录配置', PUOCK),
+                    'type' => 'panel',
+                    'open' => pk_is_checked('oauth_ccy'),
+                    'tips' => '<a target="_blank" href="https://u.cccyun.cc/doc.php">' . __('申请步骤及说明', PUOCK) . '</a>',
+                    'children' => [
+                        [
+                            'id' => 'oauth_ccy',
+                            'label' => '彩虹聚合登录 ' . __('登录', PUOCK),
+                            'type' => 'switch',
+                            'sdt' => 'false',
+                        ],
+                        [
+                            'id' => 'oauth_ccy_api',
+                            'label' => __('接口地址', PUOCK),
+                            'tips' => __('彩虹聚合登录接口地址（不含路径），例如：https://u.cccyun.cc', PUOCK),
+                            'sdt' => 'https://u.cccyun.cc',
+                            'showRefId' => 'oauth_ccy',
+                        ],
+                        [
+                            'id' => 'oauth_ccy_appid',
+                            'label' => '彩虹聚合登录 AppID',
+                            'sdt' => '',
+                            'showRefId' => 'oauth_ccy',
+                        ],
+                        [
+                            'id' => 'oauth_ccy_appkey',
+                            'label' => '彩虹聚合登录 AppKey',
+                            'sdt' => '',
+                            'showRefId' => 'oauth_ccy',
+                        ],
+                        [
+                            'id' => 'oauth_ccy_types',
+                            'label' => __('自定义登录方式类型', PUOCK),
+                            'type' => 'dynamic-list',
+                            'tips' => __('每项将生成一个登录按钮，provider key 固定前缀为：ccy_{value}', PUOCK),
+                            'sdt' => [
+                                ['label' => 'QQ', 'value' => 'qq', 'icon' => 'fa-brands fa-qq', 'color_type' => 'danger'],
+                                ['label' => '微信', 'value' => 'wx', 'icon' => 'fa-brands fa-weixin', 'color_type' => 'success'],
+                            ],
+                            'draggable' => true,
+                            'dynamicModel' => [
+                                ['id' => 'label', 'label' => __('名称', PUOCK), 'std' => '', 'tips' => __('显示在按钮上的名称', PUOCK)],
+                                ['id' => 'value', 'label' => __('对应值', PUOCK), 'std' => '', 'tips' => __('彩虹登录方式 type 值，例如 qq/wx/alipay/sina/baidu', PUOCK)],
+                                ['id' => 'icon', 'label' => __('图标', PUOCK), 'std' => '', 'tips' => __('FontAwesome class 或图片 URL', PUOCK)],
+                                ['id' => 'color_type', 'label' => __('主题色', PUOCK), 'std' => 'primary', 'type' => 'select', 'options' => [
+                                    ['label' => 'primary', 'value' => 'primary'],
+                                    ['label' => 'success', 'value' => 'success'],
+                                    ['label' => 'danger', 'value' => 'danger'],
+                                    ['label' => 'info', 'value' => 'info'],
+                                    ['label' => 'warning', 'value' => 'warning'],
+                                    ['label' => 'dark', 'value' => 'dark'],
+                                    ['label' => 'secondary', 'value' => 'secondary'],
+                                ]],
+                            ],
+                            'showRefId' => 'oauth_ccy',
+                        ],
+                        [
+                            'id' => '-',
+                            'label' => __('第三方登录回调地址提示', PUOCK),
+                            'type' => 'info',
+                            'infoType' => 'info',
+                            'tips' => '回调地址（callback url）为: <code>' . PUOCK_ABS_URI . '/inc/oauth/callback/ccy.php</code>'
+                        ],
+                    ]
+                ],
             ],
         ];
     }

@@ -68,19 +68,83 @@ function pk_oauth_list($user = null)
             'color_type' => 'warning',
             'name_field' => 'name',
             'system' => true,
-        ]
+        ],
     ];
+
+    // 彩虹聚合登录（动态配置，固定前缀：ccy_）
+    if (pk_is_checked('oauth_ccy')) {
+        $ccyAppId = trim((string)pk_get_option('oauth_ccy_appid'));
+        $ccyAppKey = trim((string)pk_get_option('oauth_ccy_appkey'));
+
+        $typesRaw = pk_get_option('oauth_ccy_types');
+        if (is_string($typesRaw)) {
+            $types = json_decode((string)$typesRaw, true);
+        } else {
+            $types = $typesRaw;
+        }
+
+        if (is_array($types)) {
+            foreach ($types as $typeItem) {
+                if (!is_array($typeItem)) {
+                    continue;
+                }
+
+                $typeValue = sanitize_key($typeItem['value'] ?? '');
+                if (empty($typeValue)) {
+                    continue;
+                }
+
+                $providerKey = 'ccy_' . $typeValue;
+                $label = (string)($typeItem['label'] ?? $providerKey);
+                $icon = (string)($typeItem['icon'] ?? '');
+                $colorType = (string)($typeItem['color_type'] ?? 'primary');
+
+                $list[$providerKey] = [
+                    'label' => $label,
+                    'openid' => $user ? get_the_author_meta($providerKey . '_oauth', $user->ID) : null,
+                    'class' => \Puock\Theme\oauth\RainbowOAuth::class,
+                    'icon' => $icon,
+                    'color_type' => $colorType,
+                    'name_field' => 'nickname',
+                    'system' => true,
+                    'enable_option' => 'oauth_ccy',
+                    'oauth_id' => $ccyAppId,
+                    'oauth_key' => $ccyAppKey,
+                    'callback_url' => function ($type, $redirect) {
+                        return PUOCK_ABS_URI . '/inc/oauth/callback/ccy.php?' . http_build_query([
+                                'pk_type' => $type,
+                                'redirect' => $redirect,
+                            ]);
+                    },
+                ];
+            }
+        }
+    }
+
     return apply_filters('pk_oauth_list', $list);
+}
+
+function pk_oauth_is_enabled($type, $oauth = null)
+{
+    if (!$oauth) {
+        $oauth_list = pk_oauth_list();
+        $oauth = $oauth_list[$type] ?? null;
+    }
+    if (!$oauth) {
+        return false;
+    }
+    $enableOption = $oauth['enable_option'] ?? ('oauth_' . $type);
+    return pk_is_checked($enableOption);
 }
 
 function pk_extra_user_profile_oauth($user)
 {
-    $oauth_list = pk_oauth_list($user)
+    $oauth_list = pk_oauth_list($user);
     ?>
     <h3>第三方账号绑定</h3>
     <table class="form-table">
         <?php foreach ($oauth_list as $item_key => $item_val):
-            if (!pk_is_checked('oauth_' . $item_key)) {
+            if (!pk_oauth_is_enabled($item_key, $item_val)) {
                 continue;
             } ?>
             <tr>
@@ -160,7 +224,7 @@ function pk_oauth_clear_bind2()
     }
 
     $oauth_list = pk_oauth_list();
-    if (!isset($oauth_list[$type]) || !pk_is_checked('oauth_' . $type)) {
+    if (!isset($oauth_list[$type]) || !pk_oauth_is_enabled($type, $oauth_list[$type])) {
         wp_die(__('不支持的请求', PUOCK));
     }
 
@@ -212,17 +276,41 @@ function pk_oauth_url_page_ajax($type, $redirect = '')
 
 function pk_oauth_get_base($type, $redirect = '')
 {
-    if (!pk_is_checked('oauth_' . $type)) {
+    $oauth_list = pk_oauth_list();
+    if (!array_key_exists($type, $oauth_list)) {
         return null;
     }
-    $oauth_list = pk_oauth_list();
-    if (array_key_exists($type, $oauth_list)) {
-        $oauth = $oauth_list[$type];
-        $oauth_id = pk_get_option('oauth_' . $type . '_' . (empty($oauth['id_field']) ? 'id' : $oauth['id_field']));
-        $oauth_key = pk_get_option('oauth_' . $type . '_' . (empty($oauth['secret_field']) ? 'secret' : $oauth['secret_field']));
-        return new PkOAuthBase($oauth, new $oauth['class']($oauth_id, $oauth_key, pk_oauth_get_callback_url($type, $redirect)));
+
+    $oauth = $oauth_list[$type];
+    if (!pk_oauth_is_enabled($type, $oauth)) {
+        return null;
     }
-    return null;
+
+    if (isset($oauth['oauth_id']) || isset($oauth['oauth_key'])) {
+        $oauth_id = trim((string)($oauth['oauth_id'] ?? ''));
+        $oauth_key = trim((string)($oauth['oauth_key'] ?? ''));
+    } else {
+        $optionPrefix = $oauth['option_prefix'] ?? ('oauth_' . $type);
+        $oauth_id = trim((string)pk_get_option($optionPrefix . '_' . (empty($oauth['id_field']) ? 'id' : $oauth['id_field'])));
+        $oauth_key = trim((string)pk_get_option($optionPrefix . '_' . (empty($oauth['secret_field']) ? 'secret' : $oauth['secret_field'])));
+    }
+
+    if ($oauth_id === '' || $oauth_key === '') {
+        $label = (string)($oauth['label'] ?? $type);
+        throw new InvalidArgumentException('第三方登录配置不完整，请检查「' . $label . '」配置');
+    }
+
+    if (isset($oauth['callback_url'])) {
+        if (is_callable($oauth['callback_url'])) {
+            $callbackUrl = call_user_func($oauth['callback_url'], $type, $redirect);
+        } else {
+            $callbackUrl = (string)$oauth['callback_url'];
+        }
+    } else {
+        $callbackUrl = pk_oauth_get_callback_url($type, $redirect);
+    }
+
+    return new PkOAuthBase($oauth, new $oauth['class']($oauth_id, $oauth_key, $callbackUrl));
 }
 
 // 第三方授权登录开始跳转
@@ -238,13 +326,22 @@ function pk_oauth_start_redirect()
         oauth_redirect_page(false, '不支持的第三方授权请求', $redirect);
         exit;
     }
-    $url = $oauth->base->getAuthUrl();
-    if (!empty($url)) {
-        pk_session_call(function () use ($oauth, $type) {
-            $_SESSION['oauth_state_' . $type] = $oauth->base->state;
-        });
-        wp_redirect($url);
+    try {
+        $url = $oauth->base->getAuthUrl();
+    } catch (Throwable $e) {
+        oauth_redirect_page(false, '授权跳转失败：' . $e->getMessage(), $redirect);
+        exit;
     }
+
+    if (empty($url)) {
+        oauth_redirect_page(false, '获取授权地址失败', $redirect);
+        exit;
+    }
+
+    pk_session_call(function () use ($oauth, $type) {
+        $_SESSION['oauth_state_' . $type] = $oauth->base->state;
+    });
+    wp_redirect($url);
     exit;
 }
 
@@ -340,7 +437,7 @@ function pk_oauth_form()
     $out = "<div>";
     $oauth_list = pk_oauth_list();
     foreach ($oauth_list as $key => $val) {
-        if (pk_is_checked('oauth_' . $key)) {
+        if (pk_oauth_is_enabled($key, $val)) {
             $out .= '<a style="margin-right:5px;margin-bottom:10px" href="' . pk_oauth_url_page_ajax($key, admin_url()) . '" class="button button-large">' . $val['label'] . '登录</a>';
         }
     }
@@ -356,7 +453,7 @@ function pk_oauth_platform_count()
     $count = 0;
     $oauth_list = pk_oauth_list();
     foreach ($oauth_list as $key => $val) {
-        if (pk_is_checked('oauth_' . $key)) {
+        if (pk_oauth_is_enabled($key, $val)) {
             $count++;
         }
     }
