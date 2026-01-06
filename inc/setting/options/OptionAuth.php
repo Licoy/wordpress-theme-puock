@@ -251,6 +251,13 @@ class OptionAuth extends BaseOptionItem
                     'tips' => '<a target="_blank" href="https://u.cccyun.cc/doc.php">' . __('申请步骤及说明', PUOCK) . '</a>',
                     'children' => [
                         [
+                            'id' => '-',
+                            'label' => __('第三方登录回调地址提示', PUOCK),
+                            'type' => 'info',
+                            'infoType' => 'info',
+                            'tips' => '回调域名为: <code>' . str_replace(['http://','https://'],'',home_url()) . '</code>'
+                        ],
+                        [
                             'id' => 'oauth_ccy',
                             'label' => '彩虹聚合登录 ' . __('登录', PUOCK),
                             'type' => 'switch',
@@ -300,13 +307,6 @@ class OptionAuth extends BaseOptionItem
                                 ]],
                             ],
                             'showRefId' => 'oauth_ccy',
-                        ],
-                        [
-                            'id' => '-',
-                            'label' => __('第三方登录回调地址提示', PUOCK),
-                            'type' => 'info',
-                            'infoType' => 'info',
-                            'tips' => '回调地址（callback url）为: <code>' . PUOCK_ABS_URI . '/inc/oauth/callback/ccy.php</code>'
                         ],
                     ]
                 ],
