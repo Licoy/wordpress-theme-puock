@@ -59,6 +59,8 @@ get_header();
                                 <i class="fa-regular fa-comment mr-1"></i>
                                 <?php echo get_comments_number() ?></a>
                                 <?php endif; ?>
+                                <a class="c-sub-a ml-2" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i><?php _e('详情', PUOCK) ?></a>
                                 </span>
                                     </div>
                                 </div>
