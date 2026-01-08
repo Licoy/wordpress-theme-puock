@@ -2,6 +2,34 @@
 
 function get_comment_notify_template($comment,$parent_id)
 {
+    $blog_name = get_option('blogname');
+    $article_title = get_the_title($comment->comment_post_ID);
+    $comment_link = get_comment_link($parent_id,array("type" => "all"));
+    $parent_comment_content = trim(get_comment($parent_id)->comment_content);
+    $reply_author = $comment->comment_author;
+    $reply_content = trim($comment->comment_content);
+    
+    $header_text = sprintf(
+        /* translators: 1: Blog name, 2: Link to article, 3: Article title */
+        __('您在%1$s的<a href="%2$s" target="_blank">《%3$s》</a>文章中的评论有了新的回复：', PUOCK),
+        $blog_name,
+        $comment_link,
+        $article_title
+    );
+    
+    $your_comment_text = __('你的评论内容为：', PUOCK);
+    $reply_text = sprintf(
+        /* translators: %s: Author name of the reply */
+        __('您收到"%s"对您的回复为：', PUOCK),
+        $reply_author
+    );
+    $view_article_text = sprintf(
+        /* translators: %s: Link to the comment */
+        __('您也可以<a target="_blank" href="%s">直接点我进入原文章</a>以查看评论~', PUOCK),
+        $comment_link
+    );
+    $footer_text = __('此邮件由系统发出，请勿直接回复，谢谢合作！', PUOCK);
+    
     $res = "
     <style>
         #p-mail-notify{
@@ -56,23 +84,23 @@ function get_comment_notify_template($comment,$parent_id)
     </style>
     <div id=\"p-mail-notify\">
         <div class=\"header\">
-            您在".get_option('blogname')."的<a href=\"".get_comment_link($parent_id,array("type" => "all"))."\" target=\"_blank\">《".get_the_title($comment->comment_post_ID)."》</a>文章中的评论有了新的回复：
+            {$header_text}
         </div>
         <div class=\"main\">
-            你的评论内容为：
+            {$your_comment_text}
             <div class=\"content-item me\">
-                ". trim(get_comment($parent_id)->comment_content) ."
+                {$parent_comment_content}
             </div>
-            您收到\"".$comment->comment_author."\"对您的回复为：
+            {$reply_text}
             <div class=\"content-item\">
-                ". trim($comment->comment_content) ."
+                {$reply_content}
             </div>
             <div class=\"tips\">
-                您也可以<a target=\"_blank\" href=\"".get_comment_link($parent_id,array("type" => "all"))."\">直接点我进入原文章</a>以查看评论~
+                {$view_article_text}
             </div>
         </div>
         <div class=\"footer\">
-            <span>此邮件由系统发出，请勿直接回复，谢谢合作！</span>
+            <span>{$footer_text}</span>
         </div>
     </div>";
     return $res;

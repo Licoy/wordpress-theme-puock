@@ -63,7 +63,7 @@
                                 <div class="col-12 col-sm-3">
                                     <div class="row flex-row justify-content-end">
                                         <div class="col-8 col-sm-7 text-end pl15">
-                                            <input type="text" value="" placeholder="验证码" maxlength="4"
+                                            <input type="text" value="" placeholder="<?php _e('验证码', PUOCK) ?>" maxlength="4"
                                                    class="form-control form-control-sm t-sm" name="comment-vd"
                                                    autocomplete="off"
                                                    id="comment-vd">
@@ -71,7 +71,7 @@
                                         <div class="col-4 col-sm-5 pr15" id="comment-captcha-box">
                                             <img class="comment-captcha captcha"
                                                  src="<?php echo pk_captcha_url('comment', 100, 28) ?>"
-                                                 alt="验证码">
+                                                 alt="<?php _e('验证码', PUOCK) ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                                         <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
                                                 data-once-load="true"
                                                 data-id="front-login"
-                                                title="快捷登录"
+                                                title="<?php _e('快捷登录', PUOCK) ?>"
                                                 data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
                                             <i
                                                     class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>
@@ -107,7 +107,7 @@
                                 <button id="comment-cancel" type="button"
                                         class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUOCK) ?></button>
                                 <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm pk-modal-toggle" type="button"
-                                        title="表情" data-once-load="true"
+                                        title="<?php _e('表情', PUOCK) ?>" data-once-load="true"
                                         data-url="<?php echo pk_ajax_url('pk_ajax_dialog_smiley') ?>">
                                     <i class="fa-regular fa-face-smile t-md"></i></button>
                                 <button id="comment-submit" type="submit" class="btn btn-primary btn-ssm"><i

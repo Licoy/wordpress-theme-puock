@@ -7,11 +7,11 @@ function pk_poster_page_callback()
 {
     $id = $_REQUEST['id'];
     if (empty($id)) {
-        wp_die('无效的文章ID: ' . $id);
+        wp_die(sprintf(__('无效的文章ID: %s', PUOCK), $id));
     }
     $post = get_post($id);
     if (empty($post)) {
-        wp_die('无效的文章ID: ' . $id);
+        wp_die(sprintf(__('无效的文章ID: %s', PUOCK), $id));
     }
     setup_postdata($post);
     $title = get_the_title($post);
@@ -35,7 +35,7 @@ function pk_poster_page_callback()
                         <p class="tip c-sub fs14">@<?php echo pk_get_web_title() ?></p>
                     <?php endif; ?>
                 </div>
-                <p class="tip c-sub fs12 mt20 p-flex-center"><i class="fa-solid fa-qrcode"></i>&nbsp;长按识别二维码查看文章内容</p>
+                <p class="tip c-sub fs12 mt20 p-flex-center"><i class="fa-solid fa-qrcode"></i>&nbsp;<?php _e('长按识别二维码查看文章内容', PUOCK) ?></p>
             </div>
         </div>
     </div>

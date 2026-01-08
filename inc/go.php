@@ -1,7 +1,7 @@
 <?php
 
 include '../../../../wp-blog-header.php';
-pk_set_custom_seo("链接跳转");
+pk_set_custom_seo(__("链接跳转", PUOCK));
 $url = $_GET['to'] ?? '';
 $name = $_GET['name'] ?? '';
 if (!empty($name)) {
@@ -9,11 +9,11 @@ if (!empty($name)) {
 }
 $error = null;
 if (empty($url)) {
-    $error = "目标网址为空，无法进行跳转";
+    $error = __("目标网址为空，无法进行跳转", PUOCK);
 } else {
     $url = htmlentities(base64_decode($url));
     if (strpos($url, "https://") !== 0 && strpos($url, "http://") !== 0) {
-        $error = "跳转链接协议有误";
+        $error = __("跳转链接协议有误", PUOCK);
     } else {
         if (pk_is_cur_site($url)) {
             header("Location:" . $url);
@@ -32,19 +32,19 @@ get_header();
     <?php echo pk_breadcrumbs() ?>
 
     <div class="text-center p-block puock-text">
-        <h3 class="mt20">跳转提示</h3>
+        <h3 class="mt20"><?php _e('跳转提示', PUOCK) ?></h3>
         <?php if (!empty($error)): ?>
             <p class="mt20"><?php echo $error ?></p>
         <?php else: ?>
             <p class="mt20">
-                <span>您即将离开<?php echo get_bloginfo('name') ?>跳转至</span><?php echo empty($name) ? $url : $name; ?><span> ，确定进入吗？</span>
+                <span><?php echo sprintf(__('您即将离开%s跳转至', PUOCK), get_bloginfo('name')); ?></span><?php echo empty($name) ? $url : $name; ?><span><?php _e('，确定进入吗？', PUOCK); ?></span>
             </p>
         <?php endif; ?>
         <div class="text-center mt20">
             <a rel="nofollow" href="<?php echo $url; ?>" class="btn btn-ssm btn-primary"><i
-                        class="fa-regular fa-paper-plane"></i>&nbsp;立即进入</a>
+                        class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('立即进入', PUOCK) ?></a>
             <a href="<?php echo home_url() ?>" class="btn btn-ssm btn-secondary"><i
-                        class="fa fa-home"></i>&nbsp;返回首页</a>
+                        class="fa fa-home"></i>&nbsp;<?php _e('返回首页', PUOCK) ?></a>
         </div>
     </div>
 </div>

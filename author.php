@@ -22,7 +22,7 @@
                 <div class="author-tab-data">
                     <div class="data-header">
                         <div class="item cur">
-                            文章 <span class="c-sub fs12"><?php echo count_user_posts(get_the_author_meta('ID')) ?></span>
+                            <?php _e('文章', PUOCK) ?> <span class="c-sub fs12"><?php echo count_user_posts(get_the_author_meta('ID')) ?></span>
                         </div>
 <!--                        <div class="item">-->
 <!--                            评论 <span class="c-sub fs12">--><?php //echo count_user_posts(get_the_author_meta('ID')) ?><!--</span>-->

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Puock\n"
-"POT-Creation-Date: 2020-09-11 14:24+0800\n"
-"PO-Revision-Date: 2022-03-05 22:36+0800\n"
+"POT-Creation-Date: 2025-01-08 11:30+0800\n"
+"PO-Revision-Date: 2025-01-08 11:30+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -260,3 +260,343 @@ msgstr "支持暗黑與白天模式的自適應多風格主席！"
 #. Author of the plugin/theme
 msgid "Licoy"
 msgstr "Licoy"
+
+#: inc/fun/opt.php
+msgid "你已经点过赞了"
+msgstr "你已經點過讚了"
+
+#: inc/fun/opt.php
+msgid "点赞成功"
+msgstr "點讚成功"
+
+#: inc/fun/opt.php
+msgid "压缩前为:%dbytes;压缩后为:%dbytes;节约:%s%%"
+msgstr "壓縮前為:%dbytes;壓縮後為:%dbytes;節約:%s%%"
+
+#: inc/fun/opt.php
+msgid "共计查询SQL：%d次，耗时：%s秒"
+msgstr "共計查詢SQL：%d次，耗時：%s秒"
+
+#: inc/fun/opt.php
+msgid "共计 %d 个字符，预计需要花费 %d 分钟才能阅读完成。"
+msgstr "共計 %d 個字符，預計需要花費 %d 分鐘才能閱讀完成。"
+
+#: inc/fun/opt.php
+msgid "您无权访问"
+msgstr "您無權訪問"
+
+#: inc/fun/widget.php
+msgid "全部分类"
+msgstr "全部分類"
+
+#: inc/fun/widget.php
+msgid "隐藏标题"
+msgstr "隱藏標題"
+
+#: inc/fun/widget.php
+msgid "图标类"
+msgstr "圖標類"
+
+#: inc/fun/widget.php
+msgid "区块class类"
+msgstr "區塊class類"
+
+#: inc/fun/widget.php
+msgid "标题"
+msgstr "標題"
+
+#: inc/fun/widget.php
+msgid "显示篇数"
+msgstr "顯示篇數"
+
+#: inc/fun/widget.php
+msgid "最近N天内"
+msgstr "最近N天內"
+
+#: inc/fun/widget.php
+msgid "指定分类ID（多个ID之间使用,进行分隔）"
+msgstr "指定分類ID（多個ID之間使用,進行分隔）"
+
+#: inc/fun/widget.php
+msgid "简洁风格"
+msgstr "簡潔風格"
+
+#: inc/fun/widget.php
+msgid "热门文章"
+msgstr "熱門文章"
+
+#: inc/fun/widget.php
+msgid "根据阅读量显示最近的"
+msgstr "根據閱讀量顯示最近的"
+
+#: inc/fun/widget.php
+msgid "最新文章"
+msgstr "最新文章"
+
+#: inc/fun/widget.php
+msgid "热评文章"
+msgstr "熱評文章"
+
+#: inc/fun/widget.php
+msgid "读者墙"
+msgstr "讀者牆"
+
+#: inc/fun/widget.php
+msgid "展示网站的读者形成"
+msgstr "展示網站的讀者形成"
+
+#: inc/fun/widget.php
+msgid "显示数量"
+msgstr "顯示數量"
+
+#: inc/fun/widget.php
+msgid "最新评论"
+msgstr "最新評論"
+
+#: inc/fun/widget.php
+msgid "展示网站的"
+msgstr "展示網站的"
+
+#: inc/fun/widget.php
+msgid "HTML文本"
+msgstr "HTML文字"
+
+#: inc/fun/widget.php
+msgid "支持HTML/JS/CSS"
+msgstr "支持HTML/JS/CSS"
+
+#: inc/fun/widget.php
+msgid "内容"
+msgstr "內容"
+
+#: inc/fun/widget.php
+msgid "搜索框"
+msgstr "搜尋框"
+
+#: inc/fun/widget.php
+msgid "提供便捷快速的"
+msgstr "提供便捷快速的"
+
+#: inc/fun/widget.php
+msgid "文章搜索"
+msgstr "文章搜尋"
+
+#: inc/fun/widget.php
+msgid "输入关键字回车搜索"
+msgstr "輸入關鍵字按Enter搜尋"
+
+#: inc/fun/widget.php
+msgid "搜索框预留文字"
+msgstr "搜尋框預留文字"
+
+#: inc/fun/widget.php
+msgid "随机文章"
+msgstr "隨機文章"
+
+#: inc/fun/widget.php
+msgid "显示指定范围内的"
+msgstr "顯示指定範圍內的"
+
+#: inc/fun/widget.php
+msgid "关于博主"
+msgstr "關於博主"
+
+#: inc/fun/widget.php
+msgid "显示博客的主人-"
+msgstr "顯示博客的主人-"
+
+#: inc/fun/widget.php
+msgid "博主名字"
+msgstr "博主名字"
+
+#: inc/fun/widget.php
+msgid "介绍(支持html/js)"
+msgstr "介紹(支持html/js)"
+
+#: inc/fun/widget.php
+msgid "邮箱(用于获取头像)"
+msgstr "電子郵件(用於獲取頭像)"
+
+#: inc/fun/widget.php
+msgid "顶部背景图url"
+msgstr "頂部背景圖url"
+
+#: inc/fun/widget.php
+msgid "显示用户数"
+msgstr "顯示用戶數"
+
+#: inc/fun/widget.php
+msgid "显示文章数"
+msgstr "顯示文章數"
+
+#: inc/fun/widget.php
+msgid "显示评论数"
+msgstr "顯示評論數"
+
+#: inc/fun/widget.php
+msgid "显示阅读量"
+msgstr "顯示閱讀量"
+
+#: inc/fun/widget.php
+msgid "用户数"
+msgstr "用戶數"
+
+#: inc/fun/widget.php
+msgid "文章数"
+msgstr "文章數"
+
+#: inc/fun/widget.php
+msgid "分类目录"
+msgstr "分類目錄"
+
+#: inc/fun/widget.php
+msgid "显示博客的所有"
+msgstr "顯示博客的所有"
+
+#: inc/fun/widget.php
+msgid "标签云"
+msgstr "標籤雲"
+
+#: inc/fun/widget.php
+msgid "集成博客的标签为"
+msgstr "集成博客的標籤為"
+
+#: inc/fun/widget.php
+msgid "最大显示数量（0为不限制）"
+msgstr "最大顯示數量（0為不限制）"
+
+#: inc/fun/widget.php
+msgid "随机显示标签"
+msgstr "隨機顯示標籤"
+
+#: inc/fun/widget.php
+msgid "暂无标签"
+msgstr "暫無標籤"
+
+#: inc/fun/widget.php
+msgid "一言一句话"
+msgstr "一言一句話"
+
+#: inc/fun/widget.php
+msgid "随机展示"
+msgstr "隨機展示"
+
+#: inc/fun/widget.php
+msgid "自定义API"
+msgstr "自定義API"
+
+#: comments.php
+msgid "验证码"
+msgstr "驗證碼"
+
+#: comments.php
+msgid "表情"
+msgstr "表情"
+
+#: comments.php
+msgid "快捷登录"
+msgstr "快捷登入"
+
+#: inc/go.php
+msgid "链接跳转"
+msgstr "連結跳轉"
+
+#: inc/go.php
+msgid "目标网址为空，无法进行跳转"
+msgstr "目標網址為空，無法進行跳轉"
+
+#: inc/go.php
+msgid "跳转链接协议有误"
+msgstr "跳轉連結協議有誤"
+
+#: inc/go.php
+msgid "跳转提示"
+msgstr "跳轉提示"
+
+#: inc/go.php
+msgid "您即将离开%s跳转至"
+msgstr "您即將離開%s跳轉至"
+
+#: inc/go.php
+msgid "，确定进入吗？"
+msgstr "，確定進入嗎？"
+
+#: inc/go.php
+msgid "立即进入"
+msgstr "立即進入"
+
+#: inc/fun/comment-notify.php
+msgid "您在%1$s的<a href=\"%2$s\" target=\"_blank\">《%3$s》</a>文章中的评论有了新的回复："
+msgstr "您在%1$s的<a href=\"%2$s\" target=\"_blank\">《%3$s》</a>文章中的評論有了新的回覆："
+
+#: inc/fun/comment-notify.php
+msgid "你的评论内容为："
+msgstr "你的評論內容為："
+
+#: inc/fun/comment-notify.php
+msgid "您收到\"%s\"对您的回复为："
+msgstr "您收到\"%s\"對您的回覆為："
+
+#: inc/fun/comment-notify.php
+msgid "您也可以<a target=\"_blank\" href=\"%s\">直接点我进入原文章</a>以查看评论~"
+msgstr "您也可以<a target=\"_blank\" href=\"%s\">直接點我進入原文章</a>以查看評論~"
+
+#: inc/fun/comment-notify.php
+msgid "此邮件由系统发出，请勿直接回复，谢谢合作！"
+msgstr "此郵件由系統發出，請勿直接回覆，謝謝合作！"
+
+#: pages/template-links.php
+msgid "暂无介绍"
+msgstr "暫無介紹"
+
+#: pages/template-archives.php
+msgid "d日"
+msgstr "d日"
+
+#: author.php
+msgid "文章"
+msgstr "文章"
+
+#: pages/template-chatgpt.php
+msgid "请在此处描述您的问题"
+msgstr "請在此處描述您的問題"
+
+#: pages/template-chatgpt.php
+msgid "AI绘画"
+msgstr "AI繪畫"
+
+#: pages/template-chatgpt.php
+msgid "立即提问"
+msgstr "立即提問"
+
+#: pages/template-chatgpt.php
+msgid "清屏"
+msgstr "清屏"
+
+#: inc/ajax/dialog-reward.php
+msgid "暂无打赏二维码"
+msgstr "暫無打賞二維碼"
+
+#: inc/ajax/dialog-reward.php
+msgid "支付宝赞赏"
+msgstr "支付寶讚賞"
+
+#: inc/ajax/dialog-reward.php
+msgid "请使用支付宝扫一扫"
+msgstr "請使用支付寶掃一掃"
+
+#: inc/ajax/dialog-reward.php
+msgid "微信赞赏"
+msgstr "微信讚賞"
+
+#: inc/ajax/dialog-reward.php
+msgid "请使用微信扫一扫"
+msgstr "請使用微信掃一掃"
+
+#: inc/ajax/page-poster.php
+msgid "无效的文章ID: %s"
+msgstr "無效的文章ID: %s"
+
+#: inc/ajax/page-poster.php
+msgid "长按识别二维码查看文章内容"
+msgstr "長按識別二維碼查看文章內容"

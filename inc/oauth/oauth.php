@@ -42,7 +42,7 @@ function pk_oauth_list($user = null)
             'system' => true,
         ],
         'weibo' => [
-            'label' => '微博',
+            'label' => __('微博', PUOCK),
             'openid' => $user ? get_the_author_meta('weibo_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\Weibo\OAuth2::class,
             'name_field' => 'name',
@@ -52,7 +52,7 @@ function pk_oauth_list($user = null)
             'system' => true,
         ],
         'gitee' => [
-            'label' => '码云',
+            'label' => __('码云', PUOCK),
             'openid' => $user ? get_the_author_meta('gitee_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\Gitee\OAuth2::class,
             'icon' => 'fa-solid fa-globe',
@@ -141,7 +141,7 @@ function pk_extra_user_profile_oauth($user)
 {
     $oauth_list = pk_oauth_list($user);
     ?>
-    <h3>第三方账号绑定</h3>
+    <h3><?php _e('第三方账号绑定', PUOCK); ?></h3>
     <table class="form-table">
         <?php foreach ($oauth_list as $item_key => $item_val):
             if (!pk_oauth_is_enabled($item_key, $item_val)) {
@@ -154,11 +154,11 @@ function pk_extra_user_profile_oauth($user)
                         <a href="<?php echo pk_oauth_url_page_ajax($item_key, get_edit_profile_url()) ?>"
                            target="_blank"
                            class="button"
-                           id="<?php echo $item_key ?>_oauth">立即绑定</a>
+                           id="<?php echo $item_key ?>_oauth"><?php _e('立即绑定', PUOCK); ?></a>
                     <?php else: ?>
                         <a id="<?php echo $item_key ?>_oauth"
                            href="<?php echo pk_oauth_clear_bind_url($item_key, get_edit_profile_url()) ?>"
-                           class="button">解除绑定<?php echo $item_val['label'] ?></a>
+                           class="button"><?php echo sprintf(__('解除绑定%s', PUOCK), $item_val['label']); ?></a>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -249,7 +249,7 @@ function oauth_redirect_page($success = true, $info = '', $from_redirect = '')
     } else {
         pk_session_call(function () use ($info) {
             if (empty($info)) {
-                $info = '发生未知错误';
+                $info = __('发生未知错误', PUOCK);
             }
             $_SESSION['error_info'] = $info;
         });
@@ -297,7 +297,7 @@ function pk_oauth_get_base($type, $redirect = '')
 
     if ($oauth_id === '' || $oauth_key === '') {
         $label = (string)($oauth['label'] ?? $type);
-        throw new InvalidArgumentException('第三方登录配置不完整，请检查「' . $label . '」配置');
+        throw new InvalidArgumentException(sprintf(__('第三方登录配置不完整，请检查「%s」配置', PUOCK), $label));
     }
 
     if (isset($oauth['callback_url'])) {
@@ -323,18 +323,18 @@ function pk_oauth_start_redirect()
     }
     $oauth = pk_oauth_get_base($type, $redirect);
     if (!$oauth) {
-        oauth_redirect_page(false, '不支持的第三方授权请求', $redirect);
+        oauth_redirect_page(false, __('不支持的第三方授权请求', PUOCK), $redirect);
         exit;
     }
     try {
         $url = $oauth->base->getAuthUrl();
     } catch (Throwable $e) {
-        oauth_redirect_page(false, '授权跳转失败：' . $e->getMessage(), $redirect);
+        oauth_redirect_page(false, sprintf(__('授权跳转失败：%s', PUOCK), $e->getMessage()), $redirect);
         exit;
     }
 
     if (empty($url)) {
-        oauth_redirect_page(false, '获取授权地址失败', $redirect);
+        oauth_redirect_page(false, __('获取授权地址失败', PUOCK), $redirect);
         exit;
     }
 
@@ -367,7 +367,7 @@ function pk_oauth_callback_execute($type, $redirect)
     }
     $oauth = pk_oauth_get_base($type, $redirect);
     if (!$oauth) {
-        oauth_redirect_page(false, '无效授权请求', $redirect);
+        oauth_redirect_page(false, __('无效授权请求', PUOCK), $redirect);
         exit;
     }
     $oauth_state = null;
@@ -375,7 +375,7 @@ function pk_oauth_callback_execute($type, $redirect)
         $oauth_state = $_SESSION['oauth_state_' . $type];
     });
     if (empty($oauth_state)) {
-        oauth_redirect_page(false, '无效的授权状态', $redirect);
+        oauth_redirect_page(false, __('无效的授权状态', PUOCK), $redirect);
         exit;
     }
     $oauthBase = $oauth->base;
@@ -383,17 +383,17 @@ function pk_oauth_callback_execute($type, $redirect)
         $oauthBase->getAccessToken($oauth_state);
         $userInfo = $oauthBase->getUserInfo();
     } catch (Exception $e) {
-        oauth_redirect_page(false, '授权失败：' . $e->getMessage(), $redirect);
+        oauth_redirect_page(false, sprintf(__('授权失败：%s', PUOCK), $e->getMessage()), $redirect);
         exit;
     }
     if (is_user_logged_in()) {
         $bind_users = get_users(array('meta_key' => $type . '_oauth', 'meta_value' => $oauthBase->openid, 'exclude' => get_current_user_id()));
         if ($bind_users && count($bind_users) > 0) {
-            oauth_redirect_page(false, '绑定失败：此授权' . $oauth->oauth['label'] . '账户已被其他账户使用', $redirect);
+            oauth_redirect_page(false, sprintf(__('绑定失败：此授权%s账户已被其他账户使用', PUOCK), $oauth->oauth['label']), $redirect);
             exit;
         }
         if (!empty(get_user_meta(get_current_user_id(), $type . "_oauth"))) {
-            oauth_redirect_page(false, '绑定失败：此账户已绑定其他' . $oauth->oauth['label'] . '授权账户', $redirect);
+            oauth_redirect_page(false, sprintf(__('绑定失败：此账户已绑定其他%s授权账户', PUOCK), $oauth->oauth['label']), $redirect);
             exit;
         }
         $user = wp_get_current_user();
@@ -405,7 +405,7 @@ function pk_oauth_callback_execute($type, $redirect)
         if (!$users || count($users) <= 0) {
             //不存在用户，先自动注册再登录
             if (pk_is_checked('oauth_close_register')) {
-                oauth_redirect_page(false, '您的' . $oauth->oauth['label'] . '账号未绑定本站账户，当前已关闭自动注册，请手动注册后再进入个人资料中进行绑定', $redirect);
+                oauth_redirect_page(false, sprintf(__('您的%s账号未绑定本站账户，当前已关闭自动注册，请手动注册后再进入个人资料中进行绑定', PUOCK), $oauth->oauth['label']), $redirect);
                 exit;
             }
             $wp_create_nonce = wp_create_nonce($oauthBase->openid);
@@ -438,7 +438,7 @@ function pk_oauth_form()
     $oauth_list = pk_oauth_list();
     foreach ($oauth_list as $key => $val) {
         if (pk_oauth_is_enabled($key, $val)) {
-            $out .= '<a style="margin-right:5px;margin-bottom:10px" href="' . pk_oauth_url_page_ajax($key, admin_url()) . '" class="button button-large">' . $val['label'] . '登录</a>';
+            $out .= '<a style="margin-right:5px;margin-bottom:10px" href="' . pk_oauth_url_page_ajax($key, admin_url()) . '" class="button button-large">' . sprintf(__('%s登录', PUOCK), $val['label']) . '</a>';
         }
     }
     $out .= "</div>";

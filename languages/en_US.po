@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Puock\n"
-"POT-Creation-Date: 2023-01-20 14:15+0800\n"
-"PO-Revision-Date: 2023-01-20 14:16+0800\n"
+"POT-Creation-Date: 2025-01-08 11:30+0800\n"
+"PO-Revision-Date: 2025-01-08 11:30+0800\n"
 "Last-Translator: Licoy <licoycn@gmail.com>\n"
 "Language-Team: Licoy <licoycn@gmail.com>\n"
 "Language: en_US\n"
@@ -501,10 +501,6 @@ msgstr "Enable"
 #: inc/setting/options/OptionCarousel.php:63
 msgid "鼠标滚轮切换"
 msgstr "Mouse wheel switching"
-
-#: inc/setting/options/OptionCarousel.php:69
-msgid "隐藏标题"
-msgstr "Hide the title"
 
 #: inc/setting/options/OptionCarousel.php:75
 msgid "循环播放"
@@ -1443,3 +1439,331 @@ msgstr "5 days ago"
 
 msgid "六天前"
 msgstr "6 days ago"
+
+#: inc/fun/opt.php
+msgid "你已经点过赞了"
+msgstr "You have already liked this"
+
+#: inc/fun/opt.php
+msgid "点赞成功"
+msgstr "Liked successfully"
+
+#: inc/fun/opt.php
+msgid "压缩前为:%dbytes;压缩后为:%dbytes;节约:%s%%"
+msgstr "Before compression: %d bytes; After compression: %d bytes; Saved: %s%%"
+
+#: inc/fun/opt.php
+msgid "共计查询SQL：%d次，耗时：%s秒"
+msgstr "Total SQL queries: %d, Time: %s seconds"
+
+#: inc/fun/opt.php
+msgid "共计 %d 个字符，预计需要花费 %d 分钟才能阅读完成。"
+msgstr "Total %d characters, estimated reading time: %d minutes."
+
+#: inc/fun/opt.php
+msgid "您无权访问"
+msgstr "You do not have permission to access this page"
+
+#: inc/fun/widget.php
+msgid "全部分类"
+msgstr "All Categories"
+
+#: inc/fun/widget.php
+msgid "隐藏标题"
+msgstr "Hide Title"
+
+#: inc/fun/widget.php
+msgid "图标类"
+msgstr "Icon Class"
+
+#: inc/fun/widget.php
+msgid "区块class类"
+msgstr "Block CSS Class"
+
+#: inc/fun/widget.php
+msgid "显示篇数"
+msgstr "Number of Posts"
+
+#: inc/fun/widget.php
+msgid "最近N天内"
+msgstr "Within Recent N Days"
+
+#: inc/fun/widget.php
+msgid "指定分类ID（多个ID之间使用,进行分隔）"
+msgstr "Specify Category IDs (separate multiple IDs with commas)"
+
+#: inc/fun/widget.php
+msgid "简洁风格"
+msgstr "Simple Style"
+
+#: inc/fun/widget.php
+msgid "热门文章"
+msgstr "Hot Posts"
+
+#: inc/fun/widget.php
+msgid "根据阅读量显示最近的"
+msgstr "Display recent posts by views"
+
+#: inc/fun/widget.php
+msgid "最新文章"
+msgstr "Latest Posts"
+
+#: inc/fun/widget.php
+msgid "热评文章"
+msgstr "Most Commented Posts"
+
+#: inc/fun/widget.php
+msgid "读者墙"
+msgstr "Readers Wall"
+
+#: inc/fun/widget.php
+msgid "展示网站的读者形成"
+msgstr "Display website readers"
+
+#: inc/fun/widget.php
+msgid "显示数量"
+msgstr "Display Count"
+
+#: inc/fun/widget.php
+msgid "最新评论"
+msgstr "Latest Comments"
+
+#: inc/fun/widget.php
+msgid "展示网站的"
+msgstr "Display website's"
+
+#: inc/fun/widget.php
+msgid "HTML文本"
+msgstr "HTML Text"
+
+#: inc/fun/widget.php
+msgid "支持HTML/JS/CSS"
+msgstr "Support HTML/JS/CSS"
+
+#: inc/fun/widget.php
+msgid "搜索框"
+msgstr "Search Box"
+
+#: inc/fun/widget.php
+msgid "提供便捷快速的"
+msgstr "Provide quick and convenient"
+
+#: inc/fun/widget.php
+msgid "文章搜索"
+msgstr "Article Search"
+
+#: inc/fun/widget.php
+msgid "输入关键字回车搜索"
+msgstr "Enter keyword to search"
+
+#: inc/fun/widget.php
+msgid "搜索框预留文字"
+msgstr "Search Box Placeholder"
+
+#: inc/fun/widget.php
+msgid "随机文章"
+msgstr "Random Posts"
+
+#: inc/fun/widget.php
+msgid "显示指定范围内的"
+msgstr "Display within specified range"
+
+#: inc/fun/widget.php
+msgid "关于博主"
+msgstr "About Author"
+
+#: inc/fun/widget.php
+msgid "显示博客的主人-"
+msgstr "Display blog owner -"
+
+#: inc/fun/widget.php
+msgid "博主名字"
+msgstr "Author Name"
+
+#: inc/fun/widget.php
+msgid "介绍(支持html/js)"
+msgstr "Introduction (supports HTML/JS)"
+
+#: inc/fun/widget.php
+msgid "邮箱(用于获取头像)"
+msgstr "Email (for avatar)"
+
+#: inc/fun/widget.php
+msgid "顶部背景图url"
+msgstr "Top Background Image URL"
+
+#: inc/fun/widget.php
+msgid "显示用户数"
+msgstr "Show User Count"
+
+#: inc/fun/widget.php
+msgid "显示文章数"
+msgstr "Show Post Count"
+
+#: inc/fun/widget.php
+msgid "显示评论数"
+msgstr "Show Comment Count"
+
+#: inc/fun/widget.php
+msgid "显示阅读量"
+msgstr "Show View Count"
+
+#: inc/fun/widget.php
+msgid "用户数"
+msgstr "Users"
+
+#: inc/fun/widget.php
+msgid "文章数"
+msgstr "Posts"
+
+#: inc/fun/widget.php
+msgid "分类目录"
+msgstr "Categories"
+
+#: inc/fun/widget.php
+msgid "显示博客的所有"
+msgstr "Display all blog"
+
+#: inc/fun/widget.php
+msgid "标签云"
+msgstr "Tag Cloud"
+
+#: inc/fun/widget.php
+msgid "集成博客的标签为"
+msgstr "Integrate blog tags into"
+
+#: inc/fun/widget.php
+msgid "最大显示数量（0为不限制）"
+msgstr "Maximum Display Count (0 for unlimited)"
+
+#: inc/fun/widget.php
+msgid "随机显示标签"
+msgstr "Random Tag Display"
+
+#: inc/fun/widget.php
+msgid "暂无标签"
+msgstr "No tags yet"
+
+#: inc/fun/widget.php
+msgid "一言一句话"
+msgstr "Hitokoto"
+
+#: inc/fun/widget.php
+msgid "随机展示"
+msgstr "Random Display"
+
+#: inc/fun/widget.php
+msgid "自定义API"
+msgstr "Custom API"
+
+#: comments.php
+msgid "验证码"
+msgstr "Captcha"
+
+#: comments.php
+msgid "表情"
+msgstr "Emoji"
+
+#: inc/go.php
+msgid "链接跳转"
+msgstr "Link Redirect"
+
+#: inc/go.php
+msgid "目标网址为空，无法进行跳转"
+msgstr "Target URL is empty, cannot redirect"
+
+#: inc/go.php
+msgid "跳转链接协议有误"
+msgstr "Invalid redirect link protocol"
+
+#: inc/go.php
+msgid "跳转提示"
+msgstr "Redirect Notice"
+
+#: inc/go.php
+msgid "您即将离开%s跳转至"
+msgstr "You are about to leave %s and go to"
+
+#: inc/go.php
+msgid "，确定进入吗？"
+msgstr ", are you sure to continue?"
+
+#: inc/go.php
+msgid "立即进入"
+msgstr "Enter Now"
+
+#: inc/fun/comment-notify.php
+msgid "您在%1$s的<a href=\"%2$s\" target=\"_blank\">《%3$s》</a>文章中的评论有了新的回复："
+msgstr "Your comment on <a href=\"%2$s\" target=\"_blank\">%3$s</a> at %1$s has a new reply:"
+
+#: inc/fun/comment-notify.php
+msgid "你的评论内容为："
+msgstr "Your comment was:"
+
+#: inc/fun/comment-notify.php
+msgid "您收到\"%s\"对您的回复为："
+msgstr "You received a reply from \"%s\":"
+
+#: inc/fun/comment-notify.php
+msgid "您也可以<a target=\"_blank\" href=\"%s\">直接点我进入原文章</a>以查看评论~"
+msgstr "You can also <a target=\"_blank\" href=\"%s\">click here to view the original article</a> to see the comment~"
+
+#: inc/fun/comment-notify.php
+msgid "此邮件由系统发出，请勿直接回复，谢谢合作！"
+msgstr "This email was sent by the system, please do not reply directly. Thank you for your cooperation!"
+
+#: pages/template-links.php
+msgid "暂无介绍"
+msgstr "No description"
+
+#: pages/template-archives.php
+msgid "d日"
+msgstr "jS"
+
+#: author.php
+msgid "文章"
+msgstr "Posts"
+
+#: pages/template-chatgpt.php
+msgid "请在此处描述您的问题"
+msgstr "Please describe your question here"
+
+#: pages/template-chatgpt.php
+msgid "AI绘画"
+msgstr "AI Drawing"
+
+#: pages/template-chatgpt.php
+msgid "立即提问"
+msgstr "Ask Now"
+
+#: pages/template-chatgpt.php
+msgid "清屏"
+msgstr "Clear"
+
+#: inc/ajax/dialog-reward.php
+msgid "暂无打赏二维码"
+msgstr "No reward QR code available"
+
+#: inc/ajax/dialog-reward.php
+msgid "支付宝赞赏"
+msgstr "Alipay Reward"
+
+#: inc/ajax/dialog-reward.php
+msgid "请使用支付宝扫一扫"
+msgstr "Please scan with Alipay"
+
+#: inc/ajax/dialog-reward.php
+msgid "微信赞赏"
+msgstr "WeChat Reward"
+
+#: inc/ajax/dialog-reward.php
+msgid "请使用微信扫一扫"
+msgstr "Please scan with WeChat"
+
+#: inc/ajax/page-poster.php
+msgid "无效的文章ID: %s"
+msgstr "Invalid post ID: %s"
+
+#: inc/ajax/page-poster.php
+msgid "长按识别二维码查看文章内容"
+msgstr "Long press to scan QR code and view article"

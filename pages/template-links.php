@@ -57,7 +57,7 @@ get_header();
                                         <?php endif;?>
                                         <div class="info">
                                             <p class="ml-1 text-nowrap text-truncate"><?php echo $link->link_name ?></p>
-                                            <p class="c-sub ml-1 text-nowrap text-truncate"><?php echo empty($link->link_notes) ? '暂无介绍' : $link->link_notes ?></p>
+                                            <p class="c-sub ml-1 text-nowrap text-truncate"><?php echo empty($link->link_notes) ? __('暂无介绍', PUOCK) : $link->link_notes ?></p>
                                         </div>
                                     </div>
                                 </a>

@@ -7,8 +7,8 @@ function puock_post_like()
     if ($action == 'like') {
         $cookie_key = 'puock_like_' . $id;
         if (!empty($_COOKIE[$cookie_key])) {
-            echo json_encode(array('e' => 1, 't' => '你已经点过赞了'));
-            die;
+        echo json_encode(array('e' => 1, 't' => __('你已经点过赞了', PUOCK)));
+        die;
         }
         $like_num = get_post_meta($id, 'puock_like', true);
         $expire = time() + (86400);
@@ -19,7 +19,7 @@ function puock_post_like()
         } else {
             update_post_meta($id, 'puock_like', ($like_num + 1));
         }
-        echo json_encode(array('e' => 0, 't' => '点赞成功', 'd' => get_post_meta($id, 'puock_like', true)));
+        echo json_encode(array('e' => 0, 't' => __('点赞成功', PUOCK), 'd' => get_post_meta($id, 'puock_like', true)));
     }
     die;
 }
@@ -254,7 +254,7 @@ function wp_compress_html()
         $final = strlen($out);
         $savings = ($initial - $final) / $initial * 100;
         $savings = round($savings, 2);
-        $info = "<!--压缩前为:{$initial}bytes;压缩后为:{$final}bytes;节约:{$savings}%-->";
+        $info = "<!--" . sprintf(__('压缩前为:%dbytes;压缩后为:%dbytes;节约:%s%%', PUOCK), $initial, $final, $savings) . "-->";
         return $out . $info;
     }
 
@@ -527,7 +527,7 @@ function pk_debug_print_sql_list()
     $show_sql_detail = pk_get_option('debug_sql_detail');
     $out = "<script>";
     if ($show_sql_count) {
-        $out .= "console.log('共计查询SQL：" . get_num_queries() . "次，耗时：" . timer_stop() . "秒');";
+        $out .= "console.log('" . sprintf(__('共计查询SQL：%d次，耗时：%s秒', PUOCK), get_num_queries(), timer_stop()) . "');";
     }
     if ($show_sql_detail) {
         $out .= "console.log(" . json_encode($wpdb->queries) . ");";
@@ -583,7 +583,7 @@ function get_entry_content_class($echo = true)
 function pk_disable_not_admin_user_profile()
 {
     if (is_admin() && !current_user_can('administrator')) {
-        wp_die('您无权访问');
+        wp_die(__('您无权访问', PUOCK));
     }
 }
 
@@ -596,7 +596,7 @@ function pk_read_time_tip(): string
 {
     $words_count = count_words();
     $read_time = ceil($words_count / 400);
-    return sprintf(__('共计 %d 个字符，预计需要花费 %d 分钟才能阅读完成。'), $words_count, $read_time);
+    return sprintf(__('共计 %d 个字符，预计需要花费 %d 分钟才能阅读完成。', PUOCK), $words_count, $read_time);
 }
 
 function pk_set_custom_seo($title, $keywords = '', $description = '')
