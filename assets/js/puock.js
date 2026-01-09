@@ -411,7 +411,16 @@ class Puock {
     }
 
     lazyLoadInit(parent = null, el = '.lazy') {
-        if (window.lozad) {
+        // 使用增强版懒加载
+        if (window.puockLazyLoader) {
+            if (parent) {
+                window.puockLazyLoader.update(parent);
+            } else {
+                window.puockLazyLoader.update();
+            }
+        } 
+        // 降级到 lozad
+        else if (window.lozad) {
             const observer = lozad([el, 'img[data-lazy="true"]'], {
                 rootMargin: '10px 0px',
                 threshold: 0.1,

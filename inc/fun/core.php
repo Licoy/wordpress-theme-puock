@@ -46,6 +46,7 @@ require_once PUOCK_ABS_DIR . '/inc/fun/comment-notify.php';
 require_once PUOCK_ABS_DIR . '/inc/user-agent-parse.php';
 require_once PUOCK_ABS_DIR . '/inc/phpqrcode.php';
 require_once PUOCK_ABS_DIR . '/inc/ajax/index.php';
+require_once PUOCK_ABS_DIR . '/inc/fun/lazyload.php';
 if (pk_is_checked('no_category')) {
     require_once PUOCK_ABS_DIR . '/inc/no-category.php';
 }

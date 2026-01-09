@@ -191,6 +191,11 @@ function pk_init_register_assets()
         if (pk_get_option('vd_type') === 'gt') {
             wp_enqueue_script('puock-gt4', pk_get_static_url() . '/assets/libs/gt4.js', [], PUOCK_CUR_VER_STR, true);
         }
+        // 加载增强懒加载
+        if (pk_is_checked('basic_img_lazy_s')) {
+            wp_enqueue_script('puock-lazyload-enhanced', pk_get_static_url() . '/assets/js/lazyload-enhanced.js', [], PUOCK_CUR_VER_STR, false);
+            wp_enqueue_style('puock-lazyload-enhanced', pk_get_static_url() . '/assets/style/lazyload-enhanced.less', [], PUOCK_CUR_VER_STR);
+        }
         wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/puock.min.js', array('puock-libs'), PUOCK_CUR_VER_STR, true);
 
         //加载全站黑白样式
