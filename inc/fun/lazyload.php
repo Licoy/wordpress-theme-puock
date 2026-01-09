@@ -85,18 +85,19 @@ function pk_get_lqip_placeholder($src, $quality = 10, $blur = 10) {
         return pk_get_lazy_pl_img();
     }
     
-    // 使用 timthumb 生成低质量占位图
-    if (!empty($src)) {
-        $placeholder = PUOCK_ABS_URI . "/timthumb.php?w=50&h=50&q={$quality}&f={$blur}&src=" . urlencode($src);
-        return $placeholder;
+    // 检查图片 URL 是否为空
+    if (empty($src) || $src === 'null' || $src === null) {
+        return pk_get_lazy_pl_img();
     }
     
-    return pk_get_lazy_pl_img();
+    // 使用 timthumb 生成低质量占位图
+    $placeholder = PUOCK_ABS_URI . "/timthumb.php?w=50&h=50&q={$quality}&f={$blur}&src=" . urlencode($src);
+    return $placeholder;
 }
 
 // 生成响应式图片 srcset
 function pk_generate_srcset($src, $sizes = [320, 640, 960, 1280, 1920]) {
-    if (!pk_is_checked('lazyload_srcset_enable')) {
+    if (!pk_is_checked('lazyload_srcset_enable') || empty($src)) {
         return '';
     }
     
@@ -112,6 +113,12 @@ function pk_generate_srcset($src, $sizes = [320, 640, 960, 1280, 1920]) {
 
 // 增强版懒加载图片信息获取
 function pk_get_enhanced_lazy_img_info($origin, $class = '', $width = null, $height = null, $thumbnail = true, $options = []) {
+    // 检查图片 URL 是否为空
+    if (empty($origin) || $origin === 'null' || $origin === null) {
+        // 返回占位符图片
+        return "src='" . pk_get_lazy_pl_img() . "' class='" . esc_attr($class) . "' alt='placeholder'";
+    }
+    
     $defaults = [
         'use_lqip' => pk_is_checked('lazyload_lqip_enable'),
         'use_srcset' => pk_is_checked('lazyload_srcset_enable'),

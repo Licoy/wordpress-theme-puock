@@ -337,6 +337,12 @@ function pk_get_lazy_pl_img()
 
 function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = null, $thumbnail = true)
 {
+    // 检查图片 URL 是否为空
+    if (empty($origin) || $origin === 'null' || $origin === null) {
+        // 返回占位符图片
+        return "src='" . pk_get_lazy_pl_img() . "' class='" . esc_attr($class) . "' alt='placeholder'";
+    }
+    
     if (!pk_is_checked('basic_img_lazy_s')) {
         if ($thumbnail) {
             $out = "src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "' ";
@@ -368,6 +374,11 @@ if (pk_is_checked('basic_img_lazy_z')) {
 //获取图片缩略图链接
 function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
 {
+    // 检查源 URL 是否为空
+    if (empty($src) || $src === 'null' || $src === null) {
+        return pk_get_lazy_pl_img();
+    }
+    
     if ($width == null || $height == null) {
         return $src;
     }
