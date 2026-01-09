@@ -365,12 +365,31 @@ function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = nul
 
 function pk_content_img_lazy($content)
 {
-    return preg_replace('/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i', "<img\$1data-src=\"\$2\" data-lazy=\"true\" src=\"" . pk_get_lazy_pl_img() . "\"\$3/>", $content);
+    // 使用回调函数检查每个图片的 src
+    return preg_replace_callback(
+        '/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',
+        function($matches) {
+            $before = $matches[1];
+            $src = $matches[2];
+            $after = $matches[3];
+            
+            // 检查 src 是否为空或 null
+            if (empty($src) || $src === 'null' || $src === null || trim($src) === '') {
+                // 如果 src 无效，直接使用占位符，不添加 data-src
+                return "<img{$before}src=\"" . pk_get_lazy_pl_img() . "\"{$after}/>";
+            }
+            
+            // src 有效，正常处理懒加载
+            return "<img{$before}data-src=\"{$src}\" data-lazy=\"true\" src=\"" . pk_get_lazy_pl_img() . "\"{$after}/>";
+        },
+        $content
+    );
 }
 
-if (pk_is_checked('basic_img_lazy_z')) {
-    add_filter('the_content', 'pk_content_img_lazy');
-}
+// 旧的懒加载过滤器已被增强版替代（在 lazyload.php 中）
+// if (pk_is_checked('basic_img_lazy_z')) {
+//     add_filter('the_content', 'pk_content_img_lazy');
+// }
 //获取图片缩略图链接
 function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
 {

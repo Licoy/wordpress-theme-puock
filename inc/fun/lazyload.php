@@ -206,14 +206,33 @@ function pk_content_img_lazy_enhanced($content) {
             $img = $matches[0];
             $attrs = $matches[1];
             
-            // 如果已经有 data-src，跳过
-            if (strpos($attrs, 'data-src') !== false) {
+            // 如果已经有 data-src或data-lazy，说明已经处理过，跳过
+            if (strpos($attrs, 'data-src') !== false || strpos($attrs, 'data-lazy') !== false) {
                 return $img;
             }
             
             // 提取 src
             if (preg_match('/src=[\'"]([^\'"]+)[\'"]/i', $attrs, $src_match)) {
                 $src = $src_match[1];
+                
+                // 如果 src 已经是占位符图片，跳过（防止重复处理）
+                $placeholder_path = '/assets/img/z/load.svg';
+                if (strpos($src, $placeholder_path) !== false) {
+                    return $img;
+                }
+                
+                // 检查 src 是否为空或 null
+                if (empty($src) || $src === 'null' || $src === null || trim($src) === '') {
+                    // 如果 src 无效，用占位符替换整个 img 标签
+                    $lazy_placeholder = pk_get_lazy_pl_img();
+                    $new_attrs = preg_replace(
+                        '/src=[\'"]([^\'"]+)[\'"]/i',
+                        "src=\"{$lazy_placeholder}\"",
+                        $attrs
+                    );
+                    return "<img{$new_attrs}>";
+                }
+                
                 $lazy_placeholder = pk_get_lazy_pl_img();
                 
                 // 替换 src 并添加 data-src
@@ -243,9 +262,10 @@ function pk_content_img_lazy_enhanced($content) {
     return $content;
 }
 
-// 替换原有的懒加载过滤器
-remove_filter('the_content', 'pk_content_img_lazy');
-add_filter('the_content', 'pk_content_img_lazy_enhanced');
+// 替换原有的懒加载过滤器（旧的已在 core.php 中注释）
+if (pk_is_checked('basic_img_lazy_z')) {
+    add_filter('the_content', 'pk_content_img_lazy_enhanced');
+}
 
 // 添加图片格式支持检测脚本
 function pk_add_image_format_detection() {
