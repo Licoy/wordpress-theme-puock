@@ -337,27 +337,37 @@ function pk_get_lazy_pl_img()
 
 function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = null, $thumbnail = true)
 {
-    // 检查图片 URL 是否为空
-    if (empty($origin) || $origin === 'null' || $origin === null) {
+    // 检查图片 URL 是否为空、null、包含"null"或者无效
+    if (empty($origin) || $origin === 'null' || $origin === null || trim($origin) === '' || strpos($origin, 'null') !== false) {
         // 返回占位符图片
         return "src='" . pk_get_lazy_pl_img() . "' class='" . esc_attr($class) . "' alt='placeholder'";
     }
     
     if (!pk_is_checked('basic_img_lazy_s')) {
         if ($thumbnail) {
-            $out = "src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "' ";
-            $out .= "class='" . $class . "' ";
+            $thumb_src = pk_get_img_thumbnail_src($origin, $width, $height);
+            // 再次验证缩略图URL
+            if (empty($thumb_src) || strpos($thumb_src, 'null') !== false) {
+                $thumb_src = pk_get_lazy_pl_img();
+            }
+            $out = "src='" . esc_url($thumb_src) . "' ";
+            $out .= "class='" . esc_attr($class) . "' ";
         } else {
-            $out = "src='{$origin}' ";
-            $out .= "class='{$class}' ";
+            $out = "src='" . esc_url($origin) . "' ";
+            $out .= "class='" . esc_attr($class) . "' ";
         }
     } else {
         $out = "src='" . pk_get_lazy_pl_img() . "' ";
-        $out .= "class='lazy " . $class . "' ";
+        $out .= "class='lazy " . esc_attr($class) . "' ";
         if ($thumbnail) {
-            $out .= "data-src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "'";
+            $thumb_src = pk_get_img_thumbnail_src($origin, $width, $height);
+            // 再次验证缩略图URL
+            if (empty($thumb_src) || strpos($thumb_src, 'null') !== false) {
+                $thumb_src = pk_get_lazy_pl_img();
+            }
+            $out .= "data-src='" . esc_url($thumb_src) . "'";
         } else {
-            $out .= "data-src='" . $origin . "'";
+            $out .= "data-src='" . esc_url($origin) . "'";
         }
     }
     return $out;
@@ -393,8 +403,14 @@ function pk_content_img_lazy($content)
 //获取图片缩略图链接
 function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
 {
-    // 检查源 URL 是否为空
-    if (empty($src) || $src === 'null' || $src === null) {
+    // 检查源 URL 是否为空、null 或者包含 "null" 字符串
+    if (empty($src) || $src === 'null' || $src === null || trim($src) === '' || strpos($src, 'null') !== false) {
+        return pk_get_lazy_pl_img();
+    }
+    
+    // 确保 $src 是有效的 URL 格式
+    if (!filter_var($src, FILTER_VALIDATE_URL) && !preg_match('/^\//', $src)) {
+        // 不是有效的 URL，也不是绝对路径，返回占位符
         return pk_get_lazy_pl_img();
     }
     
