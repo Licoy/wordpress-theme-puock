@@ -1,0 +1,228 @@
+/* 懒加载增强样式 */
+
+/* 基础懒加载状态 */
+img.lazy {
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+}
+
+/* 加载中状态 */
+img.lazy-loading {
+    opacity: 0.6;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+}
+
+/* 加载完成状态 - 淡入效果 */
+img.lazy-loaded {
+    opacity: 1;
+}
+
+/* 淡入动画 */
+img.lazy-fade {
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, filter 0.3s ease-out;
+}
+
+img.lazy-fade.lazy-loaded {
+    opacity: 1;
+}
+
+/* 模糊到清晰效果 */
+img.lazy-blur {
+    filter: blur(10px);
+    transform: scale(1.05);
+    transition: filter 0.4s ease-out, transform 0.4s ease-out;
+}
+
+img.lazy-blur.lazy-loaded {
+    filter: blur(0);
+    transform: scale(1);
+}
+
+/* 加载失败状态 */
+img.lazy-error {
+    opacity: 0.5;
+    filter: grayscale(100%);
+    position: relative;
+}
+
+img.lazy-error::after {
+    content: '图片加载失败';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #999;
+    font-size: 12px;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* 加载动画 - 闪烁效果 */
+@keyframes loading-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* 骨架屏效果 */
+.lazy-skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(240, 240, 240, 1) 0%,
+        rgba(240, 240, 240, 1) 40%,
+        rgba(224, 224, 224, 1) 50%,
+        rgba(240, 240, 240, 1) 60%,
+        rgba(240, 240, 240, 1) 100%
+    );
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s ease-in-out infinite;
+}
+
+/* 暗色模式适配 */
+@media (prefers-color-scheme: dark) {
+    img.lazy-loading {
+        background: linear-gradient(90deg, #2a2a2a 25%, #1a1a1a 50%, #2a2a2a 75%);
+    }
+    
+    .lazy-skeleton {
+        background: linear-gradient(
+            90deg,
+            rgba(42, 42, 42, 1) 0%,
+            rgba(42, 42, 42, 1) 40%,
+            rgba(26, 26, 26, 1) 50%,
+            rgba(42, 42, 42, 1) 60%,
+            rgba(42, 42, 42, 1) 100%
+        );
+    }
+    
+    img.lazy-error::after {
+        background: rgba(30, 30, 30, 0.9);
+        color: #ccc;
+    }
+}
+
+/* 响应式图片优化 */
+img[data-srcset] {
+    width: 100%;
+    height: auto;
+}
+
+/* 防止布局抖动 */
+img.lazy[width][height] {
+    aspect-ratio: attr(width) / attr(height);
+}
+
+/* 渐进式 JPEG 样式 */
+.progressive-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.progressive-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.progressive-image .placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(20px);
+    transform: scale(1.1);
+    transition: opacity 0.4s ease-out;
+}
+
+.progressive-image .placeholder.loaded {
+    opacity: 0;
+}
+
+/* 图片容器优化 */
+.img-container {
+    position: relative;
+    background: #f5f5f5;
+    overflow: hidden;
+}
+
+.img-container::before {
+    content: '';
+    display: block;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.img-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 加载指示器 */
+.lazy-loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img.lazy-loading + .lazy-loading-indicator {
+    opacity: 1;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 性能优化 - 使用 will-change */
+img.lazy-fade,
+img.lazy-blur {
+    will-change: opacity, filter, transform;
+}
+
+img.lazy-loaded {
+    will-change: auto;
+}
+
+/* 打印时显示所有图片 */
+@media print {
+    img.lazy,
+    img.lazy-loading,
+    img.lazy-fade,
+    img.lazy-blur {
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+    }
+}
+
+/* 减少动画效果（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+    img.lazy,
+    img.lazy-fade,
+    img.lazy-blur,
+    .lazy-skeleton {
+        animation: none !important;
+        transition: none !important;
+    }
+}

@@ -46,6 +46,7 @@ require_once PUOCK_ABS_DIR . '/inc/fun/comment-notify.php';
 require_once PUOCK_ABS_DIR . '/inc/user-agent-parse.php';
 require_once PUOCK_ABS_DIR . '/inc/phpqrcode.php';
 require_once PUOCK_ABS_DIR . '/inc/ajax/index.php';
+require_once PUOCK_ABS_DIR . '/inc/fun/lazyload.php';
 if (pk_is_checked('no_category')) {
     require_once PUOCK_ABS_DIR . '/inc/no-category.php';
 }
@@ -336,21 +337,37 @@ function pk_get_lazy_pl_img()
 
 function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = null, $thumbnail = true)
 {
+    // 检查图片 URL 是否为空、null、包含"null"或者无效
+    if (empty($origin) || $origin === 'null' || $origin === null || trim($origin) === '' || strpos($origin, 'null') !== false) {
+        // 返回占位符图片
+        return "src='" . pk_get_lazy_pl_img() . "' class='" . esc_attr($class) . "' alt='placeholder'";
+    }
+    
     if (!pk_is_checked('basic_img_lazy_s')) {
         if ($thumbnail) {
-            $out = "src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "' ";
-            $out .= "class='" . $class . "' ";
+            $thumb_src = pk_get_img_thumbnail_src($origin, $width, $height);
+            // 再次验证缩略图URL
+            if (empty($thumb_src) || strpos($thumb_src, 'null') !== false) {
+                $thumb_src = pk_get_lazy_pl_img();
+            }
+            $out = "src='" . esc_url($thumb_src) . "' ";
+            $out .= "class='" . esc_attr($class) . "' ";
         } else {
-            $out = "src='{$origin}' ";
-            $out .= "class='{$class}' ";
+            $out = "src='" . esc_url($origin) . "' ";
+            $out .= "class='" . esc_attr($class) . "' ";
         }
     } else {
         $out = "src='" . pk_get_lazy_pl_img() . "' ";
-        $out .= "class='lazy " . $class . "' ";
+        $out .= "class='lazy " . esc_attr($class) . "' ";
         if ($thumbnail) {
-            $out .= "data-src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "'";
+            $thumb_src = pk_get_img_thumbnail_src($origin, $width, $height);
+            // 再次验证缩略图URL
+            if (empty($thumb_src) || strpos($thumb_src, 'null') !== false) {
+                $thumb_src = pk_get_lazy_pl_img();
+            }
+            $out .= "data-src='" . esc_url($thumb_src) . "'";
         } else {
-            $out .= "data-src='" . $origin . "'";
+            $out .= "data-src='" . esc_url($origin) . "'";
         }
     }
     return $out;
@@ -358,15 +375,45 @@ function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = nul
 
 function pk_content_img_lazy($content)
 {
-    return preg_replace('/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i', "<img\$1data-src=\"\$2\" data-lazy=\"true\" src=\"" . pk_get_lazy_pl_img() . "\"\$3/>", $content);
+    // 使用回调函数检查每个图片的 src
+    return preg_replace_callback(
+        '/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',
+        function($matches) {
+            $before = $matches[1];
+            $src = $matches[2];
+            $after = $matches[3];
+            
+            // 检查 src 是否为空或 null
+            if (empty($src) || $src === 'null' || $src === null || trim($src) === '') {
+                // 如果 src 无效，直接使用占位符，不添加 data-src
+                return "<img{$before}src=\"" . pk_get_lazy_pl_img() . "\"{$after}/>";
+            }
+            
+            // src 有效，正常处理懒加载
+            return "<img{$before}data-src=\"{$src}\" data-lazy=\"true\" src=\"" . pk_get_lazy_pl_img() . "\"{$after}/>";
+        },
+        $content
+    );
 }
 
-if (pk_is_checked('basic_img_lazy_z')) {
-    add_filter('the_content', 'pk_content_img_lazy');
-}
+// 旧的懒加载过滤器已被增强版替代（在 lazyload.php 中）
+// if (pk_is_checked('basic_img_lazy_z')) {
+//     add_filter('the_content', 'pk_content_img_lazy');
+// }
 //获取图片缩略图链接
 function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
 {
+    // 检查源 URL 是否为空、null 或者包含 "null" 字符串
+    if (empty($src) || $src === 'null' || $src === null || trim($src) === '' || strpos($src, 'null') !== false) {
+        return pk_get_lazy_pl_img();
+    }
+    
+    // 确保 $src 是有效的 URL 格式
+    if (!filter_var($src, FILTER_VALIDATE_URL) && !preg_match('/^\//', $src)) {
+        // 不是有效的 URL，也不是绝对路径，返回占位符
+        return pk_get_lazy_pl_img();
+    }
+    
     if ($width == null || $height == null) {
         return $src;
     }

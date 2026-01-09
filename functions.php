@@ -308,19 +308,25 @@ function get_post_images($_post = null): string
     }
 
     $post_id = $post_obj->ID;
+    
+    // 确保 post_id 有效
+    if (empty($post_id) || $post_id <= 0) {
+        return get_random_default_image();
+    }
+    
     $content = $post_obj->post_content;
 
     // 2. 优先：特色图（支持 attachment 和 外部链接）
     if (has_post_thumbnail($post_id)) {
         $featured_url = get_the_post_thumbnail_url($post_id, 'large');
-        if ($featured_url) {
+        if ($featured_url && filter_var($featured_url, FILTER_VALIDATE_URL)) {
             return esc_url($featured_url);
         }
     }
 
-    // 可选：支持外部特色图（如果你用了之前“external_thumbnail_url”的方案）
+    // 可选：支持外部特色图（如果你用了之前"external_thumbnail_url"的方案）
     $external_thumb = get_post_meta($post_id, 'external_thumbnail_url', true);
-    if ($external_thumb) {
+    if ($external_thumb && filter_var($external_thumb, FILTER_VALIDATE_URL)) {
         return esc_url($external_thumb);
     }
 
@@ -352,7 +358,15 @@ function get_post_images($_post = null): string
 function get_random_default_image(): string
 {
     $img_dir = get_template_directory_uri() . '/assets/img/random/';
-    return esc_url($img_dir . mt_rand(1, 8) . '.jpg');
+    $img_url = $img_dir . mt_rand(1, 8) . '.jpg';
+    
+    // 确保返回有效的 URL
+    if (empty($img_url)) {
+        // 如果为空，返回占位符
+        return pk_get_static_url() . "/assets/img/z/load.svg";
+    }
+    
+    return esc_url($img_url);
 }
 
 //分页功能
