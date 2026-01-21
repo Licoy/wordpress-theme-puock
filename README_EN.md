@@ -15,7 +15,7 @@
         <img src="https://img.shields.io/github/v/release/Licoy/wordpress-theme-puock.svg?logo=git" alt="Release-Version">
       </a>
     <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock">
-        <img src="https://img.shields.io/badge/WordPress-V5.0+-0099CC.svg?logo=wordpress" alt="WordPress-Version">
+        <img src="https://img.shields.io/badge/WordPress-V6.0+-0099CC.svg?logo=wordpress" alt="WordPress-Version">
       </a>
     <a target="_blank" href="https://github.com/Licoy/wordpress-theme-puock">
         <img src="https://img.shields.io/badge/PHP-V7.4+-666699.svg?logo=php" alt="PHP-Version">
@@ -46,10 +46,12 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 ## Theme characteristics
 - [x] Support day and dark mode
 - [x] Global load without refresh
+- [x] Home “load more”
 - [x] Support blog, CMS, enterprise three layouts
 - [x] Built-in WP optimization strategy
 - [x] Built-in frontend user center
 - [x] Support QQ / Github / Gitee / Weibo login
+- [x] Rainbow OAuth aggregation login
 - [x] Support thumbnail pseudo-static
 - [x] Global top scrolling announcements
 - [x] Graphics and geetest captcha support
@@ -57,8 +59,10 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 - [x] All sites are grayed out with one click
 - [x] Web page compressed into one line
 - [x] Background anti-malicious login
+- [x] Auto/follow system color mode
 - [x] Great SEO features built in
 - [x] Comments ajax loaded
+- [x] Reading time & word count
 - [x] Article likes, rewards, poster generation, sharing
 - [x] Twemoji integration
 - [x] Rich ad slots
@@ -70,10 +74,17 @@ Please go to the [release version](https://github.com/Licoy/wordpress-theme-puoc
 - [x] MacOS-like code style and copy code
 - [x] High-value background configuration integrated with Vue3+NaiveUI
 - [x] Article multi-level directory generation
+- [x] Multi-level TOC expansion
 - [x] Sidebar sticky scrolling
+- [x] Mobile sidebar
 - [x] WP cache support
 - [x] Custom primary color
 - [x] LOGO sweep light animation
+- [x] Skeleton loading
+- [x] Image/avatar lazy loading
+- [x] Frontend login/registration/password reset
+- [x] Settings reset
+- [x] Third‑party binding in user center
 - [x] ChatGPT and AI painting support
 - [x] Please refer to the release notes for more feature updates：[releases](https://github.com/Licoy/wordpress-theme-puock/releases)
 - [x] More features, waiting for your [proposal](https://github.com/Licoy/wordpress-theme-puock/issues)
