@@ -480,7 +480,7 @@ function pk_icon_mate() {
  */
 function pk_get_seo_title() {
     // 未启用SEO返回空
-    if (!pk_is_checked('seo_open',true)) {
+    if (!pk_is_checked('seo_open',true) || defined('THE_SEO_FRAMEWORK_VERSION')) {
         return '';
     }
     // 用户定义的连接符
