@@ -465,10 +465,36 @@ class Puock {
         }
         this.tooltipInit()
         if(!this.data.params.off_img_viewer){
+            const getViewerUrl = (image) => {
+                const img = $(image);
+                const link = img.closest('a');
+                const href = link.attr('href');
+                if (href && this.isImageUrl(href)) {
+                    return href;
+                }
+                const dataSrc = img.attr('data-src');
+                const src = img.attr('src');
+                return this.data.params.main_lazy_img ? (dataSrc || src) : (src || dataSrc);
+            }
             jQuery(".entry-content").viewer({
                 navbar: false,
-                url: this.data.params.main_lazy_img ? 'data-src' : 'src'
+                url: getViewerUrl
             });
+            $(document).off("click.pkImageLink").on("click.pkImageLink", ".entry-content a", (e) => {
+                const link = $(this.ct(e));
+                const img = link.find("img");
+                if (img.length === 0) {
+                    return;
+                }
+                const href = link.attr("href");
+                if (!this.isImageUrl(href)) {
+                    return;
+                }
+                e.preventDefault();
+                img.trigger("click");
+            });
+        }else{
+            $(document).off("click.pkImageLink");
         }
         const cp = new ClipboardJS('.pk-copy', {
             text: (trigger) => {
@@ -509,10 +535,29 @@ class Puock {
 
     getPostMenuStructure() {
         let res = []
+        let index = 0;
         for (let item of $(".entry-content").find('h1,h2,h3,h4,h5,h6')) {
-            res.push({name: $(item).text().trim(), level: item.tagName.toLowerCase(), id: $(item).attr("id")})
+            const el = $(item);
+            let id = el.attr("id");
+            if (!id) {
+                const text = el.text().trim().toLowerCase();
+                const base = text
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w\u4e00-\u9fa5\-]/g, '');
+                id = `pk-menu-${base || 'section'}-${index}`;
+                el.attr("id", id);
+            }
+            res.push({name: el.text().trim(), level: item.tagName.toLowerCase(), id})
+            index++;
         }
         return res
+    }
+
+    isImageUrl(url) {
+        if (!url) {
+            return false;
+        }
+        return /\.(jpe?g|png|gif|webp|bmp|svg)(\?.*)?$/i.test(url);
     }
 
     generatePostMenuHTML() {
