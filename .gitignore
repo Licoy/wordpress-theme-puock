@@ -13,3 +13,4 @@ gutenberg/source
 assets/dist/setting/index.html
 assets/dist/setting/assets
 .vscode/*
+.spec-workflow/*
