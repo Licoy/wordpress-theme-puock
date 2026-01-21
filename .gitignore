@@ -12,3 +12,4 @@ gutenberg/source
 **/**/*-dev.php
 assets/dist/setting/index.html
 assets/dist/setting/assets
+.vscode/*
