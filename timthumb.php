@@ -1183,9 +1183,14 @@ class timthumb
                 break;
 
             case 'image/png':
-                $image = imagecreatefrompng($src);
-                imagealphablending($image, true);
-                imagesavealpha($image, true);
+                $image = @imagecreatefrompng($src);
+                if ($image === false) {
+                    $image = $this->createImageFromString($src);
+                }
+                if ($image !== false) {
+                    imagealphablending($image, true);
+                    imagesavealpha($image, true);
+                }
                 break;
 
             case 'image/gif':
@@ -1201,6 +1206,15 @@ class timthumb
         }
 
         return $image;
+    }
+
+    protected function createImageFromString($src)
+    {
+        $imageData = @file_get_contents($src);
+        if ($imageData === false) {
+            return false;
+        }
+        return @imagecreatefromstring($imageData);
     }
 
     protected function getIP()
