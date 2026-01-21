@@ -104,6 +104,34 @@ function pk_sc_video($attr, $content = null)
         $url = ($ssl ? 'https://' : 'http://') . $url;
     }
     $auto = ($autoplay === 'true') ? 'true' : 'false';
+    $biliIframeSrc = null;
+    $parsedUrl = parse_url($url);
+    $host = strtolower($parsedUrl['host'] ?? '');
+    $path = $parsedUrl['path'] ?? '';
+    $query = $parsedUrl['query'] ?? '';
+    if (!empty($host) && (strpos($host, 'bilibili.com') !== false || strpos($host, 'b23.tv') !== false)) {
+        if (strpos($host, 'player.bilibili.com') !== false) {
+            $biliIframeSrc = $url;
+        } elseif (strpos($host, 'bilibili.com') !== false) {
+            if (preg_match('/\/video\/(BV[a-zA-Z0-9]+)/', $path, $match)) {
+                $bvid = $match[1];
+                parse_str($query, $queryArgs);
+                $page = isset($queryArgs['p']) ? max(1, intval($queryArgs['p'])) : 1;
+                $autoplayValue = $auto === 'true' ? '1' : '0';
+                $biliIframeSrc = "https://player.bilibili.com/player.html?bvid={$bvid}&page={$page}&as_wide=1&high_quality=1&danmaku=0&autoplay={$autoplayValue}";
+            }
+        }
+        if (!empty($biliIframeSrc)) {
+            if (strpos($biliIframeSrc, '//') === 0) {
+                $biliIframeSrc = 'https:' . $biliIframeSrc;
+            }
+            $wrapStyle = 'position: relative; width: 100%; padding-top: 56.25%;';
+            $iframeStyle = 'position: absolute; width: 100%; height: 100%; left: 0; top: 0;';
+            $iframeClass = $class ? ' ' . $class : '';
+            return "<div class=\"pk-sc-bili{$iframeClass}\" style=\"{$wrapStyle}\"><iframe style=\"{$iframeStyle}\" src=\"{$biliIframeSrc}\" scrolling=\"no\" border=\"0\" frameborder=\"no\" framespacing=\"0\" allowfullscreen=\"true\" sandbox=\"allow-top-navigation allow-same-origin allow-forms allow-scripts\"></iframe></div>";
+        }
+        return sc_tips(array('outline'=>true), '<span class="c-sub fs14">视频警告：未能识别有效的B站链接</span>', 't-warning');
+    }
     if (pk_is_checked('dplayer')) {
         $id = mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
         $out = "<div id='dplayer-{$id}' class='{$class}'></div>";
