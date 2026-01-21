@@ -61,6 +61,7 @@ if (window.Puock && typeof window.Puock.goUrl === 'function') {
 <?php endif; ?>
 <?php pk_debug_print_sql_list(); ?>
 
+<?php if (pk_is_checked('mobile_sidebar_enable') && wp_is_mobile()): ?>
 <!-- 移动端侧边栏 -->
 <div id="mobile-sidebar" class="mobile-sidebar">
     <div class="mobile-sidebar-content">
@@ -88,6 +89,7 @@ if (window.Puock && typeof window.Puock.goUrl === 'function') {
     </div>
     <div id="mobile-sidebar-overlay" class="mobile-sidebar-overlay"></div>
 </div>
+<?php endif; ?>
 
 </body>
 </html>
