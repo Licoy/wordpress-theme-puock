@@ -392,6 +392,16 @@ function pk_get_wp_links($link_cats = '', $auto_all = false)
 //获取懒加载图片信息
 function pk_get_lazy_pl_img()
 {
+    $custom = trim(pk_get_option('lazy_placeholder_url', ''));
+    if (!empty($custom)) {
+        if (strpos($custom, 'http://') === 0 || strpos($custom, 'https://') === 0) {
+            return $custom;
+        }
+        if (substr($custom, 0, 1) !== '/') {
+            $custom = '/' . $custom;
+        }
+        return home_url() . $custom;
+    }
     return pk_get_static_url() . "/assets/img/z/load.svg";
 }
 

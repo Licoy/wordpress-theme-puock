@@ -27,6 +27,13 @@ class OptionBasic extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'lazy_placeholder_url',
+                    'label' => __('懒加载占位图链接', PUOCK),
+                    'type' => 'text',
+                    'sdt' => '',
+                    'tips' => __('自定义懒加载占位图URL（留空使用主题默认占位图）', PUOCK),
+                ],
+                [
                     'id' => 'basic_img_lazy_z',
                     'label' => __('正文图片懒加载', PUOCK),
                     'type' => 'switch',
