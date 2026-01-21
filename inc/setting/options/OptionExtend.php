@@ -30,6 +30,26 @@ class OptionExtend extends BaseOptionItem
                     'tips' => __('使用前请先配置wordpress伪静态规则：<code>try_files $uri $uri/ /index.php?$args</code>', PUOCK)
                 ],
                 [
+                    'id' => 'user_center_entry',
+                    'label' => __('用户中心入口', PUOCK),
+                    'type' => 'select',
+                    'sdt' => '',
+                    'options' => [
+                        ['value' => 'theme', 'label' => __('主题用户中心', PUOCK)],
+                        ['value' => 'wp', 'label' => __('WordPress个人资料', PUOCK)],
+                        ['value' => 'erphp', 'label' => __('ErphpDown用户中心', PUOCK)],
+                    ],
+                    'tips' => __('用于选择用户中心跳转入口（未设置时沿用“用户中心”开关逻辑）', PUOCK)
+                ],
+                [
+                    'id' => 'erphpdown_user_center_url',
+                    'label' => __('ErphpDown用户中心URL', PUOCK),
+                    'type' => 'text',
+                    'sdt' => '/erphpdown/user',
+                    'showRefId' => 'func:(function(args){return args.data.user_center_entry==="erphp"})(args)',
+                    'tips' => __('ErphpDown 用户中心地址，可填写完整URL或站内路径', PUOCK)
+                ],
+                [
                     'id' => 'strawberry_icon',
                     'label' => __('Strawberry图标库', PUOCK),
                     'type' => 'switch',

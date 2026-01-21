@@ -6,11 +6,11 @@ Template Name: 友情链接
 $cats = get_post_meta($post->ID,'page_links_id',true);
 $use_theme_link_forward = get_post_meta($post->ID,'use_theme_link_forward',true);
 
-$links = pk_get_wp_links($cats);
+$links = pk_get_wp_links($cats, true);
 
 $groups = array();
 
-if(!empty($cats) && $links && count($links)>0){
+if($links && count($links)>0){
     foreach ($links as $link){
         if(!array_key_exists($link->term_id,$groups)){
             $groups[$link->term_id] = array(

@@ -9,7 +9,7 @@ class PuockClassLoad
 
     public function __construct()
     {
-        if (pk_is_checked('user_center')) {
+        if (pk_is_user_center_theme()) {
             self::$classes[] = PuockUserCenter::class;
         }
         add_action('init', array($this, '__wp_init'));

@@ -312,11 +312,20 @@ function pk_sidebar_check_has($name)
 }
 
 //获取链接对象，用于书籍推荐及其他页面使用
-function pk_get_wp_links($link_cats = '')
+function pk_get_wp_links($link_cats = '', $auto_all = false)
 {
     global $wpdb;
     if (empty($link_cats)) {
-        return null;
+        if (!$auto_all) {
+            return null;
+        }
+        $all_cats = get_all_category_id_row('link_category');
+        if (empty($all_cats)) {
+            return null;
+        }
+        $link_cats = array_map(function ($item) {
+            return $item['value'];
+        }, $all_cats);
     }
     if (is_array($link_cats)) {
         $link_cats = implode(',', $link_cats);
@@ -705,7 +714,7 @@ function pk_get_main_menu($mobile = false)
     if (is_user_logged_in()) {
         $user = wp_get_current_user();
         $avatar = get_avatar_url($user->user_email);
-        $out .= '<li><a ' . (pk_is_checked('user_center') ? '' : 'data-no-instant') . ' data-bs-toggle="tooltip" title="' . esc_attr__('用户中心', PUOCK) . '" href="' . pk_user_center_url() . '"><img alt="' . esc_attr__('用户中心', PUOCK) . '" src="' . $avatar . '" class="min-avatar"></a></li>';
+        $out .= '<li><a ' . (pk_is_user_center_theme() ? '' : 'data-no-instant') . ' data-bs-toggle="tooltip" title="' . esc_attr__('用户中心', PUOCK) . '" href="' . pk_user_center_url() . '"><img alt="' . esc_attr__('用户中心', PUOCK) . '" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
         if (pk_is_checked('open_quick_login')) {
             $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url($wp->request)]);
@@ -1015,17 +1024,45 @@ function pk_vd_gt_validate(array $args = null)
     return true;
 }
 
+function pk_get_user_center_entry(): string
+{
+    $entry = pk_get_option('user_center_entry', '');
+    if (!empty($entry)) {
+        return $entry;
+    }
+    return pk_is_checked('user_center') ? 'theme' : 'wp';
+}
+
+function pk_is_user_center_theme(): bool
+{
+    return pk_get_user_center_entry() === 'theme';
+}
+
 function pk_user_center_url(): string
 {
-    if (pk_is_checked('user_center')) {
+    $entry = pk_get_user_center_entry();
+    if ($entry === 'theme') {
         return home_url() . '/uc';
+    }
+    if ($entry === 'erphp') {
+        $url = trim(pk_get_option('erphpdown_user_center_url', '/erphpdown/user'));
+        if (empty($url)) {
+            return get_edit_profile_url();
+        }
+        if (strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0) {
+            return $url;
+        }
+        if (substr($url, 0, 1) !== '/') {
+            $url = '/' . $url;
+        }
+        return home_url() . $url;
     }
     return get_edit_profile_url();
 }
 
 function pk_rewrite_rule()
 {
-    if (pk_is_checked('user_center')) {
+    if (pk_is_user_center_theme()) {
         add_rewrite_rule('^uc/?([0-9A-Za-z_\-]+)?$', 'index.php?pagename=user-center&id=$matches[1]', "top");
     }
 }
@@ -1034,6 +1071,9 @@ add_action('init', 'pk_rewrite_rule');
 
 function pk_template_redirect()
 {
+    if (!pk_is_user_center_theme()) {
+        return;
+    }
     global $wp_query;
     $page_name = $wp_query->get('pagename');
     if (!empty($page_name)) {
