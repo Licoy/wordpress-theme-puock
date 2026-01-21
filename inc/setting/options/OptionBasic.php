@@ -96,6 +96,13 @@ class OptionBasic extends BaseOptionItem
                     'tips' => __('此选项为开启缓存后浏览量不自增问题解决方案', PUOCK)
                 ],
                 [
+                    'id' => 'view_dedupe_hours',
+                    'label' => __('浏览量去重小时数', PUOCK),
+                    'type' => 'number',
+                    'sdt' => 24,
+                    'tips' => __('同一用户在该时间窗口内重复访问不计入阅读量（0为不去重）', PUOCK)
+                ],
+                [
                     'id' => 'page_animate',
                     'label' => __('页面模块载入动画', PUOCK),
                     'type' => 'switch',

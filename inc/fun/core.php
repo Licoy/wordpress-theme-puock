@@ -168,17 +168,69 @@ function pk_is_pjax()
     return pk_is_checked('page_ajax_load', false);
 }
 
+function pk_view_dedupe_seconds(): int
+{
+    $hours = intval(pk_get_option('view_dedupe_hours', 24));
+    if ($hours <= 0) {
+        return 0;
+    }
+    return $hours * 3600;
+}
+
+function pk_view_dedupe_cookie_key($post_ID): string
+{
+    return 'pk_viewed_' . $post_ID;
+}
+
+function pk_has_view_dedupe_cookie($post_ID): bool
+{
+    $seconds = pk_view_dedupe_seconds();
+    if ($seconds <= 0) {
+        return false;
+    }
+    $key = pk_view_dedupe_cookie_key($post_ID);
+    return !empty($_COOKIE[$key]);
+}
+
+function pk_set_view_dedupe_cookie($post_ID): void
+{
+    $seconds = pk_view_dedupe_seconds();
+    if ($seconds <= 0) {
+        return;
+    }
+    $key = pk_view_dedupe_cookie_key($post_ID);
+    setcookie($key, '1', time() + $seconds, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true);
+    $_COOKIE[$key] = '1';
+}
+
+function pk_is_instantclick_prefetch(): bool
+{
+    $instant = $_SERVER['HTTP_X_INSTANTCLICK'] ?? $_SERVER['HTTP_X_INSTANT_CLICK'] ?? '';
+    if (!empty($instant) && strtolower($instant) === 'prefetch') {
+        return true;
+    }
+    $purpose = strtolower($_SERVER['HTTP_X_PURPOSE'] ?? ($_SERVER['HTTP_PURPOSE'] ?? ($_SERVER['HTTP_SEC_PURPOSE'] ?? '')));
+    return strpos($purpose, 'prefetch') !== false;
+}
+
 //判断阅读数量是否需要增加并进行操作
 if (!function_exists('the_views_add')) {
     function the_views_add($post_ID, $count, $key, $ajax = false)
     {
         if (is_single() || is_page() || $ajax) {
+            if (pk_is_instantclick_prefetch()) {
+                return $count;
+            }
+            if (pk_has_view_dedupe_cookie($post_ID)) {
+                return $count;
+            }
             if ($count == '') {
                 add_post_meta($post_ID, $key, '0');
             } else {
                 update_post_meta($post_ID, $key, $count + 1);
                 $count++;
             }
+            pk_set_view_dedupe_cookie($post_ID);
         }
         return $count;
     }
