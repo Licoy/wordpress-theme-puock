@@ -93,19 +93,19 @@ function pk_toolbar_link(WP_Admin_Bar $bar)
     $menu_id = 'theme-quick-start';
     $bar->add_node(array(
         'id' => $menu_id,
-        'title' => '<i class="czs-paper-plane"></i>&nbsp;' . __('Puock Theme 快捷入口', PUOCK),
+        'title' => '<i class="czs-paper-plane"></i>&nbsp;Puock Theme 快捷入口',
         'href' => '#'
     ));
     $bar->add_node(array(
         'id' => 'theme-setting',
         'parent' => $menu_id,
-        'title' => '<i class="czs-setting" style="color:#9627e3"></i>&nbsp;' . __('主题设置', PUOCK),
+        'title' => '<i class="czs-setting" style="color:#9627e3"></i>&nbsp;主题设置',
         'href' => pk_get_theme_option_url()
     ));
     $bar->add_node(array(
         'id' => 'theme-docs',
         'parent' => $menu_id,
-        'title' => '<i class="czs-doc-file" style="color:#496cf9"></i>&nbsp;' . __('主题文档', PUOCK),
+        'title' => '<i class="czs-doc-file" style="color:#496cf9"></i>&nbsp;主题文档',
         'href' => 'https://licoy.cn/puock-doc.html',
         'meta' => array(
             'target' => 'blank'
@@ -114,7 +114,7 @@ function pk_toolbar_link(WP_Admin_Bar $bar)
     $bar->add_node(array(
         'id' => 'theme-sponsor',
         'parent' => $menu_id,
-        'title' => '<i class="czs-heart" style="color:#f54747"></i>&nbsp;' . __('赞助主题', PUOCK),
+        'title' => '<i class="czs-heart" style="color:#f54747"></i>&nbsp;赞助主题',
         'href' => 'https://licoy.cn/puock-theme-sponsor.html',
         'meta' => array(
             'target' => 'blank'
@@ -123,7 +123,7 @@ function pk_toolbar_link(WP_Admin_Bar $bar)
     $bar->add_node(array(
         'id' => 'theme-group',
         'parent' => $menu_id,
-        'title' => '<i class="czs-weixin" style="color:#177b17"></i>&nbsp;' . __('主题交流群', PUOCK),
+        'title' => '<i class="czs-weixin" style="color:#177b17"></i>&nbsp;主题交流群',
         'href' => 'https://licoy.cn/go/puock-update.php?r=qq_qun',
         'meta' => array(
             'target' => 'blank'
@@ -132,7 +132,7 @@ function pk_toolbar_link(WP_Admin_Bar $bar)
     $bar->add_node(array(
         'id' => 'theme-github',
         'parent' => $menu_id,
-        'title' => '<i class="czs-github-logo"></i>&nbsp;' . __('Github 开源主页', PUOCK),
+        'title' => '<i class="czs-github-logo"></i>&nbsp;Github 开源主页',
         'href' => 'https://github.com/Licoy/wordpress-theme-puock',
         'meta' => array(
             'target' => 'blank'
@@ -629,22 +629,14 @@ function create_taxs($tax_slug, $hook_type, $tax_name)
     $labels_tax = array(
         'name' => $tax_name,
         'singular_name' => $tax_name,
-        /* translators: %s: taxonomy name */
-        'search_items' => sprintf(__('搜索%s', PUOCK), $tax_name),
-        /* translators: %s: taxonomy name */
-        'all_items' => sprintf(__('所有%s', PUOCK), $tax_name),
-        /* translators: %s: taxonomy name */
-        'parent_item' => sprintf(__('父级%s', PUOCK), $tax_name),
-        /* translators: %s: taxonomy name */
-        'parent_item_colon' => sprintf(__('父级%s', PUOCK), $tax_name),
-        /* translators: %s: taxonomy name */
-        'edit_item' => sprintf(__('编辑%s', PUOCK), $tax_name),
-        /* translators: %s: taxonomy name */
-        'update_item' => sprintf(__('更新%s', PUOCK), $tax_name),
-        /* translators: %s: taxonomy name */
-        'add_new_item' => sprintf(__('添加新%s', PUOCK), $tax_name),
-        /* translators: %s: taxonomy name */
-        'new_item_name' => sprintf(__('新%s名称', PUOCK), $tax_name),
+        'search_items' => '搜索' . $tax_name,
+        'all_items' => '所有' . $tax_name,
+        'parent_item' => '父级' . $tax_name,
+        'parent_item_colon' => '父级' . $tax_name,
+        'edit_item' => '编辑' . $tax_name,
+        'update_item' => '更新' . $tax_name,
+        'add_new_item' => '添加新' . $tax_name,
+        'new_item_name' => '新' . $tax_name . '名称',
         'menu_name' => $tax_name,
     );
 
@@ -664,7 +656,7 @@ function create_taxs($tax_slug, $hook_type, $tax_name)
 
 //注册菜单
 register_nav_menus(array(
-    'primary' => __('主要菜单', PUOCK),
+    'primary' => '主要菜单',
 ));
 
 //获取主题配置
@@ -781,14 +773,14 @@ function pk_get_main_menu($mobile = false)
     } else {
         if (pk_is_checked('open_quick_login')) {
             $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url($wp->request)]);
-            $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="' . esc_attr__('登入', PUOCK) . '" data-title="' . esc_attr__('登入', PUOCK) . '" href="javascript:void(0)" class="pk-modal-toggle" data-once-load="true" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
+            $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-once-load="true" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
         }
     }
     if (!$mobile) {
         if (pk_is_checked('theme_mode_s')) {
-            $out .= '<li><a class="colorMode" data-bs-toggle="tooltip" title="' . esc_attr__('模式切换', PUOCK) . '" href="javascript:void(0)"><i class="fa fa-' . ((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))) . '"></i></a></li>';
+            $out .= '<li><a class="colorMode" data-bs-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="fa fa-' . ((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))) . '"></i></a></li>';
         }
-        $out .= '<li><a class="search-modal-btn" data-bs-toggle="tooltip" title="' . esc_attr__('搜索', PUOCK) . '" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>';
+        $out .= '<li><a class="search-modal-btn" data-bs-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>';
     }
     $out .= '</ul>';
     return $out;
@@ -1011,7 +1003,7 @@ function pk_get_req_data(array $model)
         $val = trim($_REQUEST[$key] ?? '');
         if (empty($val)) {
             if ($item['required']) {
-                return ($item['name'] ?? $key) . __('不能为空', PUOCK);
+                return ($item['name'] ?? $key) . '不能为空';
             }
             if (isset($item['default'])) {
                 $data[$key] = $item['default'];
@@ -1039,10 +1031,10 @@ function pk_get_ip_region_str($ip)
     try {
         $s = $ip2_instance->memorySearch($ip);
     } catch (Exception $e) {
-        return __('未知', PUOCK);
+        return '未知';
     }
     if (strpos($s['region'], '内网IP') !== false) {
-        return __('内网IP', PUOCK);
+        return '内网IP';
     }
     $region = explode('|', $s['region']);
     $res = '';
@@ -1078,11 +1070,11 @@ function pk_vd_gt_validate(array $args = null)
         'timeout' => 5
     ]);
     if (is_wp_error($result)) {
-        throw new Exception(__('验证行为失败', PUOCK));
+        throw new Exception('验证行为失败');
     }
     $result = json_decode($result['body'], true);
     if ($result['status'] != 'success' || $result['result'] != 'success') {
-        throw new Exception(__('验证行为失败', PUOCK) . ': ' . $result['msg'] ?? $result['reason']);
+        throw new Exception('验证行为失败: ' . $result['msg'] ?? $result['reason']);
     }
     return true;
 }
