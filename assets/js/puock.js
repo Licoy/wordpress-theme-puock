@@ -671,19 +671,63 @@ class Puock {
                     }
                 }
                 if (!el.attr("id")) {
-                    el.attr("id", "hljs-item-" + index)
-                    el.before("<div class='pk-code-tools' data-pre-id='hljs-item-" + index + "'><div class='dot'>" +
-                        "<i></i><i></i><i></i></div><div class='actions'><div><i class='i fa fa-copy cp-code' data-clipboard-target='#hljs-item-" + index + "'></i></div></div></div>")
+                    const itemId = "hljs-item-" + index;
+                    el.attr("id", itemId);
+                    // 工具栏：红绿灯 + 自动换行按钮 + 复制按钮
+                    el.before(`<div class='pk-code-tools' data-pre-id='${itemId}'>
+                        <div class='dot'><i></i><i></i><i></i></div>
+                        <div class='actions'>
+                            <div class='pk-code-action pk-code-wrap' data-target='${itemId}' title='切换自动换行'>
+                                <i class='fa fa-align-left'></i>
+                            </div>
+                            <div class='pk-code-action pk-code-copy' data-clipboard-target='#${itemId}' title='复制代码'>
+                                <i class='fa fa-copy'></i>
+                            </div>
+                        </div>
+                    </div>`);
                     window.hljs.highlightBlock(block);
                     window.hljs.lineNumbersBlock(block);
                 }
             });
             if (fullChange) {
-                const cp = new ClipboardJS('.cp-code');
+                // 复制功能
+                const cp = new ClipboardJS('.pk-code-copy', {
+                    text: (trigger) => {
+                        const targetId = $(trigger).attr("data-clipboard-target");
+                        const codeEl = $(targetId).find("code");
+                        return codeEl.length ? codeEl.text() : $(targetId).text();
+                    }
+                });
                 cp.on("success", (e) => {
                     e.clearSelection();
-                    this.toast('已复制到剪切板')
-                })
+                    this.toast('已复制到剪切板');
+                    const icon = $(e.trigger).find("i");
+                    icon.removeClass("fa-copy").addClass("fa-check");
+                    setTimeout(() => {
+                        icon.removeClass("fa-check").addClass("fa-copy");
+                    }, 2000);
+                });
+                cp.on("error", () => {
+                    this.toast('复制失败', TYPE_DANGER);
+                });
+                
+                // 自动换行功能
+                $(document).off("click.pkCodeWrap").on("click.pkCodeWrap", ".pk-code-wrap", (e) => {
+                    const btn = $(this.ct(e));
+                    const targetId = btn.attr("data-target");
+                    const preEl = $("#" + targetId);
+                    const icon = btn.find("i");
+                    
+                    if (preEl.hasClass("pk-code-wrapped")) {
+                        preEl.removeClass("pk-code-wrapped");
+                        icon.removeClass("fa-align-justify").addClass("fa-align-left");
+                        btn.attr("title", "切换自动换行");
+                    } else {
+                        preEl.addClass("pk-code-wrapped");
+                        icon.removeClass("fa-align-left").addClass("fa-align-justify");
+                        btn.attr("title", "取消自动换行");
+                    }
+                });
             }
         }
     }

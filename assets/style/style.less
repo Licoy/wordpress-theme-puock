@@ -26,7 +26,27 @@ blockquote {
 //覆盖样式
 [id^=hljs-item]{
   font-size: 13px;
+  
+  // 自动换行样式
+  &.pk-code-wrapped {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    
+    code {
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
+      word-break: break-all !important;
+    }
+    
+    .hljs-ln-code {
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
+      word-break: break-all !important;
+    }
+  }
 }
+
 .hljs-ln-numbers {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -48,6 +68,92 @@ blockquote {
 
 .hljs-ln-code {
   padding-left: 10px;
+}
+
+// 白天模式代码高亮
+body:not(.puock-dark) {
+  [id^=hljs-item] {
+    background-color: #fafafa !important;
+    
+    .hljs-ln-numbers {
+      color: #999;
+    }
+  }
+  
+  .pk-code-tools {
+    background-color: #e8e8e8;
+    border-bottom-color: #ddd;
+    
+    .actions .pk-code-action {
+      color: #666;
+      
+      &:hover {
+        color: #333;
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
+  
+  // 白天模式语法颜色
+  .hljs-comment, .hljs-quote {
+    color: #998;
+  }
+  .hljs-keyword, .hljs-selector-tag, .hljs-subst {
+    color: #333;
+    font-weight: bold;
+  }
+  .hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008080;
+  }
+  .hljs-string, .hljs-doctag {
+    color: #d14;
+  }
+  .hljs-title, .hljs-section, .hljs-selector-id {
+    color: #900;
+    font-weight: bold;
+  }
+  .hljs-type, .hljs-class .hljs-title {
+    color: #458;
+    font-weight: bold;
+  }
+  .hljs-tag, .hljs-name, .hljs-attribute {
+    color: #000080;
+  }
+  .hljs-regexp, .hljs-link {
+    color: #009926;
+  }
+  .hljs-symbol, .hljs-bullet {
+    color: #990073;
+  }
+  .hljs-built_in, .hljs-builtin-name {
+    color: #0086b3;
+  }
+  .hljs-meta {
+    color: #999;
+    font-weight: bold;
+  }
+  .hljs-deletion {
+    background: #fdd;
+  }
+  .hljs-addition {
+    background: #dfd;
+  }
+}
+
+// 黑夜模式代码高亮
+body.puock-dark {
+  [id^=hljs-item] {
+    background-color: #1d1f21 !important;
+    
+    .hljs-ln-numbers {
+      color: #5c5c5c;
+    }
+  }
+  
+  .pk-code-tools {
+    background-color: #141617;
+    border-bottom-color: #2d2d2d;
+  }
 }
 
 .toastify {
@@ -2512,11 +2618,12 @@ a:hover {
   background-color: #0b1c2c;
   border-top-left-radius: var(--pk-g-box-radius);
   border-top-right-radius: var(--pk-g-box-radius);
-  padding: 5px 10px 5px 10px;
+  padding: 8px 12px;
   display: flex;
   justify-content: space-between;
   align-content: center;
-  border-bottom: 1px dashed var(--pk-c-dark);
+  align-items: center;
+  border-bottom: 1px dashed #3d3d3d;
 
   .dot {
     i {
@@ -2544,6 +2651,32 @@ a:hover {
   }
 
   .actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    .pk-code-action {
+      font-size: 12px;
+      color: #8e8e8e;
+      cursor: pointer;
+      transition: all .3s;
+      padding: 4px 6px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        color: var(--pk-c-light);
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      i {
+        font-size: 13px;
+      }
+    }
+    
+    // 兼容旧版复制按钮样式
     .i {
       font-size: 12px;
       color: var(--pk-c-light);
