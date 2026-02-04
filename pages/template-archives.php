@@ -39,8 +39,7 @@ get_header();
                                     <ul class="pd-links pl-0">
                                         <?php foreach ($posts as $post): setup_postdata($post) ?>
                                         <li>
-                                            <a title="<?php the_title() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>
-                                                "><?php the_title() ?>&nbsp;（&nbsp;<?php echo date_i18n(__('d日', PUOCK), strtotime($post->post_date)) ?>）</a>
+                                            <a title="<?php the_title() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?>&nbsp;（&nbsp;<?php echo date_i18n(__('d日', PUOCK), strtotime($post->post_date)) ?>）</a>
                                         </li>
                                         <?php endforeach;wp_reset_postdata(); ?>
                                     </ul>
