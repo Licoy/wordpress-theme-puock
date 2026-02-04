@@ -350,6 +350,19 @@ jQuery(function () {
                 this.onCopyChat()
             }
 
+            t(msg) {
+                if ($p && typeof $p.t === 'function') {
+                    return $p.t(msg)
+                }
+                const map = window.PUOCK_I18N || window.PUOCK_AI_I18N || {}
+                return map[msg] || msg
+            }
+
+            tf(msg, ...args) {
+                let index = 0;
+                return String(msg).replace(/%s/g, () => (args[index++] ?? ''));
+            }
+
             init() {
                 $(".chat-btn-init").remove()
                 $(".chat-btn-box").removeClass("d-none")
@@ -368,11 +381,11 @@ jQuery(function () {
                     const useImgMode = $("#chat-use-img-mode").is(":checked")
                     const useModel = $("#chat-model").val()
                     if (!useImgMode && !useModel) {
-                        $p.toast('请先选择模型')
+                        $p.toast(this.t('请先选择模型'))
                         return
                     }
                     if (text === "") {
-                        $p.toast('请先输入内容')
+                        $p.toast(this.t('请先输入内容'))
                         return
                     }
                     this.putMsg({
@@ -444,7 +457,7 @@ jQuery(function () {
                             callback("", true, true)
                             return
                         }
-                        callback(`请求异常：${e}`, true, true)
+                        callback(this.tf(this.t('请求异常：%s'), e), true, true)
                     } finally {
                         closeLoading()
                     }
@@ -464,10 +477,10 @@ jQuery(function () {
                                         <div class="fs14 content-box ${data.ai ? 'cursor-blink-after' : ''}">${this.parseContent(data.content)}</div>
                                         <div class="d-flex align-items-center mt-2 text-muted fs12">
                                             <div class="mr-1">
-                                                <i class="fa fa-${data.imgMode ? 'palette' : 'robot'} mr-1"></i>${data.imgMode ? 'AI绘画' : 'AI问答'}
+                                                <i class="fa fa-${data.imgMode ? 'palette' : 'robot'} mr-1"></i>${data.imgMode ? this.t('AI绘画') : this.t('AI问答')}
                                             </div>
-                                            <div class="primary-text-hover pk-copy" data-cp-title="对话信息" data-cp-func="puockAiChatCopy" data-id="${id}">
-                                                <span><i class="fa-regular fa-copy mr-1"></i>复制</span>
+                                            <div class="primary-text-hover pk-copy" data-cp-title="${this.t('对话信息')}" data-cp-func="puockAiChatCopy" data-id="${id}">
+                                                <span><i class="fa-regular fa-copy mr-1"></i>${this.t('复制')}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -482,8 +495,8 @@ jQuery(function () {
                 $(".chat-clear-history").on("click", () => {
                     const template = $(".chats").find(".chat-template")
                     const template_html = template.prop("outerHTML") ?? ""
-                    layer.confirm("确定要清空历史记录吗？", {
-                        btn: ['确定', '取消']
+                    layer.confirm(this.t('确定要清空历史记录吗？'), {
+                        btn: [this.t('确定'), this.t('取消')]
                     }, (index) => {
                         layer.close(index)
                         $(".chats").html(template_html)

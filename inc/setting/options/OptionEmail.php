@@ -36,7 +36,7 @@ class OptionEmail extends BaseOptionItem{
                     'label' => __('SMTP服务器', PUOCK),
                     'sdt' => '',
                     'showRefId' => 'smtp_open',
-                    'tips'=>'如163邮箱的为：smtp.163.com'
+                    'tips'=>__('如163邮箱的为：smtp.163.com', PUOCK)
                 ],
                 [
                     'id' => 'smtp_port',

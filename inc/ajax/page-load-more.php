@@ -31,7 +31,7 @@ function pk_load_more_posts()
         'html' => $html,
         'paged' => $paged,
         'has_more' => $has_more,
-    ], '加载成功');
+    ], __('加载成功', PUOCK));
 
     wp_die();
 }

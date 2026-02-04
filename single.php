@@ -70,7 +70,7 @@
                         <div class="t-separator c-sub t-sm mt30"><?php _e('正文完', PUOCK) ?></div>
                         <?php if (pk_is_checked('post_foot_qrcode_open')): ?>
                             <div class="post-foot-qrcode">
-                                <div class="title"><?php echo pk_get_option('post_foot_qrcode_title', '无说明') ?></div>
+                                <div class="title"><?php echo pk_get_option('post_foot_qrcode_title', __('无说明', PUOCK)) ?></div>
                                 <img src="<?php echo pk_get_option('post_foot_qrcode_img', '') ?>"
                                      alt="post-qrcode">
                             </div>

@@ -11,7 +11,7 @@ if (empty($current_user_center_menu)) {
     $current_user_center_menu = 'profile';
 }
 $user_center_menus = PuockUserCenter::get_menus();
-pk_set_custom_seo((isset($user_center_menus[$current_user_center_menu]) ? $user_center_menus[$current_user_center_menu]['title'].' - ' : '') . '用户中心');
+pk_set_custom_seo((isset($user_center_menus[$current_user_center_menu]) ? $user_center_menus[$current_user_center_menu]['title'].' - ' : '') . __('用户中心', PUOCK));
 get_header();
 ?>
 

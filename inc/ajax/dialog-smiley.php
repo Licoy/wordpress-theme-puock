@@ -16,7 +16,7 @@ function pk_ajax_dialog_smiley()
                      alt="<?php echo $key . '-' . $val ?>" title="<?php echo $val ?>"/></div>
         <?php endforeach; ?>
         <div class="mt10">
-            <small class="c-sub">此表情来源于: <a href="https://twemoji.twitter.com" target="_blank"
+            <small class="c-sub"><?php _e('此表情来源于:', PUOCK) ?> <a href="https://twemoji.twitter.com" target="_blank"
                                             rel="nofollow">twemoji</a></small>
         </div>
     </div>

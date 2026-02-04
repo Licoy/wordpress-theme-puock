@@ -106,7 +106,7 @@ class CaptchaBuilder
 
         imagefill($this->image,0,0,$this->backColor);
         if (empty($this->fonts)) {
-            throw new \Exception('字体不存在');
+            throw new \Exception(__('字体不存在', PUOCK));
         }
 
         $this->textFont = $this->fonts[array_rand($this->fonts)];

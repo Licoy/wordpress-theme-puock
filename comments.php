@@ -22,7 +22,7 @@
                             <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
                                     data-id="front-login"
                                     data-once-load="true"
-                                    title="快捷登录"
+                                    title="<?php esc_attr_e('快捷登录', PUOCK) ?>"
                                     data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
                                 <i
                                         class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>

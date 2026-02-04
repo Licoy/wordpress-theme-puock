@@ -3,7 +3,7 @@
     <div id="index-company" class="puock-bg pt20">
 
         <div class="container mt50" id="prod-items">
-            <h3 class="text-center"><?php echo pk_get_option('company_product_title', '产品概览') ?></h3>
+            <h3 class="text-center"><?php echo pk_get_option('company_product_title', __('产品概览', PUOCK)) ?></h3>
             <div class="row">
                 <?php $products = pk_get_option('company_products', []);
                 foreach ($products as $product): ?>

@@ -233,9 +233,16 @@ abstract class puockWidgetBase extends WP_Widget{
 class puockHotPost extends puockWidgetBase {
 
 
-    protected $title = "热门文章";
+    protected $title = '';
 
-    protected $pre_title = "根据阅读量显示最近的";
+    protected $pre_title = '';
+
+    function __construct() {
+        $this->title = __('热门文章', PUOCK);
+        $this->pre_title = __('根据阅读量显示最近的', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_fields(){
         return $this->common_post_list_fields();
@@ -293,7 +300,13 @@ add_action( 'widgets_init', function (){ register_widget('puockHotPost'); });
 //最新文章
 class puockNewPost extends puockWidgetBase {
 
-    protected $title = "最新文章";
+    protected $title = '';
+
+    function __construct() {
+        $this->title = __('最新文章', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_class_name()
     {
@@ -343,7 +356,13 @@ add_action( 'widgets_init', function (){ register_widget('puockNewPost'); });
 //热评文章
 class puockHotCommentPost extends puockWidgetBase {
 
-    protected $title = "热评文章";
+    protected $title = '';
+
+    function __construct() {
+        $this->title = __('热评文章', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_class_name()
     {
@@ -394,9 +413,16 @@ add_action( 'widgets_init', function (){ register_widget('puockHotCommentPost');
 //读者墙
 class puockReadPerson extends puockWidgetBase {
 
-    protected $title = "读者墙";
+    protected $title = '';
 
-    protected $pre_title = "展示网站的读者形成";
+    protected $pre_title = '';
+
+    function __construct() {
+        $this->title = __('读者墙', PUOCK);
+        $this->pre_title = __('展示网站的读者形成', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_class_name()
     {
@@ -458,9 +484,16 @@ add_action( 'widgets_init', function (){ register_widget('puockReadPerson'); });
 //最新评论
 class puockNewComment extends puockWidgetBase {
 
-    protected $title = "最新评论";
+    protected $title = '';
 
-    protected $pre_title = "展示网站的";
+    protected $pre_title = '';
+
+    function __construct() {
+        $this->title = __('最新评论', PUOCK);
+        $this->pre_title = __('展示网站的', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_class_name()
     {
@@ -523,9 +556,16 @@ add_action( 'widgets_init', function (){ register_widget('puockNewComment'); });
 //增强文本
 class puockStrongText extends puockWidgetBase {
 
-    protected $title = "HTML文本";
+    protected $title = '';
 
-    protected $pre_title = "支持HTML/JS/CSS";
+    protected $pre_title = '';
+
+    function __construct() {
+        $this->title = __('HTML文本', PUOCK);
+        $this->pre_title = __('支持HTML/JS/CSS', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_class_name()
     {
@@ -557,9 +597,16 @@ add_action( 'widgets_init', function (){ register_widget('puockStrongText'); });
 //搜索框
 class puockSearch extends puockWidgetBase {
 
-    protected $title = "搜索框";
+    protected $title = '';
+    
+    protected $pre_title = '';
 
-    protected $pre_title = "提供便捷快速的";
+    function __construct() {
+        $this->title = __('搜索框', PUOCK);
+        $this->pre_title = __('提供便捷快速的', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_class_name()
     {
@@ -604,9 +651,16 @@ add_action( 'widgets_init', function (){ register_widget('puockSearch'); });
 //随机文章
 class puockRandomPost extends puockWidgetBase {
 
-    protected $title = "随机文章";
+    protected $title = '';
+    
+    protected $pre_title = '';
 
-    protected $pre_title = "显示指定范围内的";
+    function __construct() {
+        $this->title = __('随机文章', PUOCK);
+        $this->pre_title = __('显示指定范围内的', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_fields(){
         return $this->common_post_list_fields();
@@ -637,9 +691,16 @@ add_action( 'widgets_init', function (){ register_widget('puockRandomPost'); });
 //关于博主
 class puockAboutAuthor extends puockWidgetBase {
 
-    protected $title = "关于博主";
+    protected $title = '';
+    
+    protected $pre_title = '';
 
-    protected $pre_title = "显示博客的主人-";
+    function __construct() {
+        $this->title = __('关于博主', PUOCK);
+        $this->pre_title = __('显示博客的主人-', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_fields(){
         return $this->merge_common_fields(array(
@@ -755,9 +816,16 @@ add_action( 'widgets_init', function (){ register_widget('puockAboutAuthor'); })
 class puockCategory extends puockWidgetBase {
 
 
-    protected $title = "分类目录";
+    protected $title = '';
+    
+    protected $pre_title = '';
 
-    protected $pre_title = "显示博客的所有";
+    function __construct() {
+        $this->title = __('分类目录', PUOCK);
+        $this->pre_title = __('显示博客的所有', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_fields(){
         return $this->merge_common_fields(array(
@@ -810,9 +878,16 @@ add_action( 'widgets_init', function (){ register_widget('puockCategory'); });
 class puockTagCloud extends puockWidgetBase {
 
 
-    protected $title = "标签云";
+    protected $title = '';
+    
+    protected $pre_title = '';
 
-    protected $pre_title = "集成博客的标签为";
+    function __construct() {
+        $this->title = __('标签云', PUOCK);
+        $this->pre_title = __('集成博客的标签为', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_fields(){
         return $this->merge_common_fields(array(
@@ -877,9 +952,16 @@ add_action( 'widgets_init', function (){ register_widget('puockTagCloud'); });
 class puockTagHitokoto extends puockWidgetBase {
 
 
-    protected $title = "一言一句话";
+    protected $title = '';
+    
+    protected $pre_title = '';
 
-    protected $pre_title = "随机展示";
+    function __construct() {
+        $this->title = __('一言一句话', PUOCK);
+        $this->pre_title = __('随机展示', PUOCK);
+        parent::__construct();
+    }
+
 
     function get_fields(){
         return $this->merge_common_fields(array(

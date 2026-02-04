@@ -38,7 +38,7 @@ function pk_front_login_exec()
     if ($try_open) {
         $ip = pk_get_client_ip();
         if (!empty(get_transient('pk_login_ban_' . $ip))) {
-            echo pk_ajax_resp_error('登录失败次数过多，请' . $try_ban_time . '分钟后再试');
+            echo pk_ajax_resp_error(sprintf(__('登录失败次数过多，请%d分钟后再试', PUOCK), $try_ban_time));
             wp_die();
         }
     }

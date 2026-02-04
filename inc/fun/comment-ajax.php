@@ -23,7 +23,7 @@ function pk_check_comment_for_chinese($comment)
 {
     $pattern = '/[\x{4e00}-\x{9fa5}]/u';
     if (!preg_match($pattern, $comment)) {
-        pk_comment_err('您的评论必须包含至少一个中文字符');
+        pk_comment_err(__('您的评论必须包含至少一个中文字符', PUOCK));
     }
     return $comment;
 }
@@ -40,11 +40,11 @@ function pk_comment_ajax()
     nocache_headers();
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        pk_comment_err('无效的请求方式', false);
+        pk_comment_err(__('无效的请求方式', PUOCK), false);
     }
 
     if (pk_post_comment_is_closed()) {
-        pk_comment_err('评论功能已关闭', false);
+        pk_comment_err(__('评论功能已关闭', PUOCK), false);
     }
 
     //是否需要进行验证
@@ -53,7 +53,7 @@ function pk_comment_ajax()
             $token = $_REQUEST['comment-vd'];
 
             if (empty($token)) {
-                pk_comment_err('无效验证码，已刷新请重新输入');
+                pk_comment_err(__('无效验证码，已刷新请重新输入', PUOCK));
             }
             $validate_pass = true;
             pk_session_call(function () use ($token, &$validate_pass) {
@@ -64,7 +64,7 @@ function pk_comment_ajax()
                 unset($_SESSION['comment_vd']);
             });
             if (!$validate_pass) {
-                pk_comment_err('验证码不正确', false);
+                pk_comment_err(__('验证码不正确', PUOCK), false);
             }
         } else {
             try {
@@ -81,7 +81,7 @@ function pk_comment_ajax()
 
     if (!$post || empty($post->comment_status)) {
         do_action('comment_id_not_found', $comment_post_ID);
-        pk_comment_err('无效的评论回复');
+        pk_comment_err(__('无效的评论回复', PUOCK));
     }
 
     $status = get_post_status($post);
@@ -90,16 +90,16 @@ function pk_comment_ajax()
 
     if (!comments_open($comment_post_ID)) {
         do_action('comment_closed', $comment_post_ID);
-        pk_comment_err('评论已关闭');
+        pk_comment_err(__('评论已关闭', PUOCK));
     } elseif ('trash' == $status) {
         do_action('comment_on_trash', $comment_post_ID);
-        pk_comment_err('无效评论');
+        pk_comment_err(__('无效评论', PUOCK));
     } elseif (!$status_obj->public && !$status_obj->private) {
         do_action('comment_on_draft', $comment_post_ID);
-        pk_comment_err('无法对草稿进行评论');
+        pk_comment_err(__('无法对草稿进行评论', PUOCK));
     } elseif (post_password_required($comment_post_ID)) {
         do_action('comment_on_password_protected', $comment_post_ID);
-        pk_comment_err('无法对受密码保护进行评论');
+        pk_comment_err(__('无法对受密码保护进行评论', PUOCK));
     } else {
         do_action('pre_comment_on_post', $comment_post_ID);
     }
@@ -124,19 +124,19 @@ function pk_comment_ajax()
             }
         }
     } else if (get_option('comment_registration') || 'private' == $status) {
-        pk_comment_err('对不起，您必须登录后才能发表评论');
+        pk_comment_err(__('对不起，您必须登录后才能发表评论', PUOCK));
     }
 
     $comment_type = '';
 
     if (get_option('require_name_email') && !$user->ID) {
         if (empty($comment_author) || empty($comment_author_email))
-            pk_comment_err('评论之前必须填写昵称及邮件');
+            pk_comment_err(__('评论之前必须填写昵称及邮件', PUOCK));
         elseif (!is_email($comment_author_email))
-            pk_comment_err('电子邮箱格式不正确');
+            pk_comment_err(__('电子邮箱格式不正确', PUOCK));
     }
 
-    if (empty($comment_content)) pk_comment_err('评论内容不能为空');
+    if (empty($comment_content)) pk_comment_err(__('评论内容不能为空', PUOCK));
 
     // 检查重复评论功能（根据主题配置决定是否启用）
     if (pk_is_checked('comment_duplicate_check')) {
@@ -149,7 +149,7 @@ function pk_comment_ajax()
         $dupe .= ") AND comment_content = %s LIMIT 1";
         $query_params[] = $comment_content;
         if ($wpdb->get_var($wpdb->prepare($dupe, $query_params))) {
-            pk_comment_err('您已经发表过相同的评论了!');
+            pk_comment_err(__('您已经发表过相同的评论了!', PUOCK));
         }
     }
 
@@ -159,7 +159,7 @@ function pk_comment_ajax()
         $time_new_comment = mysql2date('U', current_time('mysql', 1), false);
         $flood_die = apply_filters('comment_flood_filter', false, $time_last_comment, $time_new_comment);
         if ($flood_die) {
-            pk_comment_err('您的评论发表速度太快了！');
+            pk_comment_err(__('您的评论发表速度太快了！', PUOCK));
         }
     }
 
@@ -180,7 +180,7 @@ function pk_comment_ajax()
     $comment_approved_str = '';
 
     if ($comment->comment_approved == '0') {
-        $comment_approved_str = '<p class="c-sub mt-1"><i class="fa fa-warning mr-1"></i>您的评论正在等待审核！</p>';
+        $comment_approved_str = '<p class="c-sub mt-1"><i class="fa fa-warning mr-1"></i>' . __('您的评论正在等待审核！', PUOCK) . '</p>';
     }
 
     wp_set_comment_cookies($comment, $user);

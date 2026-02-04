@@ -80,7 +80,7 @@ function pk_poster_page_callback()
             (async () => {
                 try {
                     if (!rootEl) {
-                        throw new Error('未找到海报容器');
+                        throw new Error('<?php echo esc_js(__('未找到海报容器', PUOCK)); ?>');
                     }
 
                     await Promise.all([waitForImages(rootEl), waitForFonts()]);
@@ -104,7 +104,7 @@ function pk_poster_page_callback()
                     $root.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo $title ?>'>");
                 } catch (err) {
                     console.error(err);
-                    window.Puock.toast("生成海报失败，请到Console查看错误信息", TYPE_DANGER);
+                    window.Puock.toast("<?php echo esc_js(__('生成海报失败，请到Console查看错误信息', PUOCK)); ?>", TYPE_DANGER);
                 } finally {
                     window.Puock.stopLoading(loadingId);
                 }

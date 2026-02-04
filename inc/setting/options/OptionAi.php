@@ -89,8 +89,8 @@ class OptionAi
                     'id' => 'ai_chat_welcome',
                     'label' => __('默认欢迎对话', PUOCK),
                     'type' => 'textarea',
-                    'sdt' => pk_get_option('openai_default_welcome_chat', '您好，欢迎使用智能AI助理'),
-                    'tips' => '支持HTML代码',
+                    'sdt' => pk_get_option('openai_default_welcome_chat', __('您好，欢迎使用智能AI助理', PUOCK)),
+                    'tips' => __('支持HTML代码', PUOCK),
                 ],
                 [
                     'id' => 'ai_draw_dall_e',
@@ -118,8 +118,8 @@ class OptionAi
                         ['label' => '256x256', 'value' => '256x256'],
                         ['label' => '512x512', 'value' => '512x512'],
                         ['label' => '1024x1024', 'value' => '1024x1024'],
-                        ['label' => '1792x1024（仅DallE-3支持）', 'value' => '1792x1024'],
-                        ['label' => '1024x1792（仅DallE-3支持）', 'value' => '1024x1792'],
+                        ['label' => __('1792x1024（仅DallE-3支持）', PUOCK), 'value' => '1792x1024'],
+                        ['label' => __('1024x1792（仅DallE-3支持）', PUOCK), 'value' => '1024x1792'],
                     ],
                 ],
                 [

@@ -176,7 +176,7 @@ function comment_mail_notify($comment_id)
         if ($to == $comment->comment_author_email) {
             return;
         }
-        $subject = '您在 [' . get_option("blogname") . '] 的文章评论有了新的回复';
+        $subject = sprintf(__('您在 [%s] 的文章评论有了新的回复', PUOCK), get_option("blogname"));
         $message = get_comment_notify_template($comment, $parent_id);
         $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
         $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";

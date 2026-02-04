@@ -11,7 +11,7 @@
             <div class="info-top">
                 <h2 class="info-title">
                     <?php if (is_sticky()): ?><span class="badge bg-danger"><i
-                                class="fa fa-bolt-lightning"></i>置顶</span><?php endif; ?>
+                                class="fa fa-bolt-lightning"></i><?php _e('置顶', PUOCK) ?></span><?php endif; ?>
                     <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
                     <a class="a-link" title="<?php the_title() ?>" <?php pk_link_target() ?>
                        href="<?php the_permalink() ?>"><?php the_title() ?></a>
@@ -64,7 +64,7 @@
                 </a>
                 <div class="post-tags">
                     <?php if (is_sticky()): ?><span class="badge bg-danger"><i
-                                class="fa fa-bolt-lightning"></i>置顶</span><?php endif; ?>
+                                class="fa fa-bolt-lightning"></i><?php _e('置顶', PUOCK) ?></span><?php endif; ?>
                 </div>
             </div>
             <div class="post-info">

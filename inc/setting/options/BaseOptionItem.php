@@ -28,7 +28,7 @@ abstract class BaseOptionItem
     {
         if (!self::$_link_category) {
             self::$_link_category = get_all_category_id_row('link_category');
-            array_unshift(self::$_link_category, ['label' => '无', 'value' => '']);
+            array_unshift(self::$_link_category, ['label' => __('无', PUOCK), 'value' => '']);
         }
         return self::$_link_category;
     }
@@ -43,8 +43,8 @@ abstract class BaseOptionItem
     protected static function get_link_order()
     {
         return [
-            ["label" => "升序 (ASC)", "value" => "ASC"],
-            ["label" => "降序(DESC)", "value" => "DESC"]
+            ["label" => __("升序 (ASC)", PUOCK), "value" => "ASC"],
+            ["label" => __("降序(DESC)", PUOCK), "value" => "DESC"]
         ];
     }
 
@@ -58,12 +58,12 @@ abstract class BaseOptionItem
     protected static function get_link_order_by(): array
     {
         return [
-            ["label" => "ID排序", "value" => "link_id"],
-            ["label" => "链接排序", "value" => "url"],
-            ["label" => "名字排序", "value" => "name"],
-            ["label" => "评级排序", "value" => "rating"],
-            ["label" => "长度排序", "value" => "length"],
-            ["label" => "随机排序", "value" => "rand"]
+            ["label" => __("ID排序", PUOCK), "value" => "link_id"],
+            ["label" => __("链接排序", PUOCK), "value" => "url"],
+            ["label" => __("名字排序", PUOCK), "value" => "name"],
+            ["label" => __("评级排序", PUOCK), "value" => "rating"],
+            ["label" => __("长度排序", PUOCK), "value" => "length"],
+            ["label" => __("随机排序", PUOCK), "value" => "rand"]
         ];
     }
 
@@ -71,7 +71,7 @@ abstract class BaseOptionItem
     {
         if (!self::$_pages) {
             $pages = array();
-            $pages[] = ['label' => '无', 'value' => ''];
+            $pages[] = ['label' => __('无', PUOCK), 'value' => ''];
             $pageObjects = get_pages('sort_column=post_parent,menu_order');
             foreach ($pageObjects as $page) {
                 $pages[] = ['label' => $page->post_title, 'value' => $page->ID];

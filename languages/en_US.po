@@ -1767,3 +1767,119 @@ msgstr "Invalid post ID: %s"
 #: inc/ajax/page-poster.php
 msgid "长按识别二维码查看文章内容"
 msgstr "Long press to scan QR code and view article"
+
+#: inc/fun/short-code.php
+msgid "音乐播放"
+msgstr "Music Player"
+
+#: inc/fun/short-code.php
+msgid "输入链接地址"
+msgstr "Enter link URL"
+
+#: inc/fun/short-code.php
+msgid "代码嵌入"
+msgstr "Code Embed"
+
+#: inc/fun/short-code.php
+msgid "输入代码"
+msgstr "Enter code"
+
+#: inc/fun/short-code.php
+msgid "回复可见"
+msgstr "Reply to View"
+
+#: inc/fun/short-code.php
+msgid "输入内容"
+msgstr "Enter content"
+
+#: inc/fun/short-code.php
+msgid "登录可见"
+msgstr "Login to View"
+
+#: inc/fun/short-code.php
+msgid "Github仓库卡片"
+msgstr "Github Repository Card"
+
+#: inc/fun/short-code.php
+msgid "登录并验证邮箱可见"
+msgstr "Login and Verify Email to View"
+
+#: inc/fun/short-code.php
+msgid "视频播放"
+msgstr "Video Player"
+
+#: inc/fun/short-code.php
+msgid "文件下载"
+msgstr "File Download"
+
+#: inc/fun/short-code.php
+msgid "文件地址"
+msgstr "File URL"
+
+#: inc/fun/short-code.php
+msgid "输入密码可见"
+msgstr "Enter Password to View"
+
+#: inc/fun/short-code.php
+msgid "折叠面板"
+msgstr "Collapse Panel"
+
+#: inc/fun/short-code.php
+msgid "提示框"
+msgstr "Alert Box"
+
+#: inc/fun/short-code.php
+msgid "视频警告：播放链接不能为空"
+msgstr "Video Warning: Playback link cannot be empty"
+
+#: inc/fun/short-code.php
+msgid "视频警告：未能识别有效的B站链接"
+msgstr "Video Warning: Unable to identify a valid Bilibili link"
+
+#: inc/fun/short-code.php
+msgid "音频警告：播放链接不能为空"
+msgstr "Audio Warning: Playback link cannot be empty"
+
+#: inc/fun/short-code.php
+msgid "文件名称"
+msgstr "File Name"
+
+#: inc/fun/short-code.php
+msgid "文件大小"
+msgstr "File Size"
+
+#: inc/fun/short-code.php
+msgid "下载声明"
+msgstr "Download Notice"
+
+#: inc/fun/short-code.php
+msgid "下载地址"
+msgstr "Download URL"
+
+#: inc/fun/short-code.php
+msgid "此处含有隐藏内容，请提交评论并审核通过刷新后即可查看！"
+msgstr "This content is hidden, please submit a comment and refresh after approval to view!"
+
+#: inc/fun/short-code.php
+msgid "此处含有隐藏内容，登录后即可查看！"
+msgstr "This content is hidden, please login to view!"
+
+#: inc/fun/short-code.php
+msgid "此处含有隐藏内容，需要登录并验证邮箱后即可查看！"
+msgstr "This content is hidden, please login and verify your email to view!"
+
+#: inc/fun/short-code.php
+msgid "此处含有隐藏内容，需要正确输入密码后可见！"
+msgstr "This content is hidden, please enter the correct password to view!"
+
+#: inc/fun/short-code.php
+msgid "您的密码输入错误，请核对后重新输入"
+msgstr "Your password is incorrect, please check and try again"
+
+#: inc/fun/short-code.php
+msgid "请输入密码"
+msgstr "Please enter password"
+
+#: inc/fun/short-code.php
+msgid "立即查看"
+msgstr "View Now"

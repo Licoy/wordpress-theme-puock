@@ -2,18 +2,18 @@
 
 function pk_ext_moments_init()
 {
-    $name = "时光圈";
+    $name = __('时光圈', PUOCK);
     $labels = array(
         'name' => $name,
         'singular_name' => $name,
-        'add_new' => '发表'.$name,
-        'add_new_item' => '发表'.$name,
-        'edit_item' => '编辑'.$name,
-        'new_item' => '新'.$name,
-        'view_item' => '查看'.$name,
-        'search_items' => '搜索'.$name,
-        'not_found' => '暂无'.$name,
-        'not_found_in_trash' => '没有已遗弃的'.$name,
+        'add_new' => sprintf(__('发表%s', PUOCK), $name),
+        'add_new_item' => sprintf(__('发表%s', PUOCK), $name),
+        'edit_item' => sprintf(__('编辑%s', PUOCK), $name),
+        'new_item' => sprintf(__('新%s', PUOCK), $name),
+        'view_item' => sprintf(__('查看%s', PUOCK), $name),
+        'search_items' => sprintf(__('搜索%s', PUOCK), $name),
+        'not_found' => sprintf(__('暂无%s', PUOCK), $name),
+        'not_found_in_trash' => sprintf(__('没有已遗弃的%s', PUOCK), $name),
         'parent_item_colon' => '',
         'menu_name' => $name
     );

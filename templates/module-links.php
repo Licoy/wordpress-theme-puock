@@ -5,7 +5,7 @@ if (!empty($link_cid)):
     <div class="p-block index-links">
         <div>
         <span class="t-lg puock-text pb-2 d-inline-block border-bottom border-primary">
-            <i class="fa fa-link"></i>友情链接
+            <i class="fa fa-link"></i><?php _e('友情链接', PUOCK) ?>
         </span>
         </div>
         <div class="mt20 t-md index-links-box">

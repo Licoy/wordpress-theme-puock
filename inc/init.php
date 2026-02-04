@@ -26,7 +26,7 @@ function deel_setup()
         add_filter('rest_enabled', '__return_false');
         add_filter('rest_jsonp_enabled', '__return_false');
         add_filter('rest_authentication_errors', function ($access) {
-            return new WP_Error('rest_cannot_access', 'REST API已经被关闭，请打开后再进行尝试', array('status' => 403));
+            return new WP_Error('rest_cannot_access', __('REST API已经被关闭，请打开后再进行尝试', PUOCK), array('status' => 403));
         });
     }
 
@@ -147,7 +147,7 @@ function pk_env_check()
     $last_version = '7.4';
     $content = [];
     if (version_compare($php_version, $last_version, '<')) {
-        $content[] = '<p>您正在使用过时的PHP版本<code>' . $php_version . '</code>，Puock主题需要PHP版本大于<code>' . $last_version . '</code>才能完整使用全部功能，请升级PHP版本。</p>';
+        $content[] = '<p>' . sprintf(__('您正在使用过时的PHP版本<code>%1$s</code>，Puock主题需要PHP版本大于<code>%2$s</code>才能完整使用全部功能，请升级PHP版本。', PUOCK), $php_version, $last_version) . '</p>';
     }
     $need_ext = ['gd'];
     $not_ext = [];
@@ -157,7 +157,7 @@ function pk_env_check()
         }
     }
     if (count($not_ext) > 0) {
-        $content[] = '<p>您的PHP缺少扩展' . implode(', ', $not_ext) . '，缺少这些扩展可能导致部分功能无法使用，请及时安装这些扩展。</p>';
+        $content[] = '<p>' . sprintf(__('您的PHP缺少扩展%1$s，缺少这些扩展可能导致部分功能无法使用，请及时安装这些扩展。', PUOCK), implode(', ', $not_ext)) . '</p>';
     }
     if (!empty($content)) {
         echo '<div class="error">' . (join('', $content)) . '</div>';
@@ -193,6 +193,48 @@ function pk_init_register_assets()
             wp_enqueue_script('puock-gt4', pk_get_static_url() . '/assets/libs/gt4.js', [], PUOCK_CUR_VER_STR, true);
         }
         wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/puock.min.js', array('puock-libs'), PUOCK_CUR_VER_STR, true);
+
+        $puock_i18n = [
+            '表单元素为空' => __('表单元素为空', PUOCK),
+            '请求错误：%s' => __('请求错误：%s', PUOCK),
+            '复制%s成功' => __('复制%s成功', PUOCK),
+            '复制%s失败' => __('复制%s失败', PUOCK),
+            '切换自动换行' => __('切换自动换行', PUOCK),
+            '复制代码' => __('复制代码', PUOCK),
+            '已复制到剪切板' => __('已复制到剪切板', PUOCK),
+            '复制失败' => __('复制失败', PUOCK),
+            '取消自动换行' => __('取消自动换行', PUOCK),
+            '提示' => __('提示', PUOCK),
+            '评论信息不能为空' => __('评论信息不能为空', PUOCK),
+            '评论内容不能为空' => __('评论内容不能为空', PUOCK),
+            '验证码不能为空' => __('验证码不能为空', PUOCK),
+            '评论已提交成功' => __('评论已提交成功', PUOCK),
+            '请等待%s秒' => __('请等待%s秒', PUOCK),
+            '提交评论' => __('提交评论', PUOCK),
+            '提交中...' => __('提交中...', PUOCK),
+            '结构有误' => __('结构有误', PUOCK),
+            '操作过于频繁' => __('操作过于频繁', PUOCK),
+            '点赞异常' => __('点赞异常', PUOCK),
+            '加载中...' => __('加载中...', PUOCK),
+            '加载更多' => __('加载更多', PUOCK),
+            '加载失败' => __('加载失败', PUOCK),
+            '加载异常' => __('加载异常', PUOCK),
+            '获取内容节点数据失败' => __('获取内容节点数据失败', PUOCK),
+            '请求Github项目详情异常：%s' => __('请求Github项目详情异常：%s', PUOCK),
+            '无内容' => __('无内容', PUOCK),
+            '加载失败：%s' => __('加载失败：%s', PUOCK),
+            '请先选择模型' => __('请先选择模型', PUOCK),
+            '请先输入内容' => __('请先输入内容', PUOCK),
+            '请求异常：%s' => __('请求异常：%s', PUOCK),
+            'AI绘画' => __('AI绘画', PUOCK),
+            'AI问答' => __('AI问答', PUOCK),
+            '对话信息' => __('对话信息', PUOCK),
+            '复制' => __('复制', PUOCK),
+            '确定要清空历史记录吗？' => __('确定要清空历史记录吗？', PUOCK),
+            '确定' => __('确定', PUOCK),
+            '取消' => __('取消', PUOCK),
+        ];
+        wp_localize_script('puock', 'PUOCK_I18N', $puock_i18n);
 
         //加载全站黑白样式
         if (pk_is_checked('grey')) {

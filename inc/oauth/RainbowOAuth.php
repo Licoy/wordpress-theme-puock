@@ -35,7 +35,7 @@ class RainbowOAuth
         $redirectUri = $callbackUrl ?: $this->callbackUrl;
         if (empty($redirectUri))
         {
-            throw new InvalidArgumentException('callbackUrl 不能为空');
+            throw new InvalidArgumentException(__('callbackUrl 不能为空', PUOCK));
         }
 
         // Append state for CSRF validation
@@ -54,7 +54,7 @@ class RainbowOAuth
         $url = (string)($data['url'] ?? '');
         if (empty($url))
         {
-            throw new InvalidArgumentException('彩虹聚合登录返回的跳转地址为空');
+            throw new InvalidArgumentException(__('彩虹聚合登录返回的跳转地址为空', PUOCK));
         }
 
         return $url;
@@ -65,13 +65,13 @@ class RainbowOAuth
         $state = $state ?? ($_GET['state'] ?? '');
         if ((string)$storeState !== (string)$state)
         {
-            throw new InvalidArgumentException('state验证失败');
+            throw new InvalidArgumentException(__('state验证失败', PUOCK));
         }
 
         $code = $code ?? ($_GET['code'] ?? '');
         if (empty($code))
         {
-            throw new InvalidArgumentException('缺少回调参数 code');
+            throw new InvalidArgumentException(__('缺少回调参数 code', PUOCK));
         }
 
         $socialType = $this->getSocialType();
@@ -90,7 +90,7 @@ class RainbowOAuth
 
         if (empty($this->openid))
         {
-            throw new InvalidArgumentException('彩虹聚合登录返回 social_uid 为空');
+            throw new InvalidArgumentException(__('彩虹聚合登录返回 social_uid 为空', PUOCK));
         }
 
         return $this->accessToken;
@@ -105,7 +105,7 @@ class RainbowOAuth
 
         if (empty($this->openid))
         {
-            throw new InvalidArgumentException('openid 为空，无法查询用户信息');
+            throw new InvalidArgumentException(__('openid 为空，无法查询用户信息', PUOCK));
         }
 
         $socialType = $this->getSocialType();
@@ -147,13 +147,13 @@ class RainbowOAuth
     {
         if (empty($this->appid) || empty($this->appSecret))
         {
-            throw new InvalidArgumentException('彩虹聚合登录 AppID/AppKey 未配置');
+            throw new InvalidArgumentException(__('彩虹聚合登录 AppID/AppKey 未配置', PUOCK));
         }
 
         $apiBase = (string)(\pk_get_option('oauth_ccy_api') ?: 'https://u.cccyun.cc');
         $apiBase = rtrim($apiBase, '/');
         if (!str_starts_with($apiBase, 'http://') && !str_starts_with($apiBase, 'https://')) {
-            throw new InvalidArgumentException('接口地址格式不正确');
+            throw new InvalidArgumentException(__('接口地址格式不正确', PUOCK));
         }
 
         $apiUrl = $apiBase . '/connect.php';
@@ -166,20 +166,20 @@ class RainbowOAuth
 
         if (is_wp_error($resp))
         {
-            throw new InvalidArgumentException('请求彩虹聚合登录失败：' . $resp->get_error_message());
+            throw new InvalidArgumentException(sprintf(__('请求彩虹聚合登录失败：%s', PUOCK), $resp->get_error_message()));
         }
 
         $body = wp_remote_retrieve_body($resp);
         $data = json_decode($body, true);
         if (!is_array($data))
         {
-            throw new InvalidArgumentException('彩虹聚合登录返回数据解析失败');
+            throw new InvalidArgumentException(__('彩虹聚合登录返回数据解析失败', PUOCK));
         }
 
         $code = (int)($data['code'] ?? -1);
         if ($code !== 0)
         {
-            $msg = (string)($data['msg'] ?? '请求失败');
+            $msg = (string)($data['msg'] ?? __('请求失败', PUOCK));
             throw new InvalidArgumentException($msg);
         }
 

@@ -93,7 +93,7 @@ class OptionBasic extends BaseOptionItem
                     'label' => __('页面无刷新加载', PUOCK),
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips' => "新标签页打开的链接除外"
+                    'tips' => __("新标签页打开的链接除外", PUOCK)
                 ],
                 [
                     'id' => 'async_view',

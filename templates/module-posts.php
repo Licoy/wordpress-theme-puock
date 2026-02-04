@@ -21,7 +21,7 @@
     <?php if ($show_load_more): ?>
     <div class="text-center mt20 mb20">
         <button id="load-more-btn" class="btn btn-sm btn-outline-primary" data-paged="<?php echo isset($paged) ? $paged : 1; ?>">
-            <i class="fa fa-plus"></i> 加载更多
+            <i class="fa fa-plus"></i> <?php _e('加载更多', PUOCK) ?>
         </button>
     </div>
     <?php elseif ($show_pagination): ?>

@@ -49,7 +49,7 @@ class OptionAd extends BaseOptionItem{
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'ad_page_t_c',
-                    'tips'=>'显示在面包屑导航下'
+                    'tips'=>__('显示在面包屑导航下', PUOCK)
                 ],
                 [
                     'id' => 'ad_page_c_b_c',
@@ -63,7 +63,7 @@ class OptionAd extends BaseOptionItem{
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'ad_page_c_b_c',
-                    'tips'=>'会显示在文章结尾处'
+                    'tips'=>__('会显示在文章结尾处', PUOCK)
                 ],
                 [
                     'id' => 'ad_comment_t_c',

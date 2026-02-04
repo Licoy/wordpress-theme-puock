@@ -39,6 +39,16 @@ class Puock {
         modalStorage: {}
     }
 
+    t(msg) {
+        const map = window.PUOCK_I18N || {};
+        return map[msg] || msg;
+    }
+
+    tf(msg, ...args) {
+        let index = 0;
+        return String(msg).replace(/%s/g, () => (args[index++] ?? ''));
+    }
+
     // 全局一次加载或注册的事件
     onceInit() {
         this.pageInit()
@@ -154,7 +164,7 @@ class Puock {
             const form = $(this.ct(e));
             const formEls = form.find(":input")
             if (formEls.length === 0) {
-                this.toast('表单元素为空', TYPE_DANGER)
+                this.toast(this.t('表单元素为空'), TYPE_DANGER)
                 return false;
             }
             for (let i = 0; i < formEls.length; i++) {
@@ -201,7 +211,7 @@ class Puock {
                     },
                     error: (e) => {
                         this.stopLoading(loading)
-                        this.toast(`请求错误：${e.statusText}`, TYPE_DANGER)
+                        this.toast(this.tf(this.t('请求错误：%s'), e.statusText), TYPE_DANGER)
                         this.loadCommentCaptchaImage(form, true)
                     }
                 })
@@ -520,11 +530,11 @@ class Puock {
         });
         cp.on("success", (e) => {
             let name = $(e.trigger).attr('data-cp-title') || "";
-            this.toast(`复制${name}成功`)
+            this.toast(this.tf(this.t('复制%s成功'), name))
         })
         cp.on("error", (e) => {
             let name = $(e.trigger).attr('data-cp-title') || "";
-            this.toast(`复制${name}失败`, TYPE_DANGER)
+            this.toast(this.tf(this.t('复制%s失败'), name), TYPE_DANGER)
         })
         this.lazyLoadInit()
         $('#post-main, #sidebar').theiaStickySidebar({
@@ -677,10 +687,10 @@ class Puock {
                     el.before(`<div class='pk-code-tools' data-pre-id='${itemId}'>
                         <div class='dot'><i></i><i></i><i></i></div>
                         <div class='actions'>
-                            <div class='pk-code-action pk-code-wrap' data-target='${itemId}' title='切换自动换行'>
+                            <div class='pk-code-action pk-code-wrap' data-target='${itemId}' title='${this.t('切换自动换行')}'>
                                 <i class='fa fa-align-left'></i>
                             </div>
-                            <div class='pk-code-action pk-code-copy' data-clipboard-target='#${itemId}' title='复制代码'>
+                            <div class='pk-code-action pk-code-copy' data-clipboard-target='#${itemId}' title='${this.t('复制代码')}'>
                                 <i class='fa fa-copy'></i>
                             </div>
                         </div>
@@ -700,7 +710,7 @@ class Puock {
                 });
                 cp.on("success", (e) => {
                     e.clearSelection();
-                    this.toast('已复制到剪切板');
+                    this.toast(this.t('已复制到剪切板'));
                     const icon = $(e.trigger).find("i");
                     icon.removeClass("fa-copy").addClass("fa-check");
                     setTimeout(() => {
@@ -708,7 +718,7 @@ class Puock {
                     }, 2000);
                 });
                 cp.on("error", () => {
-                    this.toast('复制失败', TYPE_DANGER);
+                    this.toast(this.t('复制失败'), TYPE_DANGER);
                 });
                 
                 // 自动换行功能
@@ -721,11 +731,11 @@ class Puock {
                     if (preEl.hasClass("pk-code-wrapped")) {
                         preEl.removeClass("pk-code-wrapped");
                         icon.removeClass("fa-align-justify").addClass("fa-align-left");
-                        btn.attr("title", "切换自动换行");
+                        btn.attr("title", this.t('切换自动换行'));
                     } else {
                         preEl.addClass("pk-code-wrapped");
                         icon.removeClass("fa-align-left").addClass("fa-align-justify");
-                        btn.attr("title", "取消自动换行");
+                        btn.attr("title", this.t('取消自动换行'));
                     }
                 });
             }
@@ -847,9 +857,10 @@ class Puock {
         }
     }
 
-    infoToastShow(text, title = '提示') {
+    infoToastShow(text, title = null) {
+        const safeTitle = title || this.t('提示');
         const infoToast = $('#infoToast');
-        $("#infoToastTitle").html(title);
+        $("#infoToastTitle").html(safeTitle);
         $("#infoToastText").html(text);
         infoToast.modal('show');
     }
@@ -914,17 +925,17 @@ class Puock {
         $(document).on('submit', '#comment-form', (e) => {
             e.preventDefault();
             if ($("#comment-logged").val() === '0' && ($.trim($("#comment_author").val()) === '' || $.trim($("#comment_email").val()) === '')) {
-                this.toast('评论信息不能为空', TYPE_WARNING);
+                this.toast(this.t('评论信息不能为空'), TYPE_WARNING);
                 return;
             }
             if ($.trim($("#comment").val()) === '') {
-                this.toast('评论内容不能为空', TYPE_WARNING);
+                this.toast(this.t('评论内容不能为空'), TYPE_WARNING);
                 return;
             }
             if (this.data.params.vd_comment) {
                 if (this.data.params.vd_type === 'img') {
                     if ($.trim($("#comment-vd").val()) === '') {
-                        this.toast('验证码不能为空', TYPE_WARNING);
+                        this.toast(this.t('验证码不能为空'), TYPE_WARNING);
                         return;
                     }
                 } else {
@@ -947,7 +958,7 @@ class Puock {
             data: this.parseFormData(el, args),
             type: el.attr('method'),
             success: (data) => {
-                this.toast('评论已提交成功', TYPE_SUCCESS);
+                this.toast(this.t('评论已提交成功'), TYPE_SUCCESS);
                 this.loadCommentCaptchaImage($(".comment-captcha"));
                 $("#comment-vd").val("");
                 $("#comment").val("");
@@ -988,20 +999,20 @@ class Puock {
     commentFormLoadStateChange() {
         const commentSubmit = $("#comment-submit");
         if (this.data.comment.loading) {
-            commentSubmit.html("请等待" + this.data.comment.time + "s");
+            commentSubmit.html(this.tf(this.t('请等待%s秒'), this.data.comment.time));
             this.data.comment.val = setInterval(() => {
                 if (this.data.comment.time <= 1) {
                     clearInterval(this.data.comment.val);
-                    commentSubmit.html("提交评论");
+                    commentSubmit.html(this.t('提交评论'));
                     commentSubmit.removeAttr("disabled");
                     this.data.comment.time = 5;
                 } else {
                     --this.data.comment.time;
-                    commentSubmit.html("请等待" + this.data.comment.time + "s");
+                    commentSubmit.html(this.tf(this.t('请等待%s秒'), this.data.comment.time));
                 }
             }, 1000);
         } else {
-            commentSubmit.html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>提交中...');
+            commentSubmit.html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>' + this.t('提交中...'));
             commentSubmit.attr("disabled", true)
         }
         this.data.comment.loading = !this.data.comment.loading;
@@ -1011,7 +1022,7 @@ class Puock {
         $(document).on("click", "[id^=comment-reply-]", (e) => {
             this.data.comment.replyId = $(this.ct(e)).attr("data-id");
             if ($.trim(this.data.comment.replyId) === '') {
-                this.toast('结构有误', TYPE_DANGER);
+                this.toast(this.t('结构有误'), TYPE_DANGER);
                 return;
             }
             const cf = $("#comment-form"),
@@ -1043,7 +1054,7 @@ class Puock {
         $(document).on("click", "#post-like", (e) => {
             const currentTime = new Date().getTime();
             if (currentTime - lastSendTime < throttleTimeMs) {
-                this.toast("操作过于频繁", TYPE_WARNING);
+                this.toast(this.t('操作过于频繁'), TYPE_WARNING);
                 return
             }
             lastSendTime = currentTime
@@ -1057,7 +1068,7 @@ class Puock {
                     this.toast(res.t);
                 }
             }, 'json').fail(() => {
-                this.toast('点赞异常', TYPE_DANGER);
+                this.toast(this.t('点赞异常'), TYPE_DANGER);
             })
         })
     }
@@ -1068,7 +1079,7 @@ class Puock {
             const paged = btn.data("paged");
             const postsContainer = $("#posts > div:first");
 
-            btn.prop("disabled", true).html('<i class="fa fa-spinner fa-spin"></i> 加载中...');
+            btn.prop("disabled", true).html('<i class="fa fa-spinner fa-spin"></i> ' + this.t('加载中...'));
 
             $.post("/wp-admin/admin-ajax.php", {action: 'pk_load_more_posts', paged: paged}, (res) => {
                 if (res.code === 0) {
@@ -1081,18 +1092,18 @@ class Puock {
                     if (!res.data.has_more) {
                         btn.remove();
                     } else {
-                        btn.prop("disabled", false).html('<i class="fa fa-plus"></i> 加载更多');
+                        btn.prop("disabled", false).html('<i class="fa fa-plus"></i> ' + this.t('加载更多'));
                     }
 
                     this.lazyLoadInit(newPosts);
                     this.tooltipInit(newPosts.find("[data-bs-toggle=\"tooltip\"]"));
                 } else {
-                    this.toast(res.msg || '加载失败', TYPE_DANGER);
-                    btn.prop("disabled", false).html('<i class="fa fa-plus"></i> 加载更多');
+                    this.toast(res.msg || this.t('加载失败'), TYPE_DANGER);
+                    btn.prop("disabled", false).html('<i class="fa fa-plus"></i> ' + this.t('加载更多'));
                 }
             }, 'json').fail(() => {
-                this.toast('加载异常', TYPE_DANGER);
-                btn.prop("disabled", false).html('<i class="fa fa-plus"></i> 加载更多');
+                this.toast(this.t('加载异常'), TYPE_DANGER);
+                btn.prop("disabled", false).html('<i class="fa fa-plus"></i> ' + this.t('加载更多'));
             })
         })
     }
@@ -1127,7 +1138,7 @@ class Puock {
             error: (err)=> {
                 console.error(err)
                 this.stopLoading(loading)
-                this.toast("获取内容节点数据失败", TYPE_DANGER)
+                this.toast(this.t('获取内容节点数据失败'), TYPE_DANGER)
             }
         })
     }
@@ -1137,7 +1148,7 @@ class Puock {
             const el = $(this.ct(e));
             const noTitle = el.data("no-title") !== undefined;
             const noPadding = el.data("no-padding") !== undefined;
-            const title = el.attr("title") || el.data("title") || '提示';
+            const title = el.attr("title") || el.data("title") || this.t('提示');
             const url = el.data("url");
             const onceLoad = el.data("once-load")
             const id = SparkMD5.hash(url)
@@ -1232,7 +1243,7 @@ class Puock {
                 `);
                     el.addClass("loaded");
                 }, 'json').fail((err) => {
-                    el.html(`<div class="alert alert-danger"><i class="fa fa-warning"></i>&nbsp;请求Github项目详情异常：${repo}</div>`)
+                    el.html(`<div class="alert alert-danger"><i class="fa fa-warning"></i>&nbsp;${this.tf(this.t('请求Github项目详情异常：%s'), repo)}</div>`)
                 });
             }
         })
@@ -1290,12 +1301,12 @@ class Puock {
                 const el = $(v);
                 const api = el.attr("data-api") || "https://v1.hitokoto.cn/"
                 $.get(api, (res) => {
-                    el.find(".t").text(res.hitokoto ?? res.content ?? "无内容");
+                    el.find(".t").text(res.hitokoto ?? res.content ?? this.t('无内容'));
                     el.find('.f').text(res.from);
                     el.find('.fb').removeClass("d-none");
                 }, 'json').fail((err) => {
                     console.error(err)
-                    el.find(".t").text("加载失败：" + err.responseText || err);
+                    el.find(".t").text(this.tf(this.t('加载失败：%s'), err.responseText || err));
                     el.remove(".fb");
                 })
             })
