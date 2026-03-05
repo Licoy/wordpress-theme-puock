@@ -142,6 +142,8 @@ body:not(.puock-dark) {
 
 // 黑夜模式代码高亮
 body.puock-dark {
+  background-blend-mode: darken;
+
   [id^=hljs-item] {
     background-color: #1d1f21 !important;
     
@@ -479,8 +481,10 @@ body.pre-mac pre {
         text-align: center;
         margin-bottom: 0;
         @subHeight: (@h / 1.2);
-        height: @subHeight;
+        height: auto;
+        min-height: @subHeight;
         line-height: @subHeight;
+        white-space: nowrap;
 
         &.menu-current, &:hover {
           background-color: var(--pk-c-primary);

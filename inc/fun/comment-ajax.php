@@ -47,8 +47,8 @@ function pk_comment_ajax()
         pk_comment_err(__('评论功能已关闭', PUOCK), false);
     }
 
-    //是否需要进行验证
-    if (pk_is_checked('vd_comment')) {
+    //是否需要进行验证（管理员跳过验证）
+    if (pk_is_checked('vd_comment') && !current_user_can('manage_options')) {
         if (pk_get_option('vd_type', 'img') === 'img') {
             $token = $_REQUEST['comment-vd'];
 
