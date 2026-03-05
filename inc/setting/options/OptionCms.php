@@ -47,6 +47,23 @@ class OptionCms extends BaseOptionItem{
                     'showRefId' => 'cms_show_new',
                 ],
                 [
+                    'id' => 'cms_new_exclude_cats',
+                    'label' => __('最新文章排除分类', PUOCK),
+                    'type' => 'select',
+                    'sdt' => '',
+                    'multiple' => true,
+                    'showRefId' => 'cms_show_new',
+                    'options' => self::get_category(),
+                    'tips' => __('选择需要从最新文章列表中排除的分类', PUOCK),
+                ],
+                [
+                    'id' => 'category_posts_per_page',
+                    'label' => __('分类页每页文章数', PUOCK),
+                    'type' => 'number',
+                    'sdt' => 0,
+                    'tips' => __('设置分类页面每页显示的文章数量（0为使用WordPress默认设置）', PUOCK),
+                ],
+                [
                     'id' => 'cms_card_columns',
                     'label' => __('CMS卡片列数', PUOCK),
                     'type' => 'select',

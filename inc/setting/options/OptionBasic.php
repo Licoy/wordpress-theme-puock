@@ -83,6 +83,14 @@ class OptionBasic extends BaseOptionItem
                     'tips' => __('勾选此项会在正文目录显示文章目录', PUOCK),
                 ],
                 [
+                    'id' => 'use_post_menu_open',
+                    'label' => __('目录菜单默认展开', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => 'false',
+                    'showRefId' => 'use_post_menu',
+                    'tips' => __('开启后文章目录菜单将默认展开显示', PUOCK),
+                ],
+                [
                     'id' => 'comment_ajax',
                     'label' => __('评论ajax翻页', PUOCK),
                     'type' => 'switch',

@@ -441,6 +441,9 @@ function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
     if ($width == null || $height == null) {
         return $src;
     }
+    if (pk_is_checked('disable_timthumb')) {
+        return $src;
+    }
     if (pk_is_checked('thumbnail_rewrite_open')) {
         return home_url() . "/timthumb/w_{$width}/h_{$height}/q_90/zc_1/a_c/" . pk_safe_base64_encode($src) . ".png";
     }
@@ -905,6 +908,17 @@ function pk_pre_post_set($query)
                 $query->set('orderby', 'modified');
                 $query->set('order', 'DESC');
             }
+            $exclude_cats = pk_get_option('cms_new_exclude_cats');
+            if (!empty($exclude_cats)) {
+                $cat_ids = is_array($exclude_cats) ? array_map('intval', $exclude_cats) : [intval($exclude_cats)];
+                $query->set('category__not_in', $cat_ids);
+            }
+        }
+    }
+    if ($query->is_category() && $query->is_main_query()) {
+        $cat_per_page = intval(pk_get_option('category_posts_per_page', 0));
+        if ($cat_per_page > 0) {
+            $query->set('posts_per_page', $cat_per_page);
         }
     }
 }

@@ -14,6 +14,7 @@ $headMetas = [
     'vd_gt_id' => pk_get_option('vd_gt_id'),
     'vd_type' => pk_get_option('vd_type', 'img'),
     'use_post_menu' => pk_is_checked('use_post_menu'),
+    'use_post_menu_open' => pk_is_checked('use_post_menu_open'),
     'is_single' => is_single(),
     'is_pjax' => pk_is_checked('page_ajax_load'),
     'main_lazy_img' => pk_is_checked('basic_img_lazy_z'),

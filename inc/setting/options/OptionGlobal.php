@@ -209,6 +209,13 @@ class OptionGlobal extends BaseOptionItem
                     'sdt' => 'false',
                 ],
                 [
+                    'id' => 'disable_timthumb',
+                    'label' => __('禁用timthumb缩略图', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => false,
+                    'tips' => __('开启后将禁用timthumb缩略图裁剪功能，直接使用原始图片链接', PUOCK),
+                ],
+                [
                     'id' => 'thumbnail_rewrite_open',
                     'label' => __('缩略图伪静态', PUOCK),
                     'type' => 'switch',
