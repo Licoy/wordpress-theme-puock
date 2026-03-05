@@ -543,7 +543,7 @@ class timthumb
         $mimeType = $sData['mime'];
 
         $this->debug(3, "Mime type of image is $mimeType");
-        if (!preg_match('/^image\/(?:gif|jpg|jpeg|png|webp)$/i', $mimeType)) {
+        if (!preg_match('/^image\/(?:gif|jpg|jpeg|png|webp|avif)$/i', $mimeType)) {
             return $this->error("The image being resized is not a valid gif, jpg or png.");
         }
 
@@ -800,6 +800,12 @@ class timthumb
         } else if (preg_match('/^image\/gif$/i', $mimeType)) {
             $imgType = 'gif';
             imagegif($canvas, $tempfile);
+        } else if (preg_match('/^image\/avif$/i', $mimeType)) {
+            if (function_exists('imageavif')) {
+                imageavif($canvas, $tempfile4, $quality);
+            } else {
+                imagewebp($canvas, $tempfile4, $quality);
+            }
         } else if (preg_match('/^image\/webp$/i', $mimeType)) {
             $imgType = 'webp';
             imagewebp($canvas, $tempfile);
@@ -1066,7 +1072,7 @@ class timthumb
         }
 
         $mimeType = $this->getMimeType($tempfile);
-        if (!preg_match("/^image\/(?:jpg|jpeg|gif|png|webp)$/i", $mimeType)) {
+        if (!preg_match("/^image\/(?:jpg|jpeg|gif|png|webp|avif)$/i", $mimeType)) {
             $this->debug(3, "Remote file has invalid mime type: $mimeType");
             @unlink($this->cachefile);
             touch($this->cachefile);
@@ -1142,6 +1148,9 @@ class timthumb
         if ($lowerMimeType == 'image/webp') {
             $mimeType = 'image/webp';
         }
+        if ($lowerMimeType == 'image/avif') {
+            $mimeType = 'image/avif';
+        }
         $gmdate_expires = gmdate('D, d M Y H:i:s', strtotime('now +10 days')) . ' GMT';
         $gmdate_modified = gmdate('D, d M Y H:i:s') . ' GMT';
         // send content headers then display image
@@ -1199,6 +1208,14 @@ class timthumb
 
             case 'image/webp':
                 $image = imagecreatefromwebp($src);
+                break;
+
+            case 'image/avif':
+                if (function_exists('imagecreatefromavif')) {
+                    $image = imagecreatefromavif($src);
+                } else {
+                    $image = $this->createImageFromString($src);
+                }
                 break;
 
             default:
