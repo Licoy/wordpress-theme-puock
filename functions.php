@@ -61,30 +61,20 @@ function pk_the_author_class_out($count)
     if ($count <= 0) {
         return '';
     }
-    switch ($count) {
-        case $count >= 1 && $count < 20:
-            $level = 1;
-            break;
-        case $count >= 20 && $count < 40:
-            $level = 2;
-            break;
-        case $count >= 40 && $count < 60:
-            $level = 3;
-            break;
-        case $count >= 60 && $count < 80:
-            $level = 4;
-            break;
-        case $count >= 120 && $count < 120:
-            $level = 5;
-            break;
-        case $count >= 140 && $count < 140:
-            $level = 6;
-            break;
-        case $count >= 160 && $count < 160:
-            $level = 7;
-            break;
-        default:
-            return '';
+    if ($count < 20) {
+        $level = 1;
+    } elseif ($count < 40) {
+        $level = 2;
+    } elseif ($count < 60) {
+        $level = 3;
+    } elseif ($count < 80) {
+        $level = 4;
+    } elseif ($count < 120) {
+        $level = 5;
+    } elseif ($count < 160) {
+        $level = 6;
+    } else {
+        $level = 7;
     }
     return '<span class="t-sm c-sub"><i class="fa-regular fa-gem mr-1"></i>' . __('评论达人', PUOCK) . ' LV.' . $level . '</span>';
 }
