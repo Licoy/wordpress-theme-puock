@@ -386,6 +386,18 @@ function pk_get_wp_links($link_cats = '', $auto_all = false)
             LEFT JOIN (select * from {$wpdb->term_relationships} where term_taxonomy_id in ({$link_cats})) as relat on links.link_id = relat.object_id
             LEFT JOIN (selecT * from {$wpdb->terms} where term_id in ({$link_cats})) as terms on terms.term_id = relat.term_taxonomy_id
              where links.link_id in (relat.object_id) and links.link_visible='Y'";
+    $orderby_map = [
+        'link_id' => 'links.link_id',
+        'url' => 'links.link_url',
+        'name' => 'links.link_name',
+        'rating' => 'links.link_rating',
+        'length' => 'LENGTH(links.link_name)',
+        'rand' => 'RAND()',
+    ];
+    $orderby_key = pk_get_option('index_link_order_by', 'link_id');
+    $orderby_col = $orderby_map[$orderby_key] ?? 'links.link_id';
+    $order = strtoupper(pk_get_option('index_link_order', 'ASC')) === 'DESC' ? 'DESC' : 'ASC';
+    $sql .= " ORDER BY terms.term_id ASC, {$orderby_col} {$order}";
     return $wpdb->get_results($sql);
 }
 

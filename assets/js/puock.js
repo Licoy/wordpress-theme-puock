@@ -664,6 +664,7 @@ class Puock {
             $(".post-menus-box").show();
             if (this.data.params.use_post_menu_open) {
                 this.toggleMenu();
+                $("[class^=post-menu-sub]").show();
             }
         }
     }
