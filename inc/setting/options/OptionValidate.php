@@ -27,12 +27,23 @@ class OptionValidate extends BaseOptionItem
                             'value' => 'gt',
                             'label' => __('极验验证码', PUOCK),
                         ],
+                        [
+                            'value' => 'turnstile',
+                            'label' => 'Cloudflare Turnstile',
+                        ],
                     ],
                 ],
                 [
                     'id' => 'vd_comment',
                     'label' => __('启用评论验证', PUOCK),
                     'type' => 'switch',
+                    'sdt' => false,
+                ],
+                [
+                    'id' => 'vd_register',
+                    'label' => __('启用后台注册验证', PUOCK),
+                    'type' => 'switch',
+                    'tips' => __('开启后，WordPress后台注册页面将显示验证码（支持图形验证码和Turnstile）', PUOCK),
                     'sdt' => false,
                 ],
                 [
@@ -50,6 +61,25 @@ class OptionValidate extends BaseOptionItem
                             'id' => 'vd_gt_key',
                             'label' => __('极验验证Key', PUOCK),
                             'sdt' => ''
+                        ]
+                    ]
+                ],
+                [
+                    'id' => '-',
+                    'type' => 'panel',
+                    'label' => 'Cloudflare Turnstile',
+                    'open' => true,
+                    'children' => [
+                        [
+                            'id' => 'vd_turnstile_site_key',
+                            'label' => __('Turnstile Site Key', PUOCK),
+                            'sdt' => '',
+                            'tips' => __('在 Cloudflare Dashboard > Turnstile 中获取', PUOCK),
+                        ],
+                        [
+                            'id' => 'vd_turnstile_secret_key',
+                            'label' => __('Turnstile Secret Key', PUOCK),
+                            'sdt' => '',
                         ]
                     ]
                 ],

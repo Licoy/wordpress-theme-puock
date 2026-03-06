@@ -8,6 +8,8 @@ function get_comment_notify_template($comment,$parent_id)
     $parent_comment_content = trim(get_comment($parent_id)->comment_content);
     $reply_author = $comment->comment_author;
     $reply_content = trim($comment->comment_content);
+    $primary_color = pk_get_option('email_primary_color', '#007bff');
+    $header_img = pk_get_option('email_header_img', '');
     
     $header_text = sprintf(
         /* translators: 1: Blog name, 2: Link to article, 3: Article title */
@@ -47,19 +49,30 @@ function get_comment_notify_template($comment,$parent_id)
             padding:0 5px;
         }
         #p-mail-notify .header,#p-mail-notify .footer{
-            background-color: #007bff;
+            background-color: {$primary_color};
             padding:15px;
             color:#fff;
+        }
+        #p-mail-notify .header-img img{
+            width:100%;
+            max-height:200px;
+            object-fit:cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
         }
         #p-mail-notify .header{
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
+        #p-mail-notify .header-img + .header{
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
         #p-mail-notify .header a{
             color:#ffcc33;
         }
         #p-mail-notify .main .tips a{
-            color:#007bff;
+            color:{$primary_color};
         }
         #p-mail-notify .footer{
             font-size: 12px;
@@ -82,7 +95,14 @@ function get_comment_notify_template($comment,$parent_id)
             color:#343a40;
         }
     </style>
-    <div id=\"p-mail-notify\">
+    <div id=\"p-mail-notify\">";
+    if (!empty($header_img)) {
+        $res .= "
+        <div class=\"header-img\">
+            <img src=\"{$header_img}\" alt=\"{$blog_name}\">
+        </div>";
+    }
+    $res .= "
         <div class=\"header\">
             {$header_text}
         </div>

@@ -66,6 +66,26 @@ function pk_comment_ajax()
             if (!$validate_pass) {
                 pk_comment_err(__('验证码不正确', PUOCK), false);
             }
+        } else if (pk_get_option('vd_type', 'img') === 'turnstile') {
+            $cf_token = $_POST['cf-turnstile-response'] ?? '';
+            if (empty($cf_token)) {
+                pk_comment_err(__('请完成 Turnstile 验证', PUOCK), false);
+            }
+            $secret_key = pk_get_option('vd_turnstile_secret_key', '');
+            $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+                'body' => [
+                    'secret' => $secret_key,
+                    'response' => $cf_token,
+                    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+                ],
+            ]);
+            if (is_wp_error($response)) {
+                pk_comment_err(__('验证服务请求失败', PUOCK), false);
+            }
+            $result = json_decode(wp_remote_retrieve_body($response), true);
+            if (empty($result['success'])) {
+                pk_comment_err(__('Turnstile 验证失败，请重试', PUOCK), false);
+            }
         } else {
             try {
                 pk_vd_gt_validate();

@@ -76,6 +76,11 @@
                                     </div>
                                 </div>
                             <?php endif; ?>
+                            <?php if (pk_is_checked('vd_comment') && pk_get_option('vd_type', 'img') === 'turnstile'): ?>
+                                <div class="col-12 mt10">
+                                    <div class="cf-turnstile" data-sitekey="<?php echo esc_attr(pk_get_option('vd_turnstile_site_key')) ?>"></div>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <input type="text" hidden name="comment_post_ID" value="<?php echo $post->ID ?>">

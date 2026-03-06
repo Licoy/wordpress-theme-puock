@@ -589,6 +589,85 @@ function login_protection()
 if (pk_is_checked('login_protection')) {
     add_action('login_enqueue_scripts', 'login_protection');
 }
+
+//后台注册验证码
+function pk_register_captcha_form()
+{
+    $vd_type = pk_get_option('vd_type', 'img');
+    if ($vd_type === 'img') {
+        ?>
+        <p>
+            <label for="register_captcha"><?php _e('验证码', PUOCK) ?></label>
+            <span style="display:flex;gap:5px;align-items:center">
+                <input type="text" name="register_captcha" id="register_captcha" class="input"
+                       maxlength="4" autocomplete="off" style="flex:1" />
+                <img style="cursor:pointer;height:30px"
+                     src="<?php echo esc_url(pk_captcha_url('register', 100, 30)) ?>"
+                     onclick="this.src=this.src.replace(/&t=\d+/,'')+'&t='+Date.now()"
+                     alt="<?php esc_attr_e('验证码', PUOCK) ?>" />
+            </span>
+        </p>
+        <?php
+    } elseif ($vd_type === 'turnstile') {
+        $site_key = pk_get_option('vd_turnstile_site_key', '');
+        if ($site_key) {
+            ?>
+            <div style="margin-bottom:16px;">
+                <div class="cf-turnstile" data-sitekey="<?php echo esc_attr($site_key) ?>"></div>
+            </div>
+            <?php
+        }
+    }
+}
+
+function pk_register_captcha_validate($errors, $sanitized_user_login, $user_email)
+{
+    $vd_type = pk_get_option('vd_type', 'img');
+    if ($vd_type === 'img') {
+        $captcha_val = isset($_POST['register_captcha']) ? sanitize_text_field($_POST['register_captcha']) : '';
+        if (empty($captcha_val) || !pk_captcha_validate('register', $captcha_val)) {
+            $errors->add('captcha_error', __('<strong>错误</strong>：验证码不正确', PUOCK));
+        }
+    } elseif ($vd_type === 'turnstile') {
+        $cf_token = isset($_POST['cf-turnstile-response']) ? sanitize_text_field($_POST['cf-turnstile-response']) : '';
+        if (empty($cf_token)) {
+            $errors->add('captcha_error', __('<strong>错误</strong>：请完成 Turnstile 验证', PUOCK));
+        } else {
+            $secret_key = pk_get_option('vd_turnstile_secret_key', '');
+            $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+                'body' => [
+                    'secret' => $secret_key,
+                    'response' => $cf_token,
+                    'remoteip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+                ],
+            ]);
+            if (is_wp_error($response)) {
+                $errors->add('captcha_error', __('<strong>错误</strong>：验证服务请求失败', PUOCK));
+            } else {
+                $result = json_decode(wp_remote_retrieve_body($response), true);
+                if (empty($result['success'])) {
+                    $errors->add('captcha_error', __('<strong>错误</strong>：Turnstile 验证失败，请重试', PUOCK));
+                }
+            }
+        }
+    }
+    return $errors;
+}
+
+function pk_register_captcha_scripts()
+{
+    $vd_type = pk_get_option('vd_type', 'img');
+    if ($vd_type === 'turnstile') {
+        wp_enqueue_script('cf-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', [], null, true);
+    }
+}
+
+if (pk_is_checked('vd_register')) {
+    add_action('register_form', 'pk_register_captcha_form');
+    add_filter('registration_errors', 'pk_register_captcha_validate', 10, 3);
+    add_action('login_enqueue_scripts', 'pk_register_captcha_scripts');
+}
+
 if (pk_is_checked('compress_html')) {
     add_action('get_header', 'wp_compress_html');
 }
@@ -936,6 +1015,19 @@ function pk_pre_post_set($query)
 }
 
 add_action('pre_get_posts', 'pk_pre_post_set');
+
+// 分类页置顶文章优先显示
+function pk_category_sticky_orderby($clauses, $query)
+{
+    global $wpdb;
+    if ($query->is_category() && $query->is_main_query()) {
+        $clauses['join'] .= " LEFT JOIN {$wpdb->postmeta} AS pk_sticky ON ({$wpdb->posts}.ID = pk_sticky.post_id AND pk_sticky.meta_key = 'sticky_in_category' AND pk_sticky.meta_value = 'true')";
+        $clauses['orderby'] = "CASE WHEN pk_sticky.meta_value = 'true' THEN 0 ELSE 1 END ASC, " . $clauses['orderby'];
+    }
+    return $clauses;
+}
+
+add_filter('posts_clauses', 'pk_category_sticky_orderby', 10, 2);
 
 //静态资源加载源的链接
 function pk_get_static_url()

@@ -34,6 +34,12 @@ PuockAbsMeta::newPostMeta('pk-post-basic', [
             "type" => "checkbox"
         ),
         array(
+            "id" => "sticky_in_category",
+            "title" => __("在所属分类中置顶", PUOCK),
+            "desc" => __("开启后该文章将在其所属分类页面中置顶显示", PUOCK),
+            "type" => "checkbox"
+        ),
+        array(
             "id" => "origin_author",
             "title" => __("文章出处名称", PUOCK),
             "desc" => __("若非原创则填写此值，包括其下一栏", PUOCK),
