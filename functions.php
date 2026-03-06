@@ -282,7 +282,56 @@ function smilies_custom_button($context)
         </a><div id="insert-smiley-wrap" class="pk-media-wrap" style="display: none">' . get_wpsmiliestrans() . '</div>';
 }
 /**
- * 获取文章封面图：优先级 = 特色图 > 内容第一张图（支持 Markdown）> 随机默认图
+ * 获取文章真实封面图：优先级 = 特色图 > 外部特色图 > 内容第一张图（支持 Markdown）
+ *
+ * @param int|WP_Post|null $_post 文章 ID 或对象，null 则使用全局 $post
+ * @return string 图片 URL，不存在时返回空字符串
+ */
+function pk_get_post_cover_image($_post = null): string
+{
+    global $post;
+
+    $post_obj = $_post ? get_post($_post) : $post;
+    if (!$post_obj) {
+        return '';
+    }
+
+    $post_id = (int)$post_obj->ID;
+    $content = $post_obj->post_content;
+
+    if (has_post_thumbnail($post_id)) {
+        $featured_url = get_the_post_thumbnail_url($post_id, 'large');
+        if ($featured_url) {
+            return esc_url($featured_url);
+        }
+    }
+
+    $external_thumb = get_post_meta($post_id, 'external_thumbnail_url', true);
+    if ($external_thumb) {
+        return esc_url($external_thumb);
+    }
+
+    $first_image = null;
+    if (preg_match('/!\[[^\]]*\]\(\s*([^\s\)]+?)\s*([\'"][^\'"]*?[\'"])?\s*\)/i', $content, $matches)) {
+        $first_image = trim($matches[1]);
+    } elseif (preg_match('/<img[^>]+src=[\'"]([^\'"]+)[\'"]/i', $content, $matches)) {
+        $first_image = $matches[1];
+    }
+
+    if ($first_image && filter_var($first_image, FILTER_VALIDATE_URL)) {
+        return esc_url($first_image);
+    }
+
+    return '';
+}
+
+function pk_post_has_cover_image($_post = null): bool
+{
+    return pk_get_post_cover_image($_post) !== '';
+}
+
+/**
+ * 获取文章封面图：优先级 = 真实封面图 > 随机默认图
  *
  * @param int|WP_Post|null $_post 文章 ID 或对象，null 则使用全局 $post
  * @return string 图片 URL
@@ -291,47 +340,17 @@ function get_post_images($_post = null): string
 {
     global $post;
 
-    // 1. 获取文章对象
+    $cover_image = pk_get_post_cover_image($_post);
+    if ($cover_image !== '') {
+        return $cover_image;
+    }
+
     $post_obj = $_post ? get_post($_post) : $post;
     if (!$post_obj) {
         return get_random_default_image();
     }
 
-    $post_id = (int)$post_obj->ID;
-    $content = $post_obj->post_content;
-
-    // 2. 优先：特色图（支持 attachment 和 外部链接）
-    if (has_post_thumbnail($post_id)) {
-        $featured_url = get_the_post_thumbnail_url($post_id, 'large');
-        if ($featured_url) {
-            return esc_url($featured_url);
-        }
-    }
-
-    // 可选：支持外部特色图（如果你用了之前“external_thumbnail_url”的方案）
-    $external_thumb = get_post_meta($post_id, 'external_thumbnail_url', true);
-    if ($external_thumb) {
-        return esc_url($external_thumb);
-    }
-
-    // 3. 次选：从内容提取第一张图（支持 Markdown 和 HTML）
-    $first_image = null;
-
-    // 匹配 Markdown 图片：![alt](url)
-    if (preg_match('/!\[[^\]]*\]\(\s*([^\s\)]+?)\s*([\'"][^\'"]*?[\'"])?\s*\)/i', $content, $matches)) {
-        $first_image = trim($matches[1]);
-    }
-    // 如果没找到 Markdown 图片，再匹配 HTML 图片
-    elseif (preg_match('/<img[^>]+src=[\'"]([^\'"]+)[\'"]/i', $content, $matches)) {
-        $first_image = $matches[1];
-    }
-
-    if ($first_image && filter_var($first_image, FILTER_VALIDATE_URL)) {
-        return esc_url($first_image);
-    }
-
-    // 4. 最后：返回随机默认图（传入文章ID确保同一文章图片稳定）
-    return get_random_default_image($post_id);
+    return get_random_default_image((int)$post_obj->ID);
 }
 
 /**

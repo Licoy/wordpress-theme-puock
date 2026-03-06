@@ -1,12 +1,18 @@
 <!--文章ID：<?php the_ID() ?> -->
+<?php
+$cover_image = pk_get_post_cover_image();
+$has_cover_image = $cover_image !== '';
+?>
 <?php if (pk_post_style_list()): ?>
-    <article class="block card-plain post-item p-block post-item-list">
+    <article class="block card-plain post-item p-block post-item-list<?php echo $has_cover_image ? '' : ' post-item-no-thumb'; ?>">
+        <?php if ($has_cover_image): ?>
         <div class="thumbnail">
             <a class="t-sm  ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                 <img title="<?php the_title() ?>"
-                     alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 280, 160) ?> />
+                     alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info($cover_image, '', 280, 160) ?> />
             </a>
         </div>
+        <?php endif; ?>
         <div class="post-info">
             <div class="info-top">
                 <h2 class="info-title">
@@ -57,12 +63,21 @@
         $card_col_class = 'col-lg-3 col-md-4 col-sm-6 col-12';
     }
     ?>
-    <article class="block card-plain post-item <?php echo $card_col_class; ?> post-item-card">
+    <article class="block card-plain post-item <?php echo $card_col_class; ?> post-item-card<?php echo $has_cover_image ? '' : ' post-item-no-thumb'; ?>">
         <div class="p-block post-item-block">
+            <?php if (!$has_cover_image): ?>
+            <div class="post-tags post-tags-inline">
+                <?php if (is_sticky()): ?><span class="badge bg-danger"><i
+                            class="fa fa-bolt-lightning"></i><?php _e('置顶', PUOCK) ?></span><?php endif; ?>
+                <?php if (!is_sticky() && is_category() && get_post_meta(get_the_ID(), 'sticky_in_category', true) === 'true'): ?><span class="badge bg-warning text-dark"><i
+                            class="fa fa-thumbtack"></i><?php _e('分类置顶', PUOCK) ?></span><?php endif; ?>
+            </div>
+            <?php endif; ?>
+            <?php if ($has_cover_image): ?>
             <div class="thumbnail position-relative">
                 <a class="t-sm ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
                     <img title="<?php the_title() ?>"
-                         alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), '', 400, 200) ?> />
+                         alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info($cover_image, '', 400, 200) ?> />
                 </a>
                 <div class="post-tags">
                     <?php if (is_sticky()): ?><span class="badge bg-danger"><i
@@ -71,6 +86,7 @@
                                 class="fa fa-thumbtack"></i><?php _e('分类置顶', PUOCK) ?></span><?php endif; ?>
                 </div>
             </div>
+            <?php endif; ?>
             <div class="post-info">
                 <h2 class="info-title">
                     <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>

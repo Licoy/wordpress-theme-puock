@@ -2,6 +2,7 @@
 @import "init";
 @import "common";
 @import "animation";
+@import "markdown";
 
 body {
   background-color: var(--pk-bg-body);
@@ -14,148 +15,8 @@ body {
   box-shadow: none;
 }
 
-//引用
-blockquote {
-  padding: .8em;
-  margin: 10px 0;
-  background-color: var(--pk-bg-box-content);
-  border-left: 5px solid #c1c1c1;
-  border-radius: 4px;
-}
-
-//覆盖样式
-[id^=hljs-item]{
-  font-size: 13px;
-  
-  // 自动换行样式
-  &.pk-code-wrapped {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    word-break: break-all !important;
-    
-    code {
-      white-space: pre-wrap !important;
-      word-wrap: break-word !important;
-      word-break: break-all !important;
-    }
-    
-    .hljs-ln-code {
-      white-space: pre-wrap !important;
-      word-wrap: break-word !important;
-      word-break: break-all !important;
-    }
-  }
-}
-
-.hljs-ln-numbers {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  text-align: center;
-  color: #8e8d8d;
-  vertical-align: top;
-  display: inline-block;
-  margin-right: 10px;
-
-  .hljs-ln-n {
-    margin-right: 3px;
-    min-width: 20px;
-    word-break: normal;
-  }
-}
-
-.hljs-ln-code {
-  padding-left: 10px;
-}
-
-// 白天模式代码高亮
-body:not(.puock-dark) {
-  [id^=hljs-item] {
-    background-color: #fafafa !important;
-    
-    .hljs-ln-numbers {
-      color: #999;
-    }
-  }
-  
-  .pk-code-tools {
-    background-color: #e8e8e8;
-    border-bottom-color: #ddd;
-    
-    .actions .pk-code-action {
-      color: #666;
-      
-      &:hover {
-        color: #333;
-        background-color: rgba(0, 0, 0, 0.08);
-      }
-    }
-  }
-  
-  // 白天模式语法颜色
-  .hljs-comment, .hljs-quote {
-    color: #998;
-  }
-  .hljs-keyword, .hljs-selector-tag, .hljs-subst {
-    color: #333;
-    font-weight: bold;
-  }
-  .hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
-    color: #008080;
-  }
-  .hljs-string, .hljs-doctag {
-    color: #d14;
-  }
-  .hljs-title, .hljs-section, .hljs-selector-id {
-    color: #900;
-    font-weight: bold;
-  }
-  .hljs-type, .hljs-class .hljs-title {
-    color: #458;
-    font-weight: bold;
-  }
-  .hljs-tag, .hljs-name, .hljs-attribute {
-    color: #000080;
-  }
-  .hljs-regexp, .hljs-link {
-    color: #009926;
-  }
-  .hljs-symbol, .hljs-bullet {
-    color: #990073;
-  }
-  .hljs-built_in, .hljs-builtin-name {
-    color: #0086b3;
-  }
-  .hljs-meta {
-    color: #999;
-    font-weight: bold;
-  }
-  .hljs-deletion {
-    background: #fdd;
-  }
-  .hljs-addition {
-    background: #dfd;
-  }
-}
-
-// 黑夜模式代码高亮
 body.puock-dark {
   background-blend-mode: darken;
-
-  [id^=hljs-item] {
-    background-color: #1d1f21 !important;
-    
-    .hljs-ln-numbers {
-      color: #5c5c5c;
-    }
-  }
-  
-  .pk-code-tools {
-    background-color: #141617;
-    border-bottom-color: #2d2d2d;
-  }
 }
 
 .toastify {
@@ -325,7 +186,6 @@ body.puock-dark {
   }
 
   .swiper-wrapper {
-
     img {
       height: 100%;
       object-fit: cover;
@@ -1022,6 +882,58 @@ a:hover {
       }
     }
 
+    &.post-item-no-thumb {
+      .post-info {
+        width: 100%;
+      }
+    }
+
+    &.post-item-list.post-item-no-thumb {
+      min-height: 170px;
+
+      .post-info {
+        padding: 4px 2px 2px 0;
+      }
+
+      .info-title {
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        white-space: normal;
+      }
+
+      .info-meta {
+        margin-top: 10px;
+      }
+    }
+
+    &.post-item-card.post-item-no-thumb {
+      .post-item-block {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: linear-gradient(135deg, rgba(28, 96, 243, 0.08), rgba(28, 96, 243, 0) 58%);
+      }
+
+      .post-tags-inline {
+        margin-bottom: 10px;
+
+        .badge:not(:last-child) {
+          margin-right: 4px;
+        }
+      }
+
+      .post-info {
+        min-height: 170px;
+      }
+
+      .info-meta {
+        margin: 10px 0 14px;
+      }
+    }
+
     &:hover {
       .thumbnail {
         img {
@@ -1321,196 +1233,6 @@ a:hover {
 
   .entry-title {
     font-size: 20px;
-  }
-
-  .entry-content, .entry-content-box {
-    font-size: 15px;
-
-    &.p-indent > p:not(.no-indent) {
-      text-indent: 2rem;
-    }
-
-    a:not(.btn,.fancybox,.no-icon) {
-      &:before {
-        content: "\f0c1";
-        font-family: var(--fa-style-family, "Font Awesome 6 Free");
-        margin-right: 3px;
-        font-weight: var(--fa-style, 900);
-        font-size: 12px;
-        display: none;
-      }
-    }
-
-    &.show-link-icon {
-      a:not(.btn,.fancybox,.no-icon) {
-        &:before {
-          display: inline-block;
-        }
-      }
-    }
-
-    .p-block {
-      box-shadow: none;
-      border-width: 1px;
-      border-style: solid;
-      border-color: var(--pk-c-border);
-    }
-
-    p {
-      margin: 10px 0 !important;
-      line-height: 2;
-    }
-
-    video {
-      max-width: 100%;
-    }
-
-    blockquote {
-      p:not(:last-child) {
-        margin: 0 0 10px 0 !important;
-      }
-
-      p:last-child {
-        margin: 0 !important;
-      }
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      position: relative;
-      margin: 16px 0;
-
-      &:after {
-        content: ' ';
-        display: block;
-        border: 2px solid var(--pk-c-primary);
-        border-radius: 5px;
-        width: 36px;
-        opacity: .8;
-        margin-top: 2px;
-      }
-    }
-
-    .entry-h-border(@color) {
-      border-bottom: 1px solid @color;
-      border-left: 2px solid @color;
-    }
-
-    br:before {
-      display: block;
-      content: ' ';
-      margin: 10px 0;
-    }
-
-    .h-config(@size) {
-      font-size: @size;
-    }
-
-    h1 {
-      .h-config(26px)
-    }
-
-    h2 {
-      .h-config(24px);
-    }
-
-    h3 {
-      .h-config(22px);
-    }
-
-    h4 {
-      .h-config(20px)
-    }
-
-    h5 {
-      .h-config(18px)
-    }
-
-    h6 {
-      .h-config(16px)
-    }
-
-    code:not([class]) {
-      margin: 2px 4px;
-      padding: 0 6px;
-      border-radius: 4px;
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
-      background-color: var(--pk-bg-body);
-      display: inline-block;
-      font-family: "Segoe UI", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
-      text-indent: initial;
-    }
-
-    img:not(.wp-smiley) {
-      max-width: 100%;
-      height: auto;
-      margin: 10px auto;
-      display: block;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all .3s;
-
-      &:hover {
-        opacity: .8;
-      }
-    }
-
-    .alert {
-      margin-bottom: 10px;
-    }
-
-    a:not(.btn) {
-      color: var(--pk-c-primary);
-    }
-
-    a:not(.btn,.hide-hover):not(.post-page-numbers) {
-      .ta3-fun();
-
-      &:hover {
-        opacity: .8;
-        color: rgba(var(--pk-c-primary), 60%);
-      }
-    }
-
-
-    .btn, .p-block {
-      margin-bottom: 10px !important;
-    }
-
-    pre {
-      & > code {
-        background-color: transparent !important;
-      }
-
-    }
-
-    .post-foot-qrcode {
-      margin-top: 20px;
-      text-align: center;
-
-      .title {
-        display: inline-block;
-        padding: 6px 10px;
-        background: #0e0e0e;
-        color: #fff;
-        border-radius: 10px;
-        font-size: 10px;
-      }
-
-      img {
-        width: 180px;
-        border-radius: 10px;
-      }
-    }
-  }
-}
-
-.code-toolbar {
-  .toolbar {
-    position: absolute;
-    top: 0;
-    background: #000;
-    padding-top: 20px;
-    border-radius: 5px;
   }
 }
 
@@ -2617,88 +2339,6 @@ a:hover {
   cursor: pointer;
   height: 28px;
   width: 100px;
-}
-
-.pk-code-tools {
-  background-color: #0b1c2c;
-  border-top-left-radius: var(--pk-g-box-radius);
-  border-top-right-radius: var(--pk-g-box-radius);
-  padding: 8px 12px;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
-  border-bottom: 1px dashed #3d3d3d;
-
-  .dot {
-    i {
-      display: inline-block;
-      width: 11px;
-      height: 11px;
-      border-radius: 5.5px;
-
-      &:not(:last-child) {
-        margin-right: 5px;
-      }
-
-      &:nth-child(1) {
-        background-color: #FF5F56;
-      }
-
-      &:nth-child(2) {
-        background-color: #FFBD2E;
-      }
-
-      &:nth-child(3) {
-        background-color: #27C93F;
-      }
-    }
-  }
-
-  .actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    
-    .pk-code-action {
-      font-size: 12px;
-      color: #8e8e8e;
-      cursor: pointer;
-      transition: all .3s;
-      padding: 4px 6px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &:hover {
-        color: var(--pk-c-light);
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-      
-      i {
-        font-size: 13px;
-      }
-    }
-    
-    // 兼容旧版复制按钮样式
-    .i {
-      font-size: 12px;
-      color: var(--pk-c-light);
-      cursor: pointer;
-      transition: all .3s;
-
-      &:hover {
-        opacity: .7;
-      }
-    }
-  }
-}
-
-.post-comment {
-  .pk-code-tools {
-    margin-top: 10px;
-  }
 }
 
 .post-poster {
