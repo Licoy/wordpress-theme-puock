@@ -253,9 +253,21 @@
 
         // 暴露给全局使用
         window.puockShowResetModal = showResetModal;
+        window.pkSettingSearchKeyword = window.pkSettingSearchKeyword || '';
+
+        var settingsSearchTimer = null;
+        var settingsSearchApplying = false;
+        var settingsSearchLastSignature = '';
 
         function normalizeSearchText(text) {
             return (text || '').toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function setElementDisplay(element, shouldShow) {
+            var nextDisplay = shouldShow ? '' : 'none';
+            if (element.style.display !== nextDisplay) {
+                element.style.display = nextDisplay;
+            }
         }
 
         function getSearchHost() {
@@ -312,7 +324,7 @@
 
                 input.addEventListener('input', function() {
                     window.pkSettingSearchKeyword = input.value || '';
-                    applySettingsSearch();
+                    applySettingsSearch(true);
                 });
             }
 
@@ -324,7 +336,20 @@
             return document.getElementById('pk-setting-search-wrap');
         }
 
-        function applySettingsSearch() {
+        function buildSettingsSearchSignature(keyword, menuItems, fieldItems) {
+            return [
+                keyword,
+                menuItems.length,
+                fieldItems.length,
+                !!document.getElementById('pk-setting-search-wrap')
+            ].join('|');
+        }
+
+        function applySettingsSearch(force) {
+            if (settingsSearchApplying) {
+                return;
+            }
+
             ensureSearchBox();
 
             var input = document.getElementById('pk-setting-search-input');
@@ -336,44 +361,77 @@
             var keyword = normalizeSearchText(input.value);
             var menuItems = getSearchMenuItems();
             var fieldItems = getSearchFieldItems();
+            var signature = buildSettingsSearchSignature(keyword, menuItems, fieldItems);
             var visibleMenus = 0;
             var visibleFields = 0;
+            var selectedMenu;
 
-            menuItems.forEach(function(item) {
-                var matched = !keyword || normalizeSearchText(item.textContent).indexOf(keyword) !== -1;
-                item.style.display = matched ? '' : 'none';
-                if (matched) {
-                    visibleMenus++;
-                }
-            });
-
-            fieldItems.forEach(function(item) {
-                var matched = !keyword || normalizeSearchText(item.textContent).indexOf(keyword) !== -1;
-                item.style.display = matched ? '' : 'none';
-                if (matched) {
-                    visibleFields++;
-                }
-            });
-
-            if (keyword) {
-                var selectedMenu = document.querySelector('#pk-options-box .pk-setting-menus .n-menu-item.n-menu-item--selected');
-                if (visibleMenus > 0 && visibleFields === 0 && selectedMenu && selectedMenu.style.display === 'none') {
-                    var nextMenu = menuItems.find(function(item) {
-                        return item.style.display !== 'none';
-                    });
-                    if (nextMenu) {
-                        nextMenu.click();
-                        window.setTimeout(applySettingsSearch, 80);
-                        return;
-                    }
-                }
-
-                tip.textContent = visibleMenus === 0 && visibleFields === 0
-                    ? '<?php echo esc_js(__('没有匹配的菜单或设置项，请换个关键词试试', PUOCK)); ?>'
-                    : '<?php echo esc_js(__('已匹配', PUOCK)); ?> ' + visibleMenus + ' <?php echo esc_js(__('个菜单 /', PUOCK)); ?> ' + visibleFields + ' <?php echo esc_js(__('项设置', PUOCK)); ?>';
-            } else {
-                tip.textContent = '<?php echo esc_js(__('输入关键字后，将同时筛选左侧菜单与当前设置项', PUOCK)); ?>';
+            if (!force && !keyword && signature === settingsSearchLastSignature) {
+                return;
             }
+
+            settingsSearchApplying = true;
+
+            try {
+                menuItems.forEach(function(item) {
+                    var matched = !keyword || normalizeSearchText(item.textContent).indexOf(keyword) !== -1;
+                    setElementDisplay(item, matched);
+                    if (matched) {
+                        visibleMenus++;
+                    }
+                });
+
+                fieldItems.forEach(function(item) {
+                    var matched = !keyword || normalizeSearchText(item.textContent).indexOf(keyword) !== -1;
+                    setElementDisplay(item, matched);
+                    if (matched) {
+                        visibleFields++;
+                    }
+                });
+
+                if (keyword) {
+                    selectedMenu = document.querySelector('#pk-options-box .pk-setting-menus .n-menu-item.n-menu-item--selected');
+                }
+
+                if (keyword) {
+                    if (visibleMenus > 0 && visibleFields === 0 && selectedMenu && selectedMenu.style.display === 'none') {
+                        var nextMenu = menuItems.find(function(item) {
+                            return item.style.display !== 'none';
+                        });
+                        if (nextMenu) {
+                            nextMenu.click();
+                            window.setTimeout(function() {
+                                applySettingsSearch(true);
+                            }, 80);
+                            settingsSearchLastSignature = signature;
+                            return;
+                        }
+                    }
+
+                    tip.textContent = visibleMenus === 0 && visibleFields === 0
+                        ? '<?php echo esc_js(__('没有匹配的菜单或设置项，请换个关键词试试', PUOCK)); ?>'
+                        : '<?php echo esc_js(__('已匹配', PUOCK)); ?> ' + visibleMenus + ' <?php echo esc_js(__('个菜单 /', PUOCK)); ?> ' + visibleFields + ' <?php echo esc_js(__('项设置', PUOCK)); ?>';
+                } else {
+                    tip.textContent = '<?php echo esc_js(__('输入关键字后，将同时筛选左侧菜单与当前设置项', PUOCK)); ?>';
+                }
+
+                settingsSearchLastSignature = signature;
+            } finally {
+                settingsSearchApplying = false;
+            }
+        }
+
+        function scheduleSettingsUiRefresh(delay, forceSearch) {
+            window.clearTimeout(settingsSearchTimer);
+
+            settingsSearchTimer = window.setTimeout(function() {
+                injectResetButton();
+                ensureSearchBox();
+
+                if (forceSearch || normalizeSearchText(window.pkSettingSearchKeyword)) {
+                    applySettingsSearch(!!forceSearch);
+                }
+            }, typeof delay === 'number' ? delay : 120);
         }
 
         // 在Vue应用加载完成后注入重置按钮
@@ -419,9 +477,8 @@
         }
 
         // 使用MutationObserver监听DOM变化，等Vue加载完成
-        var observer = new MutationObserver(function(mutations) {
-            injectResetButton();
-            applySettingsSearch();
+        var observer = new MutationObserver(function() {
+            scheduleSettingsUiRefresh();
         });
 
         observer.observe(document.getElementById('app'), {
@@ -430,12 +487,9 @@
         });
 
         // 备用：延迟尝试
-        setTimeout(injectResetButton, 1000);
-        setTimeout(injectResetButton, 2000);
-        setTimeout(injectResetButton, 3000);
-        setTimeout(applySettingsSearch, 1000);
-        setTimeout(applySettingsSearch, 2000);
-        setTimeout(applySettingsSearch, 3000);
+        setTimeout(function() { scheduleSettingsUiRefresh(0, true); }, 600);
+        setTimeout(function() { scheduleSettingsUiRefresh(0, true); }, 1600);
+        setTimeout(function() { scheduleSettingsUiRefresh(0, true); }, 3200);
     })();
 </script>
 <script type="text/javascript" crossorigin src="<?php echo get_template_directory_uri() ?>/assets/dist/setting/language/<?php echo get_user_locale() ?>.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
