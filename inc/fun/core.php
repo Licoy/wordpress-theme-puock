@@ -881,6 +881,9 @@ function pk_get_main_menu($mobile = false)
         if (pk_is_checked('theme_mode_s')) {
             $out .= '<li><a class="colorMode" data-bs-toggle="tooltip" title="' . esc_attr__('模式切换', PUOCK) . '" href="javascript:void(0)"><i class="fa fa-' . ((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))) . '"></i></a></li>';
         }
+        if (pk_is_checked('cn_sc_tc_toggle')) {
+            $out .= '<li><a class="sc-tc-toggle" data-bs-toggle="tooltip" title="' . esc_attr__('简繁转换', PUOCK) . '" href="javascript:void(0)"><i class="fa fa-language"></i></a></li>';
+        }
         $out .= '<li><a class="search-modal-btn" data-bs-toggle="tooltip" title="' . esc_attr__('搜索', PUOCK) . '" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>';
     }
     $out .= '</ul>';

@@ -195,7 +195,14 @@ function pk_init_register_assets()
         if (pk_get_option('vd_type') === 'turnstile') {
             wp_enqueue_script('puock-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', [], null, true);
         }
-        wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/puock.min.js', array('puock-libs'), PUOCK_CUR_VER_STR, true);
+        if (pk_is_checked('cn_sc_tc_toggle') || pk_get_option('cn_sc_tc_default', 'sc') === 'tc') {
+            wp_enqueue_script('puock-opencc', 'https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.js', [], '1.0.5', true);
+        }
+        $puock_script_deps = array('puock-libs');
+        if (pk_is_checked('cn_sc_tc_toggle') || pk_get_option('cn_sc_tc_default', 'sc') === 'tc') {
+            $puock_script_deps[] = 'puock-opencc';
+        }
+        wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/puock.min.js', $puock_script_deps, PUOCK_CUR_VER_STR, true);
 
         $puock_i18n = [
             '表单元素为空' => __('表单元素为空', PUOCK),

@@ -27,7 +27,9 @@ class Puock {
             mode_switch: false,
             async_view_generate_time: null,
             off_img_viewer:false,
-            off_code_highlighting:false
+            off_code_highlighting:false,
+            cn_sc_tc_toggle: false,
+            cn_sc_tc_default: 'sc'
         },
         comment: {
             loading: false,
@@ -70,6 +72,9 @@ class Puock {
         });
         $(document).on("click", ".colorMode", () => {
             this.modeChange(null, true);
+        });
+        $(document).on("click", ".sc-tc-toggle", () => {
+            this.toggleScTc();
         });
         $(document).on("click", ".captcha", (e) => {
             this.loadCommentCaptchaImage($(this.ct(e)))
@@ -459,6 +464,7 @@ class Puock {
     pageChangeInit() {
         this.initReadProgress()
         this.modeInit();
+        this.scTcInit();
         this.loadCommentInfo();
         this.katexParse();
         this.initCodeHighlight();
@@ -786,6 +792,52 @@ class Puock {
 
     modeInit() {
         this.modeChange();
+    }
+
+    toggleScTc() {
+        if (!this.data.params.cn_sc_tc_toggle || typeof OpenCC === 'undefined') return;
+        const current = Cookies.get('pk_lang') || 'sc';
+        const target = current === 'sc' ? 'tc' : 'sc';
+        Cookies.set('pk_lang', target, {expires: 365});
+        this.applyScTc(target);
+    }
+
+    ensureScTcHandler(reset = false) {
+        if ((!this.data.params.cn_sc_tc_toggle && this.data.params.cn_sc_tc_default !== 'tc') || typeof OpenCC === 'undefined') return null;
+        if (reset || !this.data.instance.scTcHandler) {
+            const root = document.documentElement;
+            root.lang = 'zh-CN';
+            this.data.instance.scTcHandler = OpenCC.HTMLConverter(
+                OpenCC.Converter({from: 'cn', to: 'tw'}),
+                root,
+                'zh-CN',
+                'zh-TW'
+            );
+        }
+        return this.data.instance.scTcHandler;
+    }
+
+    applyScTc(target) {
+        if ((!this.data.params.cn_sc_tc_toggle && this.data.params.cn_sc_tc_default !== 'tc') || typeof OpenCC === 'undefined') return;
+        const handler = this.ensureScTcHandler();
+        if (!handler) return;
+        if (target === 'tc') {
+            handler.convert();
+        } else if (handler.restore) {
+            handler.restore();
+        }
+        this.updateScTcToggle(target);
+    }
+
+    scTcInit() {
+        if ((!this.data.params.cn_sc_tc_toggle && this.data.params.cn_sc_tc_default !== 'tc') || typeof OpenCC === 'undefined') return;
+        this.ensureScTcHandler(true);
+        this.applyScTc(Cookies.get('pk_lang') || this.data.params.cn_sc_tc_default || 'sc');
+    }
+
+    updateScTcToggle(target) {
+        const title = target === 'tc' ? '切换为简体' : '切换为繁体';
+        $('.sc-tc-toggle').attr('title', title).attr('data-bs-original-title', title);
     }
 
     modeChange(toLight = null, isSwitch = false) {

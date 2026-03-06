@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="<?php echo esc_attr(str_replace('_', '-', get_locale())) ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -49,6 +49,9 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
                     <i class="fa fa-bars t-md mr-2 mobile-menu-s"></i>
                     <?php if (pk_is_checked('theme_mode_s')): ?>
                         <i class="fa fa-<?php echo((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))); ?> colorMode t-md mr-2"></i>
+                    <?php endif; ?>
+                    <?php if (pk_is_checked('cn_sc_tc_toggle')): ?>
+                        <i class="fa fa-language sc-tc-toggle t-md mr-2" style="cursor:pointer"></i>
                     <?php endif; ?>
                     <i class="search-modal-btn fa fa-search t-md position-relative" style="top:0.5px"></i>
                 </div>

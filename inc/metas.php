@@ -24,6 +24,8 @@ $headMetas = [
     'off_img_viewer'=>pk_is_checked('off_img_viewer'),
     'off_code_highlighting'=>pk_is_checked('off_code_highlighting'),
     'mobile_sidebar_enable' => pk_is_checked('mobile_sidebar_enable'),
+    'cn_sc_tc_toggle' => pk_is_checked('cn_sc_tc_toggle'),
+    'cn_sc_tc_default' => pk_get_option('cn_sc_tc_default', 'sc'),
 ];
 if($headMetas['async_view_id']){
     $headMetas['async_view_generate_time'] = time();

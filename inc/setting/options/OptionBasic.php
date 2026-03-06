@@ -130,6 +130,31 @@ class OptionBasic extends BaseOptionItem
                     'sdt' => false,
                 ],
                 [
+                    'id' => 'cn_sc_tc_toggle',
+                    'label' => __('简繁体切换按钮', PUOCK),
+                    'type' => 'switch',
+                    'sdt' => false,
+                    'tips' => __('开启后，导航栏将显示简繁体切换按钮', PUOCK),
+                ],
+                [
+                    'id' => 'cn_sc_tc_default',
+                    'label' => __('默认中文字形', PUOCK),
+                    'type' => 'radio',
+                    'sdt' => 'sc',
+                    'radioType' => 'button',
+                    'options' => [
+                        [
+                            'value' => 'sc',
+                            'label' => __('简体', PUOCK),
+                        ],
+                        [
+                            'value' => 'tc',
+                            'label' => __('繁体', PUOCK),
+                        ],
+                    ],
+                    'tips' => __('可设定站点默认以简体或繁体显示；开启上方按钮后前台可手动切换', PUOCK),
+                ],
+                [
                     'id' => '-',
                     'type' => 'panel',
                     'open' => pk_is_checked('post_expire_tips_open'),
