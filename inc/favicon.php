@@ -12,6 +12,15 @@ function pk_get_website_favicon_ico($url, $cache_time, $default_ico, $basename =
             return;
         }
     }
+    // SSRF protection: block requests to private/internal IPs
+    $parsed_url = parse_url($url);
+    $host = $parsed_url['host'] ?? '';
+    $resolved_ip = gethostbyname($host);
+    if ($resolved_ip === $host || filter_var($resolved_ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_LOOPBACK) === false) {
+        pk_favicon_put_default_and_output($cache_file, $cache_filename, $default_ico);
+        return;
+    }
+
     $ch = curl_init($url . '/' . $basename);
     $ico_file = fopen($cache_file, 'w');
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
