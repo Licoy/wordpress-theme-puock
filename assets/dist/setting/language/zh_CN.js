@@ -10,6 +10,7 @@ window.puockSettingLangMessage = {
         'this road is blocked~please refresh this page or f12 open the console to view the error message! if you have any questions, please submit them to github issue or join the communication group for feedback':'此路不通~请刷新此页面或 f12 打开 console 查看错误信息！有任何疑问请提交到 github issue 或加入交流群进行反馈',
         'refresh page':'刷新页面',
         'tip: slide the lower menu option left and right to view more configurations':'提示：左右滑动下方菜单选项以查看更多配置',
+        'tip: slide the upper menu option left and right to view more configurations':'提示：左右滑动上方菜单选项以查看更多配置',
         'sponsor':'赞助我们',
         'feedback':'加入交流群',
         'license':'开源协议',
@@ -42,6 +43,19 @@ window.puockSettingLangMessage = {
         'select upload':'选择上传',
         'on':'开启',
         'off':'关闭',
-        'config change tips':'您的配置发生改变，记得保存喔~'
+        'config change tips':'您的配置发生改变，记得保存喔~',
+        'search menus and settings':'搜索菜单、设置标题、说明',
+        'close search':'关闭搜索',
+        'input keyword to filter menus and current settings':'输入关键字后，将同时筛选左侧菜单与当前设置项',
+        'no matched menu or setting':'没有匹配的菜单或设置项，请换个关键词试试',
+        'no setting items matched':'当前菜单没有匹配的设置项',
+        'matched {menus} menus and {fields} settings':'已匹配 {menus} 个菜单 / {fields} 项设置',
+        'reset settings':'重置设置',
+        'confirm reset settings':'确认重置设置',
+        'reset settings warning':'此操作将把所有主题设置恢复为默认值，您当前的设置将会丢失。此操作不可撤销，确定要继续吗？',
+        'confirm reset':'确认重置',
+        'reset settings success':'设置已重置为默认值，页面即将刷新',
+        'reset settings failed':'重置失败',
+        'unknown error':'未知错误'
     }
 }

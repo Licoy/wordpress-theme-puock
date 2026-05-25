@@ -22,6 +22,8 @@ use Puock\Theme\setting\options\OptionValidate;
 
 class PuockSetting
 {
+    const CONFIG_DEBUG_ENTRY_OPTION = 'puock_theme_config_debug_entry';
+
     public function init()
     {
         add_action("admin_menu", array($this, '__wp_reg_menu'));
@@ -55,6 +57,49 @@ class PuockSetting
 
     public function __wp_admin_init()
     {
+        register_setting('general', self::CONFIG_DEBUG_ENTRY_OPTION, array(
+            'type' => 'string',
+            'sanitize_callback' => array($this, 'sanitize_config_debug_entry'),
+            'default' => '',
+        ));
+
+        add_settings_field(
+            self::CONFIG_DEBUG_ENTRY_OPTION,
+            __('Puock主题配置调试入口', PUOCK),
+            array($this, 'render_config_debug_entry_field'),
+            'general'
+        );
+    }
+
+    public function sanitize_config_debug_entry($value): string
+    {
+        $value = trim((string)$value);
+        if ($value === '') {
+            return '';
+        }
+        return untrailingslashit(esc_url_raw($value));
+    }
+
+    public function render_config_debug_entry_field()
+    {
+        $value = esc_attr(self::get_config_debug_entry());
+        ?>
+        <input
+                name="<?php echo esc_attr(self::CONFIG_DEBUG_ENTRY_OPTION); ?>"
+                type="url"
+                class="regular-text code"
+                value="<?php echo $value; ?>"
+                placeholder="http://127.0.0.1:3333"
+        />
+        <p class="description">
+            <?php _e('开发配置框架时填写 Vite dev server 地址，例如 http://127.0.0.1:3333。留空则使用主题内置的正式构建产物。', PUOCK); ?>
+        </p>
+        <?php
+    }
+
+    public static function get_config_debug_entry(): string
+    {
+        return untrailingslashit(trim((string)get_option(self::CONFIG_DEBUG_ENTRY_OPTION, '')));
     }
 
     public function __wp_reg_menu()
