@@ -6,7 +6,7 @@
     <div class="p-block" id="comments">
         <div>
             <span class="t-lg border-bottom border-primary puock-text pb-2"><i
-                        class="fa-regular fa-comments mr-1"></i><?php _e('评论', PUOCK) ?>（<?php comments_number() ?>）</span>
+                        class="fa-regular fa-comments me-1"></i><?php _e('评论', PUOCK) ?>（<?php comments_number() ?>）</span>
         </div>
         <?php if (comments_open()): ?>
             <?php if (get_option('comment_registration', '0') == '1' && !is_user_logged_in()): //登录后才可以评论 ?>

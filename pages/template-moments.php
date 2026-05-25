@@ -49,18 +49,18 @@ get_header();
                                     </div>
                                     <div class="mt10 moment-footer p-flex-s-right">
                             <span class="t-sm c-sub">
-                            <span class="mr-2"><i class="fa-regular fa-clock mr-1"></i><?php pk_get_post_date(); ?></span>
+                            <span class="me-2"><i class="fa-regular fa-clock me-1"></i><?php pk_get_post_date(); ?></span>
                             <?php if (!pk_is_checked('hide_post_views')): ?>
-                                <span class="mr-2"><i
-                                            class="fa-regular fa-eye mr-1"></i><?php pk_get_post_views() ?></span>
+                                <span class="me-2"><i
+                                            class="fa-regular fa-eye me-1"></i><?php pk_get_post_views() ?></span>
                             <?php endif; ?>
                                 <?php if (!pk_post_comment_is_closed()): ?>
                                     <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
-                                <i class="fa-regular fa-comment mr-1"></i>
+                                <i class="fa-regular fa-comment me-1"></i>
                                 <?php echo get_comments_number() ?></a>
                                 <?php endif; ?>
-                                <a class="c-sub-a ml-2" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i><?php _e('详情', PUOCK) ?></a>
+                                <a class="c-sub-a ms-2" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
+                                    <i class="fa-solid fa-arrow-up-right-from-square me-1"></i><?php _e('详情', PUOCK) ?></a>
                                 </span>
                                     </div>
                                 </div>

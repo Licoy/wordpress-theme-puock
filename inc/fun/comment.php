@@ -47,7 +47,7 @@ function pk_comment_callback($comment, $args, $depth)
             </div>
         <?php endif; ?>
         <div class="<?php if (pk_open_show_comment_avatar()) {
-            echo 'ml-2';
+            echo 'ms-2';
         } ?> two-info">
             <div class="puock-text ta3b">
                 <span class="t-md puock-links"><?php pk_comment_author_url() ?></span>
@@ -59,7 +59,7 @@ function pk_comment_callback($comment, $args, $depth)
                 <span><?php comment_date('Y-m-d H:i:s') ?></span>
                 <?php if ($comment->comment_approved == '1' && (!$author_cat_comment || $is_author)) : ?>
                     <a id="comment-reply-<?php comment_ID() ?>" data-id="<?php comment_ID() ?>"
-                       class="hide-info animated bounceIn c-sub-a t-sm ml-1 comment-reply"
+                       class="hide-info animated bounceIn c-sub-a t-sm ms-1 comment-reply"
                        href="javascript:void(0)" title="<?php esc_attr_e('回复此评论', PUOCK) ?>"><i class="fa fa-share-from-square"></i>
                         <span class="comment-reply-text"><?php _e('回复', PUOCK) ?></span></a>
                 <?php endif; ?>
@@ -72,7 +72,7 @@ function pk_comment_callback($comment, $args, $depth)
         } ?>>
             <?php comment_text() ?>
             <?php if ($comment->comment_approved == '0') : ?>
-                <p class="c-sub mt-1"><i class="fa fa-warning mr-1"></i><?php _e('您的评论正在等待审核！', PUOCK) ?></p>
+                <p class="c-sub mt-1"><i class="fa fa-warning me-1"></i><?php _e('您的评论正在等待审核！', PUOCK) ?></p>
             <?php endif; ?>
 
             <div class="comment-os c-sub">

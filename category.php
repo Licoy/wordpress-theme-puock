@@ -6,9 +6,9 @@
             <div class="container">
                 <?php echo pk_breadcrumbs() ?>
                 <?php $cats = get_category_child($cat);if($cats && count($cats)>0): ?>
-                    <div class="mt10 row pl-3 child-cat">
+                    <div class="mt10 row ps-3 child-cat">
                         <?php foreach ($cats as $catItem): ?>
-                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 pl-0 text-center">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 ps-0 text-center">
                                 <a href="<?php echo $catItem['url'] ?>" class="a-link t-md ta3 p-block pt-2 pb-2 d-inline-block w-100 abhl ww">
                                     <span><?php echo $catItem['item']->name ?></span>
                                 </a>

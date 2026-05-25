@@ -23,7 +23,7 @@ get_header();
                         </div>
                     <?php endif;if($books!=null): ?>
                     <div class="puock-text no-style p-block pb-2">
-                        <ul id="books-main" class="pl-3 row">
+                        <ul id="books-main" class="ps-3 row">
                             <?php foreach ($books as $book): ?>
                             <li class="col-6 col-sm-4 col-md-3 col-lg-auto">
                                 <a class="shadow" title="<?php echo $book->link_name ?>" data-bs-toggle="tooltip" href="<?php echo pk_go_link($book->link_url) ?>" target="_blank" rel="nofollow">

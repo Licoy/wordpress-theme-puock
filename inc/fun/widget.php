@@ -118,7 +118,7 @@ abstract class puockWidgetBase extends WP_Widget{
             <?php if($show_title): ?>
                 <div>
                 <span class="t-lg border-bottom border-primary
-                puock-text pb-2"><i class="<?php echo $this->get_icon($instance['icon']) ?> mr-1"></i><?php echo $instance['title'] ?></span>
+                puock-text pb-2"><i class="<?php echo $this->get_icon($instance['icon']) ?> me-1"></i><?php echo $instance['title'] ?></span>
                 </div>
             <?php endif; ?>
             <div class="<?php if($show_title): ?>mt20<?php endif; ?>">
@@ -170,7 +170,7 @@ abstract class puockWidgetBase extends WP_Widget{
             if($is_simple_style){
                 $out .= '<div class="media-link mt20">
                     <h2 class="t-lg t-line-1" title="'.$title.'">
-                        <i class="fa fa-angle-right t-sm c-sub mr-1"></i>
+                        <i class="fa fa-angle-right t-sm c-sub me-1"></i>
                         <a class="a-link t-w-400 t-md" title="'.$title.'" '.$target.'
                          href="'.$link.'">'.$title.'</a>
                     </h2>
@@ -465,7 +465,7 @@ class puockReadPerson extends puockWidgetBase {
         $this->get_common_widget_header($instance); ?>
         <div class="row puock-text">
             <?php foreach ($authors as $author): ?>
-             <div class="col col-12 col-lg-6 pl-0">
+             <div class="col col-12 col-lg-6 ps-0">
                  <div class="p-2 text-truncate text-nowrap">
                     <a href="<?php echo empty($author->url) ? 'javascript:void(0)':pk_go_link($author->url) ?>" class="a-link"
                         <?php echo empty($author->url) ? '':'target="_blank"' ?> rel="nofollow">
@@ -633,7 +633,7 @@ class puockSearch extends puockWidgetBase {
             <?php if(!$this->is_checked($instance['hide_title'])): ?>
             <div>
                 <span class="t-lg border-bottom border-primary
-                puock-text pb-2"><i class="fa fa-search mr-1"></i><?php echo $instance['title'] ?></span>
+                puock-text pb-2"><i class="fa fa-search me-1"></i><?php echo $instance['title'] ?></span>
             </div>
             <?php endif; ?>
             <div class="<?php if(!$this->is_checked($instance['hide_title'])): ?>mt20<?php endif; ?>">

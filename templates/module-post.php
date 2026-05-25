@@ -32,21 +32,21 @@ $has_cover_image = $cover_image !== '';
                 <div>
                     <span class="t-sm c-sub">
                             <?php if (!pk_is_checked('hide_post_views')): ?>
-                                <span class="mr-2"><i
-                                            class="fa-regular fa-eye mr-1"></i><?php pk_get_post_views() ?><span
+                                <span class="me-2"><i
+                                            class="fa-regular fa-eye me-1"></i><?php pk_get_post_views() ?><span
                                             class="t-sm d-none d-sm-inline-block"><?php _e('次阅读', PUOCK) ?></span></span>
                             <?php endif; ?>
                         <?php if (!pk_post_comment_is_closed()): ?>
                             <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
-                                <i class="fa-regular fa-comment mr-1"></i>
+                                <i class="fa-regular fa-comment me-1"></i>
                                 <?php echo get_comments_number() ?><span
                                         class="t-sm d-none d-sm-inline-block"><?php _e('个评论', PUOCK) ?></span></a>
                         <?php endif; ?>
                     </span>
                 </div>
                 <div>
-                    <?php echo get_post_category_link('c-sub-a t-sm ml-md-2 line-h-20 d-inline-block d-md-none') ?>
-                    <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><i
+                    <?php echo get_post_category_link('c-sub-a t-sm ms-md-2 line-h-20 d-inline-block d-md-none') ?>
+                    <span class="t-sm ms-md-2 c-sub line-h-20 d-none d-md-inline-block"><i
                                 class="fa-regular fa-clock"></i> <?php pk_get_post_date() ?></span>
                 </div>
             </div>
@@ -102,21 +102,21 @@ $has_cover_image = $cover_image !== '';
                     <div>
                    <span class="t-sm c-sub">
                             <?php if (!pk_is_checked('hide_post_views')): ?>
-                                <span class="mr-2">
-                                <i class="fa-regular fa-eye mr-1"></i><?php pk_get_post_views() ?><span
+                                <span class="me-2">
+                                <i class="fa-regular fa-eye me-1"></i><?php pk_get_post_views() ?><span
                                             class="t-sm d-none d-sm-inline-block"><?php _e('次阅读', PUOCK) ?></span></span>
                             <?php endif; ?>
                        <?php if (!pk_post_comment_is_closed()): ?>
                            <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
-                                <i class="fa-regular fa-comment mr-1"></i>
+                                <i class="fa-regular fa-comment me-1"></i>
                                 <?php echo get_comments_number() ?><span
                                        class="t-sm d-none d-sm-inline-block"><?php _e('个评论', PUOCK) ?></span></a>
                        <?php endif; ?>
                     </span>
                     </div>
                     <div>
-                        <?php echo get_post_category_link('c-sub-a t-sm ml-md-2 line-h-20 d-inline-block d-md-none') ?>
-                        <span class="t-sm ml-md-2 c-sub line-h-20 d-none d-md-inline-block"><i
+                        <?php echo get_post_category_link('c-sub-a t-sm ms-md-2 line-h-20 d-inline-block d-md-none') ?>
+                        <span class="t-sm ms-md-2 c-sub line-h-20 d-none d-md-inline-block"><i
                                     class="fa-regular fa-clock"></i> <?php pk_get_post_date() ?></span>
                     </div>
                 </div>

@@ -36,7 +36,7 @@ get_header();
                                 <div class="timeline-location"></div>
                                 <div class="timeline-content">
                                     <h4><?php echo $date ?></h4>
-                                    <ul class="pd-links pl-0">
+                                    <ul class="pd-links ps-0">
                                         <?php foreach ($posts as $post): setup_postdata($post) ?>
                                         <li>
                                             <a title="<?php the_title() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?>&nbsp;（&nbsp;<?php echo date_i18n(__('d日', PUOCK), strtotime($post->post_date)) ?>）</a>

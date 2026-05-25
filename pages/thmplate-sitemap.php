@@ -21,7 +21,7 @@ get_header();
                             <div class="col-12 col-lg-6">
                                 <div class="media-link mt20">
                                     <h2 class="t-lg t-line-1" title="<?php the_title() ?>">
-                                        <i class="fa fa-angle-right t-sm c-sub mr-1"></i>
+                                        <i class="fa fa-angle-right t-sm c-sub me-1"></i>
                                         <a class="a-link t-w-400 t-md puock-text" title="<?php the_title() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                     </h2>
                                 </div>
@@ -40,7 +40,7 @@ get_header();
                 <div class="p-block" id="sitemap-pages">
                     <h2 class="t-lg puock-text"><?php _e('所有单页', PUOCK) ?></h2>
                     <div class="pd-links t-md no-style li-style-line mt20">
-                        <ul class="pl-0">
+                        <ul class="ps-0">
                             <?php wp_page_menu( array() ); ?>
                         </ul>
                     </div>

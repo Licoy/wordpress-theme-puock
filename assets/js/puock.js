@@ -650,7 +650,7 @@ class Puock {
                     const id = menuIndex;
                     const pl = (item.levelInt - maxLevel) * 10
                     let out = `<li data-level="${item.levelInt}" style='padding-left:${pl}px'>`
-                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='fa ${item.children.length > 0 ? 'fa-angle-right' : 'fa-file-invoice'} t-sm c-sub mr-1'></i> ${item.name}</a>`
+                    out += `<a class='pk-menu-to a-link t-w-400 t-md post-menu-item' data-parent="${parent}" data-id="${id}" href='#${item.id}'><i class='fa ${item.children.length > 0 ? 'fa-angle-right' : 'fa-file-invoice'} t-sm c-sub me-1'></i> ${item.name}</a>`
                     if (item.children.length > 0) {
                         out += `<ul class="post-menu-sub-${id}" data-parent="${parent + 1}">`
                         for (let child of item.children) {
@@ -845,7 +845,7 @@ class Puock {
         if (typeof (toLight) === "string") {
             toLight = toLight === 'true';
         }
-        let mode = Cookies.get('mode') || 'auto'
+        let mode = Cookies.get('mode') || this.data.params.theme_mode || 'auto'
         if (toLight === null) {
             toLight = mode==='light';
             if(mode==='auto'){
@@ -889,12 +889,13 @@ class Puock {
         body.removeClass(this.data.tag + "-auto")
         body.removeClass(toLight ? this.data.tag + "-dark" : this.data.tag + "-light");
         body.addClass(toLight ? this.data.tag + "-light" : this.data.tag + "-dark");
+        document.documentElement.setAttribute('data-bs-theme', toLight ? 'light' : 'dark');
         // this.localstorageToggle('light', toLight)
         Cookies.set('mode', mode)
     }
 
     modeChangeListener() {
-        if(Cookies.get('mode')==='auto'){
+        if((Cookies.get('mode') || this.data.params.theme_mode)==='auto'){
             this.modeChange(!window.matchMedia('(prefers-color-scheme:dark)').matches);
         }
     }
@@ -1397,4 +1398,3 @@ jQuery(() => {
         window.Puock.onceInit()
     }
 )
-

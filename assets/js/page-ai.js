@@ -476,11 +476,11 @@ jQuery(function () {
                                     <div class="col">
                                         <div class="fs14 content-box ${data.ai ? 'cursor-blink-after' : ''}">${this.parseContent(data.content)}</div>
                                         <div class="d-flex align-items-center mt-2 text-muted fs12">
-                                            <div class="mr-1">
-                                                <i class="fa fa-${data.imgMode ? 'palette' : 'robot'} mr-1"></i>${data.imgMode ? this.t('AI绘画') : this.t('AI问答')}
+                                            <div class="me-1">
+                                                <i class="fa fa-${data.imgMode ? 'palette' : 'robot'} me-1"></i>${data.imgMode ? this.t('AI绘画') : this.t('AI问答')}
                                             </div>
                                             <div class="primary-text-hover pk-copy" data-cp-title="${this.t('对话信息')}" data-cp-func="puockAiChatCopy" data-id="${id}">
-                                                <span><i class="fa-regular fa-copy mr-1"></i>${this.t('复制')}</span>
+                                                <span><i class="fa-regular fa-copy me-1"></i>${this.t('复制')}</span>
                                             </div>
                                         </div>
                                     </div>

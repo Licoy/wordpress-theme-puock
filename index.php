@@ -13,7 +13,7 @@
                 <?php endif; ?>
                 <?php endif; ?>
                 <div class="<?php pk_open_box_animated('animated fadeInLeft') ?>
-                <?php echo pk_post_style_list() ? '' : 'pr-0 pl-0' ?>">
+                <?php echo pk_post_style_list() ? '' : 'pe-0 ps-0' ?>">
                     <div>
                         <?php get_template_part('templates/module', 'posts') ?>
                     </div>

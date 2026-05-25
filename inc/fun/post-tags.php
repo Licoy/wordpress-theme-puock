@@ -70,7 +70,7 @@ function specs_show_tags() {
             }
         }
         ksort($r);
-        $out = "<ul class='pl-0' id='tags-main-index'>";
+        $out = "<ul class='ps-0' id='tags-main-index'>";
         for($i=65;$i<=90;$i++){
             $tagi = @$r[chr($i)];
             $out .= is_array($tagi) ? "<li class='a'><a href='#".chr($i)."'>".chr($i)."</a></li>" : "<li class='t'>".chr($i)."</li>";
@@ -79,7 +79,7 @@ function specs_show_tags() {
             $tagi = @$r[chr($i)];
             $out .= is_array($tagi) ? "<li class='a'><a href='#".chr($i)."'>".chr($i)."</a></li>" : "<li class='t'>".chr($i)."</li>";
         }
-        $out .= "</ul><ul id='tags-main-box' class='pl-0'>";
+        $out .= "</ul><ul id='tags-main-box' class='ps-0'>";
         for($i=65;$i<=90;$i++){
             $tagi = @$r[chr($i)];
             if(is_array($tagi)){

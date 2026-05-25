@@ -13,28 +13,28 @@
                     <div class="options p-flex-sbc mt20">
                         <div>
                             <?php if (!pk_is_checked('hide_post_views')): ?>
-                                <div class="option puock-bg ta3 t-sm mr-1"><i
-                                            class="fa-regular fa-eye mr-1"></i>
+                                <div class="option puock-bg ta3 t-sm me-1"><i
+                                            class="fa-regular fa-eye me-1"></i>
                                     <span id="post-views"><?php pk_get_post_views(); ?></span><span><?php _e('次阅读', PUOCK) ?></span>
                                 </div>
                             <?php endif; ?>
                             <?php if (!pk_post_comment_is_closed()): ?>
                                 <a href="#comments">
-                                    <div class="option puock-bg ta3 t-sm mr-1"><i
-                                                class="fa-regular fa-comment mr-1"></i><?php comments_number() ?></div>
+                                    <div class="option puock-bg ta3 t-sm me-1"><i
+                                                class="fa-regular fa-comment me-1"></i><?php comments_number() ?></div>
                                 </a>
                             <?php endif; ?>
                             <?php if (is_user_logged_in() && current_user_can('edit_post', $post->ID)): ?>
                                 <a target="_blank" href="<?php echo get_edit_post_link() ?>">
-                                    <div class="option puock-bg ta3 t-sm mr-1"><i
-                                                class="fa-regular fa-pen-to-square mr-1"></i><?php _e('编辑', PUOCK) ?>
+                                    <div class="option puock-bg ta3 t-sm me-1"><i
+                                                class="fa-regular fa-pen-to-square me-1"></i><?php _e('编辑', PUOCK) ?>
                                     </div>
                                 </a>
                             <?php endif; ?>
                         </div>
                         <?php if (!pk_is_checked("hide_global_sidebar")): ?>
                             <div>
-                                <div class="option puock-bg ta3 t-sm mr-1 d-none d-lg-inline-block post-main-size">
+                                <div class="option puock-bg ta3 t-sm me-1 d-none d-lg-inline-block post-main-size">
                                     <i class="fa fa-up-right-and-down-left-from-center"></i></div>
                             </div>
                         <?php endif; ?>
@@ -92,7 +92,7 @@
                 <?php dynamic_sidebar('post_content_author_top'); ?>
                 <?php if (pk_is_checked('page_copy_right')): ?>
                     <div class="p-block p-flex-sc">
-                        <div class="mr-3 p-flex-sk-0">
+                        <div class="me-3 p-flex-sk-0">
                             <img class="md-avatar mt-1"
                                  src="<?php echo pk_get_gravatar(get_the_author_meta('email')) ?>"
                                  alt="<?php the_author_meta('display_name') ?>"

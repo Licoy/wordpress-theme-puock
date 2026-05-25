@@ -1,11 +1,22 @@
 <!doctype html>
-<html lang="<?php echo esc_attr(str_replace('_', '-', get_locale())) ?>">
+<html lang="<?php echo esc_attr(str_replace('_', '-', get_locale())) ?>" data-bs-theme="<?php echo pk_theme_light() ? 'light' : 'dark'; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv='content-language' content='<?php echo get_locale() ?>'>
+    <script>
+        (function () {
+            var match = document.cookie.match(/(?:^|;\s*)mode=([^;]*)/);
+            var mode = match ? decodeURIComponent(match[1]) : '<?php echo esc_js(pk_theme_mode()); ?>';
+            var theme = mode === 'dark' ? 'dark' : 'light';
+            if (mode === 'auto' && window.matchMedia) {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        })();
+    </script>
     <?php echo pk_icon_mate(); ?>
     <?php echo pk_get_seo_title(); ?>
     <?php if(pk_is_checked('seo_open',true) && !defined('THE_SEO_FRAMEWORK_VERSION')) get_template_part('inc/seo') ?>
@@ -46,12 +57,12 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
                     </div>
                 </div>
                 <div class="mobile-menus d-block d-lg-none p-1 puock-text">
-                    <i class="fa fa-bars t-md mr-2 mobile-menu-s"></i>
+                    <i class="fa fa-bars t-md me-2 mobile-menu-s"></i>
                     <?php if (pk_is_checked('theme_mode_s')): ?>
-                        <i class="fa fa-<?php echo((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))); ?> colorMode t-md mr-2"></i>
+                        <i class="fa fa-<?php echo((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))); ?> colorMode t-md me-2"></i>
                     <?php endif; ?>
                     <?php if (pk_is_checked('cn_sc_tc_toggle')): ?>
-                        <i class="fa fa-language sc-tc-toggle t-md mr-2" style="cursor:pointer"></i>
+                        <i class="fa fa-language sc-tc-toggle t-md me-2" style="cursor:pointer"></i>
                     <?php endif; ?>
                     <i class="search-modal-btn fa fa-search t-md position-relative" style="top:0.5px"></i>
                 </div>
@@ -69,10 +80,10 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
                         </div>
                         <div class="search-start">
                             <button type="submit" class="btn-dark btn"><i
-                                        class="fa fa-search mr-1"></i><?php _e('搜索', PUOCK) ?></button>
+                                        class="fa fa-search me-1"></i><?php _e('搜索', PUOCK) ?></button>
                         </div>
                         <div class="search-close-btn">
-                            <button type="button" class="btn-danger btn ml-1 search-modal-btn"><i
+                            <button type="button" class="btn-danger btn ms-1 search-modal-btn"><i
                                         class="fa fa-close"></i></button>
                         </div>
                     </div>

@@ -20,6 +20,7 @@ $headMetas = [
     'main_lazy_img' => pk_is_checked('basic_img_lazy_z'),
     'link_blank_open' => pk_is_checked('link_blank_content'),
     'async_view_id' => pk_metas_get_async_view_id(),
+    'theme_mode' => pk_theme_mode(),
     'mode_switch' => pk_is_checked('theme_mode_s'),
     'off_img_viewer'=>pk_is_checked('off_img_viewer'),
     'off_code_highlighting'=>pk_is_checked('off_code_highlighting'),

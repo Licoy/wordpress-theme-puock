@@ -810,7 +810,7 @@ function pk_theme_mode()
     if (isset($_COOKIE['mode'])) {
         return $_COOKIE['mode'];
     }
-    return 'auto';
+    return pk_get_option('theme_mode', 'light');
 }
 
 //动画载入
@@ -960,9 +960,9 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
         }
         if (count($menu->children) > 0) {
             if ($mobile) {
-                $out .= '<a href="#menu-sub-' . $menu->ID . '" data-bs-toggle="collapse"><i class="fa fa-chevron-down t-sm ml-1 menu-sub-icon"></i></a>';
+                $out .= '<a href="#menu-sub-' . $menu->ID . '" data-bs-toggle="collapse"><i class="fa fa-chevron-down t-sm ms-1 menu-sub-icon"></i></a>';
             } else {
-                $out .= '<i class="fa fa-chevron-down t-sm ml-1 menu-sub-icon"></i>';
+                $out .= '<i class="fa fa-chevron-down t-sm ms-1 menu-sub-icon"></i>';
             }
         }
         if ($mobile) {

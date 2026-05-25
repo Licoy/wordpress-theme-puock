@@ -56,7 +56,7 @@ function sc_tips($attr, $content, $tag)
     ), $attr));
     $_class =  'alert alert-' . $type;
     if (!empty($icon)) {
-        $content = "<i class=\"{$icon} mr-1\"></i>" . $content;
+        $content = "<i class=\"{$icon} me-1\"></i>" . $content;
     }
     if ($outline) {
         $_class .= ' alert-outline';
@@ -272,7 +272,7 @@ function pk_password_read($attr, $content = null)
     $out .= "<div class='alert alert-primary alert-outline'>{$info}"
         . "$error<form action=\"" . get_permalink() . "\" method=\"post\"><div class=\"row\"><div class=\"col-8 col-md-10\">"
         . "<input type=\"password\" placeholder=\"{$placeholder}\" required class=\"form-control form-control-sm\" name=\"pass\"/>"
-        . "</div><div class=\"col-4 col-md-2 pl-0\"><button class=\"btn btn-sm btn-primary w-100\">{$btn_text}</button></div></div></form>"
+        . "</div><div class=\"col-4 col-md-2 ps-0\"><button class=\"btn btn-sm btn-primary w-100\">{$btn_text}</button></div></div></form>"
         . "</div>";
     return $out;
 }

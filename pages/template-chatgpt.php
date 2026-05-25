@@ -76,7 +76,7 @@ $gc_ai_chat_models = pk_get_option('ai_chat_models', []);
                                 </div>
                             </div>
                             <div>
-                                <button class="btn btn-primary btn-sm mr-2 chat-submit"><i
+                                <button class="btn btn-primary btn-sm me-2 chat-submit"><i
                                             class="fa-regular fa-paper-plane me-1"></i><?php _e('立即提问', PUOCK) ?>
                                 </button>
                                 <button class="btn btn-dark btn-sm chat-clear-history"><i
