@@ -820,6 +820,7 @@ a:hover {
       position: relative;
       height: auto;
       width: 200px;
+      aspect-ratio: 7 / 4;
       transition-duration: .5s;
       margin: 0 10px 0 0;
       flex-shrink: 0;
@@ -837,28 +838,39 @@ a:hover {
         align-items: center;
 
         img {
+          width: 100%;
           height: 100%;
+          object-fit: cover;
 
           &.lazy:not(.loaded) {
-            height: auto !important;
+            height: 100% !important;
+            object-fit: contain;
           }
         }
       }
 
       img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         transition: all .3s;
       }
     }
 
     &.post-item-card {
       .thumbnail {
+        aspect-ratio: 2 / 1;
+        margin: 0;
         width: 100%;
 
         img {
           width: 100%;
+          height: 100%;
+          object-fit: cover;
 
           &.lazy:not(.loaded) {
-            width: 120px;
+            width: 100%;
+            object-fit: contain;
           }
         }
       }
