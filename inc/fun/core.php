@@ -813,6 +813,12 @@ function pk_theme_mode()
     return pk_get_option('theme_mode', 'light');
 }
 
+function pk_theme_dark_palette()
+{
+    $palette = pk_get_option('theme_dark_palette', 'bootstrap');
+    return in_array($palette, ['bootstrap', 'blueblack'], true) ? $palette : 'bootstrap';
+}
+
 //动画载入
 function pk_open_box_animated($class, $echo = true)
 {

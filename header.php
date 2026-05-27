@@ -25,7 +25,7 @@
         <?php echo pk_get_option('tj_code_header', ''); ?>
     <?php endif; ?>
 </head>
-<body class="puock-<?php echo pk_theme_mode();
+<body class="puock-<?php echo esc_attr(pk_theme_mode()); ?> puock-dark-palette-<?php echo esc_attr(pk_theme_dark_palette());
 echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>">
 <div>
     <?php if (is_single()): ?>

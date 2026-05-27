@@ -74,6 +74,23 @@ class OptionGlobal extends BaseOptionItem
                     ],
                 ],
                 [
+                    'id' => 'theme_dark_palette',
+                    'label' => __('暗黑模式主题颜色', PUOCK),
+                    'type' => 'radio',
+                    'sdt' => 'bootstrap',
+                    'radioType' => 'button',
+                    'options' => [
+                        [
+                            'value' => 'bootstrap',
+                            'label' => __('纯黑', PUOCK),
+                        ],
+                        [
+                            'value' => 'blueblack',
+                            'label' => __('蓝黑', PUOCK),
+                        ],
+                    ],
+                ],
+                [
                     'id' => 'theme_mode_s',
                     'label' => __('允许切换主题模式', PUOCK),
                     'type' => 'switch',
