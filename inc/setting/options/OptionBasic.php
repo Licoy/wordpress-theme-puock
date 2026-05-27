@@ -205,6 +205,13 @@ class OptionBasic extends BaseOptionItem
                             'sdt' => 'false',
                         ],
                         [
+                            'id' => 'comment_author_link_go',
+                            'label' => __('评论者网站链接使用跳转页', PUOCK),
+                            'type' => 'switch',
+                            'sdt' => true,
+                            'tips' => __('开启后评论者填写的网站链接会继续使用主题跳转页；关闭后将直接跳转到评论者网站', PUOCK),
+                        ],
+                        [
                             'id' => 'comment_show_ua',
                             'label' => __('评论显示用户UA', PUOCK),
                             'type' => 'switch',

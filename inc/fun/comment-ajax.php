@@ -210,7 +210,7 @@ function pk_comment_ajax()
                 <div>' . get_avatar($comment, 64, '', '', array('class' => 'md-avatar')) . '</div>
                 <div class="ms-3 two-info">
                     <div class="puock-text ta3b">
-                        <span class="t-md puock-links">' . get_comment_author_link($comment_id) . '</span>
+                        <span class="t-md puock-links">' . pk_get_comment_author_url_html($comment_id) . '</span>
                         ' . (pk_is_checked('comment_level') ? pk_the_author_class(false, $comment) : '') . '
                     </div>
                     <div class="t-sm c-sub">' . get_comment_date('Y-m-d H:i:s', $comment_id) . '</div>
@@ -248,4 +248,3 @@ function pk_comment_ajax()
 
 add_action('wp_ajax_nopriv_comment_ajax', 'pk_comment_ajax');
 add_action('wp_ajax_comment_ajax', 'pk_comment_ajax');
-

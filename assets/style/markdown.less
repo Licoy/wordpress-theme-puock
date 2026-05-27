@@ -221,6 +221,150 @@ body.pre-mac pre {
     }
   }
 
+  .wp-block-gallery,
+  .blocks-gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+
+    .blocks-gallery-item {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: center;
+      margin: 0;
+      min-width: 0;
+      position: relative;
+
+      figure {
+        height: 100%;
+        margin: 0;
+      }
+
+      img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .wp-block-gallery.has-nested-images {
+    align-items: normal;
+
+    figure.wp-block-image {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: center;
+      margin: 0;
+      max-width: 100%;
+      min-width: 0;
+      position: relative;
+
+      a,
+      img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .wp-block-gallery.is-cropped,
+  .blocks-gallery-grid.is-cropped {
+    align-items: stretch;
+
+    .blocks-gallery-item a,
+    .blocks-gallery-item img,
+    figure.wp-block-image a,
+    figure.wp-block-image img {
+      flex: 1;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+
+  .wp-block-gallery.columns-1 .blocks-gallery-item,
+  .blocks-gallery-grid.columns-1 .blocks-gallery-item,
+  .wp-block-gallery.has-nested-images.columns-1 figure.wp-block-image {
+    flex-basis: 100%;
+  }
+
+  .wp-block-gallery.columns-2 .blocks-gallery-item,
+  .blocks-gallery-grid.columns-2 .blocks-gallery-item,
+  .wp-block-gallery.has-nested-images.columns-2 figure.wp-block-image {
+    flex-basis: calc(50% - 8px);
+  }
+
+  .wp-block-gallery.columns-3 .blocks-gallery-item,
+  .blocks-gallery-grid.columns-3 .blocks-gallery-item,
+  .wp-block-gallery.has-nested-images.columns-3 figure.wp-block-image {
+    flex-basis: calc(33.333% - 11px);
+  }
+
+  .wp-block-gallery.columns-4 .blocks-gallery-item,
+  .blocks-gallery-grid.columns-4 .blocks-gallery-item,
+  .wp-block-gallery.has-nested-images.columns-4 figure.wp-block-image {
+    flex-basis: calc(25% - 12px);
+  }
+
+  .wp-block-gallery.columns-5 .blocks-gallery-item,
+  .blocks-gallery-grid.columns-5 .blocks-gallery-item,
+  .wp-block-gallery.has-nested-images.columns-5 figure.wp-block-image {
+    flex-basis: calc(20% - 13px);
+  }
+
+  .wp-block-gallery.columns-6 .blocks-gallery-item,
+  .blocks-gallery-grid.columns-6 .blocks-gallery-item,
+  .wp-block-gallery.has-nested-images.columns-6 figure.wp-block-image {
+    flex-basis: calc(16.666% - 14px);
+  }
+
+  .wp-block-gallery.columns-7 .blocks-gallery-item,
+  .blocks-gallery-grid.columns-7 .blocks-gallery-item,
+  .wp-block-gallery.has-nested-images.columns-7 figure.wp-block-image {
+    flex-basis: calc(14.285% - 14px);
+  }
+
+  .wp-block-gallery.columns-8 .blocks-gallery-item,
+  .blocks-gallery-grid.columns-8 .blocks-gallery-item,
+  .wp-block-gallery.has-nested-images.columns-8 figure.wp-block-image {
+    flex-basis: calc(12.5% - 14px);
+  }
+
+  @media (max-width: 575.98px) {
+    .wp-block-gallery.columns-2 .blocks-gallery-item,
+    .wp-block-gallery.columns-3 .blocks-gallery-item,
+    .wp-block-gallery.columns-4 .blocks-gallery-item,
+    .wp-block-gallery.columns-5 .blocks-gallery-item,
+    .wp-block-gallery.columns-6 .blocks-gallery-item,
+    .wp-block-gallery.columns-7 .blocks-gallery-item,
+    .wp-block-gallery.columns-8 .blocks-gallery-item,
+    .blocks-gallery-grid.columns-2 .blocks-gallery-item,
+    .blocks-gallery-grid.columns-3 .blocks-gallery-item,
+    .blocks-gallery-grid.columns-4 .blocks-gallery-item,
+    .blocks-gallery-grid.columns-5 .blocks-gallery-item,
+    .blocks-gallery-grid.columns-6 .blocks-gallery-item,
+    .blocks-gallery-grid.columns-7 .blocks-gallery-item,
+    .blocks-gallery-grid.columns-8 .blocks-gallery-item,
+    .wp-block-gallery.has-nested-images.columns-2 figure.wp-block-image,
+    .wp-block-gallery.has-nested-images.columns-3 figure.wp-block-image,
+    .wp-block-gallery.has-nested-images.columns-4 figure.wp-block-image,
+    .wp-block-gallery.has-nested-images.columns-5 figure.wp-block-image,
+    .wp-block-gallery.has-nested-images.columns-6 figure.wp-block-image,
+    .wp-block-gallery.has-nested-images.columns-7 figure.wp-block-image,
+    .wp-block-gallery.has-nested-images.columns-8 figure.wp-block-image {
+      flex-basis: calc(50% - 8px);
+    }
+  }
+
   .p-block {
     box-shadow: none;
     border-width: 1px;

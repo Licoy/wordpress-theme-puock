@@ -493,12 +493,17 @@ class Puock {
                 return this.data.params.main_lazy_img ? (dataSrc || src) : (src || dataSrc);
             }
             jQuery(".entry-content").viewer({
-                navbar: false,
-                url: getViewerUrl
+                navbar: true,
+                url: getViewerUrl,
+                filter: (image) => this.isViewerImage(image)
             });
             $(document).off("click.pkImageLink").on("click.pkImageLink", ".entry-content a", (e) => {
                 const link = $(this.ct(e));
-                const img = link.find("img");
+                if (e.originalEvent && e.originalEvent.puockImageLinkTrigger) {
+                    e.preventDefault();
+                    return;
+                }
+                const img = link.find("img").filter((_, image) => this.isViewerImage(image));
                 if (img.length === 0) {
                     return;
                 }
@@ -507,7 +512,16 @@ class Puock {
                     return;
                 }
                 e.preventDefault();
-                img.trigger("click");
+                if ($(e.target).is("img")) {
+                    return;
+                }
+                const imageClick = new MouseEvent("click", {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                imageClick.puockImageLinkTrigger = true;
+                img[0].dispatchEvent(imageClick);
             });
         }else{
             $(document).off("click.pkImageLink");
@@ -574,6 +588,15 @@ class Puock {
             return false;
         }
         return /\.(jpe?g|png|gif|webp|bmp|svg)(\?.*)?$/i.test(url);
+    }
+
+    isViewerImage(image) {
+        const img = $(image);
+        const src = img.attr("src") || img.attr("data-src") || "";
+        return !img.is(".wp-smiley, .emoji, .smiley-img")
+            && img.closest(".smiley-item").length === 0
+            && src.indexOf("/assets/img/smiley/") === -1
+            && src.indexOf("/wp-includes/images/smilies/") === -1;
     }
 
     generatePostMenuHTML() {

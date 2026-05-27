@@ -529,18 +529,37 @@ if (pk_get_option('gravatar_url', 'wp') != 'wp') {
     }
 }
 //评论者链接
-function pk_comment_author_url($comment_ID = 0)
+function pk_get_comment_author_url_html($comment_ID = 0)
 {
     global $comment;
-    $attr = '';
-    if (!empty($comment) && $comment->user_id != 0) {
-        $url = get_author_posts_url($comment->user_id);
+    $comment_obj = $comment_ID ? get_comment($comment_ID) : $comment;
+    $author = esc_html(get_comment_author($comment_ID));
+
+    if (empty($comment_obj)) {
+        return $author;
+    }
+
+    if (!empty($comment_obj->user_id)) {
+        $url = get_author_posts_url((int)$comment_obj->user_id);
+        $attr = '';
     } else {
         $url = get_comment_author_url($comment_ID);
-        $attr = "target='_blank' rel='external nofollow'";
+        $attr = ' target="_blank" rel="external nofollow"';
+        if (!empty($url) && pk_is_checked('comment_author_link_go', true)) {
+            $url = pk_go_link($url);
+        }
     }
-    $author = get_comment_author($comment_ID);
-    echo empty($url) ? $author : "<a " . $attr . " href='" . pk_go_link($url) . "' class='url'>$author</a>";
+
+    if (empty($url)) {
+        return $author;
+    }
+
+    return '<a' . $attr . ' href="' . esc_url($url) . '" class="url">' . $author . '</a>';
+}
+
+function pk_comment_author_url($comment_ID = 0)
+{
+    echo pk_get_comment_author_url_html($comment_ID);
 }
 
 //评论回复通知
