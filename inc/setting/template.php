@@ -75,7 +75,7 @@ $puock_smtp_test_mail_labels = [
         donate: "https://licoy.cn/puock-theme-sponsor.html",
         update_url: '<?php echo admin_url('admin-ajax.php') ?>?action=update_theme_options',
         reset_url: '<?php echo admin_url('admin-ajax.php') ?>?action=reset_theme_options',
-        smtp_test_url: '<?php echo esc_url(admin_url('admin-ajax.php?action=pk_smtp_test_mail&nonce=' . wp_create_nonce('pk_smtp_test_mail'))) ?>',
+        smtp_test_url: <?php echo wp_json_encode(admin_url('admin-ajax.php?action=pk_smtp_test_mail&nonce=' . wp_create_nonce('pk_smtp_test_mail')), JSON_UNESCAPED_SLASHES); ?>,
         smtpTestMailLabels: <?php echo wp_json_encode($puock_smtp_test_mail_labels, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>,
         fields:<?php echo json_encode($fields); ?>,
         data:<?php echo json_encode(get_option(PUOCK_OPT)); ?>,
