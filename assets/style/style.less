@@ -1130,10 +1130,19 @@ a:hover {
       align-items: stretch;
 
       .img {
+        width: 120px;
+        height: 80px;
+        flex: 0 0 120px;
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 80px;
+
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
 
       &:hover {
@@ -1697,16 +1706,21 @@ a:hover {
     }
 
     .img {
-      flex-shrink: 0;
+      width: 120px;
+      height: 80px;
+      flex: 0 0 120px;
       margin-right: 10px;
       border-radius: 3px;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 80px;
 
       img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         border-radius: 3px;
         transition: all .3s;
       }
