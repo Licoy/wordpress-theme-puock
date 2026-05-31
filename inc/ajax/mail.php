@@ -138,7 +138,9 @@ function pk_smtp_test_mail_callback()
     [$subject, $message] = pk_smtp_test_mail_template();
     $headers = ['Content-Type: text/html; charset=' . get_option('blog_charset')];
     $mail_error = null;
-    $smtp_callback = function ($phpmailer) use ($config) {
+    $phpmailer_ref = null;
+    $smtp_callback = function ($phpmailer) use ($config, &$phpmailer_ref) {
+        $phpmailer_ref = $phpmailer;
         pk_smtp_apply_config($phpmailer, $config);
     };
     $failed_callback = function ($wp_error) use (&$mail_error) {
@@ -155,10 +157,11 @@ function pk_smtp_test_mail_callback()
     }
 
     if (!$sent) {
-        $error_message = __('测试邮件发送失败，请检查 SMTP 配置', PUOCK);
-        if (is_wp_error($mail_error) && $mail_error->get_error_message()) {
-            $error_message .= '：' . $mail_error->get_error_message();
-        }
+        $error_message = pk_smtp_build_error_message(
+            __('测试邮件发送失败，请检查 SMTP 配置', PUOCK),
+            $mail_error,
+            $phpmailer_ref
+        );
         wp_send_json_error($error_message);
     }
 

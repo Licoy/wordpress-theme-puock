@@ -82,6 +82,19 @@ $puock_smtp_test_mail_labels = [
         el.style.color = type === 'success' ? '#18a058' : '#d03050'
     }
 
+    window.puockGetSmtpTestMailMessage = function (payload, fallback) {
+        if (typeof payload === 'string' && payload !== '') {
+            return payload
+        }
+        if (payload && typeof payload.message === 'string' && payload.message !== '') {
+            return payload.message
+        }
+        if (payload && typeof payload.data === 'string' && payload.data !== '') {
+            return payload.data
+        }
+        return fallback
+    }
+
     window.puockToggleSmtpCustomEmail = function (event) {
         var root = document.getElementById(window.puockSmtpTestMailRootId)
         var custom = root && root.querySelector('[data-role="custom-email"]')
@@ -118,11 +131,17 @@ $puock_smtp_test_mail_labels = [
                     settings: data,
                 }),
             })
-            var result = await response.json()
+            var responseText = await response.text()
+            var result = null
+            try {
+                result = JSON.parse(responseText)
+            } catch (e) {
+                result = {success: false, data: responseText}
+            }
             if (result.success) {
-                window.puockSetSmtpTestMailResult(root, 'success', (result.data && result.data.message) || labels.success)
+                window.puockSetSmtpTestMailResult(root, 'success', window.puockGetSmtpTestMailMessage(result.data, labels.success))
             } else {
-                window.puockSetSmtpTestMailResult(root, 'error', result.data || labels.failed)
+                window.puockSetSmtpTestMailResult(root, 'error', window.puockGetSmtpTestMailMessage(result.data, labels.failed))
             }
         } catch (e) {
             console.error(e)

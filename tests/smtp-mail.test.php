@@ -82,4 +82,10 @@ assert_same('secret', $mailer->Password, 'PHPMailer Password should use normaliz
 assert_true($mailer->SMTPAuth, 'PHPMailer SMTPAuth should be enabled.');
 assert_true($mailer->smtpEnabled, 'PHPMailer SMTP mode should be enabled.');
 
+$failedMailer = new class {
+    public $ErrorInfo = 'SMTP Error: Could not authenticate.';
+};
+$message = pk_smtp_build_error_message('测试邮件发送失败', null, $failedMailer);
+assert_same('测试邮件发送失败：SMTP Error: Could not authenticate.', $message, 'SMTP failure should include PHPMailer ErrorInfo when WP_Error is unavailable.');
+
 echo "smtp mail tests passed\n";
