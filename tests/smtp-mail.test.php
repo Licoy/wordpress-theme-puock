@@ -88,4 +88,7 @@ $failedMailer = new class {
 $message = pk_smtp_build_error_message('测试邮件发送失败', null, $failedMailer);
 assert_same('测试邮件发送失败：SMTP Error: Could not authenticate.', $message, 'SMTP failure should include PHPMailer ErrorInfo when WP_Error is unavailable.');
 
+$message = pk_smtp_build_error_message('测试邮件发送失败', null, null, '服务器未返回详细错误，请检查 SMTP 服务器、端口、加密方式、账号和授权码。');
+assert_same('测试邮件发送失败：服务器未返回详细错误，请检查 SMTP 服务器、端口、加密方式、账号和授权码。', $message, 'SMTP failure should include fallback detail when the mailer exposes no error info.');
+
 echo "smtp mail tests passed\n";

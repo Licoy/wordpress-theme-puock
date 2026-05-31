@@ -116,7 +116,7 @@ function pk_smtp_apply_config($phpmailer, array $config)
     $phpmailer->SMTPAuth = true;
 }
 
-function pk_smtp_build_error_message($fallback, $mail_error = null, $phpmailer = null)
+function pk_smtp_build_error_message($fallback, $mail_error = null, $phpmailer = null, $unknown_detail = '')
 {
     $details = [];
     if (function_exists('is_wp_error') && is_wp_error($mail_error) && $mail_error->get_error_message()) {
@@ -136,6 +136,10 @@ function pk_smtp_build_error_message($fallback, $mail_error = null, $phpmailer =
 
     $details = array_values(array_unique(array_filter($details)));
     if (empty($details)) {
+        $unknown_detail = trim((string)$unknown_detail);
+        if ($unknown_detail !== '') {
+            return $fallback . '：' . $unknown_detail;
+        }
         return $fallback;
     }
     return $fallback . '：' . implode('；', $details);

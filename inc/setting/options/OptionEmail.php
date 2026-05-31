@@ -65,11 +65,12 @@ class OptionEmail extends BaseOptionItem{
                     'tips'=>__('一般非邮箱账号直接密码，而是对应的平台的POP3/SMTP授权码', PUOCK),
                 ],
                 [
-                    'id' => '-',
+                    'id' => 'smtp_test_mail',
                     'label' => __('发送测试邮件', PUOCK),
-                    'type' => 'smtp-test',
+                    'type' => 'slot',
+                    'slot' => 'smtp-test-mail',
                     'showRefId' => 'smtp_open',
-                    'render' => 'func:window.puockCreateSmtpTestMailRender(h,data)',
+                    'tips' => __('测试会使用当前表单中的 SMTP 配置，不会自动保存。测试通过后仍需点击右上角保存配置。', PUOCK),
                 ],
                 [
                     'id' => '-',

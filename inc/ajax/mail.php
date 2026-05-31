@@ -158,9 +158,10 @@ function pk_smtp_test_mail_callback()
 
     if (!$sent) {
         $error_message = pk_smtp_build_error_message(
-            __('测试邮件发送失败，请检查 SMTP 配置', PUOCK),
+            __('测试邮件发送失败', PUOCK),
             $mail_error,
-            $phpmailer_ref
+            $phpmailer_ref,
+            __('服务器未返回详细错误，请检查 SMTP 服务器、端口、加密方式、账号和授权码。', PUOCK)
         );
         wp_send_json_error($error_message);
     }
