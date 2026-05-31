@@ -15,6 +15,14 @@ $puock_admin_color_scheme = [
 ];
 $puock_admin_primary_color = $puock_admin_color_scheme['colors'][3] ?? ($puock_admin_color_scheme['colors'][2] ?? '#2271b1');
 $puock_config_debug_entry = \Puock\Theme\setting\PuockSetting::get_config_debug_entry();
+$puock_setting_asset_version = static function ($relative_path) {
+    $version = PUOCK_CUR_VER_STR;
+    $file_path = get_template_directory() . $relative_path;
+    if (is_readable($file_path)) {
+        $version .= '-' . filemtime($file_path);
+    }
+    return esc_attr($version);
+};
 $puock_smtp_test_mail_labels = [
     'recipient' => __('收件人', PUOCK),
     'admin' => __('站点管理员邮箱', PUOCK),
@@ -31,7 +39,7 @@ $puock_smtp_test_mail_labels = [
 ];
 ?>
 <?php if ($puock_config_debug_entry === ''): ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/assets/dist/setting/index.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/assets/dist/setting/index.css?ver=<?php echo $puock_setting_asset_version('/assets/dist/setting/index.css') ?>">
 <?php endif; ?>
 <style id="pk-options-style"></style>
 <div id="app">
@@ -73,11 +81,11 @@ $puock_smtp_test_mail_labels = [
         data:<?php echo json_encode(get_option(PUOCK_OPT)); ?>,
     }
 </script>
-<script type="text/javascript" crossorigin src="<?php echo get_template_directory_uri() ?>/assets/dist/setting/language/<?php echo get_user_locale() ?>.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
+<script type="text/javascript" crossorigin src="<?php echo get_template_directory_uri() ?>/assets/dist/setting/language/<?php echo get_user_locale() ?>.js?ver=<?php echo $puock_setting_asset_version('/assets/dist/setting/language/' . get_user_locale() . '.js') ?>"></script>
 <?php if ($puock_config_debug_entry !== ''): ?>
     <script type="module" src="<?php echo esc_url($puock_config_debug_entry . '/@vite/client'); ?>"></script>
     <script type="module" src="<?php echo esc_url($puock_config_debug_entry . '/src/main.ts'); ?>"></script>
 <?php else: ?>
     <script type="module" crossorigin
-            src="<?php echo get_template_directory_uri() ?>/assets/dist/setting/index.js?ver=<?php echo PUOCK_CUR_VER_STR ?>"></script>
+            src="<?php echo get_template_directory_uri() ?>/assets/dist/setting/index.js?ver=<?php echo $puock_setting_asset_version('/assets/dist/setting/index.js') ?>"></script>
 <?php endif; ?>
