@@ -11,6 +11,15 @@
                         <?php get_template_part('templates/module', 'banners') ?>
                     </div>
                 <?php endif; ?>
+                    <?php if (pk_get_option('index_mode') == 'cms' && pk_is_checked('cms_show_four_grid')):
+                        $cms_four_grid_ava = pk_ava_cms_four_grid_items();
+                        if (is_array($cms_four_grid_ava) && count($cms_four_grid_ava) > 0):
+                            ?>
+                    <div class="<?php pk_open_box_animated('animated fadeInLeft') ?>">
+                        <?php get_template_part('templates/module', 'four-grid') ?>
+                    </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 <?php endif; ?>
                 <div class="<?php pk_open_box_animated('animated fadeInLeft') ?>
                 <?php echo pk_post_style_list() ? '' : 'pe-0 ps-0' ?>">
