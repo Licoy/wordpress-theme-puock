@@ -32,6 +32,13 @@ class OptionEmail extends BaseOptionItem{
                     'showRefId' => 'smtp_open',
                 ],
                 [
+                    'id' => 'smtp_form_n',
+                    'label' => __('发件人名称', PUOCK),
+                    'sdt' => '',
+                    'showRefId' => 'smtp_open',
+                    'tips'=>__('留空则使用 WordPress 默认发件人名称', PUOCK),
+                ],
+                [
                     'id' => 'smtp_host',
                     'label' => __('SMTP服务器', PUOCK),
                     'sdt' => '',
@@ -56,6 +63,13 @@ class OptionEmail extends BaseOptionItem{
                     'sdt' => '',
                     'showRefId' => 'smtp_open',
                     'tips'=>__('一般非邮箱账号直接密码，而是对应的平台的POP3/SMTP授权码', PUOCK),
+                ],
+                [
+                    'id' => '-',
+                    'label' => __('发送测试邮件', PUOCK),
+                    'type' => 'smtp-test',
+                    'showRefId' => 'smtp_open',
+                    'render' => 'func:window.puockCreateSmtpTestMailRender(h,data)',
                 ],
                 [
                     'id' => '-',
