@@ -56,9 +56,9 @@ class OptionGlobal extends BaseOptionItem
                     'type' => 'number',
                     'sdt' => 1240,
                     'step' => 10,
-                    'min' => 960,
+                    'min' => 320,
                     'max' => 2560,
-                    'tips' => __('单位：px。默认 1240；建议 960-2560。仅影响桌面端内容容器宽度，移动端保持自适应。', PUOCK),
+                    'tips' => __('单位：px。默认 1240；建议 320-2560。仅影响桌面端内容容器宽度，移动端保持自适应。', PUOCK),
                 ],
                 [
                     'id' => 'blog_show_load_more',

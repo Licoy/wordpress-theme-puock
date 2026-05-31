@@ -514,7 +514,7 @@ function pk_head_style_var()
 function pk_get_site_max_width()
 {
     $width = absint(pk_get_option('site_max_width', 1240));
-    if ($width < 960 || $width > 2560) {
+    if ($width < 320 || $width > 2560) {
         return 1240;
     }
     return $width;
