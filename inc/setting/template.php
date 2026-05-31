@@ -15,6 +15,20 @@ $puock_admin_color_scheme = [
 ];
 $puock_admin_primary_color = $puock_admin_color_scheme['colors'][3] ?? ($puock_admin_color_scheme['colors'][2] ?? '#2271b1');
 $puock_config_debug_entry = \Puock\Theme\setting\PuockSetting::get_config_debug_entry();
+$puock_smtp_test_mail_labels = [
+    'recipient' => __('收件人', PUOCK),
+    'admin' => __('站点管理员邮箱', PUOCK),
+    'current' => __('当前登录用户邮箱', PUOCK),
+    'custom' => __('自定义邮箱', PUOCK),
+    'customPlaceholder' => __('请输入收件人邮箱', PUOCK),
+    'send' => __('发送测试邮件', PUOCK),
+    'sending' => __('正在发送...', PUOCK),
+    'success' => __('测试邮件发送成功，请检查收件箱', PUOCK),
+    'failed' => __('测试邮件发送失败', PUOCK),
+    'missingUrl' => __('缺少测试邮件接口地址', PUOCK),
+    'requestFailed' => __('请求失败，请检查网络或控制台错误', PUOCK),
+    'tips' => __('测试会使用当前表单中的 SMTP 配置，不会自动保存。测试通过后仍需点击右上角保存配置。', PUOCK),
+];
 ?>
 <?php if ($puock_config_debug_entry === ''): ?>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/assets/dist/setting/index.css?ver=<?php echo PUOCK_CUR_VER_STR ?>">
@@ -53,8 +67,108 @@ $puock_config_debug_entry = \Puock\Theme\setting\PuockSetting::get_config_debug_
         donate: "https://licoy.cn/puock-theme-sponsor.html",
         update_url: '<?php echo admin_url('admin-ajax.php') ?>?action=update_theme_options',
         reset_url: '<?php echo admin_url('admin-ajax.php') ?>?action=reset_theme_options',
+        smtp_test_url: '<?php echo esc_url(admin_url('admin-ajax.php?action=pk_smtp_test_mail&nonce=' . wp_create_nonce('pk_smtp_test_mail'))) ?>',
         fields:<?php echo json_encode($fields); ?>,
         data:<?php echo json_encode(get_option(PUOCK_OPT)); ?>,
+    }
+
+    window.puockSmtpTestMailRootId = 'pk-smtp-test-mail'
+    window.puockSmtpTestMailLabels = <?php echo wp_json_encode($puock_smtp_test_mail_labels, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
+
+    window.puockSetSmtpTestMailResult = function (root, type, text) {
+        var el = root && root.querySelector('[data-role="result"]')
+        if (!el) return
+        el.textContent = text
+        el.style.color = type === 'success' ? '#18a058' : '#d03050'
+    }
+
+    window.puockToggleSmtpCustomEmail = function (event) {
+        var root = document.getElementById(window.puockSmtpTestMailRootId)
+        var custom = root && root.querySelector('[data-role="custom-email"]')
+        if (custom) {
+            custom.style.display = event.target.value === 'custom' ? 'block' : 'none'
+        }
+    }
+
+    window.puockSendSmtpTestMail = async function (data) {
+        var labels = window.puockSmtpTestMailLabels || {}
+        var root = document.getElementById(window.puockSmtpTestMailRootId)
+        var url = window.puockSettingMetaInfo && window.puockSettingMetaInfo.smtp_test_url
+        if (!root || !url) {
+            window.puockSetSmtpTestMailResult(root, 'error', labels.missingUrl)
+            return
+        }
+
+        var typeEl = root.querySelector('[data-role="recipient-type"]')
+        var emailEl = root.querySelector('[data-role="custom-email"]')
+        var button = root.querySelector('[data-role="send-button"]')
+        var oldText = button.textContent
+        button.disabled = true
+        button.textContent = labels.sending
+        window.puockSetSmtpTestMailResult(root, 'info', '')
+
+        try {
+            var response = await fetch(url, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    recipient_type: typeEl.value,
+                    recipient_email: emailEl.value,
+                    settings: data,
+                }),
+            })
+            var result = await response.json()
+            if (result.success) {
+                window.puockSetSmtpTestMailResult(root, 'success', (result.data && result.data.message) || labels.success)
+            } else {
+                window.puockSetSmtpTestMailResult(root, 'error', result.data || labels.failed)
+            }
+        } catch (e) {
+            console.error(e)
+            window.puockSetSmtpTestMailResult(root, 'error', labels.requestFailed)
+        } finally {
+            button.disabled = false
+            button.textContent = oldText
+        }
+    }
+
+    window.puockCreateSmtpTestMailRender = function (h, data) {
+        var labels = window.puockSmtpTestMailLabels || {}
+        var inputStyle = {height: '32px', minWidth: '220px'}
+        return h('div', {
+            id: window.puockSmtpTestMailRootId,
+            style: {display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '560px'},
+        }, [
+            h('div', {style: {display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap'}}, [
+                h('span', {style: {fontWeight: '600'}}, labels.recipient),
+                h('select', {
+                    'data-role': 'recipient-type',
+                    onChange: window.puockToggleSmtpCustomEmail,
+                    style: {minWidth: '170px', height: '32px'},
+                }, [
+                    h('option', {value: 'admin'}, labels.admin),
+                    h('option', {value: 'current'}, labels.current),
+                    h('option', {value: 'custom'}, labels.custom),
+                ]),
+                h('input', {
+                    'data-role': 'custom-email',
+                    type: 'email',
+                    placeholder: labels.customPlaceholder,
+                    style: Object.assign({display: 'none'}, inputStyle),
+                }),
+                h('button', {
+                    'data-role': 'send-button',
+                    type: 'button',
+                    class: 'button button-primary',
+                    onClick: function () {
+                        window.puockSendSmtpTestMail(data)
+                    },
+                }, labels.send),
+            ]),
+            h('div', {style: {fontSize: '12px', color: '#707070'}}, labels.tips),
+            h('div', {'data-role': 'result', style: {fontSize: '12px', minHeight: '18px'}}),
+        ])
     }
 
 </script>

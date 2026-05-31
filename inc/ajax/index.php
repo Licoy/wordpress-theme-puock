@@ -8,3 +8,4 @@ require_once __DIR__ . '/dialog-post-share.php';
 require_once __DIR__ . '/dialog-smiley.php';
 require_once __DIR__ . '/dialog-reward.php';
 require_once __DIR__ . '/ai.php';
+require_once __DIR__ . '/mail.php';
