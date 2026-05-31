@@ -685,3 +685,26 @@ function pk_ava_home_banners()
         return false;
     }
 }
+
+function pk_ava_cms_four_grid_items($limit = 4)
+{
+    $cms_four_grid_list = pk_get_option('cms_four_grid_list', []);
+    if (!is_array($cms_four_grid_list) || count($cms_four_grid_list) <= 0) {
+        return false;
+    }
+
+    $limit = max(1, (int)$limit);
+    $ava = [];
+    foreach ($cms_four_grid_list as $item) {
+        if (count($ava) >= $limit || !is_array($item)) {
+            continue;
+        }
+        $hidden = filter_var($item['hide'] ?? false, FILTER_VALIDATE_BOOLEAN);
+        if ($hidden || empty($item['img'])) {
+            continue;
+        }
+        $ava[] = $item;
+    }
+
+    return count($ava) > 0 ? $ava : false;
+}

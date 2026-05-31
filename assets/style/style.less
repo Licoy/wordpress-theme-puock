@@ -226,6 +226,31 @@ body.puock-dark {
   }
 }
 
+#cms-four-grid {
+  .cms-four-grid-item {
+    display: block;
+    overflow: hidden;
+    height: 100%;
+    border-radius: var(--pk-g-box-radius);
+    background-color: var(--pk-bg-box);
+  }
+
+  .cms-four-grid-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2.5 / 1;
+    height: auto;
+    object-fit: cover;
+    transition: transform .3s, opacity .3s;
+  }
+
+  .cms-four-grid-link:hover {
+    .cms-four-grid-img {
+      transform: var(--pk-g-list-img-hover);
+    }
+  }
+}
+
 
 pre {
   padding: 10px;
