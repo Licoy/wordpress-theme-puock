@@ -263,6 +263,10 @@ function pk_init_register_assets()
 
         //加载头部样式
         wp_add_inline_style('puock', pk_head_style_var());
+        $site_max_width_style = pk_site_max_width_style();
+        if (!empty($site_max_width_style)) {
+            wp_add_inline_style('puock', $site_max_width_style);
+        }
 
         //加载自定义样式
         if (!empty(pk_get_option('css_code_header', ''))) {

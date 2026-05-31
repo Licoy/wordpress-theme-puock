@@ -51,6 +51,16 @@ class OptionGlobal extends BaseOptionItem
                     ],
                 ],
                 [
+                    'id' => 'site_max_width',
+                    'label' => __('网站最大宽度', PUOCK),
+                    'type' => 'number',
+                    'sdt' => 1240,
+                    'step' => 10,
+                    'min' => 960,
+                    'max' => 2560,
+                    'tips' => __('单位：px。默认 1240；建议 960-2560。仅影响桌面端内容容器宽度，移动端保持自适应。', PUOCK),
+                ],
+                [
                     'id' => 'blog_show_load_more',
                     'label' => __('博客模式显示加载更多', PUOCK),
                     'type' => 'switch',

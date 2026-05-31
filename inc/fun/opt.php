@@ -511,6 +511,27 @@ function pk_head_style_var()
     return ":root{" . join(";", $vars) . "}";
 }
 
+function pk_get_site_max_width()
+{
+    $width = absint(pk_get_option('site_max_width', 1240));
+    if ($width < 960 || $width > 2560) {
+        return 1240;
+    }
+    return $width;
+}
+
+function pk_site_max_width_style()
+{
+    $width = pk_get_site_max_width();
+    if ($width === 1240) {
+        return '';
+    }
+    return sprintf(
+        '@media (min-width: 1200px){.container,.container-lg,.container-md,.container-sm{max-width:%dpx;}}',
+        $width
+    );
+}
+
 // 加载文件媒体文件
 function pk_load_media_files()
 {
