@@ -453,12 +453,15 @@ function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
     if ($width == null || $height == null) {
         return $src;
     }
-    $src_path = wp_parse_url($src, PHP_URL_PATH);
-    $src_ext = strtolower(pathinfo($src_path ?: $src, PATHINFO_EXTENSION));
-    if (in_array($src_ext, array('webp', 'avif'), true)) {
+    if (pk_is_checked('disable_timthumb')) {
         return $src;
     }
-    if (pk_is_checked('disable_timthumb')) {
+    $src_path = wp_parse_url($src, PHP_URL_PATH);
+    $src_ext = strtolower(pathinfo($src_path ?: $src, PATHINFO_EXTENSION));
+    if ($src_ext === 'webp' && (!function_exists('imagecreatefromwebp') || !function_exists('imagewebp'))) {
+        return $src;
+    }
+    if ($src_ext === 'avif' && (!function_exists('imagecreatefromavif') || !function_exists('imageavif'))) {
         return $src;
     }
     if (pk_is_checked('thumbnail_rewrite_open')) {

@@ -801,14 +801,21 @@ class timthumb
             $imgType = 'gif';
             imagegif($canvas, $tempfile);
         } else if (preg_match('/^image\/avif$/i', $mimeType)) {
-            if (function_exists('imageavif')) {
-                imageavif($canvas, $tempfile4, $quality);
-            } else {
-                imagewebp($canvas, $tempfile4, $quality);
+            $imgType = 'avif';
+            if (!function_exists('imageavif')) {
+                return $this->error('GD Library Error: imageavif does not exist.');
+            }
+            if (!imageavif($canvas, $tempfile, $quality)) {
+                return $this->error('Unable to write AVIF image.');
             }
         } else if (preg_match('/^image\/webp$/i', $mimeType)) {
             $imgType = 'webp';
-            imagewebp($canvas, $tempfile);
+            if (!function_exists('imagewebp')) {
+                return $this->error('GD Library Error: imagewebp does not exist.');
+            }
+            if (!imagewebp($canvas, $tempfile)) {
+                return $this->error('Unable to write WebP image.');
+            }
         } else {
             return $this->sanityFail("Could not match mime type after verifying it previously.");
         }
@@ -1111,8 +1118,9 @@ class timthumb
         }
         fseek($fp, strlen($this->filePrependSecurityBlock), SEEK_SET);
         $imgType = fread($fp, 4);
-        $readLen = $imgType === 'webp' ? 7 : 6;
-        fseek($fp, $imgType === 'webp' ? 3 : 2, SEEK_CUR);
+        $hasFourLetterImageType = in_array($imgType, array('webp', 'avif'), true);
+        $readLen = $hasFourLetterImageType ? 7 : 6;
+        fseek($fp, $hasFourLetterImageType ? 3 : 2, SEEK_CUR);
         if (ftell($fp) != strlen($this->filePrependSecurityBlock) + $readLen) {
             @unlink($this->cachefile);
             return $this->error("The cached image file seems to be corrupt.");
@@ -1138,9 +1146,11 @@ class timthumb
 
     protected function sendImageHeaders($mimeType, $dataSize)
     {
+        $mimeType = trim($mimeType);
         $lowerMimeType = strtolower($mimeType);
         if (!preg_match('/^image\//i', $mimeType)) {
             $mimeType = 'image/' . $mimeType;
+            $lowerMimeType = strtolower($mimeType);
         }
         if ($lowerMimeType == 'image/jpg') {
             $mimeType = 'image/jpeg';
