@@ -126,12 +126,12 @@ class RainbowOAuth
     {
         $allow = ['qq', 'wx', 'alipay', 'sina', 'baidu', 'huawei', 'xiaomi', 'douyin', 'bilibili', 'dingtalk'];
 
-        $providerType = sanitize_key($_GET['type'] ?? '');
+        $providerType = sanitize_key($_GET['pk_type'] ?? ($_GET['type'] ?? ''));
         if (in_array($providerType, $allow, true)) {
             return $providerType;
         }
 
-        if (str_starts_with($providerType, 'ccy_'))
+        if (strpos($providerType, 'ccy_') === 0)
         {
             $t = substr($providerType, strlen('ccy_'));
             if (in_array($t, $allow, true))
@@ -152,16 +152,17 @@ class RainbowOAuth
 
         $apiBase = (string)(\pk_get_option('oauth_ccy_api') ?: 'https://u.cccyun.cc');
         $apiBase = rtrim($apiBase, '/');
-        if (!str_starts_with($apiBase, 'http://') && !str_starts_with($apiBase, 'https://')) {
-            throw new InvalidArgumentException(__('接口地址格式不正确', PUOCK));
+        $apiBase = esc_url_raw($apiBase, ['https']);
+        if (!$apiBase || parse_url($apiBase, PHP_URL_SCHEME) !== 'https') {
+            throw new InvalidArgumentException(__('接口地址必须使用 HTTPS', PUOCK));
         }
 
         $apiUrl = $apiBase . '/connect.php';
-        $url = add_query_arg($query, $apiUrl);
 
-        $resp = wp_remote_get($url, [
+        $resp = wp_remote_post($apiUrl, [
             'timeout' => 15,
             'redirection' => 0,
+            'body' => $query,
         ]);
 
         if (is_wp_error($resp))

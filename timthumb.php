@@ -197,6 +197,49 @@ class timthumb
         return base64_decode($data);
     }
 
+    protected function isSafeRemoteHost($host)
+    {
+        $host = strtolower(trim((string)$host, " \t\n\r\0\x0B."));
+        if ($host === '' || !preg_match('/^[a-z0-9.-]+$/i', $host)) {
+            return false;
+        }
+        $ips = filter_var($host, FILTER_VALIDATE_IP) ? array($host) : gethostbynamel($host);
+        if (!$ips) {
+            return false;
+        }
+        foreach ($ips as $ip) {
+            if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
+                return false;
+            }
+            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected function hostMatchesAllowedSite($host, $site)
+    {
+        $host = strtolower(trim((string)$host, '.'));
+        $site = strtolower(trim((string)$site, '.'));
+        if ($host === '' || $site === '') {
+            return false;
+        }
+        return $host === $site || substr($host, -strlen('.' . $site)) === '.' . $site;
+    }
+
+    protected function pathIsWithin($path, $base)
+    {
+        $path = $this->realpath($path);
+        $base = $this->realpath($base);
+        if (!$path || !$base) {
+            return false;
+        }
+        $path = rtrim(str_replace('\\', '/', $path), '/');
+        $base = rtrim(str_replace('\\', '/', $base), '/');
+        return $path === $base || strpos($path, $base . '/') === 0;
+    }
+
     public function __construct()
     {
         global $ALLOWED_SITES;
@@ -267,7 +310,7 @@ class timthumb
                 $this->debug(2, "Fetching only from selected external sites is enabled.");
                 $allowed = false;
                 foreach ($ALLOWED_SITES as $site) {
-                    if ((strtolower(substr($this->url['host'], -strlen($site) - 1)) === strtolower(".$site")) || (strtolower($this->url['host']) === strtolower($site))) {
+                    if ($this->hostMatchesAllowedSite($this->url['host'] ?? '', $site)) {
                         $this->debug(3, "URL hostname {$this->url['host']} matches $site so allowing.");
                         $allowed = true;
                     }
@@ -275,6 +318,9 @@ class timthumb
                 if (!$allowed) {
                     return $this->error("You may not fetch images from that site. To enable this site in timthumb, you can either add it to \$ALLOWED_SITES and set ALLOW_EXTERNAL=true. Or you can set ALLOW_ALL_EXTERNAL_SITES=true, depending on your security needs.");
                 }
+            }
+            if (!$this->isSafeRemoteHost($this->url['host'] ?? '')) {
+                return $this->error("You may not fetch images from private or invalid hosts.");
             }
         }
 
@@ -939,7 +985,7 @@ class timthumb
         if (file_exists($this->docRoot . '/' . $src)) {
             $this->debug(3, "Found file as " . $this->docRoot . '/' . $src);
             $real = $this->realpath($this->docRoot . '/' . $src);
-            if (stripos($real, $this->docRoot) === 0) {
+            if ($this->pathIsWithin($real, $this->docRoot)) {
                 return $real;
             } else {
                 $this->debug(1, "Security block: The file specified occurs outside the document root.");
@@ -953,7 +999,7 @@ class timthumb
             if (!$this->docRoot) {
                 $this->sanityFail("docRoot not set when checking absolute path.");
             }
-            if (stripos($absolute, $this->docRoot) === 0) {
+            if ($this->pathIsWithin($absolute, $this->docRoot)) {
                 return $absolute;
             } else {
                 $this->debug(1, "Security block: The file specified occurs outside the document root.");
@@ -976,7 +1022,7 @@ class timthumb
             if (file_exists($base . $src)) {
                 $this->debug(3, "Found file as: " . $base . $src);
                 $real = $this->realpath($base . $src);
-                if (stripos($real, $this->realpath($this->docRoot)) === 0) {
+                if ($this->pathIsWithin($real, $this->docRoot)) {
                     return $real;
                 } else {
                     $this->debug(1, "Security block: The file specified occurs outside the document root.");
@@ -1332,6 +1378,11 @@ class timthumb
     {
         $this->lastURLError = false;
         $url = preg_replace('/ /', '%20', $url);
+        $parts = parse_url($url);
+        if (!$parts || !in_array(strtolower($parts['scheme'] ?? ''), array('http', 'https'), true) || !$this->isSafeRemoteHost($parts['host'] ?? '')) {
+            $this->lastURLError = 'Blocked unsafe remote URL';
+            return false;
+        }
         if (function_exists('curl_init')) {
             $this->debug(3, "Curl is installed so using it to fetch URL.");
             self::$curlFH = fopen($tempfile, 'w');
@@ -1348,8 +1399,8 @@ class timthumb
             curl_setopt($curl, CURLOPT_HEADER, 0);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
             curl_setopt($curl, CURLOPT_WRITEFUNCTION, 'timthumb::curlWrite');
-            @curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-            @curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
+            @curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
+            @curl_setopt($curl, CURLOPT_MAXREDIRS, 0);
 
             $curlResult = curl_exec($curl);
             fclose(self::$curlFH);
@@ -1357,7 +1408,8 @@ class timthumb
             if ($httpStatus == 404) {
                 $this->set404();
             }
-            if ($httpStatus == 302) {
+            if ($httpStatus >= 300 && $httpStatus < 400) {
+                curl_close($curl);
                 $this->error("External Image is Redirecting. Try alternate image url");
                 return false;
             }
@@ -1370,7 +1422,14 @@ class timthumb
                 return false;
             }
         } else {
-            $img = @file_get_contents($url);
+            $context = stream_context_create(array(
+                'http' => array(
+                    'follow_location' => 0,
+                    'max_redirects' => 0,
+                    'timeout' => CURL_TIMEOUT,
+                ),
+            ));
+            $img = @file_get_contents($url, false, $context, 0, MAX_FILE_SIZE + 1);
             if ($img === false) {
                 $err = error_get_last();
                 if (is_array($err) && $err['message']) {
@@ -1382,6 +1441,10 @@ class timthumb
                     $this->set404();
                 }
 
+                return false;
+            }
+            if (strlen($img) > MAX_FILE_SIZE) {
+                $this->lastURLError = 'Remote file too large.';
                 return false;
             }
             if (!file_put_contents($tempfile, $img)) {

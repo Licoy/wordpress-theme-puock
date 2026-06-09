@@ -7,14 +7,14 @@
 
     <div id="author">
         <div class="bg"
-             style="background-image: url('<?php echo PUOCK_ABS_URI.'/assets/img/show/author-bg.jpg' ?>')">
+             style="background-image: url('<?php echo esc_url(PUOCK_ABS_URI . '/assets/img/show/author-bg.jpg') ?>')">
             <div class="avatar">
-                <img <?php echo pk_get_lazy_img_info(get_avatar_url(get_the_author_meta('ID'),['size'=>200]),'avatar') ?>>
+                <img <?php echo pk_get_lazy_img_info(esc_url(get_avatar_url(get_the_author_meta('ID'), ['size' => 200])), 'avatar') ?>>
             </div>
         </div>
         <div class="info">
-            <div class="fs18"><?php the_author_meta('display_name') ?></div>
-            <div class="fs12 c-sub mt10"><?php the_author_meta('description') ?></div>
+            <div class="fs18"><?php echo esc_html(get_the_author_meta('display_name')) ?></div>
+            <div class="fs12 c-sub mt10"><?php echo esc_html(get_the_author_meta('description')) ?></div>
         </div>
         <div class="row row-cols-1 mt15">
             <div class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12

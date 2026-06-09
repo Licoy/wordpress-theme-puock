@@ -363,6 +363,74 @@ jQuery(function () {
                 return String(msg).replace(/%s/g, () => (args[index++] ?? ''));
             }
 
+            escapeHtml(str) {
+                return String(str ?? '').replace(/[&<>"']/g, (s) => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;',
+                })[s])
+            }
+
+            isSafeUrl(value, allowImageData = false) {
+                const url = String(value ?? '').trim()
+                if (url === '' || url.startsWith('#') || url.startsWith('/')) return true
+                if (/^https?:\/\//i.test(url) || /^mailto:/i.test(url)) return true
+                return allowImageData && /^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(url)
+            }
+
+            sanitizeAiHtml(html) {
+                const template = document.createElement('template')
+                template.innerHTML = String(html ?? '')
+                const allowedTags = new Set(['A', 'B', 'BLOCKQUOTE', 'BR', 'CODE', 'DEL', 'EM', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'HR', 'I', 'IMG', 'LI', 'OL', 'P', 'PRE', 'S', 'SPAN', 'STRONG', 'TABLE', 'TBODY', 'TD', 'TH', 'THEAD', 'TR', 'UL'])
+                const allowedAttrs = {
+                    A: new Set(['href', 'title', 'target', 'rel']),
+                    IMG: new Set(['src', 'alt', 'title']),
+                    CODE: new Set(['class']),
+                    PRE: new Set(['class']),
+                    TH: new Set(['align']),
+                    TD: new Set(['align']),
+                }
+                const walk = (node) => {
+                    Array.from(node.children).forEach((el) => {
+                        walk(el)
+                        const tag = el.tagName
+                        if (!allowedTags.has(tag)) {
+                            el.replaceWith(document.createTextNode(el.textContent || ''))
+                            return
+                        }
+                        Array.from(el.attributes).forEach((attr) => {
+                            const name = attr.name.toLowerCase()
+                            const attrAllowed = allowedAttrs[tag]?.has(name) || false
+                            if (!attrAllowed) {
+                                el.removeAttribute(attr.name)
+                                return
+                            }
+                            if (name === 'href' && !this.isSafeUrl(attr.value)) {
+                                el.removeAttribute(attr.name)
+                            }
+                            if (name === 'src' && !this.isSafeUrl(attr.value, tag === 'IMG')) {
+                                el.removeAttribute(attr.name)
+                            }
+                            if (name === 'class' && !/^language-[a-z0-9_-]+$/i.test(attr.value)) {
+                                el.removeAttribute(attr.name)
+                            }
+                        })
+                        if (tag === 'A') {
+                            el.setAttribute('rel', 'nofollow noopener noreferrer')
+                            if (el.getAttribute('target') === '_blank') {
+                                el.setAttribute('target', '_blank')
+                            } else {
+                                el.removeAttribute('target')
+                            }
+                        }
+                    })
+                }
+                walk(template.content)
+                return template.innerHTML
+            }
+
             init() {
                 $(".chat-btn-init").remove()
                 $(".chat-btn-box").removeClass("d-none")
@@ -468,10 +536,10 @@ jQuery(function () {
                 const id = "chat-" + ((new Date().getTime()) + "") + (Math.floor(Math.random() * 1000) + "")
                 const chat = {id: id, ...data}
                 this.data.chatList.push(chat)
-                const html = `<div id="${id}" class="chat-item is-${data.ai ? 'ai' : 'user'}">
+                    const html = `<div id="${id}" class="chat-item is-${data.ai ? 'ai' : 'user'}">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <img src="${data.avatar}" class="avatar md-avatar" alt="avatar">
+                                        <img src="${this.escapeHtml(data.avatar)}" class="avatar md-avatar" alt="avatar">
                                     </div>
                                     <div class="col">
                                         <div class="fs14 content-box ${data.ai ? 'cursor-blink-after' : ''}">${this.parseContent(data.content)}</div>
@@ -518,12 +586,13 @@ jQuery(function () {
             }
 
             parseContent(str) {
-                if(!str || str.trim()==='') return str
-                return marked.parse(str, {
+                if(!str || str.trim()==='') return ''
+                const html = marked.parse(str, {
                     breaks: true,
                     mangle:false,
                     headerIds:false,
                 })
+                return this.sanitizeAiHtml(html)
             }
 
         }

@@ -8,27 +8,27 @@ if (!function_exists('pk_global_notice_html')){
             if (is_array($global_notice_list) && count($global_notice_list) > 0) {
                 $final_list = [];
                 foreach ($global_notice_list as $item) {
-                    if ($global_notice_list['hide'] ?? false) continue;
+                    if ($item['hide'] ?? false) continue;
                     $final_list[] = $item;
                 }
                 if (count($final_list) > 0) { ?>
                     <div class="puock-text p-block t-md global-top-notice">
                         <div data-swiper="init" data-swiper-class="global-top-notice-swiper"
-                             data-swiper-args='<?php echo json_encode([
+                             data-swiper-args='<?php echo esc_attr(wp_json_encode([
                                  'direction' => 'vertical',
-                                 'autoplay' => ['delay' => pk_get_option('global_notice_autoplay_speed', 3000), 'disableOnInteraction' => false],
+                                 'autoplay' => ['delay' => max(500, absint(pk_get_option('global_notice_autoplay_speed', 3000))), 'disableOnInteraction' => false],
                                  'loop' => true
-                             ]) ?>'>
+                             ])) ?>'>
                             <div class="swiper global-top-notice-swiper">
                                 <div class="swiper-wrapper">
                                     <?php
                                     foreach ($final_list as $item) { ?>
                                         <div class="swiper-slide t-line-1">
                                             <a class="ta3" data-no-instant
-                                               href="<?php echo empty($item['link']) ? 'javascript:void(0)' : $item['link'] ?>">
+                                               href="<?php echo empty($item['link']) ? 'javascript:void(0)' : esc_url($item['link']) ?>">
                                             <span class="notice-icon"><i
-                                                        class="<?php echo empty($item['icon']) ? 'fa-regular fa-bell' : $item['icon'] ?>"></i></span>
-                                                <span><?php echo $item['title'] ?></span>
+                                                        class="<?php echo esc_attr(empty($item['icon']) ? 'fa-regular fa-bell' : pk_sc_safe_class($item['icon'])) ?>"></i></span>
+                                                <span><?php echo wp_kses_post($item['title']) ?></span>
                                             </a>
                                         </div>
                                     <?php } ?>

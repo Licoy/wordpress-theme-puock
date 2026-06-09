@@ -1118,13 +1118,29 @@ function pk_get_thumbnail_allow_sites()
     $thumbnail_allows = trim(pk_get_option("thumbnail_allows", ''));
     if (!empty($thumbnail_allows)) {
         foreach (explode("\n", $thumbnail_allows) as $site) {
-            $site = trim($site);
+            $site = pk_normalize_thumbnail_allow_site($site);
             if (!empty($site)) {
-                $sites[] = $site;
+                $sites[$site] = $site;
             }
         }
     }
-    return $sites;
+    return array_values($sites);
+}
+
+function pk_normalize_thumbnail_allow_site($site)
+{
+    $site = trim((string)$site);
+    if ($site === '') {
+        return '';
+    }
+    $site = preg_replace('#^https?://#i', '', $site);
+    $site = explode('/', $site, 2)[0];
+    $site = preg_replace('/:\d+$/', '', $site);
+    $site = strtolower(trim($site));
+    if (!preg_match('/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/', $site)) {
+        return '';
+    }
+    return $site;
 }
 
 //生成缩略图白名单文件名称
@@ -1137,17 +1153,78 @@ function pk_get_thumbnail_allow_sites_filepath()
 function pk_generate_thumbnail_allow_sites_file()
 {
     $sites = pk_get_thumbnail_allow_sites();
-    $template = "<?php \$ALLOWED_SITES = [\n";
-    if (count($sites) > 0) {
-        foreach ($sites as $site) {
-            $template .= "\t\"$site\",\n";
-        }
-    }
-    $template .= "];";
+    $template = "<?php\n\$ALLOWED_SITES = " . var_export($sites, true) . ";\n";
     return file_put_contents(pk_get_thumbnail_allow_sites_filepath(), $template);
 }
 
 add_action('pk_option_updated', 'pk_generate_thumbnail_allow_sites_file', 10, 0);
+
+function pk_comment_proof_cookie_name(): string
+{
+    return 'puock_comment_proof_' . COOKIEHASH;
+}
+
+function pk_comment_proof_email_hash(string $email): string
+{
+    return hash('sha256', strtolower(trim($email)));
+}
+
+function pk_comment_proof_sign(string $payload): string
+{
+    return hash_hmac('sha256', $payload, wp_salt('auth'));
+}
+
+function pk_set_comment_proof_cookie_from_comment($comment)
+{
+    if (!($comment instanceof WP_Comment) || empty($comment->comment_author_email)) {
+        return;
+    }
+    $payload = implode('|', [
+        (int)$comment->comment_ID,
+        (int)$comment->comment_post_ID,
+        pk_comment_proof_email_hash($comment->comment_author_email),
+    ]);
+    $value = base64_encode($payload . '|' . pk_comment_proof_sign($payload));
+    $cookie_options = [
+        'expires' => time() + YEAR_IN_SECONDS,
+        'path' => COOKIEPATH ?: '/',
+        'secure' => is_ssl(),
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ];
+    if (COOKIE_DOMAIN) {
+        $cookie_options['domain'] = COOKIE_DOMAIN;
+    }
+    setcookie(pk_comment_proof_cookie_name(), $value, $cookie_options);
+}
+
+function pk_get_comment_proof_cookie(): ?array
+{
+    $cookie_name = pk_comment_proof_cookie_name();
+    if (empty($_COOKIE[$cookie_name])) {
+        return null;
+    }
+    $decoded = base64_decode(wp_unslash($_COOKIE[$cookie_name]), true);
+    if (!$decoded) {
+        return null;
+    }
+    $parts = explode('|', $decoded);
+    if (count($parts) !== 4) {
+        return null;
+    }
+    [$comment_id, $post_id, $email_hash, $sig] = $parts;
+    $payload = implode('|', [(int)$comment_id, (int)$post_id, $email_hash]);
+    if (!hash_equals(pk_comment_proof_sign($payload), $sig)) {
+        return null;
+    }
+    return [
+        'comment_id' => (int)$comment_id,
+        'post_id' => (int)$post_id,
+        'email_hash' => $email_hash,
+    ];
+}
+
+add_action('set_comment_cookies', 'pk_set_comment_proof_cookie_from_comment', 10, 1);
 
 // get request model data
 function pk_get_req_data(array $model)

@@ -5,13 +5,13 @@ if (pk_is_checked('post_poster_open')) {
 }
 function pk_poster_page_callback()
 {
-    $id = $_REQUEST['id'];
+    $id = absint($_REQUEST['id'] ?? 0);
     if (empty($id)) {
-        wp_die(sprintf(__('无效的文章ID: %s', PUOCK), $id));
+        wp_die(esc_html(sprintf(__('无效的文章ID: %s', PUOCK), $id)));
     }
     $post = get_post($id);
-    if (empty($post)) {
-        wp_die(sprintf(__('无效的文章ID: %s', PUOCK), $id));
+    if (empty($post) || !is_post_publicly_viewable($post) || post_password_required($post)) {
+        wp_die(esc_html(sprintf(__('无效的文章ID: %s', PUOCK), $id)));
     }
     setup_postdata($post);
     $title = get_the_title($post);
@@ -20,19 +20,19 @@ function pk_poster_page_callback()
     ?>
 
     <div class="post-poster">
-        <div class="post-poster-main" id="<?php echo $el_id; ?>">
+        <div class="post-poster-main" id="<?php echo esc_attr($el_id); ?>">
             <div class="cover">
-                <img crossOrigin="anonymous" src="<?php echo pk_get_img_thumbnail_src(get_post_images($post),640,320) ?>" alt="poster">
+                <img crossOrigin="anonymous" src="<?php echo esc_url(pk_get_img_thumbnail_src(get_post_images($post),640,320)) ?>" alt="poster">
             </div>
             <div class="content">
-                <p class="title mt20 fs16"><?php echo $title ?></p>
-                <p class="excerpt text-3line fs14 mt20 c-sub"><?php echo get_the_excerpt() ?></p>
+                <p class="title mt20 fs16"><?php echo esc_html($title) ?></p>
+                <p class="excerpt text-3line fs14 mt20 c-sub"><?php echo esc_html(get_the_excerpt()) ?></p>
                 <div class="info mt20">
-                    <img class="qrcode" src="<?php echo $qrcode_url ?>" alt="<?php echo $title ?>">
+                    <img class="qrcode" src="<?php echo esc_url($qrcode_url) ?>" alt="<?php echo esc_attr($title) ?>">
                     <?php if (!pk_is_checked('on_txt_logo') || empty(pk_get_option('light_logo'))): ?>
-                        <img class="logo" src="<?php echo pk_get_option('light_logo') ?>" alt="logo">
+                        <img class="logo" src="<?php echo esc_url(pk_get_option('light_logo')) ?>" alt="logo">
                     <?php else: ?>
-                        <p class="tip c-sub fs14">@<?php echo pk_get_web_title() ?></p>
+                        <p class="tip c-sub fs14">@<?php echo esc_html(pk_get_web_title()) ?></p>
                     <?php endif; ?>
                 </div>
                 <p class="tip c-sub fs12 mt20 p-flex-center"><i class="fa-solid fa-qrcode"></i>&nbsp;<?php _e('长按识别二维码查看文章内容', PUOCK) ?></p>
@@ -45,7 +45,7 @@ function pk_poster_page_callback()
     <script>
         $(function () {
             const loadingId = window.Puock.startLoading();
-            const rootSelector = "#<?php echo $el_id; ?>";
+            const rootSelector = "#<?php echo esc_js($el_id); ?>";
             const rootEl = document.querySelector(rootSelector);
 
             const waitForImages = (node) => {
@@ -101,7 +101,7 @@ function pk_poster_page_callback()
 
                     const $root = $(rootSelector);
                     $root.show();
-                    $root.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo $title ?>'>");
+                    $root.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo esc_js($title) ?>'>");
                 } catch (err) {
                     console.error(err);
                     window.Puock.toast("<?php echo esc_js(__('生成海报失败，请到Console查看错误信息', PUOCK)); ?>", TYPE_DANGER);
@@ -112,6 +112,6 @@ function pk_poster_page_callback()
         })
     </script>
     <?php
-
+    wp_reset_postdata();
     wp_die();
 }

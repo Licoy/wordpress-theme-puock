@@ -25,7 +25,7 @@ function edit_category_seo_field($tag)
             <th scope="row"><label for="seo-cat-keywords">' . esc_html__('SEO关键字', PUOCK) . '</label></th>  
             <td>  
                 <input name="seo-cat-keywords" id="seo-cat-keywords" type="text" value="';
-    echo get_option('seo-cat-keywords-' . $tag->term_id) . '" size="40"/><br>  
+    echo esc_attr(get_option('seo-cat-keywords-' . $tag->term_id)) . '" size="40"/><br>
                 <span class="seo-cat-keywords">' . esc_html__('SEO关键字，多个关键字之间使用","分隔，默认显示该分类名称', PUOCK) . '</span>  
             </td>  
         </tr>';
@@ -33,7 +33,7 @@ function edit_category_seo_field($tag)
             <th scope="row"><label for="seo-cat-desc">' . esc_html__('SEO描述', PUOCK) . '</label></th>  
             <td>  
                 <input name="seo-cat-desc" id="seo-cat-desc" type="text" value="';
-    echo get_option('seo-cat-desc-' . $tag->term_id) . '" size="40"/><br>  
+    echo esc_attr(get_option('seo-cat-desc-' . $tag->term_id)) . '" size="40"/><br>
                 <span class="seo-cat-desc">' . esc_html__('SEO描述，默认显示该分类名称', PUOCK) . '</span>  
             </td>  
         </tr>';
@@ -48,8 +48,8 @@ function cat_seo_taxonomy_save_data($term_id)
         if (!current_user_can('manage_categories')) {
             return $term_id;
         }
-        update_option('seo-cat-keywords-' . $term_id, $_POST['seo-cat-keywords']);
-        update_option('seo-cat-desc-' . $term_id, $_POST['seo-cat-desc']);
+        update_option('seo-cat-keywords-' . $term_id, sanitize_text_field(wp_unslash($_POST['seo-cat-keywords'])));
+        update_option('seo-cat-desc-' . $term_id, sanitize_text_field(wp_unslash($_POST['seo-cat-desc'])));
     }
 }
 

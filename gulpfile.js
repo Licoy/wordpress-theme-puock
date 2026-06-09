@@ -5,8 +5,7 @@ const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
 const plumber = require('gulp-plumber');
 const concat = require('gulp-concat');
-const concatCss = require('gulp-concat-css');
-const minifyCSS = require('gulp-minify-css')
+const cleanCSS = require('gulp-clean-css')
 
 const _core_script = "assets/js/*.js"
 const _libs_script = "assets/libs/basic/**/*.js"
@@ -26,14 +25,9 @@ gulp.task('style', function () {
 
 gulp.task('lib_style', function () {
     return gulp.src(_libs_style)
-        .pipe(concatCss("libs.min.css",{
-            // inlineImports:false,
-            rebaseUrls:false
-        }))
-        .pipe(minifyCSS({
-            format: 'keep-breaks',
-            semicolonAfterLastProperty: true,
-            afterComment: true
+        .pipe(concat('libs.min.css'))
+        .pipe(cleanCSS({
+            level: 2
         }))
         .pipe(gulp.dest(_dist + '/style'))
 })

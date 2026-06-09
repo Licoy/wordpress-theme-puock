@@ -37,6 +37,7 @@ $puock_smtp_test_mail_labels = [
     'requestFailed' => __('请求失败，请检查网络或控制台错误', PUOCK),
     'tips' => __('测试会使用当前表单中的 SMTP 配置，不会自动保存。测试通过后仍需点击右上角保存配置。', PUOCK),
 ];
+$puock_theme_options_nonce = wp_create_nonce('pk_theme_options');
 ?>
 <?php if ($puock_config_debug_entry === ''): ?>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/assets/dist/setting/index.css?ver=<?php echo $puock_setting_asset_version('/assets/dist/setting/index.css') ?>">
@@ -73,8 +74,8 @@ $puock_smtp_test_mail_labels = [
         qq: "https://licoy.cn/go/puock-update.php?r=qq_qun",
         license: "GPL V3",
         donate: "https://licoy.cn/puock-theme-sponsor.html",
-        update_url: '<?php echo admin_url('admin-ajax.php') ?>?action=update_theme_options',
-        reset_url: '<?php echo admin_url('admin-ajax.php') ?>?action=reset_theme_options',
+        update_url: <?php echo wp_json_encode(admin_url('admin-ajax.php?action=update_theme_options&nonce=' . $puock_theme_options_nonce), JSON_UNESCAPED_SLASHES); ?>,
+        reset_url: <?php echo wp_json_encode(admin_url('admin-ajax.php?action=reset_theme_options&nonce=' . $puock_theme_options_nonce), JSON_UNESCAPED_SLASHES); ?>,
         smtp_test_url: <?php echo wp_json_encode(admin_url('admin-ajax.php?action=pk_smtp_test_mail&nonce=' . wp_create_nonce('pk_smtp_test_mail')), JSON_UNESCAPED_SLASHES); ?>,
         smtpTestMailLabels: <?php echo wp_json_encode($puock_smtp_test_mail_labels, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>,
         fields:<?php echo json_encode($fields); ?>,

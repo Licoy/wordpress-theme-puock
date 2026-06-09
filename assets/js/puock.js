@@ -1140,7 +1140,8 @@ class Puock {
             lastSendTime = currentTime
             const vm = $(this.ct(e))
             let id = vm.attr("data-id");
-            $.post("/wp-admin/admin-ajax.php", {action: 'puock_like', um_id: id, um_action: 'like'}, (res) => {
+            let nonce = vm.attr("data-nonce");
+            $.post("/wp-admin/admin-ajax.php", {action: 'puock_like', um_id: id, um_action: 'like', _wpnonce: nonce}, (res) => {
                 if (res.e === 0) {
                     vm.find("span").html(res.d);
                     vm.addClass("bg-primary text-light");

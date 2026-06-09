@@ -17,13 +17,22 @@ function pk_oauth_quick_buttons($echo = false, $redirect = '')
     foreach ($oauth_list as $key => $val) {
         if (!isset($val['system']) || !$val['system'] || pk_oauth_is_enabled($key, $val)) {
             $url = $val['url'] ?? pk_oauth_url_page_ajax($key, $redirect);
-            $icon = isset($val['icon']) ? str_starts_with($val['icon'], 'http') ? "<img src='{$val['icon']}' width='15' class='me-1' alt='{$val['label']}'/>":"<i class='{$val['icon']} me-1'></i>" : '';
+            $label = (string)($val['label'] ?? $key);
+            $raw_icon = (string)($val['icon'] ?? '');
+            $icon = '';
+            if ($raw_icon !== '') {
+                if (strpos($raw_icon, 'http') === 0) {
+                    $icon = "<img src='" . esc_url($raw_icon) . "' width='15' class='me-1' alt='" . esc_attr($label) . "'/>";
+                } else {
+                    $icon = "<i class='" . esc_attr(pk_sc_safe_class($raw_icon . ' me-1')) . "'></i>";
+                }
+            }
             $color_type = $val['color_type'] ?? 'primary';
-            $out .= "<a class='btn btn-{$color_type} btn-ssm mr5 mb5 d-flex align-items-center'
+            $out .= "<a class='btn btn-" . esc_attr(sanitize_html_class($color_type)) . " btn-ssm mr5 mb5 d-flex align-items-center'
                data-no-instant
-               href='{$url}'>
+               href='" . esc_url($url) . "'>
                 {$icon}
-                {$val['label']}
+                " . esc_html($label) . "
             </a>";
         }
     }

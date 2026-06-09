@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv='content-language' content='<?php echo get_locale() ?>'>
+    <meta http-equiv='content-language' content='<?php echo esc_attr(get_locale()) ?>'>
     <script>
         (function () {
             var match = document.cookie.match(/(?:^|;\s*)mode=([^;]*)/);
@@ -41,14 +41,14 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
             } ?>">
         <div class="navbar navbar-dark shadow-sm">
             <div class="container">
-                <a href="<?php echo home_url() ?>" id="logo" class="navbar-brand <?php if(pk_is_checked('logo_loop_light')) echo 'logo-loop-light'; ?>">
+                <a href="<?php echo esc_url(home_url()) ?>" id="logo" class="navbar-brand <?php if(pk_is_checked('logo_loop_light')) echo 'logo-loop-light'; ?>">
                     <?php if (pk_is_checked('on_txt_logo') || empty(pk_get_option('light_logo')) || empty(pk_get_option('dark_logo'))): ?>
-                        <span class="puock-text txt-logo"><?php echo pk_get_web_title() ?></span>
+                        <span class="puock-text txt-logo"><?php echo esc_html(pk_get_web_title()) ?></span>
                     <?php else: ?>
                         <img id="logo-light" alt="logo" class="w-100 <?php echo pk_theme_light() ? '' : 'd-none' ?>"
-                             src="<?php echo pk_get_option('light_logo') ?>">
+                             src="<?php echo esc_url(pk_get_option('light_logo')) ?>">
                         <img id="logo-dark" alt="logo" class="w-100 <?php echo pk_theme_light() ? 'd-none' : '' ?>"
-                             src="<?php echo pk_get_option('dark_logo') ?>">
+                             src="<?php echo esc_url(pk_get_option('dark_logo')) ?>">
                     <?php endif; ?>
                 </a>
                 <div class="d-none d-lg-block puock-links">
@@ -72,7 +72,7 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
     <div id="search" class="d-none">
         <div class="w-100 d-flex justify-content-center">
             <div id="search-main" class="container p-block">
-                <form class="global-search-form" action="<?php echo home_url() ?>">
+                <form class="global-search-form" action="<?php echo esc_url(home_url()) ?>">
                     <div class="search-layout">
                         <div class="search-input">
                             <input required type="text" name="s" class="form-control"

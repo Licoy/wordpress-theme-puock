@@ -14,13 +14,14 @@ if (!$gc_user_id) {
 $gc_ai_avatar = pk_get_option('favicon');
 $gc_ai_avatar = empty($gc_ai_avatar) ? get_avatar_url(1) : $gc_ai_avatar;
 $gc_ai_chat_models = pk_get_option('ai_chat_models', []);
+$gc_ai_meta_info = [
+    'userAvatar' => esc_url_raw(get_avatar_url($gc_user_id)),
+    'aiAvatar' => esc_url_raw($gc_ai_avatar),
+    'url' => esc_url_raw(pk_ajax_url('pk_ai_ask')),
+];
 ?>
 <script>
-    const aiMetaInfo = {
-        userAvatar: '<?php echo get_avatar_url($gc_user_id) ?>',
-        aiAvatar: '<?php echo $gc_ai_avatar ?>',
-        url: '<?php echo pk_ajax_url('pk_ai_ask') ?>'
-    }
+    const aiMetaInfo = <?php echo wp_json_encode($gc_ai_meta_info); ?>;
 </script>
 <div id="page" class="container mt20">
     <div id="page-cg">
@@ -41,11 +42,11 @@ $gc_ai_chat_models = pk_get_option('ai_chat_models', []);
                                 <div class="chat-item is-ai chat-template">
                                     <div class="row">
                                         <div class="col-auto">
-                                            <img alt="ai_avatar" src="<?php echo $gc_ai_avatar ?>"
+                                            <img alt="ai_avatar" src="<?php echo esc_url($gc_ai_avatar) ?>"
                                                  class="avatar md-avatar">
                                         </div>
                                         <div class="col">
-                                            <div class="fs14 content-box"><?php echo pk_get_option('ai_chat_welcome') ?></div>
+                                            <div class="fs14 content-box"><?php echo wp_kses_post(pk_get_option('ai_chat_welcome')) ?></div>
                                         </div>
                                     </div>
                                 </div>
@@ -63,8 +64,8 @@ $gc_ai_chat_models = pk_get_option('ai_chat_models', []);
                         <div class="d-flex justify-content-between align-items-center mt10 d-none chat-btn-box">
                             <div class="d-flex align-items-center">
                                 <select id="chat-model" class="form-control me-3">
-                                    <?php if (is_array($gc_ai_chat_models)): foreach ($gc_ai_chat_models as $chat_val): if ($chat_val['enable']): ?>
-                                        <option value="<?php echo $chat_val['name'] ?>"><?php echo $chat_val['alias'] ?? strtoupper($chat_val['name']) ?></option>
+                                    <?php if (is_array($gc_ai_chat_models)): foreach ($gc_ai_chat_models as $chat_val): if (!empty($chat_val['enable']) && !empty($chat_val['name'])): ?>
+                                        <option value="<?php echo esc_attr($chat_val['name']) ?>"><?php echo esc_html($chat_val['alias'] ?? strtoupper($chat_val['name'])) ?></option>
                                     <?php endif;endforeach; endif; ?>
                                 </select>
                                 <div class="form-check form-switch flex-shrink-0">

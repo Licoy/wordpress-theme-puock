@@ -486,8 +486,8 @@ function pk_icon_mate() {
     if ($pk_icon === '') return '';
     
     //连接字符串
-    $str = '<link rel="shortcut icon" href="' . $pk_icon . '">
-    <link rel="apple-touch-icon" href="' . $pk_icon . '"/>';
+    $str = '<link rel="shortcut icon" href="' . esc_url($pk_icon) . '">
+    <link rel="apple-touch-icon" href="' . esc_url($pk_icon) . '"/>';
 
     return $str;
 }
@@ -550,7 +550,7 @@ function pk_get_seo_title() {
     } else {
         $pk_title .= $pk_blog_name . $pk_paged_title;
     }
-    return '<title>'.$pk_title.'</title>';
+    return '<title>' . esc_html($pk_title) . '</title>';
 }
 
 //获取阅读数量
@@ -755,4 +755,3 @@ if (is_admin()) {
     // 在线更新支持
     pk_update();
 }
-

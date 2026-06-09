@@ -29,6 +29,11 @@ function pk_ajax_get_req_body()
     return json_decode($body, true);
 }
 
+function pk_ajax_check_theme_options_nonce()
+{
+    check_ajax_referer('pk_theme_options', 'nonce');
+}
+
 function pk_ajax_result_page($success = true, $info = '', $from_redirect = '')
 {
     if ($success && !empty($from_redirect)) {
@@ -59,6 +64,7 @@ pk_ajax_register('get_theme_options', 'pk_ajax_get_theme_options');
 function pk_ajax_update_theme_options()
 {
     if (current_user_can('edit_theme_options')) {
+        pk_ajax_check_theme_options_nonce();
         $body = pk_ajax_get_req_body();
         update_option(PUOCK_OPT, $body);
         do_action('pk_option_updated', $body);
@@ -95,6 +101,7 @@ pk_ajax_register('get_theme_options_defaults', 'pk_ajax_get_theme_options_defaul
 function pk_ajax_reset_theme_options()
 {
     if (current_user_can('edit_theme_options')) {
+        pk_ajax_check_theme_options_nonce();
         $setting = new \Puock\Theme\setting\PuockSetting();
         $defaults = $setting->get_default_options();
         update_option(PUOCK_OPT, $defaults);

@@ -178,6 +178,7 @@ function pk_oauth_clear_bind_url($type, $redirect = null)
     return pk_ajax_url('pk_oauth_clear_bind', [
         'type' => $type,
         'redirect' => $redirect,
+        '_wpnonce' => wp_create_nonce('pk_oauth_clear_bind_' . $type),
     ]);
 }
 
@@ -197,8 +198,12 @@ function pk_oauth_clear_bind()
 {
     $type = sanitize_key($_GET['type'] ?? '');
     $redirect = $_GET['redirect'] ?? '';
+    $nonce = $_GET['_wpnonce'] ?? '';
+    if (empty($type) || !wp_verify_nonce($nonce, 'pk_oauth_clear_bind_' . $type)) {
+        wp_die(__('非法请求', PUOCK));
+    }
     $oauth_list = pk_oauth_list();
-    if ($type && isset($oauth_list[$type])) {
+    if (isset($oauth_list[$type]) && pk_oauth_is_enabled($type, $oauth_list[$type])) {
         delete_user_meta(get_current_user_id(), $type . '_oauth');
     }
     if (empty($redirect)) {

@@ -70,8 +70,8 @@
                         <div class="t-separator c-sub t-sm mt30"><?php _e('正文完', PUOCK) ?></div>
                         <?php if (pk_is_checked('post_foot_qrcode_open')): ?>
                             <div class="post-foot-qrcode">
-                                <div class="title"><?php echo pk_get_option('post_foot_qrcode_title', __('无说明', PUOCK)) ?></div>
-                                <img src="<?php echo pk_get_option('post_foot_qrcode_img', '') ?>"
+                                <div class="title"><?php echo esc_html(pk_get_option('post_foot_qrcode_title', __('无说明', PUOCK))) ?></div>
+                                <img src="<?php echo esc_url(pk_get_option('post_foot_qrcode_img', '')) ?>"
                                      alt="post-qrcode">
                             </div>
                         <?php endif; ?>
@@ -94,9 +94,9 @@
                     <div class="p-block p-flex-sc">
                         <div class="me-3 p-flex-sk-0">
                             <img class="md-avatar mt-1"
-                                 src="<?php echo pk_get_gravatar(get_the_author_meta('email')) ?>"
-                                 alt="<?php the_author_meta('display_name') ?>"
-                                 title="<?php the_author_meta('display_name') ?>">
+                                 src="<?php echo esc_url(pk_get_gravatar(get_the_author_meta('email'))) ?>"
+                                 alt="<?php echo esc_attr(get_the_author_meta('display_name')) ?>"
+                                 title="<?php echo esc_attr(get_the_author_meta('display_name')) ?>">
                         </div>
                         <div class="puock-text t-md">
                             <?php $origin_author = get_post_meta(get_the_ID(), 'origin_author', true);
@@ -106,22 +106,22 @@
                                     <a class="a-link"
                                        href="<?php global $authordata;
                                        if ($authordata) {
-                                           echo get_author_posts_url($authordata->ID,
-                                               $authordata->user_nicename);
-                                       } ?>"><?php the_author() ?> </a><?php _e('于', PUOCK) ?><?php the_date('Y-m-d') ?><?php
+                                           echo esc_url(get_author_posts_url($authordata->ID,
+                                               $authordata->user_nicename));
+                                       } ?>"><?php echo esc_html(get_the_author()) ?> </a><?php _e('于', PUOCK) ?><?php the_date('Y-m-d') ?><?php
                                     _e('发表，', PUOCK) ?><?php _e('共计', PUOCK) ?><?php echo count_words() ?><?php _e('字。', PUOCK) ?>
                                 </div>
                                 <div class="mt-2">
                                     <span class="font-weight-bold c-sub"><?php _e('转载说明：', PUOCK) ?></span><span
-                                            class="c-sub"><?php echo pk_get_option('post_reprint_note', pk_get_option('footer_copyright')) ?></span>
+                                            class="c-sub"><?php echo wp_kses_post(pk_get_option('post_reprint_note', pk_get_option('footer_copyright'))) ?></span>
                                 </div>
                             <?php else: ?>
                                 <div>
                                     <span class="font-weight-bold"><?php _e('版权声明：', PUOCK) ?></span><?php _e('本文于', PUOCK) ?><?php the_date('Y-m-d')
                                     ?><?php _e('转载自', PUOCK) ?><a target="_blank"
-                                                                  href="<?php echo get_post_meta(get_the_ID(), 'origin_url', true) ?>"
+                                                                  href="<?php echo esc_url(get_post_meta(get_the_ID(), 'origin_url', true)) ?>"
                                                                   class="a-link" rel="nofollow"><?php
-                                        echo $origin_author ?></a><?php _e('，共计', PUOCK) ?><?php echo count_words('') ?><?php _e('字。', PUOCK) ?>
+                                        echo esc_html($origin_author) ?></a><?php _e('，共计', PUOCK) ?><?php echo count_words('') ?><?php _e('字。', PUOCK) ?>
                                 </div>
                                 <div class="mt-2">
                                     <span class="font-weight-bold c-sub"><?php _e('转载提示：', PUOCK) ?></span><span

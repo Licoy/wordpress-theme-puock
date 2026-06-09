@@ -116,6 +116,26 @@ namespace {
         $output,
         'SMTP test URL should not be injected with HTML-escaped ampersands in script context.'
     );
+    assert_contains(
+        'update_url: "http://example.test/wp-admin/admin-ajax.php?action=update_theme_options&nonce=nonce-value"',
+        $output,
+        'Theme option update URL should include a nonce.'
+    );
+    assert_contains(
+        'reset_url: "http://example.test/wp-admin/admin-ajax.php?action=reset_theme_options&nonce=nonce-value"',
+        $output,
+        'Theme option reset URL should include a nonce.'
+    );
+    assert_not_contains(
+        'update_url: \'http://example.test/wp-admin/admin-ajax.php?action=update_theme_options&#038;nonce=nonce-value\'',
+        $output,
+        'Theme option update URL should not use HTML-escaped ampersands in script context.'
+    );
+    assert_not_contains(
+        'reset_url: \'http://example.test/wp-admin/admin-ajax.php?action=reset_theme_options&#038;nonce=nonce-value\'',
+        $output,
+        'Theme option reset URL should not use HTML-escaped ampersands in script context.'
+    );
 
     echo "setting template tests passed\n";
 }

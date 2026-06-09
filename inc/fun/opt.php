@@ -2,26 +2,48 @@
 // 点赞
 function puock_post_like()
 {
-    $id = $_POST["um_id"];
-    $action = $_POST["um_action"];
+    $id = absint($_POST["um_id"] ?? 0);
+    $action = sanitize_key($_POST["um_action"] ?? '');
+    $nonce = sanitize_text_field(wp_unslash($_POST['_wpnonce'] ?? ''));
+    if (!$id || !wp_verify_nonce($nonce, 'puock_like_' . $id)) {
+        wp_send_json(['e' => 1, 't' => __('无效请求', PUOCK)]);
+    }
+    $post = get_post($id);
+    if (!$post || !is_post_publicly_viewable($post) || post_password_required($post)) {
+        wp_send_json(['e' => 1, 't' => __('无效文章', PUOCK)]);
+    }
     if ($action == 'like') {
         $cookie_key = 'puock_like_' . $id;
         if (!empty($_COOKIE[$cookie_key])) {
-        echo json_encode(array('e' => 1, 't' => __('你已经点过赞了', PUOCK)));
-        die;
+            wp_send_json(array('e' => 1, 't' => __('你已经点过赞了', PUOCK)));
         }
+        $rate_key = 'puock_like_' . md5(pk_get_client_ip() . '|' . $id);
+        if (get_transient($rate_key)) {
+            wp_send_json(array('e' => 1, 't' => __('操作过于频繁', PUOCK)));
+        }
+        set_transient($rate_key, 1, HOUR_IN_SECONDS);
         $like_num = get_post_meta($id, 'puock_like', true);
         $expire = time() + (86400);
         $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
-        setcookie($cookie_key, $id, $expire, '/', $domain, false);
+        $cookie_options = [
+            'expires' => $expire,
+            'path' => '/',
+            'secure' => is_ssl(),
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ];
+        if ($domain) {
+            $cookie_options['domain'] = $domain;
+        }
+        setcookie($cookie_key, $id, $cookie_options);
         if (!$like_num || !is_numeric($like_num)) {
             update_post_meta($id, 'puock_like', 1);
         } else {
             update_post_meta($id, 'puock_like', ($like_num + 1));
         }
-        echo json_encode(array('e' => 0, 't' => __('点赞成功', PUOCK), 'd' => get_post_meta($id, 'puock_like', true)));
+        wp_send_json(array('e' => 0, 't' => __('点赞成功', PUOCK), 'd' => get_post_meta($id, 'puock_like', true)));
     }
-    die;
+    wp_send_json(array('e' => 1, 't' => __('无效操作', PUOCK)));
 }
 
 add_action('wp_ajax_nopriv_puock_like', 'puock_post_like');
@@ -306,7 +328,14 @@ if (pk_is_checked('link_go_page')) {
 //检测链接是否属于本站
 function pk_is_cur_site($url)
 {
-    return str_starts_with($url, home_url());
+    $site = wp_parse_url(home_url());
+    $target = wp_parse_url($url);
+    if (!is_array($site) || !is_array($target) || empty($site['host']) || empty($target['host'])) {
+        return false;
+    }
+    $site_port = $site['port'] ?? null;
+    $target_port = $target['port'] ?? null;
+    return strtolower($site['host']) === strtolower($target['host']) && $site_port === $target_port;
 }
 
 if (pk_is_checked('use_post_menu')) {
@@ -417,8 +446,8 @@ function pk_captcha()
     if (!in_array($type, ['comment', 'login', 'register', 'forget-password'])) {
         wp_die();
     }
-    $width = $_GET['w'];
-    $height = $_GET['h'];
+    $width = min(300, max(40, absint($_GET['w'] ?? 100)));
+    $height = min(120, max(20, absint($_GET['h'] ?? 40)));
     include_once PUOCK_ABS_DIR . '/inc/php-captcha.php';
     $captcha = new CaptchaBuilder();
     $captcha->initialize([
