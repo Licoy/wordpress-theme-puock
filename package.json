@@ -2,7 +2,7 @@
   "name": "puock",
   "version": "1.0.0",
   "devDependencies": {
-    "@babel/cli": "^7.29.7",
+    "@babel/cli": "^8.0.4",
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
     "gulp": "^5.0.1",
