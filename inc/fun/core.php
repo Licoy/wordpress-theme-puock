@@ -332,7 +332,9 @@ function pk_hide_sidebar($post_id = null)
 {
     global $post;
     if (pk_is_checked("hide_global_sidebar")) {
-        return true;
+        if (!(pk_is_checked("keep_single_sidebar") && is_singular('post'))) {
+            return true;
+        }
     }
     if (is_single() || is_page()) {
         if ($post_id == null) {
