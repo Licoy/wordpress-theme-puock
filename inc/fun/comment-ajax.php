@@ -19,6 +19,37 @@ function pk_comment_err($msg, $refresh_code = true)
     exit();
 }
 
+/**
+ * Cloudflare Turnstile 校验
+ * @throws Exception
+ */
+function pk_vd_turnstile_validate()
+{
+    $cf_token = $_POST['cf-turnstile-response'] ?? '';
+    if ($cf_token === '') {
+        $cf_token = $_REQUEST['cf-turnstile-response'] ?? '';
+    }
+    if (empty($cf_token)) {
+        throw new Exception(__('请完成 Turnstile 验证', PUOCK));
+    }
+    $secret_key = pk_get_option('vd_turnstile_secret_key', '');
+    $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+        'body' => [
+            'secret' => $secret_key,
+            'response' => $cf_token,
+            'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+        ],
+    ]);
+    if (is_wp_error($response)) {
+        throw new Exception(__('验证服务请求失败', PUOCK));
+    }
+    $result = json_decode(wp_remote_retrieve_body($response), true);
+    if (empty($result['success'])) {
+        throw new Exception(__('Turnstile 验证失败，请重试', PUOCK));
+    }
+    return true;
+}
+
 function pk_check_comment_for_chinese($comment)
 {
     $pattern = '/[\x{4e00}-\x{9fa5}]/u';
@@ -67,24 +98,10 @@ function pk_comment_ajax()
                 pk_comment_err(__('验证码不正确', PUOCK), false);
             }
         } else if (pk_get_option('vd_type', 'img') === 'turnstile') {
-            $cf_token = $_POST['cf-turnstile-response'] ?? '';
-            if (empty($cf_token)) {
-                pk_comment_err(__('请完成 Turnstile 验证', PUOCK), false);
-            }
-            $secret_key = pk_get_option('vd_turnstile_secret_key', '');
-            $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
-                'body' => [
-                    'secret' => $secret_key,
-                    'response' => $cf_token,
-                    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
-                ],
-            ]);
-            if (is_wp_error($response)) {
-                pk_comment_err(__('验证服务请求失败', PUOCK), false);
-            }
-            $result = json_decode(wp_remote_retrieve_body($response), true);
-            if (empty($result['success'])) {
-                pk_comment_err(__('Turnstile 验证失败，请重试', PUOCK), false);
+            try {
+                pk_vd_turnstile_validate();
+            } catch (Exception $e) {
+                pk_comment_err($e->getMessage(), false);
             }
         } else {
             try {

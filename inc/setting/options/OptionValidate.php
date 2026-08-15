@@ -18,6 +18,7 @@ class OptionValidate extends BaseOptionItem
                     'type' => 'radio',
                     'sdt' => 'img',
                     'radioType' => 'button',
+                    'tips' => __('若使用 Cloudflare Turnstile：到 Cloudflare Dashboard > Turnstile 创建站点，填写 Site Key / Secret Key，验证码类型选择 Cloudflare Turnstile，并开启「启用评论验证」或「启用后台注册验证」。站点域名需加入 Turnstile 允许主机。', PUOCK),
                     'options' => [
                         [
                             'value' => 'img',
@@ -69,17 +70,19 @@ class OptionValidate extends BaseOptionItem
                     'type' => 'panel',
                     'label' => 'Cloudflare Turnstile',
                     'open' => true,
+                    'tips' => __('到 Cloudflare Dashboard > Turnstile 创建站点，填写 Site Key / Secret Key，验证码类型选择 Cloudflare Turnstile，并开启「启用评论验证」或「启用后台注册验证」。站点域名需加入 Turnstile 允许主机。', PUOCK),
                     'children' => [
                         [
                             'id' => 'vd_turnstile_site_key',
                             'label' => __('Turnstile Site Key', PUOCK),
                             'sdt' => '',
-                            'tips' => __('在 Cloudflare Dashboard > Turnstile 中获取', PUOCK),
+                            'tips' => __('在 Cloudflare Dashboard > Turnstile 中创建站点后获取', PUOCK),
                         ],
                         [
                             'id' => 'vd_turnstile_secret_key',
                             'label' => __('Turnstile Secret Key', PUOCK),
                             'sdt' => '',
+                            'tips' => __('在 Cloudflare Dashboard > Turnstile 中创建站点后获取，请妥善保管', PUOCK),
                         ]
                     ]
                 ],

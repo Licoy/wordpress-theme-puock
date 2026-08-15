@@ -6,13 +6,34 @@
  */
 function pk_front_form_validate_code_check($type = '', $code = '')
 {
-    if (pk_get_option('vd_type', 'img') === 'img') {
+    $vd_type = pk_get_option('vd_type', 'img');
+    if ($vd_type === 'img') {
         if (!pk_captcha_validate($type, $code)) {
             throw new Exception(__('验证码错误', PUOCK));
         }
-    } else {
-        pk_vd_gt_validate();
+        return;
     }
+    if ($vd_type === 'turnstile') {
+        pk_vd_turnstile_validate();
+        return;
+    }
+    pk_vd_gt_validate();
+}
+
+function pk_front_form_turnstile_html($validate_type)
+{
+    if ($validate_type !== 'turnstile') {
+        return;
+    }
+    $site_key = pk_get_option('vd_turnstile_site_key');
+    if (empty($site_key)) {
+        return;
+    }
+    ?>
+    <div class="mb15">
+        <div class="cf-turnstile" data-sitekey="<?php echo esc_attr($site_key); ?>"></div>
+    </div>
+    <?php
 }
 
 function pk_front_login_exec()
@@ -237,6 +258,7 @@ function pk_front_login_page_callback()
                         </div>
                     </div>
                 <?php endif; ?>
+                <?php pk_front_form_turnstile_html($validate_type); ?>
                 <div class="mb15 form-check form-switch">
                     <input class="form-check-input" name="remember" type="checkbox" role="switch"
                            id="front-login-remember-me">
@@ -297,6 +319,7 @@ function pk_front_login_page_callback()
                         </div>
                     </div>
                 <?php endif; ?>
+                <?php pk_front_form_turnstile_html($validate_type); ?>
                 <div class="mb15 d-flex justify-content-center wh100">
                     <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-right-to-bracket"></i>
                         <?php _e('立即注册', PUOCK); ?>
@@ -345,6 +368,7 @@ function pk_front_login_page_callback()
                         </div>
                     </div>
                 <?php endif; ?>
+                <?php pk_front_form_turnstile_html($validate_type); ?>
                 <div class="mb15 d-flex justify-content-center wh100">
                     <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-paper-plane"></i> <?php _e('发送邮件', PUOCK); ?>
                     </button>
