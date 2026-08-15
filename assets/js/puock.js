@@ -293,8 +293,13 @@ class Puock {
 
     gt = {
         validate: (success = undefined) => {
+            const captcha = this.data.instance.gt
+            if (!captcha || typeof captcha.showCaptcha !== 'function') {
+                this.toast(this.t('验证码不能为空'), TYPE_WARNING)
+                return
+            }
             this.data.instance.gt_callback = success
-            this.data.instance.gt.showCaptcha();
+            captcha.showCaptcha();
         }
     }
 
@@ -1013,16 +1018,23 @@ class Puock {
                 return;
             }
             if (this.data.params.vd_comment) {
-                if (this.data.params.vd_type === 'img') {
+                const vdType = this.data.params.vd_type;
+                if (vdType === 'img') {
                     if ($.trim($("#comment-vd").val()) === '') {
                         this.toast(this.t('验证码不能为空'), TYPE_WARNING);
                         return;
                     }
-                } else {
+                } else if (vdType === 'gt') {
                     this.gt.validate((code) => {
                         this.commentSubmit(this.ct(e), code)
                     })
                     return;
+                } else if (vdType === 'turnstile') {
+                    const form = $(this.ct(e));
+                    if (form.find('.cf-turnstile').length && !$.trim(form.find('[name="cf-turnstile-response"]').val())) {
+                        this.toast(this.t('验证码不能为空'), TYPE_WARNING);
+                        return;
+                    }
                 }
             }
             this.commentSubmit(this.ct(e))
