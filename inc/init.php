@@ -21,13 +21,10 @@ function deel_setup()
     remove_action('wp_head', 'wp_oembed_add_host_js');
     remove_filter('pre_oembed_result', 'wp_filter_pre_oembed_result', 10);
 
-    // 屏蔽 REST API
+    // 屏蔽匿名 REST API；已登录且具备编辑能力的用户仍放行（古腾堡依赖 REST）
     if (pk_is_checked('close_rest_api')) {
-        add_filter('rest_enabled', '__return_false');
         add_filter('rest_jsonp_enabled', '__return_false');
-        add_filter('rest_authentication_errors', function ($access) {
-            return new WP_Error('rest_cannot_access', __('REST API已经被关闭，请打开后再进行尝试', PUOCK), array('status' => 403));
-        });
+        add_filter('rest_authentication_errors', 'pk_rest_authentication_errors');
     }
 
     if(pk_is_checked('close_xmlrpc')){
@@ -104,6 +101,40 @@ function deel_setup()
     {
         return 0;
     }
+}
+
+/**
+ * Whether the current user may use REST while close_rest_api is enabled.
+ */
+function pk_rest_api_user_can_access()
+{
+    return is_user_logged_in() && (
+        current_user_can('edit_posts')
+        || current_user_can('edit_pages')
+    );
+}
+
+/**
+ * Block anonymous REST when close_rest_api is on; allow editors for Gutenberg.
+ *
+ * @param mixed $access Authentication result from other callbacks.
+ * @return mixed
+ */
+function pk_rest_authentication_errors($access)
+{
+    if (true === $access || is_wp_error($access)) {
+        return $access;
+    }
+
+    if (pk_rest_api_user_can_access()) {
+        return $access;
+    }
+
+    return new WP_Error(
+        'rest_cannot_access',
+        __('REST API已经被关闭，请打开后再进行尝试', PUOCK),
+        array('status' => 403)
+    );
 }
 
 /**

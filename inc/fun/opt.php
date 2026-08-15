@@ -564,6 +564,12 @@ function pk_site_max_width_style()
 // 加载文件媒体文件
 function pk_load_media_files()
 {
+    if (function_exists('get_current_screen')) {
+        $screen = get_current_screen();
+        if ($screen && method_exists($screen, 'is_block_editor') && $screen->is_block_editor()) {
+            return;
+        }
+    }
     wp_enqueue_media();
 }
 

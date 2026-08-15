@@ -262,7 +262,8 @@ add_action('init', 'puock_twemoji_smiley', 3);
 
 function get_wpsmiliestrans()
 {
-    global $wpsmiliestrans, $output;
+    global $wpsmiliestrans;
+    $output = '';
     if (!is_array($wpsmiliestrans)) {
         $wpsmiliestrans = array();
     }
@@ -605,6 +606,9 @@ function count_words($text = null)
 //给文章内容添加灯箱
 function light_box_text_replace($content)
 {
+    if (!is_string($content)) {
+        return $content;
+    }
     $pattern = "/<a(.*?)href=('|\")([A-Za-z0-9\/_\.\~\:-]*?)(\.bmp|\.gif|\.jpg|\.jpeg|\.png)('|\")([^\>]*?)>/i";
     $replacement = '<a$1href=$2$3$4$5$6 class="fancybox" data-no-instant target="_blank">';
     $content = preg_replace($pattern, $replacement, $content);
@@ -618,6 +622,9 @@ add_filter('the_content', 'light_box_text_replace', 99);
 function content_img_add_alt_title($content)
 {
     global $post;
+    if (!is_string($content)) {
+        return $content;
+    }
     preg_match_all('/<img (.*?)\/>/', $content, $images);
     if (!is_null($images)) {
         $title = @$post->post_title;
@@ -636,6 +643,9 @@ add_filter('the_content', 'content_img_add_alt_title', 99);
 function pk_bootstrap_table_class($content)
 {
     global $post;
+    if (!is_string($content)) {
+        return $content;
+    }
     preg_match_all('/<table.*?>[\s\S]*<\/table>/', $content, $tables);
     if (!is_null($tables)) {
         foreach ($tables[0] as $index => $value) {
