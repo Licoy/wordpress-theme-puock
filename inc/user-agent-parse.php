@@ -11,10 +11,17 @@
 
 namespace donatj\UserAgent {
 
-    const PLATFORM = 'platform';
-    const BROWSER = 'browser';
-    const BROWSER_VERSION = 'version';
+    if (!defined(__NAMESPACE__ . '\\PLATFORM')) {
+        define(__NAMESPACE__ . '\\PLATFORM', 'platform');
+    }
+    if (!defined(__NAMESPACE__ . '\\BROWSER')) {
+        define(__NAMESPACE__ . '\\BROWSER', 'browser');
+    }
+    if (!defined(__NAMESPACE__ . '\\BROWSER_VERSION')) {
+        define(__NAMESPACE__ . '\\BROWSER_VERSION', 'version');
+    }
 
+    if (!function_exists(__NAMESPACE__ . '\\parse_user_agent')) {
     /**
      * Parses a user agent string into its important parts
      *
@@ -202,5 +209,6 @@ REGEX
         }
 
         return $return;
+    }
     }
 }
