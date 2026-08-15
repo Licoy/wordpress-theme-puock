@@ -17,7 +17,7 @@
                                       name="comment" class="form-control form-control-sm t-sm" rows="4"></textarea>
                         </div>
                     </form>
-                    <?php if (pk_oauth_platform_count() > 0): ?>
+                    <?php if (pk_is_checked('open_quick_login') || pk_oauth_platform_count() > 0): ?>
                         <div>
                             <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
                                     data-id="front-login"
@@ -27,6 +27,13 @@
                                 <i
                                         class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>
                             </button>
+                        </div>
+                    <?php else: ?>
+                        <div>
+                            <a class="btn btn-primary btn-ssm" data-no-instant
+                               href="<?php echo esc_url(wp_login_url(get_permalink())) ?>">
+                                <i class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('登录', PUOCK) ?>
+                            </a>
                         </div>
                     <?php endif; ?>
                 </div>

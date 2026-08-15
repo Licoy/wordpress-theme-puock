@@ -903,6 +903,9 @@ function pk_get_main_menu($mobile = false)
         if (pk_is_checked('open_quick_login')) {
             $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url($wp->request)]);
             $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="' . esc_attr__('登入', PUOCK) . '" data-title="' . esc_attr__('登入', PUOCK) . '" href="javascript:void(0)" class="pk-modal-toggle" data-once-load="true" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
+        } elseif (pk_is_checked('user_center')) {
+            $url = wp_login_url(home_url($wp->request));
+            $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="' . esc_attr__('登入', PUOCK) . '" href="' . esc_url($url) . '"><i class="fa fa-right-to-bracket"></i></a></li>';
         }
     }
     if (!$mobile) {
@@ -1314,16 +1317,19 @@ function pk_vd_gt_validate(array $args = null)
 
 function pk_get_user_center_entry(): string
 {
+    if (!pk_is_checked('user_center')) {
+        return 'wp';
+    }
     $entry = pk_get_option('user_center_entry', '');
     if (!empty($entry)) {
         return $entry;
     }
-    return pk_is_checked('user_center') ? 'theme' : 'wp';
+    return 'theme';
 }
 
 function pk_is_user_center_theme(): bool
 {
-    return pk_get_user_center_entry() === 'theme';
+    return pk_is_checked('user_center') && pk_get_user_center_entry() === 'theme';
 }
 
 function pk_user_center_url(): string
@@ -1348,36 +1354,60 @@ function pk_user_center_url(): string
     return get_edit_profile_url();
 }
 
+function pk_add_user_center_rewrite_rule()
+{
+    add_rewrite_rule('^uc/?([0-9A-Za-z_\-]+)?$', 'index.php?pagename=user-center&id=$matches[1]', 'top');
+}
+
+function pk_sync_user_center_rewrite_rule()
+{
+    pk_add_user_center_rewrite_rule();
+}
+
 function pk_rewrite_rule()
 {
-    if (pk_is_user_center_theme()) {
-        add_rewrite_rule('^uc/?([0-9A-Za-z_\-]+)?$', 'index.php?pagename=user-center&id=$matches[1]', "top");
-    }
+    // Always register /uc so disabling the theme user center can still redirect.
+    pk_add_user_center_rewrite_rule();
 }
 
 add_action('init', 'pk_rewrite_rule');
 
-function pk_template_redirect()
+function pk_flush_user_center_rewrite_on_option_updated($new_options)
 {
-    if (!pk_is_user_center_theme()) {
+    if (!is_array($new_options)) {
         return;
     }
+    $val = $new_options['user_center'] ?? null;
+    $enabled = ($val === true || $val === 'true' || $val === 1 || $val === '1') ? '1' : '0';
+    $entry = isset($new_options['user_center_entry']) ? (string)$new_options['user_center_entry'] : '';
+    $state = $enabled . '|' . $entry;
+    if (get_option('pk_user_center_rewrite_state') === $state) {
+        return;
+    }
+    pk_sync_user_center_rewrite_rule();
+    flush_rewrite_rules(false);
+    update_option('pk_user_center_rewrite_state', $state, false);
+}
+
+add_action('pk_option_updated', 'pk_flush_user_center_rewrite_on_option_updated');
+
+function pk_template_redirect()
+{
     global $wp_query;
     $page_name = $wp_query->get('pagename');
-    if (!empty($page_name)) {
-        $template = '';
-        switch ($page_name) {
-            case 'user-center':
-                $template = PUOCK_ABS_DIR . '/inc/page/user-center.php';
-                break;
-            default:
-                break;
-        }
-        if (!empty($template)) {
-            pk_load_template($template);
-            exit;
-        }
+    if ($page_name !== 'user-center') {
+        return;
     }
+    if (!pk_is_user_center_theme()) {
+        if (is_user_logged_in()) {
+            wp_safe_redirect(get_edit_profile_url());
+        } else {
+            wp_safe_redirect(wp_login_url());
+        }
+        exit;
+    }
+    pk_load_template(PUOCK_ABS_DIR . '/inc/page/user-center.php');
+    exit;
 }
 
 add_action('template_redirect', 'pk_template_redirect');

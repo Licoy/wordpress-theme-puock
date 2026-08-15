@@ -27,7 +27,7 @@ class OptionExtend extends BaseOptionItem
                     'type' => 'switch',
                     'sdt' => false,
                     'badge' => ['value' => 'New'],
-                    'tips' => __('使用前请先配置wordpress伪静态规则：<code>try_files $uri $uri/ /index.php?$args</code>', PUOCK)
+                    'tips' => __('关闭后主题用户中心 /uc 将不可访问，已登录用户将进入 WordPress 个人资料/后台。前台登录按钮还需在「登录与授权」中开启「快捷登录」，评论区在需要登录时也会显示登录入口。使用前请先配置 WordPress 伪静态规则：', PUOCK) . '<code>try_files $uri $uri/ /index.php?$args</code>'
                 ],
                 [
                     'id' => 'user_center_entry',
@@ -39,7 +39,7 @@ class OptionExtend extends BaseOptionItem
                         ['value' => 'wp', 'label' => __('WordPress个人资料', PUOCK)],
                         ['value' => 'erphp', 'label' => __('ErphpDown用户中心', PUOCK)],
                     ],
-                    'tips' => __('用于选择用户中心跳转入口（未设置时沿用“用户中心”开关逻辑）', PUOCK)
+                    'tips' => __('仅在开启「用户中心」后生效；关闭「用户中心」后主题 /uc 不可用，登录用户将进入 WordPress 个人资料/后台。未设置时默认使用主题用户中心。', PUOCK)
                 ],
                 [
                     'id' => 'erphpdown_user_center_url',
