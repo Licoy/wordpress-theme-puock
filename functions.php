@@ -354,6 +354,35 @@ function get_post_images($_post = null): string
 }
 
 /**
+ * glob() 兼容封装。
+ * Alpine / musl 等 PHP 构建不提供 GLOB_BRACE，直接使用会 Fatal Error。
+ *
+ * @param string $pattern
+ * @return string[]
+ */
+function pk_glob($pattern): array
+{
+    if (defined('GLOB_BRACE')) {
+        $files = glob($pattern, GLOB_BRACE);
+        return is_array($files) ? $files : [];
+    }
+
+    if (preg_match('/^(.*)\{([^}]+)\}(.*)$/', $pattern, $m)) {
+        $files = [];
+        foreach (explode(',', $m[2]) as $alt) {
+            $matched = glob($m[1] . $alt . $m[3]);
+            if (is_array($matched)) {
+                $files = array_merge($files, $matched);
+            }
+        }
+        return $files;
+    }
+
+    $files = glob($pattern);
+    return is_array($files) ? $files : [];
+}
+
+/**
  * 获取随机默认图片
  * 基于文章ID生成伪随机数，确保同一文章始终使用相同图片，不同文章尽量不同
  *
@@ -364,7 +393,7 @@ function get_random_default_image($post_id = null): string
 {
     $img_dir = get_template_directory() . '/assets/img/random/';
     $img_uri = get_template_directory_uri() . '/assets/img/random/';
-    $files = glob($img_dir . '*.{jpg,jpeg,png,gif,webp,avif}', GLOB_BRACE);
+    $files = pk_glob($img_dir . '*.{jpg,jpeg,png,gif,webp,avif}');
     $count = $files ? count($files) : 8;
     if ($post_id) {
         $index = (crc32('puock_rand_' . $post_id) % $count);
