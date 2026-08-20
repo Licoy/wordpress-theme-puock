@@ -197,14 +197,8 @@ jobs:
           checksum_name="${archive_name}.sha256"
           archive_path="${RELEASE_DIR}/${archive_name}"
           checksum_path="${RELEASE_DIR}/${checksum_name}"
-          release_endpoint="repos/${GITHUB_REPOSITORY}/releases/tags/${tag}"
+          releases_endpoint="repos/${GITHUB_REPOSITORY}/releases?per_page=100"
           note_paragraph="$(printf '**正式安装包 / Official install package:** 请仅下载 `%s`。GitHub 自动显示的 Source code 文件仅为仓库源码快照，不是正式安装包。' "${archive_name}")"
-          printf -v release_notes '%s\n\n%s\n\n%s\n%s\n%s' \
-            "${note_paragraph}" \
-            '**发布前人工验收 / Manual checks before publishing**' \
-            '- [ ] `worker` 已返回上一正式 Release asset，旧 `fastgit` 已成为相同结果的兼容别名。' \
-            '- [ ] 已下载草稿 ZIP，并核对 SHA-256、单一 `puock/` 目录和 denylist。' \
-            '- [ ] 已完成 WordPress 全新安装和从上一版本一键更新冒烟测试。'
 
           for release_file in "${archive_path}" "${checksum_path}"; do
             if [[ ! -f "${release_file}" ]]; then
@@ -212,6 +206,51 @@ jobs:
               exit 1
             fi
           done
+
+          find_release_by_tag() {
+            local releases_json
+            local matches_json
+            local match_count
+
+            if ! releases_json="$(gh api --paginate --slurp "${releases_endpoint}")"; then
+              echo "Could not list repository releases" >&2
+              return 1
+            fi
+            if ! matches_json="$(
+              jq -c --arg tag "${tag}" \
+                '[.[][] | select(.tag_name == $tag)]' \
+                <<<"${releases_json}"
+            )"; then
+              echo "Could not filter repository releases" >&2
+              return 1
+            fi
+            if ! match_count="$(jq 'length' <<<"${matches_json}")"; then
+              echo "Could not count matching releases" >&2
+              return 1
+            fi
+            if (( match_count > 1 )); then
+              echo "Found multiple releases for tag ${tag}" >&2
+              exit 1
+            fi
+            jq -c '.[0] // empty' <<<"${matches_json}"
+          }
+
+          download_release_asset() {
+            local release_json="$1"
+            local asset_name="$2"
+            local output_path="$3"
+            local asset_id
+
+            asset_id="$(
+              jq -er --arg name "${asset_name}" \
+                '.assets[] | select(.name == $name) | .id' \
+                <<<"${release_json}"
+            )"
+            gh api \
+              -H 'Accept: application/octet-stream' \
+              "repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}" \
+              > "${output_path}"
+          }
 
           verify_existing_draft() {
             local release_json="$1"
@@ -236,10 +275,14 @@ jobs:
             fi
 
             mkdir -p "${existing_dir}"
-            gh release download "${tag}" \
-              --dir "${existing_dir}" \
-              --pattern "${archive_name}" \
-              --pattern "${checksum_name}"
+            download_release_asset \
+              "${release_json}" \
+              "${archive_name}" \
+              "${existing_dir}/${archive_name}"
+            download_release_asset \
+              "${release_json}" \
+              "${checksum_name}" \
+              "${existing_dir}/${checksum_name}"
             if ! cmp -s "${archive_path}" "${existing_dir}/${archive_name}"; then
               echo "Existing draft ZIP has a different digest" >&2
               exit 1
@@ -250,17 +293,11 @@ jobs:
             fi
           }
 
-          query_error="${RUNNER_TEMP}/release-query-error.log"
-          if release_json="$(gh api "${release_endpoint}" 2>"${query_error}")"; then
+          release_json="$(find_release_by_tag)"
+          if [[ -n "${release_json}" ]]; then
             verify_existing_draft "${release_json}"
             echo "An identical draft release already exists; no assets were changed."
             exit 0
-          fi
-
-          if ! grep -Fq 'HTTP 404' "${query_error}"; then
-            sed -n '1,20p' "${query_error}" >&2
-            echo "Could not determine whether the release exists" >&2
-            exit 1
           fi
 
           gh release create "${tag}" \
@@ -270,7 +307,11 @@ jobs:
             --verify-tag \
             --generate-notes \
             --title "${tag}" \
-            --notes "${release_notes}"
+            --notes "${note_paragraph}"
 
-          release_json="$(gh api "${release_endpoint}")"
+          release_json="$(find_release_by_tag)"
+          if [[ -z "${release_json}" ]]; then
+            echo "Draft release was created but could not be found" >&2
+            exit 1
+          fi
           verify_existing_draft "${release_json}"
