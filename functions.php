@@ -319,6 +319,10 @@ function pk_get_post_cover_image($_post = null): string
         $first_image = $matches[1];
     }
 
+    if ($first_image) {
+        $first_image = WP_Http::make_absolute_url($first_image, home_url('/'));
+    }
+
     if ($first_image && filter_var($first_image, FILTER_VALIDATE_URL)) {
         return esc_url($first_image);
     }
