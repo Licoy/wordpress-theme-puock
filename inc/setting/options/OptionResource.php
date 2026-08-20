@@ -62,10 +62,6 @@ class OptionResource extends BaseOptionItem{
                         [
                             'value' => 'github',
                             'label' => 'Github',
-                        ],
-                        [
-                            'value' => 'fastgit',
-                            'label' => 'fastgit',
                         ]
                     ],
                 ],

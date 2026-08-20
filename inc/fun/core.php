@@ -146,7 +146,7 @@ if (is_user_logged_in() && current_user_can('manage_options')) {
 
 function pk_admin_scripts()
 {
-    wp_enqueue_script('puock-admin', get_stylesheet_directory_uri() . '/assets/dist/admin.min.js',
+    wp_enqueue_script('puock-admin', get_stylesheet_directory_uri() . '/assets/dist/js/admin.min.js',
         array(), PUOCK_CUR_VER_STR, true);
 }
 

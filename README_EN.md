@@ -34,9 +34,12 @@
 ![theme-options.png](./.screenshot/options.png)
 
 ## Install
-Please go to the [release version](https://github.com/Licoy/wordpress-theme-puock/releases) to download the latest version, and then click "Add" in "Appearance"-"Themes" in the WordPress management background, select Puock's theme package to upload, install and enable it.
+Go to [Releases](https://github.com/Licoy/wordpress-theme-puock/releases) and download only the official install package named
+`puock-vX.Y.Z.zip` for the version you want. In WordPress, open "Appearance" → "Themes", click "Add", then upload, install, and enable that package.
 
 **Tip: in order to prevent incompatible themes, please backup data before installing themes to prevent data fields from overlapping.**
+
+**Important: do not clone the repository or download GitHub's automatically generated `Source code (zip)` or `Source code (tar.gz)` files. They are source snapshots, not official install packages.**
 
 ### Environmental requirements
 

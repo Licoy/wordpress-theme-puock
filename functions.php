@@ -7,7 +7,7 @@ const PUOCK = 'puock';
 const PUOCK_OPT = 'puock_options';
 $puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
-include_once('vendor/autoload.php');
+require_once __DIR__ . '/vendor/autoload.php';
 include_once('inc/fun/core.php');
 include_once('gutenberg/index.php');
 
@@ -672,6 +672,54 @@ add_action('wp_enqueue_scripts', 'pk_init_wp_empty_style');
 
 require_once dirname(__FILE__) . '/fun-custom.php';
 
+function pk_update_package_url_is_safe($version, $download_url)
+{
+    if (!is_string($version) || !is_string($download_url)
+        || preg_match('/^\d+\.\d+\.\d+$/D', $version) !== 1) {
+        return false;
+    }
+
+    $asset_path = sprintf(
+        '/Licoy/wordpress-theme-puock/releases/download/v%1$s/puock-v%1$s.zip',
+        $version
+    );
+
+    return in_array($download_url, [
+        'https://github.com' . $asset_path,
+        'https://gh.gitcdn.top/https://github.com' . $asset_path,
+    ], true);
+}
+
+function pk_filter_update_package($update, $http_response = null)
+{
+    if ($update === null) {
+        return null;
+    }
+
+    $version = is_object($update) && isset($update->version) && is_string($update->version)
+        ? $update->version
+        : '';
+    $download_url = is_object($update) && isset($update->download_url) && is_string($update->download_url)
+        ? $update->download_url
+        : '';
+    if (pk_update_package_url_is_safe($version, $download_url)) {
+        return $update;
+    }
+
+    $error = new WP_Error(
+        'puock-unsafe-update-package',
+        __('拒绝使用来源或版本不匹配的主题更新包。', PUOCK),
+        ['version' => $version, 'download_url' => $download_url]
+    );
+    do_action('puc_api_error', $error, $http_response, $download_url, PUOCK);
+    error_log('[puock-unsafe-update-package] ' . wp_json_encode([
+        'version' => $version,
+        'download_url' => substr($download_url, 0, 500),
+    ]));
+
+    return null;
+}
+
 //更新支持
 function pk_update()
 {
@@ -680,39 +728,28 @@ function pk_update()
     if (empty($check_period) || !is_numeric($check_period)) {
         $check_period = 6;
     }
-    $current_theme_dir_name = basename(dirname(__FILE__));
-    include('update-checker/plugin-update-checker.php');
-    switch ($update_server) {
-        case 'github':
-            {
-                $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-                    'https://github.com/Licoy/wordpress-theme-puock',
-                    __FILE__,
-                    PUOCK,
-                    $check_period
-                );
-            }
-            break;
-        case 'fastgit':
-            {
-                $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-                    'https://licoy.cn/go/puock-update.php?r=fastgit',
-                    __FILE__,
-                    PUOCK,
-                    $check_period
-                );
-            }
-            break;
-        default:
-        {
-            $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-                'https://licoy.cn/go/puock-update.php?r=worker',
-                __FILE__,
-                PUOCK,
-                $check_period
-            );
-        }
+    if ($update_server === 'github') {
+        $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+            'https://github.com/Licoy/wordpress-theme-puock',
+            __FILE__,
+            PUOCK,
+            $check_period
+        );
+        $vcs_api = $pkUpdateChecker->getVcsApi();
+        $vcs_api->enableReleaseAssets(
+            '/^puock-v\d+\.\d+\.\d+\.zip$/D',
+            $vcs_api::REQUIRE_RELEASE_ASSETS
+        );
+    } else {
+        $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+            'https://licoy.cn/go/puock-update.php?r=worker',
+            __FILE__,
+            PUOCK,
+            $check_period
+        );
     }
+
+    $pkUpdateChecker->addResultFilter('pk_filter_update_package');
 }
 
 
@@ -794,7 +831,5 @@ function pk_update()
 //
 //add_action('comment_post', 'pk_comment_mail_notify');
 
-if (is_admin()) {
-    // 在线更新支持
-    pk_update();
-}
+// 在线更新支持
+pk_update();

@@ -39,6 +39,8 @@ $core = file_text('inc/fun/core.php');
 assert_contains('pk_comment_proof_sign', $core, 'Comment proof cookie should be signed.');
 assert_contains('hash_equals(pk_comment_proof_sign($payload), $sig)', $core, 'Comment proof cookie signature should use constant-time comparison.');
 assert_contains('var_export($sites, true)', $core, 'Thumbnail allowlist file generation should not interpolate raw PHP.');
+assert_contains('/assets/dist/js/admin.min.js', $core, 'Admin scripts should use the packaged production JS path.');
+assert_not_contains('/assets/dist/admin.min.js', $core, 'Admin scripts must not reference a path omitted from the production package.');
 
 $opt = file_text('inc/fun/opt.php');
 assert_contains('wp_verify_nonce($nonce, \'puock_like_\' . $id)', $opt, 'Like endpoint should verify nonce.');

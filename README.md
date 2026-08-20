@@ -47,12 +47,12 @@
 
 ## 安装
 
-请到 [发行版本](https://github.com/Licoy/wordpress-theme-puock/releases)
-中进行下载最新版本，然后到WordPress管理后台中的「外观」-「主题」中点击「添加」，选择Puock的主题包进行上传安装并启用即可。
+请到 [发行版本](https://github.com/Licoy/wordpress-theme-puock/releases) 中仅下载与版本号对应的正式安装包
+`puock-vX.Y.Z.zip`，然后到 WordPress 管理后台的「外观」-「主题」中点击「添加」，选择该安装包上传、安装并启用。
 
 **提示：为了防止主题不兼容，请在安装主题前进行数据备份，防止数据字段重复覆盖等情况发生。**
 
-**重要：请不要直接克隆或直接下载仓库进行使用，请到发行版中进行下载使用**
+**重要：不要直接克隆仓库，也不要下载 GitHub 自动显示的 `Source code (zip)` 或 `Source code (tar.gz)`；它们只是源码快照，不是正式安装包。**
 
 ### 环境要求
 

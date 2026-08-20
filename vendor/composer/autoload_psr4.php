@@ -10,7 +10,7 @@ return array(
     'Yurun\\OAuthLogin\\' => array($vendorDir . '/yurunsoft/yurun-oauth-login/src'),
     'Rahul900day\\Gpt3Encoder\\' => array($vendorDir . '/rahul900day/gpt-3-encoder/src'),
     'Puock\\Theme\\' => array($baseDir . '/inc'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Orhanerday\\OpenAi\\' => array($vendorDir . '/orhanerday/open-ai/src'),
 );

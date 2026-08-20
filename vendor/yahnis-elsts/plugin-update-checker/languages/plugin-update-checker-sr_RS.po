@@ -1,0 +1,57 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin-update-checker\n"
+"POT-Creation-Date: 2024-12-09 11:45+0100\n"
+"PO-Revision-Date: 2024-12-09 12:20+0100\n"
+"Last-Translator: Aleksandar Urošević <urke.kg@gmail.com>\n"
+"Language-Team: \n"
+"Language: sr_RS\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_x\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Puc/v5p5/Plugin/Ui.php:56
+msgid "View details"
+msgstr "Види детаље"
+
+#: Puc/v5p5/Plugin/Ui.php:79
+#, php-format
+msgid "More information about %s"
+msgstr "Више информација о %s"
+
+#: Puc/v5p5/Plugin/Ui.php:130
+msgid "Check for updates"
+msgstr "Провера ажурирања"
+
+#: Puc/v5p5/Plugin/Ui.php:217
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr "Додатак %s је у најновијем издању."
+
+#: Puc/v5p5/Plugin/Ui.php:219
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr "Доступно је ново издање за %s."
+
+#: Puc/v5p5/Plugin/Ui.php:221
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr "Није могуће утврдити да ли су доступне исправке за %s."
+
+#: Puc/v5p5/Plugin/Ui.php:227
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr "Непознат статус провере ажурирања \"%s\""
+
+#: Puc/v5p5/Vcs/PluginUpdateChecker.php:113
+msgid "There is no changelog available."
+msgstr "Белешке о изменама нису доступне."
