@@ -202,7 +202,7 @@ function pk_download($attr, $content = null)
         <div class='mb15'><i class='fa fa-file-zipper'></i>&nbsp;<span>{$file_name_label}：" . esc_html($filename) . "</span></div>
         <div class='mb15'><i class='fa fa-download'></i>&nbsp;<span>{$file_size_label}：" . esc_html($size) . "</span></div>
         <div class='mb15'><i class='fa-regular fa-bell'></i>&nbsp;<span>{$download_notice_label}：" . wp_kses_post($down_tips) . "</span></div>
-        <div><i class='fa fa-link'></i><span>{$download_url_label}：" . esc_html($content) . "</span></div>
+        <div><i class='fa fa-link'></i><span>{$download_url_label}：" . wp_kses_post($content) . "</span></div>
     </div>";
 }
 
