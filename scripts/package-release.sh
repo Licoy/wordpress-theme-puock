@@ -130,7 +130,7 @@ copy_required() {
 copy_required \
     404.php author.php category.php comments.php date.php error.php footer.php \
     fun-custom.php functions.php header.php index.php page.php search.php sidebar.php \
-    single.php tag.php timthumb.php style.css screenshot.png LICENSE \
+    single.php tag.php timthumb.php style.css screenshot.png README.md LICENSE \
     ad inc pages templates
 
 # This legacy template has no runtime reference and is intentionally not shipped.
@@ -248,6 +248,7 @@ while IFS= read -r -d '' debug_bar_dir; do
 done < <(find "$package_dir/$puc_base/Puc" -type d -name DebugBar -print0)
 
 required_release_paths=(
+    README.md
     style.css
     functions.php
     vendor/autoload.php
@@ -275,7 +276,7 @@ if [[ -n "$(find "$package_dir" -type l -print -quit)" ]]; then
     die "release package must not contain symbolic links"
 fi
 
-deny_pattern='(^|/)([Tt]ests?|node_modules|update-checker|\.github|\.git|\.vscode|\.idea|\.spec-workflow|scripts)(/|$)|(^|/)assets/(js|style)(/|$)|(^|/)assets/libs/basic(/|$)|(^|/)vendor/orhanerday/open-ai/files(/|$)|(^|/)vendor/zoujingli/ip2region/_test\.php$|(^|/)vendor/yahnis-elsts/plugin-update-checker/(css|js|examples)(/|$)|(^|/)vendor/yahnis-elsts/plugin-update-checker/Puc/[^/]+/DebugBar(/|$)|^puock/(AGENTS\.md|README(_EN)?\.md|USAGE(_EN)?\.md|package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|composer\.(json|lock)|gulpfile\.js|\.babelrc)$|(^|/)(\.DS_Store|\.env([^/]*)?)$|(^|/)[^/]*(\.map|\.po|\.pot|\.log|\.test\.php|-dev\.php)$'
+deny_pattern='(^|/)([Tt]ests?|node_modules|update-checker|\.github|\.git|\.vscode|\.idea|\.spec-workflow|scripts)(/|$)|(^|/)assets/(js|style)(/|$)|(^|/)assets/libs/basic(/|$)|(^|/)vendor/orhanerday/open-ai/files(/|$)|(^|/)vendor/zoujingli/ip2region/_test\.php$|(^|/)vendor/yahnis-elsts/plugin-update-checker/(css|js|examples)(/|$)|(^|/)vendor/yahnis-elsts/plugin-update-checker/Puc/[^/]+/DebugBar(/|$)|^puock/(AGENTS\.md|README_EN\.md|USAGE(_EN)?\.md|package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|composer\.(json|lock)|gulpfile\.js|\.babelrc)$|(^|/)(\.DS_Store|\.env([^/]*)?)$|(^|/)[^/]*(\.map|\.po|\.pot|\.log|\.test\.php|-dev\.php)$'
 package_entries=$(cd "$stage_root" && find puock -print | sort)
 denied_entries=$(printf '%s\n' "$package_entries" | grep -E "$deny_pattern" || true)
 [[ -z "$denied_entries" ]] || die "denied release entries found:\n$denied_entries"
