@@ -207,6 +207,62 @@ jobs:
             fi
           done
 
+          previous_tag="$(gh api "repos/${GITHUB_REPOSITORY}/releases/latest" --jq '.tag_name')"
+          if [[ ! "${previous_tag}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ || "${previous_tag}" == "${tag}" ]]; then
+            echo "Could not determine the previous stable release tag" >&2
+            exit 1
+          fi
+          compare_json="$(
+            gh api --paginate --slurp \
+              "repos/${GITHUB_REPOSITORY}/compare/${previous_tag}...${tag}?per_page=100"
+          )"
+          commit_count="$(jq '[.[] | .commits[]] | length' <<<"${compare_json}")"
+          if (( commit_count == 0 )); then
+            echo "No commits found between ${previous_tag} and ${tag}" >&2
+            exit 1
+          fi
+          changelog="$(
+            jq -r '
+              def titles: {
+                feat: "Features", fix: "Bug Fixes", docs: "Documentation",
+                style: "Styles", refactor: "Code Refactoring",
+                perf: "Performance Improvements", test: "Tests", build: "Builds",
+                ci: "Continuous Integration", chore: "Chores", revert: "Reverts"
+              };
+              def parsed_commit:
+                . as $commit
+                | ($commit.commit.message | split("\n")[0]) as $header
+                | select(($header | test("^Merge ")) | not)
+                | (try ($header | capture("^(?<type>[A-Za-z]+)(?:\\((?<scope>[^)]+)\\))?!?:[[:space:]]+(?<subject>.+)$")) catch null) as $parsed
+                | {
+                    type: ($parsed.type // null), scope: ($parsed.scope // null),
+                    subject: ($parsed.subject // null), header: $header, hash: $commit.sha,
+                    author: ($commit.commit.author.name // "unknown"), url: $commit.html_url,
+                    breaking: ($commit.commit.message | test("(?m)^BREAKING CHANGES?:[[:space:]]"))
+                  }
+                | .line = if .type then
+                    "- \(if .scope then "**\(.scope)**: " else "" end)\(.subject) ([\(.author)](\(.url)))"
+                  else "- \(.hash[0:7]): \(.header) (\(.author))" end;
+              def section($title; $lines):
+                if ($lines | length) == 0 then empty
+                else "## \($title)\n" + ($lines | join("\n")) end;
+
+              [.[] | .commits[] | parsed_commit] as $commits
+              | ["feat","fix","docs","style","refactor","perf","test","build","ci","chore","revert"] as $types
+              | [
+                  section("Breaking Changes"; [$commits[] | select(.breaking) | .line]),
+                  ($types[] as $type | section(titles[$type]; [$commits[] | select(.type == $type) | .line])),
+                  section("Commits"; [$commits[] | select((.type // "") as $type | $types | index($type) | not) | .line])
+                ]
+              | join("\n\n")
+            ' <<<"${compare_json}"
+          )"
+          if [[ -z "${changelog}" ]]; then
+            echo "Generated release changelog is empty" >&2
+            exit 1
+          fi
+          release_notes="${note_paragraph}"$'\n\n'"${changelog}"
+
           find_release_by_tag() {
             local releases_json
             local matches_json
@@ -271,8 +327,8 @@ jobs:
             fi
 
             release_body="$(jq -r '.body // ""' <<<"${release_json}")"
-            if [[ "${release_body}" != "${note_paragraph}"* ]]; then
-              echo "Existing draft release notes do not start with the required package notice" >&2
+            if [[ "${release_body}" != "${release_notes}" ]]; then
+              echo "Existing draft release notes differ from the generated changelog" >&2
               exit 1
             fi
 
@@ -307,9 +363,8 @@ jobs:
             "${checksum_path}" \
             --draft \
             --verify-tag \
-            --generate-notes \
             --title "${tag}" \
-            --notes "${note_paragraph}"
+            --notes "${release_notes}"
 
           for attempt in {1..12}; do
             if ! release_json="$(find_release_by_tag)"; then
