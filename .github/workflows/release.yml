@@ -311,9 +311,20 @@ jobs:
             --title "${tag}" \
             --notes "${note_paragraph}"
 
-          release_json="$(find_release_by_tag)"
+          for attempt in {1..12}; do
+            if ! release_json="$(find_release_by_tag)"; then
+              exit 1
+            fi
+            if [[ -n "${release_json}" ]]; then
+              break
+            fi
+            if (( attempt < 12 )); then
+              echo "Draft release is not visible yet (attempt ${attempt}/12); retrying in 5 seconds" >&2
+              sleep 5
+            fi
+          done
           if [[ -z "${release_json}" ]]; then
-            echo "Draft release was created but could not be found" >&2
+            echo "Draft release was created but was not visible after 12 attempts" >&2
             exit 1
           fi
           verify_existing_draft "${release_json}"
