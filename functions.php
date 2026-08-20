@@ -680,7 +680,7 @@ function pk_update_package_url_is_safe($version, $download_url)
     }
 
     $asset_path = sprintf(
-        '/Licoy/wordpress-theme-puock/releases/download/v%1$s/puock-v%1$s.zip',
+        '/Licoy/wordpress-theme-puock/releases/download/v%1$s/Puock-V%1$s.zip',
         $version
     );
 
@@ -737,7 +737,7 @@ function pk_update()
         );
         $vcs_api = $pkUpdateChecker->getVcsApi();
         $vcs_api->enableReleaseAssets(
-            '/^puock-v\d+\.\d+\.\d+\.zip$/D',
+            '/^Puock-V\d+\.\d+\.\d+\.zip$/D',
             $vcs_api::REQUIRE_RELEASE_ASSETS
         );
     } else {

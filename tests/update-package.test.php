@@ -48,6 +48,7 @@ function wp_json_encode($value, $flags = 0)
 
 $source = file_get_contents(__DIR__ . '/../functions.php');
 assert_same(true, strpos($source, 'REQUIRE_RELEASE_ASSETS') !== false, 'GitHub updates must require a matching release asset.');
+assert_same(true, strpos($source, '/^Puock-V\d+\.\d+\.\d+\.zip$/D') !== false, 'GitHub updates must require the exact case-sensitive asset filename.');
 assert_same(false, strpos($source, 'puock-update.php?r=fastgit') !== false, 'Legacy FastGit settings must fall back to the worker source.');
 
 $resource_options = file_get_contents(__DIR__ . '/../inc/setting/options/OptionResource.php');
@@ -62,15 +63,16 @@ if ($start === false || $end === false) {
 eval(substr($source, $start, $end - $start));
 
 $version = '2.10.4';
-$github_asset = 'https://github.com/Licoy/wordpress-theme-puock/releases/download/v2.10.4/puock-v2.10.4.zip';
-$worker_asset = 'https://gh.gitcdn.top/https://github.com/Licoy/wordpress-theme-puock/releases/download/v2.10.4/puock-v2.10.4.zip';
+$github_asset = 'https://github.com/Licoy/wordpress-theme-puock/releases/download/v2.10.4/Puock-V2.10.4.zip';
+$worker_asset = 'https://gh.gitcdn.top/https://github.com/Licoy/wordpress-theme-puock/releases/download/v2.10.4/Puock-V2.10.4.zip';
 
 assert_same(true, pk_update_package_url_is_safe($version, $github_asset), 'GitHub release asset should be accepted.');
 assert_same(true, pk_update_package_url_is_safe($version, $worker_asset), 'Official proxy release asset should be accepted.');
 assert_same(false, pk_update_package_url_is_safe($version, 'https://github.com/Licoy/wordpress-theme-puock/archive/refs/tags/v2.10.4.zip'), 'GitHub source archives must be rejected.');
 assert_same(false, pk_update_package_url_is_safe($version, 'https://api.github.com/repos/Licoy/wordpress-theme-puock/zipball/v2.10.4'), 'GitHub zipball URLs must be rejected.');
-assert_same(false, pk_update_package_url_is_safe($version, 'https://example.com/puock-v2.10.4.zip'), 'Untrusted hosts must be rejected.');
-assert_same(false, pk_update_package_url_is_safe($version, 'https://github.com/Licoy/wordpress-theme-puock/releases/download/v2.10.3/puock-v2.10.3.zip'), 'Asset version must match update metadata.');
+assert_same(false, pk_update_package_url_is_safe($version, 'https://example.com/Puock-V2.10.4.zip'), 'Untrusted hosts must be rejected.');
+assert_same(false, pk_update_package_url_is_safe($version, 'https://github.com/Licoy/wordpress-theme-puock/releases/download/v2.10.3/Puock-V2.10.3.zip'), 'Asset version must match update metadata.');
+assert_same(false, pk_update_package_url_is_safe($version, 'https://github.com/Licoy/wordpress-theme-puock/releases/download/v2.10.4/puock-v2.10.4.zip'), 'Asset filename matching must be case-sensitive.');
 assert_same(false, pk_update_package_url_is_safe('v2.10.4', $github_asset), 'Update metadata must use a stable numeric version.');
 assert_same(false, pk_update_package_url_is_safe([], $github_asset), 'Malformed version metadata must be rejected.');
 

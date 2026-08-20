@@ -170,7 +170,7 @@ jobs:
       - name: Lint packaged PHP with PHP 8.5
         run: |
           set -euo pipefail
-          archive="${RUNNER_TEMP}/release/puock-${GITHUB_REF_NAME}.zip"
+          archive="${RUNNER_TEMP}/release/Puock-V${GITHUB_REF_NAME#v}.zip"
           extract_dir="${RUNNER_TEMP}/release-php85"
           mkdir -p "${extract_dir}"
           unzip -q "${archive}" -d "${extract_dir}"
@@ -193,12 +193,12 @@ jobs:
           set -euo pipefail
 
           tag="${GITHUB_REF_NAME}"
-          archive_name="puock-${tag}.zip"
+          archive_name="Puock-V${tag#v}.zip"
           checksum_name="${archive_name}.sha256"
           archive_path="${RELEASE_DIR}/${archive_name}"
           checksum_path="${RELEASE_DIR}/${checksum_name}"
           releases_endpoint="repos/${GITHUB_REPOSITORY}/releases?per_page=100"
-          note_paragraph="$(printf '**正式安装包 / Official install package:** 请仅下载 `%s`。GitHub 自动显示的 Source code 文件仅为仓库源码快照，不是正式安装包。' "${archive_name}")"
+          note_paragraph="$(printf '**Official install package:** Download `%s` only. Source code files generated automatically by GitHub are repository snapshots, not release packages.' "${archive_name}")"
 
           for release_file in "${archive_path}" "${checksum_path}"; do
             if [[ ! -f "${release_file}" ]]; then
@@ -262,9 +262,11 @@ jobs:
               exit 1
             fi
             if ! jq -e --arg archive "${archive_name}" --arg checksum "${checksum_name}" \
-              '(.assets | length) == 2 and ([.assets[].name] | sort) == ([$archive, $checksum] | sort)' \
+              '(.assets | length) == 2
+                and ([.assets[].name] | sort) == ([$archive, $checksum] | sort)
+                and all(.assets[]; (.label // "") == "")' \
               <<<"${release_json}" > /dev/null; then
-              echo "Existing draft must contain exactly the expected ZIP and checksum assets" >&2
+              echo "Existing draft must contain only the expected unlabeled ZIP and checksum assets" >&2
               exit 1
             fi
 
@@ -301,8 +303,8 @@ jobs:
           fi
 
           gh release create "${tag}" \
-            "${archive_path}#Puock 正式安装包" \
-            "${checksum_path}#SHA-256 校验值" \
+            "${archive_path}" \
+            "${checksum_path}" \
             --draft \
             --verify-tag \
             --generate-notes \

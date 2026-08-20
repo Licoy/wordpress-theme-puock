@@ -40,7 +40,7 @@ commit_epoch=$(git -C "$repo_root" show -s --format=%ct "$commit") || die "canno
 
 mkdir -p "$output_arg"
 output_dir=$(CDPATH= cd -- "$output_arg" && pwd -P)
-archive_name="puock-${release_tag}.zip"
+archive_name="Puock-V${release_tag#v}.zip"
 checksum_name="${archive_name}.sha256"
 output_archive="$output_dir/$archive_name"
 output_checksum="$output_dir/$checksum_name"
