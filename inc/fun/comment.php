@@ -2,15 +2,19 @@
 
 use function donatj\UserAgent\parse_user_agent;
 
-function pk_comment_author_view($text, $comment)
+function pk_comment_is_author_only($comment)
 {
-    global $authordata;
-    $author_view = get_post_meta($comment->comment_post_ID, 'author_cat_comment', true) == 'true';
-    if (empty($authordata)) {
-        $authordata = get_userdata(get_post_field('post_author', $comment->comment_post_ID));
+    return get_post_meta($comment->comment_post_ID, 'author_cat_comment', true) == 'true';
+}
+
+function pk_comment_author_view($text, $comment = null)
+{
+    if (!$comment instanceof WP_Comment || !pk_comment_is_author_only($comment)) {
+        return $text;
     }
-    $is_author = apply_filters('pk_comment_author_view_is_author', $authordata->ID, $authordata->ID == get_current_user_id());
-    if ($author_view && !$is_author) {
+    $author_id = (int)get_post_field('post_author', $comment->comment_post_ID);
+    $is_author = (bool)apply_filters('pk_comment_author_view_is_author', $author_id > 0 && $author_id === get_current_user_id(), $author_id);
+    if (!$is_author) {
         $text = apply_filters('pk_comment_author_view', '<div class="fs12 c-sub"><i class="fa fa-lock"></i> ' . __('评论仅对作者可见', PUOCK) . '</div>');
     }
     return $text;

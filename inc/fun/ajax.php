@@ -61,11 +61,40 @@ function pk_ajax_get_theme_options()
 
 pk_ajax_register('get_theme_options', 'pk_ajax_get_theme_options');
 
+/**
+ * 没有 unfiltered_html 权限的用户（如多站点子站点管理员）不能写入脚本等不安全的 HTML：
+ * 被修改的字段若无法通过 wp_kses_post 则保留原值，没有原值时使用过滤后的内容
+ */
+function pk_theme_options_kses($value, $old)
+{
+    if (is_array($value)) {
+        foreach ($value as $key => $item) {
+            $value[$key] = pk_theme_options_kses($item, is_array($old) ? ($old[$key] ?? null) : null);
+        }
+        return $value;
+    }
+    if (!is_string($value) || $value === $old) {
+        return $value;
+    }
+    $filtered = wp_kses_post($value);
+    // 只比较标签层面的差异，忽略 & 等实体规范化，避免普通链接参数被误判
+    if ($filtered === wp_kses_normalize_entities($value)) {
+        return $value;
+    }
+    return is_string($old) ? $old : $filtered;
+}
+
 function pk_ajax_update_theme_options()
 {
     if (current_user_can('edit_theme_options')) {
         pk_ajax_check_theme_options_nonce();
         $body = pk_ajax_get_req_body();
+        if (!is_array($body)) {
+            wp_send_json_error(__('请求格式错误', PUOCK));
+        }
+        if (!current_user_can('unfiltered_html')) {
+            $body = pk_theme_options_kses($body, get_option(PUOCK_OPT));
+        }
         update_option(PUOCK_OPT, $body);
         do_action('pk_option_updated', $body);
         flush_rewrite_rules();

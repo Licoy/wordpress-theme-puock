@@ -33,12 +33,12 @@
                                 <?php if ($post_index == 0): ?>
                                     <div class="mtb10 magazine-media-item">
                                         <a class="img ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-                                            <img title="<?php the_title() ?>"
-                                                 alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'w-100 round-3', 120, 80) ?>/>
+                                            <img title="<?php the_title_attribute() ?>"
+                                                 alt="<?php the_title_attribute() ?>" <?php echo pk_get_lazy_img_info(get_post_images(), 'w-100 round-3', 120, 80) ?>/>
                                         </a>
                                         <div class="t-line-1">
                                             <h2 class="t-lg t-line-1"><a class="a-link"
-                                                                         title="<?php the_title() ?>" <?php pk_link_target() ?>
+                                                                         title="<?php the_title_attribute() ?>" <?php pk_link_target() ?>
                                                                          href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                             </h2>
                                             <div class="t-md c-sub text-2line"><?php the_excerpt() ?></div>
@@ -50,7 +50,7 @@
                                             <div class="col-lg-9 col-12 text-nowrap text-truncate">
                                                 <i class="fa fa-angle-right t-sm c-sub me-1"></i>
                                                 <a class="a-link t-w-400 t-md"
-                                                   title="<?php the_title() ?>" <?php pk_link_target() ?>
+                                                   title="<?php the_title_attribute() ?>" <?php pk_link_target() ?>
                                                    href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                             </div>
                                             <div class="col-lg-3 text-end d-none d-lg-block">

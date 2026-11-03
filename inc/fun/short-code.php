@@ -294,7 +294,7 @@ function pk_password_read($attr, $content = null)
     }
     $info = "<p class='fs14 c-sub'><i class='fa-regular fa-eye'></i>&nbsp;" . esc_html($desc) . "</p>";
     if (isset($_REQUEST['pass'])) {
-        if ($_REQUEST['pass'] == $pass) {
+        if (is_string($_REQUEST['pass']) && (string)$pass !== '' && hash_equals((string)$pass, $_REQUEST['pass'])) {
             return do_shortcode($content);
         } else {
             $info .= "<p class='fs14 text-danger'><i class='fa-solid fa-triangle-exclamation'></i>&nbsp;" . __('您的密码输入错误，请核对后重新输入', PUOCK) . "</p>";
@@ -311,6 +311,30 @@ function pk_password_read($attr, $content = null)
 }
 
 add_shortcode('password', 'pk_password_read');
+
+//隐藏内容（含密码明文）保存在正文中，不能让其参与站内搜索的匹配与排序，否则可以通过搜索结果逐字推断
+function pk_sc_hidden_content_search_sql($sql)
+{
+    global $wpdb;
+    if (empty($sql) || current_user_can('edit_others_posts')) {
+        return $sql;
+    }
+    $column = "{$wpdb->posts}.post_content";
+    $hidden = "({$column} LIKE '%[reply%' OR {$column} LIKE '%[login%' OR {$column} LIKE '%[password%')";
+    return preg_replace_callback(
+        '/' . preg_quote($column, '/') . ' (NOT LIKE|LIKE) (\'(?:[^\'\\\\]|\\\\.)*\')/',
+        function ($m) use ($column, $hidden) {
+            if ($m[1] === 'NOT LIKE') {
+                return "({$column} NOT LIKE {$m[2]} OR {$hidden})";
+            }
+            return "({$column} LIKE {$m[2]} AND NOT {$hidden})";
+        },
+        $sql
+    );
+}
+
+add_filter('posts_search', 'pk_sc_hidden_content_search_sql');
+add_filter('posts_search_orderby', 'pk_sc_hidden_content_search_sql');
 //隐藏收缩
 function pk_sc_collapse($attr, $content = null)
 {

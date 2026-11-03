@@ -74,7 +74,8 @@ class PuockSetting
     public function sanitize_config_debug_entry($value): string
     {
         $value = trim((string)$value);
-        if ($value === '') {
+        // 调试入口会在设置页加载任意脚本，仅允许拥有 unfiltered_html 权限的用户配置
+        if ($value === '' || !current_user_can('unfiltered_html')) {
             return '';
         }
         return untrailingslashit(esc_url_raw($value));
@@ -99,6 +100,9 @@ class PuockSetting
 
     public static function get_config_debug_entry(): string
     {
+        if (!current_user_can('unfiltered_html')) {
+            return '';
+        }
         return untrailingslashit(trim((string)get_option(self::CONFIG_DEBUG_ENTRY_OPTION, '')));
     }
 

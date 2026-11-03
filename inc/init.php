@@ -64,11 +64,13 @@ function deel_setup()
     }
 
     add_action('widgets_init', 'unregister_d_widget');
-    //分类，标签描述添加图片
-    remove_filter('pre_term_description', 'wp_filter_kses');
-    remove_filter('pre_link_description', 'wp_filter_kses');
-    remove_filter('pre_link_notes', 'wp_filter_kses');
+    //分类，标签描述添加图片：放宽为文章级白名单，而非完全移除过滤
+    foreach (['pre_term_description', 'pre_link_description', 'pre_link_notes'] as $pk_kses_filter) {
+        remove_filter($pk_kses_filter, 'wp_filter_kses');
+        add_filter($pk_kses_filter, 'wp_filter_post_kses');
+    }
     remove_filter('term_description', 'wp_kses_data');
+    add_filter('term_description', 'wp_kses_post');
     //添加主题特性
     add_theme_support('post-thumbnails');//缩略图设置
     add_theme_support('post-formats', array('aside'));//增加文章形式

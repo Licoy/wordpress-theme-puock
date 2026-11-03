@@ -41,7 +41,7 @@ if (!defined('DEBUG_ON')) define('DEBUG_ON', false);                            
 if (!defined('DEBUG_LEVEL')) define('DEBUG_LEVEL', 1);                                // Debug level 1 is less noisy and 3 is the most noisy
 if (!defined('MEMORY_LIMIT')) define('MEMORY_LIMIT', '30M');                            // Set PHP memory limit
 if (!defined('BLOCK_EXTERNAL_LEECHERS')) define('BLOCK_EXTERNAL_LEECHERS', false);                // If the image or webshot is being loaded on an external site, display a red "No Hotlinking" gif.
-if (!defined('DISPLAY_ERROR_MESSAGES')) define('DISPLAY_ERROR_MESSAGES', true);                // Display error messages. Set to false to turn off errors (good for production websites)
+if (!defined('DISPLAY_ERROR_MESSAGES')) define('DISPLAY_ERROR_MESSAGES', false);                // Display error messages. Set to false to turn off errors (good for production websites)
 //Image fetching and caching
 if (!defined('ALLOW_EXTERNAL')) define('ALLOW_EXTERNAL', TRUE);                        // Allow image fetching from external websites. Will check against ALLOWED_SITES if ALLOW_ALL_EXTERNAL_SITES is false
 if (!defined('ALLOW_ALL_EXTERNAL_SITES')) define('ALLOW_ALL_EXTERNAL_SITES', false);                // Less secure.
@@ -197,21 +197,41 @@ class timthumb
         return base64_decode($data);
     }
 
-    protected function isSafeRemoteHost($host)
+    protected function isSafeRemoteHost($host, &$resolvedIp = null)
     {
+        $resolvedIp = null;
         $host = strtolower(trim((string)$host, " \t\n\r\0\x0B."));
         if ($host === '' || !preg_match('/^[a-z0-9.-]+$/i', $host)) {
             return false;
         }
-        $ips = filter_var($host, FILTER_VALIDATE_IP) ? array($host) : gethostbynamel($host);
+        $ips = filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) ? array($host) : gethostbynamel($host);
         if (!$ips) {
             return false;
         }
         foreach ($ips as $ip) {
-            if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
+            if (!$this->isPublicIPv4($ip)) {
                 return false;
             }
-            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+        }
+        $resolvedIp = $ips[0];
+        return true;
+    }
+
+    protected function isPublicIPv4($ip)
+    {
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+            return false;
+        }
+        if (defined('FILTER_FLAG_GLOBAL_RANGE') && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_GLOBAL_RANGE) === false) {
+            return false;
+        }
+        // 低版本 PHP 的 NO_PRIV/NO_RES 未覆盖的特殊用途网段（CGNAT、云厂商元数据、基准测试等）
+        $long = ip2long($ip);
+        $blocked = array('0.0.0.0/8', '100.64.0.0/10', '192.0.0.0/24', '192.0.2.0/24', '198.18.0.0/15', '198.51.100.0/24', '203.0.113.0/24');
+        foreach ($blocked as $cidr) {
+            list($net, $bits) = explode('/', $cidr);
+            $mask = -1 << (32 - (int)$bits);
+            if (($long & $mask) === (ip2long($net) & $mask)) {
                 return false;
             }
         }
@@ -268,13 +288,21 @@ class timthumb
         //Clean the cache before we do anything because we don't want the first visitor after FILE_CACHE_TIME_BETWEEN_CLEANS expires to get a stale image.
         $this->cleanCache();
 
-        $this->myHost = preg_replace('/^www\./i', '', $_SERVER['HTTP_HOST']);
+        // Host 头可被伪造，只接受合法主机名，并在拼入正则前转义
+        $requestHost = strtolower((string)($_SERVER['HTTP_HOST'] ?? ''));
+        if (!preg_match('/^[a-z0-9.-]+(?::\d+)?$/', $requestHost)) {
+            $requestHost = '';
+        }
+        $this->myHost = preg_quote(preg_replace('/^www\./i', '', $requestHost), '/');
         $this->src = $this->param('src');
         if(strpos($this->src,"http://")===false && strpos($this->src,"https://")===false){
             $this->src = self::safe_base64_decode($this->src);
         }
+        if ($this->myHost !== '') {
+            $this->src = preg_replace('/^https?:\/\/(?:www\.)?' . $this->myHost . '(?=[\/?#]|$)/i', '', $this->src);
+        }
+        // 白名单与内网校验必须基于替换后真正要请求的地址
         $this->url = parse_url($this->src);
-        $this->src = preg_replace('/https?:\/\/(?:www\.)?' . $this->myHost . '/i', '', $this->src);
 
         if (strlen($this->src) <= 3) {
             $this->error("No image specified");
@@ -1379,8 +1407,14 @@ class timthumb
         $this->lastURLError = false;
         $url = preg_replace('/ /', '%20', $url);
         $parts = parse_url($url);
-        if (!$parts || !in_array(strtolower($parts['scheme'] ?? ''), array('http', 'https'), true) || !$this->isSafeRemoteHost($parts['host'] ?? '')) {
+        $scheme = strtolower($parts['scheme'] ?? '');
+        if (!$parts || !in_array($scheme, array('http', 'https'), true) || !$this->isSafeRemoteHost($parts['host'] ?? '', $resolvedIp)) {
             $this->lastURLError = 'Blocked unsafe remote URL';
+            return false;
+        }
+        if (!function_exists('curl_init')) {
+            // 无法将连接固定到已校验的 IP，存在 DNS 重绑定风险，不再回退到 file_get_contents
+            $this->lastURLError = 'Remote fetching requires curl';
             return false;
         }
         if (function_exists('curl_init')) {
@@ -1401,6 +1435,11 @@ class timthumb
             curl_setopt($curl, CURLOPT_WRITEFUNCTION, 'timthumb::curlWrite');
             @curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
             @curl_setopt($curl, CURLOPT_MAXREDIRS, 0);
+            // 固定到校验通过的 IPv4 地址，防止 DNS 重绑定与 IPv6 绕过
+            $port = isset($parts['port']) ? (int)$parts['port'] : ($scheme === 'https' ? 443 : 80);
+            curl_setopt($curl, CURLOPT_RESOLVE, array($parts['host'] . ':' . $port . ':' . $resolvedIp));
+            curl_setopt($curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+            curl_setopt($curl, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
 
             $curlResult = curl_exec($curl);
             fclose(self::$curlFH);
@@ -1421,37 +1460,6 @@ class timthumb
                 curl_close($curl);
                 return false;
             }
-        } else {
-            $context = stream_context_create(array(
-                'http' => array(
-                    'follow_location' => 0,
-                    'max_redirects' => 0,
-                    'timeout' => CURL_TIMEOUT,
-                ),
-            ));
-            $img = @file_get_contents($url, false, $context, 0, MAX_FILE_SIZE + 1);
-            if ($img === false) {
-                $err = error_get_last();
-                if (is_array($err) && $err['message']) {
-                    $this->lastURLError = $err['message'];
-                } else {
-                    $this->lastURLError = $err;
-                }
-                if (preg_match('/404/', $this->lastURLError)) {
-                    $this->set404();
-                }
-
-                return false;
-            }
-            if (strlen($img) > MAX_FILE_SIZE) {
-                $this->lastURLError = 'Remote file too large.';
-                return false;
-            }
-            if (!file_put_contents($tempfile, $img)) {
-                $this->error("Could not write to $tempfile.");
-                return false;
-            }
-            return true;
         }
 
     }

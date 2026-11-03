@@ -61,12 +61,21 @@ abstract class PuockAbsMeta
     public function baseSaveData($post_id)
     {
         $args = $this->instance_args;
-        if (!wp_verify_nonce($_POST[$args['id'] . '_noncename'] ?? '', plugin_basename(__FILE__))) {
+        if (!wp_verify_nonce($_POST[$args['id'] . '_noncename'] ?? '', $this->nonceAction())) {
+            return $post_id;
+        }
+        if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || wp_is_post_revision($post_id)) {
+            return $post_id;
+        }
+        if (!current_user_can('edit_post', $post_id)) {
             return $post_id;
         }
         $data = array();
         foreach ($args['options'] as $option) {
-            $val = $_POST[$option['id']] ?? '';
+            if (empty($option['id'])) {
+                continue;
+            }
+            $val = $this->sanitizeValue($option, wp_unslash($_POST[$option['id']] ?? ''));
             if ($args['single']) {
                 update_post_meta($post_id, $option['id'], $val);
             } else {
@@ -78,6 +87,32 @@ abstract class PuockAbsMeta
         }
     }
 
+    protected function nonceAction(): string
+    {
+        return 'pk_meta_box_' . $this->instance_args['id'];
+    }
+
+    protected function sanitizeValue($option, $val)
+    {
+        switch ($option['type'] ?? 'text') {
+            case 'checkbox':
+                return $val === 'true' ? 'true' : '';
+            case 'color':
+                return is_string($val) ? (string)sanitize_hex_color($val) : '';
+            case 'select':
+            case 'radio':
+                $allowed = array_map('strval', array_column($option['options'] ?? [], 'value'));
+                if (!empty($option['multiple'])) {
+                    return array_values(array_intersect(array_map('strval', (array)$val), $allowed));
+                }
+                return is_scalar($val) && in_array((string)$val, $allowed, true) ? (string)$val : '';
+            case 'textarea':
+                return is_string($val) ? sanitize_textarea_field($val) : '';
+            default:
+                return is_string($val) ? sanitize_text_field($val) : '';
+        }
+    }
+
     /**
      * @param $args array[id|title|std|type|desc|options]
      * @return void
@@ -85,7 +120,7 @@ abstract class PuockAbsMeta
     public function baseRender($post)
     {
         $args = $this->instance_args;
-        echo '<input type="hidden" name="' . $args['id'] . '_noncename" id="' . $args['id'] . '_noncename" value="' . wp_create_nonce(plugin_basename(__FILE__)) . '" />';
+        echo '<input type="hidden" name="' . esc_attr($args['id']) . '_noncename" id="' . esc_attr($args['id']) . '_noncename" value="' . esc_attr(wp_create_nonce($this->nonceAction())) . '" />';
         echo "<table class='form-table' role='presentation'><tbody>";
         foreach ($args['options'] as $arg) {
             echo "<tr>";
@@ -103,25 +138,25 @@ abstract class PuockAbsMeta
                     break;
                 case 'textarea':
                     echo '<th>' . $arg['title'] . '</th>';
-                    echo '<td><textarea cols="40" rows="2" name="' . $arg['id'] . '">' . $value . '</textarea>' . $desc . '</td>';
+                    echo '<td><textarea cols="40" rows="2" name="' . esc_attr($arg['id']) . '">' . esc_textarea($value) . '</textarea>' . $desc . '</td>';
                     break;
                 case 'color':
                     echo '<th>' . $arg['title'] . '</th>';
-                    echo '<td><input type="color" value="' . $value . '" name="' . $arg['id'] . '"/>' . $desc . '</td>';
+                    echo '<td><input type="color" value="' . esc_attr($value) . '" name="' . esc_attr($arg['id']) . '"/>' . $desc . '</td>';
                     break;
                 case 'select':
                     if (@$arg['multiple'] && is_string($value)) {
                         $value = explode(',', $value);
                     }
                     echo '<th>' . $arg['title'] . '</th>';
-                    echo '<td><select ' . (@$arg['multiple'] ? 'multiple' : '') . '  name="' . $arg['id'] . (@$arg['multiple'] ? '[]' : '') . '">';
+                    echo '<td><select ' . (@$arg['multiple'] ? 'multiple' : '') . '  name="' . esc_attr($arg['id']) . (@$arg['multiple'] ? '[]' : '') . '">';
                     foreach ($arg['options'] as $option) {
                         if (is_array($value)) {
                             $selected = in_array($option['value'], $value) ? 'selected' : '';
                         } else {
                             $selected = $value == $option['value'] ? 'selected' : '';
                         }
-                        echo '<option value="' . $option['value'] . '" ' . $selected . '>' . $option['label'] . '</option>';
+                        echo '<option value="' . esc_attr($option['value']) . '" ' . $selected . '>' . esc_html($option['label']) . '</option>';
                     }
                     echo "</select>{$desc}</td>";
                     break;
@@ -133,7 +168,7 @@ abstract class PuockAbsMeta
                         if ($value == $option['value']) {
                             $checked = 'checked = "checked"';
                         }
-                        echo '<input ' . $checked . ' type="radio" class="kcheck" value="' . $option['value'] . '" name="' . $option['id'] . '_value"/>' . $option['label'];
+                        echo '<input ' . $checked . ' type="radio" class="kcheck" value="' . esc_attr($option['value']) . '" name="' . esc_attr($option['id']) . '_value"/>' . esc_html($option['label']);
                     }
                     echo $desc . '</td>';
                     break;
@@ -142,11 +177,11 @@ abstract class PuockAbsMeta
                     $checked = '';
                     if ($value == 'true')
                         $checked = 'checked = "checked"';
-                    echo '<td><label><input type="checkbox" name="' . $arg['id'] . '" value="true"  ' . $checked . ' />' . $arg['title'] . '</label>' . $desc . '</td>';
+                    echo '<td><label><input type="checkbox" name="' . esc_attr($arg['id']) . '" value="true"  ' . $checked . ' />' . $arg['title'] . '</label>' . $desc . '</td>';
                     break;
                 default:
                     echo '<th>' . $arg['title'] . '</th>';
-                    echo '<td><input type="text" size="40" name="' . $arg['id'] . '" value="' . $value . '" />' . $desc . '</td>';
+                    echo '<td><input type="text" size="40" name="' . esc_attr($arg['id']) . '" value="' . esc_attr($value) . '" />' . $desc . '</td>';
             }
             echo "</tr>";
         }

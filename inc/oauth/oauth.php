@@ -15,6 +15,11 @@ class PkOAuthBase
     {
         $this->oauth = $oauth;
         $this->base = $base;
+        // YurunHttp 默认不校验证书，换取 token 与用户信息的请求可被中间人伪造 openid
+        if (isset($base->http) && $base->http instanceof \Yurun\Util\HttpRequest) {
+            $base->http->isVerifyCA = true;
+            $base->http->caCert = ABSPATH . WPINC . '/certificates/ca-bundle.crt';
+        }
     }
 
 }

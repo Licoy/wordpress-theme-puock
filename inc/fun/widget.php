@@ -166,12 +166,13 @@ abstract class puockWidgetBase extends WP_Widget{
         $target = pk_link_target(false);
         foreach ($posts as $post){
             $title = get_the_title($post);
+            $title_attr = the_title_attribute(['echo' => false, 'post' => $post]);
             $link = get_permalink($post);
             if($is_simple_style){
                 $out .= '<div class="media-link mt20">
-                    <h2 class="t-lg t-line-1" title="'.$title.'">
+                    <h2 class="t-lg t-line-1" title="'.$title_attr.'">
                         <i class="fa fa-angle-right t-sm c-sub me-1"></i>
-                        <a class="a-link t-w-400 t-md" title="'.$title.'" '.$target.'
+                        <a class="a-link t-w-400 t-md" title="'.$title_attr.'" '.$target.'
                          href="'.$link.'">'.$title.'</a>
                     </h2>
                 </div>';
@@ -179,9 +180,9 @@ abstract class puockWidgetBase extends WP_Widget{
                 $img = pk_get_lazy_img_info(get_post_images($post), '', 120,80);
                 $out .= '<div class="mt10">
                     <div class="widget-common-media-post">
-                        <a class="img ww" title="'.$title.'" '.$target.' href="'.$link.'"><img '.$img.' alt="'.$title.'"/></a>
+                        <a class="img ww" title="'.$title_attr.'" '.$target.' href="'.$link.'"><img '.$img.' alt="'.$title_attr.'"/></a>
                         <div class="info">
-                        <h2 class="t-lg t-line-1"><a class="a-link t-w-400 t-md" title="'.$title.'" '.$target.'
+                        <h2 class="t-lg t-line-1"><a class="a-link t-w-400 t-md" title="'.$title_attr.'" '.$target.'
                          href="'.$link.'">'.$title.'</a></h2>
                          <div class="description t-sm c-sub text-3line">'.get_the_excerpt($post).'</div>
                         </div>
@@ -457,7 +458,7 @@ class puockReadPerson extends puockWidgetBase {
             $days = $this->get_num_val($instance, 'days',31);
             $nums = $this->get_num_val($instance, 'nums');
             $sql = "SELECT count(comment_ID) as num, comment_author_email as mail,comment_author as `name`,comment_author_url as url
-                    FROM $wpdb->comments WHERE user_id !=1 AND TO_DAYS(now()) - TO_DAYS(comment_date) < {$days}
+                    FROM $wpdb->comments WHERE user_id !=1 AND comment_approved = '1' AND TO_DAYS(now()) - TO_DAYS(comment_date) < {$days}
                      group by comment_author_email order by num desc limit 0,{$nums}";
             $authors = $wpdb->get_results($sql);
             pk_cache_set(PKC_WIDGET_READ_PERSONS, $authors);
@@ -467,10 +468,10 @@ class puockReadPerson extends puockWidgetBase {
             <?php foreach ($authors as $author): ?>
              <div class="col col-12 col-lg-6 ps-0">
                  <div class="p-2 text-truncate text-nowrap">
-                    <a href="<?php echo empty($author->url) ? 'javascript:void(0)':pk_go_link($author->url) ?>" class="a-link"
+                    <a href="<?php echo empty($author->url) ? 'javascript:void(0)':esc_url(pk_go_link($author->url)) ?>" class="a-link"
                         <?php echo empty($author->url) ? '':'target="_blank"' ?> rel="nofollow">
-                        <img <?php echo pk_get_lazy_img_info(get_avatar_url($author->mail),'md-avatar') ?> alt="<?php echo $author->name?>">
-                        <span class="t-sm"><?php echo $author->name?></span>
+                        <img <?php echo pk_get_lazy_img_info(get_avatar_url($author->mail),'md-avatar') ?> alt="<?php echo esc_attr($author->name)?>">
+                        <span class="t-sm"><?php echo esc_html($author->name)?></span>
                     </a>
                 </div>
             </div>
@@ -529,21 +530,25 @@ class puockNewComment extends puockWidgetBase {
             $args = array(
                 'number' => $nums,
                 'status'  => 'approve',
+                'post_status' => 'publish',
                 'date_query' => array(
                     'before' => 'tomorrow',
                     'inclusive' => true,
                 ),    
             );
-            $comments = get_comments($args);
+            $comments = array_values(array_filter(get_comments($args), function ($comment) {
+                return empty(get_post_field('post_password', $comment->comment_post_ID))
+                    && !pk_comment_is_author_only($comment);
+            }));
             pk_cache_set(PKC_WIDGET_NEW_COMMENTS, $comments);
         }
         $this->get_common_widget_header($instance); ?>
         <div class="min-comments t-md">
             <?php foreach ($comments as $comment): ?>
             <div class="comment t-md t-line-1">
-                <img <?php echo pk_get_lazy_img_info(get_avatar_url($comment->comment_author_email),'min-avatar') ?> alt="<?php echo $comment->comment_author ?>">
-                <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->comment_post_ID).'#comment-'.$comment->comment_ID ?>">
-                <span class="ta3 link-hover"><?php echo $comment->comment_author ?></span></a>
+                <img <?php echo pk_get_lazy_img_info(get_avatar_url($comment->comment_author_email),'min-avatar') ?> alt="<?php echo esc_attr($comment->comment_author) ?>">
+                <a class="puock-link" <?php pk_link_target() ?> href="<?php echo esc_url(get_permalink($comment->comment_post_ID).'#comment-'.$comment->comment_ID) ?>">
+                <span class="ta3 link-hover"><?php echo esc_html($comment->comment_author) ?></span></a>
                 <span class="c-sub t-w-400"><?php echo strip_tags(convert_smilies($comment->comment_content),['img']) ?></span>
             </div>
             <?php endforeach; ?>

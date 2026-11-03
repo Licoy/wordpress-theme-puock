@@ -20,9 +20,9 @@ get_header();
                         <?php foreach($posts as $post): setup_postdata($post) ?>
                             <div class="col-12 col-lg-6">
                                 <div class="media-link mt20">
-                                    <h2 class="t-lg t-line-1" title="<?php the_title() ?>">
+                                    <h2 class="t-lg t-line-1" title="<?php the_title_attribute() ?>">
                                         <i class="fa fa-angle-right t-sm c-sub me-1"></i>
-                                        <a class="a-link t-w-400 t-md puock-text" title="<?php the_title() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                        <a class="a-link t-w-400 t-md puock-text" title="<?php the_title_attribute() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                     </h2>
                                 </div>
                             </div>

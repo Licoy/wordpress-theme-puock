@@ -1,3 +1,4 @@
+<?php if (post_password_required()) return; ?>
 <?php if (get_comments_number() == 0 && !comments_open() || pk_post_comment_is_closed()):echo ''; else: ?>
     <?php get_template_part('ad/comment', 'top') ?>
 <?php add_filter('pk_rb_float_actions',function ($content){

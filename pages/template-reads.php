@@ -29,11 +29,11 @@ get_header();
                             <?php foreach ($reads as $read): ?>
                                 <div class="col col-6 col-md-4 col-lg-3 ps-0">
                                     <div class="p-2 text-truncate text-nowrap">
-                                        <a href="<?php echo $use_theme_link_forward ? pk_go_link($read->url) : $read->url; ?>"
+                                        <a href="<?php echo esc_url($use_theme_link_forward ? pk_go_link($read->url) : $read->url); ?>"
                                             <?php echo empty($read->url) ? '':'target="_blank"' ?> rel="nofollow">
                                             <img data-bs-toggle="tooltip" <?php echo pk_get_lazy_img_info(get_avatar_url($read->mail),'md-avatar') ?>
-                                                 title="<?php echo $read->name?>" alt="<?php echo $read->name?>">
-                                            <span class="t-sm"><span class="c-sub">+(<?php echo $read->num?>)&nbsp;</span><?php echo $read->name?></span>
+                                                 title="<?php echo esc_attr($read->name)?>" alt="<?php echo esc_attr($read->name)?>">
+                                            <span class="t-sm"><span class="c-sub">+(<?php echo (int)$read->num?>)&nbsp;</span><?php echo esc_html($read->name)?></span>
                                         </a>
                                     </div>
                                 </div>

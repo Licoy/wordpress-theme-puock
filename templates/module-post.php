@@ -9,8 +9,8 @@ $has_display_cover_image = $display_cover_image !== '';
         <?php if ($has_display_cover_image): ?>
         <div class="thumbnail">
             <a class="t-sm  ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-                <img title="<?php the_title() ?>"
-                     alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info($display_cover_image, '', 280, 160) ?> />
+                <img title="<?php the_title_attribute() ?>"
+                     alt="<?php the_title_attribute() ?>" <?php echo pk_get_lazy_img_info($display_cover_image, '', 280, 160) ?> />
             </a>
         </div>
         <?php endif; ?>
@@ -22,7 +22,7 @@ $has_display_cover_image = $display_cover_image !== '';
                     <?php if (!is_sticky() && is_category() && get_post_meta(get_the_ID(), 'sticky_in_category', true) === 'true'): ?><span class="badge bg-warning text-dark"><i
                                 class="fa fa-thumbtack"></i><?php _e('分类置顶', PUOCK) ?></span><?php endif; ?>
                     <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
-                    <a class="a-link" title="<?php the_title() ?>" <?php pk_link_target() ?>
+                    <a class="a-link" title="<?php the_title_attribute() ?>" <?php pk_link_target() ?>
                        href="<?php the_permalink() ?>"><?php the_title() ?></a>
                 </h2>
                 <div class="info-meta c-sub text-2line d-none d-md-block">
@@ -69,8 +69,8 @@ $has_display_cover_image = $display_cover_image !== '';
             <?php if ($has_display_cover_image): ?>
             <div class="thumbnail position-relative">
                 <a class="t-sm ww" <?php pk_link_target() ?> href="<?php the_permalink() ?>">
-                    <img title="<?php the_title() ?>"
-                         alt="<?php the_title() ?>" <?php echo pk_get_lazy_img_info($display_cover_image, '', 400, 200) ?> />
+                    <img title="<?php the_title_attribute() ?>"
+                         alt="<?php the_title_attribute() ?>" <?php echo pk_get_lazy_img_info($display_cover_image, '', 400, 200) ?> />
                 </a>
                 <div class="post-tags">
                     <?php if (is_sticky()): ?><span class="badge bg-danger"><i
@@ -83,7 +83,7 @@ $has_display_cover_image = $display_cover_image !== '';
             <div class="post-info">
                 <h2 class="info-title">
                     <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
-                    <a class="a-link puock-text" title="<?php the_title() ?>" <?php pk_link_target() ?>
+                    <a class="a-link puock-text" title="<?php the_title_attribute() ?>" <?php pk_link_target() ?>
                        href="<?php the_permalink() ?>"><?php the_title() ?></a>
                 </h2>
                 <div class="info-meta c-sub">

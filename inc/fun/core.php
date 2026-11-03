@@ -382,9 +382,14 @@ function pk_get_wp_links($link_cats = '', $auto_all = false)
             return $item['value'];
         }, $all_cats);
     }
-    if (is_array($link_cats)) {
-        $link_cats = implode(',', $link_cats);
+    if (!is_array($link_cats)) {
+        $link_cats = explode(',', (string)$link_cats);
     }
+    $link_cats = array_filter(array_map('absint', $link_cats));
+    if (empty($link_cats)) {
+        return null;
+    }
+    $link_cats = implode(',', $link_cats);
     $sql = "select links.*,terms.term_id,terms.name  from {$wpdb->links} as links
             LEFT JOIN (select * from {$wpdb->term_relationships} where term_taxonomy_id in ({$link_cats})) as relat on links.link_id = relat.object_id
             LEFT JOIN (selecT * from {$wpdb->terms} where term_id in ({$link_cats})) as terms on terms.term_id = relat.term_taxonomy_id
@@ -599,17 +604,39 @@ function pk_check_email_is_sysgen($email)
 }
 
 //后台登录保护
+function pk_login_protection_token()
+{
+    return wp_hash('pk_login_protection|' . pk_get_option('lp_user', 'admin') . '|' . pk_get_option('lp_pass', 'admin'));
+}
+
 function login_protection()
 {
-    if (!is_user_logged_in()) {
-        if ($_GET[pk_get_option('lp_user', 'admin')] != pk_get_option('lp_pass', 'admin')) {
-            header("Location: " . home_url());
-        }
+    if (is_user_logged_in()) {
+        return;
     }
+    // 退出、文章密码、邮件重置密码、隐私确认等由核心自行校验的动作不拦截
+    $action = $_REQUEST['action'] ?? 'login';
+    if (in_array($action, ['logout', 'postpass', 'rp', 'resetpass', 'confirmaction'], true)) {
+        return;
+    }
+    $cookie_name = 'pk_lp_' . COOKIEHASH;
+    $token = pk_login_protection_token();
+    $pass = $_GET[pk_get_option('lp_user', 'admin')] ?? null;
+    if (is_string($pass) && hash_equals((string)pk_get_option('lp_pass', 'admin'), $pass)) {
+        // 登录表单提交时不会携带地址栏参数，通过签名 Cookie 保持访问凭证
+        setcookie($cookie_name, $token, 0, SITECOOKIEPATH, COOKIE_DOMAIN, is_ssl(), true);
+        return;
+    }
+    $cookie = $_COOKIE[$cookie_name] ?? '';
+    if (is_string($cookie) && hash_equals($token, $cookie)) {
+        return;
+    }
+    wp_safe_redirect(home_url());
+    exit;
 }
 
 if (pk_is_checked('login_protection')) {
-    add_action('login_enqueue_scripts', 'login_protection');
+    add_action('login_init', 'login_protection');
 }
 
 //后台注册验证码

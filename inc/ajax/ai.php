@@ -66,6 +66,10 @@ function pk_ajax_ai_ask()
     if (!$uid && !pk_is_checked('ai_guest_use')) {
         pk_ai_die(__('游客不允许使用AI助手', PUOCK));
     }
+    // 仅接受 JSON 请求：跨站表单无法发送 application/json，会触发 CORS 预检而被拦截
+    if (stripos($_SERVER['CONTENT_TYPE'] ?? '', 'application/json') !== 0) {
+        pk_ai_die(__('请求格式错误', PUOCK));
+    }
     if (pk_ai_rate_limited((int)$uid)) {
         pk_ai_die(__('请求过于频繁，请稍后再试', PUOCK));
     }
@@ -173,6 +177,9 @@ function pk_ajax_ai_ask()
                 pk_ai_die(sprintf(__('AI问答异常：%s', PUOCK), is_string($res->error) ? $res->error : wp_json_encode($res->error)));
             }
             $answer = $res->choices[0]->message->content;
+            // 回答由前端按 Markdown 渲染并过滤，这里不能以 HTML 输出
+            header('Content-Type: text/plain; charset=utf-8');
+            header('X-Content-Type-Options: nosniff');
             echo $answer;
         }
         wp_die();

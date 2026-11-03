@@ -75,8 +75,7 @@ function pk_front_login_exec()
         ], __('登录成功', PUOCK));
     } else {
         if ($try_open) {
-            $try = get_transient('pk_login_try_' . $ip) ?? 0;
-            $try++;
+            $try = (int)get_transient('pk_login_try_' . $ip) + 1;
             if ($try >= $try_num) {
                 set_transient('pk_login_ban_' . $ip, 1, $try_ban_time * 60);
             echo pk_ajax_resp_error(sprintf(__('登录失败次数过多，请%d分钟后再试', PUOCK), $try_ban_time));
@@ -136,19 +135,9 @@ function pk_front_forget_password_exec()
 {
     if (is_string($data = pk_get_req_data([
             'email' => ['email' => __('邮箱', PUOCK), 'required' => true],
-            're-password' => ['email' => __('重复密码', PUOCK), 'required' => true],
-            'password' => ['name' => __('密码', PUOCK), 'required' => true],
             'vd' => ['name' => __('验证码', PUOCK), 'required' => false],
         ])) === true) {
         echo pk_ajax_resp_error($data);
-        wp_die();
-    }
-    if (strlen($data['password']) < 6 || strlen($data['password']) > 18) {
-        echo pk_ajax_resp_error(__('密码不合法', PUOCK));
-        wp_die();
-    }
-    if ($data['password'] !== $data['re-password']) {
-        echo pk_ajax_resp_error(__('两次密码不一致', PUOCK));
         wp_die();
     }
     if (!is_email($data['email'])) {
@@ -161,41 +150,17 @@ function pk_front_forget_password_exec()
         echo pk_ajax_resp_error($e->getMessage());
         wp_die();
     }
+    // 新密码只能由收到邮件的用户在核心的重置页面中设置；无论邮箱是否存在都返回相同提示，避免枚举
     $user = get_user_by('email', $data['email']);
-    if (empty($user)) {
-        echo pk_ajax_resp_error(__('不存在该邮箱的用户', PUOCK));
-        wp_die();
+    if ($user instanceof WP_User) {
+        $key = get_password_reset_key($user);
+        if (!is_wp_error($key)) {
+            $url = network_site_url('wp-login.php?action=rp&key=' . $key . '&login=' . rawurlencode($user->user_login), 'login');
+            wp_mail($user->user_email, __('密码重置', PUOCK) . ' - ' . pk_get_web_title(), sprintf(__('您的密码重置链接为：%s，请点击链接设置新密码，如非本人操作请忽略此邮件', PUOCK), $url));
+        }
     }
-    $code = md5($data['email'] . wp_generate_password(20, false));
-    set_transient('pk_forget_password_' . $code, ['password' => $data['password'], 'email' => $data['email']], 60 * 5);
-    $url = pk_ajax_url('pk_front_forget_password_reset_exec', [
-        'code' => $code,
-    ]);
-    if (wp_mail($data['email'], __('密码重置', PUOCK) . ' - ' . pk_get_web_title(), sprintf(__('您的密码重置链接为：%s，请在5分钟内点击链接重置密码', PUOCK), $url))) {
-        echo pk_ajax_resp(null, __('重置密码链接已发送至邮箱', PUOCK));
-    } else {
-        echo pk_ajax_resp_error(__('重置密码链接邮件发送失败', PUOCK));
-    }
+    echo pk_ajax_resp(null, __('如果该邮箱已注册，重置密码链接将发送至邮箱', PUOCK));
     wp_die();
-}
-
-function pk_front_forget_password_reset_exec()
-{
-    $code = $_REQUEST['code'] ?? '';
-    if (empty($code)) {
-        pk_ajax_result_page(false, __('密码重置失败：密码重置链接无效', PUOCK));
-    }
-    $info = get_transient('pk_forget_password_' . $code);
-    if (empty($info)) {
-        pk_ajax_result_page(false, __('密码重置失败：密码重置链接无效', PUOCK));
-    }
-    $user = get_user_by('email', $info['email']);
-    if (empty($user)) {
-        pk_ajax_result_page(false, __('密码重置失败：用户不存在', PUOCK));
-    }
-    delete_transient('pk_forget_password_' . $code);
-    wp_set_password($info['password'], $user->ID);
-    pk_ajax_result_page(true, __('密码重置成功，请返回登录', PUOCK));
 }
 
 
@@ -207,7 +172,6 @@ if (pk_is_checked('open_quick_login')) {
         }
         if (pk_is_checked('quick_login_forget_password')) {
             pk_ajax_register('pk_front_forget_password_exec', 'pk_front_forget_password_exec', true);
-            pk_ajax_register('pk_front_forget_password_reset_exec', 'pk_front_forget_password_reset_exec', true);
         }
     }
     pk_ajax_register('pk_font_login_page', 'pk_front_login_page_callback', true);
@@ -339,16 +303,6 @@ function pk_front_login_page_callback()
                     <label for="_front_forget_password_email" class="form-label"><?php _e('邮箱', PUOCK); ?></label>
                     <input type="email" name="email" class="form-control form-control-sm" data-required
                            id="_front_forget_password_email" placeholder="<?php esc_attr_e('请输入邮箱', PUOCK); ?>">
-                </div>
-                <div class="mb15">
-                    <label for="_front_forget_password_password" class="form-label"><?php _e('新密码', PUOCK); ?></label>
-                    <input type="password" name="password" class="form-control form-control-sm" data-required
-                           id="_front_forget_password_password" placeholder="<?php esc_attr_e('请输入6～18位字符的新密码', PUOCK); ?>">
-                </div>
-                <div class="mb15">
-                    <label for="_front_forget_password_password_re" class="form-label"><?php _e('重复新密码', PUOCK); ?></label>
-                    <input type="password" name="re-password" class="form-control form-control-sm" data-required
-                           id="_front_forget_password_password_re" placeholder="<?php esc_attr_e('请重复输入6～18位字符的新密码', PUOCK); ?>">
                 </div>
                 <?php if ($validate_type === 'img'): ?>
                     <div class="mb15">
