@@ -1134,9 +1134,37 @@ function pk_chinese_format($content)
 {
     include_once dirname(__FILE__) . '/../lib/ChineseTypesetting.php';
     $typesetting = new ChineseTypesetting();
-    $content = $typesetting->insertSpace($content);
-    $content = $typesetting->removeSpace($content);
-    return $typesetting->full2Half($content);
+    // Keep markup (including quoted attributes) and literal element contents intact.
+    $markup = <<<'REGEX'
+~
+(
+    <!-- .*? (?: --> | \z )
+  | <!\[CDATA\[ .*? (?: \]\]> | \z )
+  | <(script|style|textarea|title|pre|code|kbd|samp)(?=[\s/>])
+        (?: "[^"]*" | '[^']*' | [^>"'] )*+ >
+        .*? (?: </\2\s*> | \z )
+  | <(?: /?[a-z] | [!?] ) (?: "[^"]*" | '[^']*' | [^>"'] )*+ (?: > | \z )
+)
+~isx
+REGEX;
+    if (preg_match_all($markup, $content, $matches, PREG_OFFSET_CAPTURE) === false) {
+        return $content;
+    }
+
+    $formatText = static function ($text) use ($typesetting) {
+        $text = $typesetting->insertSpace($text);
+        $text = $typesetting->removeSpace($text);
+        return $typesetting->full2Half($text);
+    };
+
+    $result = '';
+    $offset = 0;
+    foreach ($matches[0] as [$token, $start]) {
+        $result .= $formatText(substr($content, $offset, $start - $offset)) . $token;
+        $offset = $start + strlen($token);
+    }
+
+    return $result . $formatText(substr($content, $offset));
 }
 
 if (pk_is_checked('chinese_format')) {
