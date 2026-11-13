@@ -1,6 +1,6 @@
 <?php
 
-include '../../../../wp-blog-header.php';
+require_once dirname(__DIR__, 4) . '/wp-load.php';
 pk_set_custom_seo(__("链接跳转", PUOCK));
 $url = '';
 $raw_url = $_GET['to'] ?? '';
