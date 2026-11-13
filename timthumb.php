@@ -959,8 +959,10 @@ class timthumb
             return $this->error("Could not get a lock for writing.");
         }
         $this->debug(3, "Done image replace with security header. Cleaning up and running cleanCache()");
-        imagedestroy($canvas);
-        imagedestroy($image);
+        if (PHP_VERSION_ID < 80000) {
+            imagedestroy($canvas);
+            imagedestroy($image);
+        }
         return true;
     }
 
